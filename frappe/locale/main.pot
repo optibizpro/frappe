@@ -17904,6 +17904,14 @@ msgid "Open Settings"
 msgstr ""
 
 #: frappe/public/js/frappe/ui/toolbar/about.js:8
+msgid "PT. OPTIMIZED BUSINESS PROCESS"
+msgstr ""
+
+#: frappe/public/js/frappe/ui/toolbar/about.js:8
+msgid "OptiBizPro"
+msgstr ""
+
+#: frappe/public/js/frappe/ui/toolbar/about.js:8
 msgid "Open Source Applications for the Web"
 msgstr ""
 
