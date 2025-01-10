@@ -10,7 +10,7 @@ app_license = "MIT"
 app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
 develop_version = "15.x.x-develop"
 
-app_email = "developers@frappe.io"
+app_email = "support@optibizpro.com"
 
 before_install = "frappe.utils.install.before_install"
 after_install = "frappe.utils.install.after_install"
@@ -542,9 +542,9 @@ standard_help_items = [
 		"is_standard": 1,
 	},
 	{
-		"item_label": "Frappe Support",
+		"item_label": "OptiBizPro Support",
 		"item_type": "Route",
-		"route": "https://frappe.io/support",
+		"route": "https://optibizpro.com/help",
 		"is_standard": 1,
 	},
 ]
