@@ -10,15 +10,15 @@ frappe.ui.misc.about = function () {
 					__("Open Source Applications for the Web") +
 					"</p>  \
 		<p><i class='fa fa-globe fa-fw'></i>\
-			Website: <a href='https://frappeframework.com' target='_blank'>https://frappeframework.com</a></p>\
+			Website: <a href='https://optibizpro.com' target='_blank'>https://optibizpro.com</a></p>\
 		<p><i class='fa fa-github fa-fw'></i>\
-			Source: <a href='https://github.com/frappe' target='_blank'>https://github.com/frappe</a></p>\
+			Source: <a href='https://github.com/optibizpro' target='_blank'>https://github.com/optibizpro</a></p>\
 		<p><i class='fa fa-linkedin fa-fw'></i>\
-			Linkedin: <a href='https://linkedin.com/company/frappe-tech' target='_blank'>https://linkedin.com/company/frappe-tech</a></p>\
+			Linkedin: <a href='https://linkedin.com/company/optibizpro' target='_blank'>https://linkedin.com/company/optibizpro</a></p>\
 		<p><i class='fa fa-facebook fa-fw'></i>\
-			Facebook: <a href='https://facebook.com/erpnext' target='_blank'>https://facebook.com/erpnext</a></p>\
+			Facebook: <a href='https://facebook.com/optibizpro' target='_blank'>https://facebook.com/optibizpro</a></p>\
 		<p><i class='fa fa-twitter fa-fw'></i>\
-			Twitter: <a href='https://twitter.com/erpnext' target='_blank'>https://twitter.com/erpnext</a></p>\
+			Twitter: <a href='https://twitter.com/optibizpro' target='_blank'>https://twitter.com/optibizpro</a></p>\
 		<hr>\
 		<h4>Installed Apps</h4>\
 		<div id='about-app-versions'>Loading versions...</div>\
