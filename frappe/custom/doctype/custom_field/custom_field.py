@@ -223,7 +223,11 @@ class CustomField(Document):
 			)
 
 		# delete property setter entries
+<<<<<<< HEAD
+		frappe.db.delete("Property Setter", {"doc_type": self.dt, "field_name": self.fieldname})
+=======
 		delete_property_setter(self.dt, field_name=self.fieldname)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# update doctype layouts
 		doctype_layouts = frappe.get_all("DocType Layout", filters={"document_type": self.dt}, pluck="name")

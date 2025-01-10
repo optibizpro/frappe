@@ -7,6 +7,14 @@ from frappe.custom.doctype.custom_field.custom_field import (
 	create_custom_fields,
 	rename_fieldname,
 )
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+test_records = frappe.get_test_records("Custom Field")
+
+
+class TestCustomField(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -20,6 +28,7 @@ class UnitTestCustomField(UnitTestCase):
 
 
 class TestCustomField(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_create_custom_fields(self):
 		create_custom_fields(
 			{
@@ -93,6 +102,8 @@ class TestCustomField(IntegrationTestCase):
 			# nosemgrep
 			frappe.db.commit()
 
+<<<<<<< HEAD
+=======
 	def test_custom_section_and_column_breaks_ordering(self):
 		doc = frappe.get_doc(
 			{
@@ -173,6 +184,7 @@ class TestCustomField(IntegrationTestCase):
 		]
 		self.assertEqual(field_names, expected_order)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_custom_field_renaming(self):
 		def gen_fieldname():
 			return "test_" + frappe.generate_hash()

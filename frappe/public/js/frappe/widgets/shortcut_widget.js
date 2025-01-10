@@ -49,7 +49,16 @@ export default class ShortcutWidget extends Widget {
 			}
 
 			if (this.type == "URL") {
+<<<<<<< HEAD
+				if (frappe.open_in_new_tab) {
+					window.open(this.url, "_blank");
+					frappe.open_in_new_tab = false;
+				} else {
+					window.location.href = this.url;
+				}
+=======
 				window.open(this.url, "_blank");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				return;
 			}
 
@@ -66,6 +75,10 @@ export default class ShortcutWidget extends Widget {
 
 		this.widget.addClass("shortcut-widget-box");
 
+<<<<<<< HEAD
+		let filters = frappe.utils.process_filter_expression(this.stats_filter);
+		if (this.type == "DocType" && filters) {
+=======
 		// Make it tabbable
 		this.widget.attr({
 			role: "link",
@@ -80,6 +93,7 @@ export default class ShortcutWidget extends Widget {
 			this.doc_view != "New" &&
 			!frappe.boot.single_types.includes(this.link_to)
 		) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.db
 				.count(this.link_to, {
 					filters: filters || [],
@@ -99,11 +113,15 @@ export default class ShortcutWidget extends Widget {
 		this.action_area.empty();
 		const label = get_label();
 		let color = this.color && count ? this.color.toLowerCase() : "gray";
+<<<<<<< HEAD
+		$(`<div class="indicator-pill ellipsis ${color}">${label}</div>`).appendTo(
+=======
 		$(
 			`<div class="indicator-pill no-indicator-dot ellipsis ${color}">${__(label)}</div>`
 		).appendTo(this.action_area);
 
 		$(frappe.utils.icon("es-line-arrow-up-right", "xs", "", "", "ml-2")).appendTo(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.action_area
 		);
 	}

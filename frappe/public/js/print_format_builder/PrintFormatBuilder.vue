@@ -19,6 +19,48 @@ import PrintFormatControls from "./PrintFormatControls.vue";
 import { getStore } from "./store";
 import { computed, ref, onMounted, provide } from "vue";
 
+<<<<<<< HEAD
+export default {
+	name: "PrintFormatBuilder",
+	props: ["print_format_name"],
+	components: {
+		PrintFormat,
+		PrintFormatControls,
+		Preview,
+	},
+	data() {
+		return {
+			show_preview: false,
+		};
+	},
+	provide() {
+		return {
+			$store: this.$store,
+		};
+	},
+	mounted() {
+		this.$store.fetch().then(() => {
+			if (!this.$store.layout) {
+				this.$store.layout = this.$store.get_default_layout();
+				this.$store.save_changes();
+			}
+		});
+	},
+	methods: {
+		toggle_preview() {
+			this.show_preview = !this.show_preview;
+		},
+	},
+	computed: {
+		$store() {
+			return getStore(this.print_format_name);
+		},
+		shouldRender() {
+			return Boolean(this.$store.print_format && this.$store.meta && this.$store.layout);
+		},
+	},
+};
+=======
 // props
 const props = defineProps(["print_format_name"]);
 
@@ -55,6 +97,7 @@ onMounted(() => {
 });
 
 defineExpose({ toggle_preview, $store });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

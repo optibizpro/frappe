@@ -25,11 +25,25 @@
   "float_precision",
   "currency_precision",
   "rounding_method",
+<<<<<<< HEAD
+  "sec_backup_limit",
+  "backup_limit",
+  "encrypt_backup",
+  "background_workers",
+  "enable_scheduler",
+  "dormant_days",
+  "permissions",
+  "apply_strict_user_permissions",
+  "column_break_21",
+  "allow_guests_to_upload_files",
+  "force_web_capture_mode_for_uploads",
+=======
   "permissions",
   "apply_strict_user_permissions",
   "column_break_21",
   "allow_older_web_view_links",
   "security_tab",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "security",
   "session_expiry",
   "document_share_key_expiry",
@@ -39,10 +53,29 @@
   "login_methods_section",
   "allow_login_using_mobile_number",
   "allow_login_using_user_name",
+<<<<<<< HEAD
+  "disable_user_pass_login",
+  "login_with_email_link",
+  "login_with_email_link_expiry",
+  "rate_limit_email_link_login",
+  "allow_error_traceback",
+  "strip_exif_metadata_from_uploaded_images",
+  "allow_older_web_view_links",
+  "apply_perm_level_on_api_calls",
+  "password_settings",
+  "logout_on_password_reset",
+  "force_user_to_reset_password",
+  "reset_password_link_expiry_duration",
+  "password_reset_limit",
+  "column_break_31",
+  "enable_password_policy",
+  "minimum_password_score",
+=======
   "column_break_uhqk",
   "login_with_email_link",
   "login_with_email_link_expiry",
   "rate_limit_email_link_login",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "brute_force_security",
   "allow_consecutive_login_attempts",
   "column_break_34",
@@ -72,6 +105,18 @@
   "hide_footer_in_auto_email_reports",
   "attach_view_link",
   "store_attached_pdf_document",
+<<<<<<< HEAD
+  "prepared_report_section",
+  "max_auto_email_report_per_user",
+  "system_updates_section",
+  "disable_system_update_notification",
+  "disable_change_log_notification",
+  "telemetry_section",
+  "enable_telemetry",
+  "files_section",
+  "max_file_size",
+  "column_break_uqma"
+=======
   "welcome_email_template",
   "reset_password_template",
   "files_tab",
@@ -104,6 +149,7 @@
   "enable_telemetry",
   "search_section",
   "link_field_results_limit"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  ],
  "fields": [
   {
@@ -228,11 +274,29 @@
    "fieldtype": "Section Break"
   },
   {
+<<<<<<< HEAD
+   "default": "60:00",
+=======
    "default": "170:00",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "description": "Example: Setting this to 24:00 will log out a user if they are not active for 24:00 hours.",
    "fieldname": "session_expiry",
    "fieldtype": "Data",
    "label": "Session Expiry (idle timeout)"
+<<<<<<< HEAD
+  },
+  {
+   "default": "720:00",
+   "description": "In Hours",
+   "fieldname": "session_expiry_mobile",
+   "fieldtype": "Data",
+   "label": "Session Expiry Mobile"
+  },
+  {
+   "fieldname": "column_break_13",
+   "fieldtype": "Column Break"
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "0",
@@ -433,6 +497,10 @@
    "label": "Include Web View Link in Email"
   },
   {
+<<<<<<< HEAD
+   "collapsible": 1,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "prepared_report_section",
    "fieldtype": "Section Break",
    "label": "Reports"
@@ -520,6 +588,12 @@
    "label": "Disable Username/Password Login"
   },
   {
+<<<<<<< HEAD
+   "default": "0",
+   "fieldname": "apply_perm_level_on_api_calls",
+   "fieldtype": "Check",
+   "label": "Apply Perm Level on API calls (Recommended)"
+=======
    "default": "1",
    "description": "Allow users to log in without a password, using a login link sent to their email",
    "fieldname": "login_with_email_link",
@@ -532,6 +606,7 @@
    "fieldname": "login_with_email_link_expiry",
    "fieldtype": "Int",
    "label": "Login with email link expiry (in minutes)"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "Banker's Rounding (legacy)",
@@ -547,6 +622,24 @@
    "label": "Disable Document Sharing"
   },
   {
+<<<<<<< HEAD
+   "default": "0",
+   "description": "Allow users to log in without a password, using a login link sent to their email",
+   "fieldname": "login_with_email_link",
+   "fieldtype": "Check",
+   "label": "Login with email link"
+  },
+  {
+   "default": "10",
+   "depends_on": "login_with_email_link",
+   "fieldname": "login_with_email_link_expiry",
+   "fieldtype": "Int",
+   "label": "Login with email link expiry (in minutes)"
+  },
+  {
+   "collapsible": 1,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "telemetry_section",
    "fieldtype": "Section Break",
    "label": "Telemetry"
@@ -558,6 +651,8 @@
    "label": "Allow Sending Usage Data for Improving Applications"
   },
   {
+<<<<<<< HEAD
+=======
    "fieldname": "welcome_email_template",
    "fieldtype": "Link",
    "label": "Welcome Email Template",
@@ -570,6 +665,7 @@
    "options": "Email Template"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "default": "0",
    "description": "When uploading files, force the use of the web-based image capture. If this is unchecked, the default behavior is to use the mobile native camera when use from a mobile is detected.",
    "fieldname": "force_web_capture_mode_for_uploads",
@@ -577,8 +673,15 @@
    "label": "Force Web Capture Mode for Uploads"
   },
   {
+<<<<<<< HEAD
+   "collapsible": 1,
+   "fieldname": "files_section",
+   "fieldtype": "Section Break",
+   "label": "Files"
+=======
    "fieldname": "files_section",
    "fieldtype": "Section Break"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "max_file_size",
@@ -591,6 +694,8 @@
    "fieldtype": "Column Break"
   },
   {
+<<<<<<< HEAD
+=======
    "description": "Provide a list of allowed file extensions for file uploads. Each line should contain one allowed file type. If unset, all file extensions are allowed. Example: <br>CSV<br>JPG<br>PNG",
    "fieldname": "allowed_file_extensions",
    "fieldtype": "Small Text",
@@ -657,6 +762,7 @@
    "non_negative": 1
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "default": "1",
    "description": "When sending document using email, store the PDF on Communication. Warning: This can increase your storage usage.",
    "fieldname": "store_attached_pdf_document",
@@ -664,6 +770,8 @@
    "label": "Store Attached PDF Document"
   },
   {
+<<<<<<< HEAD
+=======
    "fieldname": "app_tab",
    "fieldtype": "Tab Break",
    "label": "App"
@@ -675,6 +783,7 @@
    "label": "Default App"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "depends_on": "login_with_email_link",
    "description": "You can set a high value here if multiple users will be logging in from the same network.",
    "fieldname": "rate_limit_email_link_login",
@@ -686,6 +795,8 @@
    "fieldname": "use_number_format_from_currency",
    "fieldtype": "Check",
    "label": "Use Number Format from Currency"
+<<<<<<< HEAD
+=======
   },
   {
    "description": "Default display currency",
@@ -699,12 +810,17 @@
    "fieldname": "hide_empty_read_only_fields",
    "fieldtype": "Check",
    "label": "Hide Empty Read-Only Fields"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "icon": "fa fa-cog",
  "issingle": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-09-26 16:20:59.417151",
+=======
  "modified": "2024-12-03 16:23:09.410614",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "System Settings",

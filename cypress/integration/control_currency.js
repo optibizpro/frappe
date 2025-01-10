@@ -9,7 +9,10 @@ context("Control Currency", () => {
 	function get_dialog_with_currency(df_options = {}) {
 		return cy.dialog({
 			title: "Currency Check",
+<<<<<<< HEAD
+=======
 			animate: false,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			fields: [
 				{
 					fieldname: fieldname,
@@ -49,6 +52,8 @@ context("Control Currency", () => {
 				blur_expected: "10",
 			},
 			{
+<<<<<<< HEAD
+=======
 				input: "10.000",
 				number_format: "#.###,##",
 				df_options: { precision: 0 },
@@ -60,6 +65,7 @@ context("Control Currency", () => {
 				blur_expected: "10.000,00",
 			},
 			{
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				input: "10.101",
 				df_options: { precision: "" },
 				blur_expected: "10.1",
@@ -73,11 +79,17 @@ context("Control Currency", () => {
 				.then((frappe) => {
 					frappe.boot.sysdefaults.currency = test_case.currency;
 					frappe.boot.sysdefaults.currency_precision = test_case.default_precision ?? 2;
+<<<<<<< HEAD
+				});
+
+			get_dialog_with_currency(test_case.df_options).as("dialog");
+=======
 					frappe.boot.sysdefaults.number_format = test_case.number_format ?? "#,###.##";
 				});
 
 			get_dialog_with_currency(test_case.df_options).as("dialog");
 			cy.wait(300);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			cy.get_field(fieldname, "Currency").clear();
 			cy.wait(300);
 			cy.fill_field(fieldname, test_case.input, "Currency").blur();

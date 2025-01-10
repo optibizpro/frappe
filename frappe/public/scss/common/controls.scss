@@ -150,6 +150,9 @@ select.form-control {
 	.help:empty {
 		display: none;
 	}
+	.help:empty {
+		display: none;
+	}
 	.ql-editor:not(.read-mode) {
 		background-color: var(--control-bg);
 	}

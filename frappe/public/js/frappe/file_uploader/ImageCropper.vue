@@ -41,6 +41,86 @@
 <script setup>
 import { computed, onMounted, ref, watch } from "vue";
 import Cropper from "cropperjs";
+<<<<<<< HEAD
+export default {
+	name: "ImageCropper",
+	props: ["file", "fixed_aspect_ratio"],
+	data() {
+		let aspect_ratio = this.fixed_aspect_ratio != null ? this.fixed_aspect_ratio : NaN;
+		return {
+			src: null,
+			cropper: null,
+			image: null,
+			aspect_ratio,
+		};
+	},
+	watch: {
+		aspect_ratio(value) {
+			if (this.cropper) {
+				this.cropper.setAspectRatio(value);
+			}
+		},
+	},
+	mounted() {
+		if (window.FileReader) {
+			let fr = new FileReader();
+			fr.onload = () => (this.src = fr.result);
+			fr.readAsDataURL(this.file.cropper_file);
+		}
+		let crop_box = this.file.crop_box_data;
+		this.image = this.$refs.image;
+		this.image.onload = () => {
+			this.cropper = new Cropper(this.image, {
+				zoomable: false,
+				scalable: false,
+				viewMode: 1,
+				data: crop_box,
+				aspectRatio: this.aspect_ratio,
+			});
+			window.cropper = this.cropper;
+		};
+	},
+	computed: {
+		aspect_ratio_buttons() {
+			return [
+				{
+					label: __("1:1", null, "Image Cropper"),
+					value: 1,
+				},
+				{
+					label: __("4:3", null, "Image Cropper"),
+					value: 4 / 3,
+				},
+				{
+					label: __("16:9", null, "Image Cropper"),
+					value: 16 / 9,
+				},
+				{
+					label: __("Free", null, "Image Cropper"),
+					value: NaN,
+				},
+			];
+		},
+	},
+	methods: {
+		crop_image() {
+			this.file.crop_box_data = this.cropper.getData();
+			const canvas = this.cropper.getCroppedCanvas();
+			const file_type = this.file.file_obj.type;
+			canvas.toBlob((blob) => {
+				var cropped_file_obj = new File([blob], this.file.name, {
+					type: blob.type,
+				});
+				this.file.file_obj = cropped_file_obj;
+				this.$emit("toggle_image_cropper");
+			}, file_type);
+		},
+	},
+};
+</script>
+
+<style scoped>
+=======
 
 // props
 const props = defineProps({
@@ -129,6 +209,7 @@ watch(
 
 <style scoped>
 @import "cropperjs/dist/cropper.min.css";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 img {
 	display: block;
 	max-width: 100%;

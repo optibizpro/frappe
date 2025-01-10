@@ -171,7 +171,11 @@ class WebsiteSettings(Document):
 def get_website_settings(context=None):
 	hooks = frappe.get_hooks()
 	context = frappe._dict(context or {})
+<<<<<<< HEAD
+	settings: "WebsiteSettings" = frappe.get_cached_doc("Website Settings")
+=======
 	settings: WebsiteSettings = frappe.get_cached_doc("Website Settings")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	context = context.update(
 		{

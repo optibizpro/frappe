@@ -10,7 +10,10 @@
 	color: var(--text-color);
 	border-radius: var(--border-radius-lg);
 	border: 1px solid var(--border-color);
+<<<<<<< HEAD
+=======
 	box-shadow: var(--shadow-2xl);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	position: fixed;
 
 	&.active {
@@ -53,12 +56,28 @@
 
 		&.-range-from-,
 		&.-range-to- {
+<<<<<<< HEAD
+			border: 1px solid fade(#0089ff, 30%);
+			background: fade(#0089ff, 10%);
+=======
 			border: 1px solid var(--border-color);
 			background: var(--date-range-bg);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		&.-selected-,
 		&.-current-.-selected- {
+<<<<<<< HEAD
+			background: #0089ff;
+		}
+
+		&.-in-range- {
+			background: fade(#0089ff, 5%);
+		}
+
+		&.-in-range-.-focus- {
+			background: fade(#0089ff, 10%);
+=======
 			color: var(--date-active-text);
 			background: var(--date-active-bg);
 			border-radius: var(--border-radius-tiny);
@@ -72,6 +91,7 @@
 		&.-in-range-.-focus- {
 			color: var(--date-active-text);
 			background: var(--date-active-bg);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		&.-focus- {
@@ -79,8 +99,12 @@
 		}
 
 		&.-selected-.-focus- {
+<<<<<<< HEAD
+			background: fade(#0089ff, 90%);
+=======
 			color: var(--date-active-text);
 			background: var(--date-active-bg);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -90,7 +114,11 @@
 	}
 
 	&--time-row {
+<<<<<<< HEAD
+		background-image: linear-gradient(to right, #0089ff, #0089ff);
+=======
 		background-image: linear-gradient(to right, var(--gray-600), var(--gray-600));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		background-repeat: no-repeat;
 		background-size: 100% 1px;
 		background-position: left 50%;

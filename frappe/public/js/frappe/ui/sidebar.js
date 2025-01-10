@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+frappe.provide("frappe.ui");
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 frappe.ui.Sidebar = class Sidebar {
 	constructor() {
 		this.items = {};
@@ -310,6 +315,30 @@ frappe.ui.Sidebar = class Sidebar {
 				<div class="sidebar-child-item nested-container"></div>
 			</div>
 		`);
+<<<<<<< HEAD
+
+		this.$sidebar = this.wrapper.find("." + this.css_class);
+	}
+
+	add_item(item, section, h6 = false) {
+		let $section, $li_item;
+		if (!section && this.wrapper.find(".sidebar-menu").length === 0) {
+			// if no section, add section with no heading
+			$section = this.get_section();
+		} else {
+			$section = this.get_section(section);
+		}
+
+		if (item instanceof jQuery) {
+			$li_item = $(`<li>`);
+			item.appendTo($li_item);
+		} else {
+			const className = h6 ? "h6" : "";
+			const html = `<li class=${className}>
+				<a ${item.href ? `href="${item.href}"` : ""}>${item.label}</a>
+			</li>`;
+			$li_item = $(html).click(() => item.on_click && item.on_click());
+=======
 	}
 
 	add_toggle_children(item, sidebar_control, item_container) {
@@ -334,6 +363,7 @@ frappe.ui.Sidebar = class Sidebar {
 			)
 		) {
 			$drop_icon.removeClass("hidden");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		$drop_icon.on("click", () => {
 			let opened = $drop_icon.find("use").attr("href") === "#es-line-down";
@@ -348,6 +378,35 @@ frappe.ui.Sidebar = class Sidebar {
 		});
 	}
 
+<<<<<<< HEAD
+		if (item.name) {
+			this.items[item.name] = $li_item;
+		}
+	}
+
+	remove_item(name) {
+		if (this.items[name]) {
+			this.items[name].remove();
+		}
+	}
+
+	get_section(section_heading = "") {
+		let $section = $(this.wrapper.find(`[data-section-heading="${section_heading}"]`));
+		if ($section.length) {
+			return $section;
+		}
+
+		const $section_heading = section_heading ? `<li class="h6">${section_heading}</li>` : "";
+
+		$section = $(`
+			<ul class="list-unstyled sidebar-menu" data-section-heading="${section_heading || "default"}">
+				${$section_heading}
+			</ul>
+		`);
+
+		this.$sidebar.append($section);
+		return $section;
+=======
 	setup_sorting() {
 		if (!this.has_access) return;
 
@@ -398,5 +457,6 @@ frappe.ui.Sidebar = class Sidebar {
 			frappe.boot.sidebar_pages = r;
 			this.setup_pages();
 		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };

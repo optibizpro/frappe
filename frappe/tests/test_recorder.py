@@ -1,20 +1,31 @@
 # Copyright (c) 2019, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+<<<<<<< HEAD
+=======
 import time
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import sqlparse
 
 import frappe
 import frappe.recorder
 from frappe.recorder import normalize_query
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, timeout
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 from frappe.utils.doctor import any_job_pending
 from frappe.website.serve import get_response_content
 
 
+<<<<<<< HEAD
+class TestRecorder(FrappeTestCase):
+=======
 class TestRecorder(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		self.wait_for_background_jobs()
 		frappe.recorder.stop()
@@ -23,11 +34,14 @@ class TestRecorder(IntegrationTestCase):
 		frappe.recorder.start()
 		frappe.recorder.record()
 
+<<<<<<< HEAD
+=======
 	@timeout
 	def wait_for_background_jobs(self):
 		while any_job_pending(frappe.local.site):
 			time.sleep(1)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def stop_recording(self):
 		frappe.recorder.dump()
 		frappe.recorder.stop()
@@ -83,7 +97,10 @@ class TestRecorder(IntegrationTestCase):
 	def test_explain(self):
 		frappe.db.sql("SELECT * FROM tabDocType")
 		frappe.db.sql("COMMIT")
+<<<<<<< HEAD
+=======
 		frappe.db.sql("select 1", run=0)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.stop_recording()
 
 		requests = frappe.recorder.get()
@@ -143,7 +160,11 @@ class TestRecorder(IntegrationTestCase):
 		self.assertIn("Error", content)
 
 
+<<<<<<< HEAD
+class TestRecorderDeco(FrappeTestCase):
+=======
 class TestRecorderDeco(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_recorder_flag(self):
 		frappe.recorder.delete()
 
@@ -155,7 +176,11 @@ class TestRecorderDeco(IntegrationTestCase):
 		self.assertTrue(frappe.recorder.get())
 
 
+<<<<<<< HEAD
+class TestQueryNormalization(FrappeTestCase):
+=======
 class TestQueryNormalization(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_query_normalization(self):
 		test_cases = {
 			"select * from user where name = 'x'": "select * from user where name = ?",

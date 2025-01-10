@@ -1,13 +1,12 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and contributors
 # License: MIT. See LICENSE
 
-import imaplib
-import poplib
 import smtplib
 from functools import wraps
 
 import frappe
 from frappe import _
+from frappe.email.receive import Timed_IMAP4, Timed_IMAP4_SSL, Timed_POP3, Timed_POP3_SSL
 from frappe.email.utils import get_port
 from frappe.model.document import Document
 from frappe.utils import cint
@@ -53,6 +52,8 @@ def handle_error(event):
 
 
 class EmailDomain(Document):
+<<<<<<< HEAD
+=======
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -78,6 +79,7 @@ class EmailDomain(Document):
 		validate_ssl_certificate_for_outgoing: DF.Check
 	# end: auto-generated types
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def validate(self):
 		"""Validate POP3/IMAP and SMTP connections."""
 
@@ -106,9 +108,15 @@ class EmailDomain(Document):
 		self.incoming_port = get_port(self)
 
 		if self.use_imap:
+<<<<<<< HEAD
+			conn_method = Timed_IMAP4_SSL if self.use_ssl else Timed_IMAP4
+		else:
+			conn_method = Timed_POP3_SSL if self.use_ssl else Timed_POP3
+=======
 			conn_method = imaplib.IMAP4_SSL if self.use_ssl else imaplib.IMAP4
 		else:
 			conn_method = poplib.POP3_SSL if self.use_ssl else poplib.POP3
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.use_starttls = cint(self.use_imap and self.use_starttls and not self.use_ssl)
 		incoming_conn = conn_method(self.email_server, port=self.incoming_port, timeout=30)

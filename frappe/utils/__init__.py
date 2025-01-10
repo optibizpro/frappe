@@ -19,8 +19,14 @@ from collections.abc import (
 )
 from email.header import decode_header, make_header
 from email.utils import formataddr, parseaddr
+<<<<<<< HEAD
+from urllib.parse import quote, urlparse
+
+from redis.exceptions import ConnectionError
+=======
 from typing import TypedDict
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from werkzeug.test import Client
 
 from frappe.deprecation_dumpster import gzip_compress, gzip_decompress, make_esc
@@ -303,8 +309,17 @@ def get_gravatar(email: str) -> str:
 
 
 def get_traceback(with_context=False) -> str:
+<<<<<<< HEAD
+	"""
+	Returns the traceback of the Exception
+	"""
+	from traceback_with_variables import iter_exc_lines
+
+	exc_type, exc_value, exc_tb = sys.exc_info()
+=======
 	"""Return the traceback of the Exception."""
 	from traceback_with_variables import iter_exc_lines
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	exc = sys.exception()
 	if not exc:
@@ -314,7 +329,11 @@ def get_traceback(with_context=False) -> str:
 		exc = exc.__cause__
 
 	if with_context:
+<<<<<<< HEAD
+		trace_list = iter_exc_lines(fmt=_get_traceback_sanitizer())
+=======
 		trace_list = iter_exc_lines(exc, fmt=_get_traceback_sanitizer())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		tb = "\n".join(trace_list)
 	else:
 		trace_list = traceback.format_exception(exc)
@@ -465,8 +484,13 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 			"executable": shutil.which("bash") or "/bin/bash",
 		}
 
+<<<<<<< HEAD
+			p = Popen(cmd, **kwargs)
+			exit_code = p.wait()
+=======
 		if low_priority:
 			kwargs["preexec_fn"] = lambda: os.nice(10)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		p = Popen(cmd, **kwargs)
 		exit_code = p.wait()
@@ -474,9 +498,12 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 		stdout.seek(0)
 		out = stdout.read()
 
+<<<<<<< HEAD
+=======
 		stderr.seek(0)
 		err = stderr.read()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	failed = check_exit_code and exit_code
 
 	if verbose or failed:
@@ -486,9 +513,13 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 			print(out)
 
 	if failed:
+<<<<<<< HEAD
+		raise Exception("Command failed")
+=======
 		raise frappe.CommandFailedError(
 			"Command failed", out.decode(errors="replace"), err.decode(errors="replace")
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return err, out
 
@@ -693,7 +724,11 @@ def get_request_session(max_retries=5):
 	from requests.adapters import HTTPAdapter, Retry
 
 	session = requests.Session()
+<<<<<<< HEAD
+	http_adapter = requests.adapters.HTTPAdapter(max_retries=Retry(total=max_retries, status_forcelist=[500]))
+=======
 	http_adapter = HTTPAdapter(max_retries=Retry(total=max_retries, status_forcelist=[500]))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	session.mount("http://", http_adapter)
 	session.mount("https://", http_adapter)
@@ -881,6 +916,33 @@ def call(fn, *args, **kwargs):
 	return json.loads(frappe.as_json(frappe.call(fn, *args, **kwargs)))
 
 
+<<<<<<< HEAD
+# Following methods are aken as-is from Python 3 codebase
+# since gzip.compress and gzip.decompress are not available in Python 2.7
+def gzip_compress(data, compresslevel=9):
+	"""Compress data in one shot and return the compressed string.
+	Optional argument is the compression level, in range of 0-9.
+	"""
+	from gzip import GzipFile
+
+	buf = io.BytesIO()
+	with GzipFile(fileobj=buf, mode="wb", compresslevel=compresslevel) as f:
+		f.write(data)
+	return buf.getvalue()
+
+
+def gzip_decompress(data):
+	"""Decompress a gzip compressed string in one shot.
+	Return the decompressed string.
+	"""
+	from gzip import GzipFile
+
+	with GzipFile(fileobj=io.BytesIO(data)) as f:
+		return f.read()
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_safe_filters(filters):
 	try:
 		filters = json.loads(filters)

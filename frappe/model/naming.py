@@ -7,15 +7,19 @@ import re
 import time
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Optional
+<<<<<<< HEAD
+=======
 from uuid import UUID
 
 import uuid_utils
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _
 from frappe.model import log_types
 from frappe.query_builder import DocType
 from frappe.utils import cint, cstr, now_datetime
+from frappe.utils.caching import redis_cache
 
 if TYPE_CHECKING:
 	from frappe.model.document import Document
@@ -195,10 +199,33 @@ def set_new_name(doc):
 def is_autoincremented(doctype: str, meta: Optional["Meta"] = None) -> bool:
 	"""Checks if the doctype has autoincrement autoname set"""
 
+<<<<<<< HEAD
+	if doctype in log_types:
+		return _implicitly_auto_incremented(doctype)
+	else:
+		if not meta:
+			meta = frappe.get_meta(doctype)
+
+		if not getattr(meta, "issingle", False) and meta.autoname == "autoincrement":
+			return True
+
+	return False
+=======
 	if not meta:
 		meta = frappe.get_meta(doctype)
 
 	return not getattr(meta, "issingle", False) and meta.autoname == "autoincrement"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+
+@redis_cache
+def _implicitly_auto_incremented(doctype) -> bool:
+	query = f"""select data_type FROM information_schema.columns where column_name = 'name' and table_name = 'tab{doctype}'"""
+	values = ()
+	if frappe.db.db_type == "mariadb":
+		query += " and table_schema = %s"
+		values = (frappe.db.db_name,)
+	return frappe.db.sql(query, values)[0][0] == "bigint"
 
 
 def set_name_from_naming_options(autoname, doc):
@@ -281,7 +308,12 @@ def make_autoname(key="", doctype="", doc="", *, ignore_validate=False):
 	                DE/09/01/00001 where 09 is the year, 01 is the month and 00001 is the series
 	"""
 	if key == "hash":
+<<<<<<< HEAD
+		# Makeshift "ULID": first 4 chars are based on timestamp, other 6 are random
+		return _get_timestamp_prefix() + _generate_random_string(6)
+=======
 		return _generate_random_string(10)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	series = NamingSeries(key)
 	return series.generate_next_name(doc, ignore_validate=ignore_validate)
@@ -377,7 +409,11 @@ def parse_naming_series(
 
 
 def has_custom_parser(e):
+<<<<<<< HEAD
+	"""Returns true if the naming series part has a custom parser"""
+=======
 	"""Return True if the naming series part has a custom parser."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return frappe.get_hooks("naming_series_variables", {}).get(e)
 
 
@@ -471,7 +507,11 @@ def get_default_naming_series(doctype: str) -> str | None:
 			return option
 
 
+<<<<<<< HEAD
+def validate_name(doctype: str, name: int | str, case: str | None = None):
+=======
 def validate_name(doctype: str, name: int | str):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if not name:
 		frappe.throw(_("No Name Specified for {0}").format(doctype))
 
@@ -583,6 +623,8 @@ def _format_autoname(autoname: str, doc):
 	def get_param_value_for_word_match(match):
 		param = match.group()
 		return parse_naming_series([param[1:-1]], doc=doc)
+<<<<<<< HEAD
+=======
 
 	def get_param_value_for_hash_match(patterned_string: str):
 		def get_param_value(match):
@@ -592,6 +634,7 @@ def _format_autoname(autoname: str, doc):
 			return parse_naming_series([param[1:-1]], doc=doc, key=key)
 
 		return get_param_value
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# Replace braced params with their parsed value
 	autoname_value = BRACED_PARAMS_WORD_PATTERN.sub(get_param_value_for_word_match, autoname_value)

@@ -33,7 +33,11 @@ from frappe.modules import get_doc_path, make_boilerplate
 from frappe.modules.import_file import get_file_path
 from frappe.permissions import ALL_USER_ROLE, AUTOMATIC_ROLES, SYSTEM_USER_ROLE
 from frappe.query_builder.functions import Concat
+<<<<<<< HEAD
+from frappe.utils import cint, is_a_property, random_string
+=======
 from frappe.utils import cint, flt, get_datetime, is_a_property, random_string
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.website.utils import clear_cache
 
 if TYPE_CHECKING:
@@ -346,7 +350,11 @@ class DocType(Document):
 
 		self.flags.update_fields_to_fetch_queries = []
 
+<<<<<<< HEAD
+		new_fields_to_fetch = [df for df in new_meta.get_fields_to_fetch()]
+=======
 		new_fields_to_fetch = new_meta.get_fields_to_fetch()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if set(old_fields_to_fetch) != {df.fieldname for df in new_fields_to_fetch}:
 			for df in new_fields_to_fetch:
@@ -481,7 +489,11 @@ class DocType(Document):
 						elif d.fieldtype == "Tab Break":
 							d.fieldname = d.fieldname + "_tab"
 					elif d.fieldtype in ("Section Break", "Column Break", "Tab Break"):
+<<<<<<< HEAD
+						d.fieldname = d.fieldtype.lower().replace(" ", "_") + "_" + str(random_string(5))
+=======
 						d.fieldname = d.fieldtype.lower().replace(" ", "_") + "_" + str(random_string(4))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					else:
 						frappe.throw(
 							_("Row #{}: Fieldname is required").format(d.idx), title="Missing Fieldname"
@@ -1664,8 +1676,11 @@ def validate_fields(meta: Meta):
 	fields = meta.get("fields")
 	fieldname_list = [d.fieldname for d in fields]
 
+<<<<<<< HEAD
+=======
 	in_ci = os.environ.get("CI")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	not_allowed_in_list_view = get_fields_not_allowed_in_list_view(meta)
 
 	for d in fields:
@@ -1684,7 +1699,11 @@ def validate_fields(meta: Meta):
 		validate_fetch_from(d)
 		validate_data_field_type(d)
 
+<<<<<<< HEAD
+		if not frappe.flags.in_migrate:
+=======
 		if not frappe.flags.in_migrate or in_ci:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			check_unique_fieldname(meta.get("name"), d.fieldname)
 			check_link_table_options(meta.get("name"), d)
 			check_illegal_mandatory(meta.get("name"), d)
@@ -1697,7 +1716,11 @@ def validate_fields(meta: Meta):
 			check_max_height(d)
 			check_no_of_ratings(d)
 
+<<<<<<< HEAD
+	if not frappe.flags.in_migrate:
+=======
 	if not frappe.flags.in_migrate or in_ci:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		check_fold(fields)
 		check_search_fields(meta, fields)
 		check_title_field(meta)

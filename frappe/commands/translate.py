@@ -40,7 +40,11 @@ def new_language(context: CliCtxObj, lang_code, app):
 	frappe.translate.write_translations_file(app, lang_code)
 
 	print(f"File created at ./apps/{app}/{app}/translations/{lang_code}.csv")
+<<<<<<< HEAD
+	print("You will need to add the language in frappe/geo/languages.json, if you haven't done it already.")
+=======
 	print("You will need to add the language in frappe/geo/languages.csv, if you haven't done it already.")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("get-untranslated")
@@ -102,13 +106,21 @@ def import_translations(context: CliCtxObj, lang, path):
 @click.argument("source-app")
 @click.argument("target-app")
 @pass_context
+<<<<<<< HEAD
+def migrate_translations(context, source_app, target_app):
+=======
 def migrate_translations(context: CliCtxObj, source_app, target_app):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"Migrate target-app-specific translations from source-app to target-app"
 	import frappe.translate
 
 	site = get_site(context)
 	try:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		frappe.translate.migrate_translations(source_app, target_app)
 	finally:

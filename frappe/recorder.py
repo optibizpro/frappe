@@ -1,6 +1,10 @@
 # Copyright (c) 2018, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+<<<<<<< HEAD
+import datetime
+=======
 import cProfile
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import functools
 import inspect
 import io
@@ -10,7 +14,10 @@ import re
 import time
 from collections import Counter
 from collections.abc import Callable
+<<<<<<< HEAD
+=======
 from dataclasses import dataclass
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import sqlparse
 
@@ -59,6 +66,12 @@ def record_sql(*args, **kwargs):
 	result = frappe.db._sql(*args, **kwargs)
 	end_time = time.monotonic()
 
+<<<<<<< HEAD
+	stack = list(get_current_stack_frames())
+
+	data = {
+		"query": str(frappe.db.last_query),
+=======
 	query = getattr(frappe.db, "last_query", None)
 	if not query or isinstance(result, str):
 		# run=0, doesn't actually run the query so last_query won't be present
@@ -70,6 +83,7 @@ def record_sql(*args, **kwargs):
 
 	data = {
 		"query": str(query),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"stack": stack,
 		"explain_result": [],
 		"time": start_time,
@@ -86,8 +100,13 @@ def get_current_stack_frames():
 	try:
 		current = inspect.currentframe()
 		frames = inspect.getouterframes(current, context=10)
+<<<<<<< HEAD
+		for _frame, filename, lineno, function, _context, _index in list(reversed(frames))[:-2]:
+			if "/apps/" in filename or "<serverscript>" in filename:
+=======
 		for frame, filename, lineno, function, context, index in list(reversed(frames))[:-2]:  # noqa: B007
 			if "/apps/" in filename or SERVER_SCRIPT_FILE_PREFIX in filename:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				yield {
 					"filename": TRACEBACK_PATH_PATTERN.sub("", filename),
 					"lineno": lineno,
@@ -109,8 +128,12 @@ def post_process():
 	frappe.db.rollback()
 	frappe.db.begin(read_only=True)  # Explicitly start read only transaction
 
+<<<<<<< HEAD
+	result = list(frappe.cache().hgetall(RECORDER_REQUEST_HASH).values())
+=======
 	config = RecorderConfig.retrieve()
 	result = list(frappe.cache.hgetall(RECORDER_REQUEST_HASH).values())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	for request in result:
 		for call in request["calls"]:
@@ -120,16 +143,24 @@ def post_process():
 			call["query"] = formatted_query
 
 			# Collect EXPLAIN for executed query
+<<<<<<< HEAD
+			if is_query_type(formatted_query, ("select", "update", "delete")):
+=======
 			if config.explain and is_query_type(formatted_query, ("select", "update", "delete")):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				# Only SELECT/UPDATE/DELETE queries can be "EXPLAIN"ed
 				try:
 					call["explain_result"] = frappe.db.sql(f"EXPLAIN {formatted_query}", as_dict=True)
 				except Exception:
 					pass
 		mark_duplicates(request)
+<<<<<<< HEAD
+		frappe.cache().hset(RECORDER_REQUEST_HASH, request["uuid"], request)
+=======
 		frappe.cache.hset(RECORDER_REQUEST_HASH, request["uuid"], request)
 
 	config.delete()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def mark_duplicates(request):
@@ -175,12 +206,18 @@ def normalize_query(query: str) -> str:
 
 
 def record(force=False):
+<<<<<<< HEAD
+	if __debug__:
+		if frappe.cache().get_value(RECORDER_INTERCEPT_FLAG) or force:
+			frappe.local._recorder = Recorder()
+=======
 	flag_value = frappe.client_cache.get_value(RECORDER_INTERCEPT_FLAG)
 	if flag_value or force:
 		frappe.local._recorder = Recorder(force=force)
 	elif flag_value is None:
 		# Explicitly set it once so next requests can use client-side cache
 		frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def dump():
@@ -192,6 +229,9 @@ class Recorder:
 	def __init__(self, force=False):
 		self.config = RecorderConfig.retrieve()
 		self.calls = []
+<<<<<<< HEAD
+		if frappe.request:
+=======
 		self._patched_sql = False
 		self.profiler = None
 		self._recording = True
@@ -206,19 +246,29 @@ class Recorder:
 			and frappe.request
 			and self.config.request_filter in frappe.request.path
 		):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.path = frappe.request.path
 			self.cmd = frappe.local.form_dict.cmd or ""
 			self.method = frappe.request.method
 			self.headers = dict(frappe.local.request.headers)
 			self.form_dict = frappe.local.form_dict
+<<<<<<< HEAD
+		else:
+			self.path = None
+=======
 			self.event_type = "HTTP Request"
 		elif self.config.record_jobs and frappe.job and self.config.jobs_filter in frappe.job.method:
 			self.event_type = "Background Job"
 			self.path = frappe.job.method
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.cmd = None
 			self.method = None
 			self.headers = None
 			self.form_dict = None
+<<<<<<< HEAD
+
+		_patch()
+=======
 		elif not self.force:
 			self._recording = False
 			return
@@ -235,6 +285,7 @@ class Recorder:
 		if self.config.profile:
 			self.profiler = cProfile.Profile()
 			self.profiler.enable()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def register(self, data):
 		self.calls.append(data)
@@ -272,7 +323,16 @@ class Recorder:
 			"method": self.method,
 			"event_type": self.event_type,
 		}
+<<<<<<< HEAD
+		frappe.cache().hset(RECORDER_REQUEST_SPARSE_HASH, self.uuid, request_data)
+		frappe.publish_realtime(
+			event="recorder-dump-event",
+			message=json.dumps(request_data, default=str),
+			user="Administrator",
+		)
+=======
 		frappe.cache.hset(RECORDER_REQUEST_SPARSE_HASH, self.uuid, request_data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		request_data["calls"] = self.calls
 		request_data["headers"] = self.headers
@@ -280,6 +340,8 @@ class Recorder:
 		request_data["profile"] = profiler_output
 		frappe.cache.hset(RECORDER_REQUEST_HASH, self.uuid, request_data)
 
+<<<<<<< HEAD
+=======
 		if self.config.record_sql:
 			self._unpatch_sql()
 
@@ -287,10 +349,15 @@ class Recorder:
 	def _patch_sql():
 		frappe.db._sql = frappe.db.sql
 		frappe.db.sql = record_sql
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@staticmethod
 	def _unpatch_sql():
 		frappe.db.sql = frappe.db._sql
+
+
+def _unpatch():
+	frappe.db.sql = frappe.db._sql
 
 
 def do_not_record(function):
@@ -324,6 +391,10 @@ def status(*args, **kwargs):
 @frappe.whitelist()
 @do_not_record
 @administrator_only
+<<<<<<< HEAD
+def start(*args, **kwargs):
+	frappe.cache().set_value(RECORDER_INTERCEPT_FLAG, 1, expires_in_sec=60 * 60)
+=======
 def start(
 	record_jobs: bool = True,
 	record_requests: bool = True,
@@ -347,13 +418,18 @@ def start(
 		jobs_filter=jobs_filter,
 	).store()
 	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()
 @do_not_record
 @administrator_only
 def stop(*args, **kwargs):
+<<<<<<< HEAD
+	frappe.cache().delete_value(RECORDER_INTERCEPT_FLAG)
+=======
 	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.enqueue(post_process, now=frappe.flags.in_test)
 
 
@@ -379,8 +455,13 @@ def export_data(*args, **kwargs):
 @do_not_record
 @administrator_only
 def delete(*args, **kwargs):
+<<<<<<< HEAD
+	frappe.cache().delete_value(RECORDER_REQUEST_SPARSE_HASH)
+	frappe.cache().delete_value(RECORDER_REQUEST_HASH)
+=======
 	frappe.cache.delete_value(RECORDER_REQUEST_SPARSE_HASH)
 	frappe.cache.delete_value(RECORDER_REQUEST_HASH)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def record_queries(func: Callable):
@@ -392,12 +473,18 @@ def record_queries(func: Callable):
 		frappe.local._recorder.path = f"Function call: {func.__module__}.{func.__qualname__}"
 		ret = func(*args, **kwargs)
 		dump()
+<<<<<<< HEAD
+		_unpatch()
+=======
 		Recorder._unpatch_sql()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		post_process()
 		print("Recorded queries, open recorder to view them.")
 		return ret
 
 	return wrapped
+<<<<<<< HEAD
+=======
 
 
 @frappe.whitelist()
@@ -410,3 +497,4 @@ def import_data(file: str) -> None:
 		frappe.cache.hset(RECORDER_REQUEST_SPARSE_HASH, request["uuid"], request)
 		frappe.cache.hset(RECORDER_REQUEST_HASH, request["uuid"], request)
 	file_doc.delete(delete_permanently=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

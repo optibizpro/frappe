@@ -6,6 +6,13 @@
 </div>
 
 <div align="center">
+<<<<<<< HEAD
+	<a href="https://github.com/frappe/frappe/actions/workflows/server-mariadb-tests.yml"><img src="https://github.com/frappe/frappe/actions/workflows/server-mariadb-tests.yml/badge.svg"></a>
+	<a href="https://github.com/frappe/frappe/actions/workflows/ui-tests.yml"><img src="https://github.com/frappe/frappe/actions/workflows/ui-tests.yml/badge.svg?branch=develop"></a>
+	<a href='https://frappeframework.com/docs'><img src='https://img.shields.io/badge/docs-📖-7575FF.svg?style=flat-square'/></a>
+	<a href='https://www.codetriage.com/frappe/frappe'><img src='https://www.codetriage.com/frappe/frappe/badges/users.svg'></a>
+	<a href="https://codecov.io/gh/frappe/frappe"><img src="https://codecov.io/gh/frappe/frappe/branch/develop/graph/badge.svg?token=XoTa679hIj"/></a>
+=======
 	<a target="_blank" href="#LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-success.svg"></a>
 	<a href="https://codecov.io/gh/frappe/frappe"><img src="https://codecov.io/gh/frappe/frappe/branch/develop/graph/badge.svg?token=XoTa679hIj"/></a>
 </div>
@@ -16,6 +23,7 @@
     <a href="https://frappe.io/framework">Website</a>
     -
     <a href="https://docs.frappe.io/framework">Documentation</a>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </div>
 
 ## Frappe Framework
@@ -24,6 +32,11 @@ Full-stack web application framework that uses Python and MariaDB on the server 
 ### Motivation
 Started in 2005, Frappe Framework was inspired by the Semantic Web. The "big idea" behind semantic web was of a framework that not only described how information is shown (like headings, body etc), but also what it means, like name, address etc.
 
+<<<<<<< HEAD
+<div align="center" style="max-height: 40px;">
+	<a href="https://frappecloud.com/frappe/signup"><img src=".github/try-on-f-cloud-button.svg" height="40"></a>
+	<a href="https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/gavindsouza/install-scripts/main/frappe/pwd.yml"><img src="https://raw.githubusercontent.com/play-with-docker/stacks/master/assets/images/button.png" alt="Try in PWD" height="37"/></a>
+=======
 By creating a web framework that allowed for easy definition of metadata, it made building complex applications easy. Applications usually designed around how users interact with a system, but not based on semantics of the underlying system. Applications built on semantics end up being much more consistent and extensible. The first application built on Framework was ERPNext, a beast with more than 700 object types. Framework is not for the light hearted - it is not the first thing you might want to learn if you are beginning to learn web programming, but if you are ready to do real work, then Framework is the right tool for the job.
 
 ### Key Features
@@ -63,6 +76,7 @@ It takes care of installation, setup, upgrades, monitoring, maintenance and supp
             <img src="https://frappe.io/files/try-on-fc-black.png" alt="Try on Frappe Cloud" height="28" />
         </picture>
     </a>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </div>
 
 ### Self Hosting

@@ -17,9 +17,17 @@
   "introduction_text",
   "web_form_fields",
   "settings_tab",
+<<<<<<< HEAD
+  "login_required",
+  "allow_multiple",
+  "allow_edit",
+  "allow_delete",
+  "anonymous",
+=======
   "access_control_section",
   "anonymous",
   "login_required",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "column_break_2",
   "apply_document_permissions",
   "allow_edit",
@@ -30,12 +38,20 @@
   "allow_comments",
   "allow_print",
   "print_format",
+<<<<<<< HEAD
+  "allow_comments",
+  "show_attachments",
+  "allow_incomplete",
+  "section_break_2",
+  "max_attachment_size",
+=======
   "max_attachment_size",
   "show_attachments",
   "column_break_hhec",
   "hide_navbar",
   "hide_footer",
   "allowed_embedding_domains",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "condition_section",
   "condition_description",
   "condition_json",
@@ -99,7 +115,11 @@
    "default": "0",
    "fieldname": "is_standard",
    "fieldtype": "Check",
+<<<<<<< HEAD
+   "label": "Is Standard",
+=======
    "label": "Is standard",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "no_copy": 1
   },
   {
@@ -114,7 +134,11 @@
    "depends_on": "eval:!doc.anonymous",
    "fieldname": "login_required",
    "fieldtype": "Check",
+<<<<<<< HEAD
+   "label": "Login Required"
+=======
    "label": "Login required"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "0",
@@ -169,7 +193,11 @@
    "description": "Allow saving if mandatory fields are not filled",
    "fieldname": "allow_incomplete",
    "fieldtype": "Check",
+<<<<<<< HEAD
+   "label": "Allow Incomplete Forms"
+=======
    "label": "Allow incomplete forms"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "introduction_text",
@@ -193,8 +221,12 @@
    "description": "For help see <a href=\"https://frappeframework.com/docs/user/en/guides/portal-development/web-forms\" target=\"_blank\">Client Script API and Examples</a>",
    "fieldname": "client_script",
    "fieldtype": "Code",
+<<<<<<< HEAD
+   "label": "Client Script"
+=======
    "label": "Client script",
    "options": "Javascript"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "Save",
@@ -237,7 +269,11 @@
    "default": "0",
    "fieldname": "apply_document_permissions",
    "fieldtype": "Check",
+<<<<<<< HEAD
+   "label": "Apply Document Permissions"
+=======
    "label": "Apply document permissions"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "0",
@@ -278,7 +314,11 @@
   {
    "fieldname": "success_title",
    "fieldtype": "Data",
+<<<<<<< HEAD
+   "label": "Success Title"
+=======
    "label": "Success title"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "banner_image",
@@ -302,6 +342,13 @@
   {
    "fieldname": "column_break_2",
    "fieldtype": "Column Break"
+<<<<<<< HEAD
+  },
+  {
+   "fieldname": "section_break_2",
+   "fieldtype": "Section Break"
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "collapsible": 1,
@@ -350,12 +397,20 @@
   {
    "fieldname": "meta_title",
    "fieldtype": "Data",
+<<<<<<< HEAD
+   "label": "Meta Title"
+=======
    "label": "Meta title"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "meta_description",
    "fieldtype": "Small Text",
+<<<<<<< HEAD
+   "label": "Meta Description"
+=======
    "label": "Meta description"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "column_break_khxs",
@@ -364,7 +419,11 @@
   {
    "fieldname": "meta_image",
    "fieldtype": "Attach Image",
+<<<<<<< HEAD
+   "label": "Meta Image"
+=======
    "label": "Meta image"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "column_break_vdhm",
@@ -372,15 +431,26 @@
   },
   {
    "default": "0",
+<<<<<<< HEAD
+   "description": "Receive anonymous response",
+   "fieldname": "anonymous",
+   "fieldtype": "Check",
+   "label": "Anonymous"
+=======
    "description": "If enabled, all responses on the web form will be submitted anonymously",
    "fieldname": "anonymous",
    "fieldtype": "Check",
    "label": "Anonymous responses"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "condition_description",
    "fieldtype": "HTML",
+<<<<<<< HEAD
+   "label": "Condition Description",
+=======
    "label": "Condition description",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "options": "<p>Multiple webforms can be created for a single doctype. Add filters specific to this webform to display correct record after submission.</p><p>For Example:</p>\n<p>If you create a separate webform every year to capture feedback from employees add a \n field named year in doctype and add a filter <b>year = 2023</b></p>\n"
   },
   {
@@ -391,6 +461,8 @@
    "fieldname": "condition_json",
    "fieldtype": "JSON",
    "label": "Condition JSON"
+<<<<<<< HEAD
+=======
   },
   {
    "default": "0",
@@ -423,13 +495,18 @@
   {
    "fieldname": "column_break_hhec",
    "fieldtype": "Column Break"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "has_web_view": 1,
  "icon": "icon-edit",
  "is_published_field": "published",
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-07-27 20:32:06.331745",
+=======
  "modified": "2024-12-30 17:00:05.944646",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Website",
  "name": "Web Form",

@@ -3,7 +3,10 @@
 
 import os
 import shutil
+<<<<<<< HEAD
+=======
 from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 import frappe.model
@@ -101,6 +104,24 @@ def get_module_name(doc):
 
 
 def delete_folder(module, dt, dn):
+<<<<<<< HEAD
+	if frappe.db.get_value("Module Def", module, "custom"):
+		module_path = get_custom_module_path(module)
+	else:
+		module_path = get_module_path(module)
+
+	dt, dn = scrub_dt_dn(dt, dn)
+
+	# delete folder
+	folder = os.path.join(module_path, dt, dn)
+
+	if os.path.exists(folder):
+		shutil.rmtree(folder)
+
+
+def create_folder(module, dt, dn, create_init):
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.db.get_value("Module Def", module, "custom"):
 		module_path = get_custom_module_path(module)
 	else:

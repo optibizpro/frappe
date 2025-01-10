@@ -89,8 +89,15 @@ def get(doctype, name=None, filters=None, parent=None):
 		doc = frappe.get_doc(doctype)  # single
 
 	doc.check_permission()
+<<<<<<< HEAD
+
+	if frappe.get_system_settings("apply_perm_level_on_api_calls"):
+		doc.apply_fieldlevel_read_permissions()
+
+=======
 	doc.apply_fieldlevel_read_permissions()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return doc.as_dict()
 
 
@@ -211,7 +218,15 @@ def insert_many(docs=None):
 	if len(docs) > 200:
 		frappe.throw(_("Only 200 inserts allowed in one request"))
 
+<<<<<<< HEAD
+	out = []
+	for doc in docs:
+		out.append(insert_doc(doc).name)
+
+	return out
+=======
 	return [insert_doc(doc).name for doc in docs]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist(methods=["POST", "PUT"])
@@ -306,7 +321,11 @@ def has_permission(doctype, docname, perm_type="read"):
 
 @frappe.whitelist()
 def get_doc_permissions(doctype, docname):
+<<<<<<< HEAD
+	"""Returns an evaluated document permissions dict like `{"read":1, "write":1}`
+=======
 	"""Return an evaluated document permissions dict like `{"read":1, "write":1}`.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param doctype: DocType of the document to be evaluated
 	:param docname: `name` of the document to be evaluated
@@ -329,7 +348,26 @@ def get_password(doctype, name, fieldname):
 
 from frappe.deprecation_dumpster import get_js as _get_js
 
+<<<<<<< HEAD
+	:param items: JSON list of paths of the js files to be loaded."""
+	items = json.loads(items)
+	out = []
+	for src in items:
+		src = src.strip("/").split("/")
+
+		if ".." in src or src[0] != "assets":
+			frappe.throw(_("Invalid file path: {0}").format("/".join(src)))
+
+		contentpath = os.path.join(frappe.local.sites_path, *src)
+		with open(contentpath) as srcfile:
+			code = frappe.utils.cstr(srcfile.read())
+
+		out.append(code)
+
+	return out
+=======
 get_js = frappe.whitelist()(_get_js)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist(allow_guest=True)

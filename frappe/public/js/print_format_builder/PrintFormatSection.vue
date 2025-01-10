@@ -52,9 +52,13 @@
 						:animation="150"
 						item-key="id"
 					>
+<<<<<<< HEAD
+						<Field v-for="df in get_fields(column)" :key="df.fieldname" :df="df" />
+=======
 						<template #item="{ element }">
 							<Field :df="element" />
 						</template>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</draggable>
 				</div>
 			</div>
@@ -70,12 +74,93 @@ import draggable from "vuedraggable";
 import Field from "./Field.vue";
 import { computed } from "vue";
 
+<<<<<<< HEAD
+export default {
+	name: "PrintFormatSection",
+	mixins: [storeMixin],
+	props: ["section"],
+	components: {
+		draggable,
+		Field,
+	},
+	methods: {
+		add_column() {
+			if (this.section.columns.length < 4) {
+				this.section.columns.push({
+					label: "",
+					fields: [],
+				});
+			}
+		},
+		remove_column() {
+			if (this.section.columns.length <= 1) return;
+=======
 // props
 const props = defineProps(["section"]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 // emits
 let emit = defineEmits(["add_section_above"]);
 
+<<<<<<< HEAD
+			this.$set(this.section, "columns", columns);
+		},
+		add_page_break() {
+			this.$set(this.section, "page_break", true);
+		},
+		remove_page_break() {
+			this.$set(this.section, "page_break", false);
+		},
+		get_fields(column) {
+			return column.fields.filter((df) => !df.remove);
+		},
+	},
+	computed: {
+		section_options() {
+			return [
+				{
+					label: __("Add section above"),
+					action: () => this.$emit("add_section_above"),
+				},
+				{
+					label: __("Add column"),
+					action: this.add_column,
+					condition: () => this.section.columns.length < 4,
+				},
+				{
+					label: __("Remove column"),
+					action: this.remove_column,
+					condition: () => this.section.columns.length > 1,
+				},
+				{
+					label: __("Add page break"),
+					action: this.add_page_break,
+					condition: () => !this.section.page_break,
+				},
+				{
+					label: __("Remove page break"),
+					action: this.remove_page_break,
+					condition: () => this.section.page_break,
+				},
+				{
+					label: __("Remove section"),
+					action: () => this.$set(this.section, "remove", true),
+				},
+				{
+					label: __("Field Orientation (Left-Right)"),
+					condition: () => !this.section.field_orientation,
+					action: () => this.$set(this.section, "field_orientation", "left-right"),
+				},
+				{
+					label: __("Field Orientation (Top-Down)"),
+					condition: () => this.section.field_orientation == "left-right",
+					action: () => this.$set(this.section, "field_orientation", ""),
+				},
+			].filter((option) => (option.condition ? option.condition() : true));
+		},
+	},
+};
+=======
 // methods
 function add_column() {
 	if (props.section.columns.length < 4) {
@@ -153,6 +238,7 @@ let section_options = computed(() => {
 		},
 	].filter((option) => (option.condition ? option.condition() : true));
 });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

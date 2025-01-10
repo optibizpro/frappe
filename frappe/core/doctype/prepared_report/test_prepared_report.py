@@ -2,6 +2,15 @@
 # License: MIT. See LICENSE
 import json
 import time
+<<<<<<< HEAD
+
+import frappe
+from frappe.desk.query_report import generate_report_result, get_report_doc
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestPreparedReport(FrappeTestCase):
+=======
 from contextlib import contextmanager
 
 import frappe
@@ -21,6 +30,7 @@ class UnitTestPreparedReport(UnitTestCase):
 
 
 class TestPreparedReport(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def tearDownClass(cls):
 		for r in frappe.get_all("Prepared Report", pluck="name"):
@@ -28,6 +38,13 @@ class TestPreparedReport(IntegrationTestCase):
 
 		frappe.db.commit()
 
+<<<<<<< HEAD
+	def create_prepared_report(self, commit=False):
+		doc = frappe.get_doc(
+			{
+				"doctype": "Prepared Report",
+				"report_name": "Database Storage Usage By Tables",
+=======
 	@timeout(seconds=20)
 	def wait_for_status(self, report, status):
 		frappe.db.commit()  # Flush changes first
@@ -43,6 +60,7 @@ class TestPreparedReport(IntegrationTestCase):
 			{
 				"doctype": "Prepared Report",
 				"report_name": report or "Database Storage Usage By Tables",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		).insert()
 
@@ -52,6 +70,25 @@ class TestPreparedReport(IntegrationTestCase):
 		return doc
 
 	def test_queueing(self):
+<<<<<<< HEAD
+		doc_ = self.create_prepared_report()
+		self.assertEqual("Queued", doc_.status)
+		self.assertTrue(doc_.queued_at)
+
+		frappe.db.commit()
+		time.sleep(5)
+
+		doc_ = frappe.get_last_doc("Prepared Report")
+		self.assertEqual("Completed", doc_.status)
+		self.assertTrue(doc_.job_id)
+		self.assertTrue(doc_.report_end_time)
+
+	def test_prepared_data(self):
+		doc_ = self.create_prepared_report(commit=True)
+		time.sleep(5)
+
+		prepared_data = json.loads(doc_.get_prepared_data().decode("utf-8"))
+=======
 		doc = self.create_prepared_report()
 		self.assertEqual("Queued", doc.status)
 		self.assertTrue(doc.queued_at)
@@ -67,10 +104,13 @@ class TestPreparedReport(IntegrationTestCase):
 		self.wait_for_status(doc, "Completed")
 
 		prepared_data = json.loads(doc.get_prepared_data().decode("utf-8"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		generated_data = generate_report_result(get_report_doc("Database Storage Usage By Tables"))
 		self.assertEqual(len(prepared_data["columns"]), len(generated_data["columns"]))
 		self.assertEqual(len(prepared_data["result"]), len(generated_data["result"]))
 		self.assertEqual(len(prepared_data), len(generated_data))
+<<<<<<< HEAD
+=======
 
 	@run_only_if(db_type_is.MARIADB)
 	def test_start_status_and_kill_jobs(self):
@@ -99,3 +139,4 @@ def test_report(**args):
 		yield report
 	finally:
 		report.delete()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -2,6 +2,8 @@
 // MIT License. See license.txt
 
 frappe.ui.form.on("DocType", {
+<<<<<<< HEAD
+=======
 	onload: function (frm) {
 		if (frm.is_new() && !frm.doc?.fields) {
 			frappe.listview_settings["DocType"].new_doctype_dialog();
@@ -31,6 +33,7 @@ frappe.ui.form.on("DocType", {
 		}
 	},
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	refresh: function (frm) {
 		frm.set_query("role", "permissions", function (doc) {
 			if (doc.custom && frappe.session.user != "Administrator") {
@@ -51,6 +54,25 @@ frappe.ui.form.on("DocType", {
 		}
 
 		if (!frm.is_new() && !frm.doc.istable) {
+<<<<<<< HEAD
+			if (frm.doc.issingle) {
+				frm.add_custom_button(__("Go to {0}", [__(frm.doc.name)]), () => {
+					window.open(`/app/${frappe.router.slug(frm.doc.name)}`);
+				});
+			} else {
+				frm.add_custom_button(__("Go to {0} List", [__(frm.doc.name)]), () => {
+					window.open(`/app/${frappe.router.slug(frm.doc.name)}`);
+				});
+			}
+		}
+
+		const customize_form_link = "<a href='/app/customize-form'>Customize Form</a>";
+		if (!frappe.boot.developer_mode && !frm.doc.custom) {
+			// make the document read-only
+			frm.set_read_only();
+			frm.dashboard.add_comment(
+				__("DocTypes can not be modified, please use {0} instead", [customize_form_link]),
+=======
 			const button_text = frm.doc.issingle
 				? __("Go to {0}", [__(frm.doc.name)])
 				: __("Go to {0} List", [__(frm.doc.name)]);
@@ -66,15 +88,27 @@ frappe.ui.form.on("DocType", {
 			frm.dashboard.clear_comment();
 			frm.dashboard.add_comment(
 				__("DocTypes cannot be modified, please use {0} instead", [customize_form_link]),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"blue",
 				true
 			);
 		} else if (frappe.boot.developer_mode) {
+<<<<<<< HEAD
+			let msg = __(
+				"This site is running in developer mode. Any change made here will be updated in code."
+			);
+			msg += "<br>";
+			msg += __("If you just want to customize for your site, use {0} instead.", [
+				customize_form_link,
+			]);
+			frm.dashboard.add_comment(msg, "yellow");
+=======
 			frm.dashboard.clear_comment();
 			let msg = __(
 				"This site is running in developer mode. Any change made here will be updated in code."
 			);
 			frm.dashboard.add_comment(msg, "yellow", true);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		if (frm.is_new()) {
@@ -92,8 +126,11 @@ frappe.ui.form.on("DocType", {
 		frm.cscript.autoname(frm);
 		frm.cscript.set_naming_rule_description(frm);
 		frm.trigger("setup_default_views");
+<<<<<<< HEAD
+=======
 
 		render_form_builder(frm);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	istable: (frm) => {
@@ -107,6 +144,8 @@ frappe.ui.form.on("DocType", {
 	set_default_permission: (frm) => {
 		if (!(frm.doc.permissions && frm.doc.permissions.length)) {
 			frm.add_child("permissions", { role: "System Manager" });
+<<<<<<< HEAD
+=======
 		}
 	},
 
@@ -133,13 +172,111 @@ frappe.ui.form.on("DocType", {
 			frm.footer.wrapper.show();
 			frm.form_wrapper.find(".form-message").show();
 			frm.form_wrapper.removeClass("mb-1");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
+	},
+
+	is_tree: (frm) => {
+		frm.trigger("setup_default_views");
+	},
+
+	is_calendar_and_gantt: (frm) => {
+		frm.trigger("setup_default_views");
+	},
+
+	setup_default_views: (frm) => {
+		frappe.model.set_default_views_for_doctype(frm.doc.name, frm);
 	},
 });
 
 frappe.ui.form.on("DocField", {
 	form_render(frm, doctype, docname) {
+<<<<<<< HEAD
+		// Render two select fields for Fetch From instead of Small Text for better UX
+		let field = frm.cur_grid.grid_form.fields_dict.fetch_from;
+		$(field.input_area).hide();
+
+		let $doctype_select = $(`<select class="form-control">`);
+		let $field_select = $(`<select class="form-control">`);
+		let $wrapper = $('<div class="fetch-from-select row"><div>');
+		$wrapper.append($doctype_select, $field_select);
+		field.$input_wrapper.append($wrapper);
+		$doctype_select.wrap('<div class="col"></div>');
+		$field_select.wrap('<div class="col"></div>');
+
+		let row = frappe.get_doc(doctype, docname);
+		let curr_value = { doctype: null, fieldname: null };
+		if (row.fetch_from) {
+			let [doctype, fieldname] = row.fetch_from.split(".");
+			curr_value.doctype = doctype;
+			curr_value.fieldname = fieldname;
+		}
+
+		let doctypes = frm.doc.fields
+			.filter((df) => df.fieldtype == "Link")
+			.filter((df) => df.options && df.fieldname != row.fieldname)
+			.sort((a, b) => a.options.localeCompare(b.options))
+			.map((df) => ({
+				label: `${df.options} (${df.fieldname})`,
+				value: df.fieldname,
+			}));
+		$doctype_select.add_options([
+			{ label: __("Select DocType"), value: "", selected: true },
+			...doctypes,
+		]);
+
+		$doctype_select.on("change", () => {
+			row.fetch_from = "";
+			frm.dirty();
+			update_fieldname_options();
+		});
+
+		function update_fieldname_options() {
+			$field_select.find("option").remove();
+
+			let link_fieldname = $doctype_select.val();
+			if (!link_fieldname) return;
+			let link_field = frm.doc.fields.find((df) => df.fieldname === link_fieldname);
+			let link_doctype = link_field.options;
+			frappe.model.with_doctype(link_doctype, () => {
+				let fields = frappe.meta
+					.get_docfields(link_doctype, null, {
+						fieldtype: ["not in", frappe.model.no_value_type],
+					})
+					.sort((a, b) => a.label.localeCompare(b.label))
+					.map((df) => ({
+						label: `${df.label} (${df.fieldtype})`,
+						value: df.fieldname,
+					}));
+				$field_select.add_options([
+					{
+						label: __("Select Field"),
+						value: "",
+						selected: true,
+						disabled: true,
+					},
+					...fields,
+				]);
+
+				if (curr_value.fieldname) {
+					$field_select.val(curr_value.fieldname);
+				}
+			});
+		}
+
+		$field_select.on("change", () => {
+			let fetch_from = `${$doctype_select.val()}.${$field_select.val()}`;
+			row.fetch_from = fetch_from;
+			frm.dirty();
+		});
+
+		if (curr_value.doctype) {
+			$doctype_select.val(curr_value.doctype);
+			update_fieldname_options();
+		}
+=======
 		frm.trigger("setup_fetch_from_fields", doctype, docname);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	fieldtype: function (frm) {
@@ -151,6 +288,8 @@ frappe.ui.form.on("DocField", {
 	},
 });
 
+<<<<<<< HEAD
+=======
 function render_form_builder(frm) {
 	if (frappe.form_builder && frappe.form_builder.doctype === frm.doc.name) {
 		frappe.form_builder.setup_page_actions();
@@ -177,4 +316,5 @@ function render_form_builder(frm) {
 	}
 }
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 extend_cscript(cur_frm.cscript, new frappe.model.DocTypeController({ frm: cur_frm }));

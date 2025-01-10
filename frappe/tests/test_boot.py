@@ -27,6 +27,8 @@ class TestBootData(IntegrationTestCase):
 		unseen_notes = [d.title for d in get_unseen_notes()]
 		self.assertListEqual(unseen_notes, [])
 
+<<<<<<< HEAD
+=======
 
 class TestPermissionQueries(IntegrationTestCase):
 	@classmethod
@@ -34,6 +36,7 @@ class TestPermissionQueries(IntegrationTestCase):
 		cls.enterClassContext(cls.enable_safe_exec())
 		return super().setUpClass()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_user_pages_or_reports_with_permission_query(self):
 		# Create a ToDo custom report with admin user
 		frappe.set_user("Administrator")
@@ -49,12 +52,23 @@ class TestPermissionQueries(IntegrationTestCase):
 
 		# Add permission query such that each user can only see their own custom reports
 		frappe.get_doc(
+<<<<<<< HEAD
+			dict(
+				doctype="Server Script",
+				name="test_report_permission_query",
+				script_type="Permission Query",
+				reference_doctype="Report",
+				script="""conditions = f"(`tabReport`.is_standard = 'Yes' or `tabReport`.owner = '{frappe.session.user}')"
+				""",
+			)
+=======
 			doctype="Server Script",
 			name="test_report_permission_query",
 			script_type="Permission Query",
 			reference_doctype="Report",
 			script="""conditions = f"(`tabReport`.is_standard = 'Yes' or `tabReport`.owner = '{frappe.session.user}')"
 				""",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert()
 
 		# Create a ToDo custom report with test user
@@ -70,7 +84,11 @@ class TestPermissionQueries(IntegrationTestCase):
 		).insert(ignore_permissions=True)
 
 		get_user_pages_or_reports("Report")
+<<<<<<< HEAD
+		allowed_reports = frappe.cache().get_value("has_role:Report", user=frappe.session.user)
+=======
 		allowed_reports = frappe.cache.get_value("has_role:Report", user=frappe.session.user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# Test user must not see admin user's report
 		self.assertNotIn("Test Admin Report", allowed_reports)

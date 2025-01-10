@@ -27,8 +27,12 @@ $threshold: 34;
 	}
 	&:before {
 		content: " ";
+<<<<<<< HEAD
+		top: 40px; // TODO: get top and bottom programmatically
+=======
 		top: 90px; // TODO: get top and bottom programmatically
 		left: calc(var(--timeline-item-icon-size) / 2);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		position: absolute;
 		border-left: 1px solid var(--dark-border-color);
 		bottom: calc(-1 * var(--timeline-item-bottom-margin) + 25px);
@@ -39,7 +43,11 @@ $threshold: 34;
 		background: var(--bg-color);
 		&:before {
 			content: " ";
+<<<<<<< HEAD
+			background: var(--gray-600);
+=======
 			background: var(--timeline-badge-color);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			border-radius: 50%;
 			height: 4px;
 			width: 4px;
@@ -123,7 +131,10 @@ $threshold: 34;
 		}
 		.timeline-badge {
 			@include timeline-badge(var(--timeline-item-icon-size));
+<<<<<<< HEAD
+=======
 			left: calc(-1 * var(--timeline-item-left-margin));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		.timeline-load-more {
 			margin-left: calc(var(--timeline-item-left-margin) + var(--padding-sm));

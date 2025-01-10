@@ -7,6 +7,24 @@
 	</div>
 </template>
 
+<<<<<<< HEAD
+			this.is_shown = true;
+			if (this.timeout) {
+				clearTimeout(this.timeout);
+			}
+			this.timeout = setTimeout(() => {
+				this.hide();
+			}, 10000);
+		},
+		hide() {
+			this.is_shown = false;
+		},
+		reload() {
+			window.location.reload();
+		},
+	},
+};
+=======
 <script setup>
 import { ref } from "vue";
 
@@ -38,6 +56,7 @@ function reload() {
 }
 
 defineExpose({ show, hide });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

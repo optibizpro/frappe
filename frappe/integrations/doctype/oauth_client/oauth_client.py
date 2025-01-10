@@ -49,7 +49,11 @@ class OAuthClient(Document):
 
 	def add_default_role(self):
 		if not self.allowed_roles:
+<<<<<<< HEAD
+			self.append("allowed_roles", {"role": "All"})
+=======
 			self.append("allowed_roles", {"role": SYSTEM_USER_ROLE})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def user_has_allowed_role(self) -> bool:
 		"""Returns true if session user is allowed to use this client."""

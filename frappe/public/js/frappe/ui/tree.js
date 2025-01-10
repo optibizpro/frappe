@@ -11,13 +11,21 @@ frappe.ui.Tree = class {
 		icon_set,
 		toolbar,
 		expandable,
+<<<<<<< HEAD
+		with_skeleton = 1, // eslint-disable-line
+=======
 		with_skeleton = 1,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		args,
 		method,
 		get_label,
 		on_render,
+<<<<<<< HEAD
+		on_click, // eslint-disable-line
+=======
 		on_click,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}) {
 		$.extend(this, arguments[0]);
 		if (root_value == null) {
@@ -79,7 +87,18 @@ frappe.ui.Tree = class {
 	setup_treenode_class() {
 		let tree = this;
 		this.TreeNode = class {
+<<<<<<< HEAD
+			constructor({
+				parent,
+				label,
+				parent_label,
+				expandable,
+				is_root,
+				data, // eslint-disable-line
+			}) {
+=======
 			constructor({ parent, label, parent_label, expandable, is_root, data }) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				$.extend(this, arguments[0]);
 				this.loaded = 0;
 				this.expanded = 0;

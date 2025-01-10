@@ -14,6 +14,20 @@ DOCUMENTATION_DOMAINS = [
 ]
 
 
+<<<<<<< HEAD
+
+def docs_link_exists(body):
+	for line in body.splitlines():
+		for word in line.split():
+			if word.startswith("http") and uri_validator(word):
+				parsed_url = urlparse(word)
+				if parsed_url.netloc == "github.com":
+					parts = parsed_url.path.split("/")
+					if len(parts) == 5 and parts[1] == "frappe" and parts[2] in docs_repos:
+						return True
+				if parsed_url.netloc in ["docs.erpnext.com", "frappeframework.com"]:
+					return True
+=======
 def is_valid_url(url: str) -> bool:
 	parts = urlparse(url)
 	return all((parts.scheme, parts.netloc, parts.path))
@@ -56,6 +70,7 @@ def check_pull_request(number: str) -> "tuple[int, str]":
 		return 0, "Documentation Link Found. You're Awesome! 🎉"
 
 	return 1, "Documentation Link Not Found! ⚠️"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 if __name__ == "__main__":

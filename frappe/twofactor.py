@@ -220,6 +220,10 @@ def process_2fa_for_sms(user, token, otp_secret):
 
 def process_2fa_for_otp_app(user, otp_secret, otp_issuer):
 	"""Process OTP App method for 2fa."""
+<<<<<<< HEAD
+	pyotp.TOTP(otp_secret).provisioning_uri(user, issuer_name=otp_issuer)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if get_default(user + "_otplogin"):
 		otp_setup_completed = True
 	else:
@@ -247,7 +251,11 @@ def process_2fa_for_email(user, token, otp_secret, otp_issuer, method="Email"):
 		"""Sending email verification"""
 		prompt = _("Verification code has been sent to your registered email address.")
 	status = send_token_via_email(user, token, otp_secret, otp_issuer, subject=subject, message=message)
+<<<<<<< HEAD
+	verification_obj = {
+=======
 	return {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"token_delivery": status,
 		"prompt": status and prompt,
 		"method": "Email",
@@ -372,6 +380,35 @@ def get_qr_svg_code(totp_uri):
 	return svg
 
 
+<<<<<<< HEAD
+def qrcode_as_png(user, totp_uri):
+	"""Save temporary Qrcode to server."""
+	from pyqrcode import create as qrcreate
+
+	folder = create_barcode_folder()
+	png_file_name = f"{frappe.generate_hash(length=20)}.png"
+	_file = frappe.get_doc(
+		{
+			"doctype": "File",
+			"file_name": png_file_name,
+			"attached_to_doctype": "User",
+			"attached_to_name": user,
+			"folder": folder,
+			"content": png_file_name,
+		}
+	)
+	_file.save()
+	frappe.db.commit()
+	file_url = get_url(_file.file_url)
+	file_path = os.path.join(frappe.get_site_path("public", "files"), _file.file_name)
+	url = qrcreate(totp_uri)
+	with open(file_path, "w") as png_file:
+		url.png(png_file, scale=8, module_color=[0, 0, 0, 180], background=[0xFF, 0xFF, 0xCC])
+	return file_url
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def create_barcode_folder():
 	"""Get Barcodes folder."""
 	folder_name = "Barcodes"

@@ -227,7 +227,10 @@ class UserPermissions:
 				"send_me_a_copy",
 				"user_type",
 				"onboarding_status",
+<<<<<<< HEAD
+=======
 				"default_workspace",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			],
 			as_dict=True,
 		)

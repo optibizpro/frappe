@@ -12,7 +12,10 @@ import frappe
 from frappe import _, are_emails_muted, safe_encode
 from frappe.desk.form import assign_to
 from frappe.email.doctype.email_domain.email_domain import EMAIL_DOMAIN_FIELDS
+<<<<<<< HEAD
+=======
 from frappe.email.frappemail import FrappeMail
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.email.receive import EmailServer, InboundMail, SentEmailInInboxError
 from frappe.email.smtp import SMTPServer
 from frappe.email.utils import get_port
@@ -166,11 +169,15 @@ class EmailAccount(Document):
 			self.awaiting_password = 0
 			self.password = None
 
+<<<<<<< HEAD
+		if not frappe.local.flags.in_install and not self.awaiting_password:
+=======
 		if (
 			not frappe.local.flags.in_install
 			and not self.awaiting_password
 			and not self.service == "Frappe Mail"
 		):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if validate_oauth or self.password or self.smtp_server in ("127.0.0.1", "localhost"):
 				if self.enable_incoming:
 					self.get_incoming_server()
@@ -269,7 +276,11 @@ class EmailAccount(Document):
 		return frappe.db.get_value("Email Domain", domain, EMAIL_DOMAIN_FIELDS, as_dict=True)
 
 	def get_incoming_server(self, in_receive=False, email_sync_rule="UNSEEN"):
+<<<<<<< HEAD
+		"""Returns logged in POP3/IMAP connection object."""
+=======
 		"""Return logged in POP3/IMAP connection object."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		oauth_token = self.get_oauth_token()
 		args = frappe._dict(
 			{
@@ -422,7 +433,11 @@ class EmailAccount(Document):
 
 		if _raise_error:
 			frappe.throw(
+<<<<<<< HEAD
+				_("Please setup default Email Account from Setup > Email > Email Account"),
+=======
 				_("Please setup default Email Account from Settings > Email Account"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frappe.OutgoingEmailError,
 			)
 
@@ -499,6 +514,8 @@ class EmailAccount(Document):
 		return oauth_token.get_password("access_token") if oauth_token else None
 
 	def sendmail_config(self):
+		oauth_token = self.get_oauth_token()
+
 		return {
 			"email_account": self.name,
 			"server": self.smtp_server,
@@ -508,7 +525,11 @@ class EmailAccount(Document):
 			"use_ssl": cint(self.use_ssl_for_outgoing),
 			"use_tls": cint(self.use_tls),
 			"use_oauth": self.auth_method == "OAuth",
+<<<<<<< HEAD
+			"access_token": oauth_token.get_password("access_token") if oauth_token else None,
+=======
 			"access_token": self.get_access_token(),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 	def get_smtp_server(self):
@@ -524,6 +545,13 @@ class EmailAccount(Document):
 		config = self.sendmail_config()
 		return SMTPServer(**config)
 
+<<<<<<< HEAD
+	def handle_incoming_connect_error(self, description):
+		if self.get_failed_attempts_count() > 5:
+			# This is done in background to avoid committing here.
+			frappe.enqueue(self._disable_broken_incoming_account, description=description)
+		else:
+=======
 	def get_frappe_mail_client(self):
 		return self._frappe_mail_client
 
@@ -553,6 +581,7 @@ class EmailAccount(Document):
 			# This is done in background to avoid committing here.
 			frappe.enqueue(self._disable_broken_incoming_account, description=description)
 		else:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.set_failed_attempts_count(self.get_failed_attempts_count() + 1)
 
 	def _disable_broken_incoming_account(self, description):
@@ -576,10 +605,17 @@ class EmailAccount(Document):
 				pass
 
 	def set_failed_attempts_count(self, value):
+<<<<<<< HEAD
+		frappe.cache().set_value(f"{self.name}:email-account-failed-attempts", value)
+
+	def get_failed_attempts_count(self):
+		return cint(frappe.cache().get_value(f"{self.name}:email-account-failed-attempts"))
+=======
 		frappe.cache.set_value(f"{self.name}:email-account-failed-attempts", value)
 
 	def get_failed_attempts_count(self):
 		return cint(frappe.cache.get_value(f"{self.name}:email-account-failed-attempts"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def receive(self):
 		"""Called by scheduler to receive emails from this EMail account using POP3/IMAP."""
@@ -761,10 +797,14 @@ class EmailAccount(Document):
 			if not self.enable_incoming:
 				frappe.throw(_("Automatic Linking can be activated only if Incoming is enabled."))
 
+<<<<<<< HEAD
+			if frappe.db.exists("Email Account", {"enable_automatic_linking": 1, "name": ("!=", self.name)}):
+=======
 			if frappe.db.exists(
 				"Email Account",
 				{"enable_automatic_linking": 1, "name": ("!=", self.name)},
 			):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frappe.throw(_("Automatic Linking can be activated only for one Email Account."))
 
 	def append_email_to_sent_folder(self, message):
@@ -775,22 +815,30 @@ class EmailAccount(Document):
 		try:
 			email_server = self.get_incoming_server(in_receive=True)
 			message = safe_encode(message)
+<<<<<<< HEAD
+			email_server.imap.append("Sent", "\\Seen", imaplib.Time2Internaldate(time.time()), message)
+=======
 			sent_folder_name = self.sent_folder_name or "Sent"
 			email_server.imap.append(
 				sent_folder_name, "\\Seen", imaplib.Time2Internaldate(time.time()), message
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		except Exception:
 			self.log_error("Unable to add to Sent folder")
 
 	def get_oauth_token(self):
 		if self.auth_method == "OAuth":
 			connected_app = frappe.get_doc("Connected App", self.connected_app)
+<<<<<<< HEAD
+			return connected_app.get_active_token(self.connected_user)
+=======
 			if self.backend_app_flow:
 				token = connected_app.get_backend_app_token()
 			else:
 				token = connected_app.get_active_token(self.connected_user)
 
 			return token
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()
@@ -803,6 +851,16 @@ def get_append_to(doctype=None, txt=None, searchfield=None, start=None, page_len
 		dt.name for dt in frappe.get_all("DocType", filters=filters, fields=["name", "email_append_to"])
 	]
 	# Set Email Append To DocTypes set via Customize Form
+<<<<<<< HEAD
+	for dt in frappe.get_list(
+		"Property Setter", filters={"property": "email_append_to", "value": 1}, fields=["doc_type"]
+	):
+		email_append_to_list.append(dt.doc_type)
+
+	email_append_to = [[d] for d in set(email_append_to_list) if txt in d]
+
+	return email_append_to
+=======
 	email_append_to_list.extend(
 		dt.doc_type
 		for dt in frappe.get_list(
@@ -812,6 +870,7 @@ def get_append_to(doctype=None, txt=None, searchfield=None, start=None, page_len
 		)
 	)
 	return [[d] for d in set(email_append_to_list) if txt in d]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def notify_unreplied():
@@ -877,22 +936,31 @@ def pull(now=False):
 	doctype = frappe.qb.DocType("Email Account")
 	email_accounts = (
 		frappe.qb.from_(doctype)
+<<<<<<< HEAD
+		.select(doctype.name, doctype.auth_method, doctype.connected_app, doctype.connected_user)
+=======
 		.select(
 			doctype.name,
 			doctype.auth_method,
 			doctype.connected_app,
 			doctype.connected_user,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		.where(doctype.enable_incoming == 1)
 		.where(doctype.awaiting_password == 0)
 		.run(as_dict=1)
 	)
 
 	for email_account in email_accounts:
+<<<<<<< HEAD
+		if email_account.auth_method == "OAuth" and not has_token(
+			email_account.connected_app, email_account.connected_user
+=======
 		if (
 			email_account.auth_method == "OAuth"
 			and not email_account.backend_app_flow
 			and not has_token(email_account.connected_app, email_account.connected_user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		):
 			# don't try to pull from accounts which dont have access token (for Oauth)
 			continue
@@ -938,7 +1006,11 @@ def pull_from_email_account(email_account):
 def get_max_email_uid(email_account):
 	"""get maximum uid of emails"""
 
+<<<<<<< HEAD
+	result = frappe.get_all(
+=======
 	if result := frappe.get_all(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"Communication",
 		filters={
 			"communication_medium": "Email",
@@ -980,11 +1052,15 @@ def setup_user_email_inbox(email_account, awaiting_password, email_id, enable_ou
 
 		# check if inbox is alreay configured
 		user_inbox = (
+<<<<<<< HEAD
+			frappe.db.get_value("User Email", {"email_account": email_account, "parent": user_name}, ["name"])
+=======
 			frappe.db.get_value(
 				"User Email",
 				{"email_account": email_account, "parent": user_name},
 				["name"],
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			or None
 		)
 
@@ -1011,11 +1087,15 @@ def remove_user_email_inbox(email_account):
 	if not email_account:
 		return
 
+<<<<<<< HEAD
+	users = frappe.get_all("User Email", filters={"email_account": email_account}, fields=["parent as name"])
+=======
 	users = frappe.get_all(
 		"User Email",
 		filters={"email_account": email_account},
 		fields=["parent as name"],
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	for user in users:
 		doc = frappe.get_doc("User", user.get("name"))

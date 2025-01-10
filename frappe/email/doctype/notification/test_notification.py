@@ -8,7 +8,11 @@ import frappe
 import frappe.utils
 import frappe.utils.scheduler
 from frappe.desk.form import assign_to
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 from .notification import trigger_notifications
 
@@ -25,6 +29,9 @@ def get_test_notification(config):
 		frappe.db.commit()
 
 
+<<<<<<< HEAD
+class TestNotification(FrappeTestCase):
+=======
 class UnitTestNotification(UnitTestCase):
 	"""
 	Unit tests for Notification.
@@ -35,6 +42,7 @@ class UnitTestNotification(UnitTestCase):
 
 
 class TestNotification(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.db.delete("Email Queue")
 		frappe.set_user("test@example.com")

@@ -5,10 +5,17 @@ import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.database import savepoint
 from frappe.desk.form import linked_with
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestLinkedWith(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 
 
 class TestLinkedWith(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		parent_doctype = new_doctype("Parent DocType")
 		parent_doctype.is_submittable = 1
@@ -175,7 +182,11 @@ class TestLinkedWith(IntegrationTestCase):
 		linked_doc = frappe.new_doc(dt_name).insert().submit()
 
 		second_doc = (
+<<<<<<< HEAD
+			frappe.get_doc(doctype=dt_name, **{"from": linked_doc.doctype, "order": linked_doc.name})
+=======
 			frappe.new_doc(dt_name, **{"from": linked_doc.doctype, "order": linked_doc.name})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			.insert()
 			.submit()
 		)

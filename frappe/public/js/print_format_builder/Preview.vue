@@ -36,6 +36,86 @@
 		></iframe>
 	</div>
 </template>
+<<<<<<< HEAD
+<script>
+import { storeMixin } from "./store";
+export default {
+	name: "Preview",
+	mixins: [storeMixin],
+	data() {
+		return {
+			type: "PDF",
+			docname: null,
+			preview_loaded: false,
+		};
+	},
+	mounted() {
+		this.doc_select = frappe.ui.form.make_control({
+			parent: this.$refs["doc-select"],
+			df: {
+				label: __("Select {0}", [__(this.doctype)]),
+				fieldname: "docname",
+				fieldtype: "Link",
+				options: this.doctype,
+				change: () => {
+					this.docname = this.doc_select.get_value();
+				},
+			},
+			render_input: true,
+		});
+		this.preview_type = frappe.ui.form.make_control({
+			parent: this.$refs["preview-type"],
+			df: {
+				label: __("Preview type"),
+				fieldname: "docname",
+				fieldtype: "Select",
+				options: ["PDF", "HTML"],
+				change: () => {
+					this.type = this.preview_type.get_value();
+				},
+			},
+			render_input: true,
+		});
+		this.preview_type.set_value(this.type);
+		this.get_default_docname().then(
+			(docname) => docname && this.doc_select.set_value(docname)
+		);
+		this.$store.$on("after_save", () => {
+			this.refresh();
+		});
+	},
+	methods: {
+		refresh() {
+			this.$refs.iframe.contentWindow.location.reload();
+		},
+		get_default_docname() {
+			return frappe.db.get_list(this.doctype, { limit: 1 }).then((doc) => {
+				return doc.length > 0 ? doc[0].name : null;
+			});
+		},
+	},
+	computed: {
+		doctype() {
+			return this.print_format.doc_type;
+		},
+		url() {
+			if (!this.docname) return null;
+			let params = new URLSearchParams();
+			params.append("doctype", this.doctype);
+			params.append("name", this.docname);
+			params.append("print_format", this.print_format.name);
+			if (this.$store.letterhead) {
+				params.append("letterhead", this.$store.letterhead.name);
+			}
+			let url =
+				this.type == "PDF"
+					? `/api/method/frappe.utils.weasyprint.download_pdf`
+					: "/printpreview";
+			return `${url}?${params.toString()}`;
+		},
+	},
+};
+=======
 
 <script setup>
 import { useStore } from "./store";
@@ -115,6 +195,7 @@ onMounted(() => {
 		doc_name && doc_select.value.set_value(doc_name);
 	});
 });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

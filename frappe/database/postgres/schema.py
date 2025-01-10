@@ -30,8 +30,13 @@ class PostgresTable(DBTable):
 			)
 
 		# creating sequence(s)
+<<<<<<< HEAD
+		if (not self.meta.issingle and self.meta.autoname == "autoincrement") or self.doctype in log_types:
+			frappe.db.create_sequence(self.doctype, check_not_exists=True, cache=frappe.db.SEQUENCE_CACHE)
+=======
 		if not self.meta.issingle and self.meta.autoname == "autoincrement":
 			frappe.db.create_sequence(self.doctype, check_not_exists=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			name_column = "name bigint primary key"
 
 		elif not self.meta.issingle and self.meta.autoname == "UUID":
@@ -57,7 +62,11 @@ class PostgresTable(DBTable):
 
 	def create_indexes(self):
 		create_index_query = ""
+<<<<<<< HEAD
+		for _key, col in self.columns.items():
+=======
 		for col in self.columns.values():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (
 				col.set_index
 				and col.fieldtype in frappe.db.type_map

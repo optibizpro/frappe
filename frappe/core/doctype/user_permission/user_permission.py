@@ -34,11 +34,19 @@ class UserPermission(Document):
 		self.validate_default_permission()
 
 	def on_update(self):
+<<<<<<< HEAD
+		frappe.cache().hdel("user_permissions", self.user)
+		frappe.publish_realtime("update_user_permissions", user=self.user, after_commit=True)
+
+	def on_trash(self):
+		frappe.cache().hdel("user_permissions", self.user)
+=======
 		frappe.cache.hdel("user_permissions", self.user)
 		frappe.publish_realtime("update_user_permissions", user=self.user, after_commit=True)
 
 	def on_trash(self):
 		frappe.cache.hdel("user_permissions", self.user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.publish_realtime("update_user_permissions", user=self.user, after_commit=True)
 
 	def validate_user_permission(self):
@@ -78,6 +86,10 @@ class UserPermission(Document):
 
 	def get_permission_log_options(self, event=None):
 		pass
+
+
+def send_user_permissions(bootinfo):
+	bootinfo.user["user_permissions"] = get_user_permissions()
 
 
 def send_user_permissions(bootinfo):

@@ -8,17 +8,30 @@
 
 .indicator::before {
 	content: "";
+<<<<<<< HEAD
+	height: 6px;
+	width: 6px;
+=======
 	height: 8px;
 	width: 8px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	border-radius: var(--border-radius);
 	margin: 0px 8px 0px 0px;
 }
 .indicator-pill,
 .indicator-pill-right {
+<<<<<<< HEAD
+	padding: 3px 10px;
+	font-size: var(--text-sm);
+	border-radius: var(--border-radius);
+	font-weight: 500;
+	height: 24px;
+=======
 	@include get_textstyle("sm", "regular");
 	padding: 4.5px 8px;
 	border-radius: var(--border-radius-full);
 	height: 20px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 .indicator-pill-round {

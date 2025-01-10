@@ -4,7 +4,11 @@ frappe.provide("frappe.utils");
 
 export default class LinksWidget extends Widget {
 	constructor(opts) {
+<<<<<<< HEAD
+		opts.icon = opts.icon || "file";
+=======
 		opts.icon = opts.icon || "es-line-filetype";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		super(opts);
 	}
 
@@ -25,6 +29,8 @@ export default class LinksWidget extends Widget {
 			this.options.links = this.links;
 		}
 		this.widget.addClass("links-widget-box");
+<<<<<<< HEAD
+=======
 
 		if (this.description) {
 			const description = $(`
@@ -41,6 +47,7 @@ export default class LinksWidget extends Widget {
 			});
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const is_link_disabled = (item) => {
 			return item.dependencies && item.incomplete_dependencies;
 		};
@@ -72,6 +79,16 @@ export default class LinksWidget extends Widget {
 			}
 
 			if (item.youtube_id)
+<<<<<<< HEAD
+				return `<span class="link-content help-video-link ellipsis" data-youtubeid="${
+					item.youtube_id
+				}">
+						${item.label ? item.label : item.name}</span>`;
+
+			return `<span class="link-content ellipsis">${
+				item.label ? item.label : item.name
+			}</span>`;
+=======
 				return `
 					<span class="link-content help-video-link ellipsis" data-youtubeid="${item.youtube_id}">
 						${item.link_title}
@@ -84,6 +101,7 @@ export default class LinksWidget extends Widget {
 					${frappe.utils.icon("es-line-arrow-up-right", "xs", "", "", "ml-2")}
 				</span>
 			`;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 
 		this.link_list = this.links.map((item) => {
@@ -92,7 +110,10 @@ export default class LinksWidget extends Widget {
 				type: item.link_type,
 				doctype: item.doctype,
 				is_query_report: item.is_query_report,
+<<<<<<< HEAD
+=======
 				report_ref_doctype: item.report_ref_doctype,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			};
 
 			if (item.link_type.toLowerCase() == "report" && !item.is_query_report) {

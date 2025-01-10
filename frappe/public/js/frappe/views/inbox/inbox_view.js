@@ -74,9 +74,17 @@ frappe.views.InboxView = class InboxView extends frappe.views.ListView {
 	}
 
 	get_seen_class(doc) {
+<<<<<<< HEAD
+		const seen =
+			Boolean(doc.seen) || JSON.parse(doc._seen || "[]").includes(frappe.session.user)
+				? ""
+				: "bold";
+		return seen;
+=======
 		return Boolean(doc.seen) || JSON.parse(doc._seen || "[]").includes(frappe.session.user)
 			? ""
 			: "bold";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get is_sent_emails() {

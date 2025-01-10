@@ -9,11 +9,19 @@ from unittest.mock import patch
 
 import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
+<<<<<<< HEAD
+from frappe.exceptions import DoesNotExistError, ValidationError
+=======
 from frappe.exceptions import DoesNotExistError
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.model.base_document import get_controller
 from frappe.model.rename_doc import bulk_rename, update_document_title
 from frappe.modules.utils import get_doc_path
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import add_to_date, now
 
 
@@ -37,7 +45,11 @@ def patch_db(endpoints: list[str] | None = None):
 		frappe.db.rollback(save_point=savepoint)
 
 
+<<<<<<< HEAD
+class TestRenameDoc(FrappeTestCase):
+=======
 class TestRenameDoc(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(self):
 		"""Setting Up data for the tests defined under TestRenameDoc"""
@@ -279,6 +291,8 @@ class TestRenameDoc(IntegrationTestCase):
 
 		self.assertEqual(len(parent_a_instance.test_table), 1)
 		self.assertEqual(len(parent_b_instance.test_table), 1)
+<<<<<<< HEAD
+=======
 
 	def test_rename_autoincrement_doc(self):
 		if not frappe.db.exists("DocType", "Autoincrement DocType"):
@@ -322,3 +336,4 @@ class TestRenameDoc(IntegrationTestCase):
 
 		self.assertTrue(frappe.db.exists("Autoincrement DocType", marilyn.name) is None)
 		self.assertEqual(linked_with_marilyn.autoincrement_doctype, frappe.utils.cstr(mary.name))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -2,6 +2,14 @@
 # License: MIT. See LICENSE
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+test_records = frappe.get_test_records("Note")
+
+
+class TestNote(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -15,12 +23,17 @@ class UnitTestNote(UnitTestCase):
 
 
 class TestNote(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def insert_note(self):
 		frappe.db.delete("Version")
 		frappe.db.delete("Note")
 		frappe.db.delete("Note Seen By")
 
+<<<<<<< HEAD
+		return frappe.get_doc(dict(doctype="Note", title="test note", content="test note content")).insert()
+=======
 		return frappe.get_doc(doctype="Note", title="test note", content="test note content").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_version(self):
 		note = self.insert_note()

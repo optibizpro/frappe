@@ -1,11 +1,19 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils.data import add_to_date, today
+
+
+class TestDocumentLocks(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.utils.data import add_to_date, today
 
 
 class TestDocumentLocks(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_locking(self):
 		todo = frappe.get_doc(doctype="ToDo", description="test").insert()
 		todo_1 = frappe.get_doc("ToDo", todo.name)
@@ -18,6 +26,10 @@ class TestDocumentLocks(IntegrationTestCase):
 		self.assertRaises(frappe.DocumentLockedError, todo.lock)
 		todo_1.unlock()
 
+<<<<<<< HEAD
+	def test_locks_auto_expiry(self):
+		todo = frappe.get_doc(dict(doctype="ToDo", description=frappe.generate_hash())).insert()
+=======
 	def test_operations_on_locked_documents(self):
 		todo = frappe.get_doc(doctype="ToDo", description="testing operations").insert()
 		todo.lock()
@@ -40,6 +52,7 @@ class TestDocumentLocks(IntegrationTestCase):
 
 	def test_locks_auto_expiry(self):
 		todo = frappe.get_doc(doctype="ToDo", description=frappe.generate_hash()).insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		todo.lock()
 
 		self.assertRaises(frappe.DocumentLockedError, todo.lock)

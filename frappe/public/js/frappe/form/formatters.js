@@ -49,10 +49,13 @@ frappe.form.formatters = {
 		return __(frappe.form.formatters["Data"](value, df));
 	},
 	Float: function (value, docfield, options, doc) {
+<<<<<<< HEAD
+=======
 		if (value === null) {
 			return "";
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		// don't allow 0 precision for Floats, hence or'ing with null
 		var precision =
 			docfield.precision ||
@@ -77,6 +80,11 @@ frappe.form.formatters = {
 		}
 	},
 	Int: function (value, docfield, options) {
+<<<<<<< HEAD
+		return frappe.form.formatters._right(value == null ? "" : cint(value), options);
+	},
+	Percent: function (value, docfield, options) {
+=======
 		if (value === null) {
 			return "";
 		}
@@ -91,6 +99,7 @@ frappe.form.formatters = {
 			return "";
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const precision =
 			docfield.precision ||
 			cint(frappe.boot.sysdefaults && frappe.boot.sysdefaults.float_precision) ||
@@ -117,10 +126,13 @@ frappe.form.formatters = {
 		</div>`;
 	},
 	Currency: function (value, docfield, options, doc) {
+<<<<<<< HEAD
+=======
 		if (value === null) {
 			return "";
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		var currency = frappe.meta.get_field_currency(docfield, doc);
 
 		let precision;
@@ -363,9 +375,14 @@ frappe.form.formatters = {
 		return $("<div></div>").text(value).html();
 	},
 	FileSize: function (value) {
+<<<<<<< HEAD
+		if (value > 1048576) {
+			value = flt(flt(value) / 1048576, 1) + "M";
+=======
 		value = cint(value);
 		if (value > 1048576) {
 			return (value / 1048576).toFixed(2) + "M";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		} else if (value > 1024) {
 			return (value / 1024).toFixed(2) + "K";
 		}

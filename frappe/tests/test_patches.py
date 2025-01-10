@@ -3,7 +3,12 @@ from unittest.mock import mock_open, patch
 
 import frappe
 from frappe.modules import patch_handler
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import get_bench_path
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 EMTPY_FILE = ""
 EMTPY_SECTION = """
@@ -48,7 +53,11 @@ app.module.patch4
 """
 
 
+<<<<<<< HEAD
+class TestPatches(FrappeTestCase):
+=======
 class TestPatches(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_patch_module_names(self):
 		frappe.flags.final_patches = []
 		frappe.flags.in_install = True
@@ -78,7 +87,11 @@ class TestPatches(IntegrationTestCase):
 		self.assertGreaterEqual(finished_patches, len(all_patches))
 
 
+<<<<<<< HEAD
+class TestPatchReader(FrappeTestCase):
+=======
 class TestPatchReader(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def get_patches(self):
 		return (
 			patch_handler.get_patches_from_app("frappe"),
@@ -173,4 +186,8 @@ def _get_dotted_path(file: Path, app) -> str:
 	*path, filename = file.relative_to(app_path).parts
 	base_filename = Path(filename).stem
 
+<<<<<<< HEAD
+	return ".".join([*path, base_filename])
+=======
 	return ".".join([app, *path, base_filename])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

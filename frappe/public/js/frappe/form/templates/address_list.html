@@ -1,4 +1,17 @@
 <div class="clearfix"></div>
+<<<<<<< HEAD
+{% for(var i=0, l=addr_list.length; i<l; i++) { %}
+<div class="address-box">
+	<p class="h6">
+		{%= i+1 %}. {%= addr_list[i].address_title %}{% if(addr_list[i].address_type!="Other") { %}
+		<span class="text-muted">({%= __(addr_list[i].address_type) %})</span>{% } %}
+		{% if(addr_list[i].is_primary_address) { %}
+		<span class="text-muted">({%= __("Primary") %})</span>{% } %}
+		{% if(addr_list[i].is_shipping_address) { %}
+		<span class="text-muted">({%= __("Shipping") %})</span>{% } %}
+		{% if(addr_list[i].disabled) { %}
+		<span class="text-muted">({%= __("Disabled") %})</span>{% } %}
+=======
 {% for (const addr of addr_list) { %}
 	<div class="address-box">
 		<a
@@ -32,6 +45,7 @@
 		<p>{%= addr.display %}</p>
 	</div>
 {% } %}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 {% if (!addr_list.length) { %}
 	<p class="text-muted small">{%= __("No address added yet.") %}</p>

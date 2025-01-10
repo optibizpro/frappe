@@ -205,7 +205,11 @@ class LDAPSettings(Document):
 		user.remove_roles(*roles_to_remove)
 
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
+<<<<<<< HEAD
+		user: "User" = None
+=======
 		user: User = None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		role: str = None
 
 		if frappe.db.exists("User", user_data["email"]):
@@ -414,6 +418,13 @@ def login():
 
 	frappe.form_dict.pop("pwd", None)
 	frappe.local.login_manager.post_login()
+
+	try:
+		from frappe.core.doctype.activity_log.activity_log import add_authentication_log
+
+		add_authentication_log(_("{0} logged in").format(user.full_name), user.name)
+	except ImportError:
+		pass
 
 	# because of a GET request!
 	frappe.db.commit()

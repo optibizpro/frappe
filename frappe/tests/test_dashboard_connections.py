@@ -1,6 +1,9 @@
 # Copyright (c) 2019, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+<<<<<<< HEAD
+=======
 import os
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from unittest.mock import patch
 
 import frappe
@@ -8,10 +11,17 @@ import frappe.utils
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.custom.doctype.customize_form.test_customize_form import TestCustomizeForm
 from frappe.desk.notifications import get_open_count
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, patch_hooks
+
+
+class TestDashboardConnections(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 
 
 class TestDashboardConnections(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@patch.dict(frappe.conf, {"developer_mode": 1})
 	def setUp(self):
 		delete_test_data()
@@ -24,7 +34,11 @@ class TestDashboardConnections(IntegrationTestCase):
 	def test_internal_link_count(self):
 		earth = frappe.get_doc(
 			{
+<<<<<<< HEAD
+				"doctype": "Doctype B With Child Table With Link To Doctype A",
+=======
 				"doctype": "Test Doctype B With Child Table With Link To Doctype A",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"title": "Earth",
 			}
 		)
@@ -38,13 +52,21 @@ class TestDashboardConnections(IntegrationTestCase):
 
 		mars = frappe.get_doc(
 			{
+<<<<<<< HEAD
+				"doctype": "Doctype A With Child Table With Link To Doctype B",
+=======
 				"doctype": "Test Doctype A With Child Table With Link To Doctype B",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"title": "Mars",
 			}
 		)
 		mars.append(
 			"child_table",
+<<<<<<< HEAD
+			{"title": "Mars", "doctype_b_with_child_table_with_link_to_doctype_a": "Earth"},
+=======
 			{"title": "Mars", "test_doctype_b_with_test_child_table_with_link_to_doctype_a": "Earth"},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 		mars.insert()
 
@@ -54,7 +76,11 @@ class TestDashboardConnections(IntegrationTestCase):
 				"internal_links_found": [
 					{
 						"count": 1,
+<<<<<<< HEAD
+						"doctype": "Doctype B With Child Table With Link To Doctype A",
+=======
 						"doctype": "Test Doctype B With Child Table With Link To Doctype A",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						"names": ["Earth"],
 						"open_count": 0,
 					}
@@ -65,17 +91,28 @@ class TestDashboardConnections(IntegrationTestCase):
 		with patch.object(
 			mars.meta,
 			"get_dashboard_data",
+<<<<<<< HEAD
+			return_value=get_dashboard_for_doctype_a_with_child_table_with_link_to_doctype_b(),
+		):
+			self.assertEqual(
+				get_open_count("Doctype A With Child Table With Link To Doctype B", "Mars"),
+=======
 			return_value=get_dashboard_for_test_doctype_a_with_test_child_table_with_link_to_doctype_b(),
 		):
 			self.assertEqual(
 				get_open_count("Test Doctype A With Child Table With Link To Doctype B", "Mars"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				expected_open_count,
 			)
 
 	def test_external_link_count(self):
 		saturn = frappe.get_doc(
 			{
+<<<<<<< HEAD
+				"doctype": "Doctype A With Child Table With Link To Doctype B",
+=======
 				"doctype": "Test Doctype A With Child Table With Link To Doctype B",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"title": "Saturn",
 			}
 		)
@@ -89,13 +126,21 @@ class TestDashboardConnections(IntegrationTestCase):
 
 		pluto = frappe.get_doc(
 			{
+<<<<<<< HEAD
+				"doctype": "Doctype B With Child Table With Link To Doctype A",
+=======
 				"doctype": "Test Doctype B With Child Table With Link To Doctype A",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"title": "Pluto",
 			}
 		)
 		pluto.append(
 			"child_table",
+<<<<<<< HEAD
+			{"title": "Pluto", "doctype_a_with_child_table_with_link_to_doctype_b": "Saturn"},
+=======
 			{"title": "Pluto", "test_doctype_a_with_test_child_table_with_link_to_doctype_b": "Saturn"},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 		pluto.insert()
 
@@ -103,7 +148,11 @@ class TestDashboardConnections(IntegrationTestCase):
 			"count": {
 				"external_links_found": [
 					{
+<<<<<<< HEAD
+						"doctype": "Doctype B With Child Table With Link To Doctype A",
+=======
 						"doctype": "Test Doctype B With Child Table With Link To Doctype A",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						"open_count": 0,
 						"count": 1,
 					}
@@ -115,10 +164,17 @@ class TestDashboardConnections(IntegrationTestCase):
 		with patch.object(
 			saturn.meta,
 			"get_dashboard_data",
+<<<<<<< HEAD
+			return_value=get_dashboard_for_doctype_a_with_child_table_with_link_to_doctype_b(),
+		):
+			self.assertEqual(
+				get_open_count("Doctype A With Child Table With Link To Doctype B", "Saturn"),
+=======
 			return_value=get_dashboard_for_test_doctype_a_with_test_child_table_with_link_to_doctype_b(),
 		):
 			self.assertEqual(
 				get_open_count("Test Doctype A With Child Table With Link To Doctype B", "Saturn"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				expected_open_count,
 			)
 
@@ -130,15 +186,25 @@ class TestDashboardConnections(IntegrationTestCase):
 		todo.run_method("save_customization")
 
 		# create a test doc
+<<<<<<< HEAD
+		todo_doc = frappe.get_doc(dict(doctype="ToDo", description="test")).insert()
+		frappe.get_doc(dict(doctype="Test Doctype D", title="d-001", doclink=todo_doc.name)).insert()
+		frappe.get_doc(dict(doctype="Test Doctype E", title="e-001", todo=todo_doc.name)).insert()
+=======
 		todo_doc = frappe.get_doc(doctype="ToDo", description="test").insert()
 		frappe.get_doc(doctype="Test Doctype D", title="d-001", doclink=todo_doc.name).insert()
 		frappe.get_doc(doctype="Test Doctype E", title="e-001", todo=todo_doc.name).insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		connections = get_open_count("ToDo", todo_doc.name)["count"]
 		self.assertEqual(len(connections["external_links_found"]), 2)
 
 		# Change standard fieldname, see if all custom links still work
+<<<<<<< HEAD
+		with patch_hooks(
+=======
 		with self.patch_hooks(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{
 				"override_doctype_dashboards": {
 					"ToDo": ["frappe.tests.test_dashboard_connections.get_dashboard_for_todo"]
@@ -155,20 +221,34 @@ class TestDashboardConnections(IntegrationTestCase):
 
 
 def create_test_data():
+<<<<<<< HEAD
+	create_child_table_with_link_to_doctype_a()
+	create_child_table_with_link_to_doctype_b()
+	create_doctype_a_with_child_table_with_link_to_doctype_b()
+	create_doctype_b_with_child_table_with_link_to_doctype_a()
+=======
 	create_test_child_table_with_link_to_doctype_a()
 	create_test_child_table_with_link_to_doctype_b()
 	create_test_doctype_a_with_test_child_table_with_link_to_doctype_b()
 	create_test_doctype_b_with_test_child_table_with_link_to_doctype_a()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	create_linked_doctypes()
 	add_links_in_child_tables()
 
 
 def delete_test_data():
 	doctypes = [
+<<<<<<< HEAD
+		"Child Table With Link To Doctype A",
+		"Child Table With Link To Doctype B",
+		"Doctype A With Child Table With Link To Doctype B",
+		"Doctype B With Child Table With Link To Doctype A",
+=======
 		"Test Child Table With Link To Doctype A",
 		"Test Child Table With Link To Doctype B",
 		"Test Doctype A With Child Table With Link To Doctype B",
 		"Test Doctype B With Child Table With Link To Doctype A",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"Test Doctype D",
 		"Test Doctype E",
 	]
@@ -178,6 +258,35 @@ def delete_test_data():
 			frappe.delete_doc("DocType", doctype, force=True)
 
 
+<<<<<<< HEAD
+def create_child_table_with_link_to_doctype_a():
+	frappe.get_doc(
+		{
+			"doctype": "DocType",
+			"name": "Child Table With Link To Doctype A",
+			"module": "Custom",
+			"autoname": "field:title",
+			"fields": [{"fieldname": "title", "fieldtype": "Data", "label": "Title", "reqd": 1, "unique": 1}],
+			"istable": 1,
+			"naming_rule": "By fieldname",
+			"permissions": [{"role": "System Manager"}],
+		}
+	).insert(ignore_if_duplicate=True)
+
+
+def create_child_table_with_link_to_doctype_b():
+	frappe.get_doc(
+		{
+			"doctype": "DocType",
+			"name": "Child Table With Link To Doctype B",
+			"module": "Custom",
+			"autoname": "field:title",
+			"fields": [{"fieldname": "title", "fieldtype": "Data", "label": "Title", "reqd": 1, "unique": 1}],
+			"istable": 1,
+			"naming_rule": "By fieldname",
+			"permissions": [{"role": "System Manager"}],
+		}
+=======
 def create_test_child_table_with_link_to_doctype_a():
 	new_doctype(
 		"Test Child Table With Link To Doctype A",
@@ -197,10 +306,111 @@ def create_test_child_table_with_link_to_doctype_b():
 		custom=False,
 		autoname="field:title",
 		naming_rule="By fieldname",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	).insert(ignore_if_duplicate=True)
 
 
 def add_links_in_child_tables():
+<<<<<<< HEAD
+	child_table_with_link_to_doctype_a = frappe.get_doc("DocType", "Child Table With Link To Doctype A")
+	if len(child_table_with_link_to_doctype_a.fields) == 1:
+		child_table_with_link_to_doctype_a.append(
+			"fields",
+			{
+				"fieldname": "doctype_a_with_child_table_with_link_to_doctype_b",
+				"fieldtype": "Link",
+				"in_list_view": 1,
+				"label": "Doctype A With Child Table With Link To Doctype B" or "Doctype to Link",
+				"options": "Doctype A With Child Table With Link To Doctype B" or "Doctype to Link",
+			},
+		)
+		child_table_with_link_to_doctype_a.save()
+
+	child_table_with_link_to_doctype_b = frappe.get_doc("DocType", "Child Table With Link To Doctype B")
+	if len(child_table_with_link_to_doctype_b.fields) == 1:
+		child_table_with_link_to_doctype_b.append(
+			"fields",
+			{
+				"fieldname": "doctype_b_with_child_table_with_link_to_doctype_a",
+				"fieldtype": "Link",
+				"in_list_view": 1,
+				"label": "Doctype B With Child Table With Link To Doctype A" or "Doctype to Link",
+				"options": "Doctype B With Child Table With Link To Doctype A" or "Doctype to Link",
+			},
+		)
+		child_table_with_link_to_doctype_b.save()
+
+
+def create_doctype_a_with_child_table_with_link_to_doctype_b():
+	frappe.get_doc(
+		{
+			"doctype": "DocType",
+			"name": "Doctype A With Child Table With Link To Doctype B",
+			"module": "Custom",
+			"autoname": "field:title",
+			"fields": [
+				{"fieldname": "title", "fieldtype": "Data", "label": "Title", "unique": 1},
+				{
+					"fieldname": "child_table",
+					"fieldtype": "Table",
+					"label": "Child Table",
+					"options": "Child Table With Link To Doctype B",
+				},
+				{
+					"fieldname": "connections_tab",
+					"fieldtype": "Tab Break",
+					"label": "Connections",
+					"show_dashboard": 1,
+				},
+			],
+			"naming_rule": "By fieldname",
+			"permissions": [{"role": "System Manager"}],
+		}
+	).insert(ignore_if_duplicate=True)
+
+
+def create_doctype_b_with_child_table_with_link_to_doctype_a():
+	frappe.get_doc(
+		{
+			"doctype": "DocType",
+			"name": "Doctype B With Child Table With Link To Doctype A",
+			"module": "Custom",
+			"autoname": "field:title",
+			"fields": [
+				{"fieldname": "title", "fieldtype": "Data", "label": "Title", "unique": 1},
+				{
+					"fieldname": "child_table",
+					"fieldtype": "Table",
+					"label": "Child Table",
+					"options": "Child Table With Link To Doctype A",
+				},
+				{
+					"fieldname": "connections_tab",
+					"fieldtype": "Tab Break",
+					"label": "Connections",
+					"show_dashboard": 1,
+				},
+			],
+			"naming_rule": "By fieldname",
+			"permissions": [{"role": "System Manager"}],
+		}
+	).insert(ignore_if_duplicate=True)
+
+
+def get_dashboard_for_doctype_a_with_child_table_with_link_to_doctype_b():
+	dashboard = frappe._dict()
+
+	data = {
+		"fieldname": "doctype_a_with_child_table_with_link_to_doctype_b",
+		"internal_and_external_links": {
+			"Doctype B With Child Table With Link To Doctype A": [
+				"child_table",
+				"doctype_b_with_child_table_with_link_to_doctype_a",
+			],
+		},
+		"transactions": [
+			{"label": "Reference", "items": ["Doctype B With Child Table With Link To Doctype A"]},
+=======
 	test_child_table_with_link_to_doctype_a = frappe.get_doc(
 		"DocType", "Test Child Table With Link To Doctype A"
 	)
@@ -295,6 +505,7 @@ def get_dashboard_for_test_doctype_a_with_test_child_table_with_link_to_doctype_
 		},
 		"transactions": [
 			{"label": "Reference", "items": ["Test Doctype B With Child Table With Link To Doctype A"]},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		],
 	}
 

@@ -27,6 +27,9 @@ frappe.query_reports["Website Analytics"] = {
 			default: "Daily",
 			reqd: 1,
 		},
+<<<<<<< HEAD
+	],
+=======
 		{
 			fieldname: "group_by",
 			label: __("Group By"),
@@ -62,4 +65,5 @@ frappe.query_reports["Website Analytics"] = {
 		}
 		return default_formatter(value, row, column, data);
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

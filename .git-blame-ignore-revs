@@ -26,6 +26,10 @@ c0c5b2ebdddbe8898ce2d5e5365f4931ff73b6bf
 # update python code to use 3.10 supported features
 81b37cb7d2160866afa2496873656afe53f0c145
 
+<<<<<<< HEAD
+# format JS files with pretter
+5d6b24f0b134fd897644086499745cd35428bc11
+=======
 # mass minified JSON schema
 85e3ee940353d7b0b517b33815148672e9a8b15b
 
@@ -58,3 +62,4 @@ e9bbe03354079cfcef65a77b0c33f57b047a7c93
 
 # ruff update
 84ef6ec677c8657c3243ac456a1ef794bfb34a50
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

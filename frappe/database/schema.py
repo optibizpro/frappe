@@ -27,7 +27,10 @@ class DBTable:
 		self.add_column: list[DbColumn] = []
 		self.change_type: list[DbColumn] = []
 		self.change_name: list[DbColumn] = []
+<<<<<<< HEAD
+=======
 		self.change_nullability: list[DbColumn] = []
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.add_unique: list[DbColumn] = []
 		self.add_index: list[DbColumn] = []
 		self.drop_unique: list[DbColumn] = []
@@ -176,6 +179,9 @@ class DBTable:
 
 
 class DbColumn:
+<<<<<<< HEAD
+	def __init__(self, table, fieldname, fieldtype, length, default, set_index, options, unique, precision):
+=======
 	def __init__(
 		self,
 		*,
@@ -190,6 +196,7 @@ class DbColumn:
 		precision,
 		not_nullable,
 	):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.table = table
 		self.fieldname = fieldname
 		self.fieldtype = fieldtype
@@ -202,12 +209,16 @@ class DbColumn:
 		self.not_nullable = not_nullable
 
 	def get_definition(self, for_modification=False):
+<<<<<<< HEAD
+		column_def = get_definition(self.fieldtype, precision=self.precision, length=self.length)
+=======
 		column_def = get_definition(
 			self.fieldtype,
 			precision=self.precision,
 			length=self.length,
 			options=self.options,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not column_def:
 			return column_def
@@ -231,12 +242,17 @@ class DbColumn:
 		):
 			default = frappe.db.escape(self.default)
 
+<<<<<<< HEAD
+		if self.unique and not for_modification and (column_def not in ("text", "longtext")):
+			column_def += " unique"
+=======
 		if self.not_nullable and null:
 			if default is None:
 				default = get_not_null_defaults(self.fieldtype)
 				if isinstance(default, str):
 					default = frappe.db.escape(default)
 			null = False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if self.unique and not for_modification and (column_def not in ("text", "longtext")):
 			unique = True

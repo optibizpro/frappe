@@ -1,6 +1,7 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+import contextlib
 import copy
 import json
 import os
@@ -41,6 +42,15 @@ class PrintContext(TypedDict):
 def get_context(context) -> PrintContext:
 	"""Build context for print"""
 	if not ((frappe.form_dict.doctype and frappe.form_dict.name) or frappe.form_dict.doc):
+<<<<<<< HEAD
+		return {
+			"body": f"""
+				<h1>Error</h1>
+				<p>Parameters doctype and name required</p>
+				<pre>{escape_html(frappe.as_json(frappe.form_dict, indent=2))}</pre>
+				"""
+		}
+=======
 		return PrintContext(
 			print_style="",
 			comment="",
@@ -56,6 +66,7 @@ def get_context(context) -> PrintContext:
 <pre>{escape_html(frappe.as_json(frappe.form_dict, indent=2))}</pre>
 """,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if frappe.form_dict.doc:
 		doc = frappe.form_dict.doc
@@ -119,6 +130,17 @@ def get_print_format_doc(print_format_name: str, meta: "Meta") -> Optional["Prin
 
 
 def get_rendered_template(
+<<<<<<< HEAD
+	doc,
+	name=None,
+	print_format=None,
+	meta=None,
+	no_letterhead=None,
+	letterhead=None,
+	trigger_print=False,
+	settings=None,
+):
+=======
 	doc: "Document",
 	print_format: Optional["PrintFormat"] = None,
 	meta: "Meta" = None,
@@ -127,6 +149,7 @@ def get_rendered_template(
 	trigger_print: bool = False,
 	settings: dict | None = None,
 ) -> str:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	print_settings = frappe.get_single("Print Settings").as_dict()
 	print_settings.update(settings or {})
 
@@ -246,8 +269,22 @@ def get_rendered_template(
 			"print_settings": print_settings,
 		}
 	)
+<<<<<<< HEAD
+
+	try:
+		html = template.render(args, filters={"len": len})
+	except Exception as e:
+		frappe.throw(
+			_("Error in print format on line {0}: {1}").format(
+				_guess_template_error_line_number(template), e
+			),
+			exc=frappe.PrintFormatError,
+			title=_("Print Format Error"),
+		)
+=======
 	hook_func = frappe.get_hooks("pdf_body_html")
 	html = frappe.get_attr(hook_func[-1])(jenv=jenv, template=template, print_format=print_format, args=args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if cint(trigger_print):
 		html += trigger_print_script
@@ -255,7 +292,24 @@ def get_rendered_template(
 	return html
 
 
+<<<<<<< HEAD
+def _guess_template_error_line_number(template) -> int | None:
+	"""Guess line on which exception occured from current traceback."""
+	with contextlib.suppress(Exception):
+		import sys
+		import traceback
+
+		_, _, tb = sys.exc_info()
+
+		for frame in reversed(traceback.extract_tb(tb)):
+			if template.filename in frame.filename:
+				return frame.lineno
+
+
+def set_link_titles(doc):
+=======
 def set_link_titles(doc: "Document") -> None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# Adds name with title of link field doctype to __link_titles
 	if not doc.get("__link_titles"):
 		setattr(doc, "__link_titles", {})
@@ -369,12 +423,19 @@ def get_rendered_raw_commands(doc: str, name: str | None = None, print_format: s
 			_("{0} is not a raw printing format.").format(print_format), frappe.TemplateNotFoundError
 		)
 
+<<<<<<< HEAD
+	return {"raw_commands": get_rendered_template(doc, name=name, print_format=print_format, meta=meta)}
+
+
+def validate_print_permission(doc):
+=======
 	return {
 		"raw_commands": get_rendered_template(doc=document, print_format=print_format, meta=document.meta)
 	}
 
 
 def validate_print_permission(doc: "Document") -> None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.has_website_permission(doc):
 		return
 
@@ -489,7 +550,11 @@ def make_layout(doc: "Document", meta: "Meta", format_data=None) -> list:
 
 		if df.fieldtype == "Section Break" or page == []:
 			if len(page) > 1:
+<<<<<<< HEAD
+				if page[-1]["has_data"] is False:
+=======
 				if not page[-1]["has_data"]:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					# truncate last section if empty
 					del page[-1]
 

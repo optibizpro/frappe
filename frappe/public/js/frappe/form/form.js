@@ -38,7 +38,11 @@ frappe.ui.form.Form = class FrappeForm {
 		this.events = {};
 		this.fetch_dict = {};
 		this.parent = parent;
+<<<<<<< HEAD
+		this.doctype_layout = frappe.get_doc("DocType Layout", doctype_layout_name);
+=======
 		this.doctype_layout = frappe.get_meta(doctype_layout_name);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.undo_manager = new UndoManager({ frm: this });
 		this.setup_meta(doctype);
 		this.debounced_reload_doc = frappe.utils.debounce(this.reload_doc.bind(this), 1000);
@@ -52,7 +56,11 @@ frappe.ui.form.Form = class FrappeForm {
 	}
 
 	setup_meta() {
+<<<<<<< HEAD
+		this.meta = frappe.get_doc("DocType", this.doctype);
+=======
 		this.meta = frappe.get_meta(this.doctype);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if (this.meta.istable) {
 			this.meta.in_dialog = 1;
@@ -83,8 +91,12 @@ frappe.ui.form.Form = class FrappeForm {
 
 		frappe.ui.make_app_page({
 			parent: this.wrapper,
+<<<<<<< HEAD
+			single_column: this.meta.hide_toolbar,
+=======
 			single_column: is_single_column,
 			sidebar_position: "Right",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 		this.page = this.wrapper.page;
 		this.layout_main = this.page.main.get(0);
@@ -96,11 +108,14 @@ frappe.ui.form.Form = class FrappeForm {
 		this.toolbar = new frappe.ui.form.Toolbar({
 			frm: this,
 			page: this.page,
+<<<<<<< HEAD
+=======
 		});
 
 		this.viewers = new frappe.ui.form.FormViewers({
 			frm: this,
 			parent: $('<div class="form-viewers d-flex"></div>').prependTo(this.page.page_actions),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 
 		// navigate records keyboard shortcuts
@@ -158,10 +173,27 @@ frappe.ui.form.Form = class FrappeForm {
 
 		// Alternate for redo, main shortcut are present in toolbar.js
 		frappe.ui.keys.add_shortcut({
+<<<<<<< HEAD
+			shortcut: "ctrl+z",
+			action: () => this.undo_manager.undo(),
+			page: this.page,
+			description: __("Undo last action"),
+		});
+		frappe.ui.keys.add_shortcut({
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			shortcut: "shift+ctrl+z",
 			action: () => this.undo_manager.redo(),
 			page: this.page,
 			description: __("Redo last action"),
+<<<<<<< HEAD
+		});
+		frappe.ui.keys.add_shortcut({
+			shortcut: "ctrl+y",
+			action: () => this.undo_manager.redo(),
+			page: this.page,
+			description: __("Redo last action"),
+=======
 			condition: () => !this.is_form_builder(),
 		});
 		frappe.ui.keys.add_shortcut({
@@ -169,6 +201,7 @@ frappe.ui.form.Form = class FrappeForm {
 			action: () => this.print_doc(),
 			description: __("Print document"),
 			condition: () => frappe.model.can_print(this.doctype, this) && !this.meta.issingle,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 
 		let grid_shortcut_keys = [
@@ -312,6 +345,13 @@ frappe.ui.form.Form = class FrappeForm {
 
 		// using $.each to preserve df via closure
 		$.each(table_fields, function (i, df) {
+<<<<<<< HEAD
+			frappe.model.on(df.options, "*", function (fieldname, value, doc) {
+				if (doc.parent == me.docname && doc.parentfield === df.fieldname) {
+					me.dirty();
+					me.fields_dict[df.fieldname].grid.set_value(fieldname, value, doc);
+					return me.script_manager.trigger(fieldname, doc.doctype, doc.name);
+=======
 			frappe.model.on(
 				df.options,
 				"*",
@@ -324,6 +364,7 @@ frappe.ui.form.Form = class FrappeForm {
 						me.fields_dict[df.fieldname].grid.set_value(fieldname, value, doc);
 						return me.script_manager.trigger(fieldname, doc.doctype, doc.name);
 					}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 			);
 		});
@@ -332,6 +373,8 @@ frappe.ui.form.Form = class FrappeForm {
 	setup_notify_on_rename() {
 		$(document).on("rename", (ev, dt, old_name, new_name) => {
 			if (dt == this.doctype) this.rename_notify(dt, old_name, new_name);
+<<<<<<< HEAD
+=======
 		});
 
 		frappe.realtime.on("doc_rename", (data) => {
@@ -340,6 +383,7 @@ frappe.ui.form.Form = class FrappeForm {
 				// the current form does not exist anymore, route to the new one
 				frappe.set_route("Form", this.doctype, data.new);
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 
@@ -427,7 +471,11 @@ frappe.ui.form.Form = class FrappeForm {
 			// read only (workflow)
 			this.read_only = frappe.workflow.is_read_only(this.doctype, this.docname);
 			if (this.read_only) {
+<<<<<<< HEAD
+				this.set_read_only(true);
+=======
 				this.set_read_only();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frappe.show_alert(__("This form is not editable due to a Workflow."));
 			}
 
@@ -468,7 +516,10 @@ frappe.ui.form.Form = class FrappeForm {
 				.toggleClass("cancelled-form", this.doc.docstatus === 2);
 
 			this.show_conflict_message();
+<<<<<<< HEAD
+=======
 			this.show_submission_queue_banner();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			if (frappe.boot.read_only) {
 				this.disable_form();
@@ -524,7 +575,11 @@ frappe.ui.form.Form = class FrappeForm {
 
 				// feedback
 				frappe.msgprint({
+<<<<<<< HEAD
+					message: __("{} Complete", [action.label]),
+=======
 					message: __("{} Complete", [__(action.label)]),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					alert: true,
 				});
 			});
@@ -559,6 +614,10 @@ frappe.ui.form.Form = class FrappeForm {
 	}
 
 	trigger_onload(switched) {
+<<<<<<< HEAD
+		this.cscript.is_onload = false;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (!this.opendocs[this.docname]) {
 			var me = this;
 			this.cscript.is_onload = true;
@@ -656,12 +715,18 @@ frappe.ui.form.Form = class FrappeForm {
 	}
 
 	focus_on_first_input() {
+<<<<<<< HEAD
+		let first = this.form_wrapper.find(".form-layout :input:visible:first");
+		if (!in_list(["Date", "Datetime"], first.attr("data-fieldtype"))) {
+			first.focus();
+=======
 		const layout_wrapper = this.layout.wrapper;
 
 		// dont do anything if the current active element is inside the form
 		// user must have clicked on some element before this function trigerred
 		if (!layout_wrapper || layout_wrapper.has(":focus").length) {
 			return;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		layout_wrapper
@@ -774,7 +839,11 @@ frappe.ui.form.Form = class FrappeForm {
 				me.show_success_action();
 			})
 			.catch((e) => {
+<<<<<<< HEAD
+				console.error(e); // eslint-disable-line
+=======
 				console.error(e);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 	}
 
@@ -913,15 +982,28 @@ frappe.ui.form.Form = class FrappeForm {
 				args: {
 					doctype: me.doc.doctype,
 					name: me.doc.name,
+<<<<<<< HEAD
+=======
 					ignore_doctypes_on_cancel_all: me.ignore_doctypes_on_cancel_all,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				},
 				freeze: true,
 			})
 			.then((r) => {
 				if (!r.exc) {
+<<<<<<< HEAD
+					let doctypes_to_cancel = (r.message.docs || [])
+						.map((value) => {
+							return value.doctype;
+						})
+						.filter((value) => {
+							return !me.ignore_doctypes_on_cancel_all.includes(value);
+						});
+=======
 					let doctypes_to_cancel = (r.message.docs || []).map((value) => {
 						return value.doctype;
 					});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 					if (doctypes_to_cancel.length) {
 						return me._cancel_all(r, btn, callback, on_error);
@@ -1034,6 +1116,8 @@ frappe.ui.form.Form = class FrappeForm {
 				cancel_doc,
 				me.handle_save_fail(btn, on_error)
 			);
+<<<<<<< HEAD
+=======
 		}
 	}
 
@@ -1080,6 +1164,7 @@ frappe.ui.form.Form = class FrappeForm {
 				discard_doc,
 				me.handle_save_fail(btn, on_error)
 			);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -1563,10 +1648,14 @@ frappe.ui.form.Form = class FrappeForm {
 		$.each(fields_list, function (i, fname) {
 			var docfield = frappe.meta.docfield_map[doctype][fname];
 			if (docfield) {
+<<<<<<< HEAD
+				var label = __(docfield.label || "").replace(/\([^\)]*\)/g, ""); // eslint-disable-line
+=======
 				var label = __(docfield.label || "", null, docfield.parent).replace(
 					/\([^\)]*\)/g,
 					""
 				); // eslint-disable-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				if (parentfield) {
 					grid_field_label_map[doctype + "-" + fname] =
 						label.trim() + " (" + __(currency) + ")";
@@ -1641,7 +1730,11 @@ frappe.ui.form.Form = class FrappeForm {
 				if (this.fields_dict[fieldname].grid.grid_rows_by_docname[table_row_name]) {
 					this.fields_dict[fieldname].grid.grid_rows_by_docname[
 						table_row_name
+<<<<<<< HEAD
+					].refresh_field(fieldname);
+=======
 					].refresh_field(table_field);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 			} else {
 				this.refresh_field(fieldname);
@@ -1799,6 +1892,15 @@ frappe.ui.form.Form = class FrappeForm {
 					if (opts.child) {
 						// update child doc
 						opts.child = locals[opts.child.doctype][opts.child.name];
+<<<<<<< HEAD
+
+						var std_field_list = ["doctype"]
+							.concat(frappe.model.std_fields_list)
+							.concat(frappe.model.child_table_field_list);
+						for (var key in r.message) {
+							if (std_field_list.indexOf(key) === -1) {
+								opts.child[key] = r.message[key];
+=======
 						// if child row is deleted, don't update
 						if (opts.child) {
 							var std_field_list = ["doctype"]
@@ -1808,6 +1910,7 @@ frappe.ui.form.Form = class FrappeForm {
 								if (std_field_list.indexOf(key) === -1) {
 									opts.child[key] = r.message[key];
 								}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							}
 
 							me.fields_dict[opts.child.parentfield].refresh();
@@ -2045,9 +2148,13 @@ frappe.ui.form.Form = class FrappeForm {
 
 		// focus if text field
 		if (focus) {
+<<<<<<< HEAD
+			$el.find("input, select, textarea").focus();
+=======
 			setTimeout(() => {
 				$el.find("input, select, textarea").focus();
 			}, 500);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		// highlight control inside field
@@ -2064,7 +2171,11 @@ frappe.ui.form.Form = class FrappeForm {
 		let docname = this.docname;
 
 		if (this.doc && !this.is_new()) {
+<<<<<<< HEAD
+			frappe.socketio.doc_subscribe(doctype, docname);
+=======
 			frappe.realtime.doc_subscribe(doctype, docname);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		frappe.realtime.off("docinfo_update");
 		frappe.realtime.on("docinfo_update", ({ doc, key, action = "update" }) => {
@@ -2267,3 +2378,22 @@ frappe.ui.form.Form = class FrappeForm {
 };
 
 frappe.validated = 0;
+<<<<<<< HEAD
+// Proxy for frappe.validated
+Object.defineProperty(window, "validated", {
+	get: function () {
+		console.warn(
+			"Please use `frappe.validated` instead of `validated`. It will be deprecated soon."
+		); // eslint-disable-line
+		return frappe.validated;
+	},
+	set: function (value) {
+		console.warn(
+			"Please use `frappe.validated` instead of `validated`. It will be deprecated soon."
+		); // eslint-disable-line
+		frappe.validated = value;
+		return frappe.validated;
+	},
+});
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -3,7 +3,11 @@
 import json
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 from frappe.website.doctype.web_form.web_form import accept
 from frappe.website.serve import get_response_content
@@ -11,6 +15,9 @@ from frappe.website.serve import get_response_content
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Web Form"]
 
 
+<<<<<<< HEAD
+class TestWebForm(FrappeTestCase):
+=======
 class UnitTestWebForm(UnitTestCase):
 	"""
 	Unit tests for WebForm.
@@ -21,6 +28,7 @@ class UnitTestWebForm(UnitTestCase):
 
 
 class TestWebForm(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.conf.disable_website_cache = True
 
@@ -59,6 +67,11 @@ class TestWebForm(IntegrationTestCase):
 
 		accept("manage-events", json.dumps(doc))
 
+<<<<<<< HEAD
+		accept(web_form="manage-events", docname=self.event_name, data=json.dumps(doc))
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(frappe.db.get_value("Event", self.event_name, "description"), doc.get("description"))
 
 	def test_webform_render(self):
@@ -71,6 +84,13 @@ class TestWebForm(IntegrationTestCase):
 
 	def test_webform_html_meta_is_added(self):
 		set_request(method="GET", path="manage-events/new")
+<<<<<<< HEAD
+		content = get_response_content("manage-events/new")
+
+		self.assertIn('<meta name="name" content="Test Meta Form Title">', content)
+		self.assertIn('<meta property="og:description" content="Test Meta Form Description">', content)
+		self.assertIn('<meta property="og:image" content="https://frappe.io/files/frappe.png">', content)
+=======
 		content = self.normalize_html(get_response_content("manage-events/new"))
 
 		self.assertIn(self.normalize_html('<meta name="title" content="Test Meta Form Title">'), content)
@@ -85,3 +105,4 @@ class TestWebForm(IntegrationTestCase):
 			self.normalize_html('<meta property="og:image" content="https://frappe.io/files/frappe.png">'),
 			content,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

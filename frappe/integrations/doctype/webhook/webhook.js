@@ -14,9 +14,17 @@ frappe.webhook = {
 							!frappe.model.table_fields.includes(d.fieldtype)
 						) {
 							return null;
+<<<<<<< HEAD
+						} else if (d.fieldtype === "Currency" || d.fieldtype === "Float") {
+							return { label: d.label, value: d.fieldname };
+						} else {
+							return {
+								label: `${__(d.label)} (${d.fieldtype})`,
+=======
 						} else {
 							return {
 								label: `${__(d.label, null, d.parent)} (${__(d.fieldtype)})`,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								value: d.fieldname,
 							};
 						}
@@ -29,9 +37,13 @@ frappe.webhook = {
 						fields.unshift({ label: __("Name (Doc Name)"), value: "name" });
 					} else {
 						fields.push({
+<<<<<<< HEAD
+							label: `${__(field.label)} (${field.fieldtype})`,
+=======
 							label: `${__(field.label, null, field.parent)} (${__(
 								field.fieldtype
 							)})`,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							value: field.fieldname,
 						});
 					}
@@ -121,6 +133,20 @@ frappe.ui.form.on("Webhook", {
 	enable_security: (frm) => {
 		frm.toggle_reqd("webhook_secret", frm.doc.enable_security);
 	},
+<<<<<<< HEAD
+
+	preview_document: (frm) => {
+		frappe.call({
+			method: "generate_preview",
+			doc: frm.doc,
+			callback: (r) => {
+				frm.refresh_field("meets_condition");
+				frm.refresh_field("preview_request_body");
+			},
+		});
+	},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 frappe.ui.form.on("Webhook Data", {

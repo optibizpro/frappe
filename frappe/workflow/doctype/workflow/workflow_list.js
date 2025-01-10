@@ -7,6 +7,8 @@ frappe.listview_settings["Workflow"] = {
 			return [__("Not active"), "gray", "is_active,=,No"];
 		}
 	},
+<<<<<<< HEAD
+=======
 	button: {
 		show(doc) {
 			return doc.name;
@@ -21,6 +23,7 @@ frappe.listview_settings["Workflow"] = {
 			frappe.set_route("workflow-builder", doc.name);
 		},
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };
 
 frappe.help.youtube_id["Workflow"] = "yObJUg9FxFs";

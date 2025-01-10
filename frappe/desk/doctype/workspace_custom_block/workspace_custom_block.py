@@ -6,6 +6,8 @@ from frappe.model.document import Document
 
 
 class WorkspaceCustomBlock(Document):
+<<<<<<< HEAD
+=======
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -21,4 +23,5 @@ class WorkspaceCustomBlock(Document):
 		parenttype: DF.Data
 	# end: auto-generated types
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	pass

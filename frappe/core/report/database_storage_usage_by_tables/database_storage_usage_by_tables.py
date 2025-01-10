@@ -38,6 +38,8 @@ def execute(filters=None):
 		as_dict=1,
 	)
 	return COLUMNS, data
+<<<<<<< HEAD
+=======
 
 
 @frappe.whitelist()
@@ -62,3 +64,4 @@ def optimize_doctype_job(doctype_name: str):
 		query = f"VACUUM (ANALYZE) {doctype_table};"
 
 	frappe.db.sql(query)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

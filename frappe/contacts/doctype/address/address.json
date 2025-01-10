@@ -150,7 +150,11 @@
  "icon": "fa fa-map-marker",
  "idx": 5,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-11-20 17:28:41.698356",
+=======
  "modified": "2024-03-23 16:01:27.068028",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Contacts",
  "name": "Address",
@@ -211,7 +215,10 @@
   },
   {
    "create": 1,
+<<<<<<< HEAD
+=======
    "export": 1,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "if_owner": 1,
    "print": 1,
    "read": 1,
@@ -220,7 +227,11 @@
   }
  ],
  "search_fields": "country, state",
+<<<<<<< HEAD
+ "sort_field": "modified",
+=======
  "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "sort_order": "DESC",
  "states": []
 }

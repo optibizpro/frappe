@@ -15,8 +15,12 @@ frappe.ui.form.Attachments = class Attachments {
 			me.new_attachment();
 		});
 
+<<<<<<< HEAD
+		this.parent.find(".explore-btn").click(() => {
+=======
 		this.parent.find(".explore-link").click(() => {
 			if (!this.frm.attachments.get_attachments()?.length) return;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.open_in_new_tab = true;
 			frappe.set_route("List", "File", {
 				attached_to_doctype: this.frm.doctype,
@@ -52,12 +56,33 @@ frappe.ui.form.Attachments = class Attachments {
 		this.parent.find(".attachment-row").remove();
 
 		var max_reached = this.max_reached();
+<<<<<<< HEAD
+		this.add_attachment_wrapper.toggle(!max_reached);
+		this.setup_expanded_explore_button(max_reached);
+=======
 		this.add_attachment_wrapper.find(".add-attachment-btn").toggle(!max_reached);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// add attachment objects
 		var attachments = this.get_attachments();
 		this.render_attachments(attachments);
 		this.setup_show_all_button(attachments);
+	}
+
+<<<<<<< HEAD
+	setup_expanded_explore_button(max_reached) {
+		if (!max_reached) {
+			this.parent.find(".explore-full-btn").addClass("hidden");
+			return;
+		}
+
+		this.parent.find(".explore-full-btn").removeClass("hidden");
+		this.parent.find(".explore-full-btn").click(() => {
+			frappe.set_route("List", "File", {
+				attached_to_doctype: this.frm.doctype,
+				attached_to_name: this.frm.docname,
+			});
+		});
 	}
 
 	setup_show_all_button(attachments) {
@@ -79,6 +104,27 @@ frappe.ui.form.Attachments = class Attachments {
 		});
 	}
 
+=======
+	setup_show_all_button(attachments) {
+		// show button if there is more to show and user has not clicked on "Show All"
+		let is_slicable = attachments.length > this.attachments_page_length;
+		let show = !this.show_all_attachments && is_slicable;
+
+		let show_all_btn = this.parent.find(".show-all-btn");
+		if (!show) {
+			show_all_btn.addClass("hidden");
+			return;
+		}
+
+		show_all_btn.removeClass("hidden");
+		show_all_btn.click(() => {
+			show_all_btn.addClass("hidden");
+			this.show_all_attachments = true;
+			this.refresh();
+		});
+	}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_attachments() {
 		return this.frm.get_docinfo().attachments || [];
 	}
@@ -109,6 +155,10 @@ frappe.ui.form.Attachments = class Attachments {
 		if (!attachments.length) {
 			// If no attachments in totality
 			this.attachments_label.removeClass("has-attachments");
+<<<<<<< HEAD
+			this.parent.find(".explore-btn").toggle(false); // hide explore icon button
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -124,7 +174,11 @@ frappe.ui.form.Attachments = class Attachments {
 
 		let file_label = `
 			<a href="${file_url}" target="_blank" title="${frappe.utils.escape_html(file_name)}"
+<<<<<<< HEAD
+				class="ellipsis" style="max-width: calc(100% - 43px);"
+=======
 				class="ellipsis attachment-file-label"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			>
 				<span>${file_name}</span>
 			</a>`;
@@ -147,6 +201,17 @@ frappe.ui.form.Attachments = class Attachments {
 			};
 		}
 
+<<<<<<< HEAD
+		const icon = `<a href="/app/file/${fileid}">
+				${frappe.utils.icon(attachment.is_private ? "lock" : "unlock", "sm ml-0")}
+			</a>`;
+
+		$(`<li class="attachment-row">`)
+			.append(frappe.get_data_pill(file_label, fileid, remove_action, icon))
+			.insertAfter(this.add_attachment_wrapper);
+
+		this.parent.find(".explore-btn").toggle(true); // show explore icon button if hidden
+=======
 		const icon = `<a href="/app/file/${fileid}" class="attachment-icon">
 				${frappe.utils.icon(attachment.is_private ? "es-line-lock" : "es-line-unlock", "sm ml-0")}
 			</a>`;
@@ -154,6 +219,7 @@ frappe.ui.form.Attachments = class Attachments {
 		$(`<div class="attachment-row"></div>`)
 			.append(frappe.get_data_pill(file_label, fileid, remove_action, icon))
 			.insertAfter(this.add_attachment_wrapper);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_file_url(attachment) {

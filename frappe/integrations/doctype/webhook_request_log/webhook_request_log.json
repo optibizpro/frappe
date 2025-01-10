@@ -6,8 +6,13 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
+<<<<<<< HEAD
+  "user",
+  "webhook",
+=======
   "webhook",
   "reference_doctype",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "reference_document",
   "headers",
   "data",
@@ -75,6 +80,8 @@
    "fieldtype": "Link",
    "label": "Webhook",
    "options": "Webhook"
+<<<<<<< HEAD
+=======
   },
   {
    "fieldname": "reference_doctype",
@@ -83,12 +90,17 @@
    "in_standard_filter": 1,
    "label": "Reference Doctype",
    "read_only": 1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "in_create": 1,
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-02-24 14:59:24.743552",
+=======
  "modified": "2024-09-14 05:52:41.583612",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Integrations",
  "name": "Webhook Request Log",

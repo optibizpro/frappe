@@ -4,6 +4,12 @@ import time
 
 import frappe
 from frappe.auth import CookieManager, LoginManager
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestActivityLog(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -20,13 +26,18 @@ class TestActivityLog(IntegrationTestCase):
 	def setUp(self) -> None:
 		frappe.set_user("Administrator")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_activity_log(self):
 		# test user login log
 		frappe.local.form_dict = frappe._dict(
 			{
 				"cmd": "login",
 				"sid": "Guest",
+<<<<<<< HEAD
+				"pwd": frappe.conf.admin_password or "admin",
+=======
 				"pwd": self.ADMIN_PASSWORD or "admin",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"usr": "Administrator",
 			}
 		)

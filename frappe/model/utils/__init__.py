@@ -61,7 +61,11 @@ def render_include(content):
 	content = cstr(content)
 
 	# try 5 levels of includes
+<<<<<<< HEAD
+	for _i in range(5):
+=======
 	for _ in range(5):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if "{% include" in content:
 			paths = INCLUDE_DIRECTIVE_PATTERN.findall(content)
 			if not paths:
@@ -131,6 +135,11 @@ def get_fetch_values(doctype, fieldname, value):
 
 @site_cache()
 def is_virtual_doctype(doctype: str):
+<<<<<<< HEAD
+	if frappe.db.has_column("DocType", "is_virtual"):
+		return frappe.db.get_value("DocType", doctype, "is_virtual")
+	return False
+=======
 	if frappe.flags.in_install or frappe.flags.in_migrate:
 		if frappe.db.has_column("DocType", "is_virtual"):
 			return frappe.db.get_value("DocType", doctype, "is_virtual")
@@ -216,3 +225,4 @@ def simple_singledispatch(func):
 
 	wrapper.register = register
 	return wrapper
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

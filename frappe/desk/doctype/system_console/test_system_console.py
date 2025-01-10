@@ -1,6 +1,12 @@
 # Copyright (c) 2020, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestSystemConsole(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -19,6 +25,7 @@ class TestSystemConsole(IntegrationTestCase):
 		cls.enterClassContext(cls.enable_safe_exec())
 		return super().setUpClass()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_system_console(self):
 		system_console = frappe.get_doc("System Console")
 		system_console.console = 'log("hello")'

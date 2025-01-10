@@ -1,6 +1,10 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and contributors
 # License: MIT. See LICENSE
 
+<<<<<<< HEAD
+import os
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from contextlib import suppress
 
 import redis
@@ -42,11 +46,16 @@ def publish_realtime(
 	if message is None:
 		message = {}
 
+<<<<<<< HEAD
+	if event is None:
+		event = "task_progress" if frappe.local.task_id else "global"
+=======
 	if not task_id and hasattr(frappe.local, "task_id"):
 		task_id = frappe.local.task_id
 
 	if event is None:
 		event = "task_progress" if task_id else "global"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif event == "msgprint" and not user:
 		user = frappe.session.user
 	elif event == "list_update":
@@ -54,6 +63,12 @@ def publish_realtime(
 		room = get_doctype_room(doctype)
 	elif event == "docinfo_update":
 		room = get_doc_room(doctype, docname)
+<<<<<<< HEAD
+
+	if not task_id and hasattr(frappe.local, "task_id"):
+		task_id = frappe.local.task_id
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not room:
 		if task_id:
@@ -101,6 +116,43 @@ def emit_via_redis(event, message, room):
 	:param event: Event name, like `task_progress` etc.
 	:param message: JSON message object. For async must contain `task_id`
 	:param room: name of the room"""
+<<<<<<< HEAD
+
+	with suppress(redis.exceptions.ConnectionError):
+		r = get_redis_server()
+		r.publish("events", frappe.as_json({"event": event, "message": message, "room": room}))
+
+
+def get_redis_server():
+	"""returns redis_socketio connection."""
+	global redis_server
+	if not redis_server:
+		from redis import Redis
+
+		redis_server = Redis.from_url(frappe.conf.redis_socketio or "redis://localhost:12311")
+	return redis_server
+
+
+@frappe.whitelist(allow_guest=True)
+def can_subscribe_doc(doctype, docname):
+	if os.environ.get("CI"):
+		return True
+
+	from frappe.exceptions import PermissionError
+
+	if not frappe.has_permission(doctype=doctype, doc=docname, ptype="read"):
+		raise PermissionError()
+
+	return True
+
+
+@frappe.whitelist(allow_guest=True)
+def can_subscribe_doctype(doctype: str) -> bool:
+	from frappe.exceptions import PermissionError
+
+	if not frappe.has_permission(doctype=doctype, ptype="read"):
+		raise PermissionError()
+=======
 	from frappe.utils.background_jobs import get_redis_connection_without_auth
 
 	with suppress(redis.exceptions.ConnectionError):
@@ -117,6 +169,7 @@ def emit_via_redis(event, message, room):
 def has_permission(doctype: str, name: str) -> bool:
 	if not frappe.has_permission(doctype=doctype, doc=name, ptype="read"):
 		raise frappe.PermissionError
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return True
 
@@ -126,11 +179,37 @@ def get_user_info():
 	return {
 		"user": frappe.session.user,
 		"user_type": frappe.session.data.user_type,
+<<<<<<< HEAD
+=======
 		"installed_apps": frappe.get_installed_apps(),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 
 def get_doctype_room(doctype):
+<<<<<<< HEAD
+	return f"{frappe.local.site}:doctype:{doctype}"
+
+
+def get_doc_room(doctype, docname):
+	return f"{frappe.local.site}:doc:{doctype}/{cstr(docname)}"
+
+
+def get_user_room(user):
+	return f"{frappe.local.site}:user:{user}"
+
+
+def get_site_room():
+	return f"{frappe.local.site}:all"
+
+
+def get_task_progress_room(task_id):
+	return f"{frappe.local.site}:task_progress:{task_id}"
+
+
+def get_website_room():
+	return f"{frappe.local.site}:website"
+=======
 	return f"doctype:{doctype}"
 
 
@@ -152,3 +231,4 @@ def get_task_progress_room(task_id):
 
 def get_website_room():
 	return "website"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

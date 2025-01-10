@@ -39,8 +39,13 @@ class MariaDBTable(DBTable):
 				additional_definitions.append("index modified(modified)")
 
 		# creating sequence(s)
+<<<<<<< HEAD
+		if (not self.meta.issingle and self.meta.autoname == "autoincrement") or self.doctype in log_types:
+			frappe.db.create_sequence(self.doctype, check_not_exists=True, cache=frappe.db.SEQUENCE_CACHE)
+=======
 		if not self.meta.issingle and self.meta.autoname == "autoincrement":
 			frappe.db.create_sequence(self.doctype, check_not_exists=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			# NOTE: not used nextval func as default as the ability to restore
 			# database with sequences has bugs in mariadb and gives a scary error.
@@ -98,6 +103,29 @@ class MariaDBTable(DBTable):
 
 		drop_index_query = []
 
+<<<<<<< HEAD
+		for col in self.add_column:
+			add_column_query.append(f"ADD COLUMN `{col.fieldname}` {col.get_definition()}")
+
+		columns_to_modify = set(self.change_type + self.set_default)
+		for col in columns_to_modify:
+			modify_column_query.append(
+				f"MODIFY `{col.fieldname}` {col.get_definition(for_modification=True)}"
+			)
+
+		for col in self.add_unique:
+			modify_column_query.append(f"ADD UNIQUE INDEX IF NOT EXISTS {col.fieldname} (`{col.fieldname}`)")
+
+		for col in self.add_index:
+			# if index key does not exists
+			if not frappe.db.get_column_index(self.table_name, col.fieldname, unique=False):
+				add_index_query.append(f"ADD INDEX `{col.fieldname}_index`(`{col.fieldname}`)")
+
+		if self.meta.sort_field == "creation" and not frappe.db.get_column_index(
+			self.table_name, "creation", unique=False
+		):
+			add_index_query.append("ADD INDEX `creation`(`creation`)")
+
 		for col in {*self.drop_index, *self.drop_unique}:
 			if col.fieldname == "name":
 				continue
@@ -108,6 +136,18 @@ class MariaDBTable(DBTable):
 				if unique_index := frappe.db.get_column_index(self.table_name, col.fieldname, unique=True):
 					drop_index_query.append(f"DROP INDEX `{unique_index.Key_name}`")
 
+=======
+		for col in {*self.drop_index, *self.drop_unique}:
+			if col.fieldname == "name":
+				continue
+
+			current_column = self.current_columns.get(col.fieldname.lower())
+			unique_constraint_changed = current_column.unique != col.unique
+			if unique_constraint_changed and not col.unique:
+				if unique_index := frappe.db.get_column_index(self.table_name, col.fieldname, unique=True):
+					drop_index_query.append(f"DROP INDEX `{unique_index.Key_name}`")
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			index_constraint_changed = current_column.index != col.set_index
 			if index_constraint_changed and not col.set_index:
 				if index_record := frappe.db.get_column_index(self.table_name, col.fieldname, unique=False):
@@ -128,7 +168,10 @@ class MariaDBTable(DBTable):
 				if query_parts:
 					query_body = ", ".join(query_parts)
 					query = f"ALTER TABLE `{self.table_name}` {query_body}"
+<<<<<<< HEAD
+=======
 					# nosemgrep
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					frappe.db.sql_ddl(query)
 
 		except Exception as e:
@@ -141,6 +184,11 @@ class MariaDBTable(DBTable):
 					_(
 						"{0} field cannot be set as unique in {1}, as there are non-unique existing values"
 					).format(fieldname, self.table_name)
+<<<<<<< HEAD
+				)
+
+			raise
+=======
 				)
 
 			raise
@@ -161,3 +209,4 @@ class MariaDBTable(DBTable):
 		# Reverting from UUID to VARCHAR
 		if autoname != "UUID" and frappe.db.get_column_type(self.doctype, "name") == "uuid":
 			return f"modify name varchar({frappe.db.VARCHAR_LEN})"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

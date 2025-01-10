@@ -4,11 +4,15 @@ import frappe
 from frappe.core.doctype.data_import.importer import Importer
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.test_query_builder import db_type_is, run_only_if
+from frappe.tests.utils import FrappeTestCase
 from frappe.utils import format_duration, getdate
 
 doctype_name = "DocType for Import"
 
 
+<<<<<<< HEAD
+class TestImporter(FrappeTestCase):
+=======
 class UnitTestDataImport(UnitTestCase):
 	"""
 	Unit tests for DataImport.
@@ -19,6 +23,7 @@ class UnitTestDataImport(UnitTestCase):
 
 
 class TestImporter(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()

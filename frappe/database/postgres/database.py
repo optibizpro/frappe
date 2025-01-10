@@ -115,10 +115,13 @@ class PostgresExceptionUtil:
 		return getattr(e, "pgcode", None) == STRING_DATA_RIGHT_TRUNCATION
 
 	@staticmethod
+<<<<<<< HEAD
+=======
 	def is_db_table_size_limit(e) -> bool:
 		return False
 
 	@staticmethod
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def is_interface_error(e):
 		return isinstance(e, InterfaceError)
 
@@ -243,8 +246,12 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 			from information_schema.tables
 			where table_catalog=%s
 				and table_type = 'BASE TABLE'
+<<<<<<< HEAD
+				and table_schema='{}'""".format(frappe.conf.db_name, frappe.conf.get("db_schema", "public"))
+=======
 				and table_schema=%s""",
 				(self.cur_db_name, self.db_schema),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 		]
 
@@ -385,10 +392,15 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 
 	def has_index(self, table_name, index_name):
 		return self.sql(
+<<<<<<< HEAD
+			f"""SELECT 1 FROM pg_indexes WHERE tablename='{table_name}'
+			and indexname='{index_name}' limit 1"""
+=======
 			"""SELECT 1 FROM pg_indexes WHERE tablename=%s
 			and schemaname = %s
 			and indexname=%s limit 1""",
 			(table_name, self.db_schema, index_name),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 
 	def add_index(self, doctype: str, fields: list, index_name: str | None = None):
@@ -421,6 +433,10 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 			self.commit()
 
 			self.sql(
+<<<<<<< HEAD
+				"""ALTER TABLE `tab{}`
+					ADD CONSTRAINT {} UNIQUE ({})""".format(doctype, constraint_name, ", ".join(fields))
+=======
 				sql.SQL(
 					"""ALTER TABLE {schema}.{table}
 					ADD CONSTRAINT {constraint} UNIQUE ({fields})"""
@@ -432,6 +448,7 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 					fields=sql.SQL(", ").join(sql.Identifier(field) for field in fields),
 				)
 				.as_string(self._conn)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 
 	def get_table_columns_description(self, table_name):
@@ -458,8 +475,12 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 					WHERE tablename='{table_name}' AND schemaname='{self.db_schema}') b
 				ON SUBSTRING(b.indexdef, '(.*)') LIKE CONCAT('%', a.column_name, '%')
 			WHERE a.table_name = '{table_name}'
+<<<<<<< HEAD
+			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length;
+=======
 				AND a.table_schema = '{self.db_schema}'
 			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length, a.is_nullable;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		""",
 			as_dict=1,
 		)

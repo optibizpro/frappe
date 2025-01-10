@@ -1,11 +1,19 @@
 # Copyright (c) 2017, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Role"]
 
 
+<<<<<<< HEAD
+class TestRoleProfile(FrappeTestCase):
+	def test_make_new_role_profile(self):
+=======
 class UnitTestRoleProfile(UnitTestCase):
 	"""
 	Unit tests for RoleProfile.
@@ -17,6 +25,7 @@ class UnitTestRoleProfile(UnitTestCase):
 
 class TestRoleProfile(IntegrationTestCase):
 	def test_make_new_role_profiles(self):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.delete_doc_if_exists("Role Profile", "Test 1", force=1)
 		new_role_profile = frappe.get_doc(doctype="Role Profile", role_profile="Test 1").insert()
 

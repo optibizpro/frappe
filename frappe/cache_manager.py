@@ -66,22 +66,36 @@ user_cache_keys = (
 )
 
 doctype_cache_keys = (
+<<<<<<< HEAD
+	"doctype_meta",
 	"doctype_form_meta",
+	"table_columns",
+=======
+	"doctype_form_meta",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"last_modified",
 	"linked_doctypes",
 	"notifications",
 	"workflow",
 	"data_import_column_header_map",
 )
+<<<<<<< HEAD
+=======
 
 wildcard_keys = (
 	"document_cache::*",
 	"table_columns::*",
 )
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_user_cache(user=None):
 	from frappe.desk.notifications import clear_notifications
+<<<<<<< HEAD
+
+	cache = frappe.cache()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# this will automatically reload the global cache
 	# so it is important to clear this first
@@ -113,19 +127,32 @@ def clear_global_cache():
 
 def clear_defaults_cache(user=None):
 	if user:
+<<<<<<< HEAD
+		for p in [user, *common_default_keys]:
+			frappe.cache().hdel("defaults", p)
+=======
 		for key in [user, *common_default_keys]:
 			frappe.client_cache.delete_value(f"defaults::{key}")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif frappe.flags.in_install != "frappe":
 		frappe.client_cache.delete_keys("defaults::*")
 
 
 def clear_doctype_cache(doctype=None):
+<<<<<<< HEAD
+	from frappe.desk.notifications import delete_notification_count_for
+
+	clear_controller_cache(doctype)
+
+	cache = frappe.cache()
+=======
 	clear_controller_cache(doctype)
 
 	_clear_doctype_cache_from_redis(doctype)
 	if hasattr(frappe.db, "after_commit"):
 		frappe.db.after_commit.add(lambda: _clear_doctype_cache_from_redis(doctype))
 		frappe.db.after_rollback.add(lambda: _clear_doctype_cache_from_redis(doctype))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def _clear_doctype_cache_from_redis(doctype: str | None = None):
@@ -179,7 +206,11 @@ def clear_controller_cache(doctype=None):
 
 
 def get_doctype_map(doctype, name, filters=None, order_by=None):
+<<<<<<< HEAD
+	return frappe.cache().hget(
+=======
 	return frappe.cache.hget(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		get_doctype_map_key(doctype),
 		name,
 		lambda: frappe.get_all(doctype, filters=filters, order_by=order_by, ignore_ddl=True),

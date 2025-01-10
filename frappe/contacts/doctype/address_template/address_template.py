@@ -27,10 +27,23 @@ class AddressTemplate(Document):
 		if not self.template:
 			self.template = get_default_address_template()
 
+<<<<<<< HEAD
+		self.defaults = frappe.db.get_values("Address Template", {"is_default": 1, "name": ("!=", self.name)})
+		if not self.is_default:
+			if not self.defaults:
+				self.is_default = 1
+				if cint(frappe.db.get_single_value("System Settings", "setup_complete")):
+					frappe.msgprint(
+						_("Setting this Address Template as default as there is no other default")
+					)
+
+		validate_template(self.template)
+=======
 		if not self.is_default and not self._get_previous_default():
 			self.is_default = 1
 			if frappe.get_system_settings("setup_complete"):
 				frappe.msgprint(_("Setting this Address Template as default as there is no other default"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def on_update(self):
 		if self.is_default and (previous_default := self._get_previous_default()):

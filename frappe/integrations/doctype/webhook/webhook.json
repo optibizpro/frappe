@@ -17,9 +17,14 @@
   "html_condition",
   "sb_webhook",
   "request_url",
+<<<<<<< HEAD
+  "timeout",
+  "request_method",
+=======
   "is_dynamic_url",
   "timeout",
   "background_jobs_queue",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "cb_webhook",
   "request_method",
   "request_structure",
@@ -178,6 +183,38 @@
    "label": "Request Timeout"
   },
   {
+<<<<<<< HEAD
+   "fieldname": "preview_request_body",
+   "fieldtype": "Code",
+   "is_virtual": 1,
+   "label": "Request Body"
+  },
+  {
+   "fieldname": "meets_condition",
+   "fieldtype": "Data",
+   "is_virtual": 1,
+   "label": "Meets Condition?"
+  },
+  {
+   "fieldname": "column_break_26",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_28",
+   "fieldtype": "Section Break"
+  },
+  {
+   "default": "5",
+   "description": "The number of seconds until the request expires",
+   "fieldname": "timeout",
+   "fieldtype": "Int",
+   "label": "Request Timeout",
+   "reqd": 1
+  }
+ ],
+ "links": [],
+ "modified": "2024-02-05 17:49:50.203001",
+=======
    "fieldname": "background_jobs_queue",
    "fieldtype": "Autocomplete",
    "label": "Background Jobs Queue"
@@ -190,6 +227,7 @@
   }
  ],
  "modified": "2024-10-28 12:21:52.172428",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Integrations",
  "name": "Webhook",

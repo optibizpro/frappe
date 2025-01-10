@@ -4,11 +4,18 @@ import json
 
 import frappe
 from frappe.desk.listview import get_group_by_count, get_list_settings, set_list_settings
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestListView(FrappeTestCase):
+=======
 from frappe.desk.reportview import get
 from frappe.tests import IntegrationTestCase
 
 
 class TestListView(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		if frappe.db.exists("List View Settings", "DocType"):
 			frappe.delete_doc("List View Settings", "DocType")
@@ -79,6 +86,8 @@ class TestListView(IntegrationTestCase):
 			'[["Note Seen By","user","=","Administrator"]]',
 			"invalid_field",
 		)
+<<<<<<< HEAD
+=======
 
 	def test_list_view_comment_count(self):
 		frappe.form_dict.doctype = "DocType"
@@ -94,3 +103,4 @@ class TestListView(IntegrationTestCase):
 		for with_comment_count in (0, False, "0", None):
 			frappe.form_dict.with_comment_count = with_comment_count
 			self.assertEqual(len(get()["values"][0]), 1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

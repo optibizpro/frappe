@@ -2,6 +2,12 @@
 # See license.txt
 
 # import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestPrintFormatFieldTemplate(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -15,4 +21,5 @@ class UnitTestPrintFormatFieldTemplate(UnitTestCase):
 
 
 class TestPrintFormatFieldTemplate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	pass

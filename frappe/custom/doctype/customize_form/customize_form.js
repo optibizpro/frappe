@@ -81,7 +81,11 @@ frappe.ui.form.on("Customize Form", {
 
 	add_customize_child_table_button: function (frm) {
 		frm.doc.fields.forEach(function (f) {
+<<<<<<< HEAD
+			if (!in_list(["Table", "Table MultiSelect"], f.fieldtype)) return;
+=======
 			if (!["Table", "Table MultiSelect"].includes(f.fieldtype)) return;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			frm.add_custom_button(
 				__(f.options),
@@ -96,6 +100,54 @@ frappe.ui.form.on("Customize Form", {
 		frm.page.clear_icons();
 
 		if (frm.doc.doc_type) {
+<<<<<<< HEAD
+			frm.page.set_title(__("Customize Form - {0}", [__(frm.doc.doc_type)]));
+			frappe.customize_form.set_primary_action(frm);
+
+			frm.add_custom_button(
+				__("Go to {0} List", [__(frm.doc.doc_type)]),
+				function () {
+					frappe.set_route("List", frm.doc.doc_type);
+				},
+				__("Actions")
+			);
+
+			frm.add_custom_button(
+				__("Reload"),
+				function () {
+					frm.script_manager.trigger("doc_type");
+				},
+				__("Actions")
+			);
+
+			frm.add_custom_button(
+				__("Reset to defaults"),
+				function () {
+					frappe.customize_form.confirm(__("Remove all customizations?"), frm);
+				},
+				__("Actions")
+			);
+
+			frm.add_custom_button(
+				__("Set Permissions"),
+				function () {
+					frappe.set_route("permission-manager", frm.doc.doc_type);
+				},
+				__("Actions")
+			);
+
+			const is_autoname_autoincrement = frm.doc.autoname === "autoincrement";
+			frm.set_df_property("naming_rule", "hidden", is_autoname_autoincrement);
+			frm.set_df_property("autoname", "read_only", is_autoname_autoincrement);
+
+			frm.add_custom_button(
+				__("Trim Table"),
+				function () {
+					frm.trigger("trim_table");
+				},
+				__("Actions")
+			);
+=======
 			frappe.model.with_doctype(frm.doc.doc_type).then(() => {
 				frm.page.set_title(__("Customize Form - {0}", [__(frm.doc.doc_type)]));
 				frappe.customize_form.set_primary_action(frm);
@@ -159,6 +211,7 @@ frappe.ui.form.on("Customize Form", {
 				render_form_builder(frm);
 				frm.get_field("form_builder").tab.set_active();
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		frm.events.setup_export(frm);
@@ -181,6 +234,8 @@ frappe.ui.form.on("Customize Form", {
 		}
 	},
 
+<<<<<<< HEAD
+=======
 	reset_layout(frm) {
 		frappe.confirm(
 			__("Layout will be reset to standard layout, are you sure you want to do this?"),
@@ -202,6 +257,7 @@ frappe.ui.form.on("Customize Form", {
 		);
 	},
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	async trim_table(frm) {
 		let dropped_columns = await frappe.xcall(
 			"frappe.custom.doctype.customize_form.customize_form.get_orphaned_columns",
@@ -329,10 +385,13 @@ frappe.ui.form.on("Customize Form Field", {
 		f.is_custom_field = true;
 		frm.trigger("setup_default_views");
 	},
+<<<<<<< HEAD
+=======
 
 	form_render(frm, doctype, docname) {
 		frm.trigger("setup_fetch_from_fields", doctype, docname);
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 let parenttype, parent; // used in the form events for the child tables: links, actions and states
@@ -352,11 +411,14 @@ frappe.ui.form.on("DocType Link", {
 		let f = frappe.model.get_doc(cdt, cdn);
 		f.custom = 1;
 	},
+<<<<<<< HEAD
+=======
 	links_remove: function (frm, doctype, name) {
 		// replicate the changed rows from the browser's copy of the parent doc to the current 'Customize Form' doc
 		let parent_doc = locals[parenttype][parent];
 		frm.doc.links = parent_doc.links;
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 // can't delete standard actions
@@ -374,11 +436,14 @@ frappe.ui.form.on("DocType Action", {
 		let f = frappe.model.get_doc(cdt, cdn);
 		f.custom = 1;
 	},
+<<<<<<< HEAD
+=======
 	actions_remove: function (frm, doctype, name) {
 		// replicate the changed rows from the browser's copy of the parent doc to the current 'Customize Form' doc
 		let parent_doc = locals[parenttype][parent];
 		frm.doc.actions = parent_doc.actions;
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 // can't delete standard states
@@ -396,6 +461,56 @@ frappe.ui.form.on("DocType State", {
 		let f = frappe.model.get_doc(cdt, cdn);
 		f.custom = 1;
 	},
+<<<<<<< HEAD
+});
+
+frappe.customize_form.validate_fieldnames = async function (frm) {
+	for (let i = 0; i < frm.doc.fields.length; i++) {
+		let field = frm.doc.fields[i];
+
+		let fieldname = field.label && frappe.model.scrub(field.label).toLowerCase();
+		if (
+			field.label &&
+			!field.fieldname &&
+			in_list(frappe.model.restricted_fields, fieldname)
+		) {
+			let message = __(
+				"For field <b>{0}</b> in row <b>{1}</b>, fieldname <b>{2}</b> is restricted it will be renamed as <b>{2}1</b>. Do you want to continue?",
+				[field.label, field.idx, fieldname]
+			);
+			await pause_to_confirm(message);
+		}
+	}
+
+	function pause_to_confirm(message) {
+		return new Promise((resolve) => {
+			frappe.confirm(
+				message,
+				() => resolve(),
+				() => {
+					frm.page.btn_primary.prop("disabled", false);
+				}
+			);
+		});
+	}
+};
+
+frappe.customize_form.save_customization = function (frm) {
+	if (frm.doc.doc_type) {
+		return frm.call({
+			doc: frm.doc,
+			freeze: true,
+			freeze_message: __("Saving Customization..."),
+			btn: frm.page.btn_primary,
+			method: "save_customization",
+			callback: function (r) {
+				if (!r.exc) {
+					frappe.customize_form.clear_locals_and_refresh(frm);
+					frm.script_manager.trigger("doc_type");
+				}
+			},
+		});
+=======
 	states_remove: function (frm, doctype, name) {
 		// replicate the changed rows from the browser's copy of the parent doc to the current 'Customize Form' doc
 		let parent_doc = locals[parenttype][parent];
@@ -431,12 +546,18 @@ frappe.customize_form.update_fields_from_form_builder = function (frm) {
 			frappe.throw(fields);
 		}
 		frm.refresh_fields();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };
 
 frappe.customize_form.set_primary_action = function (frm) {
+<<<<<<< HEAD
+	frm.page.set_primary_action(__("Update"), async () => {
+		await this.validate_fieldnames(frm);
+=======
 	frm.page.set_primary_action(__("Update"), () => {
 		this.update_fields_from_form_builder(frm);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.save_customization(frm);
 	});
 };
@@ -484,6 +605,8 @@ frappe.customize_form.clear_locals_and_refresh = function (frm) {
 	frm.refresh();
 };
 
+<<<<<<< HEAD
+=======
 function render_form_builder(frm) {
 	if (frappe.form_builder && frappe.form_builder.doctype === frm.doc.doc_type) {
 		frappe.form_builder.setup_page_actions();
@@ -510,4 +633,5 @@ function render_form_builder(frm) {
 	}
 }
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 extend_cscript(cur_frm.cscript, new frappe.model.DocTypeController({ frm: cur_frm }));

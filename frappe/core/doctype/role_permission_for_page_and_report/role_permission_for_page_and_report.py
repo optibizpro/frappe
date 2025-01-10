@@ -5,6 +5,10 @@ import frappe
 from frappe.core.doctype.report.report import is_prepared_report_enabled
 from frappe.model.document import Document
 from frappe.permissions import ALL_USER_ROLE
+<<<<<<< HEAD
+from frappe.utils import cint
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class RolePermissionforPageandReport(Document):
@@ -85,9 +89,15 @@ class RolePermissionforPageandReport(Document):
 		if self.report:
 			# intentionally written update query in frappe.db.sql instead of frappe.db.set_value
 			frappe.db.sql(
+<<<<<<< HEAD
+				"""update `tabReport` set disable_prepared_report = %s, prepared_report = %s
+				where name = %s""",
+				(self.disable_prepared_report, not self.disable_prepared_report, self.report),
+=======
 				"""update `tabReport` set prepared_report = %s
 				where name = %s""",
 				(self.enable_prepared_report, self.report),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 
 	def get_args(self, row=None):

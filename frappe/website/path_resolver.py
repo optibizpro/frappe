@@ -18,9 +18,15 @@ from frappe.website.utils import can_cache, get_home_page
 
 
 class PathResolver:
+<<<<<<< HEAD
+	__slots__ = ("path",)
+
+	def __init__(self, path):
+=======
 	__slots__ = ("http_status_code", "path")
 
 	def __init__(self, path, http_status_code=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.path = path.strip("/ ")
 		self.http_status_code = http_status_code
 
@@ -53,6 +59,15 @@ class PathResolver:
 				frappe.flags.redirect_location = e.new_url
 				return frappe.flags.redirect_location, RedirectPage(e.new_url, e.code)
 
+<<<<<<< HEAD
+		endpoint = resolve_path(self.path)
+
+		# WARN: Hardcoded for better performance
+		if endpoint == "app":
+			return endpoint, TemplatePage(endpoint, 200)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		custom_renderers = self.get_custom_page_renderers()
 		renderers = [
 			*custom_renderers,
@@ -115,9 +130,13 @@ def resolve_redirect(path, query_string=None):
 	                ]
 	"""
 	redirects = frappe.get_hooks("website_redirects")
+<<<<<<< HEAD
+	redirects += frappe.get_all("Website Route Redirect", ["source", "target"], order_by=None)
+=======
 	redirects += frappe.get_all(
 		"Website Route Redirect", ["source", "target", "redirect_http_status"], order_by=None
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not redirects:
 		return
@@ -194,7 +213,11 @@ def get_website_rules():
 		# dont cache in development
 		return _get()
 
+<<<<<<< HEAD
+	return frappe.cache().get_value("website_route_rules", _get)
+=======
 	return frappe.cache.get_value("website_route_rules", _get)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def validate_path(path: str):

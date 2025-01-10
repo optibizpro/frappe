@@ -82,10 +82,13 @@ $.extend(frappe.datetime, {
 		return moment(d1).diff(d2, "hours");
 	},
 
+<<<<<<< HEAD
+=======
 	get_minute_diff: function (d1, d2) {
 		return moment(d1).diff(d2, "minutes");
 	},
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_day_diff: function (d1, d2) {
 		return moment(d1).diff(d2, "days");
 	},
@@ -167,9 +170,13 @@ $.extend(frappe.datetime, {
 	},
 
 	get_datetime_as_string: function (d) {
+<<<<<<< HEAD
+		return moment(d).format("YYYY-MM-DD HH:mm:ss");
+=======
 		let time_format = frappe?.boot?.sysdefaults?.time_format || frappe.defaultTimeFormat;
 		let datetime_format = frappe.defaultDateFormat + " " + time_format;
 		return moment(d).format(datetime_format);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	user_to_str: function (val, only_time = false) {
@@ -274,5 +281,40 @@ $.extend(frappe.datetime, {
 	get_first_day_of_the_week_index() {
 		const first_day_of_the_week = frappe.sys_defaults.first_day_of_the_week || "Sunday";
 		return moment.weekdays().indexOf(first_day_of_the_week);
+<<<<<<< HEAD
 	},
+});
+
+// Proxy for dateutil and get_today
+Object.defineProperties(window, {
+	dateutil: {
+		get: function () {
+			console.warn(
+				"Please use `frappe.datetime` instead of `dateutil`. It will be deprecated soon."
+			);
+			return frappe.datetime;
+		},
+		configurable: true,
+	},
+	date: {
+		get: function () {
+			console.warn(
+				"Please use `frappe.datetime` instead of `date`. It will be deprecated soon."
+			);
+			return frappe.datetime;
+		},
+		configurable: true,
+	},
+	get_today: {
+		get: function () {
+			console.warn(
+				"Please use `frappe.datetime.get_today` instead of `get_today`. It will be deprecated soon."
+			);
+			return frappe.datetime.get_today;
+		},
+		configurable: true,
+	},
+=======
+	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });

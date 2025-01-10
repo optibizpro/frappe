@@ -7,7 +7,11 @@ UI_TEST_USER = "frappe@example.com"
 
 
 def whitelist_for_tests(fn):
+<<<<<<< HEAD
+	if frappe.request and not (frappe.flags.in_test or getattr(frappe.local, "dev_server", 0)):
+=======
 	if frappe.request and not frappe.flags.in_test and not getattr(frappe.local, "dev_server", 0):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.throw("Cannot run UI tests. Use a development server with `bench start`")
 
 	return frappe.whitelist()(fn)
@@ -78,12 +82,19 @@ def create_todo_records():
 
 
 @whitelist_for_tests
+<<<<<<< HEAD
+def clear_notes():
+	for note in frappe.get_all("Note", pluck="name"):
+		frappe.delete_doc("Note", note, force=True)
+
+=======
 def prepare_webform_test():
 	for note in frappe.get_all("Note", pluck="name"):
 		frappe.delete_doc("Note", note, force=True)
 
 	frappe.delete_doc_if_exists("Web Form", "note")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @whitelist_for_tests
 def create_communication_record():
@@ -413,7 +424,11 @@ def create_blog_post():
 		}
 	).insert(ignore_if_duplicate=True)
 
+<<<<<<< HEAD
+	doc = frappe.get_doc(
+=======
 	return frappe.get_doc(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		{
 			"name": "test-blog-attachment-post",
 			"doctype": "Blog Post",
@@ -424,6 +439,11 @@ def create_blog_post():
 		},
 	).insert(ignore_if_duplicate=True)
 
+<<<<<<< HEAD
+	return doc
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @whitelist_for_tests
 def create_test_user(username=None):
@@ -450,12 +470,19 @@ def create_test_user(username=None):
 
 	user.save()
 
+<<<<<<< HEAD
+
+@whitelist_for_tests
+def setup_tree_doctype():
+	frappe.delete_doc_if_exists("DocType", "Custom Tree")
+=======
 	frappe.db.set_single_value("Workspace Settings", "workspace_setup_completed", 1)
 
 
 @whitelist_for_tests
 def setup_tree_doctype():
 	frappe.delete_doc_if_exists("DocType", "Custom Tree", force=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	frappe.get_doc(
 		{
@@ -479,7 +506,11 @@ def setup_tree_doctype():
 
 @whitelist_for_tests
 def setup_image_doctype():
+<<<<<<< HEAD
+	frappe.delete_doc_if_exists("DocType", "Custom Image")
+=======
 	frappe.delete_doc_if_exists("DocType", "Custom Image", force=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	frappe.get_doc(
 		{
@@ -537,6 +568,15 @@ def setup_default_view(view, force_reroute=None):
 
 
 @whitelist_for_tests
+<<<<<<< HEAD
+def create_note():
+	if not frappe.db.exists("Note", "Routing Test"):
+		frappe.get_doc({"doctype": "Note", "title": "Routing Test"}).insert()
+
+
+@whitelist_for_tests
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def create_kanban():
 	if not frappe.db.exists("Custom Field", "Note-kanban"):
 		frappe.get_doc(
@@ -580,7 +620,11 @@ def create_kanban():
 
 @whitelist_for_tests
 def create_todo(description):
+<<<<<<< HEAD
+	frappe.get_doc({"doctype": "ToDo", "description": description}).insert()
+=======
 	return frappe.get_doc({"doctype": "ToDo", "description": description}).insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @whitelist_for_tests
@@ -628,6 +672,8 @@ def add_remove_role(action, user, role):
 		user_doc.remove_roles(role)
 	else:
 		user_doc.add_roles(role)
+<<<<<<< HEAD
+=======
 
 
 @whitelist_for_tests
@@ -665,3 +711,4 @@ def slow_task(duration, title, doctype, docname):
 	for i in range(steps + 1):
 		frappe.publish_progress(i * 10, title=title, doctype=doctype, docname=docname)
 		time.sleep(int(duration) / steps)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -427,17 +427,43 @@ class BackupGenerator:
 		extra = []
 		if self.db_type == "mariadb":
 			if self.backup_includes:
+<<<<<<< HEAD
+				args["include"] = " ".join(
+					[f"--table='public.\"{table}\"'" for table in self.backup_includes]
+				)
+=======
 				extra.extend(self.backup_includes)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			elif self.backup_excludes:
 				extra.extend([f"--ignore-table={self.db_name}.{table}" for table in self.backup_excludes])
 
+<<<<<<< HEAD
+			cmd_string = (
+				"self=$$; "
+				"( {db_exc} postgres://{user}:{password}@{db_host}:{db_port}/{db_name}"
+				" {include} {exclude} || kill $self ) | {gzip} >> {backup_path_db}"
+			)
+
+		else:
+=======
 		elif self.db_type == "postgres":
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if self.backup_includes:
 				extra.extend([f'--table=public."{table}"' for table in self.backup_includes])
 			elif self.backup_excludes:
 				extra.extend([f'--exclude-table-data=public."{table}"' for table in self.backup_excludes])
 
+<<<<<<< HEAD
+			cmd_string = (
+				# Remember process of this shell and kill it if mysqldump exits w/ non-zero code
+				"self=$$; "
+				" ( {db_exc} --single-transaction --quick --lock-tables=false -u {user}"
+				" -p{password} {db_name} -h {db_host} -P {db_port} {include} {exclude} || kill $self ) "
+				" | {gzip} >> {backup_path_db}"
+			)
+=======
 		from frappe.database import get_command
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		bin, args, bin_name = get_command(
 			socket=self.db_socket,
@@ -678,7 +704,8 @@ def get_backup_path():
 @frappe.whitelist()
 def get_backup_encryption_key():
 	frappe.only_for("System Manager")
-	return get_or_generate_backup_encryption_key()
+<<<<<<< HEAD
+	return frappe.conf.get(BACKUP_ENCRYPTION_CONFIG_KEY)
 
 
 def get_or_generate_backup_encryption_key():
@@ -687,6 +714,38 @@ def get_or_generate_backup_encryption_key():
 	key = frappe.conf.get(BACKUP_ENCRYPTION_CONFIG_KEY)
 	if key:
 		return key
+
+	key = Fernet.generate_key().decode()
+	update_site_config(BACKUP_ENCRYPTION_CONFIG_KEY, key)
+
+	return key
+=======
+	return get_or_generate_backup_encryption_key()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+
+def get_or_generate_backup_encryption_key():
+	from frappe.installer import update_site_config
+
+<<<<<<< HEAD
+	def backup_decryption(self, passphrase):
+		"""
+		Decrypts backup at the given path using the passphrase.
+		"""
+		if not os.path.exists(self.file_path):
+			print("Invalid path", self.file_path)
+			return
+		else:
+			if which("gpg") is None:
+				click.secho("Please install `gpg` and ensure its available in your PATH", fg="red")
+				sys.exit(1)
+			file_path_with_ext = self.file_path + ".gpg"
+			os.rename(self.file_path, file_path_with_ext)
+=======
+	key = frappe.conf.get(BACKUP_ENCRYPTION_CONFIG_KEY)
+	if key:
+		return key
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	key = Fernet.generate_key().decode()
 	update_site_config(BACKUP_ENCRYPTION_CONFIG_KEY, key)

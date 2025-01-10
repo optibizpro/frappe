@@ -1,6 +1,14 @@
 # Copyright (c) 2015, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+# test_records = frappe.get_test_records('Help Article')
+
+
+class TestHelpArticle(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -14,6 +22,7 @@ class UnitTestHelpArticle(UnitTestCase):
 
 
 class TestHelpArticle(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls) -> None:
 		cls.help_category = frappe.get_doc(
@@ -32,6 +41,8 @@ class TestHelpArticle(IntegrationTestCase):
 			}
 		).insert()
 
+<<<<<<< HEAD
+=======
 	def test_article_is_helpful(self):
 		from frappe.website.doctype.help_article.help_article import add_feedback
 
@@ -58,6 +69,7 @@ class TestHelpArticle(IntegrationTestCase):
 		self.help_article.load_from_db()
 		self.assertEqual(self.help_article.published, 0)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def tearDownClass(cls) -> None:
 		frappe.delete_doc(cls.help_article.doctype, cls.help_article.name)

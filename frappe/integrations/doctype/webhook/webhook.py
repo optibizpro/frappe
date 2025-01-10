@@ -114,6 +114,15 @@ class Webhook(Document):
 				self.get_password("webhook_secret", False).encode("utf8")
 			except Exception:
 				frappe.throw(_("Invalid Webhook Secret"))
+<<<<<<< HEAD
+
+	@frappe.whitelist()
+	def generate_preview(self):
+		# This function doesn't need to do anything specific as virtual fields
+		# get evaluated automatically.
+		pass
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@frappe.whitelist()
 	def preview_meets_condition(self, preview_document):
@@ -142,6 +151,16 @@ def get_context(doc):
 
 
 def enqueue_webhook(doc, webhook) -> None:
+<<<<<<< HEAD
+	headers = data = None
+	try:
+		webhook: Webhook = frappe.get_doc("Webhook", webhook.get("name"))
+		headers = get_webhook_headers(doc, webhook)
+		data = get_webhook_data(doc, webhook)
+	except Exception as e:
+		frappe.logger().debug({"enqueue_webhook_error": e})
+		log_request(webhook.name, doc.name, webhook.request_url, headers, data)
+=======
 	request_url = headers = data = r = None
 	try:
 		webhook: Webhook = frappe.get_doc("Webhook", webhook.get("name"))
@@ -154,6 +173,7 @@ def enqueue_webhook(doc, webhook) -> None:
 	except Exception as e:
 		frappe.logger().debug({"enqueue_webhook_error": e})
 		log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return
 
 	for i in range(3):
@@ -167,16 +187,28 @@ def enqueue_webhook(doc, webhook) -> None:
 			)
 			r.raise_for_status()
 			frappe.logger().debug({"webhook_success": r.text})
+<<<<<<< HEAD
+			log_request(webhook.name, doc.name, webhook.request_url, headers, data, r)
+=======
 			log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data, r)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			break
 
 		except requests.exceptions.ReadTimeout as e:
 			frappe.logger().debug({"webhook_error": e, "try": i + 1})
+<<<<<<< HEAD
+			log_request(webhook.name, doc.name, webhook.request_url, headers, data)
+
+		except Exception as e:
+			frappe.logger().debug({"webhook_error": e, "try": i + 1})
+			log_request(webhook.name, doc.name, webhook.request_url, headers, data, r)
+=======
 			log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data)
 
 		except Exception as e:
 			frappe.logger().debug({"webhook_error": e, "try": i + 1})
 			log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data, r)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			sleep(3 * i + 1)
 			if i != 2:
 				continue
@@ -184,7 +216,10 @@ def enqueue_webhook(doc, webhook) -> None:
 
 def log_request(
 	webhook: str,
+<<<<<<< HEAD
+=======
 	doctype: str,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	docname: str,
 	url: str,
 	headers: dict,
@@ -195,13 +230,20 @@ def log_request(
 		{
 			"doctype": "Webhook Request Log",
 			"webhook": webhook,
+<<<<<<< HEAD
+=======
 			"reference_doctype": doctype,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"reference_document": docname,
 			"user": frappe.session.user if frappe.session.user else None,
 			"url": url,
 			"headers": frappe.as_json(headers) if headers else None,
 			"data": frappe.as_json(data) if data else None,
+<<<<<<< HEAD
+			"response": res and res.text,
+=======
 			"response": res.text if res is not None else None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"error": frappe.get_traceback(),
 		}
 	)

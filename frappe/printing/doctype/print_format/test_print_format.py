@@ -2,16 +2,25 @@
 # License: MIT. See LICENSE
 import os
 import re
+<<<<<<< HEAD
+
+import frappe
+from frappe.tests.utils import FrappeTestCase
+=======
 import unittest
 from typing import TYPE_CHECKING
 
 import frappe
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 if TYPE_CHECKING:
 	from frappe.printing.doctype.print_format.print_format import PrintFormat
 
 
+<<<<<<< HEAD
+class TestPrintFormat(FrappeTestCase):
+=======
 class UnitTestPrintFormat(UnitTestCase):
 	"""
 	Unit tests for PrintFormat.
@@ -22,6 +31,7 @@ class UnitTestPrintFormat(UnitTestCase):
 
 
 class TestPrintFormat(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_print_user(self, style=None):
 		print_html = frappe.get_print("User", "Administrator", style=style)
 		self.assertTrue("<label>First Name: </label>" in print_html)

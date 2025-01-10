@@ -58,7 +58,11 @@ class EnergyPointLog(Document):
 				"energy_point_alert", message=alert_dict, user=self.user, after_commit=True
 			)
 
+<<<<<<< HEAD
+		frappe.cache().hdel("energy_points", self.user)
+=======
 		frappe.cache.hdel("energy_points", self.user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if self.type != "Review" and frappe.get_cached_value(
 			"Notification Settings", self.user, "energy_points_system_notifications"

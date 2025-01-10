@@ -317,6 +317,15 @@ class TestOAuth20(FrappeRequestTestCase):
 
 	def test_openid_code_id_token(self):
 		update_client_for_auth_code_grant(self.client_id)
+<<<<<<< HEAD
+
+		session = requests.Session()
+		login(session)
+
+		redirect_destination = None
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		nonce = frappe.generate_hash()
 
 		# Go to Authorize url

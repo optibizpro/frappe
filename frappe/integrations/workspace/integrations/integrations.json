@@ -218,7 +218,11 @@
    "type": "Link"
   }
  ],
+<<<<<<< HEAD
+ "modified": "2023-05-24 14:58:55.910408",
+=======
  "modified": "2024-02-28 10:47:38.188832",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Integrations",
  "name": "Integrations",

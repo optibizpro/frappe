@@ -35,7 +35,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 				this.add_totals_row = this.report_doc.json.add_totals_row;
 				this.page_title = __(this.report_name);
 				this.page_length = this.report_doc.json.page_length || 20;
+<<<<<<< HEAD
+				this.order_by = this.report_doc.json.order_by || "modified desc";
+=======
 				this.order_by = this.report_doc.json.order_by || "creation desc";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				this.chart_args = this.report_doc.json.chart_args;
 			});
 		} else {
@@ -49,14 +53,22 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 		this.setup_columns();
 		super.setup_new_doc_event();
 		this.setup_events();
+<<<<<<< HEAD
+		this.page.main.addClass("report-view");
+=======
 		this.page.main.parent().addClass("report-view");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	setup_events() {
 		if (this.list_view_settings?.disable_auto_refresh) {
 			return;
 		}
+<<<<<<< HEAD
+		frappe.socketio.doctype_subscribe(this.doctype);
+=======
 		frappe.realtime.doctype_subscribe(this.doctype);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.realtime.on("list_update", (data) => this.on_update(data));
 	}
 
@@ -98,7 +110,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 		);
 		this.$paging_area
 			.find(".level-left")
+<<<<<<< HEAD
+			.after(`<span class="comparison-message text-muted">${message}</span>`);
+=======
 			.after(`<span class="comparison-message text-extra-muted">${message}</span>`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	setup_sort_selector() {
@@ -329,7 +345,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 						columns_in_picker = columns[this.doctype]
 							.filter((df) => !this.is_column_added(df))
 							.map((df) => ({
+<<<<<<< HEAD
+								label: __(df.label),
+=======
 								label: __(df.label, null, df.parent),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								value: df.fieldname,
 							}));
 
@@ -339,7 +359,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 							columns[cdt]
 								.filter((df) => !this.is_column_added(df))
 								.map((df) => ({
+<<<<<<< HEAD
+									label: __(df.label) + ` (${cdt})`,
+=======
 									label: __(df.label, null, df.parent) + ` (${cdt})`,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 									value: df.fieldname + "," + cdt,
 								}))
 								.forEach((df) => columns_in_picker.push(df));
@@ -914,7 +938,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 	get_columns_for_picker() {
 		let out = {};
 
+<<<<<<< HEAD
+		const standard_fields_filter = (df) => !in_list(frappe.model.no_value_type, df.fieldtype);
+=======
 		const standard_fields_filter = (df) => !frappe.model.no_value_type.includes(df.fieldtype);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		let doctype_fields = frappe.meta
 			.get_docfields(this.doctype)
@@ -988,7 +1016,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 					return !df.hidden && df.fieldname !== "name";
 				})
 				.map((df) => ({
+<<<<<<< HEAD
+					label: __(df.label),
+=======
 					label: __(df.label, null, df.parent),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					value: df.fieldname,
 					checked: this.fields.find(
 						(f) => f[0] === df.fieldname && f[1] === this.doctype
@@ -1013,7 +1045,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 						return !df.hidden;
 					})
 					.map((df) => ({
+<<<<<<< HEAD
+						label: __(df.label),
+=======
 						label: __(df.label, null, df.parent),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						value: df.fieldname,
 						checked: this.fields.find((f) => f[0] === df.fieldname && f[1] === cdt),
 					})),
@@ -1581,7 +1617,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 					const args = this.get_args();
 					const selected_items = this.get_checked_items(true);
 
+<<<<<<< HEAD
+					let extra_fields = null;
+=======
 					let extra_fields = [];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					if (this.list_view_settings.disable_count) {
 						extra_fields = [
 							{
@@ -1600,6 +1640,8 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 								label: __("Export all {0} rows?", [`<b>${this.total_count}</b>`]),
 							},
 						];
+<<<<<<< HEAD
+=======
 					}
 					if (frappe.boot.lang !== "en") {
 						extra_fields.push({
@@ -1608,6 +1650,7 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 							label: __("Translate values"),
 							default: 1,
 						});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					}
 
 					const d = frappe.report_utils.get_export_dialog(
@@ -1622,7 +1665,10 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 							if (data.file_format == "CSV") {
 								args.csv_delimiter = data.csv_delimiter;
 								args.csv_quoting = data.csv_quoting;
+<<<<<<< HEAD
+=======
 								args.csv_decimal_sep = data.csv_decimal_sep;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							}
 
 							if (this.add_totals_row) {
@@ -1699,7 +1745,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 		}
 
 		// user permissions
+<<<<<<< HEAD
+		if (this.report_name && frappe.model.can_set_user_permissions("Report")) {
+=======
 		if (this.report_name && frappe.user.has_role("System Manager")) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			items.push({
 				label: __("User Permissions"),
 				action: () => {
@@ -1720,6 +1770,8 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 
 		return items.map((i) => Object.assign(i, { standard: true }));
 	}
+<<<<<<< HEAD
+=======
 
 	get_search_params() {
 		let search_params = super.get_search_params();
@@ -1750,4 +1802,5 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 
 		return super.parse_filters_from_route_options();
 	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

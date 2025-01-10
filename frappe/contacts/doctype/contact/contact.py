@@ -50,6 +50,19 @@ class Contact(Document):
 	# end: auto-generated types
 
 	def autoname(self):
+<<<<<<< HEAD
+		# concat first and last name
+		self.name = " ".join(filter(None, [cstr(self.get(f)).strip() for f in ["first_name", "last_name"]]))
+
+		# concat party name if reqd
+		for link in self.links:
+			self.name = self.name + "-" + link.link_name.strip()
+			break
+
+		if frappe.db.exists("Contact", self.name):
+			self.name = append_number_if_name_exists("Contact", self.name)
+
+=======
 		self.name = self._get_full_name()
 
 		# concat party name if reqd
@@ -60,6 +73,7 @@ class Contact(Document):
 		if frappe.db.exists("Contact", self.name):
 			self.name = append_number_if_name_exists("Contact", self.name)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def validate(self):
 		self.full_name = self._get_full_name()
 		self.set_primary_email()
@@ -129,6 +143,9 @@ class Contact(Document):
 
 		if len([email.email_id for email in self.email_ids if email.is_primary]) > 1:
 			frappe.throw(_("Only one {0} can be set as primary.").format(frappe.bold(_("Email ID"))))
+
+		if len(self.email_ids) == 1:
+			self.email_ids[0].is_primary = 1
 
 		if len(self.email_ids) == 1:
 			self.email_ids[0].is_primary = 1
@@ -265,7 +282,11 @@ def get_default_contact(doctype, name):
 		where
 			dl.link_doctype=%s and
 			dl.link_name=%s and
+<<<<<<< HEAD
+			dl.parenttype = 'Contact'""",
+=======
 			dl.parenttype = 'Contact' """,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		(doctype, name),
 		as_dict=True,
 	)
@@ -343,7 +364,11 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 
 	return frappe.db.sql(
 		f"""select
+<<<<<<< HEAD
+			`tabContact`.name, `tabContact`.first_name, `tabContact`.last_name
+=======
 			`tabContact`.name, `tabContact`.full_name, `tabContact`.company_name
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		from
 			`tabContact`, `tabDynamic Link`
 		where
@@ -354,8 +379,13 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 			`tabContact`.`{searchfield}` like %(txt)s
 			{get_match_cond(doctype)}
 		order by
+<<<<<<< HEAD
+			if(locate(%(_txt)s, `tabContact`.name), locate(%(_txt)s, `tabContact`.name), 99999),
+			`tabContact`.idx desc, `tabContact`.name
+=======
 			if(locate(%(_txt)s, `tabContact`.full_name), locate(%(_txt)s, `tabContact`.company_name), 99999),
 			`tabContact`.idx desc, `tabContact`.full_name
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		limit %(start)s, %(page_len)s """,
 		{
 			"txt": "%" + txt + "%",

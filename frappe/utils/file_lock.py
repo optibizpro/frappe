@@ -65,7 +65,13 @@ def delete_lock(name):
 
 
 def get_lock_path(name):
+<<<<<<< HEAD
+	name = name.lower()
+	lock_path = get_site_path(LOCKS_DIR, name + ".lock")
+	return lock_path
+=======
 	return get_site_path(LOCKS_DIR, f"{name.lower()}.lock")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def release_document_locks():

@@ -14,7 +14,11 @@ export default class Tab {
 
 	make() {
 		const id = `${frappe.scrub(this.doctype, "-")}-${this.df.fieldname}`;
+<<<<<<< HEAD
+		this.parent = $(`
+=======
 		this.tab_link = $(`
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			<li class="nav-item">
 				<a class="nav-link ${this.df.active ? "active" : ""}" id="${id}-tab"
 					data-toggle="tab"
@@ -58,9 +62,15 @@ export default class Tab {
 	}
 
 	toggle(show) {
+<<<<<<< HEAD
+		this.parent.toggleClass("hide", !show);
+		this.wrapper.toggleClass("hide", !show);
+		this.parent.toggleClass("show", show);
+=======
 		this.tab_link.toggleClass("hide", !show);
 		this.wrapper.toggleClass("hide", !show);
 		this.tab_link.toggleClass("show", show);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.wrapper.toggleClass("show", show);
 		this.hidden = !show;
 	}
@@ -80,9 +90,16 @@ export default class Tab {
 	replace_field(fieldobj) {
 		fieldobj.tab = this;
 	}
+	replace_field(fieldobj) {
+		fieldobj.tab = this;
+	}
 
 	set_active() {
+<<<<<<< HEAD
+		this.parent.find(".nav-link").tab("show");
+=======
 		this.tab_link.find(".nav-link").tab("show");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.wrapper.addClass("show");
 		this.frm?.set_active_tab?.(this);
 	}
@@ -92,12 +109,21 @@ export default class Tab {
 	}
 
 	is_hidden() {
+<<<<<<< HEAD
+		return this.wrapper.hasClass("hide");
+	}
+
+	setup_listeners() {
+		this.parent.find(".nav-link").on("shown.bs.tab", () => {
+			this?.frm.set_active_tab?.(this);
+=======
 		return this.wrapper.hasClass("hide") && this.tab_link.hasClass("hide");
 	}
 
 	setup_listeners() {
 		this.tab_link.find(".nav-link").on("shown.bs.tab", () => {
 			this.frm?.set_active_tab?.(this);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 }

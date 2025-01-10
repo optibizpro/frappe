@@ -7,6 +7,12 @@ from unittest.mock import patch
 
 import frappe
 import frappe.translate
+<<<<<<< HEAD
+from frappe import _
+from frappe.tests.utils import FrappeTestCase
+from frappe.translate import (
+	extract_javascript,
+=======
 from frappe import _, _lt
 from frappe.gettext.extractors.javascript import extract_javascript
 from frappe.tests import IntegrationTestCase
@@ -14,6 +20,7 @@ from frappe.translate import (
 	MERGED_TRANSLATION_KEY,
 	USER_TRANSLATION_KEY,
 	clear_cache,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	extract_messages_from_javascript_code,
 	extract_messages_from_python_code,
 	get_language,
@@ -21,7 +28,11 @@ from frappe.translate import (
 	get_parent_language,
 	get_translation_dict_from_file,
 )
+<<<<<<< HEAD
+from frappe.utils import set_request
+=======
 from frappe.utils import get_bench_path, set_request
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 dirname = os.path.dirname(__file__)
 translation_string_file = os.path.abspath(os.path.join(dirname, "translation_test_file.txt"))
@@ -32,10 +43,14 @@ first_lang, second_lang, third_lang, fourth_lang, fifth_lang = choices(
 )
 
 
+<<<<<<< HEAD
+class TestTranslate(FrappeTestCase):
+=======
 _lazy_translations = _lt("Communication")
 
 
 class TestTranslate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	guest_sessions_required = (
 		"test_guest_request_language_resolution_with_cookie",
 		"test_guest_request_language_resolution_with_request_header",
@@ -49,6 +64,8 @@ class TestTranslate(IntegrationTestCase):
 		frappe.form_dict.pop("_lang", None)
 		if self._testMethodName in self.guest_sessions_required:
 			frappe.set_user("Administrator")
+<<<<<<< HEAD
+=======
 		frappe.local.lang = "en"
 
 	def test_clear_cache(self):
@@ -61,6 +78,7 @@ class TestTranslate(IntegrationTestCase):
 
 		self.assertIsNone(frappe.cache.hget(USER_TRANSLATION_KEY, frappe.local.lang))
 		self.assertIsNone(frappe.cache.hget(MERGED_TRANSLATION_KEY, frappe.local.lang))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_extract_message_from_file(self):
 		data = frappe.translate.get_messages_from_file(translation_string_file)
@@ -172,7 +190,11 @@ class TestTranslate(IntegrationTestCase):
 		site = frappe.local.site
 		frappe.destroy()
 		_("this shouldn't break")
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 
 	def test_guest_request_language_resolution_with_request_header(self):
@@ -215,7 +237,10 @@ class TestTranslate(IntegrationTestCase):
 				)
 			_(not_a_string)
 			_(not_a_string, context="wat")
+<<<<<<< HEAD
+=======
 			_lt("Communication")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"""
 		)
 		expected_output = [
@@ -225,7 +250,10 @@ class TestTranslate(IntegrationTestCase):
 			(5, "name with", "name context"),
 			(6, "broken on", "new line"),
 			(10, "broken on separate line", None),
+<<<<<<< HEAD
+=======
 			(15, "Communication", None),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		]
 
 		output = extract_messages_from_python_code(code)
@@ -284,6 +312,8 @@ class TestTranslate(IntegrationTestCase):
 		args = get_args("""__("attr with", ["format", "replacements"])""")
 		self.assertEqual(args, "attr with")
 
+<<<<<<< HEAD
+=======
 		args = get_args("""__("attr with", null, "context")""")
 		self.assertEqual(args, ("attr with", None, "context"))
 
@@ -318,6 +348,7 @@ class TestTranslate(IntegrationTestCase):
 			args, ("Multiline translation with format replacements and no context {0} {1}", None)
 		)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def verify_translation_files(app):
 	"""Function to verify translation file syntax in app."""

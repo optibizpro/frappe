@@ -149,10 +149,18 @@ def clear_notifications(user=None):
 	for_module = list(config.get("for_module")) if config.get("for_module") else []
 	groups = for_doctype + for_module
 
+<<<<<<< HEAD
+	for name in groups:
+		if user:
+			cache.hdel("notification_count:" + name, user)
+		else:
+			cache.delete_key("notification_count:" + name)
+=======
 	if user:
 		frappe.cache.hdel_names([f"notification_count:{name}" for name in groups], user)
 	else:
 		frappe.cache.delete_value([f"notification_count:{name}" for name in groups])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_notification_config(user):
@@ -160,7 +168,11 @@ def clear_notification_config(user):
 
 
 def delete_notification_count_for(doctype):
+<<<<<<< HEAD
+	frappe.cache().delete_key("notification_count:" + doctype)
+=======
 	frappe.cache.delete_key("notification_count:" + doctype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_doctype_notifications(doc, method=None, *args, **kwargs):

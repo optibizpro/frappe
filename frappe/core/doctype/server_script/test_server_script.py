@@ -3,10 +3,15 @@
 import requests
 
 import frappe
+<<<<<<< HEAD
+from frappe.core.doctype.scheduled_job_type.scheduled_job_type import sync_jobs
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJobType, sync_jobs
 from frappe.core.doctype.server_script.server_script import ServerScript
 from frappe.frappeclient import FrappeClient, FrappeException
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import get_site_url
 
 scripts = [
@@ -108,6 +113,9 @@ doc.save()
 ]
 
 
+<<<<<<< HEAD
+class TestServerScript(FrappeTestCase):
+=======
 class UnitTestServerScript(UnitTestCase):
 	"""
 	Unit tests for ServerScript.
@@ -118,6 +126,7 @@ class UnitTestServerScript(UnitTestCase):
 
 
 class TestServerScript(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -193,7 +202,11 @@ class TestServerScript(IntegrationTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
+		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()
@@ -203,7 +216,11 @@ class TestServerScript(IntegrationTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
+		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()
@@ -269,6 +286,8 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script.insert()
 		script.execute_method()
 
+<<<<<<< HEAD
+=======
 	def test_server_script_rate_limiting(self):
 		script1 = frappe.get_doc(
 			doctype="Server Script",
@@ -317,6 +336,7 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script2.delete()
 		frappe.db.commit()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_server_script_scheduled(self):
 		scheduled_script = frappe.get_doc(
 			doctype="Server Script",
@@ -348,6 +368,10 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 
 		cron_script.cron_format = "0 0 2 1 *"  # 2nd january
 		cron_script.save()
+<<<<<<< HEAD
+		cron_job.reload()
+		self.assertEqual(cron_job.next_execution.day, 2)
+=======
 
 		updated_cron_job_name = frappe.db.get_value("Scheduled Job Type", {"server_script": cron_script.name})
 		updated_cron_job = frappe.get_doc("Scheduled Job Type", updated_cron_job_name)
@@ -393,3 +417,4 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script.disabled = 0
 		script.save()
 		self.assertFalse(job.reload().stopped)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -46,7 +46,11 @@ class EmailGroup(Document):
 		added = 0
 
 		for user in frappe.get_all(doctype, [email_field, unsubscribed_field or "name"]):
+<<<<<<< HEAD
+			try:
+=======
 			with contextlib.suppress(frappe.UniqueValidationError, frappe.InvalidEmailAddressError):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				email = parse_addr(user.get(email_field))[1] if user.get(email_field) else None
 				if email:
 					frappe.get_doc(

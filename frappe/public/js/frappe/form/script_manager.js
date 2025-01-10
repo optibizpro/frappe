@@ -163,10 +163,17 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 				handlers.new_style.push(fn);
 			});
 		}
+<<<<<<< HEAD
+		if (this.frm.cscript[event_name]) {
+			handlers.old_style.push(event_name);
+		}
+		if (this.frm.cscript["custom_" + event_name]) {
+=======
 		if (this.frm.cscript && this.frm.cscript[event_name]) {
 			handlers.old_style.push(event_name);
 		}
 		if (this.frm.cscript && this.frm.cscript["custom_" + event_name]) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			handlers.old_style.push("custom_" + event_name);
 		}
 		return handlers;
@@ -188,7 +195,11 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 
 		if (!this.frm.doctype_layout && doctype.__custom_js) {
 			try {
+<<<<<<< HEAD
+				eval(doctype.__custom_js);
+=======
 				new Function(doctype.__custom_js)();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			} catch (e) {
 				frappe.msgprint({
 					title: __("Error in Client Script"),

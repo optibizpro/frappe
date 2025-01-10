@@ -624,6 +624,8 @@ class CustomizeForm(Document):
 		self.fetch_to_customize()
 
 	@frappe.whitelist()
+<<<<<<< HEAD
+=======
 	def reset_layout(self):
 		if not self.doc_type:
 			return
@@ -642,6 +644,7 @@ class CustomizeForm(Document):
 		self.fetch_to_customize()
 
 	@frappe.whitelist()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def trim_table(self):
 		"""Removes database fields that don't exist in the doctype.
 
@@ -702,6 +705,8 @@ def is_standard_or_system_generated_field(df):
 	return not df.get("is_custom_field") or df.get("is_system_generated")
 
 
+<<<<<<< HEAD
+=======
 @frappe.whitelist()
 def get_link_filters_from_doc_without_customisations(doctype, fieldname):
 	"""Get the filters of a link field from a doc without customisations
@@ -713,6 +718,7 @@ def get_link_filters_from_doc_without_customisations(doctype, fieldname):
 	return field[0].link_filters
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 doctype_properties = {
 	"search_fields": "Data",
 	"title_field": "Data",
@@ -739,6 +745,10 @@ doctype_properties = {
 	"naming_rule": "Data",
 	"autoname": "Data",
 	"show_title_field_in_link": "Check",
+<<<<<<< HEAD
+	"translate_link_fields": "Check",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"is_calendar_and_gantt": "Check",
 	"default_view": "Select",
 	"force_re_route_to_default_view": "Check",

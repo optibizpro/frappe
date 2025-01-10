@@ -156,6 +156,7 @@ class SiteMigration:
 
 		print("Syncing languages...")
 		sync_languages()
+		flush_deferred_inserts()
 
 		print("Flushing deferred inserts...")
 		flush_deferred_inserts()
@@ -240,6 +241,16 @@ class SiteMigration:
 		if not self.required_services_running():
 			raise SystemExit(1)
 
+<<<<<<< HEAD
+		self.setUp()
+		try:
+			self.pre_schema_updates()
+			self.run_schema_updates()
+			self.post_schema_updates()
+		finally:
+			self.tearDown()
+			frappe.destroy()
+=======
 		with filelock("bench_migrate", timeout=1):
 			self.setUp()
 			try:
@@ -249,3 +260,4 @@ class SiteMigration:
 			finally:
 				self.tearDown()
 				frappe.destroy()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

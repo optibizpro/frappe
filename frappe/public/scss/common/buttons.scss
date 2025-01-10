@@ -79,7 +79,11 @@
 	color: var(--text-color);
 	&:hover,
 	&:active {
+<<<<<<< HEAD
+		background-color: var(--gray-400);
+=======
 		background-color: var(--btn-default-hover-bg);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		color: var(--text-color);
 	}
 }
@@ -89,7 +93,11 @@
 	color: var(--text-color);
 	&:hover,
 	&:active {
+<<<<<<< HEAD
+		background: var(--fg-hover-color);
+=======
 		background: var(--btn-default-hover-bg);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		color: var(--text-color);
 	}
 }

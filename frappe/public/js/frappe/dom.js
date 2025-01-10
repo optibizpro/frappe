@@ -32,6 +32,15 @@ frappe.dom = {
 		// execute the script globally
 		document.getElementsByTagName("head")[0].appendChild(el);
 	},
+<<<<<<< HEAD
+	remove_script_and_style: function (txt) {
+		const evil_tags = ["script", "style", "noscript", "title", "meta", "base", "head"];
+		const parser = new DOMParser();
+		const doc = parser.parseFromString(txt, "text/html");
+		const body = doc.body;
+		let found = !!doc.head.innerHTML;
+
+=======
 
 	remove_script_and_style: function (txt) {
 		const evil_tags = ["script", "style", "noscript", "title", "meta", "base", "head"];
@@ -53,6 +62,7 @@ frappe.dom = {
 		const body = doc.body;
 		let found = !!doc.head.innerHTML;
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for (const tag of evil_tags) {
 			for (const element of body.getElementsByTagName(tag)) {
 				found = true;
@@ -296,7 +306,11 @@ frappe.timeout = (seconds) => {
 	});
 };
 
+<<<<<<< HEAD
+frappe.scrub = function (text, spacer = "_") {
+=======
 frappe.scrub = frappe.slug = function (text, spacer = "_") {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return text.replace(/ /g, spacer).toLowerCase();
 };
 
@@ -304,6 +318,9 @@ frappe.unscrub = function (txt) {
 	return frappe.model.unscrub(txt);
 };
 
+<<<<<<< HEAD
+frappe.get_data_pill = (label, target_id = null, remove_action = null, image = null) => {
+=======
 frappe.get_data_pill = (
 	label,
 	target_id = null,
@@ -317,18 +334,27 @@ frappe.get_data_pill = (
 		color = frappe.get_palette(label);
 	}
 	style = `background-color: var(${color[0]}); color: var(${color[1]})`;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	let data_pill_wrapper = $(`
 		<button class="data-pill btn" style="${style}">
 			<div class="flex align-center ellipsis">
 				${image ? image : ""}
+<<<<<<< HEAD
+				<span class="pill-label ${image ? "ml-2" : ""}">${label}</span>
+=======
 				<span class="pill-label">${label} </span>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			</div>
 		</button>
 	`);
 	if (remove_action) {
 		let remove_btn = $(`
 			<span class="remove-btn cursor-pointer">
+<<<<<<< HEAD
+				${frappe.utils.icon("close", "sm")}
+=======
 				${frappe.utils.icon("close", "sm", "es-icon")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			</span>
 		`);
 		if (typeof remove_action === "function") {

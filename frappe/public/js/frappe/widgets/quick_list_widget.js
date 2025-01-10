@@ -50,7 +50,11 @@ export default class QuickListWidget extends Widget {
 	setup_refresh_list_button() {
 		this.refresh_list = $(
 			`<div class="refresh-list btn btn-xs pull-right" title="${__("Refresh List")}">
+<<<<<<< HEAD
+				${frappe.utils.icon("refresh", "sm")}
+=======
 				${frappe.utils.icon("es-line-reload", "sm")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			</div>`
 		);
 
@@ -205,6 +209,10 @@ export default class QuickListWidget extends Widget {
 
 			let add_fields = frappe.listview_settings?.[this.document_type]?.add_fields;
 			if (Array.isArray(add_fields)) {
+<<<<<<< HEAD
+				fields.push(...add_fields);
+				fields = [...new Set(fields)];
+=======
 				for (const fieldname of add_fields) {
 					// Only keep fields that exist and are permitted
 					if (frappe.meta.has_field(this.document_type, fieldname)) {
@@ -212,6 +220,7 @@ export default class QuickListWidget extends Widget {
 					}
 				}
 				fields = [...new Set(fields)]; // Remove duplicates
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 
 			let quick_list_filter = frappe.utils.process_filter_expression(this.quick_list_filter);
@@ -222,7 +231,11 @@ export default class QuickListWidget extends Widget {
 					doctype: this.document_type,
 					fields: fields,
 					filters: quick_list_filter,
+<<<<<<< HEAD
+					order_by: "modified desc",
+=======
 					order_by: "creation desc",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					start: 0,
 					page_length: 4,
 				},
@@ -252,6 +265,10 @@ export default class QuickListWidget extends Widget {
 		this.footer.empty();
 
 		let filters = frappe.utils.get_filter_from_json(this.quick_list_filter);
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		let route = frappe.utils.generate_route({ type: "doctype", name: this.document_type });
 		this.see_all_button = $(`
 			<div class="see-all btn btn-xs">${__("View List")}</div>

@@ -30,8 +30,34 @@ def get_all_webhooks():
 	return webhooks
 
 
+def get_all_webhooks():
+	# query webhooks
+	webhooks_list = frappe.get_all(
+		"Webhook",
+		fields=["name", "condition", "webhook_docevent", "webhook_doctype"],
+		filters={"enabled": True},
+	)
+
+	# make webhooks map
+	webhooks = {}
+	for w in webhooks_list:
+		webhooks.setdefault(w.webhook_doctype, []).append(w)
+
+	return webhooks
+
+
 def run_webhooks(doc, method):
 	"""Run webhooks for this method"""
+<<<<<<< HEAD
+
+	frappe_flags = frappe.local.flags
+
+	if frappe_flags.in_import or frappe_flags.in_patch or frappe_flags.in_install or frappe_flags.in_migrate:
+		return
+
+	# load all webhooks from cache / DB
+	webhooks = frappe.cache().get_value("webhooks", get_all_webhooks)
+=======
 	if method not in supported_events:
 		return
 
@@ -42,6 +68,7 @@ def run_webhooks(doc, method):
 
 	# load all webhooks from cache / DB
 	webhooks = frappe.cache.get_value("webhooks", get_all_webhooks)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# get webhooks for this doctype
 	webhooks_for_doc = webhooks.get(doc.doctype, None)
@@ -75,7 +102,11 @@ def _add_webhook_to_queue(webhook, doc):
 	# Maintain a queue and flush on commit
 	if not getattr(frappe.local, "_webhook_queue", None):
 		frappe.local._webhook_queue = []
+<<<<<<< HEAD
+		frappe.db.add_before_commit(flush_webhook_execution_queue)
+=======
 		frappe.db.after_commit.add(flush_webhook_execution_queue)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	frappe.local._webhook_queue.append(frappe._dict(doc=doc, webhook=webhook))
 
@@ -115,6 +146,11 @@ def flush_webhook_execution_queue():
 			"frappe.integrations.doctype.webhook.webhook.enqueue_webhook",
 			doc=instance.doc,
 			webhook=instance.webhook,
+<<<<<<< HEAD
+			enqueue_after_commit=True,
+			now=frappe.flags.in_test,
+=======
 			now=frappe.flags.in_test,
 			queue=instance.webhook.background_jobs_queue or "default",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)

@@ -5,19 +5,31 @@ from unittest.mock import patch
 from rq import Queue
 
 import frappe
+<<<<<<< HEAD
+from frappe.core.page.background_jobs.background_jobs import remove_failed_jobs
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils.background_jobs import (
+	RQ_JOB_FAILURE_TTL,
+	RQ_RESULTS_TTL,
+=======
 from frappe.core.doctype.rq_job.rq_job import remove_failed_jobs
 from frappe.tests import IntegrationTestCase
 from frappe.utils.background_jobs import (
 	RQ_JOB_FAILURE_TTL,
 	RQ_RESULTS_TTL,
 	create_job_id,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	execute_job,
 	generate_qname,
 	get_redis_conn,
 )
 
 
+<<<<<<< HEAD
+class TestBackgroundJobs(FrappeTestCase):
+=======
 class TestBackgroundJobs(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_remove_failed_jobs(self):
 		frappe.enqueue(method="frappe.tests.test_background_jobs.fail_function", queue="short")
 		# wait for enqueued job to execute
@@ -55,10 +67,15 @@ class TestBackgroundJobs(IntegrationTestCase):
 
 	def test_job_hooks(self):
 		self.addCleanup(lambda: _test_JOB_HOOK.clear())
+<<<<<<< HEAD
+		with freeze_local() as locals, frappe.init_site(locals.site), patch(
+			"frappe.get_hooks", patch_job_hooks
+=======
 		with (
 			freeze_local() as locals,
 			frappe.init_site(locals.site),
 			patch("frappe.get_hooks", patch_job_hooks),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		):
 			frappe.connect()
 			self.assertIsNone(_test_JOB_HOOK.get("before_job"))

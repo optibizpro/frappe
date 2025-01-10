@@ -100,6 +100,10 @@ frappe.search.utils = {
 				out.label = frappe.utils.escape_html(match[0]).bold();
 				out.value = match[0];
 			} else {
+<<<<<<< HEAD
+				// eslint-disable-next-line
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				console.log("Illegal match", match);
 			}
 			out.index = 80;
@@ -129,21 +133,38 @@ frappe.search.utils = {
 	get_search_in_list: function (keywords) {
 		var me = this;
 		var out = [];
+<<<<<<< HEAD
+		if (in_list(keywords.split(" "), "in") && keywords.slice(-2) !== "in") {
+			var parts = keywords.split(" in ");
+			frappe.boot.user.can_read.forEach(function (item) {
+				if (frappe.boot.user.can_search.includes(item)) {
+					var level = me.fuzzy_search(parts[1], item);
+					if (level) {
+=======
 		if (keywords.split(" ").includes("in") && keywords.slice(-2) !== "in") {
 			var parts = keywords.split(" in ");
 			frappe.boot.user.can_read.forEach(function (item) {
 				if (frappe.boot.user.can_search.includes(item)) {
 					const search_result = me.fuzzy_search(parts[1], item, true);
 					if (search_result.score) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						out.push({
 							type: "In List",
 							label: __("Find {0} in {1}", [
 								__(parts[0]),
+<<<<<<< HEAD
+								me.bolden_match_part(__(item), parts[1]),
+							]),
+							value: __("Find {0} in {1}", [__(parts[0]), __(item)]),
+							route_options: { name: ["like", "%" + parts[0] + "%"] },
+							index: 1 + level,
+=======
 								search_result.marked_string,
 							]),
 							value: __("Find {0} in {1}", [__(parts[0]), __(item)]),
 							route_options: { name: ["like", "%" + parts[0] + "%"] },
 							index: 1 + search_result.score,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							route: ["List", item],
 						});
 					}
@@ -159,8 +180,12 @@ frappe.search.utils = {
 		var firstKeyword = keywords.split(" ")[0];
 		if (firstKeyword.toLowerCase() === __("new")) {
 			frappe.boot.user.can_create.forEach(function (item) {
+<<<<<<< HEAD
+				var level = me.fuzzy_search(keywords.substr(4), item);
+=======
 				const search_result = me.fuzzy_search(keywords.substr(4), item, true);
 				var level = search_result.score;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				if (level) {
 					out.push({
 						type: "New",
@@ -182,15 +207,27 @@ frappe.search.utils = {
 		var me = this;
 		var out = [];
 
+<<<<<<< HEAD
+		var level, target;
+=======
 		var score, marked_string, target;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		var option = function (type, route, order) {
 			// check to skip extra list in the text
 			// eg. Price List List should be only Price List
 			let skip_list = type === "List" && target.endsWith("List");
+<<<<<<< HEAD
+			let label_without_type = me.bolden_match_part(__(target), keywords);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (skip_list) {
 				var label = marked_string || __(target);
 			} else {
+<<<<<<< HEAD
+				label = __(`{0} ${skip_list ? "" : type}`, [label_without_type]);
+=======
 				label = __(`{0} ${skip_list ? "" : type}`, [marked_string || __(target)]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 			return {
 				type: type,
@@ -202,9 +239,14 @@ frappe.search.utils = {
 			};
 		};
 		frappe.boot.user.can_read.forEach(function (item) {
+<<<<<<< HEAD
+			level = me.fuzzy_search(keywords, item);
+			if (level) {
+=======
 			const search_result = me.fuzzy_search(keywords, item, true);
 			({ score, marked_string } = search_result);
 			if (score) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				target = item;
 				if (frappe.boot.single_types.includes(item)) {
 					out.push(option("", ["Form", item, item], 0.05));
@@ -239,8 +281,12 @@ frappe.search.utils = {
 		var out = [];
 		var route;
 		Object.keys(frappe.boot.user.all_reports).forEach(function (item) {
+<<<<<<< HEAD
+			var level = me.fuzzy_search(keywords, item);
+=======
 			const search_result = me.fuzzy_search(keywords, item, true);
 			var level = search_result.score;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (level > 0) {
 				var report = frappe.boot.user.all_reports[item];
 				if (report.report_type == "Report Builder")
@@ -248,7 +294,11 @@ frappe.search.utils = {
 				else route = ["query-report", item];
 				out.push({
 					type: "Report",
+<<<<<<< HEAD
+					label: __("Report {0}", [me.bolden_match_part(__(item), keywords)]),
+=======
 					label: __("Report {0}", [search_result.marked_string || __(item)]),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					value: __("Report {0}", [__(item)]),
 					index: level,
 					route: route,
@@ -268,8 +318,12 @@ frappe.search.utils = {
 		});
 		Object.keys(this.pages).forEach(function (item) {
 			if (item == "Hub" || item == "hub") return;
+<<<<<<< HEAD
+			var level = me.fuzzy_search(keywords, item);
+=======
 			const search_result = me.fuzzy_search(keywords, item, true);
 			var level = search_result.score;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (level) {
 				var page = me.pages[item];
 				out.push({
@@ -318,8 +372,12 @@ frappe.search.utils = {
 		var me = this;
 		var out = [];
 		frappe.boot.allowed_workspaces.forEach(function (item) {
+<<<<<<< HEAD
+			var level = me.fuzzy_search(keywords, item.name);
+=======
 			const search_result = me.fuzzy_search(keywords, item.name, true);
 			var level = search_result.score;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (level > 0) {
 				var ret = {
 					type: "Workspace",
@@ -339,8 +397,12 @@ frappe.search.utils = {
 		var me = this;
 		var out = [];
 		frappe.boot.dashboards.forEach(function (item) {
+<<<<<<< HEAD
+			var level = me.fuzzy_search(keywords, item.name);
+=======
 			const search_result = me.fuzzy_search(keywords, item.name, true);
 			var level = search_result.score;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (level > 0) {
 				var ret = {
 					type: "Dashboard",
@@ -379,6 +441,14 @@ frappe.search.utils = {
 					var part = parts[i];
 					if (part.toLowerCase().indexOf(keywords) !== -1) {
 						// If the field contains the keyword
+<<<<<<< HEAD
+						if (part.indexOf(" &&& ") !== -1) {
+							var colon_index = part.indexOf(" &&& ");
+							var field_value = part.slice(colon_index + 5);
+						} else {
+							var colon_index = part.indexOf(" : ");
+							var field_value = part.slice(colon_index + 3);
+=======
 						let colon_index, field_value;
 						if (part.indexOf(" &&& ") !== -1) {
 							colon_index = part.indexOf(" &&& ");
@@ -386,6 +456,7 @@ frappe.search.utils = {
 						} else {
 							colon_index = part.indexOf(" : ");
 							field_value = part.slice(colon_index + 3);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						}
 						if (field_value.length > field_length) {
 							// If field value exceeds field_length, find the keyword in it
@@ -407,15 +478,24 @@ frappe.search.utils = {
 						// Find remaining result_length and add field length to result_current_length
 						var remaining_length = result_max_length - result_current_length;
 						result_current_length += field_name.length + field_value.length + 2;
+<<<<<<< HEAD
+=======
 						const search_result_name = me.fuzzy_search(keywords, field_name, true);
 						const search_result_value = me.fuzzy_search(keywords, field_value, true);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						if (result_current_length < result_max_length) {
 							// We have room, push the entire field
 							field_text =
 								'<span class="field-name text-muted">' +
+<<<<<<< HEAD
+								me.bolden_match_part(field_name, keywords) +
+								": </span> " +
+								me.bolden_match_part(field_value, keywords);
+=======
 								search_result_name.marked_string +
 								": </span> " +
 								search_result_value.marked_string;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							if (fields.indexOf(field_text) === -1 && doc_name !== field_value) {
 								fields.push(field_text);
 							}
@@ -426,12 +506,20 @@ frappe.search.utils = {
 								remaining_length -= field_name.length;
 								field_text =
 									'<span class="field-name text-muted">' +
+<<<<<<< HEAD
+									me.bolden_match_part(field_name, keywords) +
+=======
 									search_result_name.marked_string +
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 									": </span> ";
 								field_value = field_value.slice(0, remaining_length);
 								field_value =
 									field_value.slice(0, field_value.lastIndexOf(" ")) + " ...";
+<<<<<<< HEAD
+								field_text += me.bolden_match_part(field_value, keywords);
+=======
 								field_text += search_result_value.marked_string;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								fields.push(field_text);
 							} else {
 								// No room for even the field name, skip
@@ -576,6 +664,44 @@ frappe.search.utils = {
 		];
 	},
 
+<<<<<<< HEAD
+	fuzzy_search: function (keywords, _item) {
+		keywords = keywords || "";
+		var item = __(_item || "");
+		var match = fuzzy_match(keywords, item);
+		return match[1];
+	},
+
+	bolden_match_part: function (str, subseq) {
+		if (fuzzy_match(subseq, str)[0] === false) {
+			return str;
+		}
+		if (str.indexOf(subseq) == 0) {
+			var tail = str.split(subseq)[1];
+			return "<mark>" + subseq + "</mark>" + tail;
+		}
+		var rendered = "";
+		var str_orig = str;
+		var str_len = str.length;
+		str = str.toLowerCase();
+		subseq = subseq.toLowerCase();
+
+		outer: for (var i = 0, j = 0; i < subseq.length; i++) {
+			var sub_ch = subseq.charCodeAt(i);
+			while (j < str_len) {
+				if (str.charCodeAt(j) === sub_ch) {
+					var str_char = str_orig.charAt(j);
+					if (str_char === str_char.toLowerCase()) {
+						rendered += "<mark>" + subseq.charAt(i) + "</mark>";
+					} else {
+						rendered += "<mark>" + subseq.charAt(i).toUpperCase() + "</mark>";
+					}
+					j++;
+					continue outer;
+				}
+				rendered += str_orig.charAt(j);
+				j++;
+=======
 	fuzzy_search: function (keywords = "", _item = "", return_marked_string = false) {
 		const item = __(_item);
 
@@ -609,6 +735,7 @@ frappe.search.utils = {
 			} else {
 				marked_string += flushBuffer();
 				marked_string += item[index];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		});
 		marked_string += flushBuffer();
@@ -632,8 +759,13 @@ frappe.search.utils = {
 				const search_result = this.fuzzy_search(txt, item.label, true);
 				results.push({
 					type: "Executable",
+<<<<<<< HEAD
+					value: this.bolden_match_part(__(item.label), txt),
+					index: this.fuzzy_search(txt, target),
+=======
 					value: search_result.marked_string,
 					index: search_result.score,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					match: item.label,
 					onclick: () => item.action.apply(this, item.args),
 				});

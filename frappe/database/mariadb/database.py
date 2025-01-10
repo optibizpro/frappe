@@ -126,8 +126,13 @@ class MariaDBConnectionUtil:
 			"use_unicode": True,
 		}
 
+<<<<<<< HEAD
+		if self.user not in (frappe.flags.root_login, "root"):
+			conn_settings["database"] = self.user
+=======
 		if self.cur_db_name:
 			conn_settings["database"] = self.cur_db_name
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if self.socket:
 			conn_settings["unix_socket"] = self.socket
@@ -307,7 +312,11 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 				content text,
 				fulltext(content),
 				route varchar({self.VARCHAR_LEN}),
+<<<<<<< HEAD
+				published int(1) not null default 0,
+=======
 				published TINYINT not null default 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				unique `doctype_name` (doctype, name))
 				COLLATE=utf8mb4_unicode_ci
 				ENGINE=MyISAM
@@ -474,6 +483,8 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 
 		return tables
 
+<<<<<<< HEAD
+=======
 	def get_row_size(self, doctype: str) -> int:
 		"""Get estimated max row size of any table in bytes."""
 
@@ -527,6 +538,7 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 		if est_row_size:
 			return int(est_row_size[0][0])
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@contextmanager
 	def unbuffered_cursor(self):
 		from pymysql.cursors import SSCursor

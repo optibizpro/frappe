@@ -42,7 +42,11 @@ class UserType(Document):
 		super().clear_cache()
 
 		if not self.is_standard:
+<<<<<<< HEAD
+			frappe.cache().delete_value("non_standard_user_types")
+=======
 			frappe.cache.delete_value("non_standard_user_types")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def on_update(self):
 		if self.is_standard:
@@ -143,7 +147,11 @@ class UserType(Document):
 			docperm = add_role_permissions(row.document_type, self.role)
 			values = {perm: row.get(perm, default=0) for perm in perms}
 
+<<<<<<< HEAD
+			frappe.db.set_value("Custom DocPerm", docperm, values)
+=======
 			update_custom_docperm(docperm, values)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def add_select_perm_doctypes(self):
 		if frappe.flags.ignore_select_perm:
@@ -307,7 +315,11 @@ def apply_permissions_for_non_standard_user_type(doc, method=None):
 	if not frappe.db.table_exists("User Type") or frappe.flags.in_migrate:
 		return
 
+<<<<<<< HEAD
+	user_types = frappe.cache().get_value(
+=======
 	user_types = frappe.cache.get_value(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"non_standard_user_types",
 		get_non_standard_user_types,
 	)

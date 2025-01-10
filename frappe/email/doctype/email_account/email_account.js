@@ -1,4 +1,6 @@
 frappe.email_defaults = {
+<<<<<<< HEAD
+=======
 	"Frappe Mail": {
 		domain: null,
 		password: null,
@@ -19,6 +21,7 @@ frappe.email_defaults = {
 		smtp_port: null,
 		no_smtp_authentication: 0,
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	GMail: {
 		email_server: "imap.gmail.com",
 		incoming_port: 993,
@@ -148,6 +151,13 @@ frappe.ui.form.on("Email Account", {
 		frm.trigger("warn_autoreply_on_incoming");
 	},
 
+<<<<<<< HEAD
+	notify_if_unreplied: function (frm) {
+		frm.set_df_property("send_notification_to", "reqd", frm.doc.notify_if_unreplied);
+	},
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	onload: function (frm) {
 		frm.set_df_property("append_to", "only_select", true);
 		frm.set_query(
@@ -164,15 +174,25 @@ frappe.ui.form.on("Email Account", {
 			frm.refresh_field("imap_folder");
 		}
 		set_default_max_attachment_size(frm);
+<<<<<<< HEAD
+		frm.events.show_oauth_authorization_message(frm);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	refresh: function (frm) {
 		frm.events.enable_incoming(frm);
+<<<<<<< HEAD
+		frm.events.notify_if_unreplied(frm);
+=======
 		frm.events.show_oauth_authorization_message(frm);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if (frappe.route_flags.delete_user_from_locals && frappe.route_flags.linked_user) {
 			delete frappe.route_flags.delete_user_from_locals;
 			delete locals["User"][frappe.route_flags.linked_user];
+<<<<<<< HEAD
+=======
 		}
 
 		if (!frm.is_dirty() && frm.doc.enable_incoming) {
@@ -188,6 +208,7 @@ frappe.ui.form.on("Email Account", {
 					}
 				});
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	},
 
@@ -195,6 +216,10 @@ frappe.ui.form.on("Email Account", {
 		oauth_access(frm);
 	},
 
+<<<<<<< HEAD
+	show_oauth_authorization_message(frm) {
+		if (frm.doc.auth_method === "OAuth" && frm.doc.connected_app) {
+=======
 	validate_frappe_mail_settings: function (frm) {
 		if (frm.doc.service == "Frappe Mail") {
 			frappe.call({
@@ -210,6 +235,7 @@ frappe.ui.form.on("Email Account", {
 			frm.doc.connected_app &&
 			!frm.doc.backend_app_flow
 		) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.call({
 				method: "frappe.integrations.doctype.connected_app.connected_app.has_token",
 				args: {

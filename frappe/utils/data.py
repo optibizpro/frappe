@@ -25,6 +25,12 @@ from dateutil.relativedelta import relativedelta
 
 import frappe
 from frappe.desk.utils import slug
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecation_warning
+
+DateTimeLikeObject = str | datetime.date | datetime.datetime
+NumericType = int | float
+=======
 from frappe.locale import get_date_format, get_first_day_of_the_week, get_number_format, get_time_format
 from frappe.types.filter import Filters, FilterSignature, FilterTuple
 from frappe.utils.deprecations import deprecated
@@ -51,6 +57,7 @@ TimespanOptions = Literal[
 	"next 6 months",
 	"next year",
 ]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 if typing.TYPE_CHECKING:
@@ -123,6 +130,14 @@ def getdate(
 		return None
 
 	try:
+<<<<<<< HEAD
+		return parser.parse(string_date, dayfirst=parse_day_first).date()
+	except ParserError:
+		frappe.throw(
+			frappe._("{} is not a valid date string.").format(frappe.bold(string_date)),
+			title=frappe._("Invalid Date"),
+		)
+=======
 		# PERF: Our DATE_FORMAT is same as ISO format.
 		# fromisoformat is written in C so it's better than using strptime parser
 		return datetime.date.fromisoformat(string_date)
@@ -134,11 +149,18 @@ def getdate(
 				frappe._("{} is not a valid date string.").format(frappe.bold(string_date)),
 				title=frappe._("Invalid Date"),
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_datetime(
 	datetime_str: Optional["DateTimeLikeObject"] | tuple | list = None,
 ) -> datetime.datetime | None:
+<<<<<<< HEAD
+	if datetime_str is None:
+		return now_datetime()
+
+	if isinstance(datetime_str, datetime.datetime | datetime.timedelta):
+=======
 	"""Return the below mentioned values based on the given `datetime_str`:
 
 	* If `datetime_str` is None, returns datetime object of current datetime
@@ -154,6 +176,7 @@ def get_datetime(
 		return now_datetime()
 
 	elif isinstance(datetime_str, datetime.datetime | datetime.timedelta):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return datetime_str
 
 	elif isinstance(datetime_str, list | tuple):
@@ -213,9 +236,12 @@ def get_timedelta(time: str | datetime.timedelta | None = None) -> datetime.time
 
 
 def to_timedelta(time_str: str | datetime.time) -> datetime.timedelta:
+<<<<<<< HEAD
+=======
 	"""Return a `datetime.timedelta` object from the given string or `datetime.time` object.
 	If the given argument is not a string or a `datetime.time` object, it is returned as is.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(time_str, datetime.time):
 		time_str = str(time_str)
 
@@ -363,9 +389,15 @@ def time_diff_in_hours(string_ed_date: DateTimeLikeObject, string_st_date: DateT
 	return round(float(time_diff(string_ed_date, string_st_date).total_seconds()) / 3600, 6)
 
 
+<<<<<<< HEAD
+def now_datetime():
+	dt = convert_utc_to_system_timezone(datetime.datetime.utcnow())
+	return dt.replace(tzinfo=None)
+=======
 def now_datetime() -> datetime.datetime:
 	"""Return the current datetime in system timezone."""
 	return datetime.datetime.now(ZoneInfo(get_system_timezone())).replace(tzinfo=None)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_timestamp(date: Optional["DateTimeLikeObject"] = None) -> float:
@@ -380,6 +412,30 @@ def get_eta(from_time: DateTimeLikeObject, percent_complete) -> str:
 	return str(datetime.timedelta(seconds=(100 - percent_complete) / percent_complete * diff))
 
 
+<<<<<<< HEAD
+def _get_system_timezone():
+	return frappe.db.get_system_setting("time_zone") or "Asia/Kolkata"  # Default to India ?!
+
+
+def get_system_timezone():
+	if frappe.local.flags.in_test:
+		return _get_system_timezone()
+
+	return frappe.cache().get_value("time_zone", _get_system_timezone)
+
+
+def get_time_zone():
+	deprecation_warning(
+		"`get_time_zone` is deprecated and will be removed in version 15. Use `get_system_timezone` instead."
+	)
+	return get_system_timezone()
+
+
+def convert_utc_to_timezone(utc_timestamp, time_zone):
+	from pytz import UnknownTimeZoneError, timezone
+
+	utcnow = timezone("UTC").localize(utc_timestamp)
+=======
 def get_system_timezone() -> str:
 	"""Return the system timezone."""
 	return frappe.get_system_settings("time_zone") or "Asia/Kolkata"  # Default to India ?!
@@ -389,6 +445,7 @@ def convert_utc_to_timezone(utc_timestamp: datetime.datetime, time_zone: str) ->
 	if utc_timestamp.tzinfo is None:
 		utc_timestamp = utc_timestamp.replace(tzinfo=ZoneInfo("UTC"))
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	try:
 		return utc_timestamp.astimezone(ZoneInfo(time_zone))
 	except ZoneInfoNotFoundError:
@@ -401,10 +458,21 @@ def get_datetime_in_timezone(time_zone: str) -> datetime.datetime:
 	return convert_utc_to_timezone(utc_timestamp, time_zone)
 
 
+<<<<<<< HEAD
+def convert_utc_to_system_timezone(utc_timestamp):
+=======
 def convert_utc_to_system_timezone(utc_timestamp: datetime.datetime) -> datetime.datetime:
 	"""Return the given UTC `datetime` timestamp in system timezone."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	time_zone = get_system_timezone()
 	return convert_utc_to_timezone(utc_timestamp, time_zone)
+
+
+def convert_utc_to_user_timezone(utc_timestamp):
+	deprecation_warning(
+		"`convert_utc_to_user_timezone` is deprecated and will be removed in version 15. Use `convert_utc_to_system_timezone` instead."
+	)
+	return convert_utc_to_system_timezone(utc_timestamp)
 
 
 def now() -> str:
@@ -463,9 +531,15 @@ def get_first_day(dt, d_years=0, d_months=0, as_str: Literal[True] = False) -> s
 
 # TODO: first arg
 def get_first_day(dt, d_years: int = 0, d_months: int = 0, as_str: bool = False) -> str | datetime.date:
+<<<<<<< HEAD
+	"""
+	Returns the first day of the month for the date specified by date object
+	Also adds `d_years` and `d_months` if specified
+=======
 	"""Return the first day of the month for the date specified by date object.
 
 	Also, add `d_years` and `d_months` if specified.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	dt = getdate(dt)
 
@@ -633,6 +707,9 @@ def get_year_ending(date: DateTimeLikeObject | None = None, as_str=False) -> dat
 	return year_ending.strftime(DATE_FORMAT) if as_str else year_ending
 
 
+<<<<<<< HEAD
+def get_time(time_str: str) -> datetime.time:
+=======
 def get_time(
 	time_str: str | datetime.datetime | datetime.time | datetime.timedelta,
 ) -> datetime.time:
@@ -640,6 +717,7 @@ def get_time(
 
 	If the given argument is already a `datetime.time` object, it is returned as is."""
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(time_str, datetime.datetime):
 		return time_str.time()
 	elif isinstance(time_str, datetime.time):
@@ -698,8 +776,12 @@ def get_user_time_format() -> str:
 
 
 def format_date(string_date=None, format_string: str | None = None, parse_day_first: bool = False) -> str:
+<<<<<<< HEAD
+	"""Converts the given string date to :data:`user_date_format`
+=======
 	"""Convert the given string date to :data:`user_date_format`.
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	User format specified in defaults
 
 	Examples:
@@ -885,6 +967,72 @@ def get_weekday(datetime: DateTimeLikeObject | None = None) -> str:
 
 def get_month(datetime: DateTimeLikeObject | None = None) -> str:
 	"""Return the month name (e.g. 'January') for the given datetime like object (datetime.date, datetime.datetime, string).
+<<<<<<< HEAD
+
+	If `datetime` argument is not provided, the current month name is returned.
+	"""
+	if not datetime:
+		datetime = now_datetime()
+
+	if isinstance(datetime, str):
+		datetime = get_datetime(datetime)
+
+	return calendar.month_name[datetime.month]
+
+
+def get_timespan_date_range(timespan: str) -> tuple[datetime.datetime, datetime.datetime]:
+	today = nowdate()
+	date_range_map = {
+		"last week": lambda: (
+			get_first_day_of_week(add_to_date(today, days=-7)),
+			get_last_day_of_week(add_to_date(today, days=-7)),
+		),
+		"last month": lambda: (
+			get_first_day(add_to_date(today, months=-1)),
+			get_last_day(add_to_date(today, months=-1)),
+		),
+		"last quarter": lambda: (
+			get_quarter_start(add_to_date(today, months=-3)),
+			get_quarter_ending(add_to_date(today, months=-3)),
+		),
+		"last 6 months": lambda: (
+			get_quarter_start(add_to_date(today, months=-6)),
+			get_quarter_ending(add_to_date(today, months=-3)),
+		),
+		"last year": lambda: (
+			get_year_start(add_to_date(today, years=-1)),
+			get_year_ending(add_to_date(today, years=-1)),
+		),
+		"yesterday": lambda: (add_to_date(today, days=-1),) * 2,
+		"today": lambda: (today, today),
+		"tomorrow": lambda: (add_to_date(today, days=1),) * 2,
+		"this week": lambda: (get_first_day_of_week(today), get_last_day_of_week(today)),
+		"this month": lambda: (get_first_day(today), get_last_day(today)),
+		"this quarter": lambda: (get_quarter_start(today), get_quarter_ending(today)),
+		"this year": lambda: (get_year_start(today), get_year_ending(today)),
+		"next week": lambda: (
+			get_first_day_of_week(add_to_date(today, days=7)),
+			get_last_day_of_week(add_to_date(today, days=7)),
+		),
+		"next month": lambda: (
+			get_first_day(add_to_date(today, months=1)),
+			get_last_day(add_to_date(today, months=1)),
+		),
+		"next quarter": lambda: (
+			get_quarter_start(add_to_date(today, months=3)),
+			get_quarter_ending(add_to_date(today, months=3)),
+		),
+		"next 6 months": lambda: (
+			get_quarter_start(add_to_date(today, months=3)),
+			get_quarter_ending(add_to_date(today, months=6)),
+		),
+		"next year": lambda: (
+			get_year_start(add_to_date(today, years=1)),
+			get_year_ending(add_to_date(today, years=1)),
+		),
+	}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	If `datetime` argument is not provided, the current month name is returned.
 	"""
@@ -1081,6 +1229,10 @@ def flt(s: NumericType | str, precision: Literal[0]) -> int: ...
 def flt(s: NumericType | str, precision: int | None = None) -> float: ...
 
 
+<<<<<<< HEAD
+def flt(s: NumericType | str, precision: int | None = None, rounding_method: str | None = None) -> float:
+	"""Convert to float (ignoring commas in string)
+=======
 @typing.overload
 def flt(s: None) -> Literal[0.0]: ...
 
@@ -1089,6 +1241,7 @@ def flt(
 	s: NumericType | str | None, precision: int | None = None, rounding_method: str | None = None
 ) -> float:
 	"""Convert to float (ignoring commas in string).
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param s: Number in string or other numeric format.
 	:param precision: optional argument to specify precision for rounding.
@@ -1145,8 +1298,18 @@ def cint(s: NumericType | str | None, default: int = 0) -> int:
 	0
 
 	"""
+<<<<<<< HEAD
+	try:
+		return int(s)
+	except Exception:
+		try:
+			return int(float(s))
+		except Exception:
+			return default
+=======
 	if s is None:
 		return default
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	try:
 		return int(s)
@@ -1212,10 +1375,17 @@ def rounded(num, precision=0, rounding_method=None):
 		rounding_method or frappe.get_system_settings("rounding_method") or "Banker's Rounding (legacy)"
 	)
 
+<<<<<<< HEAD
+	if rounding_method == "Banker's Rounding (legacy)":
+		return _bankers_rounding_legacy(num, precision)
+	elif rounding_method == "Banker's Rounding":
+		return _bankers_rounding(num, precision)
+=======
 	if rounding_method == "Banker's Rounding":
 		return _bankers_rounding(num, precision)
 	elif rounding_method == "Banker's Rounding (legacy)":
 		return _bankers_rounding_legacy(num, precision)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif rounding_method == "Commercial Rounding":
 		return _round_away_from_zero(num, precision)
 	else:
@@ -1349,7 +1519,11 @@ def encode(obj, encoding="utf-8"):
 
 
 def parse_val(v):
+<<<<<<< HEAD
+	"""Converts to simple datatypes from SQL query results"""
+=======
 	"""Convert to simple datatypes from SQL query results."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(v, datetime.date | datetime.datetime):
 		v = str(v)
 	elif isinstance(v, datetime.timedelta):
@@ -1516,8 +1690,23 @@ def money_in_words(
 	if number_format.string == "#,##,###.##":
 		in_million = False
 
+<<<<<<< HEAD
+	# 0.00
+	if main == "0" and fraction in ["00", "000"]:
+		out = _(main_currency, context="Currency") + " " + _("Zero")
+	# 0.XX
+	elif main == "0":
+		out = in_words(fraction, in_million).title() + " " + fraction_currency
+	else:
+		out = _(main_currency, context="Currency") + " " + in_words(main, in_million).title()
+		if cint(fraction):
+			out = (
+				out + " " + _("and") + " " + in_words(fraction, in_million).title() + " " + fraction_currency
+			)
+=======
 	def fraction_in_words() -> str:
 		return in_words(float(f"0.{fraction}") * fraction_units, in_million).title()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# 0.00
 	if main == "0" and fraction in ["0", "00", "000"]:
@@ -1686,10 +1875,51 @@ def pretty_date(iso_datetime: datetime.datetime | str) -> str:
 	from babel.dates import format_timedelta
 
 	if isinstance(iso_datetime, str):
+<<<<<<< HEAD
+		iso_datetime = datetime.datetime.strptime(iso_datetime, DATETIME_FORMAT)
+	now_dt = datetime.datetime.strptime(now(), DATETIME_FORMAT)
+	dt_diff = now_dt - iso_datetime
+
+	# available only in python 2.7+
+	# dt_diff_seconds = dt_diff.total_seconds()
+
+	dt_diff_seconds = dt_diff.days * 86400.0 + dt_diff.seconds
+
+	dt_diff_days = math.floor(dt_diff_seconds / 86400.0)
+
+	# differnt cases
+	if dt_diff_seconds < 60.0:
+		return _("just now")
+	elif dt_diff_seconds < 120.0:
+		return _("1 minute ago")
+	elif dt_diff_seconds < 3600.0:
+		return _("{0} minutes ago").format(cint(math.floor(dt_diff_seconds / 60.0)))
+	elif dt_diff_seconds < 7200.0:
+		return _("1 hour ago")
+	elif dt_diff_seconds < 86400.0:
+		return _("{0} hours ago").format(cint(math.floor(dt_diff_seconds / 3600.0)))
+	elif dt_diff_days == 1.0:
+		return _("Yesterday")
+	elif dt_diff_days < 7.0:
+		return _("{0} days ago").format(cint(dt_diff_days))
+	elif dt_diff_days < 14:
+		return _("1 week ago")
+	elif dt_diff_days < 31.0:
+		return _("{0} weeks ago").format(dt_diff_days // 7)
+	elif dt_diff_days < 61.0:
+		return _("1 month ago")
+	elif dt_diff_days < 365.0:
+		return _("{0} months ago").format(dt_diff_days // 30)
+	elif dt_diff_days < 730.0:
+		return _("1 year ago")
+	else:
+		return f"{cint(math.floor(dt_diff_days / 365.0))} years ago"
+=======
 		iso_datetime = get_datetime(iso_datetime)
 	now_dt = now_datetime()
 	locale = frappe.local.lang.replace("-", "_") if frappe.local.lang else None
 	return format_timedelta(iso_datetime - now_dt, add_direction=True, locale=locale)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def comma_or(some_list: list | tuple, add_quotes=True) -> str:
@@ -1712,6 +1942,9 @@ def comma_and(some_list: list | tuple, add_quotes=True) -> str:
 	return comma_sep(some_list, frappe._("{0} and {1}"), add_quotes)
 
 
+<<<<<<< HEAD
+def comma_sep(some_list, pattern, add_quotes=True):
+=======
 def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 	"""Return the given list or tuple as a comma separated string, with the last item joined by the given string format pattern.
 
@@ -1719,6 +1952,7 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 
 	e.g. if `some_list` is ['a', 'b', 'c'] and `pattern` is '{0} or {1}', the output will be 'a, b or c'
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -1735,11 +1969,15 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 		return some_list
 
 
+<<<<<<< HEAD
+def new_line_sep(some_list):
+=======
 def new_line_sep(some_list: list | tuple) -> str:
 	"""Return the given list or tuple as a new line separated string.
 
 	e.g. ['', 'Paid', 'Unpaid'] -> '\n Paid\n Unpaid'
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -1944,6 +2182,8 @@ def get_url_to_report_with_filters(name, filters, report_type=None, doctype=None
 		return get_url(uri=f"/app/{quoted(slug(doctype))}/view/report?{filters}")
 
 	return get_url(uri=f"/app/query-report/{quoted(name)}?{filters}")
+<<<<<<< HEAD
+=======
 
 
 def sql_like(value: str, pattern: str) -> bool:
@@ -1977,6 +2217,7 @@ def filter_operator_is(value: str, pattern: str) -> bool:
 		return not is_set()
 	else:
 		frappe.throw(frappe._(f"Invalid argument for operator 'IS': {pattern}"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 operator_map = {
@@ -2000,6 +2241,21 @@ operator_map = {
 }
 
 
+<<<<<<< HEAD
+def evaluate_filters(doc, filters: dict | list | tuple):
+	"""Returns true if doc matches filters"""
+	if isinstance(filters, dict):
+		for key, value in filters.items():
+			f = get_filter(None, {key: value})
+			if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
+				return False
+
+	elif isinstance(filters, list | tuple):
+		for d in filters:
+			f = get_filter(None, d)
+			if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
+				return False
+=======
 def evaluate_filters(doc: "Mapping", filters: FilterSignature):
 	"""Return True if doc matches filters."""
 	if not isinstance(filters, Filters):
@@ -2008,6 +2264,7 @@ def evaluate_filters(doc: "Mapping", filters: FilterSignature):
 		f = get_filter(None, d)
 		if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
 			return False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return True
 
@@ -2044,7 +2301,23 @@ def get_filter(doctype: str, filters: FilterSignature, filters_config=None) -> "
 	else:
 		ft = filters[0]
 
+<<<<<<< HEAD
+	if not isinstance(f, list | tuple):
+		frappe.throw(frappe._("Filter must be a tuple or list (in a list)"))
+
+	if len(f) == 3:
+		f = (doctype, f[0], f[1], f[2])
+	elif len(f) > 4:
+		f = f[0:4]
+	elif len(f) != 4:
+		frappe.throw(
+			frappe._("Filter must have 4 values (doctype, fieldname, operator, value): {0}").format(str(f))
+		)
+
+	f = frappe._dict(doctype=f[0], fieldname=f[1], operator=f[2], value=f[3])
+=======
 	f = frappe._dict(doctype=ft[0], fieldname=ft[1], operator=ft[2], value=ft[3])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	sanitize_column(f.fieldname)
 
@@ -2124,7 +2397,11 @@ def _sanitize_column(column_name: str, db_type: str) -> None:
 	from frappe import _
 
 	column_name = sqlparse.format(column_name, strip_comments=True, keyword_case="lower")
+<<<<<<< HEAD
+	if frappe.db and frappe.db.db_type == "mariadb":
+=======
 	if db_type == "mariadb":
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		# strip mariadb specific comments which are like python single line comments
 		column_name = MARIADB_SPECIFIC_COMMENT.sub("", column_name)
 
@@ -2500,6 +2777,8 @@ def get_job_name(key: str, doctype: str | None = None, doc_name: str | None = No
 	return job_name
 
 
+<<<<<<< HEAD
+=======
 def get_imaginary_pixel_response():
 	return {
 		"type": "binary",
@@ -2605,6 +2884,7 @@ def map_trackers(url_trackers: dict, create: bool = False):
 	return frappe_trackers
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 # This is used in test to count memory overhead of default imports.
 def _get_rss_memory_usage():
 	import psutil

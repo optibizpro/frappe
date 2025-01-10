@@ -1,13 +1,20 @@
 # Copyright (c) 2017, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.contacts.doctype.contact.contact import get_full_name
 from frappe.email import get_contact_list
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Contact", "Salutation"]
 
 
+<<<<<<< HEAD
+class TestContact(FrappeTestCase):
+=======
 class UnitTestContact(UnitTestCase):
 	"""
 	Unit tests for Contact.
@@ -18,6 +25,7 @@ class UnitTestContact(UnitTestCase):
 
 
 class TestContact(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_check_default_email(self):
 		emails = [
 			{"email": "test1@example.com", "is_primary": 0},

@@ -1,6 +1,14 @@
 # Copyright (c) 2015, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestAddressTemplate(FrappeTestCase):
+	def setUp(self):
+		self.make_default_address_template()
+=======
 from frappe.contacts.doctype.address_template.address_template import get_default_address_template
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.utils.jinja import validate_template
@@ -22,6 +30,7 @@ class TestAddressTemplate(IntegrationTestCase):
 
 	def test_default_address_template(self):
 		validate_template(get_default_address_template())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_default_is_unset(self):
 		frappe.get_doc({"doctype": "Address Template", "country": "India", "is_default": 1}).insert()

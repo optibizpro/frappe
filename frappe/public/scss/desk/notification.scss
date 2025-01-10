@@ -139,12 +139,25 @@
 	justify-content: space-between;
 
 	&.unread {
+<<<<<<< HEAD
+		&:hover {
+			.mark-as-read {
+				flex-shrink: 0;
+				align-self: center;
+				justify-self: end;
+				width: 8px;
+				height: 8px;
+				border: 2px solid var(--primary);
+				border-radius: 1000px;
+			}
+=======
 		.mark-as-read {
 			flex-shrink: 0;
 			align-self: center;
 			justify-self: end;
 			width: 8px;
 			height: 8px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		&:hover .mark-as-read {

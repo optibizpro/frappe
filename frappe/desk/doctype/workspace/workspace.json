@@ -83,7 +83,8 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Module",
-   "options": "Module Def"
+   "options": "Module Def",
+   "read_only": 1
   },
   {
    "fieldname": "column_break_3",
@@ -120,7 +121,8 @@
   {
    "fieldname": "icon",
    "fieldtype": "Icon",
-   "label": "Icon"
+   "label": "Icon",
+   "read_only": 1
   },
   {
    "fieldname": "links",
@@ -142,13 +144,20 @@
    "fieldname": "title",
    "fieldtype": "Data",
    "label": "Title",
+   "read_only": 1,
    "reqd": 1
   },
   {
    "fieldname": "parent_page",
+<<<<<<< HEAD
+   "fieldtype": "Data",
+   "label": "Parent Page",
+   "read_only": 1
+=======
    "fieldtype": "Link",
    "label": "Parent Page",
    "options": "Workspace"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "[]",
@@ -160,7 +169,8 @@
   {
    "fieldname": "sequence_id",
    "fieldtype": "Float",
-   "label": "Sequence Id"
+   "label": "Sequence Id",
+   "read_only": 1
   },
   {
    "fieldname": "roles",
@@ -192,7 +202,10 @@
    "label": "Is Hidden"
   },
   {
+<<<<<<< HEAD
+=======
    "depends_on": "eval:doc.type===\"Workspace\"",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "number_cards_tab",
    "fieldtype": "Tab Break",
    "label": "Number Cards"
@@ -204,7 +217,10 @@
    "options": "Workspace Number Card"
   },
   {
+<<<<<<< HEAD
+=======
    "depends_on": "eval:doc.type===\"Workspace\"",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "custom_blocks_tab",
    "fieldtype": "Tab Break",
    "label": "Custom Blocks"
@@ -214,6 +230,8 @@
    "fieldtype": "Table",
    "label": "Custom Blocks",
    "options": "Workspace Custom Block"
+<<<<<<< HEAD
+=======
   },
   {
    "depends_on": "doc.icon",
@@ -258,11 +276,16 @@
    "label": "External Link",
    "mandatory_depends_on": "eval:doc.type==\"URL\"",
    "options": "URL"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "in_create": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-06-08 14:52:38.110224",
+=======
  "modified": "2024-09-26 15:47:24.710881",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Workspace",
@@ -280,6 +303,8 @@
    "role": "Workspace Manager",
    "share": 1,
    "write": 1
+<<<<<<< HEAD
+=======
   },
   {
    "create": 1,
@@ -292,6 +317,7 @@
    "role": "Desk User",
    "share": 1,
    "write": 1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "sort_field": "creation",

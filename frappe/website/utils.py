@@ -12,6 +12,9 @@ from werkzeug.wrappers import Response
 import frappe
 from frappe.apps import get_apps, get_default_path, is_desk_apps
 from frappe.model.document import Document
+<<<<<<< HEAD
+from frappe.utils import cint, cstr, get_system_timezone, md_to_html
+=======
 from frappe.utils import (
 	cint,
 	cstr,
@@ -20,6 +23,7 @@ from frappe.utils import (
 	get_system_timezone,
 	md_to_html,
 )
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 FRONTMATTER_PATTERN = re.compile(r"^\s*(?:---|\+\+\+)(.*?)(?:---|\+\+\+)\s*(.+)$", re.S | re.M)
 H1_TAG_PATTERN = re.compile("<h1>([^<]*)")
@@ -368,6 +372,17 @@ def get_html_content_based_on_type(doc, fieldname, content_type):
 def clear_cache(path=None):
 	"""Clear website caches
 	:param path: (optional) for the given path"""
+<<<<<<< HEAD
+	for key in (
+		"website_generator_routes",
+		"website_pages",
+		"website_full_index",
+		"sitemap_routes",
+		"languages_with_name",
+		"languages",
+	):
+		frappe.cache().delete_value(key)
+=======
 	from frappe.website.router import clear_routing_cache
 
 	clear_routing_cache()
@@ -380,6 +395,7 @@ def clear_cache(path=None):
 		"languages",
 		"website_404",
 	]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if path:
 		frappe.cache.hdel("website_redirects", path)
@@ -579,6 +595,16 @@ def set_content_type(response, data, path):
 
 
 def add_preload_for_bundled_assets(response):
+<<<<<<< HEAD
+	links = []
+
+	for css in frappe.local.preload_assets["style"]:
+		links.append(f"<{css}>; rel=preload; as=style")
+
+	for js in frappe.local.preload_assets["script"]:
+		links.append(f"<{js}>; rel=preload; as=script")
+
+=======
 	links = [f"<{css}>; rel=preload; as=style" for css in frappe.local.preload_assets["style"]]
 	links.extend(f"<{js}>; rel=preload; as=script" for js in frappe.local.preload_assets["script"])
 
@@ -588,6 +614,7 @@ def add_preload_for_bundled_assets(response):
 		for svg in frappe.local.preload_assets["icons"]
 	)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if links:
 		response.headers["Link"] = ",".join(links)
 

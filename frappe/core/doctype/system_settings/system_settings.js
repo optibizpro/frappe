@@ -37,6 +37,12 @@ frappe.ui.form.on("System Settings", {
 			frm.set_value("bypass_restrict_ip_check_if_2fa_enabled", 0);
 		}
 	},
+<<<<<<< HEAD
+	on_update: function (frm) {
+		if (frappe.boot.time_zone && frappe.boot.time_zone.system !== frm.doc.time_zone) {
+			// Clear cache after saving to refresh the values of boot.
+			frappe.ui.toolbar.clear_cache();
+=======
 	after_save: function (frm) {
 		/**
 		 * Checks whether the effective value has changed.
@@ -56,6 +62,7 @@ frappe.ui.form.on("System Settings", {
 		if (attr_tuples.some(has_effectively_changed)) {
 			frappe.msgprint(__("Refreshing..."));
 			window.location.reload();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	},
 	first_day_of_the_week(frm) {
@@ -78,6 +85,8 @@ frappe.ui.form.on("System Settings", {
 			}
 		);
 	},
+<<<<<<< HEAD
+=======
 
 	set_rounding_method_options: function (frm) {
 		if (frm.doc.rounding_method != "Banker's Rounding (legacy)") {
@@ -91,4 +100,5 @@ frappe.ui.form.on("System Settings", {
 			field.refresh();
 		}
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });

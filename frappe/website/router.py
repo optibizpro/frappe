@@ -31,6 +31,11 @@ def get_page_info_from_web_page_with_dynamic_routes(path):
 
 def get_page_info_from_web_form(path):
 	"""Query published web forms and evaluate if the route matches"""
+<<<<<<< HEAD
+	rules, page_info = [], {}
+	web_forms = frappe.get_all("Web Form", ["name", "route", "modified"], {"published": 1})
+	for d in web_forms:
+=======
 	from frappe.website.doctype.web_form.web_form import get_published_web_forms
 
 	for d in get_published_web_forms():
@@ -38,6 +43,7 @@ def get_page_info_from_web_form(path):
 			continue
 
 		rules = []
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		rules.append(Rule(f"/{d.route}", endpoint=d.name))
 		rules.append(Rule(f"/{d.route}/list", endpoint=d.name))
 		rules.append(Rule(f"/{d.route}/new", endpoint=d.name))

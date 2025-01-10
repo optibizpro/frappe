@@ -1,7 +1,11 @@
 from datetime import timedelta
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, change_settings
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.data import now_datetime
 
 

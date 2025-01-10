@@ -65,7 +65,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 		} else {
 			this.expanded = false;
 			this.$expand_button = $(
+<<<<<<< HEAD
+				`<button class="btn btn-xs btn-default">${this.get_button_label()}</button>`
+=======
 				`<button class="btn btn-xs btn-default mt-2">${this.get_button_label()}</button>`
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 				.click(() => {
 					this.expanded = !this.expanded;
@@ -75,11 +79,14 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 				.appendTo(this.$input_wrapper);
 		}
 
+<<<<<<< HEAD
+=======
 		if (this.disabled) {
 			this.editor.setReadOnly(true);
 			$(this.ace_editor_target).css("pointer-events", "none");
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.editor.setTheme("ace/theme/tomorrow");
 		this.editor.setOption("showPrintMargin", false);
 		this.editor.setOption("wrap", this.df.wrap);
@@ -87,6 +94,15 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 		this.is_setting_content = false;
 
 		// events
+<<<<<<< HEAD
+		this.editor.session.on(
+			"change",
+			frappe.utils.debounce(() => {
+				const input_value = this.get_input_value();
+				this.parse_validate_and_set_in_model(input_value);
+			}, 300)
+		);
+=======
 		this.editor.session.on("change", () => {
 			if (this.is_setting_content) return;
 			change_content();
@@ -96,6 +112,7 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			const input_value = this.get_input_value();
 			this.parse_validate_and_set_in_model(input_value);
 		}, 300);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// setup autocompletion when it is set the first time
 		Object.defineProperty(this.df, "autocompletions", {
@@ -199,12 +216,19 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			Golang: "ace/mode/golang",
 			Go: "ace/mode/golang",
 			Jinja: "ace/mode/django",
+<<<<<<< HEAD
+=======
 			SQL: "ace/mode/sql",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 		const language = this.df.options;
 
 		const valid_languages = Object.keys(language_map);
 		if (language && !valid_languages.includes(language)) {
+<<<<<<< HEAD
+			// eslint-disable-next-line
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			console.warn(
 				`Invalid language option provided for field "${
 					this.df.label
@@ -214,9 +238,13 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 
 		const ace_language_mode = language_map[language] || "";
 		this.editor.session.setMode(ace_language_mode);
+<<<<<<< HEAD
+		this.editor.setKeyboardHandler("ace/keyboard/vscode");
+=======
 		this.editor.setKeyboardHandler(
 			`ace/keyboard/${frappe.boot.user.code_editor_type || "vscode"}`
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	parse(value) {

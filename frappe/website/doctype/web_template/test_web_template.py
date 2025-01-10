@@ -3,11 +3,18 @@
 from bs4 import BeautifulSoup
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 from frappe.website.serve import get_response
 
 
+<<<<<<< HEAD
+class TestWebTemplate(FrappeTestCase):
+=======
 class UnitTestWebTemplate(UnitTestCase):
 	"""
 	Unit tests for WebTemplate.
@@ -18,6 +25,7 @@ class UnitTestWebTemplate(UnitTestCase):
 
 
 class TestWebTemplate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_render_web_template_with_values(self):
 		doc = frappe.get_doc("Web Template", "Hero with Right Image")
 		values = {

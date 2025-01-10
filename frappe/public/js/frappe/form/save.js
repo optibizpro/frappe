@@ -16,6 +16,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 	var freeze_message = working_label ? __(working_label) : "";
 
 	var save = function () {
+<<<<<<< HEAD
+		remove_empty_rows();
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		$(frm.wrapper).addClass("validated-form");
 		if ((action !== "Save" || frm.is_dirty()) && check_mandatory()) {
 			_call({
@@ -38,6 +43,54 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 		}
 	};
 
+<<<<<<< HEAD
+	var remove_empty_rows = function () {
+		/*
+			This function removes empty rows. Note that in this function, a row is considered
+			empty if the fields with `in_list_view: 1` are undefined or falsy because that's
+			what users also consider to be an empty row
+		*/
+		const docs = frappe.model.get_all_docs(frm.doc);
+
+		// we should only worry about table data
+		const tables = docs.filter((d) => {
+			return frappe.model.is_table(d.doctype);
+		});
+
+		let modified_table_fields = [];
+
+		tables.map((doc) => {
+			const cells = frappe.meta.docfield_list[doc.doctype] || [];
+
+			const in_list_view_cells = cells.filter((df) => {
+				return cint(df.in_list_view) === 1;
+			});
+
+			const is_empty_row = function (cells) {
+				for (let i = 0; i < cells.length; i++) {
+					if (
+						locals[doc.doctype][doc.name] &&
+						locals[doc.doctype][doc.name][cells[i].fieldname]
+					) {
+						return false;
+					}
+				}
+				return true;
+			};
+
+			if (is_empty_row(in_list_view_cells)) {
+				frappe.model.clear_doc(doc.doctype, doc.name);
+				modified_table_fields.push(doc.parentfield);
+			}
+		});
+
+		modified_table_fields.forEach((field) => {
+			frm.refresh_field(field);
+		});
+	};
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	var cancel = function () {
 		var args = {
 			doctype: frm.doc.doctype,
@@ -117,12 +170,20 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 						table_field.label || frappe.unscrub(table_field.fieldname)
 					).bold();
 
+<<<<<<< HEAD
+					var message = __("Mandatory fields required in table {0}, Row {1}", [
+=======
 					message = __("Mandatory fields required in table {0}, Row {1}", [
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						table_label,
 						doc.idx,
 					]);
 				} else {
+<<<<<<< HEAD
+					var message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
+=======
 					message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 				message = message + "<br><br><ul><li>" + error_fields.join("</li><li>") + "</ul>";
 				frappe.msgprint({

@@ -38,10 +38,13 @@ def get_submitted_linked_docs(doctype: str, name: str, ignore_doctypes_on_cancel
 	3. Searching for links is going to be a tree like structure where at every level,
 	        you will be finding documents using parent document and parent document links.
 	"""
+<<<<<<< HEAD
+=======
 
 	if isinstance(ignore_doctypes_on_cancel_all, str):
 		ignore_doctypes_on_cancel_all = json.loads(ignore_doctypes_on_cancel_all)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.has_permission(doctype, doc=name)
 	tree = SubmittableDocumentTree(doctype, name)
 	visited_documents = tree.get_all_children(ignore_doctypes_on_cancel_all)
@@ -139,7 +142,11 @@ class SubmittableDocumentTree:
 		return self._references_across_doctypes.get(doctype, [])
 
 	def get_document_sources(self):
+<<<<<<< HEAD
+		"""Returns list of doctypes from where we access submittable documents."""
+=======
 		"""Return list of doctypes from where we access submittable documents."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return list(set([*self.get_link_sources(), self.root_doctype]))
 
 	def get_link_sources(self):
@@ -156,7 +163,11 @@ class SubmittableDocumentTree:
 
 
 def get_child_tables_of_doctypes(doctypes: list[str] | None = None):
+<<<<<<< HEAD
+	"""Returns child tables by doctype."""
+=======
 	"""Return child tables by doctype."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	filters = [["fieldtype", "=", "Table"]]
 	filters_for_docfield = filters
 	filters_for_customfield = filters
@@ -220,7 +231,11 @@ def get_references_across_doctypes(
 	for k, v in references_by_dlink_fields.items():
 		references.setdefault(k, []).extend(v)
 
+<<<<<<< HEAD
+	for _doctype, links in references.items():
+=======
 	for links in references.values():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for link in links:
 			link["is_child"] = link["doctype"] in all_child_tables
 	return references

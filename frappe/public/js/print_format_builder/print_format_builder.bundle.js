@@ -28,6 +28,33 @@ class PrintFormatBuilder {
 			frappe.set_route("print-format-builder-beta");
 		});
 
+<<<<<<< HEAD
+		let $vm = new Vue({
+			el: this.$wrapper.get(0),
+			render: (h) =>
+				h(PrintFormatBuilderComponent, {
+					props: {
+						print_format_name: print_format,
+					},
+				}),
+		});
+		this.$component = $vm.$children[0];
+		let store = getStore(print_format);
+		store.$watch("dirty", (value) => {
+			if (value) {
+				this.page.set_indicator("Not Saved", "orange");
+				$toggle_preview_btn.hide();
+				$reset_changes_btn.show();
+			} else {
+				this.page.clear_indicator();
+				$toggle_preview_btn.show();
+				$reset_changes_btn.hide();
+			}
+		});
+		this.$component.$watch("show_preview", (value) => {
+			$toggle_preview_btn.text(value ? __("Hide Preview") : __("Show Preview"));
+		});
+=======
 		let app = createApp(PrintFormatBuilderComponent, { print_format_name: print_format });
 		SetVueGlobals(app);
 		this.$component = app.mount(this.$wrapper.get(0));
@@ -54,6 +81,7 @@ class PrintFormatBuilder {
 				$toggle_preview_btn.text(value ? __("Hide Preview") : __("Show Preview"));
 			}
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 

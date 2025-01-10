@@ -10,7 +10,11 @@
 	</div>
 {% else %}
 	<div class="website-list" data-doctype="{{ doctype }}"
+<<<<<<< HEAD
+		data-txt="{{ txt|e or '[notxt]'  }}">
+=======
 		data-txt="{{ (txt or '')|e }}">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		<!-- {% if not hide_filters -%}
 			{% include "templates/includes/list/filters.html" %}
 		{%- endif %} -->

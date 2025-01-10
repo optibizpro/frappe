@@ -36,6 +36,29 @@ class RoleProfile(Document):
 
 	def update_all_users(self):
 		"""Changes in role_profile reflected across all its user"""
+<<<<<<< HEAD
+		has_role = frappe.qb.DocType("Has Role")
+		user = frappe.qb.DocType("User")
+
+		all_current_roles = (
+			frappe.qb.from_(user)
+			.join(has_role)
+			.on(user.name == has_role.parent)
+			.where(user.role_profile_name == self.name)
+			.select(user.name, has_role.role)
+		).run()
+
+		user_roles = defaultdict(set)
+		for user, role in all_current_roles:
+			user_roles[user].add(role)
+
+		role_profile_roles = {role.role for role in self.roles}
+		for user, roles in user_roles.items():
+			if roles != role_profile_roles:
+				user = frappe.get_doc("User", user)
+				user.roles = []
+				user.add_roles(*role_profile_roles)
+=======
 		users = frappe.get_all("User Role Profile", filters={"role_profile": self.name}, pluck="parent")
 		for user in users:
 			user = frappe.get_doc("User", user)
@@ -43,3 +66,4 @@ class RoleProfile(Document):
 
 	def get_permission_log_options(self, event=None):
 		return {"fields": ["roles"]}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

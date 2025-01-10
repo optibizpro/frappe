@@ -46,7 +46,11 @@ class NotificationLog(Document):
 		from frappe.query_builder.functions import Now
 
 		table = frappe.qb.DocType("Notification Log")
+<<<<<<< HEAD
+		frappe.db.delete(table, filters=(table.modified < (Now() - Interval(days=days))))
+=======
 		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_permission_query_conditions(for_user):
@@ -127,6 +131,10 @@ def send_notification_email(doc: NotificationLog):
 	if not user:
 		return
 
+<<<<<<< HEAD
+	doc_link = get_url_to_form(doc.document_type, doc.document_name)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	header = get_email_header(doc, user.language)
 	email_subject = strip_html(doc.subject)
 	args = {
@@ -166,7 +174,7 @@ def get_email_header(doc, language: str | None = None):
 @frappe.whitelist()
 def get_notification_logs(limit=20):
 	notification_logs = frappe.db.get_list(
-		"Notification Log", fields=["*"], limit=limit, order_by="creation desc"
+		"Notification Log", fields=["*"], limit=limit, order_by="modified desc"
 	)
 
 	users = [log.from_user for log in notification_logs]

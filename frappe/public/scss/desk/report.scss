@@ -105,11 +105,22 @@
 	margin: 5px;
 }
 
+<<<<<<< HEAD
+.group-by-button.btn-primary-light {
+	color: var(--text-on-blue);
+	outline: 1px solid var(--bg-dark-blue);
+}
+
+.group-by-icon.active {
+	use {
+		stroke: var(--text-on-blue);
+=======
 .btn {
 	.button-label,
 	.button-icon {
 		display: inline-flex;
 		vertical-align: middle;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 .group-by-icon.active {

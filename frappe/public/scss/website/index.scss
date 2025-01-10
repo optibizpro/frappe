@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+@import "../common/quill";
+@import "variables";
+=======
 @import "variables";
 @import "../../css/fonts/inter/inter.scss";
 @import "../common/quill";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @import "~bootstrap/scss/bootstrap";
 @import "~cropperjs/dist/cropper.min";
 @import "../common/mixins";
@@ -30,6 +35,10 @@
 @import "navbar";
 @import "footer";
 @import "error-state";
+<<<<<<< HEAD
+@import "my_account";
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 .ql-editor.read-mode {
 	padding: 0;

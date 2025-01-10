@@ -9,6 +9,12 @@ from frappe.automation.doctype.assignment_rule.test_assignment_rule import (
 )
 from frappe.desk.form.load import get_assignments
 from frappe.desk.listview import get_group_by_count
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestAssign(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 
 
@@ -18,6 +24,7 @@ class TestAssign(IntegrationTestCase):
 		super().setUpClass()
 		create_test_doctype(TEST_DOCTYPE)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_assign(self):
 		todo = frappe.get_doc({"doctype": "ToDo", "description": "test"}).insert()
 		if not frappe.db.exists("User", "test@example.com"):
@@ -30,7 +37,11 @@ class TestAssign(IntegrationTestCase):
 
 		self.assertTrue("test@example.com" in [d.owner for d in added])
 
+<<<<<<< HEAD
+		frappe.desk.form.assign_to.remove(todo.doctype, todo.name, "test@example.com")
+=======
 		frappe.desk.form.assign_to.remove(doc.doctype, doc.name, "test@example.com")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# assignment is cleared
 		assignments = frappe.desk.form.assign_to.get(dict(doctype=doc.doctype, name=doc.name))

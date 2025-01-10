@@ -118,8 +118,13 @@ def update_document_title(
 
 def rename_doc(
 	doctype: str | None = None,
+<<<<<<< HEAD
+	old: str | None = None,
+	new: str | None = None,
+=======
 	old: str | int | None = None,
 	new: str | int | None = None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	force: bool = False,
 	merge: bool = False,
 	ignore_permissions: bool = False,
@@ -388,9 +393,23 @@ def validate_rename(
 	if not merge and exists and not ignore_if_exists:
 		frappe.throw(_("Another {0} with name {1} exists, select another name").format(doctype, new))
 
+<<<<<<< HEAD
+	kwargs = {"doctype": doctype, "ptype": "write", "raise_exception": False}
+	if old_doc:
+		kwargs["doc"] = old_doc
+
+	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))
+
+	if merge:
+		kwargs["doc"] = frappe.get_doc(doctype, new)
+		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
+=======
 	kwargs = {"doctype": doctype, "ptype": "write", "print_logs": False}
 	if old_doc:
 		kwargs["doc"] = old_doc
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
 		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))
@@ -724,3 +743,40 @@ def bulk_rename(doctype: str, rows: list[list] | None = None, via_console: bool 
 
 	if not via_console:
 		return rename_log
+<<<<<<< HEAD
+
+
+def update_linked_doctypes(
+	doctype: str, docname: str, linked_to: str, value: str, ignore_doctypes: list | None = None
+) -> None:
+	from frappe.model.utils.rename_doc import update_linked_doctypes
+
+	show_deprecation_warning("update_linked_doctypes")
+
+	return update_linked_doctypes(
+		doctype=doctype,
+		docname=docname,
+		linked_to=linked_to,
+		value=value,
+		ignore_doctypes=ignore_doctypes,
+	)
+
+
+def get_fetch_fields(doctype: str, linked_to: str, ignore_doctypes: list | None = None) -> list[dict]:
+	from frappe.model.utils.rename_doc import get_fetch_fields
+
+	show_deprecation_warning("get_fetch_fields")
+
+	return get_fetch_fields(doctype=doctype, linked_to=linked_to, ignore_doctypes=ignore_doctypes)
+
+
+def show_deprecation_warning(funct: str) -> None:
+	from click import secho
+
+	message = (
+		f"Function frappe.model.rename_doc.{funct} has been deprecated and "
+		"moved to the frappe.model.utils.rename_doc"
+	)
+	secho(message, fg="yellow")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -2,6 +2,10 @@
 # License: MIT. See LICENSE
 import json
 from contextlib import contextmanager
+from unittest import skip
+
+import responses
+from responses.matchers import json_params_matcher
 
 import responses
 from responses.matchers import json_params_matcher
@@ -13,8 +17,12 @@ from frappe.integrations.doctype.webhook.webhook import (
 	get_webhook_data,
 	get_webhook_headers,
 )
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.classes.context_managers import timeout
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @contextmanager
@@ -30,6 +38,9 @@ def get_test_webhook(config):
 		wh.delete()
 
 
+<<<<<<< HEAD
+class TestWebhook(FrappeTestCase):
+=======
 class UnitTestWebhook(UnitTestCase):
 	"""
 	Unit tests for Webhook.
@@ -40,6 +51,7 @@ class UnitTestWebhook(UnitTestCase):
 
 
 class TestWebhook(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		# delete any existing webhooks
@@ -121,6 +133,12 @@ class TestWebhook(IntegrationTestCase):
 		self.test_user.email = "user1@integration.webhooks.test.com"
 		self.test_user.first_name = "user1"
 		self.test_user.send_welcome_email = False
+<<<<<<< HEAD
+
+		self.responses = responses.RequestsMock()
+		self.responses.start()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def tearDown(self) -> None:
 		self.user.delete()
@@ -134,14 +152,30 @@ class TestWebhook(IntegrationTestCase):
 	def test_webhook_trigger_with_enabled_webhooks(self):
 		"""Test webhook trigger for enabled webhooks"""
 
+<<<<<<< HEAD
+		frappe.cache().delete_value("webhooks")
+=======
 		frappe.cache.delete_value("webhooks")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# Insert the user to db
 		self.test_user.insert()
 
+<<<<<<< HEAD
+		webhooks = frappe.cache().get_value("webhooks")
+		self.assertTrue("User" in webhooks)
+		self.assertEqual(len(webhooks.get("User")), 1)
+
+		# only 1 hook (enabled) must be queued
+		self.assertEqual(len(frappe.local._webhook_queue), 1)
+		execution = frappe.local._webhook_queue[0]
+		self.assertEqual(execution.webhook.name, self.sample_webhooks[0].name)
+		self.assertEqual(execution.doc.name, self.test_user.name)
+=======
 		webhooks = frappe.cache.get_value("webhooks")
 		self.assertTrue("User" in webhooks)
 		self.assertEqual(len(webhooks.get("User")), 1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# only 1 hook (enabled) must be queued
 		self.assertEqual(len(frappe.local._webhook_queue), 1)
@@ -275,6 +309,8 @@ class TestWebhook(IntegrationTestCase):
 			flush_webhook_execution_queue()
 			log = frappe.get_last_doc("Webhook Request Log")
 			self.assertEqual(len(json.loads(log.response)), 3)
+<<<<<<< HEAD
+=======
 
 	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_webhook_with_dynamic_url_enabled(self):
@@ -339,3 +375,4 @@ class TestWebhook(IntegrationTestCase):
 			doc = frappe.new_doc("Note")
 			doc.title = "Test Webhook Note"
 			enqueue_webhook(doc, wh)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

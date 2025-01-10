@@ -3,10 +3,17 @@
 
 import frappe
 from frappe.geo.utils import get_coords
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestGeoUtils(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 
 
 class TestGeoUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		self.todo = frappe.get_doc(
 			doctype="ToDo", description="Test description", assigned_by="Administrator"

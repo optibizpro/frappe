@@ -14,11 +14,19 @@
 		display: block;
 	}
 
+<<<<<<< HEAD
+	& > ul:empty {
+		display: none;
+	}
+
+	& > ul {
+=======
 	& > [role="listbox"] {
 		&:empty {
 			display: none;
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		position: absolute;
 		width: 100%;
 		list-style: none;
@@ -35,8 +43,12 @@
 		z-index: 4;
 		min-width: 250px;
 
+<<<<<<< HEAD
+		& > li {
+=======
 		& > li,
 		& > [role="option"] {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			cursor: pointer;
 			@include get_textstyle("sm", "regular");
 			padding: var(--padding-sm);
@@ -56,6 +68,16 @@
 				@include get_textstyle("sm", "bold");
 			}
 
+<<<<<<< HEAD
+		& > li .link-option {
+			font-weight: normal;
+		}
+
+		& > li:hover,
+		& > li[aria-selected="true"] {
+			background-color: var(--awesomplete-hover-bg);
+			color: var(--text-color);
+=======
 			.link-option {
 				font-weight: normal;
 				color: var(--text-color);
@@ -66,6 +88,7 @@
 				background-color: var(--awesomplete-hover-bg);
 				color: var(--text-color);
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		a:hover {

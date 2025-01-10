@@ -26,7 +26,11 @@ import subprocess
 import sys
 import time
 import urllib.request
+<<<<<<< HEAD
+from functools import cache, lru_cache
+=======
 from functools import cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from urllib.error import HTTPError
 
 
@@ -71,6 +75,32 @@ def req(url):
 				continue
 			raise
 
+<<<<<<< HEAD
+	res = req(api_url)
+	return json.loads(res.read().decode("utf8"))
+
+
+def req(url):
+	"Simple resilient request call to handle rate limits."
+	headers = None
+	token = os.environ.get("GITHUB_TOKEN")
+	if token:
+		headers = {"authorization": f"Bearer {token}"}
+
+	retries = 0
+	while True:
+		try:
+			req = urllib.request.Request(url, headers=headers)
+			return urllib.request.urlopen(req)
+		except HTTPError as exc:
+			if exc.code == 403 and retries < 5:
+				retries += 1
+				time.sleep(retries)
+				continue
+			raise
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def get_files_list(pr_number, repo="frappe/frappe"):
 	"""
@@ -110,6 +140,19 @@ def has_run_ui_tests_label(pr_number, repo="frappe/frappe"):
 	"""Check if the PR has the 'Run UI Tests' label."""
 	return has_label(pr_number, "Run UI Tests", repo)
 
+<<<<<<< HEAD
+
+def has_label(pr_number, label, repo="frappe/frappe"):
+	return any(
+		[
+			fetched_label["name"]
+			for fetched_label in fetch_pr_data(pr_number, repo)["labels"]
+			if fetched_label["name"] == label
+		]
+	)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def has_label(pr_number, label, repo="frappe/frappe"):
 	"""
@@ -134,6 +177,7 @@ def is_server_side_code(file):
 	return file.endswith("py") or file.endswith(".po")
 
 
+
 def is_ci(file):
 	"""Check if the file is related to CI configuration."""
 	return ".github" in file
@@ -145,7 +189,10 @@ def is_frontend_code(file):
 
 
 def is_docs(file):
+<<<<<<< HEAD
+=======
 	"""Check if the file is documentation or image."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	regex = re.compile(r"\.(md|png|jpg|jpeg|csv|svg)$|^.github|LICENSE")
 	return bool(regex.search(file))
 
@@ -184,11 +231,19 @@ if __name__ == "__main__":
 		else:
 			print("Found `Skip CI` label on pr, stopping build process.")
 			sys.exit(0)
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif ci_files_changed:
 		print("CI related files were updated, running all build processes.")
 	elif only_docs_changed:
 		print("Only docs were updated, stopping build process.")
 		sys.exit(0)
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif (
 		only_frontend_code_changed
 		and build_type == "server"

@@ -1,5 +1,14 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+<<<<<<< HEAD
+import frappe
+from frappe.tests.utils import FrappeTestCase
+
+test_records = frappe.get_test_records("Page")
+
+
+class TestPage(FrappeTestCase):
+=======
 import os
 import unittest
 from unittest.mock import patch
@@ -18,6 +27,7 @@ class UnitTestPage(UnitTestCase):
 
 
 class TestPage(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_naming(self):
 		self.assertRaises(
 			frappe.NameError,

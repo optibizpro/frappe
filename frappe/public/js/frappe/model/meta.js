@@ -8,9 +8,12 @@ frappe.provide("frappe.meta.doctypes");
 frappe.provide("frappe.meta.precision_map");
 
 frappe.get_meta = function (doctype) {
+<<<<<<< HEAD
+=======
 	if (doctype === "DocType" && frappe.meta.__doctype_meta) {
 		return frappe.meta.__doctype_meta;
 	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return locals["DocType"] ? locals["DocType"][doctype] : null;
 };
 
@@ -19,9 +22,15 @@ $.extend(frappe.meta, {
 		$.each(doc.fields, function (i, df) {
 			frappe.meta.add_field(df);
 		});
+<<<<<<< HEAD
+		frappe.meta.sync_messages(doc);
+		if (doc.__print_formats) frappe.model.sync(doc.__print_formats);
+		if (doc.__workflow_docs) frappe.model.sync(doc.__workflow_docs);
+=======
 
 		if (doc.__print_formats?.length) frappe.model.sync(doc.__print_formats);
 		if (doc.__workflow_docs?.length) frappe.model.sync(doc.__workflow_docs);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	// build docfield_map and docfield_list
@@ -167,7 +176,11 @@ $.extend(frappe.meta, {
 			frappe.meta.get_table_fields(doctype).every(function (d) {
 				if (
 					frappe.meta.has_field(d.options, key) ||
+<<<<<<< HEAD
+					in_list(frappe.model.child_table_field_list, key)
+=======
 					frappe.model.child_table_field_list.includes(key)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				) {
 					out = d.options;
 					return false;
@@ -176,6 +189,10 @@ $.extend(frappe.meta, {
 			});
 
 			if (!out) {
+<<<<<<< HEAD
+				// eslint-disable-next-line
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				console.log(
 					__("Warning: Unable to find {0} in any table related to {1}", [
 						key,
@@ -188,7 +205,11 @@ $.extend(frappe.meta, {
 	},
 
 	get_parentfield: function (parent_dt, child_dt) {
+<<<<<<< HEAD
+		var df = (frappe.get_doc("DocType", parent_dt).fields || []).filter(
+=======
 		var df = (frappe.get_meta(parent_dt).fields || []).filter(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			(df) => frappe.model.table_fields.includes(df.fieldtype) && df.options === child_dt
 		);
 		if (!df.length) throw "parentfield not found for " + parent_dt + ", " + child_dt;
@@ -267,7 +288,11 @@ $.extend(frappe.meta, {
 			});
 		$.each(print_formats, function (i, d) {
 			if (
+<<<<<<< HEAD
+				!in_list(print_format_list, d.name) &&
+=======
 				!print_format_list.includes(d.name) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				d.print_format_type !== "JS" &&
 				(cint(enable_raw_printing) || !d.raw_printing)
 			) {
@@ -284,10 +309,23 @@ $.extend(frappe.meta, {
 		return print_format_list;
 	},
 
+<<<<<<< HEAD
+	sync_messages: function (doc) {
+		if (doc.__messages) {
+			$.extend(frappe._messages, doc.__messages);
+		}
+	},
+
+	get_field_currency: function (df, doc) {
+		var currency = frappe.boot.sysdefaults.currency;
+		if (!doc && cur_frm) doc = cur_frm.doc;
+
+=======
 	get_field_currency: function (df, doc) {
 		var currency = frappe.boot.sysdefaults.currency || "USD";
 		if (!doc && cur_frm) doc = cur_frm.doc;
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (df && df.options) {
 			if (df.options.indexOf(":") != -1) {
 				var options = df.options.split(":");

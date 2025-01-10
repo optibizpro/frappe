@@ -75,7 +75,11 @@ frappe.ui.form.PrintView = class {
 		});
 
 		this.page.add_action_icon(
+<<<<<<< HEAD
+			"file",
+=======
 			"es-line-filetype",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			() => {
 				this.go_to_form_view();
 			},
@@ -87,6 +91,26 @@ frappe.ui.form.PrintView = class {
 	setup_sidebar() {
 		this.sidebar = this.page.sidebar.addClass("print-preview-sidebar");
 
+<<<<<<< HEAD
+		this.print_sel = this.add_sidebar_item({
+			fieldtype: "Select",
+			fieldname: "print_format",
+			label: "Print Format",
+			options: [this.get_default_option_for_select(__("Select Print Format"))],
+			change: () => this.refresh_print_format(),
+			default: __("Select Print Format"),
+		}).$input;
+
+		this.language_sel = this.add_sidebar_item({
+			fieldtype: "Select",
+			fieldname: "language",
+			placeholder: "Language",
+			options: [
+				this.get_default_option_for_select(__("Select Language")),
+				...this.get_language_options(),
+			],
+			default: __("Select Language"),
+=======
 		this.print_format_selector = this.add_sidebar_item({
 			fieldtype: "Link",
 			fieldname: "print_format",
@@ -103,12 +127,27 @@ frappe.ui.form.PrintView = class {
 			fieldname: "language",
 			label: __("Language"),
 			options: "Language",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			change: () => {
 				this.set_user_lang();
 				this.preview();
 			},
 		}).$input;
 
+<<<<<<< HEAD
+		this.letterhead_selector_df = this.add_sidebar_item({
+			fieldtype: "Autocomplete",
+			fieldname: "letterhead",
+			label: __("Select Letterhead"),
+			placeholder: __("Select Letterhead"),
+			options: [__("No Letterhead")],
+			change: () => this.preview(),
+			default: this.print_settings.with_letterhead
+				? __("No Letterhead")
+				: __("Select Letterhead"),
+		});
+		this.letterhead_selector = this.letterhead_selector_df.$input;
+=======
 		let description = "";
 		if (!cint(this.print_settings.repeat_header_footer)) {
 			description =
@@ -131,6 +170,7 @@ frappe.ui.form.PrintView = class {
 				print_view.preview();
 			},
 		}).$input;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.sidebar_dynamic_section = $(`<div class="dynamic-settings"></div>`).appendTo(
 			this.sidebar
 		);
@@ -154,6 +194,17 @@ frappe.ui.form.PrintView = class {
 		return field;
 	}
 
+<<<<<<< HEAD
+	get_default_option_for_select(value) {
+		return {
+			label: value,
+			value: value,
+			disabled: true,
+		};
+	}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	setup_menu() {
 		this.page.clear_menu();
 
@@ -184,11 +235,18 @@ frappe.ui.form.PrintView = class {
 		this.set_breadcrumbs();
 		this.setup_customize_dialog();
 
+<<<<<<< HEAD
+		// print format builder beta
+		this.page.add_inner_message(`
+			<a style="line-height: 2.4" href="/app/print-format-builder-beta?doctype=${this.frm.doctype}">
+				${__("Try the new Print Format Builder")}
+=======
 		// print designer link
 		if (Object.keys(frappe.boot.versions).includes("print_designer")) {
 			this.page.add_inner_message(`
 			<a style="line-height: 2.4" href="/app/print-designer?doctype=${this.frm.doctype}">
 				${__("Try the new Print Designer")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			</a>
 			`);
 		} else {
@@ -290,7 +348,11 @@ frappe.ui.form.PrintView = class {
 					beta: data.beta,
 				};
 				frappe.set_route("print-format-builder");
+<<<<<<< HEAD
+				this.print_sel.val(data.print_format_name);
+=======
 				this.print_format_selector.val(data.print_format_name);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 			__("New Custom Print Format"),
 			__("Start")
@@ -315,6 +377,14 @@ frappe.ui.form.PrintView = class {
 	setup_customize_dialog() {
 		let print_format = this.get_print_format();
 		$(document).on("new-print-format", (e) => {
+<<<<<<< HEAD
+			this.refresh_print_options();
+			if (e.print_format) {
+				this.print_sel.val(e.print_format);
+			}
+			// start a new print format
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.prompt(
 				[
 					{
@@ -351,6 +421,29 @@ frappe.ui.form.PrintView = class {
 		});
 	}
 
+<<<<<<< HEAD
+	set_letterhead_options() {
+		let letterhead_options = [__("No Letterhead")];
+		let default_letterhead;
+		let doc_letterhead = this.frm.doc.letter_head;
+
+		return frappe.db
+			.get_list("Letter Head", {
+				filters: { disabled: 0 },
+				fields: ["name", "is_default"],
+				limit: 0,
+			})
+			.then((letterheads) => {
+				letterheads.map((letterhead) => {
+					if (letterhead.is_default) default_letterhead = letterhead.name;
+					return letterhead_options.push(letterhead.name);
+				});
+
+				this.letterhead_selector_df.set_data(letterhead_options);
+				let selected_letterhead = doc_letterhead || default_letterhead;
+				if (selected_letterhead) this.letterhead_selector.val(selected_letterhead);
+			});
+=======
 	set_default_letterhead() {
 		if (this.frm.doc.letter_head) {
 			this.letterhead_selector.val(this.frm.doc.letter_head);
@@ -360,6 +453,7 @@ frappe.ui.form.PrintView = class {
 		return frappe.db
 			.get_value("Letter Head", { disabled: 0, is_default: 1 }, "name")
 			.then(({ message }) => this.letterhead_selector.val(message.name));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	set_user_lang() {
@@ -370,7 +464,11 @@ frappe.ui.form.PrintView = class {
 		let print_format = this.get_print_format();
 		this.lang_code =
 			this.frm.doc.language || print_format.default_print_language || frappe.boot.lang;
+<<<<<<< HEAD
+		this.language_sel.val(this.lang_code);
+=======
 		this.language_selector.val(this.lang_code);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	toggle_raw_printing() {
@@ -391,6 +489,11 @@ frappe.ui.form.PrintView = class {
 		this.print_wrapper.find(".preview-beta-wrapper").hide();
 		this.print_wrapper.find(".print-preview-wrapper").show();
 
+<<<<<<< HEAD
+		const $print_format = this.print_wrapper.find("iframe");
+		this.$print_format_body = $print_format.contents();
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.get_print_html((out) => {
 			if (!out.html) {
 				out.html = this.get_no_preview_html();
@@ -639,7 +742,10 @@ frappe.ui.form.PrintView = class {
 				return;
 			}
 		} else {
+<<<<<<< HEAD
+=======
 			this.is_wkhtmltopdf_valid();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.render_page("/api/method/frappe.utils.print_format.download_pdf?");
 		}
 	}
@@ -741,12 +847,36 @@ frappe.ui.form.PrintView = class {
 	get_print_format_printer_map() {
 		// returns the whole object "print_format_printer_map" stored in the localStorage.
 		try {
+<<<<<<< HEAD
+			let print_format_printer_map = JSON.parse(localStorage.print_format_printer_map);
+			return print_format_printer_map;
+=======
 			return JSON.parse(localStorage.print_format_printer_map);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		} catch (e) {
 			return {};
 		}
 	}
 
+<<<<<<< HEAD
+	refresh_print_options() {
+		this.print_formats = frappe.meta.get_print_formats(this.frm.doctype);
+		const print_format_select_val = this.print_sel.val();
+		this.print_sel
+			.empty()
+			.add_options([
+				this.get_default_option_for_select(__("Select Print Format")),
+				...this.print_formats,
+			]);
+		return (
+			this.print_formats.includes(print_format_select_val) &&
+			this.print_sel.val(print_format_select_val)
+		);
+	}
+
+	selected_format() {
+		return this.print_sel.val() || this.frm.meta.default_print_format || "Standard";
+=======
 	set_default_print_format() {
 		if (
 			frappe.meta
@@ -762,6 +892,7 @@ frappe.ui.form.PrintView = class {
 
 	selected_format() {
 		return this.print_format_selector.val() || "Standard";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	is_raw_printing(format) {

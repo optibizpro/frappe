@@ -11,10 +11,26 @@
 		font-size: var(--text-base);
 	}
 </style>
+<<<<<<< HEAD
+<div class='page-card'>
+	<h5 class='page-card-head'>
+		<span class='indicator {{ indicator_color or "blue" }}'>
+			{{ title or _("Message") }}</span>
+	</h5>
+	<div class="page-card-body">
+	{% block message_body %}
+		{% if message %}
+		<p>{{ message }}</p>
+		{% endif %}
+		{% if primary_action %}
+		<div><a href='{{ primary_action or "/" }}' class='btn btn-primary btn-sm'>
+			{{ primary_label or _("Home") }}</a></div>
+=======
 <div class='error-page'>
 	<div>
 		{% if title %}
 		<h4 class='page-card-head'>{{ title }}</h4>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		{% endif %}
 		<div class="details">
 		{% block message_body %}

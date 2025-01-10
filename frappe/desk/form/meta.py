@@ -35,6 +35,13 @@ ASSET_KEYS = (
 
 def get_meta(doctype, cached=True) -> "FormMeta":
 	# don't cache for developer mode as js files, templates may be edited
+<<<<<<< HEAD
+	if cached and not frappe.conf.developer_mode:
+		meta = frappe.cache().hget("doctype_form_meta", doctype)
+		if not meta:
+			meta = FormMeta(doctype)
+			frappe.cache().hset("doctype_form_meta", doctype, meta)
+=======
 	cached = cached and not frappe.conf.developer_mode
 	if cached:
 		meta = frappe.cache.hget("doctype_form_meta", doctype)
@@ -42,6 +49,7 @@ def get_meta(doctype, cached=True) -> "FormMeta":
 			# Cache miss - explicitly get meta from DB to avoid
 			meta = FormMeta(doctype, cached=False)
 			frappe.cache.hset("doctype_form_meta", doctype, meta)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		meta = FormMeta(doctype)
 
@@ -185,6 +193,7 @@ class FormMeta(Meta):
 
 	def add_search_fields(self):
 		"""add search fields found in the doctypes indicated by link fields' options"""
+		# TODO: IF field is not found replace with useful message
 		for df in self.get("fields", {"fieldtype": "Link", "options": ["!=", "[Select]"]}):
 			if df.options:
 				try:
@@ -256,6 +265,21 @@ class FormMeta(Meta):
 
 				self.set("__form_grid_templates", templates)
 
+<<<<<<< HEAD
+	def set_translations(self, lang):
+		from frappe.translate import extract_messages_from_code, make_dict_from_messages
+
+		self.set("__messages", frappe.get_lang_dict("doctype", self.name))
+
+		# set translations for grid templates
+		if self.get("__form_grid_templates"):
+			for content in self.get("__form_grid_templates").values():
+				messages = extract_messages_from_code(content)
+				messages = make_dict_from_messages(messages)
+				self.get("__messages").update(messages)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def load_dashboard(self):
 		self.set("__dashboard", self.get_dashboard_data())
 

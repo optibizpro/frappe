@@ -32,7 +32,11 @@ export default class Column {
 				<label class="column-label">
 					${__(this.df.label, null, this.df.parent)}
 				</label>
+<<<<<<< HEAD
+			`).appendTo(this.wrapper);
+=======
 			`).prependTo(this.wrapper);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 

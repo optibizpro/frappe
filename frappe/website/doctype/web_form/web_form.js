@@ -11,6 +11,8 @@ frappe.ui.form.on("Web Form", {
 			}
 			return value;
 		};
+<<<<<<< HEAD
+=======
 
 		frappe.meta.docfield_map["Web Form Field"].fieldname.formatter = (value) => {
 			if (!value) return;
@@ -33,7 +35,20 @@ frappe.ui.form.on("Web Form", {
 				const code = `<iframe src="${url}" style="border: none; width: 100%; height: inherit;"></iframe>`;
 				frappe.utils.copy_to_clipboard(code, __("Embed code copied"));
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+		frappe.meta.docfield_map["Web Form Field"].fieldname.formatter = (value) => {
+			if (!value) return;
+			return frappe.unscrub(value);
+		};
+
+		frappe.meta.docfield_map["Web Form List Column"].fieldname.formatter = (value) => {
+			if (!value) return;
+			return frappe.unscrub(value);
+		};
+	},
+
+	refresh: function (frm) {
 		if (frm.doc.is_standard && !frappe.boot.developer_mode) {
 			frm.disable_form();
 			frappe.show_alert(
@@ -70,7 +85,19 @@ frappe.ui.form.on("Web Form", {
 
 		if (!frm.doc.web_form_fields) {
 			frm.scroll_to_field("web_form_fields");
+<<<<<<< HEAD
+			frappe.throw(__("Atleast one field is required in Web Form Fields Table"));
+=======
 			frappe.throw(__("At least one field is required in Web Form Fields Table"));
+		}
+
+		let page_break_count = frm.doc.web_form_fields.filter(
+			(f) => f.fieldtype == "Page Break"
+		).length;
+
+		if (page_break_count >= 10) {
+			frappe.throw(__("There can be only 9 Page Break fields in a Web Form"));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		let page_break_count = frm.doc.web_form_fields.filter(

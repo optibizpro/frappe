@@ -1,9 +1,15 @@
 frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 	frappe.ui.form.ControlLink
 ) {
+<<<<<<< HEAD
+	make_input() {
+		super.make_input();
+
+=======
 	static horizontal = false;
 	make_input() {
 		super.make_input();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.$input_area.addClass("form-control table-multiselect");
 		this.$input.removeClass("form-control");
 
@@ -28,6 +34,11 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 
 			const value = decodeURIComponent($value.data().value);
 			const link_field = this.get_link_field();
+<<<<<<< HEAD
+			this.rows = this.rows.filter((row) => row[link_field.fieldname] !== value);
+
+			this.parse_validate_and_set_in_model("");
+=======
 			this.rows = this.rows.filter((row) => {
 				if (row[link_field.fieldname] !== value) {
 					return row;
@@ -52,6 +63,7 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 					]);
 				}
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 		this.$input_area.on("click", ".btn-link-to-form", (e) => {
 			const $target = $(e.currentTarget);
@@ -186,7 +198,11 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 		let me = this;
 
 		awesomplete.filter = function (item) {
+<<<<<<< HEAD
+			if (in_list(me._rows_list, item.value)) {
+=======
 			if (me._rows_list.includes(item.value)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				return false;
 			}
 

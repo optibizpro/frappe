@@ -213,7 +213,11 @@ def get_google_calendar_object(g_calendar):
 		"token_uri": GoogleOAuth.OAUTH_URL,
 		"client_id": google_settings.client_id,
 		"client_secret": google_settings.get_password(fieldname="client_secret", raise_exception=False),
+<<<<<<< HEAD
+		"scopes": ["https://www.googleapis.com/auth/calendar/v3"],
+=======
 		"scopes": [SCOPES],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	credentials = google.oauth2.credentials.Credentials(**credentials_dict)
@@ -762,7 +766,13 @@ def get_conference_data(doc):
 
 
 def get_attendees(doc):
+<<<<<<< HEAD
+	"""
+	Returns a list of dicts with attendee emails, if available in event_participants table
+	"""
+=======
 	"""Return a list of dicts with attendee emails, if available in event_participants table."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	attendees, email_not_found = [], []
 
 	for participant in doc.event_participants:

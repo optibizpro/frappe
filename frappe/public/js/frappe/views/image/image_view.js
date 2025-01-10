@@ -187,7 +187,15 @@ frappe.views.GalleryView = class GalleryView {
 	constructor(opts) {
 		$.extend(this, opts);
 		var me = this;
+<<<<<<< HEAD
+
+		this.lib_ready = this.load_lib();
+		this.lib_ready.then(function () {
+			me.prepare();
+		});
+=======
 		me.prepare();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	prepare() {
 		// keep only one pswp dom element
@@ -207,11 +215,17 @@ frappe.views.GalleryView = class GalleryView {
 		}
 
 		return new Promise((resolve) => {
+<<<<<<< HEAD
+			const items = this.items.map(function (i) {
+				const query = 'img[data-name="' + i._name + '"]';
+				let el = me.wrapper.find(query).get(0);
+=======
 			const items = this.items
 				.filter((i) => i.image !== null)
 				.map(function (i) {
 					const query = 'img[data-name="' + i._name + '"]';
 					let el = me.wrapper.find(query).get(0);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 					let width, height;
 					if (el) {
@@ -219,6 +233,23 @@ frappe.views.GalleryView = class GalleryView {
 						height = el.naturalHeight;
 					}
 
+<<<<<<< HEAD
+				if (!el) {
+					el = me.wrapper.find('.image-field[data-name="' + i._name + '"]').get(0);
+					width = el.getBoundingClientRect().width;
+					height = el.getBoundingClientRect().height;
+				}
+
+				return {
+					src: i._image_url,
+					msrc: i._image_url,
+					name: i.name,
+					w: width,
+					h: height,
+					el: el,
+				};
+			});
+=======
 					if (!el) {
 						el = me.wrapper.find('.image-field[data-name="' + i._name + '"]').get(0);
 						width = el.getBoundingClientRect().width;
@@ -232,12 +263,17 @@ frappe.views.GalleryView = class GalleryView {
 						height: height,
 					};
 				});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.pswp_items = items;
 			resolve();
 		});
 	}
 	show(docname) {
+<<<<<<< HEAD
+		this.lib_ready.then(() => this.prepare_pswp_items()).then(() => this._show(docname));
+=======
 		this.prepare_pswp_items().then(() => this._show(docname));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	_show(docname) {
 		const items = this.pswp_items;
@@ -245,6 +281,111 @@ frappe.views.GalleryView = class GalleryView {
 
 		var options = {
 			index: item_index,
+<<<<<<< HEAD
+			getThumbBoundsFn: function (index) {
+				const query = 'img[data-name="' + items[index]._name + '"]';
+				let thumbnail = me.wrapper.find(query).get(0);
+
+				if (!thumbnail) {
+					return;
+				}
+
+				var pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+					rect = thumbnail.getBoundingClientRect();
+
+				return {
+					x: rect.left,
+					y: rect.top + pageYScroll,
+					w: rect.width,
+				};
+			},
+			history: false,
+			shareEl: false,
+			showHideOpacity: true,
+		};
+
+		// init
+		this.pswp = new PhotoSwipe(this.pswp_root.get(0), PhotoSwipeUI_Default, items, options);
+		this.browse_images();
+		this.pswp.init();
+	}
+	browse_images() {
+		const $more_items = this.pswp_root.find(".pswp__more-items");
+		const images_map = this.images_map;
+		let last_hide_timeout = null;
+
+		this.pswp.listen("afterChange", function () {
+			const images = images_map[this.currItem.name];
+			if (!images || images.length === 1) {
+				$more_items.html("");
+				return;
+			}
+
+			hide_more_items_after_2s();
+			const html = images.map(img_html).join("");
+			$more_items.html(html);
+		});
+
+		this.pswp.listen("beforeChange", hide_more_items);
+		this.pswp.listen("initialZoomOut", hide_more_items);
+		this.pswp.listen("destroy", () => {
+			$(document).off("mousemove", hide_more_items_after_2s);
+		});
+
+		// Replace current image on click
+		$more_items.on("click", ".pswp__more-item", (e) => {
+			const img_el = e.target;
+			const index = this.pswp.items.findIndex((i) => i.name === this.pswp.currItem.name);
+
+			this.pswp.goTo(index);
+			this.pswp.items.splice(index, 1, {
+				src: img_el.src,
+				w: img_el.naturalWidth,
+				h: img_el.naturalHeight,
+				name: this.pswp.currItem.name,
+			});
+			this.pswp.invalidateCurrItems();
+			this.pswp.updateSize(true);
+		});
+
+		// hide more-images 2s after mousemove
+		$(document).on("mousemove", hide_more_items_after_2s);
+
+		function hide_more_items_after_2s() {
+			clearTimeout(last_hide_timeout);
+			show_more_items();
+			last_hide_timeout = setTimeout(hide_more_items, 2000);
+		}
+
+		function show_more_items() {
+			$more_items.show();
+		}
+
+		function hide_more_items() {
+			$more_items.hide();
+		}
+
+		function img_html(src) {
+			return `<div class="pswp__more-item">
+				<img src="${src}">
+			</div>`;
+		}
+	}
+	load_lib() {
+		return new Promise((resolve) => {
+			var asset_dir = "assets/frappe/js/lib/photoswipe/";
+			frappe.require(
+				[
+					asset_dir + "photoswipe.css",
+					asset_dir + "default-skin.css",
+					asset_dir + "photoswipe.js",
+					asset_dir + "photoswipe-ui-default.js",
+				],
+				resolve
+			);
+		});
+	}
+=======
 			history: false,
 			shareEl: false,
 			dataSource: items,
@@ -254,4 +395,5 @@ frappe.views.GalleryView = class GalleryView {
 		this.pswp = new frappe.PhotoSwipe(options);
 		this.pswp.init();
 	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

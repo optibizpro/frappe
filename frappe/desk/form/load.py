@@ -15,9 +15,12 @@ from frappe.model.utils.user_settings import get_user_settings
 from frappe.permissions import get_doc_permissions, has_permission
 from frappe.utils.data import cstr
 from frappe.utils.html_utils import clean_email_html
+<<<<<<< HEAD
+=======
 
 if typing.TYPE_CHECKING:
 	from frappe.model.document import Document
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()
@@ -45,6 +48,17 @@ def getdoc(doctype, name):
 		frappe._set_document_in_cache(key, doc)
 
 	run_onload(doc)
+<<<<<<< HEAD
+
+	if not doc.has_permission("read"):
+		frappe.flags.error_message = _("Insufficient Permission for {0}").format(
+			frappe.bold(doctype + " " + name)
+		)
+		raise frappe.PermissionError(("read", doctype, name))
+
+	# ignores system setting (apply_perm_level_on_api_calls) unconditionally to maintain backward compatibility
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	doc.apply_fieldlevel_read_permissions()
 
 	# add file list
@@ -122,7 +136,11 @@ def get_docinfo(doc=None, doctype=None, name=None):
 			"assignments": get_assignments(doc.doctype, doc.name),
 			"permissions": get_doc_permissions(doc),
 			"shared": get_docshares(doc),
+<<<<<<< HEAD
+			"views": get_view_logs(doc.doctype, doc.name),
+=======
 			"views": get_view_logs(doc),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"energy_point_logs": get_point_logs(doc.doctype, doc.name),
 			"additional_timeline_content": get_additional_timeline_content(doc.doctype, doc.name),
 			"milestones": get_milestones(doc.doctype, doc.name),
@@ -340,12 +358,16 @@ def get_communication_data(
 		LIMIT %(limit)s
 		OFFSET %(start)s
 	""".format(part1=part1, part2=part2, group_by=(group_by or "")),
+<<<<<<< HEAD
+		dict(doctype=doctype, name=name, start=frappe.utils.cint(start), limit=limit),
+=======
 		dict(
 			doctype=doctype,
 			name=name,
 			start=frappe.utils.cint(start),
 			limit=limit,
 		),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		as_dict=as_dict,
 	)
 
@@ -401,7 +423,11 @@ def get_document_email(doctype, name):
 		return None
 
 	email = email.split("@")
+<<<<<<< HEAD
+	return f"{email[0]}+{quote(doctype)}={quote(cstr(name))}@{email[1]}"
+=======
 	return f"{email[0]}+{quote_plus(doctype)}={quote_plus(cstr(name))}@{email[1]}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_automatic_email_link():
@@ -438,7 +464,13 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		link_fields = meta.get_link_fields() + meta.get_dynamic_link_fields()
 
 	for field in link_fields:
+<<<<<<< HEAD
+		link_docname = getattr(doc, field.fieldname, None)
+
+		if not link_docname:
+=======
 		if not (doc_fieldvalue := getattr(doc, field.fieldname, None)):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			continue
 
 		doctype = field.options if field.fieldtype == "Link" else doc.get(field.options)
@@ -447,8 +479,13 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		if not meta or not meta.title_field or not meta.show_title_field_in_link:
 			continue
 
+<<<<<<< HEAD
+		link_title = frappe.db.get_value(doctype, link_docname, meta.title_field, cache=True, order_by=None)
+		link_titles.update({doctype + "::" + link_docname: link_title})
+=======
 		link_title = frappe.db.get_value(doctype, doc_fieldvalue, meta.title_field, cache=True, order_by=None)
 		link_titles.update({doctype + "::" + doc_fieldvalue: link_title or doc_fieldvalue})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return link_titles
 

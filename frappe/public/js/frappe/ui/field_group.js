@@ -6,8 +6,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 	constructor(opts) {
 		super(opts);
 		this.dirty = false;
+<<<<<<< HEAD
+=======
 		this.fetch_dict = {};
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		$.each(this.fields || [], function (i, f) {
 			if (!f.fieldname && f.label) {
 				f.fieldname = f.label.replace(/ /g, "_").toLowerCase();
@@ -57,7 +60,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 	focus_on_first_input() {
 		if (this.no_focus) return;
 		$.each(this.fields_list, function (i, f) {
+<<<<<<< HEAD
+			if (!in_list(["Date", "Datetime", "Time", "Check"], f.df.fieldtype) && f.set_focus) {
+=======
 			if (!["Date", "Datetime", "Time", "Check"].includes(f.df.fieldtype) && f.set_focus) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				f.set_focus();
 				return false;
 			}
@@ -130,7 +137,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 
 		if (invalid.length && check_invalid) {
 			frappe.msgprint({
+<<<<<<< HEAD
+				title: __("Inavlid Values"),
+=======
 				title: __("Invalid Values"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				message:
 					__("Following fields have invalid values:") +
 					"<br><br><ul><li>" +

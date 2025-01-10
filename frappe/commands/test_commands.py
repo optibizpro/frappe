@@ -35,6 +35,7 @@ from frappe.installer import add_to_installed_apps, remove_app
 from frappe.query_builder.utils import db_type_is
 from frappe.tests import IntegrationTestCase, timeout
 from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase, timeout
 from frappe.utils import add_to_date, get_bench_path, get_bench_relative_path, now
 from frappe.utils.backups import BackupGenerator, fetch_latest_backups
 from frappe.utils.jinja_globals import bundled_asset
@@ -133,7 +134,11 @@ def cli(cmd: Command, args: list | None = None):
 			importlib.invalidate_caches()
 
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+class BaseTestCommands(FrappeTestCase):
+=======
 class BaseTestCommands(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 	@classmethod
 	def setUpClass(cls) -> None:
 		super().setUpClass()
@@ -454,7 +459,11 @@ class TestCommands(BaseTestCommands):
 
 		# Reset it back to original password
 		original_password = frappe.conf.admin_password or "admin"
+<<<<<<< HEAD:frappe/tests/test_commands.py
+		self.execute("bench --site {site} set-admin-password %s" % original_password)
+=======
 		self.execute("bench --site {{site}} set-admin-password {}".format(original_password))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 		self.assertEqual(self.returncode, 0)
 		self.assertEqual(check_password("Administrator", original_password), "Administrator")
 
@@ -519,13 +528,19 @@ class TestCommands(BaseTestCommands):
 
 	def test_set_global_conf(self):
 		key = "answer"
+<<<<<<< HEAD:frappe/tests/test_commands.py
+		value = "42"
+=======
 		value = frappe.generate_hash()
 		_ = frappe.get_site_config()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 		self.execute(f"bench set-config {key} {value} -g")
 		conf = frappe.get_site_config()
 
 		self.assertEqual(conf[key], value)
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+=======
 	def test_different_db_username(self):
 		site = frappe.generate_hash()
 		user = "".join(secrets.choice(string.ascii_letters) for _ in range(8))
@@ -610,6 +625,7 @@ class TestCommands(BaseTestCommands):
 		)
 		self.assertEqual(self.returncode, 0)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 
 class TestBackups(BaseTestCommands):
 	backup_map = types.MappingProxyType(
@@ -649,6 +665,8 @@ class TestBackups(BaseTestCommands):
 		self.assertIn("successfully completed", self.stdout)
 		self.assertNotEqual(before_backup["database"], after_backup["database"])
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+=======
 	@skipIf(
 		not (frappe.conf.db_type == "mariadb"),
 		"Only for MariaDB",
@@ -685,15 +703,21 @@ class TestBackups(BaseTestCommands):
 		)
 		self.assertEqual(self.returncode, 0)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 	def test_backup_fails_with_exit_code(self):
 		"""Provide incorrect options to check if exit code is 1"""
 		odb = BackupGenerator(
 			frappe.conf.db_name,
 			frappe.conf.db_name,
 			frappe.conf.db_password + "INCORRECT PASSWORD",
+<<<<<<< HEAD:frappe/tests/test_commands.py
+			db_host=frappe.db.host,
+			db_port=frappe.db.port,
+=======
 			db_socket=frappe.conf.db_socket,
 			db_host=frappe.conf.db_host,
 			db_port=frappe.conf.db_port,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 			db_type=frappe.conf.db_type,
 		)
 		with self.assertRaises(Exception):
@@ -827,7 +851,11 @@ class TestBackups(BaseTestCommands):
 		self.assertEqual([], missing_in_backup(self.backup_map["excludes"]["excludes"], database))
 
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+class TestRemoveApp(FrappeTestCase):
+=======
 class TestRemoveApp(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 	def test_delete_modules(self):
 		from frappe.installer import (
 			_delete_doctypes,
@@ -891,10 +919,24 @@ class TestAddNewUser(BaseTestCommands):
 		self.execute(
 			"bench --site {site} add-user test@gmail.com --first-name test --last-name test --password 123 --user-type 'System User' --add-role 'Accounts User' --add-role 'Sales User'"
 		)
+<<<<<<< HEAD:frappe/tests/test_commands.py
+		frappe.db.rollback()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 		self.assertEqual(self.returncode, 0)
 		user = frappe.get_doc("User", "test@gmail.com")
 		roles = {r.role for r in user.roles}
 		self.assertEqual({"Accounts User", "Sales User"}, roles)
+<<<<<<< HEAD:frappe/tests/test_commands.py
+
+
+class TestBenchBuild(BaseTestCommands):
+	def test_build_assets_size_check(self):
+		with cli(frappe.commands.utils.build, "--force --production") as result:
+			self.assertEqual(result.exit_code, 0)
+			self.assertEqual(result.exception, None)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 
 
 class TestBenchBuild(IntegrationTestCase):
@@ -928,6 +970,19 @@ class TestDBUtils(BaseTestCommands):
 		meta = frappe.get_meta("User", cached=False)
 		self.assertTrue(meta.get_field(field).search_index)
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+	@run_only_if(db_type_is.MARIADB)
+	def test_describe_table(self):
+		self.execute("bench --site {site} describe-database-table --doctype User", {})
+		self.assertIn("user_type", self.stdout)
+
+		# Ensure that output is machine parseable
+		stats = json.loads(self.stdout)
+		self.assertIn("total_rows", stats)
+
+
+class TestCommandUtils(FrappeTestCase):
+=======
 
 class TestSchedulerUtils(BaseTestCommands):
 	# Retry just in case there are stuck queued jobs
@@ -943,6 +998,7 @@ class TestSchedulerUtils(BaseTestCommands):
 
 
 class TestCommandUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 	def test_bench_helper(self):
 		from frappe.utils.bench_helper import get_app_groups
 
@@ -957,12 +1013,15 @@ class TestDBCli(BaseTestCommands):
 		self.execute("bench --site {site} db-console", kwargs={"cmd_input": rb"\q"})
 		self.assertEqual(self.returncode, 0)
 
+<<<<<<< HEAD:frappe/tests/test_commands.py
+=======
 	@run_only_if(db_type_is.MARIADB)
 	def test_db_cli_with_sql(self):
 		self.execute("bench --site {site} db-console -e 'select 1'")
 		self.assertEqual(self.returncode, 0)
 		self.assertIn("1", self.stdout)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 
 class TestSchedulerCLI(BaseTestCommands):
 	@classmethod
@@ -1005,6 +1064,8 @@ class TestSchedulerCLI(BaseTestCommands):
 		self.execute("bench --site {site} scheduler resume")
 		self.assertEqual(self.returncode, 0)
 		self.assertRegex(self.stdout, r"Scheduler is resumed for site .*")
+<<<<<<< HEAD:frappe/tests/test_commands.py
+=======
 
 
 class TestCLIImplementation(BaseTestCommands):
@@ -1012,3 +1073,4 @@ class TestCLIImplementation(BaseTestCommands):
 		self.execute("bench --site {site} migrat")
 		self.assertNotEqual(self.returncode, 0)
 		self.assertRegex(self.stderr, r"No such.*migrat.*migrate")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py

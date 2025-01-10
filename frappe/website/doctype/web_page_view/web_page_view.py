@@ -68,6 +68,13 @@ def make_view_log(
 
 	if referrer:
 		referrer = referrer.split("?", 1)[0]
+<<<<<<< HEAD
+
+	is_unique = True
+	if referrer.startswith(url):
+		is_unique = False
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if path != "/" and path.startswith("/"):
 		path = path[1:]

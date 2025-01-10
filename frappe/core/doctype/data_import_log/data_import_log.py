@@ -6,6 +6,9 @@ from frappe.model.document import Document
 
 
 class DataImportLog(Document):
+<<<<<<< HEAD
+	no_feed_on_delete = True
+=======
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -26,3 +29,4 @@ class DataImportLog(Document):
 	no_feed_on_delete = True
 
 	pass
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

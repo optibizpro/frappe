@@ -425,6 +425,8 @@ def send_scheduled_email():
 		if not frappe.flags.in_test:
 			frappe.db.commit()
 
+<<<<<<< HEAD
+=======
 	frappe.flags.is_scheduler_running = False
 
 
@@ -453,6 +455,7 @@ def newsletter_email_read(recipient_email=None, reference_doctype=None, referenc
 	finally:
 		frappe.response.update(frappe.utils.get_imaginary_pixel_response())
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def get_default_email_group():
 	return _("Website", lang=frappe.db.get_default("language"))

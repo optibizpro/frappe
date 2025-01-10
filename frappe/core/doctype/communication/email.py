@@ -46,8 +46,11 @@ def make(
 	print_letterhead=True,
 	email_template=None,
 	communication_type=None,
+<<<<<<< HEAD
+=======
 	send_after=None,
 	print_language=None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	now=False,
 	**kwargs,
 ) -> dict[str, str]:
@@ -103,8 +106,11 @@ def make(
 		email_template=email_template,
 		communication_type=communication_type,
 		add_signature=False,
+<<<<<<< HEAD
+=======
 		send_after=send_after,
 		print_language=print_language,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		now=now,
 	)
 
@@ -131,8 +137,11 @@ def _make(
 	email_template=None,
 	communication_type=None,
 	add_signature=True,
+<<<<<<< HEAD
+=======
 	send_after=None,
 	print_language=None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	now=False,
 ) -> dict[str, str]:
 	"""Internal method to make a new communication that ignores Permission checks."""
@@ -187,7 +196,10 @@ def _make(
 			print_format=print_format,
 			send_me_a_copy=send_me_a_copy,
 			print_letterhead=print_letterhead,
+<<<<<<< HEAD
+=======
 			print_language=print_language,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			now=now,
 		)
 
@@ -272,11 +284,14 @@ def add_attachments(name: str, attachments: Iterable[str | dict]) -> None:
 
 @frappe.whitelist(allow_guest=True, methods=("GET",))
 def mark_email_as_seen(name: str | None = None):
+<<<<<<< HEAD
+=======
 	frappe.request.after_response.add(lambda: _mark_email_as_seen(name))
 	frappe.response.update(frappe.utils.get_imaginary_pixel_response())
 
 
 def _mark_email_as_seen(name):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	try:
 		update_communication_as_read(name)
 	except Exception:

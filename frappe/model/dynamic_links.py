@@ -75,11 +75,19 @@ def fetch_distinct_link_doctypes(doctype: str, fieldname: str):
 	"""
 
 	key = _dynamic_link_map_key(doctype, fieldname)
+<<<<<<< HEAD
+	doctypes = frappe.cache().get_value(key)
+
+	if doctypes is None:
+		doctypes = frappe.db.sql(f"""select distinct `{fieldname}` from `tab{doctype}`""", pluck=True)
+		frappe.cache().set_value(key, doctypes, expires_in_sec=12 * 60 * 60)
+=======
 	doctypes = frappe.cache.get_value(key)
 
 	if doctypes is None:
 		doctypes = frappe.db.sql(f"""select distinct `{fieldname}` from `tab{doctype}`""", pluck=True)
 		frappe.cache.set_value(key, doctypes, expires_in_sec=12 * 60 * 60)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return doctypes
 
@@ -88,12 +96,21 @@ def invalidate_distinct_link_doctypes(doctype: str, fieldname: str, linked_docty
 	"""If new linked doctype is discovered for a dynamic link then cache is evicted."""
 
 	key = _dynamic_link_map_key(doctype, fieldname)
+<<<<<<< HEAD
+	doctypes = frappe.cache().get_value(key)
+=======
 	doctypes = frappe.cache.get_value(key)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if doctypes is None or not isinstance(doctypes, list):
 		return
 
 	if linked_doctype not in doctypes:
 		# Note: Do NOT "update" cache because it can lead to concurrency bugs.
+<<<<<<< HEAD
+		frappe.cache().delete_value(key)
+		frappe.db.add_before_commit(lambda: frappe.cache().delete_value(key))
+=======
 		frappe.cache.delete_value(key)
 		frappe.db.after_commit.add(lambda: frappe.cache.delete_value(key))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

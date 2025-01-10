@@ -82,6 +82,33 @@ frappe.views.TreeView = class TreeView {
 	}
 	make_page() {
 		var me = this;
+<<<<<<< HEAD
+		this.parent = frappe.container.add_page(this.page_name);
+		frappe.ui.make_app_page({ parent: this.parent, single_column: true });
+
+		this.page = this.parent.page;
+		frappe.container.change_to(this.page_name);
+		frappe.breadcrumbs.add(
+			me.opts.breadcrumb || locals.DocType[me.doctype].module,
+			me.doctype
+		);
+
+		this.set_title();
+
+		this.page.main.css({
+			"min-height": "300px",
+		});
+
+		this.page.main.addClass("frappe-card");
+
+		if (this.opts.show_expand_all) {
+			this.page.add_inner_button(__("Collapse All"), function () {
+				me.tree.load_children(me.tree.root_node, false);
+			});
+
+			this.page.add_inner_button(__("Expand All"), function () {
+				me.tree.load_children(me.tree.root_node, true);
+=======
 		if (!this.opts || !this.opts.do_not_make_page) {
 			this.parent = frappe.container.add_page(this.page_name);
 			$(this.parent).addClass("treeview");
@@ -97,6 +124,7 @@ frappe.views.TreeView = class TreeView {
 
 			this.page.main.css({
 				"min-height": "300px",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 
 			this.page.main.addClass("frappe-card");
@@ -105,6 +133,8 @@ frappe.views.TreeView = class TreeView {
 			$(this.page[0]).addClass("frappe-card");
 		}
 
+<<<<<<< HEAD
+=======
 		if (frappe.meta.has_field(me.doctype, "disabled")) {
 			this.page.add_inner_button(
 				__("Include Disabled"),
@@ -140,6 +170,7 @@ frappe.views.TreeView = class TreeView {
 			);
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (this.opts.view_template) {
 			var row = $('<div class="row"><div>').appendTo(this.page.main);
 			this.body = $('<div class="col-sm-6 col-xs-12"></div>').appendTo(row);
@@ -202,6 +233,8 @@ frappe.views.TreeView = class TreeView {
 				}
 			},
 		});
+<<<<<<< HEAD
+=======
 	}
 	toggle_disable(el) {
 		if (this.args["include_disabled"]) {
@@ -212,6 +245,7 @@ frappe.views.TreeView = class TreeView {
 			console.log(el);
 			el.innerText = el.innerText.replace("Include", "Exclude");
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	make_tree() {
 		$(this.parent).find(".tree").remove();

@@ -56,6 +56,30 @@ class FormTimeline extends BaseTimeline {
 			return (communications || []).length || (comments || []).length;
 		};
 		let me = this;
+<<<<<<< HEAD
+		if (has_communications()) {
+			this.timeline_wrapper
+				.prepend(
+					`
+				<div class="timeline-item activity-toggle">
+					<div class="timeline-dot"></div>
+					<div class="timeline-content flex align-center">
+						<h4>${__("Activity")}</h4>
+						<nav class="nav nav-pills flex-row">
+							<a class="flex-sm-fill text-sm-center nav-link" data-only-communication="true">${__(
+								"Communication"
+							)}</a>
+							<a class="flex-sm-fill text-sm-center nav-link active">${__("All")}</a>
+						</nav>
+					</div>
+				</div>
+			`
+				)
+				.find("a")
+				.on("click", function (e) {
+					e.preventDefault();
+					me.only_communication = $(this).data().onlyCommunication;
+=======
 		this.timeline_wrapper.remove(this.timeline_actions_wrapper);
 		this.timeline_wrapper.prepend(`
 				<div class="timeline-item activity-title">
@@ -80,6 +104,7 @@ class FormTimeline extends BaseTimeline {
 				.prop("checked", !me.only_communication)
 				.on("click", function (e) {
 					me.only_communication = !this.checked;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					me.render_timeline_items();
 					$(this).tab("show");
 				});
@@ -121,6 +146,48 @@ class FormTimeline extends BaseTimeline {
 		frappe.utils.bind_actions_with_object(this.timeline_items_wrapper, this);
 	}
 
+<<<<<<< HEAD
+	set_document_info() {
+		// TODO: handle creation via automation
+		const creation = comment_when(this.frm.doc.creation);
+		let creation_message = frappe.utils.is_current_user(this.frm.doc.owner)
+			? __("You created this {0}", [creation], "Form timeline")
+			: __(
+					"{0} created this {1}",
+					[this.get_user_link(this.frm.doc.owner), creation],
+					"Form timeline"
+			  );
+
+		const modified = comment_when(this.frm.doc.modified);
+		let modified_message = frappe.utils.is_current_user(this.frm.doc.modified_by)
+			? __("You edited this {0}", [modified], "Form timeline")
+			: __(
+					"{0} edited this {1}",
+					[this.get_user_link(this.frm.doc.modified_by), modified],
+					"Form timeline"
+			  );
+
+		if (this.frm.doc.route && cint(frappe.boot.website_tracking_enabled)) {
+			let route = this.frm.doc.route;
+			frappe.utils.get_page_view_count(route).then((res) => {
+				let page_view_count_message = __("{0} Page views", [res.message], "Form timeline");
+				this.add_timeline_item(
+					{
+						content: `${creation_message} • ${modified_message} • 	${page_view_count_message}`,
+						hide_timestamp: true,
+					},
+					true
+				);
+			});
+		} else {
+			this.add_timeline_item(
+				{
+					content: `${creation_message} • ${modified_message}`,
+					hide_timestamp: true,
+				},
+				true
+			);
+=======
 	add_web_page_view_count() {
 		if (this.frm.doc.route && cint(frappe.boot.website_tracking_enabled)) {
 			frappe.utils.get_page_view_count(this.frm.doc.route).then((res) => {
@@ -129,6 +196,7 @@ class FormTimeline extends BaseTimeline {
 					hide_timestamp: true,
 				});
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -174,9 +242,29 @@ class FormTimeline extends BaseTimeline {
 		}
 	}
 
+<<<<<<< HEAD
+	get_user_link(user) {
+		const user_display_text = (frappe.user_info(user).fullname || "").bold();
+		return frappe.utils.get_form_link("User", user, true, user_display_text);
+	}
+
 	get_view_timeline_contents() {
 		let view_timeline_contents = [];
 		(this.doc_info.views || []).forEach((view) => {
+			const view_time = comment_when(view.creation);
+			let view_message = frappe.utils.is_current_user(view.owner)
+				? __("You viewed this {0}", [view_time], "Form timeline")
+				: __(
+						"{0} viewed this {1}",
+						[this.get_user_link(view.owner), view_time],
+						"Form timeline"
+				  );
+
+=======
+	get_view_timeline_contents() {
+		let view_timeline_contents = [];
+		(this.doc_info.views || []).forEach((view) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			view_timeline_contents.push({
 				creation: view.creation,
 				content: get_user_message(
@@ -337,8 +425,12 @@ class FormTimeline extends BaseTimeline {
 
 	get_comment_timeline_item(comment) {
 		return {
+<<<<<<< HEAD
+			icon: "small-message",
+=======
 			icon: "es-line-chat-alt",
 			icon_size: "sm",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			creation: comment.creation,
 			is_card: true,
 			doctype: "Comment",
@@ -404,6 +496,12 @@ class FormTimeline extends BaseTimeline {
 
 	get_attachment_timeline_contents() {
 		let attachment_timeline_contents = [];
+<<<<<<< HEAD
+		(this.doc_info.attachment_logs || []).forEach((attachment_log) => {
+			let is_file_upload = attachment_log.comment_type == "Attachment";
+			attachment_timeline_contents.push({
+				icon: is_file_upload ? "upload" : "delete",
+=======
 
 		(this.doc_info.attachment_logs || []).forEach((attachment_log) => {
 			const is_file_upload = attachment_log.comment_type == "Attachment";
@@ -423,6 +521,7 @@ class FormTimeline extends BaseTimeline {
 
 			attachment_timeline_contents.push({
 				icon: is_file_upload ? "es-line-attachment" : "es-line-delete",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				icon_size: "sm",
 				creation: attachment_log.creation,
 				content: timeline_content,
@@ -434,6 +533,17 @@ class FormTimeline extends BaseTimeline {
 
 	get_milestone_timeline_contents() {
 		let milestone_timeline_contents = [];
+<<<<<<< HEAD
+		(this.doc_info.milestones || []).forEach((milestone_log) => {
+			milestone_timeline_contents.push({
+				icon: "milestone",
+				creation: milestone_log.creation,
+				content: __("{0} changed {1} to {2}", [
+					this.get_user_link(milestone_log.owner),
+					frappe.meta.get_label(this.frm.doctype, milestone_log.track_field),
+					milestone_log.value.bold(),
+				]),
+=======
 
 		(this.doc_info.milestones || []).forEach((milestone_log) => {
 			const field = frappe.meta.get_label(this.frm.doctype, milestone_log.track_field);
@@ -449,6 +559,7 @@ class FormTimeline extends BaseTimeline {
 				icon: "milestone",
 				creation: milestone_log.creation,
 				content: timeline_content,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 		});
 
@@ -457,6 +568,14 @@ class FormTimeline extends BaseTimeline {
 
 	get_like_timeline_contents() {
 		let like_timeline_contents = [];
+<<<<<<< HEAD
+		(this.doc_info.like_logs || []).forEach((like_log) => {
+			like_timeline_contents.push({
+				icon: "heart",
+				icon_size: "sm",
+				creation: like_log.creation,
+				content: __("{0} Liked", [this.get_user_link(like_log.owner)]),
+=======
 
 		(this.doc_info.like_logs || []).forEach((like_log) => {
 			const timeline_content = get_user_message(
@@ -470,6 +589,7 @@ class FormTimeline extends BaseTimeline {
 				icon_size: "sm",
 				creation: like_log.creation,
 				content: timeline_content,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				title: "Like",
 			});
 		});

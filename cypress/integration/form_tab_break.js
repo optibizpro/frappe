@@ -25,6 +25,10 @@ context("Form Tab Break", () => {
 
 		// After save, first tab should have dashboard
 		cy.get(".form-tabs > .nav-item").eq(0).click();
+<<<<<<< HEAD
+		cy.findByText("Connections");
+=======
 		cy.findByText("Profile");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	});
 });

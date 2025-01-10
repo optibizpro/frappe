@@ -76,9 +76,15 @@ frappe.ui.form.ControlComment = class ControlComment extends frappe.ui.form.Cont
 	update_state() {
 		const value = this.get_value();
 		if (strip_html(value).trim() != "" || value.includes("img")) {
+<<<<<<< HEAD
+			this.button.removeClass("btn-default").addClass("btn-primary");
+		} else {
+			this.button.addClass("btn-default").removeClass("btn-primary");
+=======
 			this.button.removeClass("hidden").addClass("btn-primary");
 		} else {
 			this.button.addClass("hidden").removeClass("btn-primary");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -87,7 +93,10 @@ frappe.ui.form.ControlComment = class ControlComment extends frappe.ui.form.Cont
 		return Object.assign(options, {
 			theme: "bubble",
 			bounds: this.quill_container[0],
+<<<<<<< HEAD
+=======
 			placeholder: __("Type a reply / comment"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 

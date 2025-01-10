@@ -6,6 +6,14 @@ from frappe.core.doctype.user_permission.user_permission import (
 	add_user_permissions,
 	remove_applicable,
 )
+<<<<<<< HEAD
+from frappe.permissions import has_user_permission
+from frappe.tests.utils import FrappeTestCase
+from frappe.website.doctype.blog_post.test_blog_post import make_test_blog
+
+
+class TestUserPermission(FrappeTestCase):
+=======
 from frappe.permissions import add_permission, has_user_permission
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.website.doctype.blog_post.test_blog_post import make_test_blog
@@ -21,6 +29,7 @@ class UnitTestUserPermission(UnitTestCase):
 
 
 class TestUserPermission(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		test_users = (
 			"test_bulk_creation_update@example.com",

@@ -10,7 +10,10 @@ from frappe.modules.export_file import export_to_files
 from frappe.query_builder import Criterion
 from frappe.query_builder.utils import DocType
 from frappe.utils import cint, flt
+<<<<<<< HEAD
+=======
 from frappe.utils.modules import get_modules_from_all_apps_for_user
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class NumberCard(Document):

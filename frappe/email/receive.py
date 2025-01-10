@@ -10,8 +10,13 @@ import json
 import poplib
 import re
 import ssl
+<<<<<<< HEAD
+import time
+from contextlib import suppress
+=======
 from contextlib import suppress
 from email.errors import HeaderParseError
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from email.header import decode_header
 from urllib.parse import unquote
 
@@ -55,6 +60,13 @@ class EmailSizeExceededError(frappe.ValidationError):
 	pass
 
 
+<<<<<<< HEAD
+class EmailTimeoutError(frappe.ValidationError):
+	pass
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 class LoginLimitExceeded(frappe.ValidationError):
 	pass
 
@@ -77,10 +89,17 @@ class EmailServer:
 		"""Connect to IMAP"""
 		try:
 			if cint(self.settings.use_ssl):
+<<<<<<< HEAD
+				self.imap = Timed_IMAP4_SSL(
+					self.settings.host,
+					self.settings.incoming_port,
+					timeout=frappe.conf.get("pop_timeout"),
+=======
 				self.imap = imaplib.IMAP4_SSL(
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.pop_timeout,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					ssl_context=ssl.create_default_context(),
 				)
 			else:
@@ -114,10 +133,17 @@ class EmailServer:
 		# this method return pop connection
 		try:
 			if cint(self.settings.use_ssl):
+<<<<<<< HEAD
+				self.pop = Timed_POP3_SSL(
+					self.settings.host,
+					self.settings.incoming_port,
+					timeout=frappe.conf.get("pop_timeout"),
+=======
 				self.pop = poplib.POP3_SSL(
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.pop_timeout,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					context=ssl.create_default_context(),
 				)
 			else:
@@ -167,7 +193,11 @@ class EmailServer:
 		return
 
 	def get_messages(self, folder="INBOX"):
+<<<<<<< HEAD
+		"""Returns new email messages."""
+=======
 		"""Return new email messages."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.latest_messages = []
 		self.seen_status = {}
@@ -178,7 +208,11 @@ class EmailServer:
 		for i, uid in enumerate(email_list[:100]):
 			try:
 				self.retrieve_message(uid, i + 1)
+<<<<<<< HEAD
+			except (EmailTimeoutError, LoginLimitExceeded):
+=======
 			except (_socket.timeout, LoginLimitExceeded):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				# get whatever messages were retrieved
 				break
 
@@ -231,6 +265,21 @@ class EmailServer:
 				# Remove {"} quotes that are added to handle spaces in IMAP Folder names
 				if folder[0] == folder[-1] == '"':
 					folder = folder[1:-1]
+<<<<<<< HEAD
+				# new update for the IMAP Folder DocType
+				IMAPFolder = frappe.qb.DocType("IMAP Folder")
+				frappe.qb.update(IMAPFolder).set(IMAPFolder.uidvalidity, current_uid_validity).set(
+					IMAPFolder.uidnext, uidnext
+				).where(IMAPFolder.parent == self.settings.email_account_name).where(
+					IMAPFolder.folder_name == folder
+				).run()
+			else:
+				EmailAccount = frappe.qb.DocType("Email Account")
+				frappe.qb.update(EmailAccount).set(EmailAccount.uidvalidity, current_uid_validity).set(
+					EmailAccount.uidnext, uidnext
+				).where(EmailAccount.name == self.settings.email_account_name).run()
+
+=======
 
 				frappe.db.set_value(
 					"IMAP Folder",
@@ -246,6 +295,7 @@ class EmailServer:
 					update_modified=False,
 				)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			sync_count = 100 if uid_validity else int(self.settings.initial_sync_count)
 			from_uid = 1 if uidnext < (sync_count + 1) or (uidnext - sync_count) < 1 else uidnext - sync_count
 			# sync last 100 email
@@ -269,13 +319,21 @@ class EmailServer:
 			else:
 				msg = self.pop.retr(msg_num)
 				self.latest_messages.append(b"\n".join(msg[1]))
+<<<<<<< HEAD
+		except EmailTimeoutError:
+=======
 		except _socket.timeout:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			# propagate this error to break the loop
 			raise
 
 		except Exception as e:
 			if self.has_login_limit_exceeded(e):
+<<<<<<< HEAD
+				raise LoginLimitExceeded(e)
+=======
 				raise LoginLimitExceeded(e) from e
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			frappe.log_error("Unable to fetch email", self.make_error_msg(uid, msg_num))
 
@@ -303,8 +361,15 @@ class EmailServer:
 		with suppress(Exception):
 			if not cint(self.settings.use_imap):
 				self.pop.dele(msg_num)
+<<<<<<< HEAD
+			else:
+				# mark as seen if email sync rule is UNSEEN (syncing only unseen mails)
+				if self.settings.email_sync_rule == "UNSEEN":
+					self.imap.uid("STORE", uid, "+FLAGS", "(\\SEEN)")
+=======
 			elif self.settings.email_sync_rule == "UNSEEN":
 				self.imap.uid("STORE", uid, "+FLAGS", "(\\SEEN)")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def is_temporary_system_problem(self, e):
 		messages = (
@@ -329,6 +394,16 @@ class EmailServer:
 			partial_mail = Email(headers)
 
 		if partial_mail:
+<<<<<<< HEAD
+			return (
+				"\nDate: {date}\nFrom: {from_email}\nSubject: {subject}\n\n\nTraceback: \n{traceback}".format(
+					date=partial_mail.date,
+					from_email=partial_mail.from_email,
+					subject=partial_mail.subject,
+					traceback=traceback,
+				)
+			)
+=======
 			return f"""
 Date: {partial_mail.date}
 From: {partial_mail.from_email}
@@ -339,6 +414,7 @@ Traceback:
 {traceback}
 """
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return traceback
 
 	def update_flag(self, folder, uid_list=None):
@@ -412,6 +488,14 @@ class Email:
 		"""Parse and decode `Subject` header."""
 		_subject = decode_header(self.mail.get("Subject", "No Subject"))
 		self.subject = _subject[0][0] or ""
+<<<<<<< HEAD
+		if charset := _subject[0][1]:
+			self.subject = safe_decode(self.subject, charset, ALTERNATE_CHARSET_MAP)
+		else:
+			# assume that the encoding is utf-8
+			self.subject = safe_decode(self.subject)[:140]
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if charset := _subject[0][1]:
 			# Encoding is known by decode_header (might also be unknown-8bit)
@@ -457,7 +541,11 @@ class Email:
 			return ", ".join(emails)
 
 		decoded = ""
+<<<<<<< HEAD
+		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
+=======
 		for part, encoding in parts:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if encoding:
 				decoded += part.decode(encoding, "replace")
 			else:

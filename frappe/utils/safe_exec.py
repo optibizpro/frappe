@@ -7,12 +7,18 @@ import mimetypes
 import types
 from contextlib import contextmanager
 from functools import lru_cache
+<<<<<<< HEAD
+
+import RestrictedPython.Guards
+from RestrictedPython import compile_restricted, safe_globals
+=======
 from itertools import chain
 from types import FunctionType, MethodType, ModuleType
 from typing import TYPE_CHECKING, Any
 
 import RestrictedPython.Guards
 from RestrictedPython import PrintCollector, compile_restricted, safe_globals
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from RestrictedPython.transformer import RestrictingNodeTransformer
 
 import frappe
@@ -41,9 +47,12 @@ class ServerScriptNotEnabled(frappe.PermissionError):
 
 ARGUMENT_NOT_SET = object()
 
+<<<<<<< HEAD
+=======
 SAFE_EXEC_CONFIG_KEY = "server_script_enabled"
 SERVER_SCRIPT_FILE_PREFIX = "<serverscript>"
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 class NamespaceDict(frappe._dict):
 	"""Raise AttributeError if function not found in namespace"""
@@ -63,6 +72,20 @@ class FrappeTransformer(RestrictingNodeTransformer):
 	def check_name(self, node, name, *args, **kwargs):
 		if name == "_dict":
 			return
+<<<<<<< HEAD
+
+		return super().check_name(node, name, *args, **kwargs)
+
+
+def safe_exec(script, _globals=None, _locals=None, restrict_commit_rollback=False):
+	# server scripts can be disabled via site_config.json
+	# they are enabled by default
+	if "server_script_enabled" in frappe.conf:
+		enabled = frappe.conf.server_script_enabled
+	else:
+		enabled = True
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return super().check_name(node, name, *args, **kwargs)
 
@@ -107,6 +130,12 @@ def safe_exec(
 		exec_globals.frappe.db.pop("rollback", None)
 		exec_globals.frappe.db.pop("add_index", None)
 
+<<<<<<< HEAD
+	with safe_exec_flags(), patched_qb():
+		# execute script compiled by RestrictedPython
+		exec(
+			compile_restricted(script, filename="<serverscript>", policy=FrappeTransformer),
+=======
 	filename = SERVER_SCRIPT_FILE_PREFIX
 	if script_filename:
 		filename += f": {frappe.scrub(script_filename)}"
@@ -115,6 +144,7 @@ def safe_exec(
 		# execute script compiled by RestrictedPython
 		exec(
 			compile_restricted(script, filename=filename, policy=FrappeTransformer),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			exec_globals,
 			_locals,
 		)
@@ -153,7 +183,11 @@ def _validate_safe_eval_syntax(code):
 
 @contextmanager
 def safe_exec_flags():
+<<<<<<< HEAD
+	if not frappe.flags.in_safe_exec:
+=======
 	if frappe.flags.in_safe_exec is None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.flags.in_safe_exec = 0
 
 	frappe.flags.in_safe_exec += 1
@@ -270,6 +304,8 @@ def get_safe_globals():
 				before_rollback=frappe.db.before_rollback,
 				add_index=frappe.db.add_index,
 			),
+<<<<<<< HEAD
+=======
 			website=NamespaceDict(
 				abs_url=frappe.website.utils.abs_url,
 				extract_title=frappe.website.utils.extract_title,
@@ -277,6 +313,7 @@ def get_safe_globals():
 				get_home_page=frappe.website.utils.get_home_page,
 				get_html_content_based_on_type=frappe.website.utils.get_html_content_based_on_type,
 			),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			lang=getattr(frappe.local, "lang", "en"),
 		),
 		FrappeClient=FrappeClient,
@@ -306,9 +343,12 @@ def get_safe_globals():
 	out._write_ = _write
 	out._getitem_ = _getitem
 	out._getattr_ = _getattr_for_safe_exec
+<<<<<<< HEAD
+=======
 
 	# Allow using `print()` calls with `safe_exec()`
 	out._print_ = FrappePrintCollector
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# allow iterators and list comprehension
 	out._getiter_ = iter
@@ -621,7 +661,13 @@ VALID_UTILS = (
 	"now_datetime",
 	"get_timestamp",
 	"get_eta",
+<<<<<<< HEAD
+	"get_time_zone",
 	"get_system_timezone",
+	"convert_utc_to_user_timezone",
+=======
+	"get_system_timezone",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"convert_utc_to_system_timezone",
 	"now",
 	"nowdate",

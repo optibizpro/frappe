@@ -28,9 +28,12 @@ frappe.ui.toolbar.Toolbar = class {
 	make() {
 		this.bind_events();
 		$(document).trigger("toolbar_setup");
+<<<<<<< HEAD
+=======
 		$(".navbar-brand .app-logo").on("click", () => {
 			frappe.app.sidebar.toggle_sidebar();
 		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	bind_events() {
@@ -46,6 +49,13 @@ frappe.ui.toolbar.Toolbar = class {
 				search_modal.find("#modal-search").focus();
 			}, 300);
 		});
+<<<<<<< HEAD
+		$(".navbar-toggle-full-width").click(() => {
+			frappe.ui.toolbar.toggle_full_width();
+		});
+	}
+
+=======
 	}
 
 	setup_read_only_mode() {
@@ -81,6 +91,7 @@ frappe.ui.toolbar.Toolbar = class {
 		}
 	}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	setup_help() {
 		if (!frappe.boot.desk_settings.notifications) {
 			// hide the help section
@@ -166,6 +177,13 @@ frappe.ui.toolbar.Toolbar = class {
 		if (frappe.boot.desk_settings.search_bar) {
 			let awesome_bar = new frappe.search.AwesomeBar();
 			awesome_bar.setup("#navbar-search");
+<<<<<<< HEAD
+		}
+		if (frappe.model.can_read("RQ Job")) {
+			frappe.search.utils.make_function_searchable(function () {
+				frappe.set_route("List", "RQ Job");
+			}, __("Background Jobs"));
+=======
 
 			frappe.search.utils.make_function_searchable(
 				frappe.utils.generate_tracking_url,
@@ -177,6 +195,7 @@ frappe.ui.toolbar.Toolbar = class {
 					frappe.set_route("List", "RQ Job");
 				}, __("Background Jobs"));
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -282,7 +301,11 @@ frappe.ui.toolbar.setup_session_defaults = function () {
 			fields = JSON.parse(data.message);
 			let perms = frappe.perm.get_perm("Session Default Settings");
 			//add settings button only if user is a System Manager or has permission on 'Session Default Settings'
+<<<<<<< HEAD
+			if (in_list(frappe.user_roles, "System Manager") || perms[0].read == 1) {
+=======
 			if (frappe.user_roles.includes("System Manager") || perms[0].read == 1) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fields[fields.length] = {
 					fieldname: "settings",
 					fieldtype: "Button",

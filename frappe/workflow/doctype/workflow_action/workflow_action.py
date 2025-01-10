@@ -75,14 +75,23 @@ def get_permission_query_conditions(user):
 		.where(WorkflowActionPermittedRole.role.isin(roles))
 	).get_sql()
 
+<<<<<<< HEAD
+	return f"""(`tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+		or `tabWorkflow Action`.`user`={frappe.db.escape(user)})
+=======
 	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		and `tabWorkflow Action`.`status`='Open'
 	"""
 
 
 def has_permission(doc, user):
+<<<<<<< HEAD
+	user_roles = set(frappe.get_roles(user))
+=======
 	if user == "Administrator":
 		return True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	permitted_roles = {permitted_role.role for permitted_role in doc.permitted_roles}
 	return not permitted_roles.isdisjoint(frappe.get_roles(user))
@@ -118,7 +127,10 @@ def process_workflow_actions(doc, state):
 			doc=doc,
 			transitions=next_possible_transitions,
 			enqueue_after_commit=True,
+<<<<<<< HEAD
+=======
 			now=frappe.flags.in_test,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 
 
@@ -343,7 +355,11 @@ def send_workflow_action_email(doc, transitions):
 	users_data = get_users_next_action_data(transitions, doc)
 	common_args = get_common_email_args(doc)
 	message = common_args.pop("message", None)
+<<<<<<< HEAD
+	for user, data in users_data.items():  # noqa: B007
+=======
 	for data in users_data.values():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		email_args = {
 			"recipients": [data.get("email")],
 			"args": {"actions": list(deduplicate_actions(data.get("possible_actions"))), "message": message},

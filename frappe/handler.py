@@ -36,7 +36,10 @@ ALLOWED_MIMETYPES = (
 	"text/plain",
 	"video/quicktime",
 	"video/mp4",
+<<<<<<< HEAD
+=======
 	"text/csv",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 )
 
 
@@ -103,7 +106,15 @@ def is_valid_http_method(method):
 	http_method = frappe.local.request.method
 
 	if http_method not in frappe.allowed_http_methods_for_whitelisted_func[method]:
+<<<<<<< HEAD
+		throw_permission_error()
+
+
+def throw_permission_error():
+	frappe.throw(_("Not permitted"), frappe.PermissionError)
+=======
 		frappe.throw_permission_error()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist(allow_guest=True)
@@ -121,6 +132,48 @@ def web_logout():
 	)
 
 
+<<<<<<< HEAD
+@frappe.whitelist()
+def uploadfile():
+	ret = None
+	check_write_permission(frappe.form_dict.doctype, frappe.form_dict.docname)
+
+	try:
+		if frappe.form_dict.get("from_form"):
+			try:
+				ret = frappe.get_doc(
+					{
+						"doctype": "File",
+						"attached_to_name": frappe.form_dict.docname,
+						"attached_to_doctype": frappe.form_dict.doctype,
+						"attached_to_field": frappe.form_dict.docfield,
+						"file_url": frappe.form_dict.file_url,
+						"file_name": frappe.form_dict.filename,
+						"is_private": frappe.utils.cint(frappe.form_dict.is_private),
+						"content": frappe.form_dict.filedata,
+						"decode": True,
+					}
+				)
+				ret.save()
+			except frappe.DuplicateEntryError:
+				# ignore pass
+				ret = None
+				frappe.db.rollback()
+		else:
+			if frappe.form_dict.get("method"):
+				method = frappe.get_attr(frappe.form_dict.method)
+				is_whitelisted(method)
+				ret = method()
+	except Exception:
+		frappe.errprint(frappe.utils.get_traceback())
+		frappe.response["http_status_code"] = 500
+		ret = None
+
+	return ret
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @frappe.whitelist(allow_guest=True)
 def upload_file():
 	user = None
@@ -145,6 +198,12 @@ def upload_file():
 	optimize = frappe.form_dict.optimize
 	content = None
 
+<<<<<<< HEAD
+	if not ignore_permissions:
+		check_write_permission(doctype, docname)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if library_file := frappe.form_dict.get("library_file_name"):
 		frappe.has_permission("File", doc=library_file, throw=True)
 		doc = frappe.get_value(
@@ -157,9 +216,12 @@ def upload_file():
 		file_url = doc.file_url
 		filename = doc.file_name
 
+<<<<<<< HEAD
+=======
 	if not ignore_permissions:
 		check_write_permission(doctype, docname)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if "file" in files:
 		file = files["file"]
 		content = file.stream.read()
@@ -211,8 +273,12 @@ def check_write_permission(doctype: str | None = None, name: str | None = None):
 			doc.check_permission("write")
 		except frappe.DoesNotExistError:
 			# doc has not been inserted yet, name is set to "new-some-doctype"
+<<<<<<< HEAD
+			check_doctype = True
+=======
 			# If doc inserts fine then only this attachment will be linked see file/utils.py:relink_mismatched_files
 			return
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if check_doctype:
 		frappe.has_permission(doctype, "write", throw=True)
@@ -309,6 +375,10 @@ def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 	frappe.response["message"] = response
 
 	add_data_to_monitor(methodname=method)
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 runserverobj = deprecated(run_doc_method)

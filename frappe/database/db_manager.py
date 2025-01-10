@@ -66,6 +66,12 @@ class DbManager:
 		from frappe.database import get_command
 		from frappe.utils import execute_in_shell
 
+<<<<<<< HEAD
+		if pv:
+			pipe = f"{pv} {source} | " + r"sed '/\/\*M\{0,1\}!999999\\- enable the sandbox mode \*\//d' |"
+		else:
+			pipe = f"cat {source} | " + r"sed '/\/\*M\{0,1\}!999999\\- enable the sandbox mode \*\//d' |"
+=======
 		# Ensure that the entire process fails if any part of the pipeline fails
 		command: list[str] = ["set -o pipefail;"]
 
@@ -77,10 +83,30 @@ class DbManager:
 				raise Exception("`gzip` not installed")
 		else:
 			command.extend(["cat", source, "|"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# Newer versions of MariaDB add in a line that'll break on older versions, so remove it
 		command.extend(["sed", r"'/\/\*M\{0,1\}!999999\\- enable the sandbox mode \*\//d'", "|"])
 
+<<<<<<< HEAD
+		command = (
+			"{pipe} mysql -u {user} -p{password} -h{host} "
+			+ ("-P{port}" if frappe.db.port else "")
+			+ " {target}"
+		)
+
+		command = command.format(
+			pipe=pipe,
+			user=esc(user),
+			password=esc(password),
+			host=esc(frappe.db.host),
+			target=esc(target),
+			port=frappe.db.port,
+		)
+
+		os.system(command)
+		frappe.cache().delete_keys("")  # Delete all keys associated with this site.
+=======
 		# Remove view security definers
 		command.extend(["sed", r"'/\/\*![0-9]* DEFINER=[^ ]* SQL SECURITY DEFINER \*\//d'", "|"])
 
@@ -103,3 +129,4 @@ class DbManager:
 
 		execute_in_shell(" ".join(command), check_exit_code=True, verbose=verbose)
 		frappe.cache.delete_keys("")  # Delete all keys associated with this site.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

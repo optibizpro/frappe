@@ -4,6 +4,22 @@ import json
 
 import frappe
 from frappe.templates.includes.comments.comments import add_comment
+<<<<<<< HEAD
+from frappe.tests.test_model_utils import set_user
+from frappe.tests.utils import FrappeTestCase, change_settings
+from frappe.website.doctype.blog_post.test_blog_post import make_test_blog
+
+
+class TestComment(FrappeTestCase):
+	def tearDown(self):
+		frappe.form_dict.comment = None
+		frappe.form_dict.comment_email = None
+		frappe.form_dict.comment_by = None
+		frappe.form_dict.reference_doctype = None
+		frappe.form_dict.reference_name = None
+		frappe.form_dict.route = None
+		frappe.local.request_ip = None
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.test_model_utils import set_user
 from frappe.website.doctype.blog_post.test_blog_post import make_test_blog
@@ -14,6 +30,7 @@ class UnitTestComment(UnitTestCase):
 	Unit tests for Comment.
 	Use this class for testing individual functions and methods.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	pass
 
@@ -45,6 +62,18 @@ class TestComment(IntegrationTestCase):
 		test_blog = make_test_blog()
 
 		frappe.db.delete("Comment", {"reference_doctype": "Blog Post"})
+<<<<<<< HEAD
+
+		frappe.form_dict.comment = "Good comment with 10 chars"
+		frappe.form_dict.comment_email = "test@test.com"
+		frappe.form_dict.comment_by = "Good Tester"
+		frappe.form_dict.reference_doctype = "Blog Post"
+		frappe.form_dict.reference_name = test_blog.name
+		frappe.form_dict.route = test_blog.route
+		frappe.local.request_ip = "127.0.0.1"
+
+		add_comment()
+=======
 		add_comment_args = {
 			"comment": "Good comment with 10 chars",
 			"comment_email": "test@test.com",
@@ -54,6 +83,7 @@ class TestComment(IntegrationTestCase):
 			"route": test_blog.route,
 		}
 		add_comment(**add_comment_args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.assertEqual(
 			frappe.get_all(
@@ -96,6 +126,36 @@ class TestComment(IntegrationTestCase):
 
 		test_blog.delete()
 
+<<<<<<< HEAD
+	@change_settings("Blog Settings", {"allow_guest_to_comment": 0})
+	def test_guest_cannot_comment(self):
+		test_blog = make_test_blog()
+		with set_user("Guest"):
+			frappe.form_dict.comment = "Good comment with 10 chars"
+			frappe.form_dict.comment_email = "mail@example.org"
+			frappe.form_dict.comment_by = "Good Tester"
+			frappe.form_dict.reference_doctype = "Blog Post"
+			frappe.form_dict.reference_name = test_blog.name
+			frappe.form_dict.route = test_blog.route
+			frappe.local.request_ip = "127.0.0.1"
+
+			self.assertEqual(add_comment(), None)
+
+	def test_user_not_logged_in(self):
+		some_system_user = frappe.db.get_value("User", {})
+
+		test_blog = make_test_blog()
+		with set_user("Guest"):
+			frappe.form_dict.comment = "Good comment with 10 chars"
+			frappe.form_dict.comment_email = some_system_user
+			frappe.form_dict.comment_by = "Good Tester"
+			frappe.form_dict.reference_doctype = "Blog Post"
+			frappe.form_dict.reference_name = test_blog.name
+			frappe.form_dict.route = test_blog.route
+			frappe.local.request_ip = "127.0.0.1"
+
+			self.assertRaises(frappe.ValidationError, add_comment)
+=======
 	@IntegrationTestCase.change_settings("Blog Settings", {"allow_guest_to_comment": 0})
 	def test_guest_cannot_comment(self):
 		test_blog = make_test_blog()
@@ -127,3 +187,4 @@ class TestComment(IntegrationTestCase):
 				reference_name=test_blog.name,
 				route=test_blog.route,
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

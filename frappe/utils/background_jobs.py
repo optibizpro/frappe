@@ -6,26 +6,43 @@ from collections import defaultdict
 from collections.abc import Callable
 from contextlib import suppress
 from functools import lru_cache
+<<<<<<< HEAD
+from typing import TYPE_CHECKING, Any, Literal, NoReturn, Union
+=======
 from threading import Thread
 from typing import Any, NoReturn
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from uuid import uuid4
 
 import redis
 import setproctitle
 from redis.exceptions import BusyLoadingError, ConnectionError
+<<<<<<< HEAD
+from rq import Connection, Queue, Worker
+from rq.exceptions import NoSuchJobError
+from rq.job import Job
+from rq.logutils import setup_loghandlers
+from rq.worker import RandomWorker, RoundRobinWorker
+=======
 from rq import Callback, Queue, Worker
 from rq.exceptions import NoSuchJobError
 from rq.job import Job, JobStatus
 from rq.logutils import setup_loghandlers
 from rq.worker import DequeueStrategy
 from rq.worker_pool import WorkerPool
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
 
 import frappe
 import frappe.monitor
 from frappe import _
+<<<<<<< HEAD
+from frappe.utils import cint, cstr, get_bench_id
+=======
 from frappe.utils import CallbackManager, cint, get_bench_id
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.commands import log
+from frappe.utils.deprecations import deprecation_warning
 from frappe.utils.redis_queue import RedisQueue
 
 # TTL to keep RQ job logs in redis for.
@@ -70,6 +87,12 @@ def enqueue(
 	now: bool = False,
 	enqueue_after_commit: bool = False,
 	*,
+<<<<<<< HEAD
+	at_front=False,
+	job_id=None,
+	**kwargs,
+) -> Union["Job", Any]:
+=======
 	on_success: Callable | None = None,
 	on_failure: Callable | None = None,
 	at_front: bool = False,
@@ -77,6 +100,7 @@ def enqueue(
 	deduplicate=False,
 	**kwargs,
 ) -> Job | Any:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	Enqueue method to be executed using a background worker
 
@@ -85,6 +109,11 @@ def enqueue(
 	:param timeout: should be set according to the functions
 	:param event: this is passed to enable clearing of jobs from queues
 	:param is_async: if is_async=False, the method is executed immediately, else via a worker
+<<<<<<< HEAD
+	:param job_name: [DEPRECATED] can be used to name an enqueue call, which can be used to prevent duplicate calls
+	:param now: if now=True, the method is executed via frappe.call
+	:param kwargs: keyword arguments to be passed to the method
+=======
 	:param job_name: [DEPRECATED] can be used to name an enqueue call, which can be used to prevent
 	duplicate calls
 	:param now: if now=True, the method is executed via frappe.call()
@@ -95,11 +124,26 @@ def enqueue(
 	:param at_front: Enqueue the job at the front of the queue or not
 	:param kwargs: keyword arguments to be passed to the method
 	:param deduplicate: do not re-queue job if it's already queued, requires job_id.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	:param job_id: Assigning unique job id, which can be checked using `is_job_enqueued`
 	"""
 	# To handle older implementations
 	is_async = kwargs.pop("async", is_async)
 
+<<<<<<< HEAD
+	if job_id:
+		# namespace job ids to sites
+		job_id = create_job_id(job_id)
+
+	if job_name:
+		deprecation_warning("Using enqueue with `job_name` is deprecated, use `job_id` instead.")
+
+	if not is_async and not frappe.flags.in_test:
+		deprecation_warning(
+			"Using enqueue with is_async=False outside of tests is not recommended, use now=True instead."
+		)
+
+=======
 	if deduplicate:
 		if not job_id:
 			frappe.throw(_("`job_id` paramater is required for deduplication."))
@@ -133,6 +177,7 @@ def enqueue(
 			"Using enqueue with is_async=False outside of tests is not recommended, use now=True instead.",
 		)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	call_directly = now or (not is_async and not frappe.flags.in_test)
 	if call_directly:
 		return frappe.call(method, **kwargs)
@@ -165,6 +210,34 @@ def enqueue(
 		"is_async": is_async,
 		"kwargs": kwargs,
 	}
+<<<<<<< HEAD
+
+	if enqueue_after_commit:
+		if not frappe.flags.enqueue_after_commit:
+			frappe.flags.enqueue_after_commit = []
+
+		frappe.flags.enqueue_after_commit.append(
+			{
+				"queue": queue,
+				"is_async": is_async,
+				"timeout": timeout,
+				"queue_args": queue_args,
+				"job_id": job_id,
+			}
+		)
+		return
+
+	return q.enqueue_call(
+		execute_job,
+		timeout=timeout,
+		kwargs=queue_args,
+		at_front=at_front,
+		failure_ttl=frappe.conf.get("rq_job_failure_ttl") or RQ_JOB_FAILURE_TTL,
+		result_ttl=frappe.conf.get("rq_results_ttl") or RQ_RESULTS_TTL,
+		job_id=job_id,
+		on_failure=truncate_failed_registry,
+	)
+=======
 
 	on_failure = on_failure or truncate_failed_registry
 
@@ -186,6 +259,7 @@ def enqueue(
 		return
 
 	return enqueue_call()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def enqueue_doc(doctype, name=None, method=None, queue="default", timeout=300, now=False, **kwargs):
@@ -209,7 +283,10 @@ def run_doc_method(doctype, name, doc_method, **kwargs):
 def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True, retry=0):
 	"""Executes job in a worker, performs commit/rollback and logs if there is any error"""
 	retval = None
+<<<<<<< HEAD
+=======
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if is_async:
 		frappe.init(site)
 		frappe.connect()
@@ -240,6 +317,12 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 	for before_job_task in frappe.get_hooks("before_job"):
 		frappe.call(before_job_task, method=method_name, kwargs=kwargs, transaction_type="job")
 
+<<<<<<< HEAD
+	for before_job_task in frappe.get_hooks("before_job"):
+		frappe.call(before_job_task, method=method_name, kwargs=kwargs, transaction_type="job")
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	try:
 		retval = method(**kwargs)
 
@@ -282,7 +365,10 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 			frappe.connect()
 		for after_job_task in frappe.get_hooks("after_job"):
 			frappe.call(after_job_task, method=method_name, kwargs=kwargs, result=retval)
+<<<<<<< HEAD
+=======
 		frappe.local.job.after_job.run()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if is_async:
 			frappe.destroy()
@@ -294,6 +380,16 @@ def start_worker(
 	rq_username: str | None = None,
 	rq_password: str | None = None,
 	burst: bool = False,
+<<<<<<< HEAD
+	strategy: Literal["round_robin", "random"] | None = None,
+) -> None:
+	"""Wrapper to start rq worker. Connects to redis and monitors these queues."""
+	DEQUEUE_STRATEGIES = {"round_robin": RoundRobinWorker, "random": RandomWorker}
+
+	if frappe._tune_gc:
+		gc.collect()
+		gc.freeze()
+=======
 	strategy: DequeueStrategy | None = DequeueStrategy.DEFAULT,
 ) -> NoReturn:  # pragma: no cover
 	"""Wrapper to start rq worker. Connects to redis and monitors these queues."""
@@ -302,6 +398,7 @@ def start_worker(
 		strategy = DequeueStrategy.DEFAULT
 
 	_start_sentry()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	with frappe.init_site():
 		# empty init is required to get redis_queue from common_site_config.json
@@ -315,17 +412,28 @@ def start_worker(
 		setup_loghandlers("ERROR")
 
 	set_niceness()
+<<<<<<< HEAD
+	WorkerKlass = DEQUEUE_STRATEGIES.get(strategy, Worker)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	logging_level = "INFO"
 	if quiet:
 		logging_level = "WARNING"
+<<<<<<< HEAD
+	worker = WorkerKlass(queues, connection=redis_connection)
+=======
 
 	worker = Worker(queues, connection=redis_connection)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	worker.work(
 		logging_level=logging_level,
 		burst=burst,
 		date_format="%Y-%m-%d %H:%M:%S",
 		log_format="%(asctime)s,%(msecs)03d %(message)s",
+<<<<<<< HEAD
+	)
+=======
 		dequeue_strategy=strategy,
 	)
 
@@ -412,6 +520,7 @@ def start_worker_pool(
 		worker_class=FrappeWorker,  # Auto starts scheduler with workerpool
 	)
 	pool.start(logging_level=logging_level, burst=burst)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_worker_name(queue):
@@ -542,7 +651,13 @@ def get_redis_conn(username=None, password=None):
 
 	try:
 		if not cred:
+<<<<<<< HEAD
+			if not _redis_queue_conn:
+				_redis_queue_conn = RedisQueue.get_connection()
+			return _redis_queue_conn
+=======
 			return get_redis_connection_without_auth()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		else:
 			return RedisQueue.get_connection(**cred)
 	except redis.exceptions.AuthenticationError:
@@ -559,6 +674,9 @@ def get_redis_conn(username=None, password=None):
 		)
 		raise
 
+<<<<<<< HEAD
+
+=======
 
 def get_redis_connection_without_auth():
 	global _redis_queue_conn
@@ -568,6 +686,7 @@ def get_redis_connection_without_auth():
 	return _redis_queue_conn
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_queues(connection=None) -> list[Queue]:
 	"""Get all the queues linked to the current bench."""
 	queues = Queue.all(connection=connection or get_redis_conn())
@@ -601,6 +720,22 @@ def test_job(s):
 	time.sleep(s)
 
 
+<<<<<<< HEAD
+def create_job_id(job_id: str) -> str:
+	"""Generate unique job id for deduplication"""
+	return f"{frappe.local.site}::{job_id}"
+
+
+def is_job_enqueued(job_id: str) -> str:
+	from rq.job import Job
+
+	try:
+		job = Job.fetch(create_job_id(job_id), connection=get_redis_conn())
+	except NoSuchJobError:
+		return False
+
+	return job.get_status() in ("queued", "started")
+=======
 def create_job_id(job_id: str | None = None) -> str:
 	"""
 	Generate unique job id for deduplication
@@ -629,6 +764,7 @@ def get_job(job_id: str) -> Job | None:
 		return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
 	except NoSuchJobError:
 		return None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 BACKGROUND_PROCESS_NICENESS = 10
@@ -665,6 +801,8 @@ def truncate_failed_registry(job, connection, type, value, traceback):
 		for job_ids in create_batch(failed_jobs, 100):
 			for job_obj in Job.fetch_many(job_ids=job_ids, connection=connection):
 				job_obj and fail_registry.remove(job_obj, delete_job=True)
+<<<<<<< HEAD
+=======
 
 
 def flush_telemetry():
@@ -723,3 +861,4 @@ def _start_sentry():
 		_experiments=experiments,
 		**kwargs,
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

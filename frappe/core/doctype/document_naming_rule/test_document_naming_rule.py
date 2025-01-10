@@ -1,6 +1,12 @@
 # Copyright (c) 2020, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestDocumentNamingRule(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -14,6 +20,7 @@ class UnitTestDocumentNamingRule(UnitTestCase):
 
 
 class TestDocumentNamingRule(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_naming_rule_by_series(self):
 		naming_rule = frappe.get_doc(
 			doctype="Document Naming Rule", document_type="ToDo", prefix="test-todo-", prefix_digits=5

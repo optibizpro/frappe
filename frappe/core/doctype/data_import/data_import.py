@@ -228,6 +228,12 @@ def get_import_status(data_import_name):
 
 @frappe.whitelist()
 def get_import_logs(data_import: str):
+<<<<<<< HEAD
+	if not isinstance(data_import, str):
+		raise ValueError("data_import must be a string")
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	doc = frappe.get_doc("Data Import", data_import)
 	doc.check_permission("read")
 
@@ -293,6 +299,12 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 			for key in del_keys:
 				if key in doc:
 					del doc[key]
+<<<<<<< HEAD
+			for _k, v in doc.items():
+				if isinstance(v, list):
+					for child in v:
+						for key in (*del_keys, "docstatus", "doctype", "modified", "name"):
+=======
 			for v in doc.values():
 				if isinstance(v, list):
 					for child in v:
@@ -306,6 +318,7 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 							"parentfield",
 							"parenttype",
 						):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							if key in child:
 								del child[key]
 

@@ -52,7 +52,10 @@ frappe.ui.form.Dashboard = class FormDashboard {
 
 		this.links_area = this.make_section({
 			label: __("Connections"),
+<<<<<<< HEAD
+=======
 			hide_label: true,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			css_class: "form-links",
 			hidden: 1,
 			is_dashboard_section: 1,
@@ -175,9 +178,16 @@ frappe.ui.form.Dashboard = class FormDashboard {
 
 	make_progress_chart(title) {
 		this.progress_area.show();
+<<<<<<< HEAD
+		let progress_chart = $(
+			'<div class="progress-chart" title="' + (title || "") + '"></div>'
+		).appendTo(this.progress_area.body);
+		return progress_chart;
+=======
 		return $('<div class="progress-chart" title="' + (title || "") + '"></div>').appendTo(
 			this.progress_area.body
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	refresh() {
@@ -562,7 +572,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 				.addClass("indicator-column");
 		}
 
+<<<<<<< HEAD
+		let indicator = $(
+=======
 		return $(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			'<div class="col-sm-' +
 				colspan +
 				' indicator-column"><span class="indicator ' +
@@ -571,6 +585,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 				label +
 				"</span></div>"
 		).appendTo(this.stats_area_row);
+<<<<<<< HEAD
+
+		return indicator;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	// graphs

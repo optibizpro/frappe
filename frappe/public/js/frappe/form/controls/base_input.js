@@ -21,21 +21,32 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 				`<div class="frappe-control">
 				<div class="form-group">
 					<div class="clearfix">
+<<<<<<< HEAD
+						<label class="control-label" style="padding-right: 0px;"></label>
+=======
 						<label class="control-label" style="padding-right: 1px;"></label>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						<span class="help"></span>
 					</div>
 					<div class="control-input-wrapper">
 						<div class="control-input"></div>
 						<div class="control-value like-disabled-input" style="display: none;"></div>
+<<<<<<< HEAD
+						<p class="help-box small text-muted"></p>
+=======
 						<div class="help-box small text-extra-muted hide"></div>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</div>
 				</div>
 			</div>`
 			).appendTo(this.parent);
+<<<<<<< HEAD
+=======
 
 			if (this.constructor.horizontal) {
 				this.$wrapper.find(".form-group").addClass("horizontal");
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 	toggle_label(show) {
@@ -147,7 +158,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 
 	set_disp_area(value) {
 		if (
+<<<<<<< HEAD
+			in_list(["Currency", "Int", "Float"], this.df.fieldtype) &&
+=======
 			["Currency", "Int", "Float"].includes(this.df.fieldtype) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			(this.value === 0 || value === 0)
 		) {
 			// to set the 0 value in readonly for currency, int, float field
@@ -155,7 +170,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 		} else {
 			value = this.value || value;
 		}
+<<<<<<< HEAD
+		if (this.df.fieldtype === "Data") {
+=======
 		if (["Data", "Long Text", "Small Text", "Text", "Password"].includes(this.df.fieldtype)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			value = frappe.utils.escape_html(value);
 		}
 		let doc = this.doc || (this.frm && this.frm.doc);
@@ -170,8 +189,12 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 
 		var icon = "";
 		this.label_span.innerHTML =
+<<<<<<< HEAD
+			(icon ? '<i class="' + icon + '"></i> ' : "") + __(this.df.label) || "&nbsp;";
+=======
 			(icon ? '<i class="' + icon + '"></i> ' : "") +
 				__(this.df.label, null, this.df.parent) || "&nbsp;";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this._label = this.df.label;
 	}
 
@@ -183,13 +206,21 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 		if (
 			!this.df.label ||
 			!this.df?.documentation_url ||
+<<<<<<< HEAD
+			in_list(unsupported_fieldtypes, this.df.fieldtype)
+=======
 			unsupported_fieldtypes.includes(this.df.fieldtype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 			return;
 
 		let $help = this.$wrapper.find("span.help");
 		$help.empty();
+<<<<<<< HEAD
+		$(`<a href="${this.df.documentation_url}" target="_blank">
+=======
 		$(`<a href="${this.df.documentation_url}" target="_blank" title="${__("Documentation")}">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			${frappe.utils.icon("help", "sm")}
 		</a>`).appendTo($help);
 	}

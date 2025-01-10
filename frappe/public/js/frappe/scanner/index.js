@@ -46,6 +46,10 @@ frappe.ui.Scanner = class Scanner {
 					}
 				},
 				(errorMessage) => {
+<<<<<<< HEAD
+					// eslint-disable-line
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					// parse error, ignore it.
 				}
 			)
@@ -94,6 +98,10 @@ frappe.ui.Scanner = class Scanner {
 	}
 
 	load_lib() {
+<<<<<<< HEAD
+		return frappe.require("/assets/frappe/node_modules/html5-qrcode/dist/html5-qrcode.min.js");
+=======
 		return frappe.require("/assets/frappe/node_modules/html5-qrcode/html5-qrcode.min.js");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };

@@ -10,8 +10,17 @@
 	--sm-width: #{map-get($grid-breakpoints, "sm")};
 	--xs-width: #{map-get($grid-breakpoints, "xs")};
 
+<<<<<<< HEAD
+	--text-bold: 500;
+
+	--navbar-height: 60px;
+
+	--appreciation-color: var(--dark-green-600);
+	--appreciation-bg: var(--dark-green-100);
+=======
 	--appreciation-color: var(--green-600);
 	--appreciation-bg: var(--green-100);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	--criticism-color: var(--red-600);
 	--criticism-bg: var(--red-100);
 

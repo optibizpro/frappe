@@ -46,6 +46,32 @@ from frappe.types import DocRef
 from frappe.utils import cast, cint, cstr
 
 DEFAULT_FIELD_LABELS = {
+<<<<<<< HEAD
+	"name": lambda: _("ID"),
+	"creation": lambda: _("Created On"),
+	"docstatus": lambda: _("Document Status"),
+	"idx": lambda: _("Index"),
+	"modified": lambda: _("Last Updated On"),
+	"modified_by": lambda: _("Last Updated By"),
+	"owner": lambda: _("Created By"),
+	"_user_tags": lambda: _("Tags"),
+	"_liked_by": lambda: _("Liked By"),
+	"_comments": lambda: _("Comments"),
+	"_assign": lambda: _("Assigned To"),
+}
+
+
+def get_meta(doctype, cached=True) -> "Meta":
+	if not cached:
+		return Meta(doctype)
+
+	if meta := frappe.cache().hget("doctype_meta", doctype):
+		return meta
+
+	meta = Meta(doctype)
+	frappe.cache().hset("doctype_meta", doctype, meta)
+	return meta
+=======
 	"name": _lt("ID"),
 	"creation": _lt("Created On"),
 	"docstatus": _lt("Document Status"),
@@ -91,6 +117,7 @@ def clear_meta_cache(doctype: str = "*"):
 		frappe.cache.delete_keys(key)
 	else:
 		frappe.client_cache.delete_value(key)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def load_meta(doctype):
@@ -123,7 +150,11 @@ class Meta(Document):
 	_metaclass = True
 	default_fields = list(default_fields)[1:]
 	special_doctypes = frozenset(
+<<<<<<< HEAD
+		{
+=======
 		(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"DocField",
 			"DocPerm",
 			"DocType",
@@ -131,13 +162,25 @@ class Meta(Document):
 			"DocType Action",
 			"DocType Link",
 			"DocType State",
+<<<<<<< HEAD
+		}
+=======
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 	standard_set_once_fields = (
 		frappe._dict(fieldname="creation", fieldtype="Datetime"),
 		frappe._dict(fieldname="owner", fieldtype="Data"),
 	)
 
+<<<<<<< HEAD
+	def __init__(self, doctype):
+		if isinstance(doctype, Document):
+			super().__init__(doctype.as_dict())
+		else:
+			super().__init__("DocType", doctype)
+
+=======
 	@singledispatchmethod
 	def __init__(self, arg, bootstrap: Document = None):
 		raise TypeError(f"Unsupported argument type: {type(arg)}")
@@ -160,6 +203,7 @@ class Meta(Document):
 	@__init__.register(NoneType)
 	def _(self, _args, bootstrap):
 		super().__init__(bootstrap.as_dict())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.process()
 
 	def load_from_db(self):
@@ -290,24 +334,43 @@ class Meta(Document):
 		return TABLE_DOCTYPES_FOR_DOCTYPE.get(fieldname)
 
 	def get_field(self, fieldname):
+<<<<<<< HEAD
+		"""Return docfield from meta"""
+=======
 		"""Return docfield from meta."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return self._fields.get(fieldname)
 
 	def has_field(self, fieldname):
+<<<<<<< HEAD
+		"""Returns True if fieldname exists"""
+=======
 		"""Return True if fieldname exists."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return fieldname in self._fields
 
 	def get_label(self, fieldname):
+<<<<<<< HEAD
+		"""Get label of the given fieldname"""
+
+=======
 		"""Return label of the given fieldname."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if df := self.get_field(fieldname):
 			return df.get("label")
 
 		if fieldname in DEFAULT_FIELD_LABELS:
+<<<<<<< HEAD
+			return DEFAULT_FIELD_LABELS[fieldname]()
+
+		return _("No Label")
+=======
 			return str(DEFAULT_FIELD_LABELS[fieldname])
 
 		return "No Label"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def get_options(self, fieldname):
 		return self.get_field(fieldname).options
@@ -539,7 +602,11 @@ class Meta(Document):
 					field_order = fields_to_prepend
 
 		existing_fields = set(field_order) if field_order else False
+<<<<<<< HEAD
+		insert_after_map = {}
+=======
 		insertion_map = {}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		for index, field in enumerate(self.fields):
 			if existing_fields and field.fieldname in existing_fields:
@@ -548,6 +615,14 @@ class Meta(Document):
 			if not getattr(field, "is_custom_field", False):
 				if existing_fields:
 					# compute insert_after from previous field
+<<<<<<< HEAD
+					insert_after_map.setdefault(self.fields[index - 1].fieldname, []).append(field.fieldname)
+				else:
+					field_order.append(field.fieldname)
+
+			elif insert_after := getattr(field, "insert_after", None):
+				insert_after_map.setdefault(insert_after, []).append(field.fieldname)
+=======
 					insertion_map.setdefault(self.fields[index - 1].fieldname, []).append(field.fieldname)
 				else:
 					field_order.append(field.fieldname)
@@ -564,13 +639,19 @@ class Meta(Document):
 							break
 						target_position = current_field
 				insertion_map.setdefault(target_position, []).append(field.fieldname)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			else:
 				# if custom field is at the top, insert after is None
 				field_order.insert(0, field.fieldname)
 
+<<<<<<< HEAD
+		if insert_after_map:
+			_update_field_order_based_on_insert_after(field_order, insert_after_map)
+=======
 		if insertion_map:
 			_update_field_order_based_on_insert_after(field_order, insertion_map)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self._update_fields_based_on_order(field_order)
 
@@ -602,7 +683,12 @@ class Meta(Document):
 	def get_fieldnames_with_value(self, with_field_meta=False, with_virtual_fields=False):
 		def is_value_field(docfield):
 			return not (
+<<<<<<< HEAD
+				not with_virtual_fields
+				and docfield.get("is_virtual")
+=======
 				(not with_virtual_fields and docfield.get("is_virtual"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				or docfield.fieldtype in no_value_fields
 			)
 
@@ -663,6 +749,14 @@ class Meta(Document):
 			self.get_permlevel_access(permission_type=permission_type, parenttype=parenttype, user=user)
 		)
 
+<<<<<<< HEAD
+		for df in self.get_fieldnames_with_value(
+			with_field_meta=True, with_virtual_fields=with_virtual_fields
+		):
+			if df.permlevel in permlevel_access:
+				permitted_fieldnames.append(df.fieldname)
+
+=======
 		if 0 not in permlevel_access and permission_type in ("read", "select"):
 			if frappe.share.get_shared(self.name, user, rights=[permission_type], limit=1):
 				permlevel_access.add(0)
@@ -674,6 +768,7 @@ class Meta(Document):
 			)
 			if df.permlevel in permlevel_access
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return permitted_fieldnames
 
 	def get_permlevel_access(self, permission_type="read", parenttype=None, *, user=None):
@@ -964,6 +1059,8 @@ def _update_field_order_based_on_insert_after(field_order, insert_after_map):
 		# insert_after is an invalid fieldname, add these fields to the end
 		for fields in insert_after_map.values():
 			field_order.extend(fields)
+<<<<<<< HEAD
+=======
 
 
 if typing.TYPE_CHECKING:
@@ -973,3 +1070,4 @@ if typing.TYPE_CHECKING:
 
 	class _Meta(Meta, DocType):
 		pass
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

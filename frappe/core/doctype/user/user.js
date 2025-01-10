@@ -1,4 +1,9 @@
 frappe.ui.form.on("User", {
+<<<<<<< HEAD
+	before_load: function (frm) {
+		var update_tz_select = function (user_language) {
+			frm.set_df_property("time_zone", "options", [""].concat(frappe.all_timezones));
+=======
 	setup: function (frm) {
 		frm.set_query("default_workspace", () => {
 			return {
@@ -12,6 +17,7 @@ frappe.ui.form.on("User", {
 	before_load: function (frm) {
 		let update_tz_options = function () {
 			frm.fields_dict.time_zone.set_data(frappe.all_timezones);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 
 		if (!frappe.all_timezones) {
@@ -19,7 +25,11 @@ frappe.ui.form.on("User", {
 				method: "frappe.core.doctype.user.user.get_timezones",
 				callback: function (r) {
 					frappe.all_timezones = r.message.timezones;
+<<<<<<< HEAD
+					update_tz_select();
+=======
 					update_tz_options();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				},
 			});
 		} else {
@@ -37,11 +47,29 @@ frappe.ui.form.on("User", {
 		}
 	},
 
+<<<<<<< HEAD
+	role_profile_name: function (frm) {
+		if (frm.doc.role_profile_name) {
+			frappe.call({
+				method: "frappe.core.doctype.user.user.get_role_profile",
+				args: {
+					role_profile: frm.doc.role_profile_name,
+				},
+				callback: function (data) {
+					frm.set_value("roles", []);
+					$.each(data.message || [], function (i, v) {
+						var d = frm.add_child("roles");
+						d.role = v.role;
+					});
+					frm.roles_editor.show();
+				},
+=======
 	role_profiles: function (frm) {
 		if (frm.doc.role_profiles && frm.doc.role_profiles.length) {
 			frm.roles_editor.disable = 1;
 			frm.call("populate_role_profile_roles").then(() => {
 				frm.roles_editor.show();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 		} else {
 			frm.roles_editor.disable = 0;
@@ -78,7 +106,11 @@ frappe.ui.form.on("User", {
 		if (
 			frm.can_edit_roles &&
 			!frm.is_new() &&
+<<<<<<< HEAD
+			in_list(["System User", "Website User"], frm.doc.user_type)
+=======
 			["System User", "Website User"].includes(frm.doc.user_type)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		) {
 			if (!frm.roles_editor) {
 				const role_area = $('<div class="role-editor">').appendTo(
@@ -88,7 +120,11 @@ frappe.ui.form.on("User", {
 				frm.roles_editor = new frappe.RoleEditor(
 					role_area,
 					frm,
+<<<<<<< HEAD
+					frm.doc.role_profile_name ? 1 : 0
+=======
 					frm.doc.role_profiles && frm.doc.role_profiles.length ? 1 : 0
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				);
 
 				if (frm.doc.user_type == "System User") {
@@ -113,7 +149,11 @@ frappe.ui.form.on("User", {
 		}
 
 		if (
+<<<<<<< HEAD
+			in_list(["System User", "Website User"], frm.doc.user_type) &&
+=======
 			["System User", "Website User"].includes(frm.doc.user_type) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			!frm.is_new() &&
 			!frm.roles_editor &&
 			frm.can_edit_roles
@@ -122,6 +162,31 @@ frappe.ui.form.on("User", {
 			return;
 		}
 
+<<<<<<< HEAD
+		if (
+			doc.name === frappe.session.user &&
+			!doc.__unsaved &&
+			frappe.all_timezones &&
+			(doc.language || frappe.boot.user.language) &&
+			doc.language !== frappe.boot.user.language
+		) {
+			frappe.msgprint(__("Refreshing..."));
+			window.location.reload();
+		}
+
+		frm.toggle_display(["sb1", "sb3", "modules_access"], false);
+
+		if (!frm.is_new()) {
+			if (has_access_to_edit_user()) {
+				frm.add_custom_button(
+					__("Set User Permissions"),
+					function () {
+						frappe.route_options = {
+							user: doc.name,
+						};
+						frappe.set_route("List", "User Permission");
+					},
+=======
 		frm.toggle_display(["sb1", "sb3", "modules_access"], false);
 		frm.trigger("setup_impersonation");
 
@@ -144,13 +209,20 @@ frappe.ui.form.on("User", {
 						frappe.set_route("query-report", "Permitted Documents For User", {
 							user: frm.doc.name,
 						}),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					__("Permissions")
 				);
 
 				frm.add_custom_button(
+<<<<<<< HEAD
+					__("View Permitted Documents"),
+					() =>
+						frappe.set_route("query-report", "Permitted Documents For User", {
+=======
 					__("View Doctype Permissions"),
 					() =>
 						frappe.set_route("query-report", "User Doctype Permissions", {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							user: frm.doc.name,
 						}),
 					__("Permissions")
@@ -268,10 +340,13 @@ frappe.ui.form.on("User", {
 			}
 			if (!found) {
 				frm.add_custom_button(__("Create User Email"), function () {
+<<<<<<< HEAD
+=======
 					if (!frm.doc.email) {
 						frappe.msgprint(__("Email is mandatory to create User Email"));
 						return;
 					}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					frm.events.create_user_email(frm);
 				});
 			}
@@ -279,7 +354,11 @@ frappe.ui.form.on("User", {
 
 		if (frappe.route_flags.unsaved === 1) {
 			delete frappe.route_flags.unsaved;
+<<<<<<< HEAD
+			for (var i = 0; i < frm.doc.user_emails.length; i++) {
+=======
 			for (let i = 0; i < frm.doc.user_emails.length; i++) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frm.doc.user_emails[i].idx = frm.doc.user_emails[i].idx + 1;
 			}
 			frm.dirty();
@@ -309,14 +388,22 @@ frappe.ui.form.on("User", {
 				email: frm.doc.email,
 			},
 			callback: function (r) {
+<<<<<<< HEAD
+				if (!Array.isArray(r.message)) {
+=======
 				if (!Array.isArray(r.message) || !r.message.length) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					frappe.route_options = {
 						email_id: frm.doc.email,
 						awaiting_password: 1,
 						enable_incoming: 1,
 					};
 					frappe.model.with_doctype("Email Account", function (doc) {
+<<<<<<< HEAD
+						var doc = frappe.model.get_new_doc("Email Account");
+=======
 						doc = frappe.model.get_new_doc("Email Account");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						frappe.route_flags.linked_user = frm.doc.name;
 						frappe.route_flags.delete_user_from_locals = true;
 						frappe.set_route("Form", "Email Account", doc.name);
@@ -342,6 +429,14 @@ frappe.ui.form.on("User", {
 			},
 		});
 	},
+<<<<<<< HEAD
+	on_update: function (frm) {
+		if (frappe.boot.time_zone && frappe.boot.time_zone.user !== frm.doc.time_zone) {
+			// Clear cache after saving to refresh the values of boot.
+			frappe.ui.toolbar.clear_cache();
+		}
+	},
+=======
 	after_save: function (frm) {
 		/**
 		 * Checks whether the effective value has changed.
@@ -408,6 +503,7 @@ frappe.ui.form.on("User", {
 			});
 		}
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 frappe.ui.form.on("User Email", {

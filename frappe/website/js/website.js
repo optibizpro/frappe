@@ -1,5 +1,10 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // MIT License. See license.txt
+<<<<<<< HEAD
+/* eslint-disable no-console */
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import hljs from "./syntax_highlight";
 
 frappe.provide("website");
@@ -7,6 +12,12 @@ frappe.provide("frappe.awesome_bar_path");
 window.cur_frm = null;
 
 $.extend(frappe, {
+<<<<<<< HEAD
+	boot: {
+		lang: "en",
+	},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	_assets_loaded: [],
 	require: async function (links, callback) {
 		if (typeof links === "string") {
@@ -211,6 +222,18 @@ $.extend(frappe, {
 			)
 			.appendTo(document.body);
 	},
+<<<<<<< HEAD
+	send_message: function (opts, btn) {
+		return frappe.call({
+			type: "POST",
+			method: "frappe.www.contact.send_message",
+			btn: btn,
+			args: opts,
+			callback: opts.callback,
+		});
+	},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	has_permission: function (doctype, docname, perm_type, callback) {
 		return frappe.call({
 			type: "GET",
@@ -333,9 +356,15 @@ $.extend(frappe, {
 	},
 	make_navbar_active: function () {
 		var pathname = window.location.pathname;
+<<<<<<< HEAD
+		$(".navbar-nav a.active").removeClass("active");
+		$(".navbar-nav a").each(function () {
+			var href = $(this).attr("href");
+=======
 		$(".navbar-nav li.active").removeClass("active");
 		$(".navbar-nav li").each(function () {
 			var href = $(this.getElementsByTagName("a")).attr("href");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (href === pathname) {
 				$(this).addClass("active");
 				return false;
@@ -351,10 +380,13 @@ $.extend(frappe, {
 	add_switch_to_desk: function () {
 		$(".switch-to-desk").removeClass("hidden");
 	},
+<<<<<<< HEAD
+=======
 	add_apps: function (obj) {
 		$(".logged-in .apps").attr("href", obj.route).text(obj.label);
 		$(".logged-in .apps").removeClass("hidden");
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	add_link_to_headings: function () {
 		$(".doc-content .from-markdown")
 			.find("h2, h3, h4, h5, h6")
@@ -370,7 +402,55 @@ $.extend(frappe, {
 					</svg>
 				`);
 				$($heading).append($a);
+<<<<<<< HEAD
 			});
+	},
+	setup_lazy_images: function () {
+		// Use IntersectionObserver to only load images that are visible in the viewport
+		// Fallback for browsers that don't support it
+		// To use this feature, instead of adding an img tag, add
+		// <div class="website-image-lazy" data-class="img-class" data-src="image.jpg" data-alt="image"></div>
+
+		const allowed_attributes = ["src", "srcset", "alt", "title", "width", "height"];
+
+		function replace_with_image(target) {
+			const $target = $(target);
+			const attrs = $target.data();
+			const data_string = Object.keys(attrs)
+				.filter((key) => allowed_attributes.includes(key))
+				.map((key) => `${key}="${attrs[key]}"`)
+				.join(" ");
+			$target.replaceWith(`<img ${data_string}>`);
+		}
+
+		if (!window.IntersectionObserver) {
+			$(".website-image-lazy").each((_, el) => {
+				replace_with_image(el);
+			});
+			return;
+		}
+
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((e) => {
+					if (e.intersectionRatio > 0) {
+						io.unobserve(e.target);
+						replace_with_image(e.target);
+					}
+				});
+			},
+			{
+				threshold: [0, 0.2, 0.4, 0.6],
+			}
+		);
+
+		$(".website-image-lazy").each((_, el) => {
+			// Start observing an element
+			io.observe(el);
+		});
+=======
+			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 	show_language_picker() {
 		if (frappe.session.user === "Guest" && window.show_language_picker) {
@@ -562,8 +642,13 @@ frappe.setup_search = function (target, search_scope) {
 
 // Utility functions
 window.valid_email = function (id) {
+<<<<<<< HEAD
+	// eslint-disable-next-line
+	// copied regex from frappe/utils.js validate_type
+=======
 	// copied regex from frappe/utils.js validate_type
 	// eslint-disable-next-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/.test(
 		id.toLowerCase()
 	);

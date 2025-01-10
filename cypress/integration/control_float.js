@@ -34,13 +34,20 @@ context("Control Float", () => {
 				cy.wait(200);
 				cy.fill_field("float_number", d.input, "Float").blur();
 				cy.get_field("float_number", "Float").should("have.value", d.blur_expected);
+<<<<<<< HEAD
+
+=======
 				cy.wait(100);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				cy.get_field("float_number", "Float").focus();
 				cy.wait(100);
 				cy.get_field("float_number", "Float").blur();
 				cy.wait(100);
 				cy.get_field("float_number", "Float").focus();
+<<<<<<< HEAD
+=======
 				cy.wait(100);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				cy.get_field("float_number", "Float").should("have.value", d.focus_expected);
 			});
 		});
@@ -54,6 +61,19 @@ context("Control Float", () => {
 					{
 						input: "364.87,334",
 						blur_expected: "36.487,334",
+<<<<<<< HEAD
+						focus_expected: "36487.334",
+					},
+					{
+						input: "36487,334",
+						blur_expected: "36.487,334",
+						focus_expected: "36487.334",
+					},
+					{
+						input: "100",
+						blur_expected: "100,000",
+						focus_expected: "100",
+=======
 						focus_expected: "36.487,334",
 					},
 					{
@@ -65,6 +85,7 @@ context("Control Float", () => {
 						input: "2*(2+47)+1,5+1",
 						blur_expected: "100,500",
 						focus_expected: "100,500",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					},
 				],
 			},
@@ -72,6 +93,21 @@ context("Control Float", () => {
 				number_format: "#,###.##",
 				values: [
 					{
+<<<<<<< HEAD
+						input: "364,87.334",
+						blur_expected: "36,487.334",
+						focus_expected: "36487.334",
+					},
+					{
+						input: "36487.334",
+						blur_expected: "36,487.334",
+						focus_expected: "36487.334",
+					},
+					{
+						input: "100",
+						blur_expected: "100.000",
+						focus_expected: "100",
+=======
 						input: "464,87.334",
 						blur_expected: "46,487.334",
 						focus_expected: "46,487.334",
@@ -102,6 +138,7 @@ context("Control Float", () => {
 						input: "12.340",
 						blur_expected: "12.340,000",
 						focus_expected: "12.340,000",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					},
 				],
 			},

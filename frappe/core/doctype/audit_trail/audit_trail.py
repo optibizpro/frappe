@@ -11,6 +11,8 @@ from frappe.utils import compare
 
 
 class AuditTrail(Document):
+<<<<<<< HEAD
+=======
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -27,6 +29,7 @@ class AuditTrail(Document):
 
 	pass
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def validate(self):
 		self.validate_fields()
 		self.validate_document()

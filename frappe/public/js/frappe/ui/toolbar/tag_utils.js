@@ -13,9 +13,16 @@ frappe.tags.utils = {
 			return [];
 		}
 
+<<<<<<< HEAD
+		for (let i in frappe.tags.tags) {
+			let tag = frappe.tags.tags[i];
+			let level = frappe.search.utils.fuzzy_search(txt, tag);
+			if (level) {
+=======
 		frappe.tags.tags.forEach((tag) => {
 			const search_result = frappe.search.utils.fuzzy_search(txt, tag, true);
 			if (search_result.score) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				out.push({
 					type: "Tag",
 					label: __("#{0}", [search_result.marked_string]),

@@ -14,14 +14,23 @@ import random
 import time
 from typing import NoReturn
 
+<<<<<<< HEAD
+from croniter import CroniterBadCronError
+=======
 import setproctitle
 from croniter import CroniterBadCronError
 from filelock import FileLock, Timeout
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
+<<<<<<< HEAD
+from frappe.utils import cint, get_datetime, get_sites, now_datetime
+from frappe.utils.background_jobs import get_jobs, set_niceness
+=======
 from frappe.utils import cint, get_bench_path, get_datetime, get_sites, now_datetime
 from frappe.utils.background_jobs import set_niceness
 from frappe.utils.caching import redis_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DEFAULT_SCHEDULER_TICK = 4 * 60
@@ -36,16 +45,25 @@ def cprint(*args, **kwargs):
 		pass
 
 
+<<<<<<< HEAD
+def start_scheduler():
+=======
 def _proctitle(message):
 	setproctitle.setthreadtitle(f"frappe-scheduler: {message}")
 
 
 def start_scheduler() -> NoReturn:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Run enqueue_events_for_all_sites based on scheduler tick.
 	Specify scheduler_interval in seconds in common_site_config.json"""
 
 	tick = get_scheduler_tick()
 	set_niceness()
+<<<<<<< HEAD
+
+	while True:
+		time.sleep(tick)
+=======
 
 	lock_path = os.path.abspath(os.path.join(get_bench_path(), "config", "scheduler_process"))
 
@@ -59,6 +77,7 @@ def start_scheduler() -> NoReturn:
 	while True:
 		_proctitle("idle")
 		time.sleep(sleep_duration(tick))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		enqueue_events_for_all_sites()
 
 
@@ -94,9 +113,16 @@ def enqueue_events_for_all_sites() -> None:
 			frappe.logger("scheduler").debug(f"Failed to enqueue events for site: {site}", exc_info=True)
 
 
+<<<<<<< HEAD
+def enqueue_events_for_site(site):
+	def log_and_raise():
+		error_message = f"Exception in Enqueue Events for Site {site}\n{frappe.get_traceback()}"
+		frappe.logger("scheduler").error(error_message)
+=======
 def enqueue_events_for_site(site: str) -> None:
 	def log_exc():
 		frappe.logger("scheduler").error(f"Exception in Enqueue Events for Site {site}", exc_info=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	try:
 		_proctitle(f"scheduling events for {site}")
@@ -119,6 +145,19 @@ def enqueue_events_for_site(site: str) -> None:
 
 def enqueue_events() -> list[str] | None:
 	if schedule_jobs_based_on_activity():
+<<<<<<< HEAD
+		frappe.flags.enqueued_jobs = []
+		queued_jobs = get_jobs(site=site, key="job_type").get(site) or []
+		for job_type in frappe.get_all("Scheduled Job Type", ("name", "method"), dict(stopped=0)):
+			if job_type.method not in queued_jobs:
+				# don't add it to queue if still pending
+				try:
+					frappe.get_doc("Scheduled Job Type", job_type.name).enqueue()
+				except CroniterBadCronError:
+					frappe.logger("scheduler").error(
+						f"Invalid Job on {frappe.local.site} - {job_type.name}", exc_info=True
+					)
+=======
 		enqueued_jobs = []
 		all_jobs = frappe.get_all("Scheduled Job Type", filters={"stopped": 0}, fields="*")
 		random.shuffle(all_jobs)
@@ -133,6 +172,7 @@ def enqueue_events() -> list[str] | None:
 				)
 
 		return enqueued_jobs
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def is_scheduler_inactive(verbose=True) -> bool:
@@ -185,7 +225,11 @@ def schedule_jobs_based_on_activity(check_time=None):
 	Also return True for inactive sites once every 24 hours based on `Scheduled Job Log`."""
 	if is_dormant(check_time=check_time):
 		# ensure last job is one day old
+<<<<<<< HEAD
+		last_job_timestamp = _get_last_modified_timestamp("Scheduled Job Log")
+=======
 		last_job_timestamp = _get_last_creation_timestamp("Scheduled Job Log")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if not last_job_timestamp:
 			return True
 		else:
@@ -204,7 +248,11 @@ def is_dormant(check_time=None):
 	# Assume never dormant if developer_mode is enabled
 	if frappe.conf.developer_mode:
 		return False
+<<<<<<< HEAD
+	last_activity_log_timestamp = _get_last_modified_timestamp("Activity Log")
+=======
 	last_activity_log_timestamp = _get_last_creation_timestamp("Activity Log")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	since = (frappe.get_system_settings("dormant_days") or 4) * 86400
 	if not last_activity_log_timestamp:
 		return True
@@ -213,8 +261,13 @@ def is_dormant(check_time=None):
 	return False
 
 
+<<<<<<< HEAD
+def _get_last_modified_timestamp(doctype):
+	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="modified", order_by="modified desc")
+=======
 def _get_last_creation_timestamp(doctype):
 	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="creation", order_by="creation desc")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if timestamp:
 		return get_datetime(timestamp)
 
@@ -242,5 +295,9 @@ def get_scheduler_status():
 
 
 def get_scheduler_tick() -> int:
+<<<<<<< HEAD
+	return cint(frappe.get_conf().scheduler_tick_interval) or 60
+=======
 	conf = frappe.get_conf()
 	return cint(conf.scheduler_tick_interval) or DEFAULT_SCHEDULER_TICK
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

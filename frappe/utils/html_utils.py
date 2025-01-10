@@ -176,7 +176,12 @@ def sanitize_html(html, linkify=False, always_sanitize=False):
 		return name in acceptable_attributes
 
 	attributes = {"*": attributes_filter, "svg": svg_attributes}
+<<<<<<< HEAD
+	styles = bleach_allowlist.all_styles
+	strip_comments = False
+=======
 	css_sanitizer = CSSSanitizer(allowed_css_properties=bleach_allowlist.all_styles)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# returns html with escaped tags, escaped orphan >, <, etc.
 	escaped_html = bleach.clean(

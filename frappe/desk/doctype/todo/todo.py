@@ -104,6 +104,15 @@ class ToDo(Document):
 			)
 			assignments.reverse()
 
+<<<<<<< HEAD
+			frappe.db.set_value(
+				self.reference_type,
+				self.reference_name,
+				"_assign",
+				json.dumps(assignments) if assignments else "",
+				update_modified=False,
+			)
+=======
 			if frappe.get_meta(self.reference_type).issingle:
 				frappe.db.set_single_value(
 					self.reference_type,
@@ -119,6 +128,7 @@ class ToDo(Document):
 					json.dumps(assignments) if assignments else "",
 					update_modified=False,
 				)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		except Exception as e:
 			if frappe.db.is_table_missing(e) and frappe.flags.in_install:

@@ -140,9 +140,12 @@ class Communication(Document, CommunicationEmailMixin):
 			self.seen = 1
 			self.sent_or_received = "Sent"
 
+<<<<<<< HEAD
+=======
 		if not self.send_after:  # Handle empty string, always set NULL
 			self.send_after = None
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		validate_email(self)
 
 		if self.communication_medium == "Email":
@@ -306,9 +309,12 @@ class Communication(Document, CommunicationEmailMixin):
 		else:
 			self.status = "Open"
 
+<<<<<<< HEAD
+=======
 		if self.send_after and self.is_new():
 			self.delivery_status = "Scheduled"
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def mark_email_as_spam(self):
 		if (
 			self.communication_type == "Communication"
@@ -466,11 +472,15 @@ def has_permission(doc, ptype, user=None, debug=False):
 			return True
 
 		if doc.reference_doctype and doc.reference_name:
+<<<<<<< HEAD
+			return frappe.has_permission(doc.reference_doctype, ptype="read", doc=doc.reference_name)
+=======
 			return frappe.has_permission(
 				doc.reference_doctype, ptype="read", doc=doc.reference_name, user=user, debug=debug
 			)
 
 	return True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_permission_query_conditions_for_communication(user):
@@ -530,7 +540,14 @@ def get_emails(email_strings: list[str]) -> list[str]:
 	for email_string in email_strings:
 		if email_string:
 			result = getaddresses([email_string])
+<<<<<<< HEAD
+			for email in result:
+				if "@" in email[1]:
+					email_addrs.append(email[1])
+
+=======
 			email_addrs.extend(email[1] for email in result)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return email_addrs
 
 
@@ -552,14 +569,36 @@ def parse_email(email_strings):
 	When automatic email linking is enabled, an email from email_strings can contain
 	a doctype and docname ie in the format `admin+doctype+docname@example.com` or `admin+doctype=docname@example.com`,
 	the email is parsed and doctype and docname is extracted.
+<<<<<<< HEAD
+=======
 
 	see: RFC5233
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	for email_string in email_strings:
 		if not email_string:
 			continue
 
 		for email in email_string.split(","):
+<<<<<<< HEAD
+			email_username = email.split("@", 1)[0]
+			email_local_parts = email_username.split("+")
+			docname = doctype = None
+			if len(email_local_parts) == 3:
+				doctype = unquote(email_local_parts[1])
+				docname = unquote(email_local_parts[2])
+
+			elif len(email_local_parts) == 2:
+				document_parts = email_local_parts[1].split("=", 1)
+				if len(document_parts) != 2:
+					continue
+
+				doctype = unquote(document_parts[0])
+				docname = unquote(document_parts[1])
+
+			if doctype and docname:
+				yield doctype, docname
+=======
 			local_part = email.split("@", 1)[0].strip('"')
 			user, detail = None, None
 			if "+" in local_part:
@@ -582,6 +621,7 @@ def parse_email(email_strings):
 			doctype = unquote_plus(document_parts[0])
 			docname = unquote_plus(document_parts[1])
 			yield doctype, docname
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_email_without_link(email):
@@ -596,6 +636,10 @@ def get_email_without_link(email):
 
 	try:
 		_email = email.split("@")
+<<<<<<< HEAD
+		email_id = _email[0].split("+", 1)[0]
+		email_host = _email[1]
+=======
 		_local_part = _email[0].strip('"')
 		if "+" in _local_part:
 			user = _local_part.split("+", 1)[0]
@@ -604,6 +648,7 @@ def get_email_without_link(email):
 		else:
 			user = _local_part
 		domain = _email[1]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	except IndexError:
 		return email
 

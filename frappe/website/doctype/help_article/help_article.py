@@ -124,7 +124,13 @@ def clear_knowledge_base_cache():
 @frappe.whitelist(allow_guest=True)
 @rate_limit(key="article", limit=5, seconds=60 * 60)
 def add_feedback(article: str, helpful: str):
+<<<<<<< HEAD
+	if not isinstance("article", str):
+		frappe.throw(_("Invalid Article Name"))
+=======
 	field = "not_helpful" if helpful == "No" else "helpful"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+	field = "not_helpful" if helpful == "No" else "helpful"
 	value = cint(frappe.db.get_value("Help Article", article, field))
 	frappe.db.set_value("Help Article", article, field, value + 1, update_modified=False)

@@ -51,11 +51,19 @@ def flush_local_link_count():
 
 	link_count = frappe.cache.get_value("_link_count") or {}
 
+<<<<<<< HEAD
+		for key, _value in frappe.local.link_count.items():
+			if key in link_count:
+				link_count[key] += frappe.local.link_count[key]
+			else:
+				link_count[key] = frappe.local.link_count[key]
+=======
 	for key, value in new_links.items():
 		if key in link_count:
 			link_count[key] += value
 		else:
 			link_count[key] = value
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	frappe.cache.set_value("_link_count", link_count)
 	new_links.clear()

@@ -60,7 +60,15 @@ $.extend(frappe.model, {
 		if (frappe.route_options && !doc.parent) {
 			$.each(frappe.route_options, function (fieldname, value) {
 				var df = frappe.meta.has_field(doctype, fieldname);
+<<<<<<< HEAD
+				if (
+					df &&
+					in_list(["Link", "Data", "Select", "Dynamic Link"], df.fieldtype) &&
+					!df.no_copy
+				) {
+=======
 				if (df && !df.no_copy) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					doc[fieldname] = value;
 				}
 			});
@@ -80,6 +88,30 @@ $.extend(frappe.model, {
 	},
 
 	set_default_values: function (doc, parent_doc) {
+<<<<<<< HEAD
+		var doctype = doc.doctype;
+		var docfields = frappe.meta.get_docfields(doctype);
+		var updated = [];
+		for (var fid = 0; fid < docfields.length; fid++) {
+			var f = docfields[fid];
+			if (!in_list(frappe.model.no_value_type, f.fieldtype) && doc[f.fieldname] == null) {
+				if (f.no_default) continue;
+				var v = frappe.model.get_default_value(f, doc, parent_doc);
+				if (v) {
+					if (in_list(["Int", "Check"], f.fieldtype)) v = cint(v);
+					else if (in_list(["Currency", "Float"], f.fieldtype)) v = flt(v);
+
+					doc[f.fieldname] = v;
+					updated.push(f.fieldname);
+				} else if (
+					f.fieldtype == "Select" &&
+					f.options &&
+					typeof f.options === "string" &&
+					!in_list(["[Select]", "Loading..."], f.options)
+				) {
+					doc[f.fieldname] = f.options.split("\n")[0];
+				}
+=======
 		let doctype = doc.doctype;
 		let docfields = frappe.meta.get_docfields(doctype);
 		let updated = [];
@@ -95,6 +127,7 @@ $.extend(frappe.model, {
 				f.no_default
 			) {
 				return;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 
 			let v = frappe.model.get_default_value(f, doc, parent_doc);
@@ -166,6 +199,10 @@ $.extend(frappe.model, {
 				if (!user_default) {
 					user_default = frappe.defaults.get_user_default(df.fieldname);
 				}
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				if (
 					!user_default &&
 					df.remember_last_selected_value &&

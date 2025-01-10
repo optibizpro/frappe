@@ -14,8 +14,22 @@ from frappe.desk.reportview import clean_params, parse_json
 from frappe.model.utils import render_include
 from frappe.modules import get_module_path, scrub
 from frappe.monitor import add_data_to_monitor
+<<<<<<< HEAD
+from frappe.permissions import get_role_permissions
+from frappe.utils import (
+	cint,
+	cstr,
+	flt,
+	format_duration,
+	get_html_format,
+	get_url_to_form,
+	gzip_decompress,
+	sbool,
+)
+=======
 from frappe.permissions import get_role_permissions, has_permission
 from frappe.utils import cint, cstr, flt, format_duration, get_html_format, sbool
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_report_doc(report_name):
@@ -36,6 +50,10 @@ def get_report_doc(report_name):
 
 		# Follow whatever the custom report has set for prepared report field
 		doc.prepared_report = custom_report_doc.prepared_report
+<<<<<<< HEAD
+		doc.disable_prepared_report = custom_report_doc.disable_prepared_report
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not doc.is_permitted():
 		frappe.throw(
@@ -140,6 +158,16 @@ def normalize_result(result, columns):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+def background_enqueue_run(report_name, filters=None, user=None):
+	from frappe.core.doctype.prepared_report.prepared_report import make_prepared_report
+
+	return make_prepared_report(report_name, filters)
+
+
+@frappe.whitelist()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_script(report_name):
 	report = get_report_doc(report_name)
 	module = report.module or frappe.db.get_value("DocType", report.ref_doctype, "module")
@@ -165,12 +193,20 @@ def get_script(report_name):
 		script += f"\n\n//# sourceURL={scrub(report.name)}__custom"
 
 	if not script:
+<<<<<<< HEAD
+		script = "frappe.query_reports['%s']={}" % report_name
+=======
 		script = "frappe.query_reports['{}']={{}}".format(report_name)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return {
 		"script": render_include(script),
 		"html_format": html_format,
+<<<<<<< HEAD
+		"execution_time": frappe.cache().hget("report_execution_time", report_name) or 0,
+=======
 		"execution_time": frappe.cache.hget("report_execution_time", report_name) or 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"filters": report.filters,
 		"custom_report_name": report.name if report.get("is_custom_report") else None,
 	}
@@ -205,8 +241,28 @@ def run(
 			raise_exception=True,
 		)
 
-	result = None
+	if sbool(are_default_filters) and report.custom_filters:
+		filters = report.custom_filters
 
+<<<<<<< HEAD
+	if (
+		report.prepared_report
+		and not report.disable_prepared_report
+		and not sbool(ignore_prepared_report)
+		and not custom_columns
+	):
+		dn = None
+		if filters:
+			if isinstance(filters, str):
+				filters = json.loads(filters)
+
+			dn = filters.pop("prepared_report_name", None)
+
+		result = get_prepared_report_result(report, filters, dn, user)
+	else:
+		result = generate_report_result(report, filters, user, custom_columns, is_tree, parent_field)
+		add_data_to_monitor(report=report.reference_report or report.name)
+=======
 	if sbool(are_default_filters) and report.custom_filters:
 		filters = report.custom_filters
 
@@ -226,6 +282,7 @@ def run(
 	except Exception:
 		frappe.log_error("Report Error")
 		raise
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	result["add_total_row"] = report.add_total_row and not result.get("skip_total_row", False)
 
@@ -268,7 +325,11 @@ def add_custom_column_data(custom_columns, result):
 	return result
 
 
+<<<<<<< HEAD
+def get_prepared_report_result(report, filters, dn=None, user=None):
+=======
 def get_prepared_report_result(report, filters, dn="", user=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.core.doctype.prepared_report.prepared_report import get_completed_prepared_report
 
 	def get_report_data(doc, data):
@@ -324,7 +385,10 @@ def export_query():
 	file_format_type = form_params.file_format_type
 	custom_columns = frappe.parse_json(form_params.custom_columns or "[]")
 	include_indentation = form_params.include_indentation
+<<<<<<< HEAD
+=======
 	include_filters = form_params.include_filters
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	visible_idx = form_params.visible_idx
 
 	if isinstance(visible_idx, str):
@@ -332,6 +396,17 @@ def export_query():
 
 	data = run(report_name, form_params.filters, custom_columns=custom_columns, are_default_filters=False)
 	data = frappe._dict(data)
+<<<<<<< HEAD
+	if not data.columns:
+		frappe.respond_as_web_page(
+			_("No data to export"),
+			_("You can try changing the filters of your report."),
+		)
+		return
+
+	format_duration_fields(data)
+	xlsx_data, column_widths = build_xlsx_data(data, visible_idx, include_indentation)
+=======
 	data.filters = form_params.applied_filters
 
 	if not data.columns:
@@ -345,6 +420,7 @@ def export_query():
 	xlsx_data, column_widths = build_xlsx_data(
 		data, visible_idx, include_indentation, include_filters=include_filters
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if file_format_type == "CSV":
 		content = get_csv_bytes(xlsx_data, csv_params)
@@ -389,7 +465,11 @@ def build_xlsx_data(data, visible_idx, include_indentation, include_filters=Fals
 		# Note: converted for faster lookups
 		visible_idx = set(visible_idx)
 
+<<<<<<< HEAD
+	result = [[]]
+=======
 	result = []
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	column_widths = []
 
 	if cint(include_filters):
@@ -516,7 +596,11 @@ def add_total_row(result, columns, meta=None, is_tree=False, parent_field=None):
 @frappe.whitelist()
 def get_data_for_custom_field(doctype, field, names=None):
 	if not frappe.has_permission(doctype, "read"):
+<<<<<<< HEAD
+		frappe.throw(_("Not Permitted to read {0}").format(doctype), frappe.PermissionError)
+=======
 		frappe.throw(_("Not Permitted to read {0}").format(_(doctype)), frappe.PermissionError)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	filters = {}
 	if names:
@@ -524,7 +608,12 @@ def get_data_for_custom_field(doctype, field, names=None):
 			names = frappe.json.loads(names)
 		filters.update({"name": ["in", names]})
 
+<<<<<<< HEAD
+	value_map = frappe._dict(frappe.get_list(doctype, filters=filters, fields=["name", field], as_list=1))
+	return value_map
+=======
 	return frappe._dict(frappe.get_list(doctype, filters=filters, fields=["name", field], as_list=1))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_data_for_custom_report(columns, result):
@@ -704,7 +793,11 @@ def get_linked_doctypes(columns, data):
 
 	columns_dict = get_columns_dict(columns)
 
+<<<<<<< HEAD
+	for idx, _ in enumerate(columns):  # noqa: F402
+=======
 	for idx in range(len(columns)):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		df = columns_dict[idx]
 		if df.get("fieldtype") == "Link":
 			if data and isinstance(data[0], list | tuple):

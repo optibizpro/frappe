@@ -62,7 +62,11 @@ frappe.ui.FilterGroup = class {
 	}
 
 	set_popover_events() {
+<<<<<<< HEAD
+		$(document.body).on("click", (e) => {
+=======
 		$(document.body).on("mousedown", (e) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (this.wrapper && this.wrapper.is(":visible")) {
 				const in_datepicker =
 					$(e.target).is(".datepicker--cell") ||
@@ -130,7 +134,13 @@ frappe.ui.FilterGroup = class {
 	update_filter_button() {
 		const filters_applied = this.filters.length > 0;
 		const button_label = filters_applied
+<<<<<<< HEAD
+			? this.filters.length > 1
+				? __("{0} filters", [this.filters.length])
+				: __("{0} filter", [this.filters.length])
+=======
 			? __("Filters {0}", [`<span class="filter-label">${this.filters.length}</span>`])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			: __("Filter");
 
 		this.filter_button
@@ -140,10 +150,13 @@ frappe.ui.FilterGroup = class {
 		this.filter_button.find(".filter-icon").toggleClass("active", filters_applied);
 
 		this.filter_button.find(".button-label").html(button_label);
+<<<<<<< HEAD
+=======
 		this.filter_button.attr(
 			"title",
 			`${this.filters.length} Filter${this.filters.length > 1 ? "s" : ""} Applied`
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	set_filter_events() {
@@ -321,6 +334,10 @@ frappe.ui.FilterGroup = class {
 					</div>
 				</div>
 			</div>`);
+<<<<<<< HEAD
+		/* eslint-disable indent */
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_filters_as_object() {

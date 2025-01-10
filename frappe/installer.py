@@ -5,7 +5,10 @@ import gzip
 import json
 import os
 import re
+<<<<<<< HEAD
+=======
 import shutil
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import subprocess
 import sys
 from collections import OrderedDict
@@ -19,7 +22,10 @@ import frappe
 from frappe.defaults import _clear_cache
 from frappe.utils import cint, is_git_url
 from frappe.utils.dashboard import sync_dashboards
+<<<<<<< HEAD
+=======
 from frappe.utils.synchronization import filelock
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def _is_scheduler_enabled(site) -> bool:
@@ -99,7 +105,26 @@ def _new_site(
 			mariadb_user_host_login_scope=mariadb_user_host_login_scope,
 		)
 
+<<<<<<< HEAD
+	install_db(
+		root_login=db_root_username,
+		root_password=db_root_password,
+		db_name=db_name,
+		admin_password=admin_password,
+		verbose=verbose,
+		source_sql=source_sql,
+		force=force,
+		reinstall=reinstall,
+		db_password=db_password,
+		db_type=db_type,
+		db_host=db_host,
+		db_port=db_port,
+		no_mariadb_socket=no_mariadb_socket,
+	)
+	apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps) or [])
+=======
 		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps or []))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		for app in apps_to_install:
 			# NOTE: not using force here for 2 reasons:
@@ -537,6 +562,11 @@ def init_singles():
 			continue
 
 
+<<<<<<< HEAD
+def make_conf(db_name=None, db_password=None, site_config=None, db_type=None, db_host=None, db_port=None):
+	site = frappe.local.site
+	make_site_config(db_name, db_password, site_config, db_type=db_type, db_host=db_host, db_port=db_port)
+=======
 def make_conf(
 	db_name=None,
 	db_password=None,
@@ -558,6 +588,7 @@ def make_conf(
 		db_port=db_port,
 		db_user=db_user,
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	sites_path = frappe.local.sites_path
 	frappe.destroy()
 	frappe.init(site, sites_path=sites_path)
@@ -600,7 +631,10 @@ def make_site_config(
 
 def update_site_config(key, value, validate=True, site_config_path=None):
 	"""Update a value in site_config"""
+<<<<<<< HEAD
+=======
 	from frappe.config import clear_site_config_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.synchronization import filelock
 
 	if not site_config_path:
@@ -611,7 +645,10 @@ def update_site_config(key, value, validate=True, site_config_path=None):
 
 	with filelock("site_config", is_global=_is_global_conf):
 		_update_config_file(key=key, value=value, config_file=site_config_path)
+<<<<<<< HEAD
+=======
 		clear_site_config_cache()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def _update_config_file(key: str, value, config_file: str):
@@ -697,6 +734,35 @@ def remove_missing_apps():
 				frappe.db.set_global("installed_apps", json.dumps(installed_apps))
 
 
+<<<<<<< HEAD
+def extract_sql_from_archive(sql_file_path):
+	"""Return the path of an SQL file if the passed argument is the path of a gzipped
+	SQL file or an SQL file path. The path may be absolute or relative from the bench
+	root directory or the sites sub-directory.
+
+	Args:
+	        sql_file_path (str): Path of the SQL file
+
+	Returns:
+	        str: Path of the decompressed SQL file
+	"""
+	from frappe.utils import get_bench_relative_path
+
+	sql_file_path = get_bench_relative_path(sql_file_path)
+	# Extract the gzip file if user has passed *.sql.gz file instead of *.sql file
+	if sql_file_path.endswith(".gz"):
+		decompressed_file_name = extract_sql_gzip(sql_file_path)
+	else:
+		decompressed_file_name = sql_file_path
+
+	# convert archive sql to latest compatible
+	convert_archive_content(decompressed_file_name)
+
+	return decompressed_file_name
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def convert_archive_content(sql_file_path):
 	if frappe.conf.db_type == "mariadb":
 		# ever since mariaDB 10.6, row_format COMPRESSED has been deprecated and removed
@@ -737,6 +803,20 @@ def _guess_mariadb_version() -> tuple[int] | None:
 	with suppress(Exception):
 		mariadb = which("mariadb") or which("mysql")
 		version_output = subprocess.getoutput(f"{mariadb} --version")
+		version_regex = r"(?P<version>\d+\.\d+\.\d+)-MariaDB"
+
+		version = re.search(version_regex, version_output).group("version")
+
+		return tuple(int(v) for v in version.split("."))
+
+
+def _guess_mariadb_version() -> tuple[int] | None:
+	# Using command-line because we *might* not have a connection yet and this command is required
+	# in non-interactive mode.
+	# Use db.sql("select version()") instead if connection is available.
+	with suppress(Exception):
+		mysql = which("mysql")
+		version_output = subprocess.getoutput(f"{mysql} --version")
 		version_regex = r"(?P<version>\d+\.\d+\.\d+)-MariaDB"
 
 		version = re.search(version_regex, version_output).group("version")
@@ -788,6 +868,23 @@ def is_downgrade(sql_file_path, verbose=False):
 	backup_version = get_backup_version(sql_file_path) or get_old_backup_version(sql_file_path)
 	current_version = Version(frappe.__version__)
 
+<<<<<<< HEAD
+	with open(sql_file_path) as f:
+		header = f.readline()
+		# Example first line:
+		# -- Backup generated by Frappe 15.1.0 on branch fix-backup-restore
+
+		if match := re.search(r"Frappe (\d+\.\d+\.\d+)", header):
+			backup_version = Version(match.group(1))
+			current_version = Version(frappe.__version__)
+
+			downgrade = backup_version > current_version
+
+			if verbose and downgrade:
+				print(f"Your site will be downgraded from Frappe {backup_version} to {current_version}")
+
+			return downgrade
+=======
 	# Assume it's not a downgrade if we can't determine backup version
 	if backup_version is None:
 		return False
@@ -798,6 +895,7 @@ def is_downgrade(sql_file_path, verbose=False):
 		print(f"Your site is currently on Frappe {current_version} and your backup is {backup_version}.")
 
 	return is_downgrade
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_old_backup_version(sql_file_path: str) -> Version | None:
@@ -851,10 +949,14 @@ def partial_restore(sql_file_path, verbose=False):
 			" partial restore operation for PostgreSQL databases",
 			fg="yellow",
 		)
+<<<<<<< HEAD
+		warnings.warn(warn, stacklevel=1)
+=======
 		warnings.warn(warn, stacklevel=2)
 	else:
 		click.secho("Unsupported database type", fg="red")
 		return
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	import_db_from_sql(source_sql=sql_file_path, verbose=verbose)
 

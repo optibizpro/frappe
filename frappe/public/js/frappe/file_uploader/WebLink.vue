@@ -1,6 +1,10 @@
 <template>
 	<div class="file-web-link margin-bottom">
+<<<<<<< HEAD
+		<a href class="text-muted text-medium" @click.prevent="$emit('hide-web-link')">
+=======
 		<a href class="text-muted text-medium" @click.prevent="emit('hide-web-link')">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{{ __("← Back to upload files") }}
 		</a>
 		<div class="input-group">
@@ -13,6 +17,17 @@
 		</div>
 	</div>
 </template>
+<<<<<<< HEAD
+<script>
+export default {
+	name: "WebLink",
+	data() {
+		return {
+			url: "",
+		};
+	},
+};
+=======
 
 <script setup>
 import { ref } from "vue";
@@ -23,6 +38,7 @@ let emit = defineEmits(["hide-web-link"]);
 let url = ref("");
 
 defineExpose({ url });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

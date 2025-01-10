@@ -30,7 +30,11 @@ def get_workflow_name(doctype):
 	workflow_name = frappe.cache.hget("workflow", doctype)
 	if workflow_name is None:
 		workflow_name = frappe.db.get_value("Workflow", {"document_type": doctype, "is_active": 1}, "name")
+<<<<<<< HEAD
+		frappe.cache().hset("workflow", doctype, workflow_name or "")
+=======
 		frappe.cache.hset("workflow", doctype, workflow_name or "")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return workflow_name
 

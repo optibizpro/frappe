@@ -78,7 +78,10 @@ frappe.model.DocTypeController = class DocTypeController extends frappe.ui.form.
 				Expression: "format:",
 				"Expression (sld style)": "",
 				Random: "hash",
+<<<<<<< HEAD
+=======
 				UUID: "UUID",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"By script": "",
 			};
 			this.frm.set_value(
@@ -137,6 +140,9 @@ frappe.model.DocTypeController = class DocTypeController extends frappe.ui.form.
 		}
 	}
 
+<<<<<<< HEAD
+		this.frm.set_df_property("fields", "reqd", this.frm.doc.autoname !== "Prompt");
+=======
 	setup_fetch_from_fields(doc, doctype, docname) {
 		let frm = this.frm;
 		// Render two select fields for Fetch From instead of Small Text for better UX
@@ -221,5 +227,6 @@ frappe.model.DocTypeController = class DocTypeController extends frappe.ui.form.
 			$doctype_select.val(curr_value.doctype);
 			update_fieldname_options();
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };

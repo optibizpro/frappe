@@ -165,7 +165,10 @@ frappe.views.ListSidebar = class ListSidebar {
 			wrapper: this.page.sidebar.find(".list-filters"),
 			doctype: this.doctype,
 			list_view: this.list_view,
+<<<<<<< HEAD
+=======
 			section_title: this.page.sidebar.find(".save-filter-section .sidebar-label"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 
@@ -238,11 +241,19 @@ frappe.views.ListSidebar = class ListSidebar {
 	}
 
 	set_loading_state(dropdown) {
+<<<<<<< HEAD
+		dropdown.html(`<li>
+			<div class="empty-state">
+				${__("Loading...")}
+			</div>
+		</li>`);
+=======
 		dropdown.html(`<div>
 			<div class="empty-state">
 				${__("Loading...")}
 			</div>
 		</div>`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	render_stat(stats) {
@@ -295,11 +306,27 @@ frappe.views.ListSidebar = class ListSidebar {
 
 			const message = __("Get more insights with");
 			const link = "https://frappe.io/s/insights";
+<<<<<<< HEAD
+			const cta = __("Frappe Insights");
+
+			this.insights_banner = $(`
+				<div style="position: relative;">
+					<div class="pr-3">
+						${message} <a href="${link}" target="_blank" style="color: var(--primary-color)">${cta} &rarr; </a>
+					</div>
+					<div style="position: absolute; top: -1px; right: -4px; cursor: pointer;" title="Dismiss"
+						onclick="localStorage.setItem('show_insights_banner', 'false') || this.parentElement.remove()">
+						<svg class="icon  icon-sm" style="">
+							<use class="" href="#icon-close"></use>
+						</svg>
+					</div>
+=======
 			const cta = "Frappe Insights";
 
 			this.insights_banner = $(`
 				<div class="sidebar-section">
 					${message} <a href="${link}" target="_blank" style="color: var(--text-color)">${cta} &rarr; </a>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				</div>
 			`).appendTo(this.sidebar);
 		} catch (error) {

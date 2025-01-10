@@ -156,8 +156,14 @@
 		}
 	}
 
+<<<<<<< HEAD
+	.select-like,
+	.file-select {
+		padding: 15px 0px 15px 15px;
+=======
 	.file-select {
 		padding-left: 11px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 
@@ -215,6 +221,20 @@ $level-margin-right: 8px;
 .footnote-area {
 	border-top: 1px solid var(--border-color);
 
+<<<<<<< HEAD
+	.btn-group .btn-paging.btn-info {
+		background-color: var(--gray-600);
+		border-color: var(--gray-600);
+		color: var(--white);
+		font-weight: var(--text-bold);
+	}
+}
+
+.frappe-card {
+	.list-paging-area,
+	.footnote-area {
+		padding: var(--padding-md);
+=======
 	.btn-group {
 		border: 1px solid var(--border-color);
 		border-radius: var(--border-radius);
@@ -236,6 +256,7 @@ $level-margin-right: 8px;
 	.list-paging-area,
 	.footnote-area {
 		padding: var(--padding-sm) var(--padding-md);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 
@@ -247,6 +268,13 @@ $level-margin-right: 8px;
 	margin-bottom: 1px;
 }
 
+<<<<<<< HEAD
+input.list-check-all,
+input.list-row-checkbox {
+	margin-top: 0px;
+	--checkbox-right-margin: calc(var(--checkbox-size) / 2 + #{$level-margin-right});
+}
+=======
 input.list-row-checkbox,
 input.list-header-checkbox {
 	margin-top: 0;
@@ -254,6 +282,7 @@ input.list-header-checkbox {
 	--checkbox-right-margin: 0;
 	background-color: var(--card-bg);
 	z-index: 1;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	&::after {
 		// Extend the checkbox's clickable area
@@ -423,6 +452,13 @@ input.list-header-checkbox {
 
 	.filter-selector .btn-group {
 		margin: var(--margin-xs);
+<<<<<<< HEAD
+	}
+
+	.filter-button.btn-primary-light {
+		color: var(--text-on-blue);
+		outline: 1px solid var(--bg-dark-blue);
+=======
 
 		.filter-label {
 			display: inline-block;
@@ -435,6 +471,7 @@ input.list-header-checkbox {
 	}
 
 	.filter-button.btn-primary-light {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		z-index: 1;
 	}
 

@@ -4,7 +4,10 @@
 import json
 import os
 from collections import namedtuple
+<<<<<<< HEAD
+=======
 from functools import partial
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _
@@ -14,7 +17,11 @@ from frappe.desk.doctype.notification_log.notification_log import enqueue_create
 from frappe.integrations.doctype.slack_webhook_url.slack_webhook_url import send_slack_message
 from frappe.model.document import Document
 from frappe.modules.utils import export_module_json, get_doc_module
+<<<<<<< HEAD
+from frappe.utils import add_to_date, cast, nowdate, validate_email_address
+=======
 from frappe.utils import add_to_date, cast, now_datetime, nowdate, validate_email_address
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.jinja import validate_template
 from frappe.utils.safe_exec import get_safe_globals
 
@@ -163,7 +170,11 @@ class Notification(Document):
 		frappe.cache.hdel("notifications", self.document_type)
 
 	def on_update(self):
+<<<<<<< HEAD
+		frappe.cache().hdel("notifications", self.document_type)
+=======
 		frappe.cache.hdel("notifications", self.document_type)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		path = export_module_json(self, self.is_standard, self.module)
 		if path and self.message:
 			extension = FORMATS.get(self.message_type, ".md")
@@ -420,6 +431,22 @@ def get_context(context):
 		message = frappe.render_template(self.message, context)
 		if self.sender and self.sender_email:
 			sender = formataddr((self.sender, self.sender_email))
+<<<<<<< HEAD
+		frappe.sendmail(
+			recipients=recipients,
+			subject=subject,
+			sender=sender,
+			cc=cc,
+			bcc=bcc,
+			message=message,
+			reference_doctype=get_reference_doctype(doc),
+			reference_name=get_reference_name(doc),
+			attachments=attachments,
+			expose_recipients="header",
+			print_letterhead=((attachments and attachments[0].get("print_letterhead")) or False),
+		)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		communication = None
 		# Add mail notification to communication list
@@ -641,7 +668,11 @@ def get_context(context):
 		self.message = self.get_template(md_as_html=True)
 
 	def on_trash(self):
+<<<<<<< HEAD
+		frappe.cache().hdel("notifications", self.document_type)
+=======
 		frappe.cache.hdel("notifications", self.document_type)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()
@@ -728,19 +759,33 @@ def evaluate_alert(doc: Document, alert, event=None):
 		frappe.throw(message, title=_("Error in Notification"))
 	except Exception as e:
 		title = str(e)
+<<<<<<< HEAD
+		message = frappe.get_traceback()
+		frappe.log_error(message=message, title=title)
+
+=======
 		message = frappe.get_traceback(with_context=True)
 		frappe.log_error(title=title, message=message)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		msg = f"<details><summary>{title}</summary>{message}</details>"
 		frappe.throw(msg, title=_("Error in Notification"))
 
 
 def get_context(doc):
+<<<<<<< HEAD
+	Frappe = namedtuple("frappe", ["utils"])
+	return {
+		"doc": doc,
+		"nowdate": nowdate,
+		"frappe": Frappe(utils=get_safe_globals().get("frappe").get("utils")),
+=======
 	Frappe = namedtuple("Frappe", ["frappe"])
 	frappe = Frappe(frappe=get_safe_globals().get("frappe"))
 	return {
 		"doc": doc,
 		"nowdate": nowdate,
 		"frappe": frappe.frappe,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 
@@ -754,6 +799,11 @@ def get_assignees(doc):
 
 	return [d.allocated_to for d in assignees]
 
+<<<<<<< HEAD
+	return recipients
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def get_emails_from_template(template, context):
 	if not template:
@@ -769,6 +819,8 @@ def get_reference_doctype(doc):
 
 def get_reference_name(doc):
 	return doc.parent if doc.meta.istable else doc.name
+<<<<<<< HEAD
+=======
 
 
 def _parse_receiver_by_document_field(s):
@@ -779,3 +831,4 @@ def _parse_receiver_by_document_field(s):
 	else:
 		data_field, child_field = fragments[0], None
 	return data_field, child_field
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

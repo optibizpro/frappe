@@ -2,9 +2,14 @@
 # License: MIT. See LICENSE
 import datetime
 import json
+<<<<<<< HEAD
+import types
+from functools import cached_property
+=======
 import weakref
 from functools import cached_property
 from typing import TYPE_CHECKING, TypeVar
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _, _dict
@@ -33,6 +38,10 @@ from frappe.utils import (
 	sanitize_html,
 	strip_html,
 )
+<<<<<<< HEAD
+from frappe.utils.html_utils import unescape_html
+
+=======
 from frappe.utils.defaults import get_not_null_defaults
 from frappe.utils.html_utils import unescape_html
 
@@ -42,6 +51,7 @@ if TYPE_CHECKING:
 D = TypeVar("D", bound="Document")
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 max_positive_value = {"smallint": 2**15 - 1, "int": 2**31 - 1, "bigint": 2**63 - 1}
 
 DOCTYPE_TABLE_FIELDS = [
@@ -64,8 +74,42 @@ def get_controller(doctype):
 	:param doctype: DocType name as string.
 	"""
 
+<<<<<<< HEAD
+		module_name, custom = frappe.db.get_value(
+			"DocType", doctype, ("module", "custom"), cache=not frappe.flags.in_migrate
+		) or ("Core", False)
+
+		if custom:
+			is_tree = frappe.db.get_value("DocType", doctype, "is_tree", ignore=True, cache=True)
+			_class = NestedSet if is_tree else Document
+		else:
+			class_overrides = frappe.get_hooks("override_doctype_class")
+			if class_overrides and class_overrides.get(doctype):
+				import_path = class_overrides[doctype][-1]
+				module_path, classname = import_path.rsplit(".", 1)
+				module = frappe.get_module(module_path)
+				if not hasattr(module, classname):
+					raise ImportError(f"{doctype}: {classname} does not exist in module {module_path}")
+			else:
+				module = load_doctype_module(doctype, module_name)
+				classname = doctype.replace(" ", "").replace("-", "")
+
+			if hasattr(module, classname):
+				_class = getattr(module, classname)
+				if issubclass(_class, BaseDocument):
+					_class = getattr(module, classname)
+				else:
+					raise ImportError(doctype)
+			else:
+				raise ImportError(doctype)
+		return _class
+
+	if frappe.local.dev_server or frappe.flags.in_migrate:
+		return _get_controller()
+=======
 	if frappe.local.dev_server or frappe.flags.in_migrate:
 		return import_controller(doctype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	site_controllers = frappe.controllers.setdefault(frappe.local.site, {})
 	if doctype not in site_controllers:
@@ -121,7 +165,11 @@ def import_controller(doctype):
 
 class BaseDocument:
 	_reserved_keywords = frozenset(
+<<<<<<< HEAD
+		{
+=======
 		(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"doctype",
 			"meta",
 			"flags",
@@ -133,7 +181,11 @@ class BaseDocument:
 			"_reserved_keywords",
 			"permitted_fieldnames",
 			"dont_update_if_missing",
+<<<<<<< HEAD
+		}
+=======
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 
 	def __init__(self, d):
@@ -147,6 +199,13 @@ class BaseDocument:
 		if hasattr(self, "__setup__"):
 			self.__setup__()
 
+<<<<<<< HEAD
+	@cached_property
+	def meta(self):
+		return frappe.get_meta(self.doctype)
+
+	@cached_property
+=======
 	def __json__(self):
 		return self.as_dict(no_nulls=True)
 
@@ -155,13 +214,20 @@ class BaseDocument:
 		return frappe.get_meta(self.doctype)
 
 	@cached_property
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def permitted_fieldnames(self):
 		return get_permitted_fields(doctype=self.doctype, parenttype=getattr(self, "parenttype", None))
 
 	def __getstate__(self):
+<<<<<<< HEAD
+		"""
+		Called when pickling.
+		Returns a copy of `__dict__` excluding unpicklable values like `meta`.
+=======
 		"""Return a copy of `__dict__` excluding unpicklable values like `meta`.
 
 		Called when pickling.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		More info: https://docs.python.org/3/library/pickle.html#handling-stateful-objects
 		"""
 
@@ -176,12 +242,15 @@ class BaseDocument:
 
 		state.pop("meta", None)
 		state.pop("permitted_fieldnames", None)
+<<<<<<< HEAD
+=======
 		state.pop("_parent_doc", None)
 		state.pop("flags", None)
 
 	def __setstate__(self, state):
 		self.__dict__ = state
 		self.flags = _dict()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def update(self, d):
 		"""Update multiple fields of a doctype using a dictionary of key-value pairs.
@@ -378,7 +447,11 @@ class BaseDocument:
 		d = _dict()
 		field_values = self.__dict__
 
+<<<<<<< HEAD
+		for fieldname in self.meta.get_valid_columns():
+=======
 		for fieldname in self.meta.get_valid_fields():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			value = field_values.get(fieldname)
 
 			# if no need for sanitization and value is None, continue
@@ -407,7 +480,11 @@ class BaseDocument:
 						)
 
 				if isinstance(value, list) and df.fieldtype not in table_fields:
+<<<<<<< HEAD
+					frappe.throw(_("Value for {0} cannot be a list").format(_(df.label)))
+=======
 					frappe.throw(_("Value for {0} cannot be a list").format(_(df.label, context=df.parent)))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				if df.fieldtype == "Check":
 					value = 1 if cint(value) else 0
@@ -416,7 +493,11 @@ class BaseDocument:
 					value = cint(value)
 
 				elif df.fieldtype == "JSON" and isinstance(value, dict):
+<<<<<<< HEAD
+					value = json.dumps(value, sort_keys=True, indent=4, separators=(",", ": "))
+=======
 					value = json.dumps(value, separators=(",", ":"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				elif df.fieldtype in float_like_fields and not isinstance(value, float):
 					value = flt(value)
@@ -434,6 +515,8 @@ class BaseDocument:
 			if ignore_nulls and not is_virtual_field and value is None:
 				continue
 
+<<<<<<< HEAD
+=======
 			# If the docfield is not nullable - set a default non-null value
 			if value is None and getattr(df, "not_nullable", False):
 				if df.default:
@@ -444,6 +527,7 @@ class BaseDocument:
 			if hasattr(value, "__value__"):
 				value = value.__value__()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			d[fieldname] = value
 
 		return d
@@ -781,6 +865,19 @@ class BaseDocument:
 			else:
 				return has_text_content
 
+		def has_content(df):
+			value = cstr(self.get(df.fieldname))
+			has_text_content = strip_html(value).strip()
+			has_img_tag = "<img" in value
+			has_text_or_img_tag = has_text_content or has_img_tag
+
+			if df.fieldtype == "Text Editor" and has_text_or_img_tag:
+				return True
+			elif df.fieldtype == "Code" and df.options == "HTML" and has_text_or_img_tag:
+				return True
+			else:
+				return has_text_content
+
 		missing = []
 
 		for df in self.meta.get("fields", {"reqd": ("=", 1)}):
@@ -1065,7 +1162,11 @@ class BaseDocument:
 
 		frappe.throw(
 			_("{0}: '{1}' ({3}) will get truncated, as max characters allowed is {2}").format(
+<<<<<<< HEAD
+				reference, frappe.bold(_(df.label)), max_length, value
+=======
 				reference, frappe.bold(_(df.label, context=df.parent)), max_length, value
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			),
 			frappe.CharacterLengthExceededError,
 			title=_("Value too big"),
@@ -1100,7 +1201,11 @@ class BaseDocument:
 					frappe.throw(
 						_("{0} Not allowed to change {1} after submission from {2} to {3}").format(
 							f"Row #{self.idx}:" if self.get("parent") else "",
+<<<<<<< HEAD
+							frappe.bold(_(df.label)),
+=======
 							frappe.bold(_(df.label, context=df.parent)),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							frappe.bold(db_value),
 							frappe.bold(self_value),
 						),
@@ -1184,7 +1289,11 @@ class BaseDocument:
 		return "".join(set(pwd)) == "*"
 
 	def precision(self, fieldname, parentfield=None) -> int | None:
+<<<<<<< HEAD
+		"""Returns float precision for a particular field (or get global default).
+=======
 		"""Return float precision for a particular field (or get global default).
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		:param fieldname: Fieldname for which precision is required.
 		:param parentfield: If fieldname is in child table."""

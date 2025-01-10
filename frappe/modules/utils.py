@@ -75,6 +75,22 @@ def export_customizations(
 		"sync_on_migrate": sync_on_migrate,
 	}
 
+<<<<<<< HEAD
+	def add(_doctype):
+		custom["custom_fields"] += frappe.get_all(
+			"Custom Field", fields="*", filters={"dt": _doctype}, order_by="name"
+		)
+		custom["property_setters"] += frappe.get_all(
+			"Property Setter", fields="*", filters={"doc_type": _doctype}, order_by="name"
+		)
+		custom["links"] += frappe.get_all(
+			"DocType Link", fields="*", filters={"parent": _doctype}, order_by="name"
+		)
+
+	add(doctype)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if with_permissions:
 		custom["custom_perms"] = frappe.get_all(
 			"Custom DocPerm", fields="*", filters={"parent": doctype}, order_by="name"
@@ -119,7 +135,11 @@ def sync_customizations(app=None):
 							sync_customizations_for_doctype(data, folder, fname)
 
 
+<<<<<<< HEAD
+def sync_customizations_for_doctype(data, folder, filename: str = ""):
+=======
 def sync_customizations_for_doctype(data: dict, folder: str, filename: str = ""):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Sync doctype customzations for a particular data set"""
 	from frappe.core.doctype.doctype.doctype import validate_fields_for_doctype
 
@@ -173,7 +193,11 @@ def sync_customizations_for_doctype(data: dict, folder: str, filename: str = "")
 
 	if not frappe.db.exists("DocType", doctype):
 		print(_("DocType {0} does not exist.").format(doctype))
+<<<<<<< HEAD
+		print(_("Skipping fixture syncing for doctype {0} from file {1} ").format(doctype, filename))
+=======
 		print(_("Skipping fixture syncing for doctype {0} from file {1}").format(doctype, filename))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return
 
 	if data["custom_fields"]:
@@ -252,10 +276,17 @@ def load_doctype_module(doctype, module=None, prefix="", suffix=""):
 	if key not in doctype_python_modules:
 		try:
 			doctype_python_modules[key] = frappe.get_module(module_name)
+<<<<<<< HEAD
+	except ImportError as e:
+		msg = f"Module import failed for {doctype}, the DocType you're trying to open might be deleted."
+		msg += f"\nError: {e}"
+		raise ImportError(msg) from e
+=======
 		except ImportError as e:
 			msg = f"Module import failed for {doctype}, the DocType you're trying to open might be deleted."
 			msg += f"\nError: {e}"
 			raise ImportError(msg) from e
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return doctype_python_modules[key]
 

@@ -4,9 +4,12 @@
 	{% include "templates/includes/meta_block.html" %}
 {% endblock %}
 
+<<<<<<< HEAD
+=======
 {% if hide_navbar %}{% block navbar %}{% endblock %}{% endif %}
 {% if hide_footer %}{% block footer %}{% endblock %}{% endif %}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
@@ -20,7 +23,11 @@
 	{% block header_buttons %}
 	{% if allow_edit and in_view_mode %}
 		<!-- edit button -->
+<<<<<<< HEAD
+		<a href="/{{ route }}/{{ doc_name }}/edit" class="edit-button btn btn-default btn-sm">{{ _("Edit Response", context="Button in web form") }}</a>
+=======
 		<a href="/{{ route }}/{{ doc_name }}/edit" class="edit-button btn btn-default btn-sm">{{ _("Edit", context="Button in web form") }}</a>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	{% endif %}
 
 	{% if allow_print and in_view_mode %}
@@ -185,6 +192,16 @@
 			$('.page_content').css('padding-left', 'unset').css('padding-right', 'unset');
 		}
 	</script>
+<<<<<<< HEAD
+
+	<script type="text/javascript" src="/assets/frappe/node_modules/vue/dist/vue.js"></script>
+	<script>
+		Vue.prototype.__ = window.__;
+		Vue.prototype.frappe = window.frappe;
+	</script>
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	{{ include_script("web_form.bundle.js") }}
 
 	<script>

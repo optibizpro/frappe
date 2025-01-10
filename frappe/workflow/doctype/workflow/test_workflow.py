@@ -1,7 +1,10 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+<<<<<<< HEAD
+=======
 from unittest.mock import patch
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import frappe
 from frappe.model.workflow import (
 	WorkflowTransitionError,
@@ -9,6 +12,14 @@ from frappe.model.workflow import (
 	get_common_transition_actions,
 )
 from frappe.query_builder import DocType
+<<<<<<< HEAD
+from frappe.test_runner import make_test_records
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import random_string
+
+
+class TestWorkflow(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.utils import make_test_records
 from frappe.utils import random_string
@@ -24,6 +35,7 @@ class UnitTestWorkflow(UnitTestCase):
 
 
 class TestWorkflow(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -34,6 +46,10 @@ class TestWorkflow(IntegrationTestCase):
 		self.patcher.start()
 		frappe.db.delete("Workflow Action")
 		self.workflow = create_todo_workflow()
+<<<<<<< HEAD
+		frappe.set_user("Administrator")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def tearDown(self):
 		frappe.set_user("Administrator")
@@ -111,6 +127,10 @@ class TestWorkflow(IntegrationTestCase):
 		workflow_actions = frappe.get_all("Workflow Action", fields=["*"])
 		self.assertEqual(len(workflow_actions), 1)
 		self.assertEqual(workflow_actions[0].status, "Completed")
+<<<<<<< HEAD
+		frappe.set_user("Administrator")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_if_workflow_set_on_action(self):
 		self.workflow._update_state_docstatus = True
@@ -145,7 +165,11 @@ def create_todo_workflow():
 	TEST_ROLE = "Test Approver"
 
 	if not frappe.db.exists("Role", TEST_ROLE):
+<<<<<<< HEAD
+		frappe.get_doc(dict(doctype="Role", role_name=TEST_ROLE)).insert(ignore_if_duplicate=True)
+=======
 		frappe.get_doc(doctype="Role", role_name=TEST_ROLE).insert(ignore_if_duplicate=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if frappe.db.exists("User", UI_TEST_USER):
 			frappe.get_doc("User", UI_TEST_USER).add_roles(TEST_ROLE)
 

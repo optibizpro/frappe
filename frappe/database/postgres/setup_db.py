@@ -10,6 +10,13 @@ def setup_database():
 	root_conn = get_root_connection()
 	root_conn.commit()
 	root_conn.sql("end")
+<<<<<<< HEAD
+	root_conn.sql(f"DROP DATABASE IF EXISTS `{frappe.conf.db_name}`")
+	root_conn.sql(f"DROP USER IF EXISTS {frappe.conf.db_name}")
+	root_conn.sql(f"CREATE DATABASE `{frappe.conf.db_name}`")
+	root_conn.sql(f"CREATE user {frappe.conf.db_name} password '{frappe.conf.db_password}'")
+	root_conn.sql(f"GRANT ALL PRIVILEGES ON DATABASE `{frappe.conf.db_name}` TO {frappe.conf.db_name}")
+=======
 	root_conn.sql(f'DROP DATABASE IF EXISTS "{frappe.conf.db_name}"')
 
 	# If user exists, just update password
@@ -23,6 +30,7 @@ def setup_database():
 		semver_version_num = psql_version[0].get("server_version_num") or "140000"
 		if cint(semver_version_num) > 150000:
 			root_conn.sql(f'ALTER DATABASE "{frappe.conf.db_name}" OWNER TO "{frappe.conf.db_user}"')
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	root_conn.close()
 
 
@@ -51,14 +59,45 @@ def import_db_from_sql(source_sql=None, verbose=False):
 	db_name = frappe.conf.db_name
 	if not source_sql:
 		source_sql = os.path.join(os.path.dirname(__file__), "framework_postgres.sql")
+<<<<<<< HEAD
+
+	pv = which("pv")
+
+	_command = (
+		f"psql {frappe.conf.db_name} "
+		f"-h {frappe.conf.db_host or 'localhost'} -p {frappe.conf.db_port or '5432'!s} "
+		f"-U {frappe.conf.db_name}"
+=======
 	DbManager(frappe.local.db).restore_database(
 		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 	if verbose:
+<<<<<<< HEAD
+		print(command)
+
+	restore_proc = run(command, env=subprocess_env, shell=True, stdout=PIPE)
+
+	if verbose:
+		print(f"\nSTDOUT by psql:\n{restore_proc.stdout.decode()}\nImported from Database File: {source_sql}")
+
+
+def setup_help_database(help_db_name):
+	root_conn = get_root_connection(frappe.flags.root_login, frappe.flags.root_password)
+	root_conn.sql(f"DROP DATABASE IF EXISTS `{help_db_name}`")
+	root_conn.sql(f"DROP USER IF EXISTS {help_db_name}")
+	root_conn.sql(f"CREATE DATABASE `{help_db_name}`")
+	root_conn.sql(f"CREATE user {help_db_name} password '{help_db_name}'")
+	root_conn.sql(f"GRANT ALL PRIVILEGES ON DATABASE `{help_db_name}` TO {help_db_name}")
+
+
+def get_root_connection(root_login=None, root_password=None):
+=======
 		print("Imported from database {}".format(source_sql))
 
 
 def get_root_connection():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if not frappe.local.flags.root_connection:
 		import sys
 		from getpass import getpass
@@ -78,6 +117,9 @@ def get_root_connection():
 				or getpass("Postgres super user password: ")
 			)
 
+<<<<<<< HEAD
+		frappe.local.flags.root_connection = frappe.database.get_db(user=root_login, password=root_password)
+=======
 		frappe.local.flags.root_connection = frappe.database.get_db(
 			socket=frappe.conf.db_socket,
 			host=frappe.conf.db_host,
@@ -86,6 +128,7 @@ def get_root_connection():
 			password=frappe.flags.root_password,
 			cur_db_name=frappe.flags.root_login,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return frappe.local.flags.root_connection
 

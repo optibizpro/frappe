@@ -5,6 +5,12 @@ from frappe.core.doctype.session_default_settings.session_default_settings impor
 	clear_session_defaults,
 	set_session_default_values,
 )
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestSessionDefaultSettings(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -18,6 +24,7 @@ class UnitTestSessionDefaultSettings(UnitTestCase):
 
 
 class TestSessionDefaultSettings(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_set_session_default_settings(self):
 		frappe.set_user("Administrator")
 		settings = frappe.get_single("Session Default Settings")

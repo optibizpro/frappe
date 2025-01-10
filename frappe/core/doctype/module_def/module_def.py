@@ -72,7 +72,16 @@ class ModuleDef(Document):
 			return
 
 		if frappe.local.module_app.get(frappe.scrub(self.name)):
+<<<<<<< HEAD
+			delete_folder(self.module_name, "Module Def", self.name)
+			with open(frappe.get_app_path(self.app_name, "modules.txt")) as f:
+				content = f.read()
+				if self.name in content.splitlines():
+					modules = list(filter(None, content.splitlines()))
+					modules.remove(self.name)
+=======
 			frappe.db.after_commit.add(self.delete_module_from_file)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def delete_module_from_file(self):
 		delete_folder(self.module_name, "Module Def", self.name)

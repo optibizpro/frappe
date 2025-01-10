@@ -336,6 +336,12 @@ frappe.utils.sanitise_redirect = (url) => {
 		};
 	})();
 
+<<<<<<< HEAD
+	const sanitise_javascript = (url) => {
+		// please do not ask how or why
+		const REGEX_SCRIPT =
+			/j[\s]*(&#x.{1,7})?a[\s]*(&#x.{1,7})?v[\s]*(&#x.{1,7})?a[\s]*(&#x.{1,7})?s[\s]*(&#x.{1,7})?c[\s]*(&#x.{1,7})?r[\s]*(&#x.{1,7})?i[\s]*(&#x.{1,7})?p[\s]*(&#x.{1,7})?t/gi;
+=======
 	/*
 	 * Strips out url containing the text `javascript` with or without any HTML Entities in it
 	 **/
@@ -369,6 +375,7 @@ frappe.utils.sanitise_redirect = (url) => {
 			Array.from("javascript").join(REGEX_ESC_UNIT.source),
 			"gi"
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return url.replace(REGEX_SCRIPT, "");
 	};

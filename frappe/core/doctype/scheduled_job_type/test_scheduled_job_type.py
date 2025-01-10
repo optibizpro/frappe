@@ -4,6 +4,14 @@ from datetime import timedelta
 
 import frappe
 from frappe.core.doctype.scheduled_job_type.scheduled_job_type import sync_jobs
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import get_datetime
+from frappe.utils.data import add_to_date, now_datetime
+
+
+class TestScheduledJobType(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.utils import get_datetime
 from frappe.utils.data import now_datetime
@@ -19,6 +27,7 @@ class UnitTestScheduledJobType(UnitTestCase):
 
 
 class TestScheduledJobType(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.db.rollback()
 		frappe.db.truncate("Scheduled Job Type")

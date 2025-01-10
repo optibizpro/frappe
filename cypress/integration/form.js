@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 const jump_to_field = (field_label) => {
 	cy.get("body")
 		.type("{esc}") // lose focus if any
@@ -14,6 +16,7 @@ const type_value = (value) => {
 	cy.focused().clear().type(value).type("{esc}");
 };
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 context("Form", () => {
 	before(() => {
 		cy.login();
@@ -26,16 +29,24 @@ context("Form", () => {
 			});
 	});
 
+<<<<<<< HEAD
+=======
 	beforeEach(() => {
 		cy.login();
 		cy.visit("/app/website");
 	});
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	it("create a new form", () => {
 		cy.visit("/app/todo/new");
 		cy.get_field("description", "Text Editor")
 			.type("this is a test todo", { force: true })
+<<<<<<< HEAD
+			.wait(200);
+		cy.wait(1000);
+=======
 			.wait(1000);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		cy.get(".page-title").should("contain", "Not Saved");
 		cy.intercept({
 			method: "POST",
@@ -50,6 +61,8 @@ context("Form", () => {
 		cy.get(".list-row").should("contain", "this is a test todo");
 	});
 
+<<<<<<< HEAD
+=======
 	it("navigates between documents with child table list filters applied", () => {
 		cy.visit("/app/contact");
 
@@ -64,6 +77,7 @@ context("Form", () => {
 		cy.clear_filters();
 	});
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	it("validates behaviour of Data options validations in child table", () => {
 		// test email validations for set_invalid controller
 		let website_input = "website.in";
@@ -71,6 +85,30 @@ context("Form", () => {
 		let expectBackgroundColor = "rgb(255, 245, 245)";
 
 		cy.visit("/app/contact/new");
+<<<<<<< HEAD
+		cy.get('.frappe-control[data-fieldname="email_ids"]').as("table");
+		cy.get("@table").find("button.grid-add-row").click();
+		cy.get("@table").find("button.grid-add-row").click();
+		cy.get("@table").find('[data-idx="1"]').as("row1");
+		cy.get("@table").find('[data-idx="2"]').as("row2");
+		cy.get("@row1").click();
+		cy.get("@row1").find("input.input-with-feedback.form-control").as("email_input1");
+
+		cy.get("@email_input1").type(website_input, { waitForAnimations: false });
+		cy.fill_field("company_name", "Test Company");
+
+		cy.get("@row2").click();
+		cy.get("@row2").find("input.input-with-feedback.form-control").as("email_input2");
+		cy.get("@email_input2").type(valid_email, { waitForAnimations: false });
+
+		cy.get("@row1").click();
+		cy.get("@email_input1").should(($div) => {
+			const style = window.getComputedStyle($div[0]);
+			expect(style.backgroundColor).to.equal(expectBackgroundColor);
+		});
+		cy.get("@email_input1").should("have.class", "invalid");
+
+=======
 		cy.fill_field("company_name", "Test Company");
 
 		cy.get('.frappe-control[data-fieldname="email_ids"]').as("table");
@@ -90,10 +128,45 @@ context("Form", () => {
 		cy.get("@row1").click();
 		cy.get("@email_input1").should("have.class", "invalid");
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		cy.get("@row2").click();
 		cy.get("@email_input2").should("not.have.class", "invalid");
 	});
 
+<<<<<<< HEAD
+	it("Shows version conflict warning", { scrollBehavior: false }, () => {
+		cy.visit("/app/todo");
+
+		cy.insert_doc("ToDo", { description: "old" }).then((doc) => {
+			cy.visit(`/app/todo/${doc.name}`);
+			// make form dirty
+			cy.fill_field("status", "Cancelled", "Select");
+
+			// update doc using api - simulating parallel change by another user
+			cy.update_doc("ToDo", doc.name, { status: "Closed" }).then(() => {
+				cy.findByRole("button", { name: "Refresh" }).click();
+				cy.get_field("status", "Select").should("have.value", "Closed");
+			});
+		});
+	});
+
+	it("let user undo/redo field value changes", { scrollBehavior: false }, () => {
+		const jump_to_field = (field_label) => {
+			cy.get("body")
+				.type("{esc}") // lose focus if any
+				.type("{ctrl+j}") // jump to field
+				.type(field_label)
+				.wait(500)
+				.type("{enter}")
+				.wait(200)
+				.type("{enter}")
+				.wait(500);
+		};
+
+		const type_value = (value) => {
+			cy.focused().clear().type(value).type("{esc}");
+		};
+=======
 	it("Jump to field in collapsed section", { scrollBehavior: false }, () => {
 		cy.new_form("User");
 
@@ -124,6 +197,7 @@ context("Form", () => {
 							cdn
 						);
 					});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				cy.get("@table").find('[data-idx="1"] .btn-open-row').click();
 				cy.get(".grid-row-open").as("table-form");
@@ -132,6 +206,46 @@ context("Form", () => {
 					.should("be.hidden");
 				cy.get("@table-form").find(".grid-footer-toolbar").click();
 
+<<<<<<< HEAD
+		cy.new_form("User");
+
+		jump_to_field("Email");
+		type_value("admin@example.com");
+
+		jump_to_field("Username");
+		type_value("admin42");
+
+		jump_to_field("Send Welcome Email");
+		cy.focused().uncheck();
+
+		// make a mistake
+		jump_to_field("Username");
+		type_value("admin24");
+
+		// undo behaviour
+		undo();
+		cy.get_field("username").should("have.value", "admin42");
+
+		// redo behaviour
+		redo();
+		cy.get_field("username").should("have.value", "admin24");
+
+		// undo everything & redo everything, ensure same values at the end
+		undo();
+		undo();
+		undo();
+		undo();
+		redo();
+		redo();
+		redo();
+		redo();
+
+		cy.compare_document({
+			username: "admin24",
+			email: "admin@example.com",
+			send_welcome_email: 0,
+		});
+=======
 				// set property on form_render event of child table
 				cy.get("@table").find('[data-idx="1"] .btn-open-row').click();
 				cy.get("@table")
@@ -154,5 +268,6 @@ context("Form", () => {
 					.should("be.visible");
 				cy.get("@table-form").find(".grid-footer-toolbar").click();
 			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	});
 });

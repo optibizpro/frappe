@@ -2,6 +2,15 @@ frappe.ui.form.Control = class BaseControl {
 	constructor(opts) {
 		$.extend(this, opts);
 		this.make();
+<<<<<<< HEAD
+
+		// if developer_mode=1, show fieldname as tooltip
+		if (frappe.boot.user && frappe.boot.developer_mode === 1 && this.$wrapper) {
+			this.$wrapper.attr("title", __(this.df.fieldname));
+		}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (this.render_input) {
 			this.refresh();
 		}
@@ -62,12 +71,22 @@ frappe.ui.form.Control = class BaseControl {
 				if (explain) console.log("By Hidden: None");
 				return "None";
 			} else if (cint(this.df.hidden_due_to_dependency)) {
+<<<<<<< HEAD
+				// eslint-disable-next-line
+				if (explain) console.log("By Hidden Dependency: None"); // eslint-disable-line no-console
+=======
 				if (explain) console.log("By Hidden Dependency: None");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				return "None";
 			} else if (
 				cint(this.df.read_only || this.df.is_virtual || this.df.fieldtype === "Read Only")
 			) {
+<<<<<<< HEAD
+				// eslint-disable-next-line
+				if (explain) console.log("By Read Only: Read"); // eslint-disable-line no-console
+=======
 				if (explain) console.log("By Read Only: Read");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				status = "Read";
 			} else if (
 				(this.grid && this.grid.display_status == "Read") ||
@@ -84,7 +103,11 @@ frappe.ui.form.Control = class BaseControl {
 			if (
 				status === "Read" &&
 				is_null(value) &&
+<<<<<<< HEAD
+				!in_list(["HTML", "Image", "Button"], this.df.fieldtype)
+=======
 				!["HTML", "Image", "Button"].includes(this.df.fieldtype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 				status = "Read";
 
@@ -106,13 +129,21 @@ frappe.ui.form.Control = class BaseControl {
 			var grid = this.grid || this.layout.grid;
 			if (grid.display_status == "Read") {
 				status = "Read";
+<<<<<<< HEAD
+				if (explain) console.log("By Parent Grid Read-only: Read"); // eslint-disable-line no-console
+=======
 				if (explain) console.log("By Parent Grid Read-only: Read");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		}
 
 		let value = frappe.model.get_value(this.doctype, this.docname, this.df.fieldname);
 
+<<<<<<< HEAD
+		if (in_list(["Date", "Datetime"], this.df.fieldtype) && value) {
+=======
 		if (["Date", "Datetime"].includes(this.df.fieldtype) && value) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			value = frappe.datetime.str_to_user(value);
 		}
 
@@ -124,10 +155,17 @@ frappe.ui.form.Control = class BaseControl {
 			status === "Read" &&
 			!this.only_input &&
 			is_null(value) &&
+<<<<<<< HEAD
+			!in_list(["HTML", "Image", "Button", "Geolocation"], this.df.fieldtype)
+		) {
+			// eslint-disable-next-line
+			if (explain) console.log("By Hide Read-only, null fields: None"); // eslint-disable-line no-console
+=======
 			cint(frappe.boot.sysdefaults.hide_empty_read_only_fields) &&
 			!["HTML", "Image", "Button", "Geolocation"].includes(this.df.fieldtype)
 		) {
 			if (explain) console.log("By Hide Read-only, null fields: None");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			status = "None";
 		}
 

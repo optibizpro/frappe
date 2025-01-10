@@ -511,7 +511,11 @@ def search(text, start=0, limit=20, doctype=""):
 
 	# sort results based on allowed_doctype's priority
 	for doctype in allowed_doctypes:
+<<<<<<< HEAD
+		for _index, r in enumerate(results):
+=======
 		for r in results:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if r.doctype == doctype and r.rank > 0.0:
 				try:
 					meta = frappe.get_meta(r.doctype)

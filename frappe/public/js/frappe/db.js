@@ -24,6 +24,13 @@ frappe.db = {
 			});
 		});
 	},
+<<<<<<< HEAD
+	exists: function (doctype, name) {
+		return new Promise((resolve) => {
+			frappe.db.get_value(doctype, { name: name }, "name").then((r) => {
+				r.message && r.message.name ? resolve(true) : resolve(false);
+			});
+=======
 	exists: function (doctype, nameOrFilters) {
 		return new Promise((resolve) => {
 			let filters;
@@ -37,6 +44,7 @@ frappe.db = {
 					resolve(count > 0);
 				});
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	},
 	get_value: function (doctype, filters, fieldname, callback, parent_doc) {
@@ -134,7 +142,11 @@ frappe.db = {
 					filters,
 				},
 				callback(r) {
+<<<<<<< HEAD
+					resolve(r.results);
+=======
 					resolve(r.message);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				},
 			});
 		});

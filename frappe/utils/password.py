@@ -12,6 +12,24 @@ from frappe.utils import cstr, encode
 
 Auth = Table("__Auth")
 
+<<<<<<< HEAD
+
+class LegacyPassword(pbkdf2_sha256):
+	name = "frappe_legacy"
+	ident = "$frappel$"
+
+	def _calc_checksum(self, secret):
+		# check if this is a mysql hash
+		# it is possible that we will generate a false positive if the users password happens to be 40 hex chars proceeded
+		# by an * char, but this seems highly unlikely
+		if not (secret[0] == "*" and len(secret) == 41 and all(c in string.hexdigits for c in secret[1:])):
+			secret = mysql41.hash(secret + self.salt.decode("utf-8"))
+		return super()._calc_checksum(secret)
+
+
+register_crypt_handler(LegacyPassword, force=True)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 passlibctx = CryptContext(
 	schemes=[
 		"pbkdf2_sha256",
@@ -34,6 +52,9 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 	).run()
 
 	if result and result[0][0]:
+<<<<<<< HEAD
+		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
+=======
 		try:
 			return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
 		except frappe.ValidationError as e:
@@ -41,6 +62,7 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 				raise e
 
 			return None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	elif raise_exception:
 		frappe.throw(
@@ -202,7 +224,11 @@ def decrypt(txt, encryption_key=None, key: str | None = None):
 			+ _("Encryption key is invalid! Please check site_config.json")
 			+ "<br><br>"
 			+ _(
+<<<<<<< HEAD
+				"If you have recently restored the site you may need to copy the site config contaning original Encryption Key."
+=======
 				"If you have recently restored the site, you may need to copy the site_config.json containing the original encryption key."
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 			+ "<br><br>"
 			+ _(

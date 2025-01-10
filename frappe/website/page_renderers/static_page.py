@@ -23,7 +23,11 @@ UNSUPPORTED_STATIC_PAGE_TYPES = (
 
 
 class StaticPage(BaseRenderer):
+<<<<<<< HEAD
+	__slots__ = ("path", "file_path")
+=======
 	__slots__ = ("file_path", "path")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def __init__(self, path, http_status_code=None):
 		super().__init__(path=path, http_status_code=http_status_code)

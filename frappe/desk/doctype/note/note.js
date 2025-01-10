@@ -1,5 +1,26 @@
 frappe.ui.form.on("Note", {
 	refresh: function (frm) {
+<<<<<<< HEAD
+		if (frm.doc.__islocal) {
+			frm.events.set_editable(frm, true);
+		} else {
+			if (!frm.doc.content) {
+				frm.doc.content = "<span></span>";
+			}
+
+			// toggle edit
+			frm.add_custom_button("Edit", function () {
+				frm.events.set_editable(frm, !frm.is_note_editable);
+			});
+			frm.events.set_editable(frm, false);
+		}
+	},
+	set_editable: function (frm, editable) {
+		// hide all fields other than content
+
+		// no permission
+		if (editable && !frm.perm[0].write) return;
+=======
 		if (!frm.is_new()) {
 			frm.is_note_editable = false;
 			frm.events.set_editable(frm);
@@ -16,11 +37,17 @@ frappe.ui.form.on("Note", {
 			});
 		}
 		// toggle "read_only" for content and "hidden" of all other fields
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// content read_only
 		frm.set_df_property("content", "read_only", frm.is_note_editable ? 0 : 1);
 
 		// hide all other fields
+<<<<<<< HEAD
+		$.each(frm.fields_dict, function (fieldname) {
+			if (fieldname !== "content") {
+				frm.set_df_property(fieldname, "hidden", editable ? 0 : 1);
+=======
 		for (const field of frm.meta.fields) {
 			if (field.fieldname !== "content") {
 				frm.set_df_property(
@@ -30,12 +57,21 @@ frappe.ui.form.on("Note", {
 						? 0
 						: 1
 				);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		}
 
 		// no label, description for content either
+<<<<<<< HEAD
+		frm.get_field("content").toggle_label(editable);
+		frm.get_field("content").toggle_description(editable);
+
+		// set flag for toggle
+		frm.is_note_editable = editable;
+=======
 		frm.get_field("content").toggle_label(frm.is_note_editable);
 		frm.get_field("content").toggle_description(frm.is_note_editable);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 });
 

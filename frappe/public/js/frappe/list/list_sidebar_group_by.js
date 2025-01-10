@@ -80,6 +80,16 @@ frappe.views.ListGroupBy = class ListGroupBy {
 				fieldtype = docfield.fieldtype;
 			}
 
+<<<<<<< HEAD
+			return `<li class="group-by-field list-link">
+					<a class="btn btn-default btn-sm list-sidebar-button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"
+					data-label="${label}" data-fieldname="${fieldname}" data-fieldtype="${fieldtype}"
+					href="#" onclick="return false;">
+						<span class="ellipsis">${__(label)}</span>
+						<span>${frappe.utils.icon("select", "xs")}</span>
+					</a>
+=======
 			return `<div class="group-by-field list-link">
 						<a class="btn btn-default btn-sm list-sidebar-button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false"
@@ -88,6 +98,7 @@ frappe.views.ListGroupBy = class ListGroupBy {
 							<span class="ellipsis">${__(label)}</span>
 							<span>${frappe.utils.icon("select", "xs")}</span>
 						</a>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					<ul class="dropdown-menu group-by-dropdown" role="menu">
 					</ul>
 			</div>`;
@@ -214,6 +225,20 @@ frappe.views.ListGroupBy = class ListGroupBy {
 	}
 
 	get_dropdown_html(field, fieldtype, applied = false) {
+<<<<<<< HEAD
+		let label = field.name == null ? __("Not Set") : field.name;
+		if (label === frappe.session.user) {
+			label = __("Me");
+		} else if (fieldtype && fieldtype == "Check") {
+			label = label == "0" ? __("No") : __("Yes");
+		}
+		let value = field.name == null ? "" : encodeURIComponent(field.name);
+
+		let applied_html = applied
+			? `<span class="applied"> ${frappe.utils.icon("tick", "xs")} </span>`
+			: "";
+		return `<li class="group-by-item ${applied ? "selected" : ""}" data-value="${value}">
+=======
 		let label;
 		if (field.name == null) {
 			label = __("Not Set");
@@ -231,6 +256,7 @@ frappe.views.ListGroupBy = class ListGroupBy {
 			? `<span class="applied"> ${frappe.utils.icon("tick", "xs")} </span>`
 			: "";
 		return `<div class="group-by-item ${applied ? "selected" : ""}" data-value="${value}">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			<a class="dropdown-item" href="#" onclick="return false;">
 				${applied_html}
 				<span class="group-by-value ellipsis" data-name="${field.name}">${label}</span>

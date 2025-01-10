@@ -33,8 +33,13 @@
 				:key="n.value"
 				:node="n"
 				:selected_node="selected_node"
+<<<<<<< HEAD
+				@node-click="(n) => $emit('node-click', n)"
+				@load-more="(n) => $emit('load-more', n)"
+=======
 				@node-click="(n) => emit('node-click', n)"
 				@load-more="(n) => emit('load-more', n)"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			/>
 			<button
 				class="btn btn-xs btn-load-more"
@@ -47,6 +52,30 @@
 		</ul>
 	</div>
 </template>
+<<<<<<< HEAD
+<script>
+export default {
+	name: "TreeNode",
+	props: ["node", "selected_node"],
+	components: {
+		TreeNode: () => frappe.ui.components.TreeNode,
+	},
+	computed: {
+		icon() {
+			let icons = {
+				open: frappe.utils.icon("folder-open", "md"),
+				closed: frappe.utils.icon("folder-normal", "md"),
+				leaf: frappe.utils.icon("primitive-dot", "xs"),
+				search: frappe.utils.icon("search"),
+			};
+
+			if (this.node.by_search) return icons.search;
+			if (this.node.is_leaf) return icons.leaf;
+			if (this.node.open) return icons.open;
+			return icons.closed;
+		},
+	},
+=======
 
 <script setup>
 import TreeNode from "./TreeNode.vue";
@@ -80,6 +109,7 @@ let icon = computed(() => {
 
 let open_file = (filename) => {
 	return frappe.utils.get_form_link("File", filename);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };
 
 const reference = ref(null);

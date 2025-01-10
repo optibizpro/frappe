@@ -4,9 +4,12 @@
 """build query for doclistview and return results"""
 
 import json
+<<<<<<< HEAD
+=======
 from functools import lru_cache
 
 from sql_metadata import Parser
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 import frappe.permissions
@@ -16,7 +19,11 @@ from frappe.model import child_table_fields, default_fields, get_permitted_field
 from frappe.model.base_document import get_controller
 from frappe.model.db_query import DatabaseQuery
 from frappe.model.utils import is_virtual_doctype
+<<<<<<< HEAD
+from frappe.utils import add_user_info, cint, cstr, format_duration
+=======
 from frappe.utils import add_user_info, cint, format_duration
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.data import sbool
 
 
@@ -55,7 +62,11 @@ def get_count() -> int:
 
 	if is_virtual_doctype(args.doctype):
 		controller = get_controller(args.doctype)
+<<<<<<< HEAD
+		count = controller.get_count(args)
+=======
 		count = frappe.call(controller.get_count, args=args, **args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		args.distinct = sbool(args.distinct)
 		distinct = "distinct " if args.distinct else ""
@@ -105,10 +116,14 @@ def validate_fields(data):
 	wildcard = update_wildcard_field_param(data)
 
 	for field in list(data.fields or []):
+<<<<<<< HEAD
+		fieldname = extract_fieldname(field)
+=======
 		fieldname = extract_fieldnames(field)[0]
 		if not fieldname:
 			raise_invalid_field(fieldname)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if is_standard(fieldname):
 			continue
 
@@ -192,8 +207,15 @@ def is_standard(fieldname):
 def extract_fieldnames(field):
 	from frappe.database.schema import SPECIAL_CHAR_PATTERN
 
+<<<<<<< HEAD
+	fieldname = field
+	for sep in (" as ", " AS "):
+		if sep in fieldname:
+			fieldname = fieldname.split(sep, 1)[0]
+=======
 	if not SPECIAL_CHAR_PATTERN.findall(field):
 		return [field]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	columns = Parser(f"select {field} from _dummy").columns
 
@@ -216,8 +238,16 @@ def update_wildcard_field_param(data):
 	if (isinstance(data.fields, str) and data.fields == "*") or (
 		isinstance(data.fields, list | tuple) and len(data.fields) == 1 and data.fields[0] == "*"
 	):
+<<<<<<< HEAD
+		if frappe.get_system_settings("apply_perm_level_on_api_calls"):
+			parent_type = data.parenttype or data.parent_doctype
+			data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
+		else:
+			data.fields = frappe.db.get_table_columns(data.doctype)
+=======
 		parent_type = data.parenttype or data.parent_doctype
 		data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return True
 
 	return False
@@ -231,8 +261,11 @@ def clean_params(data):
 def parse_json(data):
 	if (filters := data.get("filters")) and isinstance(filters, str):
 		data["filters"] = json.loads(filters)
+<<<<<<< HEAD
+=======
 	if (applied_filters := data.get("applied_filters")) and isinstance(applied_filters, str):
 		data["applied_filters"] = json.loads(applied_filters)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if (or_filters := data.get("or_filters")) and isinstance(or_filters, str):
 		data["or_filters"] = json.loads(or_filters)
 	if (fields := data.get("fields")) and isinstance(fields, str):
@@ -365,7 +398,10 @@ def export_query():
 	title = form_params.pop("title", doctype)
 	csv_params = pop_csv_params(form_params)
 	add_totals_row = 1 if form_params.pop("add_totals_row", None) == "1" else None
+<<<<<<< HEAD
+=======
 	translate_values = 1 if form_params.pop("translate_values", None) == "1" else None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if selection := form_params.pop("selected_items", None):
 		form_params["filters"] = {"name": ("in", json.loads(selection))}
@@ -393,6 +429,10 @@ def export_query():
 	if add_totals_row:
 		ret = append_totals_row(ret)
 
+<<<<<<< HEAD
+	data = [[_("Sr"), *get_labels(db_query.fields, doctype)]]
+	data.extend([i + 1, *list(row)] for i, row in enumerate(ret))
+=======
 	fields_info = get_field_info(db_query.fields, doctype)
 
 	labels = [info["label"] for info in fields_info]
@@ -411,6 +451,7 @@ def export_query():
 			processed_data.append(processed_row)
 			data.extend(processed_data)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	data = handle_duration_fieldtype_values(doctype, data, db_query.fields)
 
 	if file_format_type == "CSV":
@@ -455,6 +496,12 @@ def get_field_info(fields, doctype):
 
 	field_info = []
 	for key in fields:
+<<<<<<< HEAD
+		try:
+			parenttype, fieldname = parse_field(key)
+		except ValueError:
+			continue
+=======
 		df = None
 		try:
 			parenttype, fieldname = parse_field(key)
@@ -463,6 +510,7 @@ def get_field_info(fields, doctype):
 			parenttype = doctype
 			fieldname = key.split("(", 1)[0]
 			fieldname = fieldname[0].upper() + fieldname[1:]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		parenttype = parenttype or doctype
 
@@ -523,14 +571,22 @@ def handle_duration_fieldtype_values(doctype, data, fields):
 
 def parse_field(field: str) -> tuple[str | None, str]:
 	"""Parse a field into parenttype and fieldname."""
+<<<<<<< HEAD
+	key = field.split(" as ")[0]
+=======
 	key = field.split(" as ", 1)[0]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if key.startswith(("count(", "sum(", "avg(")):
 		raise ValueError
 
 	if "." in key:
+<<<<<<< HEAD
+		return key.split(".")[0][4:-1], key.split(".")[1].strip("`")
+=======
 		table, column = key.split(".", 2)[:2]
 		return table[4:-1], column.strip("`")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return None, key.strip("`")
 
@@ -678,7 +734,11 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 			tagcount = frappe.get_list(
 				doctype,
 				fields=[tag["name"], "count(*)"],
+<<<<<<< HEAD
+				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
+=======
 				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				group_by=tag["name"],
 				as_list=True,
 			)

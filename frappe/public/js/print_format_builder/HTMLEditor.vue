@@ -9,6 +9,48 @@
 		<div v-show="editing" ref="editor"></div>
 	</div>
 </template>
+<<<<<<< HEAD
+<script>
+export default {
+	name: "HTMLEditor",
+	props: ["value", "button-label"],
+	data() {
+		return {
+			editing: false,
+		};
+	},
+	methods: {
+		toggle_edit() {
+			if (this.editing) {
+				this.$emit("change", this.get_value());
+				this.editing = false;
+				return;
+			}
+
+			this.editing = true;
+			if (!this.control) {
+				this.control = frappe.ui.form.make_control({
+					parent: this.$refs.editor,
+					df: {
+						fieldname: "editor",
+						fieldtype: "HTML Editor",
+						min_lines: 10,
+						max_lines: 30,
+						change: () => {
+							this.$emit("change", this.get_value());
+						},
+					},
+					render_input: true,
+				});
+			}
+			this.control.set_value(this.value);
+		},
+		get_value() {
+			return frappe.dom.remove_script_and_style(this.control.get_value());
+		},
+	},
+};
+=======
 
 <script setup>
 import { ref } from "vue";
@@ -53,6 +95,7 @@ function toggle_edit() {
 function get_value() {
 	return frappe.dom.remove_script_and_style(control.value.get_value());
 }
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

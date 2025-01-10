@@ -9,10 +9,15 @@ def sendmail_to_system_managers(subject, content):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+def get_contact_list(txt, page_length=20) -> list[dict]:
+	"""Return email ids for a multiselect field."""
+=======
 def get_contact_list(txt, page_length=20, extra_filters: str | None = None) -> list[dict]:
 	"""Return email ids for a multiselect field."""
 	if extra_filters:
 		extra_filters = frappe.parse_json(extra_filters)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	filters = [
 		["Contact Email", "email_id", "is", "set"],
@@ -20,6 +25,23 @@ def get_contact_list(txt, page_length=20, extra_filters: str | None = None) -> l
 	if extra_filters:
 		filters.extend(extra_filters)
 
+<<<<<<< HEAD
+	reportview_conditions = build_match_conditions("Contact")
+	match_conditions = f"and {reportview_conditions}" if reportview_conditions else ""
+
+	# The multiselect field will store the `label` as the selected value.
+	# The `value` is just used as a unique key to distinguish between the options.
+	# https://github.com/frappe/frappe/blob/6c6a89bcdd9454060a1333e23b855d0505c9ebc2/frappe/public/js/frappe/form/controls/autocomplete.js#L29-L35
+	out = frappe.db.sql(
+		f"""select name as value, email_id as label,
+		concat(first_name, ifnull(concat(' ',last_name), '' )) as description
+		from tabContact
+		where (name like %(txt)s or email_id like %(txt)s) and email_id != ''
+		{match_conditions}
+		limit %(page_length)s""",
+		{"txt": f"%{txt}%", "page_length": page_length},
+		as_dict=True,
+=======
 	fields = ["first_name", "middle_name", "last_name", "company_name"]
 	contacts = frappe.get_list(
 		"Contact",
@@ -28,6 +50,7 @@ def get_contact_list(txt, page_length=20, extra_filters: str | None = None) -> l
 		or_filters=[[field, "like", f"%{txt}%"] for field in fields]
 		+ [["Contact Email", "email_id", "like", f"%{txt}%"]],
 		limit_page_length=page_length,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 
 	# The multiselect field will store the `label` as the selected value.

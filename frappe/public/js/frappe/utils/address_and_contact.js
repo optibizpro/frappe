@@ -12,7 +12,13 @@ $.extend(frappe.contacts, {
 			$(frm.fields_dict["address_html"].wrapper)
 				.html(frappe.render_template("address_list", frm.doc.__onload))
 				.find(".btn-address")
+<<<<<<< HEAD
+				.on("click", function () {
+					frappe.new_doc("Address");
+				});
+=======
 				.on("click", () => new_record("Address", frm));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		// render contact
@@ -20,7 +26,13 @@ $.extend(frappe.contacts, {
 			$(frm.fields_dict["contact_html"].wrapper)
 				.html(frappe.render_template("contact_list", frm.doc.__onload))
 				.find(".btn-contact")
+<<<<<<< HEAD
+				.on("click", function () {
+					frappe.new_doc("Contact");
+				});
+=======
 				.on("click", () => new_record("Contact", frm));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	},
 	get_last_doc: function (frm) {
@@ -58,6 +70,8 @@ $.extend(frappe.contacts, {
 			.then((address_display) => frm.set_value(_display_field, address_display));
 	},
 });
+<<<<<<< HEAD
+=======
 
 function new_record(doctype, frm) {
 	frappe.dynamic_link = {
@@ -79,3 +93,4 @@ function new_record(doctype, frm) {
 		frappe.new_doc(doctype);
 	}
 }
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -22,7 +22,10 @@
    "default": "0",
    "fieldname": "skipped",
    "fieldtype": "Check",
+<<<<<<< HEAD
+=======
    "in_list_view": 1,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "label": "Skipped",
    "read_only": 1
   },
@@ -37,7 +40,11 @@
  "icon": "fa fa-cog",
  "idx": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-05-10 19:27:10.883330",
+=======
  "modified": "2024-03-23 16:03:34.014409",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Patch Log",

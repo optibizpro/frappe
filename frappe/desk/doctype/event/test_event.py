@@ -7,6 +7,15 @@ import json
 import frappe
 import frappe.defaults
 from frappe.desk.doctype.event.event import get_events
+<<<<<<< HEAD
+from frappe.test_runner import make_test_objects
+from frappe.tests.utils import FrappeTestCase
+
+test_records = frappe.get_test_records("Event")
+
+
+class TestEvent(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.utils import make_test_objects
 
@@ -21,6 +30,7 @@ class UnitTestEvent(UnitTestCase):
 
 
 class TestEvent(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.db.delete("Event")
 		make_test_objects("Event", reset=True)

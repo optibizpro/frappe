@@ -167,7 +167,11 @@ login.signup = function () {
 
 
 // Login
+<<<<<<< HEAD
+login.call = function (args, callback) {
+=======
 login.call = function (args, callback, url="/") {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	login.set_status({{ _("Verifying...") | tojson }}, 'blue');
 
 	return frappe.call({

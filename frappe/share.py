@@ -125,6 +125,15 @@ def set_docshare_permission(doctype, name, user, permission_to, value=1, everyon
 @frappe.whitelist()
 def get_users(doctype: str, name: str) -> list:
 	"""Get list of users with which this document is shared"""
+<<<<<<< HEAD
+	if not isinstance(doctype, str):
+		raise TypeError("doctype must be of type str")
+
+	if not isinstance(name, str):
+		raise TypeError("name must be of type str")
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	doc = frappe.get_doc(doctype, name)
 	return _get_users(doc)
 
@@ -132,7 +141,11 @@ def get_users(doctype: str, name: str) -> list:
 def _get_users(doc: "Document") -> list:
 	from frappe.permissions import has_permission
 
+<<<<<<< HEAD
+	if not has_permission(doc.doctype, "read", doc, raise_exception=False):
+=======
 	if not has_permission(doc.doctype, "read", doc, print_logs=False):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return []
 
 	return frappe.get_all(

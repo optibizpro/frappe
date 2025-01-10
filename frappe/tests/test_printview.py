@@ -1,10 +1,18 @@
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.www.printview import get_html_and_style
+
+
+class PrintViewTest(FrappeTestCase):
+=======
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.tests import IntegrationTestCase
 from frappe.www.printview import get_html_and_style
 
 
 class PrintViewTest(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_print_view_without_errors(self):
 		user = frappe.get_last_doc("User")
 

@@ -76,7 +76,10 @@
   "column_break_22",
   "description",
   "documentation_url",
+<<<<<<< HEAD
+=======
   "placeholder",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "oldfieldname",
   "oldfieldtype"
  ],
@@ -560,9 +563,14 @@
   {
    "depends_on": "eval:!in_list([\"Tab Break\", \"Section Break\", \"Column Break\", \"Button\", \"HTML\"], doc.fieldtype)",
    "fieldname": "documentation_url",
+<<<<<<< HEAD
+   "fieldtype": "Small Text",
+   "label": "Documentation URL"
+=======
    "fieldtype": "Data",
    "label": "Documentation URL",
    "options": "URL"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "default": "0",
@@ -572,6 +580,8 @@
    "label": "Sort Options"
   },
   {
+<<<<<<< HEAD
+=======
    "fieldname": "link_filters",
    "fieldtype": "JSON",
    "label": "Link Filters"
@@ -596,6 +606,7 @@
    "label": "Placeholder"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "default": "0",
    "depends_on": "eval:['Attach', 'Attach Image'].includes(doc.fieldtype)",
    "fieldname": "make_attachment_public",
@@ -607,7 +618,11 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-10-01 07:26:16.380090",
+=======
  "modified": "2024-10-15 23:33:03.926033",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "DocField",

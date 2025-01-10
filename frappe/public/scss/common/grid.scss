@@ -44,12 +44,18 @@
 		padding: 4px 8px !important;
 	}
 	.grid-static-col {
+<<<<<<< HEAD
+		.static-area.reqd:after {
+			content: " *";
+			color: var(--red-400);
+=======
 		padding: 6px 8px !important;
 		.static-area {
 			&.reqd:after {
 				content: " *";
 				color: var(--red-400);
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 }
@@ -153,7 +159,11 @@
 }
 
 .grid-row-check {
+<<<<<<< HEAD
+	margin-top: 2px;
+=======
 	margin-top: 3px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	&::after {
 		// Extend the checkbox's clickable area
@@ -196,8 +206,11 @@
 	.col:last-child {
 		border-right: none;
 		min-width: 0;
+<<<<<<< HEAD
+=======
 		display: flex;
 		justify-content: center;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	.col {
@@ -484,9 +497,13 @@
 .grid-custom-buttons:empty {
 	padding: 0;
 }
+<<<<<<< HEAD
+
+=======
 .grid-footer {
 	margin-top: var(--margin-sm);
 }
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 .grid-footer,
 .grid-custom-buttons {
 	padding: var(--padding-sm) 0px;
@@ -574,6 +591,15 @@
 	margin-bottom: 4px;
 }
 
+<<<<<<< HEAD
+@media (max-width: map-get($grid-breakpoints, "md")) {
+	.form-grid-container {
+		overflow-x: clip;
+
+		.form-grid {
+			min-width: 738px;
+		}
+=======
 .form-grid-container:has(.grid-row.grid-row-open) {
 	overflow-x: clip;
 	white-space: normal;
@@ -672,6 +698,7 @@
 @media (max-width: map-get($grid-breakpoints, "md")) {
 	.grid-scroll-bar {
 		display: block;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	.form-column.col-sm-6 .form-grid {
@@ -680,6 +707,19 @@
 		}
 	}
 }
+<<<<<<< HEAD
+
+@media (min-width: map-get($grid-breakpoints, "md")) {
+	.form-grid-container {
+		overflow-x: unset !important;
+
+		.form-grid {
+			position: unset !important;
+		}
+	}
+}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @media (max-width: map-get($grid-breakpoints, "sm")) {
 	.form-in-grid .form-section .form-column {

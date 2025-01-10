@@ -14,11 +14,20 @@ from frappe.utils.password import get_decrypted_password
 
 if TYPE_CHECKING:
 	from frappe.core.doctype.user.user import User
+<<<<<<< HEAD
+
+
+class SignupDisabledError(frappe.PermissionError):
+	...
+
+
+=======
 
 
 class SignupDisabledError(frappe.PermissionError): ...
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_oauth2_providers() -> dict[str, dict]:
 	out = {}
 	providers = frappe.get_all("Social Login Key", fields=["*"])
@@ -167,9 +176,16 @@ def get_info_via_oauth(provider: str, code: str, decoder: Callable | None = None
 
 def login_oauth_user(
 	data: dict | str,
+<<<<<<< HEAD
+	provider: str | None = None,
+	state: dict | str | None = None,
+	email_id: str | None = None,
+	key: str | None = None,
+=======
 	*,
 	provider: str | None = None,
 	state: dict | str,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	generate_login_token: bool = False,
 ):
 	# json.loads data and state
@@ -212,7 +228,11 @@ def login_oauth_user(
 
 	if frappe.utils.cint(generate_login_token):
 		login_token = frappe.generate_hash(length=32)
+<<<<<<< HEAD
+		frappe.cache().set_value(f"login_token:{login_token}", frappe.local.session.sid, expires_in_sec=120)
+=======
 		frappe.cache.set_value(f"login_token:{login_token}", frappe.local.session.sid, expires_in_sec=120)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		frappe.response["login_token"] = login_token
 
@@ -225,6 +245,16 @@ def login_oauth_user(
 		)
 
 
+<<<<<<< HEAD
+def get_user_record(user: str, data: dict) -> "User":
+	try:
+		return frappe.get_doc("User", user)
+	except frappe.DoesNotExistError:
+		if frappe.get_website_settings("disable_signup"):
+			raise SignupDisabledError
+
+	user: "User" = frappe.new_doc("User")
+=======
 def get_user_record(user: str, data: dict, provider: str) -> "User":
 	from frappe.integrations.doctype.social_login_key.social_login_key import provider_allows_signup
 
@@ -235,6 +265,7 @@ def get_user_record(user: str, data: dict, provider: str) -> "User":
 			raise SignupDisabledError
 
 	user: User = frappe.new_doc("User")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if gender := data.get("gender", "").title():
 		frappe.get_doc({"doctype": "Gender", "gender": gender}).insert(
@@ -263,7 +294,11 @@ def update_oauth_user(user: str, data: dict, provider: str):
 	if isinstance(data.get("location"), dict):
 		data["location"] = data["location"].get("name")
 
+<<<<<<< HEAD
+	user: "User" = get_user_record(user, data)
+=======
 	user: User = get_user_record(user, data, provider)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	update_user_record = user.is_new()
 
 	if not user.enabled:
@@ -316,7 +351,11 @@ def redirect_post_login(desk_user: bool, redirect_to: str | None = None, provide
 	frappe.local.response["type"] = "redirect"
 
 	if not redirect_to:
+<<<<<<< HEAD
+		desk_uri = "/app/workspace" if provider == "facebook" else "/app"
+=======
 		desk_uri = "/app/workspace" if provider == "facebook" else get_default_path()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		redirect_to = frappe.utils.get_url(desk_uri if desk_user else "/me")
 
 	frappe.local.response["location"] = redirect_to

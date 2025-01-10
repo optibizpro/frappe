@@ -94,9 +94,12 @@ class Report(Document):
 		):
 			frappe.throw(_("You are not allowed to delete Standard Report"))
 		delete_custom_role("report", self.name)
+<<<<<<< HEAD
+=======
 
 	def get_permission_log_options(self, event=None):
 		return {"fields": ["roles"]}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def get_columns(self):
 		return [d.as_dict(no_default_fields=True, no_child_table_fields=True) for d in self.columns]
@@ -134,7 +137,11 @@ class Report(Document):
 		if frappe.flags.in_import:
 			return
 
+<<<<<<< HEAD
+		if self.is_standard == "Yes" and (frappe.local.conf.get("developer_mode") or 0) == 1:
+=======
 		if self.is_standard == "Yes" and frappe.conf.developer_mode:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			export_to_files(record_list=[["Report", self.name]], record_module=self.module, create_init=True)
 
 			self.create_report_py()
@@ -382,9 +389,22 @@ class Report(Document):
 
 		self.db_set("disabled", cint(disable))
 
+	@frappe.whitelist()
+	def enable_prepared_report(self):
+		enable_prepared_report(self.name)
+		frappe.msgprint(_("Prepared Report Enabled"))
 
+
+<<<<<<< HEAD
+def is_prepared_report_disabled(report):
+	return (
+		frappe.db.get_value("Report", report, "disable_prepared_report")
+		and not frappe.db.get_value("Report", report, "prepared_report")
+	) or 0
+=======
 def is_prepared_report_enabled(report):
 	return cint(frappe.db.get_value("Report", report, "prepared_report"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_report_module_dotted_path(module, report_name):
@@ -420,3 +440,7 @@ def get_group_by_column_label(args, meta):
 
 def enable_prepared_report(report: str):
 	frappe.db.set_value("Report", report, "prepared_report", 1)
+<<<<<<< HEAD
+	frappe.db.set_value("Report", report, "disable_prepared_report", 0)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

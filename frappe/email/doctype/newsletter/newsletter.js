@@ -112,7 +112,10 @@ frappe.ui.form.on("Newsletter", {
 					options: {
 						minDate: new Date(),
 					},
+<<<<<<< HEAD
+=======
 					reqd: true,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				},
 				{
 					label: __("Time"),

@@ -2,6 +2,13 @@
 # License: MIT. See LICENSE
 import frappe
 from frappe import _
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.translate import clear_cache
+
+
+class TestTranslation(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -15,17 +22,31 @@ class UnitTestTranslation(UnitTestCase):
 
 
 class TestTranslation(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.db.delete("Translation")
 
 	def tearDown(self):
 		frappe.local.lang = "en"
+<<<<<<< HEAD
+=======
 		from frappe.translate import clear_cache
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		clear_cache()
 
 	def test_doctype(self):
 		translation_data = get_translation_data()
+<<<<<<< HEAD
+		for key, val in translation_data.items():
+			frappe.local.lang = key
+
+			translation = create_translation(key, val)
+			self.assertEqual(_(val[0]), val[1])
+
+			frappe.delete_doc("Translation", translation.name)
+			self.assertEqual(_(val[0]), val[0])
+=======
 		for lang, (source_string, new_translation) in translation_data.items():
 			frappe.local.lang = lang
 			original_translation = _(source_string)
@@ -35,6 +56,7 @@ class TestTranslation(IntegrationTestCase):
 
 			frappe.delete_doc("Translation", docname)
 			self.assertEqual(_(source_string), original_translation)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_parent_language(self):
 		data = {
@@ -53,17 +75,34 @@ class TestTranslation(IntegrationTestCase):
 
 		frappe.local.lang = "es"
 
+<<<<<<< HEAD
+		self.assertTrue(_(data[0][0]), data[0][1])
+
+		self.assertTrue(_(data[1][0]), data[1][1])
+=======
 		self.assertEqual(_("Test Data"), data["Test Data"]["es"])
 
 		self.assertEqual(_("Test Spanish"), data["Test Spanish"]["es"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		frappe.local.lang = "es-MX"
 
 		# different translation for es-MX
+<<<<<<< HEAD
+		self.assertTrue(_(data[2][0]), data[2][1])
+
+		# from spanish (general)
+		self.assertTrue(_(data[1][0]), data[1][1])
+=======
 		self.assertEqual(_("Test Data"), data["Test Data"]["es-MX"])
 
 		# from spanish (general)
 		self.assertEqual(_("Test Spanish"), data["Test Spanish"]["es"])
+
+	def test_multi_language_translations(self):
+		source = "User"
+		self.assertNotEqual(_(source, lang="de"), _(source, lang="es"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_multi_language_translations(self):
 		source = "User"

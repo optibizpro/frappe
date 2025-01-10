@@ -160,8 +160,11 @@
 					margin-top: var(--margin-sm);
 					min-height: 100px;
 					@include card($padding: 0, $background-color: var(--kanban-card-bg));
+<<<<<<< HEAD
+=======
 					box-shadow: none;
 					border: 1px solid var(--border-color);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 					.kanban-image {
 						height: 125px;

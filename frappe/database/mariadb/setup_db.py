@@ -3,6 +3,8 @@ import sys
 
 import click
 
+import click
+
 import frappe
 from frappe.database.db_manager import DbManager
 
@@ -15,7 +17,11 @@ def get_mariadb_version(version_string: str = ""):
 	# MariaDB classifies their versions as Major (1st and 2nd number), and Minor (3rd number)
 	# Example: Version 10.3.13 is Major Version = 10.3, Minor Version = 13
 	version_string = version_string or get_mariadb_variables().get("version")
+<<<<<<< HEAD
+	version = version_string.split("-")[0]
+=======
 	version = version_string.split("-", 1)[0]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return version.rsplit(".", 1)
 
 
@@ -54,11 +60,34 @@ def setup_database(force, verbose, mariadb_user_host_login_scope=None):
 	root_conn.close()
 
 
+<<<<<<< HEAD
+
+def setup_help_database(help_db_name):
+	dbman = DbManager(get_root_connection(frappe.flags.root_login, frappe.flags.root_password))
+	dbman.drop_database(help_db_name)
+
+	# make database
+	if help_db_name not in dbman.get_database_list():
+		try:
+			dbman.create_user(help_db_name, help_db_name)
+		except Exception as e:
+			# user already exists
+			if e.args[0] != 1396:
+				raise
+		dbman.create_database(help_db_name)
+		dbman.grant_all_privileges(help_db_name, help_db_name)
+		dbman.flush_privileges()
+
+
+def drop_user_and_database(db_name, root_login, root_password):
+	frappe.local.db = get_root_connection(root_login, root_password)
+=======
 def drop_user_and_database(
 	db_name,
 	db_user,
 ):
 	frappe.local.db = get_root_connection()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	dbman = DbManager(frappe.local.db)
 	dbman.drop_database(db_name)
 	dbman.delete_user(db_user, host="%")
@@ -68,7 +97,11 @@ def drop_user_and_database(
 def bootstrap_database(verbose, source_sql=None):
 	import sys
 
+<<<<<<< HEAD
+	frappe.connect(db_name=db_name)
+=======
 	frappe.connect()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	check_compatible_versions()
 
 	import_db_from_sql(source_sql, verbose)
@@ -104,6 +137,16 @@ def check_compatible_versions():
 		version = get_mariadb_version()
 		version_tuple = tuple(int(v) for v in version[0].split("."))
 
+<<<<<<< HEAD
+		if version_tuple < (10, 3):
+			click.secho(
+				f"Warning: MariaDB version {version} is less than 10.3 which is not supported by Frappe",
+				fg="yellow",
+			)
+		elif version_tuple >= (10, 9):
+			click.secho(
+				f"Warning: MariaDB version {version} is more than 10.8 which is not yet tested with Frappe Framework.",
+=======
 		if version_tuple < (10, 6):
 			click.secho(
 				f"Warning: MariaDB version {version} is older than 10.6 which is not supported by Frappe",
@@ -112,6 +155,7 @@ def check_compatible_versions():
 		elif version_tuple > (11, 3):
 			click.secho(
 				f"Warning: MariaDB version {version} is newer than 11.3 which is not yet tested with Frappe Framework.",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fg="yellow",
 			)
 	except Exception:
@@ -120,6 +164,12 @@ def check_compatible_versions():
 			fg="yellow",
 		)
 
+<<<<<<< HEAD
+
+def get_root_connection(root_login, root_password):
+	import getpass
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def get_root_connection():
 	if not frappe.local.flags.root_connection:
@@ -140,6 +190,9 @@ def get_root_connection():
 				or getpass("MySQL root password: ")
 			)
 
+<<<<<<< HEAD
+		frappe.local.flags.root_connection = frappe.database.get_db(user=root_login, password=root_password)
+=======
 		frappe.local.flags.root_connection = frappe.database.get_db(
 			socket=frappe.conf.db_socket,
 			host=frappe.conf.db_host,
@@ -148,5 +201,6 @@ def get_root_connection():
 			password=frappe.flags.root_password,
 			cur_db_name=None,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return frappe.local.flags.root_connection

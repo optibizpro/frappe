@@ -10,7 +10,11 @@ frappe.request.ajax_count = 0;
 frappe.request.waiting_for_ajax = [];
 frappe.request.logs = {};
 
+<<<<<<< HEAD
+frappe.xcall = function (method, params) {
+=======
 frappe.xcall = function (method, params, type) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return new Promise((resolve, reject) => {
 		frappe.call({
 			method: method,
@@ -20,7 +24,11 @@ frappe.xcall = function (method, params, type) {
 				resolve(r.message);
 			},
 			error: (r) => {
+<<<<<<< HEAD
+				reject(r.message);
+=======
 				reject(r?.message);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 		});
 	});
@@ -89,11 +97,15 @@ frappe.call = function (opts) {
 
 	let url = opts.url;
 	if (!url) {
+<<<<<<< HEAD
+		url = "/api/method/" + args.cmd;
+=======
 		let prefix = "/api/method/";
 		if (opts.api_version) {
 			prefix = `/api/${opts.api_version}/method/`;
 		}
 		url = prefix + args.cmd;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (window.cordova) {
 			let host = frappe.request.url;
 			host = host.slice(0, host.length - 1);
@@ -147,7 +159,10 @@ frappe.request.call = function (opts) {
 				indicator: "red",
 				message: __("The resource you are looking for is not available"),
 			});
+<<<<<<< HEAD
+=======
 			opts.error_callback && opts.error_callback();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		403: function (xhr) {
 			if (frappe.session.user === "Guest" && frappe.session.logged_in_user !== "Guest") {
@@ -177,7 +192,10 @@ frappe.request.call = function (opts) {
 					),
 				});
 			}
+<<<<<<< HEAD
+=======
 			opts.error_callback && opts.error_callback();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		508: function (xhr) {
 			frappe.utils.play_sound("error");
@@ -188,7 +206,10 @@ frappe.request.call = function (opts) {
 					"Another transaction is blocking this one. Please try again in a few seconds."
 				),
 			});
+<<<<<<< HEAD
+=======
 			opts.error_callback && opts.error_callback();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		413: function (data, xhr) {
 			frappe.msgprint({
@@ -198,7 +219,10 @@ frappe.request.call = function (opts) {
 					(frappe.boot.max_file_size || 5242880) / 1048576,
 				]),
 			});
+<<<<<<< HEAD
+=======
 			opts.error_callback && opts.error_callback();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		417: function (xhr) {
 			var r = xhr.responseJSON;
@@ -231,7 +255,10 @@ frappe.request.call = function (opts) {
 		},
 		502: function (xhr) {
 			frappe.msgprint(__("Internal Server Error"));
+<<<<<<< HEAD
+=======
 			opts.error_callback && opts.error_callback();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 	};
 
@@ -268,7 +295,11 @@ frappe.request.call = function (opts) {
 			},
 			opts.headers
 		),
+<<<<<<< HEAD
+		cache: false,
+=======
 		cache: window.dev_server ? false : true,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	};
 
 	if (opts.args && opts.args.doctype) {
@@ -306,8 +337,13 @@ frappe.request.call = function (opts) {
 					status_code_handler(data, xhr);
 				}
 			} catch (e) {
+<<<<<<< HEAD
+				console.log("Unable to handle success response", data); // eslint-disable-line
+				console.error(e); // eslint-disable-line
+=======
 				console.log("Unable to handle success response", data);
 				console.error(e);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		})
 		.always(function (data, textStatus, xhr) {
@@ -316,7 +352,11 @@ frappe.request.call = function (opts) {
 					data = JSON.parse(data);
 				}
 				if (data.responseText) {
+<<<<<<< HEAD
+					var xhr = data;
+=======
 					var xhr = data; // eslint-disable-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					data = JSON.parse(data.responseText);
 				}
 			} catch (e) {
@@ -360,8 +400,13 @@ frappe.request.call = function (opts) {
 				// if not handled by error handler!
 				opts.error_callback && opts.error_callback(xhr);
 			} catch (e) {
+<<<<<<< HEAD
+				console.log("Unable to handle failed response"); // eslint-disable-line
+				console.error(e); // eslint-disable-line
+=======
 				console.log("Unable to handle failed response");
 				console.error(e);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		});
 };
@@ -378,6 +423,10 @@ frappe.request.is_fresh = function (args, threshold) {
 			new Date() - past_request.timestamp < threshold &&
 			frappe.utils.deep_equal(args, past_request.args)
 		) {
+<<<<<<< HEAD
+			// eslint-disable-next-line no-console
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			console.log("throttled");
 			return true;
 		}
@@ -450,6 +499,9 @@ frappe.request.cleanup = function (opts, r) {
 		}
 
 		// show messages
+<<<<<<< HEAD
+		if (r._server_messages && !opts.silent) {
+=======
 		//
 		let messages;
 		if (opts.api_version == "v2") {
@@ -458,6 +510,7 @@ frappe.request.cleanup = function (opts, r) {
 			messages = JSON.parse(r._server_messages);
 		}
 		if (messages && !opts.silent) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			// show server messages if no handlers exist
 			if (handlers.length === 0) {
 				frappe.hide_msgprint();
@@ -484,8 +537,13 @@ frappe.request.cleanup = function (opts, r) {
 			if (opts.args) {
 				console.log("======== arguments ========");
 				console.log(opts.args);
+<<<<<<< HEAD
+				console.log("========");
+			}
+=======
 			}
 			console.log("======== debug messages ========");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			$.each(JSON.parse(r._debug_messages), function (i, v) {
 				console.log(v);
 			});
@@ -541,9 +599,12 @@ frappe.request.report_error = function (xhr, request_opts) {
 
 	const copy_markdown_to_clipboard = () => {
 		const code_block = (snippet) => "```\n" + snippet + "\n```";
+<<<<<<< HEAD
+=======
 
 		let request_data = Object.assign({}, request_opts);
 		request_data.request_id = xhr.getResponseHeader("X-Frappe-Request-Id");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const traceback_info = [
 			"### App Versions",
 			code_block(JSON.stringify(frappe.boot.versions, null, "\t")),
@@ -552,7 +613,11 @@ frappe.request.report_error = function (xhr, request_opts) {
 			"### Traceback",
 			code_block(exc),
 			"### Request Data",
+<<<<<<< HEAD
+			code_block(JSON.stringify(request_opts, null, "\t")),
+=======
 			code_block(JSON.stringify(request_data, null, "\t")),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"### Response Data",
 			code_block(JSON.stringify(data, null, "\t")),
 		].join("\n");
@@ -605,6 +670,23 @@ frappe.request.report_error = function (xhr, request_opts) {
 		if (!frappe.error_dialog) {
 			frappe.error_dialog = new frappe.ui.Dialog({
 				title: __("Server Error"),
+<<<<<<< HEAD
+				primary_action_label: __("Report"),
+				primary_action: () => {
+					if (error_report_email) {
+						show_communication();
+					} else {
+						frappe.msgprint(__("Support Email Address Not Specified"));
+					}
+					frappe.error_dialog.hide();
+				},
+				secondary_action_label: __("Copy error to clipboard"),
+				secondary_action: () => {
+					copy_markdown_to_clipboard();
+					frappe.error_dialog.hide();
+				},
+			});
+=======
 			});
 
 			if (error_report_email) {
@@ -618,6 +700,7 @@ frappe.request.report_error = function (xhr, request_opts) {
 					frappe.error_dialog.hide();
 				});
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.error_dialog.wrapper.classList.add("msgprint-dialog");
 		}
 

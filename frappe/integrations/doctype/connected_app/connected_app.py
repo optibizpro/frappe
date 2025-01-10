@@ -148,6 +148,8 @@ class ConnectedApp(Document):
 
 		return token_cache
 
+<<<<<<< HEAD
+=======
 	def get_backend_app_token(self):
 		"""Get an Access Token for the Cloud-Registered Service Principal"""
 		# There is no User assigned to the app, so we give it an empty string,
@@ -171,6 +173,7 @@ class ConnectedApp(Document):
 
 		return token_cache
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @frappe.whitelist(methods=["GET"], allow_guest=True)
 def callback(code=None, state=None):

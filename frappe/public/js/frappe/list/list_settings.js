@@ -120,7 +120,11 @@ export default class ListSettings {
 						<div class="col-1">
 							${frappe.utils.icon("drag", "xs", "", "", "sortable-handle " + show_sortable_handle)}
 						</div>
+<<<<<<< HEAD
+						<div class="col-md-10" style="padding-left:0px;">
+=======
 						<div class="col-10" style="padding-left:0px;">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							${__(me.fields[idx].label, null, me.doctype)}
 						</div>
 						<div class="col-1 ${can_remove}">
@@ -319,7 +323,11 @@ export default class ListSettings {
 		meta.fields.forEach((field) => {
 			if (
 				field.in_list_view &&
+<<<<<<< HEAD
+				!in_list(frappe.model.no_value_type, field.fieldtype) &&
+=======
 				!frappe.model.no_value_type.includes(field.fieldtype) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				me.subject_field.fieldname != field.fieldname
 			) {
 				me.fields.push({
@@ -366,11 +374,19 @@ export default class ListSettings {
 		let multiselect_fields = [];
 
 		meta.fields.forEach((field) => {
+<<<<<<< HEAD
+			if (!in_list(frappe.model.no_value_type, field.fieldtype)) {
+				multiselect_fields.push({
+					label: __(field.label, null, field.doctype),
+					value: field.fieldname,
+					checked: in_list(fields, field.fieldname),
+=======
 			if (!frappe.model.no_value_type.includes(field.fieldtype)) {
 				multiselect_fields.push({
 					label: __(field.label, null, field.doctype),
 					value: field.fieldname,
 					checked: fields.includes(field.fieldname),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				});
 			}
 		});
@@ -387,7 +403,11 @@ export default class ListSettings {
 		}
 
 		existing_fields.forEach((column) => {
+<<<<<<< HEAD
+			if (!in_list(new_fields, column)) {
+=======
 			if (!new_fields.includes(column)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				removed_fields.push(column);
 			}
 		});

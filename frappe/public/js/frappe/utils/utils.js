@@ -299,9 +299,12 @@ Object.assign(frappe.utils, {
 			);
 		return content.html();
 	},
+<<<<<<< HEAD
+=======
 	scroll_page_to_top() {
 		$(".main-section").scrollTop(0);
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	scroll_to: function (
 		element,
 		animate = true,
@@ -361,7 +364,12 @@ Object.assign(frappe.utils, {
 	get_scroll_position: function (element, additional_offset) {
 		let header_offset =
 			$(".navbar").height() + $(".page-head:visible").height() || $(".navbar").height();
+<<<<<<< HEAD
+		let scroll_top = $(element).offset().top - header_offset - cint(additional_offset);
+		return scroll_top;
+=======
 		return $(element).offset().top - header_offset - cint(additional_offset);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 	filter_dict: function (dict, filters) {
 		var ret = [];
@@ -467,7 +475,11 @@ Object.assign(frappe.utils, {
 				break;
 			case "url":
 				regExp =
+<<<<<<< HEAD
+					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i;
+=======
 					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i; // eslint-disable-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				break;
 			case "dateIso":
 				regExp = /^(\d{4})\D?(0[1-9]|1[0-2])\D?([12]\d|0[1-9]|3[01])$/;
@@ -779,6 +791,13 @@ Object.assign(frappe.utils, {
 		frappe.msgprint(__("Note: Changing the Page Name will break previous URL to this page."));
 	},
 
+<<<<<<< HEAD
+	notify: function (subject, body, route, onclick) {
+		console.log("push notifications are evil and deprecated");
+	},
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	set_title: function (title) {
 		frappe._original_title = title;
 		if (frappe._title_prefix) {
@@ -921,6 +940,19 @@ Object.assign(frappe.utils, {
 		let route = route_str.split("/");
 
 		if (route[2] === "Report" || route[0] === "query-report") {
+<<<<<<< HEAD
+			return __("{0} Report", [__(route[3]) || __(route[1])]);
+		}
+		if (route[0] === "List") {
+			return __("{0} List", [__(route[1])]);
+		}
+		if (route[0] === "modules") {
+			return __("{0} Modules", [__(route[1])]);
+		}
+		if (route[0] === "dashboard") {
+			return __("{0} Dashboard", [__(route[1])]);
+		}
+=======
 			return (__(route[3]) || __(route[1])).bold() + " " + __("Report");
 		}
 		if (route[0] === "List") {
@@ -935,6 +967,7 @@ Object.assign(frappe.utils, {
 		if (route[0] === "dashboard") {
 			return __(route[1]).bold() + " " + __("Dashboard");
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return __(frappe.utils.to_title_case(__(route[0]), true));
 	},
 	report_column_total: function (values, column, type) {
@@ -1074,8 +1107,13 @@ Object.assign(frappe.utils, {
 			let expression_function = new Function(...variable_names, code);
 			return expression_function(...variables);
 		} catch (error) {
+<<<<<<< HEAD
+			console.log("Error evaluating the following expression:"); // eslint-disable-line no-console
+			console.error(code); // eslint-disable-line no-console
+=======
 			console.log("Error evaluating the following expression:");
 			console.error(code);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			throw error;
 		}
 	},
@@ -1170,7 +1208,11 @@ Object.assign(frappe.utils, {
 	},
 
 	get_duration_options: function (docfield) {
+<<<<<<< HEAD
+		let duration_options = {
+=======
 		return {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			hide_days: docfield.hide_days,
 			hide_seconds: docfield.hide_seconds,
 		};
@@ -1189,7 +1231,11 @@ Object.assign(frappe.utils, {
 	map_defaults: {
 		center: [19.08, 72.8961],
 		zoom: 13,
+<<<<<<< HEAD
+		tiles: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+=======
 		tiles: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		options: {
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -1293,9 +1339,12 @@ Object.assign(frappe.utils, {
 								route += `/${item.kanban_board}`;
 							}
 							break;
+<<<<<<< HEAD
+=======
 						case "Image":
 							route = `${doctype_slug}/view/image`;
 							break;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						default:
 							route = doctype_slug;
 					}
@@ -1573,8 +1622,13 @@ Object.assign(frappe.utils, {
 					return title;
 				});
 		} catch (error) {
+<<<<<<< HEAD
+			console.log("Error while fetching link title."); // eslint-disable-line
+			console.log(error); // eslint-disable-line
+=======
 			console.log("Error while fetching link title.");
 			console.log(error);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return Promise.resolve(name);
 		}
 	},
@@ -1582,7 +1636,11 @@ Object.assign(frappe.utils, {
 	only_allow_num_decimal(input) {
 		input.on("input", (e) => {
 			let self = $(e.target);
+<<<<<<< HEAD
+			self.val(self.val().replace(/[^0-9.]/g, ""));
+=======
 			self.val(self.val().replace(/[^0-9.\-]/g, ""));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (
 				(e.which != 46 || self.val().indexOf(".") != -1) &&
 				(e.which < 48 || e.which > 57)
@@ -1703,6 +1761,8 @@ Object.assign(frappe.utils, {
 			});
 		},
 	},
+<<<<<<< HEAD
+=======
 	generate_tracking_url() {
 		frappe.prompt(
 			[
@@ -1807,4 +1867,5 @@ Object.assign(frappe.utils, {
 
 		return false;
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });

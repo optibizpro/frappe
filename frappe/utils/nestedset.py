@@ -165,8 +165,17 @@ def update_move_node(doc: Document, parent_field: str):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+def rebuild_tree(doctype, parent_field=None):
+	"""Call rebuild_node for all root nodes.
+
+	The `parent_field` parameter is ignored and will be removed in v16+ (kept for backward compatibility).
+	"""
+
+=======
 def rebuild_tree(doctype: str) -> None:
 	"""Call rebuild_node for all root nodes."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# Check for perm if called from client-side
 	if frappe.request and frappe.local.form_dict.cmd == "rebuild_tree":
 		frappe.only_for("System Manager")
@@ -217,7 +226,11 @@ def rebuild_node(doctype, parent, left, parent_field):
 
 	# we've got the left value, and now that we've processed
 	# the children of this node we also know the right value
+<<<<<<< HEAD
+	frappe.db.set_value(doctype, parent, {"lft": left, "rgt": right}, for_update=False, update_modified=False)
+=======
 	frappe.db.set_value(doctype, parent, {"lft": left, "rgt": right}, update_modified=False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# return the right value of this node + 1
 	return right + 1
@@ -226,6 +239,9 @@ def rebuild_node(doctype, parent, left, parent_field):
 def validate_loop(doctype, name, lft, rgt):
 	"""check if item not an ancestor (loop)"""
 	if name in frappe.get_all(doctype, filters={"lft": ["<=", lft], "rgt": [">=", rgt]}, pluck="name"):
+<<<<<<< HEAD
+		frappe.throw(_("Item cannot be added to its own descendents"), NestedSetRecursionError)
+=======
 		frappe.throw(_("Item cannot be added to its own descendants"), NestedSetRecursionError)
 
 
@@ -254,6 +270,29 @@ def remove_subtree(doctype: str, name: str, throw=True):
 	frappe.qb.update(table).set(table.rgt, table.rgt - width).where(table.rgt > rgt).run()
 
 	frappe.clear_document_cache(doctype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+
+def remove_subtree(doctype: str, name: str, throw=True):
+	"""Remove doc and all its children."""
+	frappe.has_permission(doctype, ptype="delete", throw=throw)
+
+	# Determine the `lft` and `rgt` of the subtree to be removed.
+	lft, rgt = frappe.db.get_value(doctype, name, ["lft", "rgt"])
+
+	# Delete the subtree by removing all nodes whose values for `lft` and `rgt`
+	# lie within above values or match them.
+	frappe.db.delete(doctype, {"lft": (">=", lft), "rgt": ("<=", rgt)})
+
+	# The width of the subtree is calculated as the difference between `rgt` and
+	# `lft` plus 1.
+	width = rgt - lft + 1
+
+	# All `lft` and `rgt` values, that are greater than the `rgt` of the removed
+	# subtree, must be reduced by the width of the subtree.
+	table = frappe.qb.DocType(doctype)
+	frappe.qb.update(table).set(table.lft, table.lft - width).where(table.lft > rgt).run()
+	frappe.qb.update(table).set(table.rgt, table.rgt - width).where(table.rgt > rgt).run()
 
 
 class NestedSet(Document):

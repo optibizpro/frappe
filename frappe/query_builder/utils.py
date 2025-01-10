@@ -3,7 +3,11 @@ from enum import Enum
 from importlib import import_module
 from typing import Any, get_type_hints
 
+<<<<<<< HEAD
+from pypika.queries import Column, QueryBuilder
+=======
 from pypika.queries import Column, QueryBuilder, _SetOperation
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from pypika.terms import PseudoColumn
 
 import frappe
@@ -107,6 +111,27 @@ def patch_query_execute():
 		param_collector = NamedParameterWrapper()
 		query = query.get_sql(param_wrapper=param_collector)
 		if frappe.flags.in_safe_exec:
+<<<<<<< HEAD
+			from frappe.utils.safe_exec import check_safe_sql_query
+
+			if not check_safe_sql_query(query, throw=False):
+				callstack = inspect.stack()
+				if len(callstack) >= 3 and ".py" in callstack[2].filename:
+					# ignore any query builder methods called from python files
+					# assumption is that those functions are whitelisted already.
+
+					# since query objects are patched everywhere any query.run()
+					# will have callstack like this:
+					# frame0: this function prepare_query()
+					# frame1: execute_query()
+					# frame2: frame that called `query.run()`
+					#
+					# if frame2 is server script <serverscript> is set as the filename
+					# it shouldn't be allowed.
+					pass
+				else:
+					raise frappe.PermissionError("Only SELECT SQL allowed in scripting")
+=======
 			from frappe.utils.safe_exec import SERVER_SCRIPT_FILE_PREFIX, check_safe_sql_query
 
 			if not check_safe_sql_query(query, throw=False):
@@ -125,6 +150,7 @@ def patch_query_execute():
 				if len(callstack) >= 3 and SERVER_SCRIPT_FILE_PREFIX in callstack[2].filename:
 					raise frappe.PermissionError("Only SELECT SQL allowed in scripting")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return query, param_collector.get_parameters()
 
 	builder_class = frappe.qb._BuilderClasss

@@ -2,6 +2,12 @@
 # License: MIT. See LICENSE
 import frappe
 from frappe.installer import update_site_config
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestUserType(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -15,6 +21,7 @@ class UnitTestUserType(UnitTestCase):
 
 
 class TestUserType(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		create_role()
 

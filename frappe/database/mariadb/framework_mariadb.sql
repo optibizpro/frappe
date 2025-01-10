@@ -173,12 +173,21 @@ CREATE TABLE `tabDocType` (
   `docstatus` tinyint NOT NULL DEFAULT 0,
   `idx` int NOT NULL DEFAULT 0,
   `search_fields` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
+  `issingle` int(1) NOT NULL DEFAULT 0,
+  `is_virtual` int(1) NOT NULL DEFAULT 0,
+  `is_tree` int(1) NOT NULL DEFAULT 0,
+  `istable` int(1) NOT NULL DEFAULT 0,
+  `editable_grid` int(1) NOT NULL DEFAULT 1,
+  `track_changes` int(1) NOT NULL DEFAULT 0,
+=======
   `issingle` tinyint NOT NULL DEFAULT 0,
   `is_virtual` tinyint NOT NULL DEFAULT 0,
   `is_tree` tinyint NOT NULL DEFAULT 0,
   `istable` tinyint NOT NULL DEFAULT 0,
   `editable_grid` tinyint NOT NULL DEFAULT 1,
   `track_changes` tinyint NOT NULL DEFAULT 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   `module` varchar(255) DEFAULT NULL,
   `restrict_to_domain` varchar(255) DEFAULT NULL,
   `app` varchar(255) DEFAULT NULL,
@@ -226,7 +235,11 @@ CREATE TABLE `tabDocType` (
   `sender_field` varchar(255) DEFAULT NULL,
   `show_title_field_in_link` tinyint NOT NULL DEFAULT 0,
   `migration_hash` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
+  `translated_doctype` int(1) NOT NULL DEFAULT 0,
+=======
   `translated_doctype` tinyint NOT NULL DEFAULT 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB ROW_FORMAT=DYNAMIC CHARACTER SET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

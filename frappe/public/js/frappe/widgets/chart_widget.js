@@ -125,7 +125,11 @@ export default class ChartWidget extends Widget {
 		if (this.chart_doc.type == "Heatmap") {
 			filters = [
 				{
+<<<<<<< HEAD
+					label: this.chart_settings.heatmap_year || this.chart_doc.heatmap_year,
+=======
 					label: __(this.chart_settings.heatmap_year) || __(this.chart_doc.heatmap_year),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					options: frappe.dashboard_utils.get_years_since_creation(
 						frappe.boot.user.creation
 					),
@@ -234,7 +238,11 @@ export default class ChartWidget extends Widget {
 				df: {
 					fieldtype: "DateRange",
 					fieldname: "from_date",
+<<<<<<< HEAD
+					placeholder: "Date Range",
+=======
 					placeholder: __("Date Range"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					input_class: "input-xs",
 					default: [this.chart_settings.from_date, this.chart_settings.to_date],
 					value: [this.chart_settings.from_date, this.chart_settings.to_date],
@@ -281,7 +289,12 @@ export default class ChartWidget extends Widget {
 				return frappe.report_utils.prepare_field_from_column(col);
 			});
 
+<<<<<<< HEAD
+			let data = frappe.report_utils.make_chart_options(columns, result, chart_fields).data;
+			return data;
+=======
 			return frappe.report_utils.make_chart_options(columns, result, chart_fields).data;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -404,7 +417,11 @@ export default class ChartWidget extends Widget {
 					me.fetch_and_update_chart();
 				}
 			},
+<<<<<<< HEAD
+			primary_action_label: "Set",
+=======
 			primary_action_label: __("Set"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 
 		dialog.show();
@@ -474,9 +491,13 @@ export default class ChartWidget extends Widget {
 				${actions
 					.map(
 						(action) =>
+<<<<<<< HEAD
+							`<li><a class="dropdown-item" data-action="${action.action}">${action.label}</a></li>`
+=======
 							`<li><a class="dropdown-item" data-action="${action.action}">${__(
 								action.label
 							)}</a></li>`
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					)
 					.join("")}
 			</ul>

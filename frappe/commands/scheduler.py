@@ -5,7 +5,10 @@ import click
 import frappe
 from frappe.commands import get_site, pass_context
 from frappe.exceptions import SiteNotSpecifiedError
+<<<<<<< HEAD
+=======
 from frappe.utils.bench_helper import CliCtxObj
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("trigger-scheduler-event", help="Trigger a scheduler event")
@@ -78,9 +81,16 @@ def disable_scheduler(context: CliCtxObj):
 @click.option("--format", "-f", default="text", type=click.Choice(["json", "text"]), help="Output format")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 @pass_context
+<<<<<<< HEAD
+def scheduler(context, state: str, format: str, verbose: bool = False, site: str | None = None):
+	"""Control scheduler state."""
+	import frappe
+	import frappe.utils.scheduler
+=======
 def scheduler(context: CliCtxObj, state: str, format: str, verbose: bool = False, site: str | None = None):
 	"""Control scheduler state."""
 	import frappe
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.scheduler import is_scheduler_inactive, toggle_scheduler
 
 	site = site or get_site(context)
@@ -200,7 +210,10 @@ def start_scheduler():
 	help="Dequeuing strategy to use",
 )
 def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=False, strategy=None):
+<<<<<<< HEAD
+=======
 	"""Start a background worker"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.background_jobs import start_worker
 
 	start_worker(
@@ -211,6 +224,8 @@ def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=F
 		burst=burst,
 		strategy=strategy,
 	)
+<<<<<<< HEAD
+=======
 
 
 @click.command("worker-pool")
@@ -227,6 +242,7 @@ def start_worker_pool(queue, quiet=False, num_workers=2, burst=False):
 	from frappe.utils.background_jobs import start_worker_pool
 
 	start_worker_pool(queue=queue, quiet=quiet, burst=burst, num_workers=num_workers)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("ready-for-migration")

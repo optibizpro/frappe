@@ -348,6 +348,8 @@
    "label": "Make Attachments Public by Default"
   },
   {
+<<<<<<< HEAD
+=======
    "default": "0",
    "description": "Enabling this will submit documents in background",
    "fieldname": "queue_in_background",
@@ -355,6 +357,7 @@
    "label": "Queue in Background (BETA)"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "default_view",
    "fieldtype": "Select",
    "label": "Default View"
@@ -374,6 +377,8 @@
    "label": "Is Calendar and Gantt"
   },
   {
+<<<<<<< HEAD
+=======
    "fieldname": "form_builder",
    "fieldtype": "HTML",
    "label": "Form Builder"
@@ -395,6 +400,7 @@
    "label": "Details"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "depends_on": "email_append_to",
    "fieldname": "sender_name_field",
    "fieldtype": "Data",
@@ -407,7 +413,11 @@
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-12-01 18:18:23.086134",
+=======
  "modified": "2024-03-23 16:02:15.670853",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Custom",
  "name": "Customize Form",

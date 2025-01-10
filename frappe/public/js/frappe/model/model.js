@@ -4,6 +4,39 @@
 frappe.provide("frappe.model");
 
 $.extend(frappe.model, {
+<<<<<<< HEAD
+	no_value_type: [
+		"Section Break",
+		"Column Break",
+		"Tab Break",
+		"HTML",
+		"Table",
+		"Table MultiSelect",
+		"Button",
+		"Image",
+		"Fold",
+		"Heading",
+	],
+
+	layout_fields: ["Section Break", "Column Break", "Tab Break", "Fold"],
+
+	std_fields_list: [
+		"name",
+		"owner",
+		"creation",
+		"modified",
+		"modified_by",
+		"_user_tags",
+		"_comments",
+		"_assign",
+		"_liked_by",
+		"docstatus",
+		"idx",
+	],
+
+	child_table_field_list: ["parent", "parenttype", "parentfield"],
+
+=======
 	all_fieldtypes: [
 		"Autocomplete",
 		"Attach",
@@ -77,6 +110,7 @@ $.extend(frappe.model, {
 
 	child_table_field_list: ["parent", "parenttype", "parentfield"],
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	core_doctypes_list: [
 		"DocType",
 		"DocField",
@@ -107,6 +141,8 @@ $.extend(frappe.model, {
 		"flags",
 		"docstatus",
 	],
+<<<<<<< HEAD
+=======
 
 	html_fieldtypes: [
 		"Text Editor",
@@ -117,6 +153,7 @@ $.extend(frappe.model, {
 		"Markdown Editor",
 		"Code",
 	],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	std_fields: [
 		{ fieldname: "name", fieldtype: "Link", label: __("ID") },
@@ -248,9 +285,15 @@ $.extend(frappe.model, {
 			let cached_docs = frappe.model.get_from_localstorage(doctype);
 
 			if (cached_docs) {
+<<<<<<< HEAD
+				cached_doc = cached_docs.filter((doc) => doc.name === doctype)[0];
+				if (cached_doc) {
+					cached_timestamp = cached_doc.modified;
+=======
 				meta = cached_docs.filter((doc) => doc.name === doctype)[0];
 				if (meta) {
 					cached_timestamp = meta.modified;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 			}
 
@@ -269,10 +312,16 @@ $.extend(frappe.model, {
 						throw "No doctype";
 					}
 					if (r.message == "use_cache") {
+<<<<<<< HEAD
+						frappe.model.sync(cached_doc);
+					} else {
+						frappe.model.set_in_localstorage(doctype, r.docs);
+=======
 						frappe.model.sync(meta);
 					} else {
 						frappe.model.set_in_localstorage(doctype, r.docs);
 						meta = r.docs[0];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					}
 					frappe.model.init_doctype(meta);
 
@@ -287,6 +336,25 @@ $.extend(frappe.model, {
 		}
 	},
 
+<<<<<<< HEAD
+	init_doctype: function (doctype) {
+		var meta = locals.DocType[doctype];
+		if (meta.__list_js) {
+			eval(meta.__list_js);
+		}
+		if (meta.__custom_list_js) {
+			eval(meta.__custom_list_js);
+		}
+		if (meta.__calendar_js) {
+			eval(meta.__calendar_js);
+		}
+		if (meta.__map_js) {
+			eval(meta.__map_js);
+		}
+		if (meta.__tree_js) {
+			eval(meta.__tree_js);
+		}
+=======
 	init_doctype: function (meta) {
 		if (meta.name === "DocType") {
 			// store doctype "meta" separate as it will be overridden by doctype "doc"
@@ -305,6 +373,7 @@ $.extend(frappe.model, {
 			}
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (meta.__templates) {
 			$.extend(frappe.templates, meta.__templates);
 		}
@@ -363,9 +432,17 @@ $.extend(frappe.model, {
 	},
 
 	unscrub: function (txt) {
+<<<<<<< HEAD
+		return __(txt || "")
+			.replace(/-|_/g, " ")
+			.replace(/\w*/g, function (keywords) {
+				return keywords.charAt(0).toUpperCase() + keywords.substr(1).toLowerCase();
+			});
+=======
 		return (txt || "").replace(/-|_/g, " ").replace(/\w*/g, function (keywords) {
 			return keywords.charAt(0).toUpperCase() + keywords.substr(1).toLowerCase();
 		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	can_create: function (doctype) {
@@ -477,14 +554,30 @@ $.extend(frappe.model, {
 		return frappe.boot.user.can_share.indexOf(doctype) !== -1;
 	},
 
+<<<<<<< HEAD
+	can_set_user_permissions: function (doctype, frm) {
+		// system manager can always set user permissions
+		if (frappe.user_roles.includes("System Manager")) return true;
+
+		if (frm) return frm.perm[0].set_user_permissions === 1;
+		return frappe.boot.user.can_set_user_permissions.indexOf(doctype) !== -1;
+	},
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	has_value: function (dt, dn, fn) {
 		// return true if property has value
 		var val = locals[dt] && locals[dt][dn] && locals[dt][dn][fn];
 		var df = frappe.meta.get_docfield(dt, fn, dn);
 
+<<<<<<< HEAD
+		if (frappe.model.table_fields.includes(df.fieldtype)) {
+			var ret = false;
+=======
 		let ret;
 		if (frappe.model.table_fields.includes(df.fieldtype)) {
 			ret = false;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			$.each(locals[df.options] || {}, function (k, d) {
 				if (d.parent == dn && d.parenttype == dt && d.parentfield == df.fieldname) {
 					ret = true;
@@ -570,7 +663,11 @@ $.extend(frappe.model, {
 				tasks.push(() => frappe.model.trigger(key, value, doc, skip_dirty_trigger));
 			} else {
 				// execute link triggers (want to reselect to execute triggers)
+<<<<<<< HEAD
+				if (in_list(["Link", "Dynamic Link"], fieldtype) && doc) {
+=======
 				if (["Link", "Dynamic Link"].includes(fieldtype) && doc) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					tasks.push(() => frappe.model.trigger(key, value, doc, skip_dirty_trigger));
 				}
 			}
@@ -637,11 +734,18 @@ $.extend(frappe.model, {
 	},
 
 	get_children: function (doctype, parent, parentfield, filters) {
+<<<<<<< HEAD
+		if ($.isPlainObject(doctype)) {
+			var doc = doctype;
+			var filters = parentfield;
+			var parentfield = parent;
+=======
 		let doc;
 		if ($.isPlainObject(doctype)) {
 			doc = doctype;
 			filters = parentfield;
 			parentfield = parent;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		} else {
 			doc = frappe.get_doc(doctype, parent);
 		}
@@ -655,7 +759,12 @@ $.extend(frappe.model, {
 	},
 
 	clear_table: function (doc, parentfield) {
+<<<<<<< HEAD
+		for (var i = 0, l = (doc[parentfield] || []).length; i < l; i++) {
+			var d = doc[parentfield][i];
+=======
 		for (const d of doc[parentfield] || []) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			delete locals[d.doctype][d.name];
 		}
 		doc[parentfield] = [];
@@ -674,8 +783,13 @@ $.extend(frappe.model, {
 
 		var parent = null;
 		if (doc.parenttype) {
+<<<<<<< HEAD
+			var parent = doc.parent,
+				parenttype = doc.parenttype,
+=======
 			parent = doc.parent;
 			var parenttype = doc.parenttype,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				parentfield = doc.parentfield;
 		}
 		delete locals[doctype][name];
@@ -697,7 +811,11 @@ $.extend(frappe.model, {
 	get_no_copy_list: function (doctype) {
 		var no_copy_list = ["name", "amended_from", "amendment_date", "cancel_reason"];
 
+<<<<<<< HEAD
+		var docfields = frappe.get_doc("DocType", doctype).fields || [];
+=======
 		var docfields = frappe.get_meta(doctype).fields || [];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for (var i = 0, j = docfields.length; i < j; i++) {
 			var df = docfields[i];
 			if (cint(df.no_copy)) no_copy_list.push(df.fieldname);
@@ -861,9 +979,15 @@ $.extend(frappe.model, {
 			}
 
 			if (
+<<<<<<< HEAD
+				(frm.doc.fields.find((i) => i.fieldname === "latitude") &&
+					frm.doc.fields.find((i) => i.fieldname === "longitude")) ||
+				frm.doc.fields.find(
+=======
 				(frm.doc.fields?.find((i) => i.fieldname === "latitude") &&
 					frm.doc.fields?.find((i) => i.fieldname === "longitude")) ||
 				frm.doc.fields?.find(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					(i) => i.fieldname === "location" && i.fieldtype == "Geolocation"
 				)
 			) {

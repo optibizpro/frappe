@@ -6,7 +6,11 @@ import os
 import subprocess  # nosec
 from contextlib import suppress
 
+<<<<<<< HEAD
+from semantic_version import Version
+=======
 from semantic_version import SimpleSpec, Version
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _, safe_decode
@@ -250,8 +254,41 @@ def check_release_on_github(
 	if not owner:
 		raise ValueError("Owner cannot be empty")
 
+<<<<<<< HEAD
+	Returns:
+	        tuple(Version, str): The semantic version object of the latest release and the
+	                organization name, if the application exists, otherwise None.
+	"""
+
+	import requests
+	from giturlparse import parse
+	from giturlparse.parser import ParserError
+
+	try:
+		# Check if repo remote is on github
+		remote_url = subprocess.check_output(f"cd ../apps/{app} && git ls-remote --get-url", shell=True)
+	except subprocess.CalledProcessError:
+		# Passing this since some apps may not have git initialized in them
+		return
+
+	if isinstance(remote_url, bytes):
+		remote_url = remote_url.decode()
+
+	try:
+		parsed_url = parse(remote_url)
+	except ParserError:
+		# Invalid URL
+		return
+
+	if parsed_url.resource != "github.com":
+		return
+
+	owner = parsed_url.owner
+	repo = parsed_url.name
+=======
 	if not repo:
 		raise ValueError("Repo cannot be empty")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# Get latest version from GitHub
 	releases = _get_latest_releases(owner, repo)

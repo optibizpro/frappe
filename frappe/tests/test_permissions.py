@@ -22,8 +22,14 @@ from frappe.permissions import (
 	remove_user_permission,
 	update_permission_property,
 )
+<<<<<<< HEAD
+from frappe.test_runner import make_test_records_for_doctype
+from frappe.tests.test_db_query import enable_permlevel_restrictions
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.utils import make_test_records_for_doctype
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.data import now_datetime
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Blogger", "Blog Post", "User", "Contact", "Salutation"]
@@ -94,10 +100,18 @@ class TestPermissions(IntegrationTestCase):
 		self.assertFalse(post.has_permission("read"))
 		self.assertRaises(frappe.PermissionError, post.save)
 
+<<<<<<< HEAD
+		with enable_permlevel_restrictions():
+			permitted_record = frappe.get_list("Blog Post", fields="*", limit=1)[0]
+			full_record = frappe.get_all("Blog Post", fields="*", limit=1)[0]
+			self.assertNotEqual(permitted_record, full_record)
+			self.assertSequenceSubset(post.meta.get_search_fields(), permitted_record)
+=======
 		permitted_record = frappe.get_list("Blog Post", fields="*", limit=1)[0]
 		full_record = frappe.get_all("Blog Post", fields="*", limit=1)[0]
 		self.assertNotEqual(permitted_record, full_record)
 		self.assertSequenceSubset(post.meta.get_search_fields(), permitted_record)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_user_permissions_in_doc(self):
 		add_user_permission("Blog Category", "-test-blog-category-1", "test2@example.com")
@@ -745,6 +759,8 @@ class TestPermissions(IntegrationTestCase):
 
 		with self.set_user("test@example.com"):
 			self.assertNotIn(doctype, get_doctypes_with_read())
+<<<<<<< HEAD
+=======
 
 	def test_overrides_work_as_expected(self):
 		"""custom docperms should completely override standard ones"""
@@ -764,3 +780,4 @@ class TestPermissions(IntegrationTestCase):
 		with self.set_user("test@example.com"):
 			# No one has this role, so user shouldn't have permission.
 			self.assertNotIn(doctype, get_doctypes_with_read())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

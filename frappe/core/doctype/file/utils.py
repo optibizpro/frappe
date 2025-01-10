@@ -218,9 +218,13 @@ def get_file_name(fname: str, optional_suffix: str | None = None) -> str:
 
 def extract_images_from_doc(doc: "Document", fieldname: str, is_private=True):
 	content = doc.get(fieldname)
+<<<<<<< HEAD
+	content = extract_images_from_html(doc, content, is_private=(not doc.meta.make_attachments_public))
+=======
 	if doc.meta.make_attachments_public:
 		is_private = False
 	content = extract_images_from_html(doc, content, is_private=is_private)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.flags.has_dataurl:
 		doc.set(fieldname, content)
 
@@ -237,6 +241,19 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 			content = content.encode("utf-8")
 		if b"," in content:
 			content = content.split(b",")[1]
+<<<<<<< HEAD
+
+		if not content:
+			# if there is no content, return the original tag
+			return match.group(0)
+
+		try:
+			content = safe_b64decode(content)
+		except BinasciiError:
+			frappe.flags.has_dataurl = True
+			return f'<img src="#broken-image" alt="{get_corrupted_image_msg()}"'
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not content:
 			# if there is no content, return the original tag
@@ -335,6 +352,32 @@ def attach_files_to_document(doc: "Document", event) -> None:
 			},
 		):
 			continue
+<<<<<<< HEAD
+
+		unattached_file = frappe.db.exists(
+			"File",
+			{
+				"file_url": value,
+				"attached_to_name": None,
+				"attached_to_doctype": None,
+				"attached_to_field": None,
+			},
+		)
+
+		if unattached_file:
+			frappe.db.set_value(
+				"File",
+				unattached_file,
+				field={
+					"attached_to_name": doc.name,
+					"attached_to_doctype": doc.doctype,
+					"attached_to_field": df.fieldname,
+					"is_private": cint(value.startswith("/private")),
+				},
+			)
+			continue
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		unattached_file = frappe.db.exists(
 			"File",
@@ -374,15 +417,26 @@ def attach_files_to_document(doc: "Document", event) -> None:
 
 
 def relink_files(doc, fieldname, temp_doc_name):
+<<<<<<< HEAD
+	if not temp_doc_name:
+		return
+	from frappe.utils.data import add_to_date, now_datetime
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	Relink files attached to incorrect document name to the new document name
 	by check if file with temp name exists that was created in last 60 minutes
 	"""
+<<<<<<< HEAD
+	mislinked_file = frappe.db.exists(
+=======
 	if not temp_doc_name:
 		return
 	from frappe.utils.data import add_to_date, now_datetime
 
 	mislinked_file = frappe.db.get_value(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"File",
 		{
 			"file_url": doc.get(fieldname),
@@ -395,7 +449,11 @@ def relink_files(doc, fieldname, temp_doc_name):
 			),
 		},
 	)
+<<<<<<< HEAD
+	"""If file exists, attach it to the new docname"""
+=======
 	# If file exists, attach it to the new docname
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if mislinked_file:
 		frappe.db.set_value(
 			"File",
@@ -437,6 +495,10 @@ def find_file_by_url(path: str, name: str | None = None) -> Optional["File"]:
 	# if the file is accessible from any one of those documents
 	# then it should be downloadable
 	for file_data in files:
+<<<<<<< HEAD
+		file: "File" = frappe.get_doc(doctype="File", **file_data)
+=======
 		file: File = frappe.get_doc(doctype="File", **file_data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if file.is_downloadable():
 			return file

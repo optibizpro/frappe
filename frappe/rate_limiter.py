@@ -1,8 +1,13 @@
 # Copyright (c) 2020, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+<<<<<<< HEAD
+from collections.abc import Callable
+from datetime import datetime
+=======
 import time
 from collections.abc import Callable
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from functools import wraps
 
 from werkzeug.wrappers import Response
@@ -151,7 +156,11 @@ def rate_limit(
 			if not identity:
 				frappe.throw(_("Either key or IP flag is required."))
 
+<<<<<<< HEAD
+			cache_key = frappe.cache().make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
+=======
 			cache_key = frappe.cache.make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			value = frappe.cache.get(cache_key)
 			if not value:

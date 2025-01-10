@@ -9,7 +9,10 @@ import frappe.defaults
 import frappe.permissions
 import frappe.share
 from frappe import STANDARD_USERS, _, msgprint, throw
+<<<<<<< HEAD
+=======
 from frappe.apps import get_default_path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.auth import MAX_PASSWORD_SIZE
 from frappe.core.doctype.user_type.user_type import user_linked_with_permission_on_doctype
 from frappe.desk.doctype.notification_settings.notification_settings import (
@@ -32,6 +35,10 @@ from frappe.utils import (
 	today,
 )
 from frappe.utils.data import sha256_hash
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecated
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.password import check_password, get_password_reset_limit
 from frappe.utils.password import update_password as _update_password
 from frappe.utils.user import get_system_managers
@@ -178,7 +185,10 @@ class User(Document):
 			self.email = self.name
 			self.validate_email_type(self.name)
 
+<<<<<<< HEAD
+=======
 		self.move_role_profile_name_to_role_profiles()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.populate_role_profile_roles()
 		self.check_roles_added()
 		self.set_system_user()
@@ -190,8 +200,12 @@ class User(Document):
 		self.validate_username()
 		self.remove_disabled_roles()
 		self.validate_user_email_inbox()
+<<<<<<< HEAD
+		ask_pass_update()
+=======
 		if self.user_emails:
 			ask_pass_update()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.validate_allowed_modules()
 		self.validate_user_image()
 		self.set_time_zone()
@@ -202,6 +216,13 @@ class User(Document):
 		if (self.name not in ["Administrator", "Guest"]) and (not self.get_social_login_userid("frappe")):
 			self.set_social_login_userid("frappe", frappe.generate_hash(length=39))
 
+<<<<<<< HEAD
+	def populate_role_profile_roles(self):
+		if self.role_profile_name:
+			role_profile = frappe.get_doc("Role Profile", self.role_profile_name)
+			self.set("roles", [])
+			self.append_roles(*[role.role for role in role_profile.roles])
+=======
 	def disable_email_fields_if_user_disabled(self):
 		if not self.enabled:
 			self.thread_notify = 0
@@ -249,6 +270,11 @@ class User(Document):
 		)
 		self.append("role_profiles", {"role_profile": self.role_profile_name})
 		self.role_profile_name = None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+	@deprecated
+	def validate_roles(self):
+		self.populate_role_profile_roles()
 
 	def validate_allowed_modules(self):
 		if self.module_profile:
@@ -323,8 +349,12 @@ class User(Document):
 			frappe.local.login_manager.logout(user=self.name)
 
 		# toggle notifications based on the user's status
+<<<<<<< HEAD
+		toggle_notifications(self.name, enable=cint(self.enabled))
+=======
 		toggle_notifications(self.name, enable=cint(self.enabled), ignore_permissions=True)
 		self.disable_email_fields_if_user_disabled()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def email_new_password(self, new_password=None):
 		if new_password and not self.flags.in_insert:
@@ -655,8 +685,13 @@ class User(Document):
 				self.get("roles").remove(role)
 
 	def ensure_unique_roles(self):
+<<<<<<< HEAD
+		exists = []
+		for _i, d in enumerate(self.get("roles")):
+=======
 		exists = set()
 		for d in list(self.roles):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (not d.role) or (d.role in exists):
 				self.roles.remove(d)
 			exists.add(d.role)
@@ -787,9 +822,12 @@ class User(Document):
 		if not self.time_zone:
 			self.time_zone = get_system_timezone()
 
+<<<<<<< HEAD
+=======
 	def get_permission_log_options(self, event=None):
 		return {"fields": ("role_profile_name", "roles", "module_profile", "block_modules")}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def check_roles_added(self):
 		if self.user_type != "System User" or self.roles or not self.is_new():
 			return
@@ -846,6 +884,14 @@ def get_perm_info(role):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
+<<<<<<< HEAD
+def update_password(new_password, logout_all_sessions=0, key=None, old_password=None):
+	# validate key to avoid key input like ['like', '%'], '', ['in', ['']]
+	if key and not isinstance(key, str):
+		frappe.throw(_("Invalid key type"))
+
+	result = test_password_strength(new_password, key, old_password)
+=======
 def update_password(
 	new_password: str, logout_all_sessions: int = 0, key: str | None = None, old_password: str | None = None
 ):
@@ -857,11 +903,15 @@ def update_password(
 	    key (str, optional): Password reset key. Defaults to None.
 	    old_password (str, optional): Old password. Defaults to None.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if len(new_password) > MAX_PASSWORD_SIZE:
 		frappe.throw(_("Password size exceeded the maximum allowed size."))
 
+<<<<<<< HEAD
+=======
 	result = test_password_strength(new_password)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	feedback = result.get("feedback", None)
 
 	if feedback and not feedback.get("password_policy_validation_passed", False):
@@ -1123,6 +1173,25 @@ def get_total_users():
 	)
 
 
+<<<<<<< HEAD
+def get_system_users(exclude_users=None, limit=None):
+	if not exclude_users:
+		exclude_users = []
+	elif not isinstance(exclude_users, list | tuple):
+		exclude_users = [exclude_users]
+
+	limit_cond = ""
+	if limit:
+		limit_cond = f"limit {limit}"
+
+	exclude_users += list(STANDARD_USERS)
+
+	system_users = frappe.db.sql_list(
+		"""select name from `tabUser`
+		where enabled=1 and user_type != 'Website User'
+		and name not in ({}) {}""".format(", ".join(["%s"] * len(exclude_users)), limit_cond),
+		exclude_users,
+=======
 def get_system_users(exclude_users: Iterable[str] | str | None = None, limit: int | None = None):
 	_excluded_users = list(STANDARD_USERS)
 	if isinstance(exclude_users, str):
@@ -1139,6 +1208,7 @@ def get_system_users(exclude_users: Iterable[str] | str | None = None, limit: in
 		},
 		pluck="name",
 		limit=limit,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 
 
@@ -1262,6 +1332,11 @@ def create_contact(user, ignore_links=False, ignore_mandatory=False):
 			if user.phone:
 				contact.add_phone(user.phone, is_primary_phone=True)
 
+<<<<<<< HEAD
+		if user.mobile_no:
+			contact.add_phone(user.mobile_no, is_primary_mobile_no=True)
+		contact.insert(ignore_permissions=True, ignore_links=ignore_links, ignore_mandatory=ignore_mandatory)
+=======
 			if user.mobile_no:
 				contact.add_phone(user.mobile_no, is_primary_mobile_no=True)
 
@@ -1270,6 +1345,7 @@ def create_contact(user, ignore_links=False, ignore_mandatory=False):
 			)
 		except frappe.DuplicateEntryError:
 			pass
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		try:
 			contact = frappe.get_doc("Contact", contact_name)
@@ -1312,7 +1388,11 @@ def get_restricted_ip_list(user):
 
 
 @frappe.whitelist(methods=["POST"])
+<<<<<<< HEAD
+def generate_keys(user):
+=======
 def generate_keys(user: str):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	generate api key and api secret
 

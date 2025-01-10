@@ -178,6 +178,8 @@ def remove(doctype, name, assign_to, ignore_permissions=False):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+=======
 def remove_multiple(doctype, names, ignore_permissions=False):
 	docname_list = json.loads(names)
 
@@ -192,6 +194,7 @@ def remove_multiple(doctype, names, ignore_permissions=False):
 
 
 @frappe.whitelist()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def close(doctype: str, name: str, assign_to: str, ignore_permissions=False):
 	if assign_to != frappe.session.user:
 		frappe.throw(_("Only the assignee can complete this to-do."))

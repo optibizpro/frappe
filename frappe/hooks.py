@@ -6,13 +6,22 @@ app_name = "frappe"
 app_title = "Framework"
 app_publisher = "Frappe Technologies"
 app_description = "Full stack web framework with Python, Javascript, MariaDB, Redis, Node"
+<<<<<<< HEAD
+source_link = "https://github.com/optibizpro/frappe"
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 app_license = "MIT"
 app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
 develop_version = "15.x.x-develop"
 app_home = "/app/build"
 
-app_email = "developers@frappe.io"
+app_email = "support@optibizpro.com"
 
+<<<<<<< HEAD
+docs_app = "frappe_docs"
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 before_install = "frappe.utils.install.before_install"
 after_install = "frappe.utils.install.after_install"
 
@@ -27,7 +36,10 @@ app_include_js = [
 	"controls.bundle.js",
 	"report.bundle.js",
 	"telemetry.bundle.js",
+<<<<<<< HEAD
+=======
 	"billing.bundle.js",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ]
 
 app_include_css = [
@@ -92,11 +104,14 @@ on_session_creation = [
 ]
 
 on_logout = "frappe.core.doctype.session_default_settings.session_default_settings.clear_session_defaults"
+<<<<<<< HEAD
+=======
 
 # PDF
 pdf_header_html = "frappe.utils.pdf.pdf_header_html"
 pdf_body_html = "frappe.utils.pdf.pdf_body_html"
 pdf_footer_html = "frappe.utils.pdf.pdf_footer_html"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 # permissions
 
@@ -152,10 +167,18 @@ standard_queries = {"User": "frappe.core.doctype.user.user.user_query"}
 
 doc_events = {
 	"*": {
+<<<<<<< HEAD
+		"after_insert": ["frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers"],
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"on_update": [
 			"frappe.desk.notifications.clear_doctype_notifications",
 			"frappe.workflow.doctype.workflow_action.workflow_action.process_workflow_actions",
 			"frappe.core.doctype.file.utils.attach_files_to_document",
+<<<<<<< HEAD
+			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"frappe.automation.doctype.assignment_rule.assignment_rule.apply",
 			"frappe.automation.doctype.assignment_rule.assignment_rule.update_due_date",
 			"frappe.core.doctype.user_type.user_type.apply_permissions_for_non_standard_user_type",
@@ -165,6 +188,10 @@ doc_events = {
 		"on_cancel": [
 			"frappe.desk.notifications.clear_doctype_notifications",
 			"frappe.workflow.doctype.workflow_action.workflow_action.process_workflow_actions",
+<<<<<<< HEAD
+			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"frappe.automation.doctype.assignment_rule.assignment_rule.apply",
 		],
 		"on_trash": [
@@ -211,19 +238,29 @@ scheduler_events = {
 			"frappe.oauth.delete_oauth2_data",
 			"frappe.website.doctype.web_page.web_page.check_publish_status",
 			"frappe.twofactor.delete_all_barcodes_for_users",
+<<<<<<< HEAD
+		],
+=======
 			"frappe.email.doctype.email_account.email_account.notify_unreplied",
 			"frappe.utils.global_search.sync_global_search",
 			"frappe.deferred_insert.save_to_db",
 			"frappe.automation.doctype.reminder.reminder.send_reminders",
 		],
 		# 10 minutes
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"0/10 * * * *": [
 			"frappe.email.doctype.email_account.email_account.pull",
 		],
 		# Hourly but offset by 30 minutes
+<<<<<<< HEAD
+		# "30 * * * *": [
+		#
+		# ],
+=======
 		"30 * * * *": [
 			"frappe.core.doctype.prepared_report.prepared_report.expire_stalled_report",
 		],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		# Daily but offset by 45 minutes
 		"45 0 * * *": [
 			"frappe.core.doctype.log_settings.log_settings.run_log_clean_up",
@@ -231,6 +268,11 @@ scheduler_events = {
 	},
 	"all": [
 		"frappe.email.queue.flush",
+<<<<<<< HEAD
+		"frappe.email.doctype.email_account.email_account.notify_unreplied",
+		"frappe.utils.global_search.sync_global_search",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"frappe.monitor.flush",
 	],
 	"hourly": [
@@ -253,6 +295,10 @@ scheduler_events = {
 		"frappe.integrations.doctype.google_contacts.google_contacts.sync",
 		"frappe.automation.doctype.auto_repeat.auto_repeat.make_auto_repeat_entry",
 		"frappe.automation.doctype.auto_repeat.auto_repeat.set_auto_repeat_as_completed",
+<<<<<<< HEAD
+		"frappe.email.doctype.unhandled_email.unhandled_email.remove_old_unhandled_emails",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	],
 	"daily_long": [
 		"frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_daily",
@@ -385,7 +431,10 @@ global_search_doctypes = {
 
 override_whitelisted_methods = {
 	# Legacy File APIs
+<<<<<<< HEAD
+=======
 	"frappe.utils.file_manager.download_file": "download_file",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"frappe.core.doctype.file.file.download_file": "download_file",
 	"frappe.core.doctype.file.file.unzip_file": "frappe.core.api.file.unzip_file",
 	"frappe.core.doctype.file.file.get_attached_images": "frappe.core.api.file.get_attached_images",
@@ -426,7 +475,10 @@ ignore_links_on_delete = [
 	"Workspace",
 	"Route History",
 	"Access Log",
+<<<<<<< HEAD
+=======
 	"Permission Log",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ]
 
 # Request Hooks
@@ -435,6 +487,17 @@ before_request = [
 	"frappe.monitor.start",
 	"frappe.rate_limiter.apply",
 ]
+<<<<<<< HEAD
+after_request = ["frappe.rate_limiter.update", "frappe.monitor.stop", "frappe.recorder.dump"]
+
+# Background Job Hooks
+before_job = [
+	"frappe.monitor.start",
+]
+after_job = [
+	"frappe.monitor.stop",
+	"frappe.utils.file_lock.release_document_locks",
+=======
 
 after_request = [
 	"frappe.monitor.stop",
@@ -459,6 +522,7 @@ after_job = [
 	"frappe.monitor.stop",
 	"frappe.utils.file_lock.release_document_locks",
 	"frappe.utils.background_jobs.flush_telemetry",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ]
 
 extend_bootinfo = [
@@ -467,6 +531,8 @@ extend_bootinfo = [
 ]
 
 get_changelog_feed = "frappe.desk.doctype.changelog_feed.changelog_feed.get_feed"
+<<<<<<< HEAD
+=======
 
 export_python_type_annotations = True
 
@@ -591,3 +657,4 @@ persistent_cache_keys = [
 	"rate-limit-counter-*",
 	"rl:*",
 ]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -8,7 +8,11 @@ from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.treeview import get_children
 from frappe.query_builder import Field
 from frappe.query_builder.functions import Max
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import random_string
 from frappe.utils.nestedset import (
 	NestedSetChildExistsError,
@@ -60,7 +64,11 @@ class NestedSetTestUtil:
 		frappe.db.delete("DocType", TEST_DOCTYPE)
 		frappe.db.sql_ddl(f"drop table if exists `tab{TEST_DOCTYPE}`")
 
+<<<<<<< HEAD
+		self.tree_doctype = new_doctype("Test Tree DocType", is_tree=True, autoname="field:some_fieldname")
+=======
 		self.tree_doctype = new_doctype(TEST_DOCTYPE, is_tree=True, autoname="field:some_fieldname")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.tree_doctype.insert()
 
 		for record in records:
@@ -174,7 +182,11 @@ class TestNestedSet(IntegrationTestCase):
 		child_2 = frappe.get_doc(TEST_DOCTYPE, "Child 2")
 
 		# assert that child 2 is not already under parent 1
+<<<<<<< HEAD
+		parent_lft_old, parent_rgt_old = frappe.db.get_value("Test Tree DocType", "Parent 2", ["lft", "rgt"])
+=======
 		parent_lft_old, parent_rgt_old = frappe.db.get_value(TEST_DOCTYPE, "Parent 2", ["lft", "rgt"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertTrue((parent_lft_old > child_2.lft) and (parent_rgt_old > child_2.rgt))
 
 		child_2.parent_test_tree_doctype = "Parent 2"
@@ -182,7 +194,11 @@ class TestNestedSet(IntegrationTestCase):
 		self.test_basic_tree()
 
 		# assert that child 2 is under parent 1
+<<<<<<< HEAD
+		parent_lft_new, parent_rgt_new = frappe.db.get_value("Test Tree DocType", "Parent 2", ["lft", "rgt"])
+=======
 		parent_lft_new, parent_rgt_new = frappe.db.get_value(TEST_DOCTYPE, "Parent 2", ["lft", "rgt"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertFalse((parent_lft_new > child_2.lft) and (parent_rgt_new > child_2.rgt))
 
 	def test_delete_leaf(self):
@@ -209,6 +225,16 @@ class TestNestedSet(IntegrationTestCase):
 
 	def test_remove_subtree(self):
 		remove_subtree(TEST_DOCTYPE, "Parent 2")
+		self.test_basic_tree()
+
+	def test_rename_nestedset(self):
+		doctype = new_doctype(is_tree=True).insert()
+
+		# Rename doctype
+		frappe.rename_doc("DocType", doctype.name, "Test " + random_string(10), force=True)
+
+	def test_remove_subtree(self):
+		remove_subtree("Test Tree DocType", "Parent 2")
 		self.test_basic_tree()
 
 	def test_rename_nestedset(self):

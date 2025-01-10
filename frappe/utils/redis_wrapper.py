@@ -135,9 +135,12 @@ class RedisWrapper(redis.Redis):
 
 	def delete_value(self, keys, user=None, make_keys=True, shared=False):
 		"""Delete value, list of values."""
+<<<<<<< HEAD
+=======
 		if not keys:
 			return
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if not isinstance(keys, list | tuple):
 			keys = (keys,)
 
@@ -208,11 +211,18 @@ class RedisWrapper(redis.Redis):
 
 	def exists(self, *names: str, user=None, shared=None) -> int:
 		names = [self.make_key(n, user=user, shared=shared) for n in names]
+<<<<<<< HEAD
+		try:
+			return super().exists(*names)
+		except redis.exceptions.ConnectionError:
+			return 0
+=======
 
 		try:
 			return super().exists(*names)
 		except redis.exceptions.ConnectionError:
 			return False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def hgetall(self, name):
 		value = super().hgetall(self.make_key(name))
@@ -350,11 +360,16 @@ class RedisWrapper(redis.Redis):
 		"""Return all members of the set."""
 		return super().smembers(self.make_key(name))
 
+<<<<<<< HEAD
+
+def setup_cache():
+=======
 	def ft(self, index_name="idx"):
 		return RedisearchWrapper(client=self, index_name=self.make_key(index_name))
 
 
 def setup_cache() -> RedisWrapper:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.conf.redis_cache_sentinel_enabled:
 		sentinels = [tuple(node.split(":")) for node in frappe.conf.get("redis_cache_sentinels", [])]
 		sentinel = get_sentinel_connection(
@@ -394,6 +409,8 @@ def get_sentinel_connection(
 		username=master_username,
 		password=master_password,
 	)
+<<<<<<< HEAD
+=======
 
 
 class _TrackedConnection(redis.Connection):
@@ -597,3 +614,4 @@ class ClientCache:
 
 	def reset_statistics(self):
 		self.hits = self.misses = 0
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

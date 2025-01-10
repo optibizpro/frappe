@@ -228,6 +228,13 @@ class TestCommunication(IntegrationTestCase):
 	def test_parse_email(self):
 		to = "Jon Doe <jon.doe@example.org>"
 		cc = """=?UTF-8?Q?Max_Mu=C3=9F?= <max.muss@examle.org>,
+<<<<<<< HEAD
+	erp+Customer+that%20company@example.org"""
+		bcc = ""
+
+		results = list(parse_email([to, cc, bcc]))
+		self.assertEqual([("Customer", "that company")], results)
+=======
 	erp+Customer=Plus%2BCompany@example.org,
 	erp+Customer+Space%20Company@example.org,
 	erp+Customer+Space+Company+Plus+Encoded@example.org"""
@@ -242,6 +249,7 @@ class TestCommunication(IntegrationTestCase):
 			],
 			results,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		results = list(parse_email([to, bcc]))
 		self.assertEqual(results, [])
@@ -305,6 +313,35 @@ class TestCommunication(IntegrationTestCase):
 				"is_spam": 1,
 			}
 		).insert(ignore_permissions=True)
+<<<<<<< HEAD
+
+		spam_comm: Communication = frappe.get_doc(
+			{
+				"doctype": "Communication",
+				"communication_medium": "Email",
+				"subject": "This is spam",
+				"sender": "spammer@example.com",
+				"recipients": "comm_recipient@example.com",
+				"sent_or_received": "Received",
+			}
+		).insert(ignore_permissions=True)
+
+		self.assertEqual(spam_comm.email_status, "Spam")
+
+		normal_comm: Communication = frappe.get_doc(
+			{
+				"doctype": "Communication",
+				"communication_medium": "Email",
+				"subject": "This is spam",
+				"sender": "friendlyhuman@example.com",
+				"recipients": "comm_recipient@example.com",
+				"sent_or_received": "Received",
+			}
+		).insert(ignore_permissions=True)
+		self.assertNotEqual(normal_comm.email_status, "Spam")
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		spam_comm: Communication = frappe.get_doc(
 			{
@@ -396,8 +433,12 @@ class TestCommunicationEmailMixin(IntegrationTestCase):
 		user = self.new_user(email="bcc+2@test.com", enabled=0)
 		comm = self.new_communication(bcc=bcc_list)
 		res = comm.get_mail_bcc_with_displayname()
+<<<<<<< HEAD
+		self.assertCountEqual(res, bcc_list)
+=======
 		# Disabled users have thread_notify disabled, so they'll be removed from the list
 		self.assertCountEqual(res, bcc_list[:1])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		user.delete()
 		comm.delete()
 

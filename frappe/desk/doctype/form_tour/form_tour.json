@@ -178,7 +178,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2023-05-25 11:30:44.396248",
+=======
  "modified": "2024-11-17 13:06:48.120836",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Form Tour",
@@ -199,7 +203,11 @@
   },
   {
    "read": 1,
+<<<<<<< HEAD
+   "role": "All"
+=======
    "role": "Desk User"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "sort_field": "creation",

@@ -54,12 +54,15 @@
   },
   {
    "default": "0",
+<<<<<<< HEAD
+=======
    "fieldname": "disable_comment_count",
    "fieldtype": "Check",
    "label": "Disable Comment Count"
   },
   {
    "default": "0",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "description": "Allow editing even if the doctype has a workflow set up.\n\nDoes nothing if a workflow isn't set up.",
    "fieldname": "allow_edit",
    "fieldtype": "Check",

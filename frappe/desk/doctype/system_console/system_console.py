@@ -41,9 +41,14 @@ class SystemConsole(Document):
 			frappe.db.commit()
 		else:
 			frappe.db.rollback()
+<<<<<<< HEAD
+
+		frappe.get_doc(dict(doctype="Console Log", script=self.console)).insert()
+=======
 		frappe.get_doc(
 			doctype="Console Log", script=self.console, type=self.type, committed=self.commit
 		).insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.db.commit()
 
 

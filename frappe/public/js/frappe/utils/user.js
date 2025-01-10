@@ -1,9 +1,14 @@
 frappe.user_info = function (uid) {
 	if (!uid) uid = frappe.session.user;
 
+<<<<<<< HEAD
+	if (!(frappe.boot.user_info && frappe.boot.user_info[uid])) {
+		var user_info = { fullname: uid || "Unknown" };
+=======
 	let user_info;
 	if (!(frappe.boot.user_info && frappe.boot.user_info[uid])) {
 		user_info = { fullname: uid || "Unknown" };
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	} else {
 		user_info = frappe.boot.user_info[uid];
 	}

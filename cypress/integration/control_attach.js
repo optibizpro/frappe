@@ -18,6 +18,8 @@ context("Attach Control", () => {
 					],
 				});
 			});
+<<<<<<< HEAD
+=======
 	});
 	it('Checking functionality for "Link" button in the "Attach" fieldtype', () => {
 		//Navigating to the new form for the newly created doctype
@@ -56,6 +58,7 @@ context("Attach Control", () => {
 		cy.get(".actions-btn-group > .btn").contains("Actions").click();
 		cy.get('.actions-btn-group > .dropdown-menu [data-label="Delete"]').click();
 		cy.click_modal_primary_button("Yes");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	});
 
 	it('Checking functionality for "Library" button in the "Attach" fieldtype', () => {

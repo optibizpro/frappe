@@ -1,7 +1,10 @@
 import http
 import json
 import os
+<<<<<<< HEAD
+=======
 import uuid
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from io import BytesIO
 
 from pypdf import PdfWriter
@@ -10,6 +13,10 @@ import frappe
 from frappe import _
 from frappe.core.doctype.access_log.access_log import make_access_log
 from frappe.translate import print_language
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecated
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.pdf import get_pdf
 
 no_cache = 1
@@ -21,6 +28,9 @@ from frappe.www.printview import validate_print_permission
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+def download_multi_pdf(doctype, name, format=None, no_letterhead=False, letterhead=None, options=None):
+=======
 def download_multi_pdf(
 	doctype: str | dict[str, list[str]],
 	name: str | list[str],
@@ -29,6 +39,7 @@ def download_multi_pdf(
 	letterhead: str | None = None,
 	options: str | None = None,
 ):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	Calls _download_multi_pdf with the given parameters and returns the response
 	"""
@@ -111,6 +122,11 @@ def _download_multi_pdf(
 	"""
 	filename = ""
 
+<<<<<<< HEAD
+	import json
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	pdf_writer = PdfWriter()
 
 	if isinstance(options, str):
@@ -122,6 +138,18 @@ def _download_multi_pdf(
 		filename = f"{doctype}_"
 
 		# Concatenating pdf files
+<<<<<<< HEAD
+		for _i, ss in enumerate(result):
+			pdf_writer = frappe.get_print(
+				doctype,
+				ss,
+				format,
+				as_pdf=True,
+				output=pdf_writer,
+				no_letterhead=no_letterhead,
+				letterhead=letterhead,
+				pdf_options=options,
+=======
 		for idx, ss in enumerate(result):
 			try:
 				pdf_writer = frappe.get_print(
@@ -152,6 +180,7 @@ def _download_multi_pdf(
 		if task_id is None:
 			frappe.local.response.filename = "{doctype}.pdf".format(
 				doctype=doctype.replace(" ", "-").replace("/", "-")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 
 	else:
@@ -181,6 +210,20 @@ def _download_multi_pdf(
 						reference_name=doc_name,
 					)
 
+<<<<<<< HEAD
+	with BytesIO() as merged_pdf:
+		pdf_writer.write(merged_pdf)
+		frappe.local.response.filecontent = merged_pdf.getvalue()
+
+	frappe.local.response.type = "pdf"
+
+
+@deprecated
+def read_multi_pdf(output: PdfWriter) -> bytes:
+	with BytesIO() as merged_pdf:
+		output.write(merged_pdf)
+		return merged_pdf.getvalue()
+=======
 				count += 1
 
 				if task_id:
@@ -214,6 +257,7 @@ def _download_multi_pdf(
 
 
 from frappe.deprecation_dumpster import read_multi_pdf
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist(allow_guest=True)

@@ -103,8 +103,13 @@ class SystemSettings(Document):
 	def validate(self):
 		from frappe.twofactor import toggle_two_factor_auth
 
+<<<<<<< HEAD
+		enable_password_policy = cint(self.enable_password_policy) and True or False
+		minimum_password_score = cint(getattr(self, "minimum_password_score", 0)) or 0
+=======
 		enable_password_policy = cint(self.enable_password_policy)
 		minimum_password_score = cint(getattr(self, "minimum_password_score", 0))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if enable_password_policy and minimum_password_score <= 0:
 			frappe.throw(_("Please select Minimum Password Score"))
 		elif not enable_password_policy:
@@ -134,6 +139,8 @@ class SystemSettings(Document):
 
 		self.validate_user_pass_login()
 		self.validate_backup_limit()
+<<<<<<< HEAD
+=======
 		self.validate_file_extensions()
 
 		if not self.link_field_results_limit:
@@ -145,6 +152,7 @@ class SystemSettings(Document):
 			frappe.msgprint(
 				_("{0} can not be more than {1}").format(label, 50), alert=True, indicator="yellow"
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def validate_user_pass_login(self):
 		if not self.disable_user_pass_login:
@@ -152,12 +160,20 @@ class SystemSettings(Document):
 
 		social_login_enabled = frappe.db.exists("Social Login Key", {"enable_social_login": 1})
 		ldap_enabled = frappe.db.get_single_value("LDAP Settings", "enabled")
+<<<<<<< HEAD
+
+		if not (social_login_enabled or ldap_enabled):
+			frappe.throw(
+				_(
+					"Please enable atleast one Social Login Key or LDAP before disabling username/password based login."
+=======
 		login_with_email_link_enabled = frappe.db.get_single_value("System Settings", "login_with_email_link")
 
 		if not (social_login_enabled or ldap_enabled or login_with_email_link_enabled):
 			frappe.throw(
 				_(
 					"Please enable atleast one Social Login Key or LDAP or Login With Email Link before disabling username/password based login."
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				)
 			)
 
@@ -166,6 +182,8 @@ class SystemSettings(Document):
 			frappe.msgprint(_("Number of backups must be greater than zero."), alert=True)
 			self.backup_limit = 1
 
+<<<<<<< HEAD
+=======
 	def validate_file_extensions(self):
 		if not self.allowed_file_extensions:
 			return
@@ -174,6 +192,7 @@ class SystemSettings(Document):
 			ext.strip().upper() for ext in self.allowed_file_extensions.strip().splitlines()
 		)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def on_update(self):
 		self.set_defaults()
 		clear_system_settings_cache()

@@ -7,12 +7,19 @@ import os
 import frappe
 from frappe import _, scrub
 from frappe.core.api.file import get_max_file_size
+<<<<<<< HEAD
+from frappe.core.doctype.file import remove_file_by_url
+=======
 from frappe.core.doctype.file.utils import remove_file_by_url
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.desk.form.meta import get_code_files_via_hooks
 from frappe.modules.utils import export_module_json, get_doc_module
 from frappe.rate_limiter import rate_limit
 from frappe.utils import dict_with_keys, strip_html
+<<<<<<< HEAD
+=======
 from frappe.utils.caching import redis_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.website.utils import get_boot_data, get_comment_list, get_sidebar_items
 from frappe.website.website_generator import WebsiteGenerator
 
@@ -21,6 +28,10 @@ class WebForm(WebsiteGenerator):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
+<<<<<<< HEAD
+	def onload(self):
+		super().onload()
+=======
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
@@ -71,6 +82,7 @@ class WebForm(WebsiteGenerator):
 	# end: auto-generated types
 
 	website = frappe._dict(no_cache=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def validate(self):
 		super().validate()
@@ -259,7 +271,11 @@ def get_context(context):
 			description = self.introduction_text[:140]
 
 		context.metatags = {
+<<<<<<< HEAD
+			"name": self.meta_title or self.title,
+=======
 			"title": self.meta_title or self.title,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"description": description,
 			"image": self.meta_image,
 		}
@@ -682,8 +698,11 @@ def get_link_options(web_form_name, doctype, allow_read_on_all_link_options=Fals
 		return json.dumps(link_options, default=str)
 	else:
 		return "\n".join([str(doc.value) for doc in link_options])
+<<<<<<< HEAD
+=======
 
 
 @redis_cache(ttl=60 * 60)
 def get_published_web_forms() -> dict[str, str]:
 	return frappe.get_all("Web Form", ["name", "route", "modified"], {"published": 1})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

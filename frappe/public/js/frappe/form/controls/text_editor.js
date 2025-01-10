@@ -206,10 +206,14 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 				magicUrl: true,
 				mention: this.get_mention_options(),
 			},
+<<<<<<< HEAD
+			theme: "snow",
+=======
 			theme: this.df.theme || "snow",
 			readOnly: this.disabled,
 			bounds: this.quill_container[0],
 			placeholder: this.df.placeholder || "",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 
 		// In a grid row where space is constrained, hide the toolbar.
@@ -313,7 +317,10 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 		let value = this.quill ? this.quill.root.innerHTML : "";
 		// hack to retain space sequence.
 		value = value.replace(/(\s)(\s)/g, " &nbsp;");
+<<<<<<< HEAD
+=======
 		value = this.patch_unordered_list(value);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		try {
 			if (!$(value).find(".ql-editor").length) {

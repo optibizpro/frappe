@@ -11,6 +11,8 @@ from frappe.model.workflow import get_workflow_name
 
 
 class DeletedDocument(Document):
+<<<<<<< HEAD
+=======
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
@@ -26,6 +28,7 @@ class DeletedDocument(Document):
 		restored: DF.Check
 	# end: auto-generated types
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	no_feed_on_delete = True
 
 	@staticmethod
@@ -34,7 +37,11 @@ class DeletedDocument(Document):
 		from frappe.query_builder.functions import Now
 
 		table = frappe.qb.DocType("Deleted Document")
+<<<<<<< HEAD
+		frappe.db.delete(table, filters=(table.modified < (Now() - Interval(days=days))))
+=======
 		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()

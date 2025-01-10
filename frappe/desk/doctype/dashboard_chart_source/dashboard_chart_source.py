@@ -34,6 +34,9 @@ class DashboardChartSource(Document):
 	# end: auto-generated types
 
 	def on_update(self):
+<<<<<<< HEAD
+		export_to_files(record_list=[[self.doctype, self.name]], record_module=self.module, create_init=True)
+=======
 		if not frappe.request:
 			return
 
@@ -62,3 +65,4 @@ class DashboardChartSource(Document):
 	def get_folder_path(self) -> Path:
 		"""Return the path of the folder for this dashboard chart source."""
 		return Path(get_module_path(self.module)) / FOLDER_NAME / frappe.scrub(self.name)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

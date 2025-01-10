@@ -223,6 +223,11 @@ export default class NumberCardWidget extends Widget {
 
 		const symbol = number_parts[1] || "";
 		number_parts[0] = window.convert_old_to_new_number_format(number_parts[0]);
+<<<<<<< HEAD
+		const formatted_number = $(frappe.format(number_parts[0], df)).text();
+
+		this.formatted_number = formatted_number + " " + __(symbol);
+=======
 		const formatted_number = frappe.format(number_parts[0], df, null, doc);
 		this.formatted_number =
 			($(formatted_number).text() || formatted_number) + " " + __(symbol);
@@ -243,6 +248,7 @@ export default class NumberCardWidget extends Widget {
 			}
 		});
 		return common_doc;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	render_number() {
@@ -266,12 +272,20 @@ export default class NumberCardWidget extends Widget {
 				color_class = "grey-stat";
 			} else if (this.percentage_stat > 0) {
 				caret_html = `<span class="indicator-pill-round green">
+<<<<<<< HEAD
+						${frappe.utils.icon("arrow-up-right", "xs")}
+=======
 						${frappe.utils.icon("es-line-arrow-up-right", "xs")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</span>`;
 				color_class = "green-stat";
 			} else {
 				caret_html = `<span class="indicator-pill-round red">
+<<<<<<< HEAD
+						${frappe.utils.icon("arrow-down-left", "xs")}
+=======
 						${frappe.utils.icon("arrow-down-right", "xs")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</span>`;
 				color_class = "red-stat";
 			}
@@ -341,6 +355,10 @@ export default class NumberCardWidget extends Widget {
 	}
 
 	set_card_actions(actions) {
+<<<<<<< HEAD
+		/* eslint-disable indent */
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.card_actions = $(`<div class="card-actions dropdown pull-right">
 				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				...

@@ -41,7 +41,10 @@ frappe.views.Container = class Container {
 	}
 	change_to(label) {
 		cur_page = this;
+<<<<<<< HEAD
+=======
 		let page;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (label.tagName) {
 			// if sent the div, get the table
 			page = label;

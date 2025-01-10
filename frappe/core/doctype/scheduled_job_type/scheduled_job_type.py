@@ -77,10 +77,25 @@ class ScheduledJobType(Document):
 				)
 				return True
 			else:
+<<<<<<< HEAD
+				if not self.is_job_in_queue():
+					enqueue(
+						"frappe.core.doctype.scheduled_job_type.scheduled_job_type.run_scheduled_job",
+						queue=self.get_queue_name(),
+						job_type=self.method,
+						job_id=self.rq_job_id,
+					)
+					return True
+				else:
+					frappe.logger("scheduler").error(
+						f"Skipped queueing {self.method} because it was found in queue for {frappe.local.site}"
+					)
+=======
 				frappe.logger("scheduler").error(
 					f"Skipped queueing {self.method} because it was found in queue for {frappe.local.site}"
 				)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return False
 
 	def is_event_due(self, current_time=None):
@@ -94,7 +109,11 @@ class ScheduledJobType(Document):
 	@property
 	def rq_job_id(self):
 		"""Unique ID created to deduplicate jobs with single RQ call."""
+<<<<<<< HEAD
+		return f"scheduled_job::{self.method}"
+=======
 		return f"scheduled_job::{self.name}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@property
 	def next_execution(self):

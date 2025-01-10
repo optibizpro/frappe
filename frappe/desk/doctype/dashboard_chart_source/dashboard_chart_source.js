@@ -1,6 +1,9 @@
 // Copyright (c) 2019, Frappe Technologies and contributors
 // For license information, please see license.txt
 
+<<<<<<< HEAD
+frappe.ui.form.on("Dashboard Chart Source", {});
+=======
 frappe.ui.form.on("Dashboard Chart Source", {
 	refresh: function (frm) {
 		if (!frm.is_new()) {
@@ -17,3 +20,4 @@ frappe.ui.form.on("Dashboard Chart Source", {
 		}
 	},
 });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

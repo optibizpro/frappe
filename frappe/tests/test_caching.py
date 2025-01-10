@@ -5,6 +5,10 @@ import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_api import FrappeAPITestCase
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.caching import redis_cache, request_cache, site_cache
 
 CACHE_TTL = 4
@@ -35,7 +39,11 @@ def ping_with_ttl() -> str:
 	return frappe.local.site
 
 
+<<<<<<< HEAD
+class TestCachingUtils(FrappeTestCase):
+=======
 class TestCachingUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_request_cache(self):
 		retval = []
 		acceptable_args = [
@@ -109,8 +117,12 @@ class TestRedisCache(FrappeAPITestCase):
 		self.assertEqual(calculate_area(10), 314)
 		self.assertEqual(function_call_count, 1)
 
+<<<<<<< HEAD
+		time.sleep(CACHE_TTL)
+=======
 		time.sleep(CACHE_TTL * 1.5)
 		frappe.local.cache.clear()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(calculate_area(10), 314)
 		self.assertEqual(function_call_count, 2)
 
@@ -167,6 +179,8 @@ class TestRedisCache(FrappeAPITestCase):
 		# kwargs should hit cache too
 		self.assertEqual(function_call_count, 4)
 
+<<<<<<< HEAD
+=======
 	def test_global_clear_cache(self):
 		function_call_count = 0
 
@@ -186,6 +200,7 @@ class TestRedisCache(FrappeAPITestCase):
 		calculate_area(10)
 		self.assertEqual(function_call_count, 2)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_user_cache(self):
 		function_call_count = 0
 		PI = 3.1415
@@ -213,6 +228,8 @@ class TestRedisCache(FrappeAPITestCase):
 		with self.set_user("Mathematician"):
 			self.assertEqual(calculate_area(1), PI)
 			self.assertEqual(function_call_count, 2)
+<<<<<<< HEAD
+=======
 
 
 class TestDocumentCache(FrappeAPITestCase):
@@ -349,3 +366,4 @@ class TestRedisWrapper(FrappeAPITestCase):
 
 	def test_backward_compat_cache(self):
 		self.assertEqual(frappe.cache, frappe.cache())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

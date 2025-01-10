@@ -3,11 +3,19 @@ import os
 import subprocess
 import sys
 import typing
+<<<<<<< HEAD
+from shutil import which
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import click
 
 import frappe
+<<<<<<< HEAD
+import frappe.commands
+=======
 from frappe import _
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.commands import get_site, pass_context
 from frappe.coverage import CodeCoverage
 from frappe.exceptions import SiteNotSpecifiedError
@@ -19,12 +27,25 @@ EXTRA_ARGS_CTX = {"ignore_unknown_options": True, "allow_extra_args": True}
 if typing.TYPE_CHECKING:
 	from IPython.terminal.embed import InteractiveShellEmbed
 
+if typing.TYPE_CHECKING:
+	from IPython.terminal.embed import InteractiveShellEmbed
+
 
 @click.command("build")
 @click.option("--app", help="Build assets for app")
 @click.option("--apps", help="Build assets for specific apps")
 @click.option(
 	"--hard-link",
+<<<<<<< HEAD
+	is_flag=True,
+	default=False,
+	help="Copy the files instead of symlinking",
+	envvar="FRAPPE_HARD_LINK_ASSETS",
+)
+@click.option(
+	"--make-copy",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	is_flag=True,
 	default=False,
 	help="Copy the files instead of symlinking",
@@ -281,12 +302,16 @@ def execute(context: CliCtxObj, method, args=None, kwargs=None, profile=False):
 				ret = frappe.get_attr(method)(*fn_args, **fn_kwargs)
 			except Exception:
 				# eval is safe here because input is from console
+<<<<<<< HEAD
+				ret = eval(method + "(*args, **kwargs)", globals(), locals())  # nosemgrep
+=======
 				code = compile(method, "<bench execute>", "eval")
 				ret = eval(code, globals(), locals())  # nosemgrep
 				if callable(ret):
 					suffix = "(*fn_args, **fn_kwargs)"
 					code = compile(method + suffix, "<bench execute>", "eval")
 					ret = eval(code, globals(), locals())  # nosemgrep
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			if profile:
 				import pstats
@@ -428,6 +453,33 @@ def import_doc(context: CliCtxObj, path, force=False):
 		raise SiteNotSpecifiedError
 
 
+<<<<<<< HEAD
+@click.command("import-csv", help=DATA_IMPORT_DEPRECATION)
+@click.argument("path")
+@click.option("--only-insert", default=False, is_flag=True, help="Do not overwrite existing records")
+@click.option("--submit-after-import", default=False, is_flag=True, help="Submit document after importing it")
+@click.option(
+	"--ignore-encoding-errors",
+	default=False,
+	is_flag=True,
+	help="Ignore encoding errors while coverting to unicode",
+)
+@click.option("--no-email", default=True, is_flag=True, help="Send email if applicable")
+@pass_context
+def import_csv(
+	context,
+	path,
+	only_insert=False,
+	submit_after_import=False,
+	ignore_encoding_errors=False,
+	no_email=True,
+):
+	click.secho(DATA_IMPORT_DEPRECATION, fg="yellow")
+	sys.exit(1)
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @click.command("data-import")
 @click.option(
 	"--file",
@@ -450,9 +502,13 @@ def import_doc(context: CliCtxObj, path, force=False):
 @click.option("--submit-after-import", default=False, is_flag=True, help="Submit document after importing it")
 @click.option("--mute-emails", default=True, is_flag=True, help="Mute emails during import")
 @pass_context
+<<<<<<< HEAD
+def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
+=======
 def data_import(
 	context: CliCtxObj, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True
 ):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"Import documents in bulk from CSV or XLSX using data import"
 	from frappe.core.doctype.data_import.data_import import import_file
 
@@ -505,10 +561,20 @@ def mariadb(context: CliCtxObj, extra_args):
 	"""
 	Enter into mariadb console for a given site.
 	"""
+	from frappe.utils import get_site_path
+
 	site = get_site(context)
+<<<<<<< HEAD
+	if not site:
+		raise SiteNotSpecifiedError
+	frappe.init(site=site)
+	os.environ["MYSQL_HISTFILE"] = os.path.abspath(get_site_path("logs", "mariadb_console.log"))
+	_mariadb()
+=======
 	frappe.init(site)
 	frappe.conf.db_type = "mariadb"
 	_enter_console(extra_args=extra_args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("postgres", context_settings=EXTRA_ARGS_CTX)
@@ -528,6 +594,35 @@ def _enter_console(extra_args=None):
 	from frappe.database import get_command
 	from frappe.utils import get_site_path
 
+<<<<<<< HEAD
+	mysql = which("mysql")
+	command = [
+		mysql,
+		"--port",
+		str(frappe.conf.db_port or MariaDBDatabase.default_port),
+		"-u",
+		frappe.conf.db_name,
+		f"-p{frappe.conf.db_password}",
+		frappe.conf.db_name,
+		"-h",
+		frappe.conf.db_host or "localhost",
+		"--pager=less -SFX",
+		"--safe-updates",
+		"-A",
+	]
+	os.execv(mysql, command)
+
+
+def _psql():
+	psql = which("psql")
+
+	host = frappe.conf.db_host or "127.0.0.1"
+	port = frappe.conf.db_port or "5432"
+	env = os.environ.copy()
+	env["PGPASSWORD"] = frappe.conf.db_password
+	conn_string = f"postgresql://{frappe.conf.db_name}@{host}:{port}/{frappe.conf.db_name}"
+	subprocess.run([psql, conn_string], check=True, env=env)
+=======
 	if frappe.conf.db_type == "mariadb":
 		os.environ["MYSQL_HISTFILE"] = os.path.abspath(get_site_path("logs", "mariadb_console.log"))
 	else:
@@ -548,6 +643,7 @@ def _enter_console(extra_args=None):
 			exc=frappe.ExecutableNotFound,
 		)
 	os.execv(bin, [bin, *args])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("jupyter")
@@ -749,6 +845,210 @@ def transform_database(context: CliCtxObj, table, engine, row_format, failfast):
 	frappe.destroy()
 
 
+<<<<<<< HEAD
+@click.command("run-tests")
+@click.option("--app", help="For App")
+@click.option("--doctype", help="For DocType")
+@click.option("--module-def", help="For all Doctypes in Module Def")
+@click.option("--case", help="Select particular TestCase")
+@click.option(
+	"--doctype-list-path",
+	help="Path to .txt file for list of doctypes. Example erpnext/tests/server/agriculture.txt",
+)
+@click.option("--test", multiple=True, help="Specific test")
+@click.option("--ui-tests", is_flag=True, default=False, help="Run UI Tests")
+@click.option("--module", help="Run tests in a module")
+@click.option("--profile", is_flag=True, default=False)
+@click.option("--coverage", is_flag=True, default=False)
+@click.option("--skip-test-records", is_flag=True, default=False, help="Don't create test records")
+@click.option("--skip-before-tests", is_flag=True, default=False, help="Don't run before tests hook")
+@click.option("--junit-xml-output", help="Destination file path for junit xml report")
+@click.option(
+	"--failfast", is_flag=True, default=False, help="Stop the test run on the first error or failure"
+)
+@pass_context
+def run_tests(
+	context,
+	app=None,
+	module=None,
+	doctype=None,
+	module_def=None,
+	test=(),
+	profile=False,
+	coverage=False,
+	junit_xml_output=False,
+	ui_tests=False,
+	doctype_list_path=None,
+	skip_test_records=False,
+	skip_before_tests=False,
+	failfast=False,
+	case=None,
+):
+	with CodeCoverage(coverage, app):
+		import frappe
+		import frappe.test_runner
+
+		tests = test
+		site = get_site(context)
+
+		allow_tests = frappe.get_conf(site).allow_tests
+
+		if not (allow_tests or os.environ.get("CI")):
+			click.secho("Testing is disabled for the site!", bold=True)
+			click.secho("You can enable tests by entering following command:")
+			click.secho(f"bench --site {site} set-config allow_tests true", fg="green")
+			return
+
+		frappe.init(site=site)
+
+		frappe.flags.skip_before_tests = skip_before_tests
+		frappe.flags.skip_test_records = skip_test_records
+
+		ret = frappe.test_runner.main(
+			app,
+			module,
+			doctype,
+			module_def,
+			context.verbose,
+			tests=tests,
+			force=context.force,
+			profile=profile,
+			junit_xml_output=junit_xml_output,
+			ui_tests=ui_tests,
+			doctype_list_path=doctype_list_path,
+			failfast=failfast,
+			case=case,
+		)
+
+		if len(ret.failures) == 0 and len(ret.errors) == 0:
+			ret = 0
+
+		if os.environ.get("CI"):
+			sys.exit(ret)
+
+
+@click.command("run-parallel-tests")
+@click.option("--app", help="For App", default="frappe")
+@click.option("--build-number", help="Build number", default=1)
+@click.option("--total-builds", help="Total number of builds", default=1)
+@click.option("--with-coverage", is_flag=True, help="Build coverage file")
+@click.option("--use-orchestrator", is_flag=True, help="Use orchestrator to run parallel tests")
+@click.option("--dry-run", is_flag=True, default=False, help="Dont actually run tests")
+@pass_context
+def run_parallel_tests(
+	context,
+	app,
+	build_number,
+	total_builds,
+	with_coverage=False,
+	use_orchestrator=False,
+	dry_run=False,
+):
+	with CodeCoverage(with_coverage, app):
+		site = get_site(context)
+		if use_orchestrator:
+			from frappe.parallel_test_runner import ParallelTestWithOrchestrator
+
+			ParallelTestWithOrchestrator(app, site=site)
+		else:
+			from frappe.parallel_test_runner import ParallelTestRunner
+
+			ParallelTestRunner(
+				app,
+				site=site,
+				build_number=build_number,
+				total_builds=total_builds,
+				dry_run=dry_run,
+			)
+
+
+@click.command(
+	"run-ui-tests",
+	context_settings=dict(
+		ignore_unknown_options=True,
+	),
+)
+@click.argument("app")
+@click.argument("cypressargs", nargs=-1, type=click.UNPROCESSED)
+@click.option("--headless", is_flag=True, help="Run UI Test in headless mode")
+@click.option("--parallel", is_flag=True, help="Run UI Test in parallel mode")
+@click.option("--with-coverage", is_flag=True, help="Generate coverage report")
+@click.option("--ci-build-id")
+@pass_context
+def run_ui_tests(
+	context,
+	app,
+	headless=False,
+	parallel=True,
+	with_coverage=False,
+	ci_build_id=None,
+	cypressargs=None,
+):
+	"Run UI tests"
+	site = get_site(context)
+	app_base_path = os.path.abspath(os.path.join(frappe.get_app_path(app), ".."))
+	site_url = frappe.utils.get_site_url(site)
+	admin_password = frappe.get_conf(site).admin_password
+
+	# override baseUrl using env variable
+	site_env = f"CYPRESS_baseUrl={site_url}"
+	password_env = f"CYPRESS_adminPassword={admin_password}" if admin_password else ""
+	coverage_env = f"CYPRESS_coverage={str(with_coverage).lower()}"
+
+	os.chdir(app_base_path)
+
+	node_bin = subprocess.getoutput("yarn bin")
+	cypress_path = f"{node_bin}/cypress"
+	drag_drop_plugin_path = f"{node_bin}/../@4tw/cypress-drag-drop"
+	real_events_plugin_path = f"{node_bin}/../cypress-real-events"
+	testing_library_path = f"{node_bin}/../@testing-library"
+	coverage_plugin_path = f"{node_bin}/../@cypress/code-coverage"
+
+	# check if cypress in path...if not, install it.
+	if not (
+		os.path.exists(cypress_path)
+		and os.path.exists(drag_drop_plugin_path)
+		and os.path.exists(real_events_plugin_path)
+		and os.path.exists(testing_library_path)
+		and os.path.exists(coverage_plugin_path)
+	):
+		# install cypress & dependent plugins
+		click.secho("Installing Cypress...", fg="yellow")
+		packages = " ".join(
+			[
+				"cypress@13.10.0",
+				"@4tw/cypress-drag-drop@2.2.5",
+				"cypress-real-events@1.12.0",
+				"@testing-library/cypress@10.0.1",
+				"@testing-library/dom@8.17.1",
+				"@cypress/code-coverage@3.12.39",
+			]
+		)
+		frappe.commands.popen(f"yarn add {packages} --no-lockfile", raise_err=True)
+
+	# run for headless mode
+	run_or_open = "run --browser chrome" if headless else "open"
+	formatted_command = f"{site_env} {password_env} {coverage_env} {cypress_path} {run_or_open}"
+
+	if parallel:
+		formatted_command += " --parallel"
+
+	if ci_build_id:
+		formatted_command += f" --ci-build-id {ci_build_id}"
+
+	if cypressargs:
+		formatted_command += " " + " ".join(cypressargs)
+
+	click.secho("Running Cypress...", fg="yellow")
+	try:
+		frappe.commands.popen(formatted_command, cwd=app_base_path, raise_err=True)
+	except subprocess.CalledProcessError as e:
+		click.secho("Cypress tests failed", fg="red")
+		raise click.exceptions.Exit(1) from e
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @click.command("serve")
 @click.option("--port", default=8000)
 @click.option("--profile", is_flag=True, default=False)
@@ -873,6 +1173,15 @@ def set_config(context: CliCtxObj, key, value, global_=False, parse=False):
 	"Insert/Update a value in site_config.json"
 	from frappe.installer import update_site_config
 
+<<<<<<< HEAD
+	if as_dict:
+		from frappe.utils.commands import warn
+
+		warn("--as-dict will be deprecated in v14. Use --parse instead", category=PendingDeprecationWarning)
+		parse = as_dict
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if parse:
 		import ast
 

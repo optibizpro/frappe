@@ -3,12 +3,21 @@ from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.core.utils import find
 from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import cstr
+
+
+class TestDBUpdate(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import run_only_if
 from frappe.utils import cstr
 
 
 class TestDBUpdate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_db_update(self):
 		doctype = "User"
 		frappe.reload_doctype("User", force=True)
@@ -99,6 +108,10 @@ class TestDBUpdate(IntegrationTestCase):
 			len(indexes), 1, msg=f"There should be 1 index on {doctype}.{field}, found {indexes}"
 		)
 
+<<<<<<< HEAD
+	@run_only_if(db_type_is.MARIADB)  # postgres uses invalid type for <=15
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_bigint_conversion(self):
 		doctype = new_doctype(fields=[{"fieldname": "int_field", "fieldtype": "Int"}]).insert()
 
@@ -138,6 +151,11 @@ class TestDBUpdate(IntegrationTestCase):
 		doctype.save()
 		self.check_unique_indexes(doctype.name, field)
 
+<<<<<<< HEAD
+		doctype.delete()
+		frappe.db.commit()
+
+=======
 		# New column with a unique index
 		# This works because index name is same as fieldname.
 		new_field = frappe.copy_doc(doctype.fields[0])
@@ -174,6 +192,7 @@ class TestDBUpdate(IntegrationTestCase):
 
 		self.assertEqual(frappe.db.get_column_type(referring_doctype.name, link), "uuid")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def get_fieldtype_from_def(field_def):
 	fieldtuple = frappe.db.type_map.get(field_def.fieldtype, ("", 0))

@@ -4,7 +4,10 @@
 from os.path import abspath, splitext
 from os.path import exists as path_exists
 from os.path import join as join_path
+<<<<<<< HEAD
+=======
 from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from typing import Optional
 
 import frappe
@@ -130,11 +133,14 @@ class WebsiteTheme(Document):
 			if fname.startswith(frappe.scrub(self.name) + "_") and fname.endswith(".css"):
 				theme_files.append(Path(folder_path) / fname)
 
+<<<<<<< HEAD
+=======
 		theme_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
 		# Keep 3 recent files
 		for old_file in theme_files[2:]:
 			old_file.unlink()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@frappe.whitelist()
 	def set_as_default(self):
 		self.save()

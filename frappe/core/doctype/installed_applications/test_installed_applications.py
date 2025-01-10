@@ -6,6 +6,12 @@ from frappe.core.doctype.installed_applications.installed_applications import (
 	InvalidAppOrder,
 	update_installed_apps_order,
 )
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestInstalledApplications(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -19,6 +25,7 @@ class UnitTestInstalledApplications(UnitTestCase):
 
 
 class TestInstalledApplications(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_order_change(self):
 		update_installed_apps_order(["frappe"])
 		self.assertRaises(InvalidAppOrder, update_installed_apps_order, [])

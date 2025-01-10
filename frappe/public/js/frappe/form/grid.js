@@ -71,11 +71,21 @@ export default class Grid {
 						<div class="grid-heading-row"></div>
 						<div class="grid-body">
 							<div class="rows"></div>
+<<<<<<< HEAD
+							<div class="grid-empty text-center">
+								<img
+									src="/assets/frappe/images/ui-states/grid-empty-state.svg"
+									alt="Grid Empty State"
+									class="grid-empty-illustration"
+								>
+								${__("No Data")}
+=======
 							<div class="grid-empty text-center text-extra-muted">
 								${__("No rows")}
 							</div>
 							<div class="grid-scroll-bar">
 								<div class="grid-scroll-bar-rows"></div>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							</div>
 						</div>
 					</div>
@@ -83,6 +93,23 @@ export default class Grid {
 				<div class="small form-clickable-section grid-footer">
 					<div class="flex justify-between">
 						<div class="grid-buttons">
+<<<<<<< HEAD
+							<button class="btn btn-xs btn-danger grid-remove-rows hidden"
+								data-action="delete_rows">
+								${__("Delete")}
+							</button>
+							<button class="btn btn-xs btn-danger grid-remove-all-rows hidden"
+								data-action="delete_all_rows">
+								${__("Delete All")}
+							</button>
+							<button class="grid-add-multiple-rows btn btn-xs btn-secondary hidden">
+								${__("Add Multiple")}</a>
+							</button>
+							<!-- hack to allow firefox include this in tabs -->
+							<button class="btn btn-xs btn-secondary grid-add-row">
+								${__("Add Row")}
+							</button>
+=======
 							<button type="button" class="btn btn-xs btn-danger grid-remove-rows hidden"
 								data-action="delete_rows">
 								${__("Delete")}
@@ -98,14 +125,22 @@ export default class Grid {
 							<button type="button" class="grid-add-multiple-rows btn btn-xs btn-secondary hidden">
 								${__("Add Multiple")}</a>
 							</button>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						</div>
 						<div class="grid-pagination">
 						</div>
 						<div class="grid-bulk-actions text-right">
+<<<<<<< HEAD
+							<button class="grid-download btn btn-xs btn-secondary hidden">
+								${__("Download")}
+							</button>
+							<button class="grid-upload btn btn-xs btn-secondary hidden">
+=======
 							<button type="button" class="grid-download btn btn-xs btn-secondary hidden">
 								${__("Download")}
 							</button>
 							<button type="button" class="grid-upload btn btn-xs btn-secondary hidden">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								${__("Upload")}
 							</button>
 						</div>
@@ -156,7 +191,11 @@ export default class Grid {
 		if (
 			!this.df.label ||
 			!this.df?.documentation_url ||
+<<<<<<< HEAD
+			in_list(unsupported_fieldtypes, this.df.fieldtype)
+=======
 			unsupported_fieldtypes.includes(this.df.fieldtype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 			return;
 
@@ -683,7 +722,11 @@ export default class Grid {
 	get_modal_data() {
 		return this.df.get_data
 			? this.df.get_data().filter((data) => {
+<<<<<<< HEAD
+					if (!this.deleted_docs || !in_list(this.deleted_docs, data.name)) {
+=======
 					if (!this.deleted_docs || !this.deleted_docs.includes(data.name)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						return data;
 					}
 			  })
@@ -950,7 +993,11 @@ export default class Grid {
 				!df.hidden &&
 				(this.editable_fields || df.in_list_view) &&
 				((this.frm && this.frm.get_perm(df.permlevel, "read")) || !this.frm) &&
+<<<<<<< HEAD
+				!in_list(frappe.model.layout_fields, df.fieldtype)
+=======
 				!frappe.model.layout_fields.includes(df.fieldtype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			) {
 				if (df.columns) {
 					df.colsize = df.columns;
@@ -972,6 +1019,10 @@ export default class Grid {
 				}
 
 				total_colsize += df.colsize;
+<<<<<<< HEAD
+				if (total_colsize > 11) return false;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				this.visible_columns.push([df, df.colsize]);
 			}
 		}
@@ -1206,8 +1257,12 @@ export default class Grid {
 		const $wrapper = position === "top" ? this.grid_custom_buttons : this.grid_buttons;
 		let $btn = this.custom_buttons[label];
 		if (!$btn) {
+<<<<<<< HEAD
+			$btn = $(`<button class="btn btn-secondary btn-xs btn-custom">${__(label)}</button>`)
+=======
 			$btn = $(`<button type="button" class="btn btn-secondary btn-xs btn-custom">`)
 				.html(__(label))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				.prependTo($wrapper)
 				.on("click", click);
 			this.custom_buttons[label] = $btn;

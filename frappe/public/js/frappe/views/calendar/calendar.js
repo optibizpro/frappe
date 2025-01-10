@@ -28,7 +28,11 @@ frappe.views.CalendarView = class CalendarView extends frappe.views.ListView {
 	setup_defaults() {
 		return super.setup_defaults().then(() => {
 			this.page_title = __("{0} Calendar", [this.page_title]);
+<<<<<<< HEAD
+			this.calendar_settings = frappe.views.calendar[this.doctype] || {};
+=======
 			this.calendar_settings = frappe.views.Calendar[this.doctype] || {};
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.calendar_name = frappe.get_route()[3];
 		});
 	}
@@ -101,7 +105,19 @@ frappe.views.CalendarView = class CalendarView extends frappe.views.ListView {
 	}
 
 	get required_libs() {
+<<<<<<< HEAD
+		let assets = [
+			"assets/frappe/js/lib/fullcalendar/fullcalendar.min.css",
+			"assets/frappe/js/lib/fullcalendar/fullcalendar.min.js",
+		];
+		let user_language = frappe.boot.user.language;
+		if (user_language && user_language !== "en") {
+			assets.push("assets/frappe/js/lib/fullcalendar/locale-all.js");
+		}
+		return assets;
+=======
 		return "calendar.bundle.js";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };
 
@@ -125,10 +141,17 @@ frappe.views.Calendar = class Calendar {
 	}
 	get_default_options() {
 		return new Promise((resolve) => {
+<<<<<<< HEAD
+			let defaultView = localStorage.getItem("cal_defaultView");
+			let weekends = localStorage.getItem("cal_weekends");
+			let defaults = {
+				defaultView: defaultView ? defaultView : "month",
+=======
 			let initialView = localStorage.getItem("cal_initialView");
 			let weekends = localStorage.getItem("cal_weekends");
 			let defaults = {
 				initialView: initialView ? initialView : "dayGridMonth",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				weekends: weekends ? weekends : true,
 			};
 			resolve(defaults);
@@ -154,22 +177,33 @@ frappe.views.Calendar = class Calendar {
 		});
 
 		$(this.parent).on("show", function () {
+<<<<<<< HEAD
+			me.$cal.fullCalendar("refetchEvents");
+=======
 			me.$cal.fullCalendar.refetchEvents();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 
 	make() {
 		this.$wrapper = this.parent;
+<<<<<<< HEAD
+		this.$cal = $("<div>").appendTo(this.$wrapper);
+=======
 		this.$cal = $("<div id='fc-calendar-wrapper'>").appendTo(this.$wrapper);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.footnote_area = frappe.utils.set_footnote(
 			this.footnote_area,
 			this.$wrapper,
 			__("Select or drag across time slots to create a new event.")
 		);
 		this.footnote_area.css({ "border-top": "0px" });
+<<<<<<< HEAD
+=======
 
 		this.fullCalendar = new frappe.FullCalendar(this.$cal[0], this.cal_options);
 		this.fullCalendar.render();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		this.set_css();
 	}
@@ -188,23 +222,42 @@ frappe.views.Calendar = class Calendar {
 		const me = this;
 		let btn_group = me.$wrapper.find(".fc-button-group");
 		btn_group.on("click", ".btn", function () {
+<<<<<<< HEAD
+			let value = $(this).hasClass("fc-agendaWeek-button")
+				? "agendaWeek"
+				: $(this).hasClass("fc-agendaDay-button")
+				? "agendaDay"
+				: "month";
+			me.set_localStorage_option("cal_defaultView", value);
+=======
 			let value = $(this).hasClass("fc-dayGridWeek-button")
 				? "dayGridWeek"
 				: $(this).hasClass("fc-dayGridDay-button")
 				? "dayGridDay"
 				: "dayGridMonth";
 			me.set_localStorage_option("cal_initialView", value);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 
 		me.$wrapper.on("click", ".btn-weekend", function () {
 			me.cal_options.weekends = !me.cal_options.weekends;
+<<<<<<< HEAD
+			me.$cal.fullCalendar("option", "weekends", me.cal_options.weekends);
+=======
 			me.fullCalendar.setOption("weekends", me.cal_options.weekends);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			me.set_localStorage_option("cal_weekends", me.cal_options.weekends);
 			me.set_css();
 			me.setup_view_mode_button(me.cal_options);
 		});
 	}
 	set_css() {
+<<<<<<< HEAD
+		// flatify buttons
+		this.$wrapper
+			.find("button.fc-state-default")
+			.removeClass("fc-state-default")
+=======
 		const viewButtons =
 			".fc-dayGridMonth-button, .fc-dayGridWeek-button, .fc-dayGridDay-button, .fc-today-button";
 		const fcViewButtonClasses = "fc-button fc-button-primary fc-button-active";
@@ -213,6 +266,7 @@ frappe.views.Calendar = class Calendar {
 		this.$wrapper
 			.find("button.fc-button")
 			.removeClass(fcViewButtonClasses)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			.addClass("btn btn-default");
 
 		// group all view buttons
@@ -220,6 +274,23 @@ frappe.views.Calendar = class Calendar {
 
 		// add icons
 		this.$wrapper
+<<<<<<< HEAD
+			.find(".fc-month-button, .fc-agendaWeek-button, .fc-agendaDay-button")
+			.wrapAll('<div class="btn-group" />');
+
+		this.$wrapper
+			.find(".fc-prev-button span")
+			.attr("class", "")
+			.html(frappe.utils.icon("left"));
+		this.$wrapper
+			.find(".fc-next-button span")
+			.attr("class", "")
+			.html(frappe.utils.icon("right"));
+
+		this.$wrapper.find(".fc-today-button").prepend(frappe.utils.icon("today"));
+
+		this.$wrapper.find(".fc-day-number").wrap('<div class="fc-day"></div>');
+=======
 			.find(`.fc-prev-button span`)
 			.attr("class", "")
 			.html(frappe.utils.icon("left"));
@@ -229,6 +300,7 @@ frappe.views.Calendar = class Calendar {
 			.html(frappe.utils.icon("right"));
 		if (this.$wrapper.find(".fc-today-button svg").length == 0)
 			this.$wrapper.find(".fc-today-button").prepend(frappe.utils.icon("today"));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// v6.x of fc has weird behaviour which removes all the custom classes
 		// on header buttons on click, event below re-adds all the classes
@@ -241,17 +313,33 @@ frappe.views.Calendar = class Calendar {
 				.removeClass(`active ${fcViewButtonClasses}`)
 				.addClass("btn btn-default");
 
+<<<<<<< HEAD
+		btn_group.find(".btn").on("click", function () {
+			btn_group.find(".btn").removeClass("active");
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			$(this).addClass("active");
 		});
 	}
 
 	get_system_datetime(date) {
+<<<<<<< HEAD
+		date._offset = moment(date).tz(frappe.sys_defaults.time_zone)._offset;
+		return frappe.datetime.convert_to_system_tz(moment(date).locale("en"));
+=======
 		return frappe.datetime.convert_to_system_tz(date, true);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	setup_options(defaults) {
 		var me = this;
 		defaults.meridiem = "false";
 		this.cal_options = {
+<<<<<<< HEAD
+			locale: frappe.boot.user.language || "en",
+			header: {
+				left: "prev, title, next",
+				right: "today, month, agendaWeek, agendaDay",
+=======
 			plugins: frappe.FullCalendar.Plugins,
 			initialView: defaults.initialView || "dayGridMonth",
 			locale: frappe.boot.lang,
@@ -260,6 +348,7 @@ frappe.views.Calendar = class Calendar {
 				left: "prev,title,next",
 				center: "",
 				right: "today,dayGridMonth,dayGridWeek,dayGridDay",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 			editable: true,
 			droppable: true,
@@ -269,13 +358,27 @@ frappe.views.Calendar = class Calendar {
 			displayEventTime: true,
 			weekends: defaults.weekends,
 			nowIndicator: true,
+<<<<<<< HEAD
+=======
 			themeSystem: null,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			buttonText: {
 				today: __("Today"),
 				month: __("Month"),
 				week: __("Week"),
 				day: __("Day"),
 			},
+<<<<<<< HEAD
+			events: function (start, end, timezone, callback) {
+				return frappe.call({
+					method: me.get_events_method || "frappe.desk.calendar.get_events",
+					type: "GET",
+					args: me.get_args(start, end),
+					callback: function (r) {
+						var events = r.message || [];
+						events = me.prepare_events(events);
+						callback(events);
+=======
 			events: function (info, successCallback, failureCallback) {
 				return frappe.call({
 					method: me.get_events_method || "frappe.desk.calendar.get_events",
@@ -285,10 +388,31 @@ frappe.views.Calendar = class Calendar {
 						var events = r.message || [];
 						events = me.prepare_events(events);
 						successCallback(events);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					},
 				});
 			},
 			displayEventEnd: true,
+<<<<<<< HEAD
+			eventRender: function (event, element) {
+				element.attr("title", event.tooltip);
+			},
+			eventClick: function (event) {
+				// edit event description or delete
+				var doctype = event.doctype || me.doctype;
+				if (frappe.model.can_read(doctype)) {
+					frappe.set_route("Form", doctype, event.name);
+				}
+			},
+			eventDrop: function (event, delta, revertFunc) {
+				me.update_event(event, revertFunc);
+			},
+			eventResize: function (event, delta, revertFunc) {
+				me.update_event(event, revertFunc);
+			},
+			select: function (startDate, endDate, jsEvent, view) {
+				if (view.name === "month" && endDate - startDate === 86400000) {
+=======
 			eventClick: function (info) {
 				// edit event description or delete
 				var doctype = info.doctype || me.doctype;
@@ -307,6 +431,7 @@ frappe.views.Calendar = class Calendar {
 				const allDay = seconds === 86400000;
 
 				if (info.view.type === "dayGridMonth" && allDay) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					// detect single day click in month view
 					return;
 				}
@@ -316,6 +441,19 @@ frappe.views.Calendar = class Calendar {
 				event[me.field_map.start] = me.get_system_datetime(info.start);
 				if (me.field_map.end) event[me.field_map.end] = me.get_system_datetime(info.end);
 
+<<<<<<< HEAD
+				if (me.field_map.end) event[me.field_map.end] = me.get_system_datetime(endDate);
+
+				if (me.field_map.allDay) {
+					var all_day = startDate._ambigTime && endDate._ambigTime ? 1 : 0;
+
+					event[me.field_map.allDay] = all_day;
+
+					if (all_day)
+						event[me.field_map.end] = me.get_system_datetime(
+							moment(endDate).subtract(1, "s")
+						);
+=======
 				if (seconds >= 86400000) {
 					if (allDay) {
 						// all-day click
@@ -323,9 +461,19 @@ frappe.views.Calendar = class Calendar {
 					}
 					// incase of all day or multiple day events -1 sec
 					event[me.field_map.end] = me.get_system_datetime(info.end - 1);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 				frappe.set_route("Form", me.doctype, event.name);
 			},
+<<<<<<< HEAD
+			dayClick: function (date, jsEvent, view) {
+				if (view.name === "month") {
+					const $date_cell = $("td[data-date=" + date.format("YYYY-MM-DD") + "]");
+
+					if ($date_cell.hasClass("date-clicked")) {
+						me.$cal.fullCalendar("changeView", "agendaDay");
+						me.$cal.fullCalendar("gotoDate", date);
+=======
 			dateClick: function (info) {
 				if (info.view.type === "dayGridMonth") {
 					const $date_cell = $(
@@ -334,6 +482,7 @@ frappe.views.Calendar = class Calendar {
 
 					if ($date_cell.hasClass("date-clicked")) {
 						me.fullCalendar.changeView("timeGridDay", info.date);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						me.$wrapper.find(".date-clicked").removeClass("date-clicked");
 
 						// update "active view" btn
@@ -343,6 +492,8 @@ frappe.views.Calendar = class Calendar {
 
 					me.$wrapper.find(".date-clicked").removeClass("date-clicked");
 					$date_cell.addClass("date-clicked");
+<<<<<<< HEAD
+=======
 
 					// explicitly remove the fc primary button styling that is append on view change
 					// from month -> day
@@ -350,6 +501,7 @@ frappe.views.Calendar = class Calendar {
 						.find("button.fc-button")
 						.removeClass("fc-button fc-button-primary fc-button-active")
 						.addClass("btn btn-default");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 				return false;
 			},
@@ -371,7 +523,11 @@ frappe.views.Calendar = class Calendar {
 		return args;
 	}
 	refresh() {
+<<<<<<< HEAD
+		this.$cal.fullCalendar("refetchEvents");
+=======
 		this.fullCalendar.refetchEvents();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	prepare_events(events) {
 		var me = this;
@@ -458,14 +614,23 @@ frappe.views.Calendar = class Calendar {
 	get_update_args(event) {
 		var me = this;
 		var args = {
+<<<<<<< HEAD
+			name: event[this.field_map.id],
+=======
 			name: event.id,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 
 		args[this.field_map.start] = me.get_system_datetime(event.start);
 
+<<<<<<< HEAD
+		if (this.field_map.allDay)
+			args[this.field_map.allDay] = event.start._ambigTime && event.end._ambigTime ? 1 : 0;
+=======
 		if (this.field_map.allDay) {
 			args[this.field_map.allDay] = event.end - event.start === 86400000 ? 1 : 0;
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if (this.field_map.end) {
 			if (!event.end) {
@@ -474,7 +639,13 @@ frappe.views.Calendar = class Calendar {
 
 			args[this.field_map.end] = me.get_system_datetime(event.end);
 			if (args[this.field_map.allDay]) {
+<<<<<<< HEAD
+				args[this.field_map.end] = me.get_system_datetime(
+					moment(event.end).subtract(1, "s")
+				);
+=======
 				args[this.field_map.end] = me.get_system_datetime(new Date(event.end - 1000));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		}
 
@@ -482,4 +653,17 @@ frappe.views.Calendar = class Calendar {
 
 		return { args: args, field_map: this.field_map };
 	}
+<<<<<<< HEAD
+
+	fix_end_date_for_event_render(event) {
+		if (event.allDay) {
+			// We use inclusive end dates. This workaround fixes the rendering of events
+			event.start = event.start ? $.fullCalendar.moment(event.start).stripTime() : null;
+			event.end = event.end
+				? $.fullCalendar.moment(event.end).add(1, "day").stripTime()
+				: null;
+		}
+	}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

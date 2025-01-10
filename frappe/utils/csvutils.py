@@ -156,7 +156,11 @@ def check_record(d):
 				if val not in docfield.options.split("\n"):
 					frappe.throw(
 						_("{0} must be one of {1}").format(
+<<<<<<< HEAD
+							_(docfield.label), comma_or(docfield.options.split("\n"))
+=======
 							_(docfield.label, context=docfield.parent), comma_or(docfield.options.split("\n"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						)
 					)
 

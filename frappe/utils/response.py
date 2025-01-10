@@ -32,10 +32,17 @@ if TYPE_CHECKING:
 
 def report_error(status_code):
 	"""Build error. Show traceback in developer mode"""
+<<<<<<< HEAD
+	allow_traceback = cint(frappe.db.get_system_setting("allow_error_traceback")) if frappe.db else True
+	if (
+		allow_traceback
+		and (status_code != 404 or frappe.conf.logging)
+=======
 	from frappe.api import ApiVersion, get_api_version
 
 	allow_traceback = (
 		(frappe.get_system_settings("allow_error_traceback") if frappe.db else False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		and not frappe.local.flags.disable_traceback
 		and (status_code != 404 or frappe.conf.logging)
 	)
@@ -162,6 +169,15 @@ def as_binary():
 def make_logs():
 	"""make strings for msgprint and errprint"""
 
+<<<<<<< HEAD
+	allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+
+	if frappe.error_log and allow_traceback:
+		response["exc"] = json.dumps([frappe.utils.cstr(d["exc"]) for d in frappe.local.error_log])
+
+	if frappe.local.message_log:
+		response["_server_messages"] = json.dumps([frappe.utils.cstr(d) for d in frappe.local.message_log])
+=======
 	from frappe.api import ApiVersion, get_api_version
 
 	match get_api_version():
@@ -184,6 +200,7 @@ def _make_logs_v1():
 
 	if frappe.local.message_log:
 		response["_server_messages"] = json.dumps([json.dumps(d) for d in frappe.local.message_log])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if frappe.debug_log:
 		response["_debug_messages"] = json.dumps(frappe.local.debug_log)
@@ -228,12 +245,18 @@ def json_handler(obj):
 	elif isinstance(obj, Match):
 		return obj.string
 
+<<<<<<< HEAD
+	elif type(obj) == type or isinstance(obj, Exception):
+=======
 	elif type(obj) is type or isinstance(obj, Exception):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return repr(obj)
 
 	elif callable(obj):
 		return repr(obj)
 
+<<<<<<< HEAD
+=======
 	elif isinstance(obj, uuid.UUID):
 		return str(obj)
 
@@ -243,6 +266,7 @@ def json_handler(obj):
 	elif hasattr(obj, "__value__"):  # order imporant: defer to __json__ if implemented
 		return obj.__value__()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		raise TypeError(f"""Object of type {type(obj)} with value of {obj!r} is not JSON serializable""")
 

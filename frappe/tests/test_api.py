@@ -11,12 +11,21 @@ from urllib.parse import urlencode, urljoin
 
 import requests
 from filetype import guess_mime
+<<<<<<< HEAD
+from semantic_version import Version
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from werkzeug.test import TestResponse
 
 import frappe
 from frappe.installer import update_site_config
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, patch_hooks
+from frappe.utils import cint, get_site_url, get_test_client, get_url
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.utils import cint, get_test_client, get_url
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 try:
 	_site = frappe.local.site
@@ -37,6 +46,10 @@ def suppress_stdout():
 		sys.stdout = sys.__stdout__
 
 
+<<<<<<< HEAD
+def make_request(target: str, args: tuple | None = None, kwargs: dict | None = None) -> TestResponse:
+	t = ThreadWithReturnValue(target=target, args=args, kwargs=kwargs)
+=======
 def make_request(
 	target: str,
 	args: tuple | None = None,
@@ -44,6 +57,7 @@ def make_request(
 	site: str | None = None,
 ) -> TestResponse:
 	t = ThreadWithReturnValue(target=target, args=args, kwargs=kwargs, site=site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	t.start()
 	t.join()
 	return t._return
@@ -55,7 +69,11 @@ def patch_request_header(key, *args, **kwargs):
 
 
 class ThreadWithReturnValue(Thread):
+<<<<<<< HEAD
+	def __init__(self, group=None, target=None, name=None, args=(), kwargs=None):
+=======
 	def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *, site=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if kwargs is None:
 			kwargs = {}
 		Thread.__init__(self, group, target, name, args, kwargs)
@@ -77,6 +95,12 @@ class ThreadWithReturnValue(Thread):
 		return self._return
 
 
+<<<<<<< HEAD
+class FrappeAPITestCase(FrappeTestCase):
+	SITE = frappe.local.site
+	SITE_URL = get_site_url(SITE)
+	RESOURCE_URL = f"{SITE_URL}/api/resource"
+=======
 resource_key = {
 	"": "resource",
 	"v1": "resource",
@@ -86,6 +110,7 @@ resource_key = {
 
 class FrappeAPITestCase(IntegrationTestCase):
 	version = ""  # Empty implies v1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	TEST_CLIENT = get_test_client()
 
 	@property
@@ -138,7 +163,11 @@ class TestResourceAPI(FrappeAPITestCase):
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
+<<<<<<< HEAD
+		for _ in range(10):
+=======
 		for _ in range(20):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			doc = frappe.get_doc({"doctype": "ToDo", "description": frappe.mock("paragraph")}).insert()
 			cls.GENERATED_DOCUMENTS = []
 			cls.GENERATED_DOCUMENTS.append(doc.name)
@@ -193,7 +222,11 @@ class TestResourceAPI(FrappeAPITestCase):
 
 	def test_get_list_fields(self):
 		# test 6: fetch response with fields
+<<<<<<< HEAD
+		response = self.get(f"/api/resource/{self.DOCTYPE}", {"sid": self.sid, "fields": '["description"]'})
+=======
 		response = self.get(self.resource(self.DOCTYPE), {"sid": self.sid, "fields": '["description"]'})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(response.status_code, 200)
 		json = frappe._dict(response.json)
 		self.assertIn("description", json.data[0])
@@ -251,6 +284,18 @@ class TestResourceAPI(FrappeAPITestCase):
 
 
 class TestMethodAPI(FrappeAPITestCase):
+<<<<<<< HEAD
+	METHOD_PATH = "/api/method"
+
+	def setUp(self):
+		if self._testMethodName == "test_auth_cycle":
+			from frappe.core.doctype.user.user import generate_keys
+
+			generate_keys("Administrator")
+			frappe.db.commit()
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_ping(self):
 		# test 2: test for /api/method/ping
 		response = self.get(self.method("ping"))
@@ -272,21 +317,35 @@ class TestMethodAPI(FrappeAPITestCase):
 		user = frappe.get_doc("User", "Administrator")
 		api_key, api_secret = user.api_key, user.get_password("api_secret")
 		authorization_token = f"{api_key}:{api_secret}"
+<<<<<<< HEAD
+		response = self.get(f"{self.METHOD_PATH}/frappe.auth.get_logged_user")
+=======
 		response = self.get(self.method("frappe.auth.get_logged_user"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.assertEqual(response.status_code, 200)
 		self.assertEqual(response.json["message"], "Administrator")
 
 		authorization_token = f"{api_key}:INCORRECT"
+<<<<<<< HEAD
+		response = self.get(f"{self.METHOD_PATH}/frappe.auth.get_logged_user")
+		self.assertEqual(response.status_code, 401)
+
+		authorization_token = "NonExistentKey:INCORRECT"
+		response = self.get(f"{self.METHOD_PATH}/frappe.auth.get_logged_user")
+=======
 		response = self.get(self.method("frappe.auth.get_logged_user"))
 		self.assertEqual(response.status_code, 401)
 
 		authorization_token = "NonExistentKey:INCORRECT"
 		response = self.get(self.method("frappe.auth.get_logged_user"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(response.status_code, 401)
 
 		authorization_token = None
 
+<<<<<<< HEAD
+=======
 	def test_404s(self):
 		response = self.get(self.get_path("rest"), {"sid": self.sid})
 		self.assertEqual(response.status_code, 404)
@@ -330,11 +389,17 @@ class TestMethodAPI(FrappeAPITestCase):
 
 		self.assertEqual(response.json["message"], test_data)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 class TestReadOnlyMode(FrappeAPITestCase):
 	"""During migration if read only mode can be enabled.
 	Test if reads work well and writes are blocked"""
 
+<<<<<<< HEAD
+	REQ_PATH = "/api/resource/ToDo"
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -344,16 +409,24 @@ class TestReadOnlyMode(FrappeAPITestCase):
 		update_site_config("maintenance_mode", 1)
 
 	def test_reads(self):
+<<<<<<< HEAD
+		response = self.get(self.REQ_PATH, {"sid": self.sid})
+=======
 		response = self.get(self.resource("ToDo"), {"sid": self.sid})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(response.status_code, 200)
 		self.assertIsInstance(response.json, dict)
 		self.assertIsInstance(response.json["data"], list)
 
 	def test_blocked_writes(self):
+<<<<<<< HEAD
+		response = self.post(self.REQ_PATH, {"description": frappe.mock("paragraph"), "sid": self.sid})
+=======
 		with suppress_stdout():
 			response = self.post(
 				self.resource("ToDo"), {"description": frappe.mock("paragraph"), "sid": self.sid}
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertEqual(response.status_code, 503)
 		self.assertEqual(response.json["exc_type"], "InReadOnlyMode")
 
@@ -362,7 +435,11 @@ class TestWSGIApp(FrappeAPITestCase):
 	def test_request_hooks(self):
 		self.addCleanup(lambda: _test_REQ_HOOK.clear())
 
+<<<<<<< HEAD
+		with patch_hooks(
+=======
 		with self.patch_hooks(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{
 				"before_request": ["frappe.tests.test_api.before_request"],
 				"after_request": ["frappe.tests.test_api.after_request"],
@@ -426,12 +503,21 @@ class TestResponse(FrappeAPITestCase):
 		self.assertIn("text/csv", response.headers["content-type"])
 		self.assertGreater(cint(response.headers["content-length"]), 0)
 
+<<<<<<< HEAD
+=======
 		from frappe.desk.utils import provide_binary_file
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		from frappe.utils.response import build_response
 
 		filename = "دفتر الأستاذ العام"
 		encoded_filename = filename.encode("utf-8").decode("unicode-escape", "ignore") + ".xlsx"
+<<<<<<< HEAD
+		frappe.response["type"] = "binary"
+		frappe.response["filecontent"] = "content"
+		frappe.response["filename"] = filename + ".xlsx"
+=======
 		provide_binary_file(filename, "xlsx", "content")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		response = build_response("binary")
 		self.assertEqual(response.status_code, 200)
@@ -466,6 +552,8 @@ class TestResponse(FrappeAPITestCase):
 		for redirect, expected_redirect in expected_redirects.items():
 			response = self.get(f"/login?{urlencode({'redirect-to':redirect})}", {"sid": self.sid})
 			self.assertEqual(response.location, expected_redirect)
+<<<<<<< HEAD
+=======
 
 
 def generate_admin_keys():
@@ -489,3 +577,4 @@ def test(*, fail=False, handled=True, message="Failed"):
 @frappe.whitelist(allow_guest=True)
 def test_array(data):
 	return data
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -7,7 +7,10 @@ const yargs = require("yargs");
 const cliui = require("cliui")();
 const chalk = require("chalk");
 const html_plugin = require("./frappe-html");
+<<<<<<< HEAD
+=======
 const vue_style_plugin = require("./frappe-vue-style");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 const rtlcss = require("rtlcss");
 const postCssPlugin = require("@frappe/esbuild-plugin-postcss2").default;
 const ignore_assets = require("./ignore-assets");
@@ -58,6 +61,8 @@ const argv = yargs
 		type: "boolean",
 		description: "Run build command for apps",
 	})
+<<<<<<< HEAD
+=======
 	.option("save-metafiles", {
 		type: "boolean",
 		description:
@@ -68,6 +73,7 @@ const argv = yargs
 		description:
 			"Skips build and uses cached build artifacts to update assets.json (used by Bench)",
 	})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	.example("node esbuild --apps frappe,erpnext", "Run build only for frappe and erpnext")
 	.example(
 		"node esbuild --files frappe/website.bundle.js,frappe/desk.bundle.js",
@@ -86,16 +92,33 @@ const RUN_BUILD_COMMAND = !WATCH_MODE && Boolean(argv["run-build-command"]);
 const TOTAL_BUILD_TIME = `${chalk.black.bgGreen(" DONE ")} Total Build Time`;
 const NODE_PATHS = [].concat(
 	// node_modules of apps directly importable
+<<<<<<< HEAD
+	app_list
+		.map((app) => path.resolve(get_app_path(app), "../node_modules"))
+		.filter(fs.existsSync),
+	// import js file of any app if you provide the full path
+	app_list.map((app) => path.resolve(get_app_path(app), "..")).filter(fs.existsSync)
+=======
 	app_list.map((app) => path.resolve(apps_path, app, "node_modules")).filter(fs.existsSync),
 	// import js file of any app if you provide the full path
 	app_list.map((app) => path.resolve(apps_path, app)).filter(fs.existsSync)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 );
 const USING_CACHED = Boolean(argv["using-cached"]);
 
+<<<<<<< HEAD
+execute()
+	.then(() => RUN_BUILD_COMMAND && run_build_command_for_apps(APPS))
+	.catch((e) => {
+		console.error(e);
+		throw e;
+	});
+=======
 execute().catch((e) => {
 	console.error(e);
 	process.exit(1);
 });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 if (WATCH_MODE) {
 	// listen for open files in editor event
@@ -286,7 +309,11 @@ function get_files_to_build(files) {
 }
 
 function build_files({ files, outdir }) {
+<<<<<<< HEAD
+	let build_plugins = [html_plugin, build_cleanup_plugin, vue()];
+=======
 	let build_plugins = [vue(), html_plugin, build_cleanup_plugin, vue_style_plugin];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return esbuild.build(get_build_options(files, outdir, build_plugins));
 }
 
@@ -322,8 +349,11 @@ function get_build_options(files, outdir, plugins) {
 		nodePaths: NODE_PATHS,
 		define: {
 			"process.env.NODE_ENV": JSON.stringify(PRODUCTION ? "production" : "development"),
+<<<<<<< HEAD
+=======
 			__VUE_OPTIONS_API__: JSON.stringify(true),
 			__VUE_PROD_DEVTOOLS__: JSON.stringify(false),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		plugins: plugins,
 		watch: get_watch_config(),
@@ -451,6 +481,9 @@ async function write_assets_json(metafile) {
 		}
 	}
 
+<<<<<<< HEAD
+	let assets_json_path = path.resolve(assets_path, `assets${rtl ? "-rtl" : ""}.json`);
+=======
 	let { obj: assets_json, path: assets_json_path } = await get_assets_json_path_and_obj(rtl);
 	// update with new values
 	let new_assets_json = Object.assign({}, assets_json, out);
@@ -488,6 +521,7 @@ async function update_assets_json_in_cache() {
 async function get_assets_json_path_and_obj(is_rtl) {
 	const file_name = is_rtl ? "assets-rtl.json" : "assets.json";
 	const assets_json_path = path.resolve(assets_path, file_name);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	let assets_json;
 	try {
 		assets_json = await fs.promises.readFile(assets_json_path, "utf-8");
@@ -495,7 +529,35 @@ async function get_assets_json_path_and_obj(is_rtl) {
 		assets_json = "{}";
 	}
 	assets_json = JSON.parse(assets_json);
+<<<<<<< HEAD
+	// update with new values
+	let new_assets_json = Object.assign({}, assets_json, out);
+	curr_assets_json = new_assets_json;
+
+	await fs.promises.writeFile(assets_json_path, JSON.stringify(new_assets_json, null, 4));
+	await update_assets_json_in_cache();
+	return {
+		new_assets_json,
+		prev_assets_json,
+	};
+}
+
+function update_assets_json_in_cache() {
+	// update assets_json cache in redis, so that it can be read directly by python
+	return new Promise((resolve) => {
+		let client = get_redis_subscriber("redis_cache");
+		// handle error event to avoid printing stack traces
+		client.on("error", (_) => {
+			log_warn("Cannot connect to redis_cache to update assets_json");
+		});
+		client.del("assets_json", (err) => {
+			client.unref();
+			resolve();
+		});
+	});
+=======
 	return { obj: assets_json, path: assets_json_path };
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 function run_build_command_for_apps(apps) {
@@ -535,12 +597,19 @@ function run_build_command_for_apps(apps) {
 
 async function notify_redis({ error, success, changed_files }) {
 	// notify redis which in turns tells socketio to publish this to browser
+<<<<<<< HEAD
+	let subscriber = get_redis_subscriber("redis_socketio");
+	subscriber.on("error", (_) => {
+		log_warn("Cannot connect to redis_socketio for browser events");
+	});
+=======
 	let subscriber = get_redis_subscriber("redis_queue");
 	try {
 		await subscriber.connect();
 	} catch (e) {
 		log_warn("Cannot connect to redis_queue for browser events");
 	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	let payload = null;
 	if (error) {
@@ -572,6 +641,12 @@ async function notify_redis({ error, success, changed_files }) {
 	);
 }
 
+<<<<<<< HEAD
+function open_in_editor() {
+	let subscriber = get_redis_subscriber("redis_socketio");
+	subscriber.on("error", (_) => {
+		log_warn("Cannot connect to redis_socketio for open_in_editor events");
+=======
 async function open_in_editor() {
 	let subscriber = get_redis_subscriber("redis_queue");
 	try {
@@ -585,6 +660,7 @@ async function open_in_editor() {
 		log("Opening file in editor:", file_path);
 		let launch = require("launch-editor");
 		launch(`${file_path}:${file.line}:${file.column}`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	});
 }
 

@@ -5,6 +5,7 @@ import json
 import os
 import re
 import timeit
+import typing
 from datetime import date, datetime, time
 
 import frappe
@@ -536,6 +537,10 @@ class ImportFile:
 			# subsequent rows that have blank values in parent columns
 			# are considered as child rows
 			parent_column_indexes = self.header.get_column_indexes(self.doctype)
+<<<<<<< HEAD
+			first_row.get_values(parent_column_indexes)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			data_without_first_row = data[1:]
 			for row in data_without_first_row:
@@ -588,10 +593,13 @@ class ImportFile:
 
 		file_content = None
 
+<<<<<<< HEAD
+=======
 		if self.console:
 			file_content = frappe.read_file(file_path, True)
 			return file_content, extn
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		file_name = frappe.db.get_value("File", {"file_url": file_path})
 		if file_name:
 			file = frappe.get_doc("File", file_name)

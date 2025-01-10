@@ -53,6 +53,11 @@ class WidgetDialog {
 			}
 		}
 
+<<<<<<< HEAD
+		let action = this.editing ? "Edit" : "Add";
+		let label = (action = action + " " + frappe.model.unscrub(this.type));
+		return __(label);
+=======
 		switch (this.type) {
 			case "chart":
 				return __("New Chart");
@@ -71,6 +76,7 @@ class WidgetDialog {
 			default:
 				return __("New {0}", [__(frappe.model.unscrub(this.type))]);
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_fields() {
@@ -176,6 +182,13 @@ class QuickListDialog extends WidgetDialog {
 						},
 					};
 				},
+<<<<<<< HEAD
+			},
+			{
+				fieldtype: "Column Break",
+				fieldname: "column_break_4",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 			{
 				fieldtype: "Data",
@@ -248,6 +261,11 @@ class CardDialog extends WidgetDialog {
 			{
 				fieldtype: "Data",
 				fieldname: "label",
+<<<<<<< HEAD
+				label: "Label",
+			},
+			{
+=======
 				label: __("Label"),
 			},
 			{
@@ -257,6 +275,7 @@ class CardDialog extends WidgetDialog {
 				max_height: "7rem",
 			},
 			{
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fieldname: "links",
 				fieldtype: "Table",
 				label: __("Card Links"),
@@ -267,6 +286,20 @@ class CardDialog extends WidgetDialog {
 				},
 				fields: [
 					{
+<<<<<<< HEAD
+						fieldname: "label",
+						fieldtype: "Data",
+						in_list_view: 1,
+						label: "Label",
+					},
+					{
+						fieldname: "icon",
+						fieldtype: "Icon",
+						label: "Icon",
+					},
+					{
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						fieldname: "link_type",
 						fieldtype: "Select",
 						in_list_view: 1,
@@ -294,6 +327,10 @@ class CardDialog extends WidgetDialog {
 						},
 					},
 					{
+<<<<<<< HEAD
+						fieldname: "column_break_7",
+						fieldtype: "Column Break",
+=======
 						fieldname: "label",
 						fieldtype: "Data",
 						in_list_view: 1,
@@ -303,6 +340,7 @@ class CardDialog extends WidgetDialog {
 						fieldname: "icon",
 						fieldtype: "Icon",
 						label: "Icon",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					},
 					{
 						fieldname: "dependencies",
@@ -391,7 +429,10 @@ class ShortcutDialog extends WidgetDialog {
 				label: __("Type"),
 				reqd: 1,
 				options: "DocType\nReport\nPage\nDashboard\nURL",
+<<<<<<< HEAD
+=======
 				initial_value: "DocType",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				onchange: () => {
 					if (this.dialog.get_value("type") == "DocType") {
 						this.dialog.fields_dict.link_to.get_query = () => {
@@ -409,6 +450,18 @@ class ShortcutDialog extends WidgetDialog {
 				},
 			},
 			{
+<<<<<<< HEAD
+				fieldtype: "Data",
+				fieldname: "label",
+				label: __("Label"),
+			},
+			{
+				fieldtype: "Column Break",
+				fieldname: "column_break_4",
+			},
+			{
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fieldtype: "Dynamic Link",
 				fieldname: "link_to",
 				label: __("Link To"),
@@ -428,7 +481,10 @@ class ShortcutDialog extends WidgetDialog {
 
 							const views = ["List", "Report Builder", "Dashboard", "New"];
 							if (meta.is_tree === 1) views.push("Tree");
+<<<<<<< HEAD
+=======
 							if (meta.image_field) views.push("Image");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							if (frappe.boot.calendars.includes(doctype)) views.push("Calendar");
 
 							const response = await frappe.db.get_value(
@@ -449,6 +505,11 @@ class ShortcutDialog extends WidgetDialog {
 			},
 			{
 				fieldtype: "Data",
+<<<<<<< HEAD
+				fieldname: "url",
+				label: __("URL"),
+				options: "URL",
+=======
 				fieldname: "label",
 				label: __("Label"),
 			},
@@ -456,6 +517,7 @@ class ShortcutDialog extends WidgetDialog {
 				fieldtype: "Data",
 				fieldname: "url",
 				label: __("URL"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				default: "",
 				depends_on: (s) => s.type == "URL",
 				mandatory_depends_on: (s) => s.type == "URL",
@@ -464,7 +526,11 @@ class ShortcutDialog extends WidgetDialog {
 				fieldtype: "Select",
 				fieldname: "doc_view",
 				label: __("DocType View"),
+<<<<<<< HEAD
+				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban",
+=======
 				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban\nImage",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				description: __(
 					"Which view of the associated DocType should this shortcut take you to?"
 				),
@@ -545,6 +611,13 @@ class ShortcutDialog extends WidgetDialog {
 						.find(".color-box")
 						.get(0).style.backgroundColor = `var(--text-on-${color})`;
 				},
+<<<<<<< HEAD
+			},
+			{
+				fieldtype: "Column Break",
+				fieldname: "column_break_3",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 			{
 				fieldtype: "Data",
@@ -579,11 +652,15 @@ class ShortcutDialog extends WidgetDialog {
 		data.label = data.label ? data.label : frappe.model.unscrub(data.link_to);
 
 		if (data.url) {
+<<<<<<< HEAD
+			!validate_url(data.url) &&
+=======
 			let _url = data.url;
 			if (data.url.startsWith("/")) {
 				_url = frappe.urllib.get_base_url() + data.url;
 			}
 			!validate_url(_url) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frappe.throw({
 					message: __("<b>{0}</b> is not a valid URL", [data.url]),
 					title: __("Invalid URL"),
@@ -612,7 +689,11 @@ class NumberCardDialog extends WidgetDialog {
 				{
 					fieldtype: "Link",
 					fieldname: "number_card_name",
+<<<<<<< HEAD
+					label: __("Number Cards"),
+=======
 					label: __("Number Card"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					options: "Number Card",
 					reqd: 1,
 					get_query: () => {
@@ -690,6 +771,16 @@ class NumberCardDialog extends WidgetDialog {
 				mandatory_depends_on: 'eval: doc.new_or_existing == "New Card"',
 			},
 			{
+<<<<<<< HEAD
+				label: __("Function"),
+				fieldname: "function",
+				fieldtype: "Select",
+				options: ["Count", "Sum", "Average", "Minimum", "Maximum"],
+				mandatory_depends_on: 'eval: doc.new_or_existing == "New Card"',
+			},
+			{
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				label: __("Function Based On"),
 				fieldname: "aggregate_function_based_on",
 				fieldtype: "Select",

@@ -15,7 +15,11 @@ import frappe
 from frappe import _
 from frappe.database.schema import SPECIAL_CHAR_PATTERN
 from frappe.model.document import Document
+<<<<<<< HEAD
+from frappe.permissions import get_doctypes_with_read
+=======
 from frappe.permissions import SYSTEM_USER_ROLE, get_doctypes_with_read
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import call_hook_method, cint, get_files_path, get_hook_method, get_url
 from frappe.utils.file_manager import is_safe_path
 from frappe.utils.image import optimize_image, strip_exif_data
@@ -98,7 +102,10 @@ class File(Document):
 		self.set_file_name()
 		self.validate_attachment_limit()
 		self.set_file_type()
+<<<<<<< HEAD
+=======
 		self.validate_file_extension()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if self.is_folder:
 			return
@@ -112,6 +119,8 @@ class File(Document):
 
 		self.validate_duplicate_entry()  # Hash is generated in save_file
 
+		self.validate_duplicate_entry()  # Hash is generated in save_file
+
 	def after_insert(self):
 		if not self.is_folder:
 			self.create_attachment_record()
@@ -119,6 +128,13 @@ class File(Document):
 	def validate(self):
 		if self.is_folder:
 			return
+
+<<<<<<< HEAD
+		# Ensure correct formatting and type
+		self.file_url = unquote(self.file_url) if self.file_url else ""
+=======
+		self.validate_attachment_references()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.validate_attachment_references()
 
@@ -521,7 +537,11 @@ class File(Document):
 	def exists_on_disk(self):
 		return os.path.exists(self.get_full_path())
 
+<<<<<<< HEAD
+	def get_content(self) -> bytes:
+=======
 	def get_content(self, encodings=None) -> bytes | str:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if self.is_folder:
 			frappe.throw(_("Cannot get file contents of a Folder"))
 
@@ -799,12 +819,22 @@ def on_doctype_update():
 	frappe.db.add_index("File", ["attached_to_doctype", "attached_to_name"])
 
 
+<<<<<<< HEAD
+def has_permission(doc, ptype=None, user=None):
+=======
 def has_permission(doc, ptype=None, user=None, debug=False):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	user = user or frappe.session.user
 
 	if user == "Administrator":
 		return True
 
+<<<<<<< HEAD
+	if ptype == "create":
+		return frappe.has_permission("File", "create", user=user)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if not doc.is_private and ptype in ("read", "select"):
 		return True
 
@@ -822,9 +852,15 @@ def has_permission(doc, ptype=None, user=None, debug=False):
 			return False
 
 		if ptype in ["write", "create", "delete"]:
+<<<<<<< HEAD
+			return ref_doc.has_permission("write")
+		else:
+			return ref_doc.has_permission("read")
+=======
 			return ref_doc.has_permission("write", debug=debug, user=user)
 		else:
 			return ref_doc.has_permission("read", debug=debug, user=user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return False
 
@@ -834,7 +870,11 @@ def get_permission_query_conditions(user: str | None = None) -> str:
 	if user == "Administrator":
 		return ""
 
+<<<<<<< HEAD
+	if frappe.get_cached_value("User", user, "user_type") != "System User":
+=======
 	if SYSTEM_USER_ROLE not in frappe.get_roles(user):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return f""" `tabFile`.`owner` = {frappe.db.escape(user)} """
 
 	readable_doctypes = ", ".join(repr(dt) for dt in get_doctypes_with_read())

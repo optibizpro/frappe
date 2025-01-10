@@ -91,7 +91,11 @@ function fuzzy_match_recursive(
 			.replace(/[\u0300-\u036f]/g, "")
 			.toLowerCase();
 		// Match found.
+<<<<<<< HEAD
+		if (pattern[pattern_cur_index].toLowerCase() === str[str_curr_index].toLowerCase()) {
+=======
 		if (normalized_pattern_char === normalized_str_char) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (next_match >= max_matches) {
 				return [false, out_score, matches];
 			}

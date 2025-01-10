@@ -103,6 +103,8 @@ class SMTPServer:
 				_("Invalid Outgoing Mail Server or Port: {0}").format(str(e)),
 				title=_("Incorrect Configuration"),
 			)
+<<<<<<< HEAD
+=======
 
 	def _enqueue_connection_closure(self):
 		if frappe.request and hasattr(frappe.request, "after_response"):
@@ -114,6 +116,7 @@ class SMTPServer:
 			import atexit
 
 			atexit.register(self.quit)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def is_session_active(self):
 		if self._session:

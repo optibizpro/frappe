@@ -2,6 +2,13 @@
 # License: MIT. See LICENSE
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.website.doctype.website_settings.website_settings import get_website_settings
+
+
+class TestWebsiteSettings(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.website.doctype.website_settings.website_settings import get_website_settings
 
@@ -16,6 +23,7 @@ class UnitTestWebsiteSettings(UnitTestCase):
 
 
 class TestWebsiteSettings(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_child_items_in_top_bar(self):
 		ws = frappe.get_doc("Website Settings")
 		ws.append(

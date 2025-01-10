@@ -123,7 +123,11 @@ class BaseTimeline {
 		if (item.icon) {
 			timeline_item.append(`
 				<div class="timeline-badge" title='${item.title || frappe.utils.to_title_case(item.icon)}'>
+<<<<<<< HEAD
+					${frappe.utils.icon(item.icon, item.icon_size || "md")}
+=======
 					${frappe.utils.icon(item.icon, item.icon_size || "md", item.icon_class || "")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				</div>
 			`);
 		} else if (item.timeline_badge) {

@@ -5,6 +5,28 @@ frappe.ui.misc.about = function () {
 
 		$(d.body).html(
 			repl(
+<<<<<<< HEAD
+				"<div>\
+		<p>" +
+					__("Open Source Applications for the Web") +
+					"</p>  \
+		<p><i class='fa fa-globe fa-fw'></i>\
+			Website: <a href='https://optibizpro.com' target='_blank'>https://optibizpro.com</a></p>\
+		<p><i class='fa fa-github fa-fw'></i>\
+			Source: <a href='https://github.com/optibizpro' target='_blank'>https://github.com/optibizpro</a></p>\
+		<p><i class='fa fa-linkedin fa-fw'></i>\
+			Linkedin: <a href='https://linkedin.com/company/optibizpro' target='_blank'>https://linkedin.com/company/optibizpro</a></p>\
+		<p><i class='fa fa-facebook fa-fw'></i>\
+			Facebook: <a href='https://facebook.com/optibizpro' target='_blank'>https://facebook.com/optibizpro</a></p>\
+		<p><i class='fa fa-twitter fa-fw'></i>\
+			Twitter: <a href='https://twitter.com/optibizpro' target='_blank'>https://twitter.com/optibizpro</a></p>\
+		<hr>\
+		<h4>Installed Apps</h4>\
+		<div id='about-app-versions'>Loading versions...</div>\
+		<hr>\
+		<p class='text-muted'>&copy; Frappe Technologies Pvt. Ltd. and contributors </p> \
+		</div>",
+=======
 				`<div>
 					<p>${__("Open Source Applications for the Web")}</p>
 					<p><i class='fa fa-globe fa-fw'></i>
@@ -34,6 +56,7 @@ frappe.ui.misc.about = function () {
 					<hr>
 					<p class='text-muted'>${__("&copy; Frappe Technologies Pvt. Ltd. and contributors")} </p>
 					</div>`,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				frappe.app
 			)
 		);
@@ -57,15 +80,24 @@ frappe.ui.misc.about = function () {
 			var $wrap = $("#about-app-versions").empty();
 			$.each(Object.keys(versions).sort(), function (i, key) {
 				var v = versions[key];
+<<<<<<< HEAD
+				if (v.branch) {
+					var text = $.format("<p><b>{0}:</b> v{1} ({2})<br></p>", [
+=======
 				let text;
 				if (v.branch) {
 					text = $.format("<p><b>{0}:</b> v{1} ({2})<br></p>", [
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						v.title,
 						v.branch_version || v.version,
 						v.branch,
 					]);
 				} else {
+<<<<<<< HEAD
+					var text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
+=======
 					text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 				$(text).appendTo($wrap);
 			});

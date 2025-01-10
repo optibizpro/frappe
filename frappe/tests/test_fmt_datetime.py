@@ -3,7 +3,11 @@
 import datetime
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import (
 	format_datetime,
 	format_time,
@@ -33,7 +37,11 @@ test_time_formats = {
 }
 
 
+<<<<<<< HEAD
+class TestFmtDatetime(FrappeTestCase):
+=======
 class TestFmtDatetime(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Tests date, time and datetime formatters and some associated
 	utility functions. These rely on the system-wide date and time
 	formats.

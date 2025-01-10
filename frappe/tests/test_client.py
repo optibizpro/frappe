@@ -3,11 +3,18 @@
 from unittest.mock import patch
 
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestClient(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.utils import get_site_url
 
 
 class TestClient(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_set_value(self):
 		todo = frappe.get_doc(doctype="ToDo", description="test").insert()
 		frappe.set_value("ToDo", todo.name, "description", "test 1")
@@ -132,9 +139,13 @@ class TestClient(IntegrationTestCase):
 			"accept": "application/json",
 			"content-type": "application/json",
 		}
+<<<<<<< HEAD
+		url = f"http://{frappe.local.site}:{frappe.conf.webserver_port}/api/method/frappe.client.get_list"
+=======
 		url = get_site_url(frappe.local.site)
 		url += "/api/method/frappe.client.get_list"
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		res = requests.post(url, json=params, headers=headers)
 		self.assertEqual(res.status_code, 200)
 		data = res.json()
@@ -234,8 +245,13 @@ class TestClient(IntegrationTestCase):
 		docs = insert_many(doc_list)
 
 		self.assertEqual(len(docs), 7)
+<<<<<<< HEAD
+		self.assertEqual(docs[3], "not-a-random-title")
+		self.assertEqual(docs[6], "another-note-title")
+=======
 		self.assertEqual(frappe.db.get_value("Note", docs[3], "title"), "not-a-random-title")
 		self.assertEqual(frappe.db.get_value("Note", docs[6], "title"), "another-note-title")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertIn(note1.name, docs)
 
 		# cleanup

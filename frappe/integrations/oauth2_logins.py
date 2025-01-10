@@ -44,11 +44,14 @@ def login_via_fairlogin(code: str, state: str):
 
 
 @frappe.whitelist(allow_guest=True)
+<<<<<<< HEAD
+=======
 def login_via_keycloak(code: str, state: str):
 	login_via_oauth2("keycloak", code, state, decoder=decoder_compat)
 
 
 @frappe.whitelist(allow_guest=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def custom(code: str, state: str):
 	"""
 	Callback for processing code and state for user added providers

@@ -14,8 +14,12 @@ import requests
 import frappe
 from frappe.tests.utils import make_test_records
 
+<<<<<<< HEAD
+from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
+=======
 from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
 from .testing.result import TestResult
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 click_ctx = click.get_current_context(True)
 if click_ctx:
@@ -35,12 +39,15 @@ class ParallelTestRunner:
 		self.build_number = frappe.utils.cint(build_number) or 1
 		self.total_builds = frappe.utils.cint(total_builds)
 		self.dry_run = dry_run
+<<<<<<< HEAD
+=======
 		self.test_file_list = []
 		self.total_test_weight = 0
 		self.test_result = None
 		self.setup_test_file_list()
 
 	def setup_and_run(self):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.setup_test_site()
 		self.run_tests()
 		self.print_result()
@@ -56,7 +63,10 @@ class ParallelTestRunner:
 		frappe.flags.in_test = True
 		frappe.clear_cache()
 		frappe.utils.scheduler.disable_scheduler()
+<<<<<<< HEAD
+=======
 		_decorate_all_methods_and_functions_with_type_checker()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.before_test_setup()
 
 	def before_test_setup(self):
@@ -92,6 +102,9 @@ class ParallelTestRunner:
 			print("running tests from", "/".join(file_info))
 			return
 
+<<<<<<< HEAD
+		frappe.set_user("Administrator")
+=======
 		if frappe.session.user != "Administrator":
 			from frappe.deprecation_dumpster import deprecation_warning
 
@@ -101,6 +114,7 @@ class ParallelTestRunner:
 				"Setting the test environment user to 'Administrator' by the test runner is deprecated. The UnitTestCase now ensures a consistent user environment on set up and tear down at the class level. ",
 			)
 			frappe.set_user("Administrator")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		path, filename = file_info
 		module = self.get_module(path, filename)
 		from frappe.deprecation_dumpster import compat_preload_test_records_upfront
@@ -141,15 +155,55 @@ class ParallelTestRunner:
 		# Load balance based on total # of tests ~ each runner should get roughly same # of tests.
 		test_list = get_all_tests(self.app)
 
+<<<<<<< HEAD
+		test_counts = [self.get_test_count(test) for test in test_list]
+=======
 		test_counts = [self.get_test_weight(test) for test in test_list]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		test_chunks = split_by_weight(test_list, test_counts, chunk_count=self.total_builds)
 
 		return test_chunks[self.build_number - 1]
 
 	@staticmethod
+<<<<<<< HEAD
+	def get_test_count(test):
+		"""Get approximate count of tests inside a file"""
+		file_name = "/".join(test)
+
+		with open(file_name) as f:
+			test_count = f.read().count("def test_")
+
+		return test_count
+
+
+def split_by_weight(work, weights, chunk_count):
+	"""Roughly split work by respective weight while keep ordering."""
+	expected_weight = sum(weights) // chunk_count
+
+	chunks = [[] for _ in range(chunk_count)]
+
+	chunk_no = 0
+	chunk_weight = 0
+
+	for task, weight in zip(work, weights, strict=False):
+		if chunk_weight > expected_weight:
+			chunk_weight = 0
+			chunk_no += 1
+			assert chunk_no < chunk_count
+
+		chunks[chunk_no].append(task)
+		chunk_weight += weight
+
+	assert len(work) == sum(len(chunk) for chunk in chunks)
+	assert len(chunks) == chunk_count
+
+	return chunks
+
+=======
 	def get_test_weight(test):
 		"""Get approximate count of tests inside a file"""
 		file_name = "/".join(test)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		test_weight = TEST_WEIGHT_OVERRIDES.get(test[-1]) or 1
 

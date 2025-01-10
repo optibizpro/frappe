@@ -2,14 +2,22 @@ from unittest.mock import patch
 
 import frappe
 from frappe import get_hooks
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 from frappe.website.page_renderers.static_page import StaticPage
 from frappe.website.serve import get_response, get_response_content
 from frappe.website.utils import build_response, clear_website_cache, get_home_page
 
 
+<<<<<<< HEAD
+class TestWebsite(FrappeTestCase):
+=======
 class TestWebsite(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		frappe.set_user("Guest")
 		self._clearRequest()
@@ -164,11 +172,14 @@ class TestWebsite(IntegrationTestCase):
 			dict(source=r"/testfromregex.*", target=r"://testto2"),
 			dict(source=r"/testsub/(.*)", target=r"://testto3/\1"),
 			dict(source=r"/courses/course\?course=(.*)", target=r"/courses/\1", match_with_query_string=True),
+<<<<<<< HEAD
+=======
 			dict(
 				source="/test307",
 				target="/test",
 				redirect_http_status=307,
 			),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		]
 
 		website_settings = frappe.get_doc("Website Settings")
@@ -355,9 +366,14 @@ class TestWebsite(IntegrationTestCase):
 		FILES_TO_SKIP = choices(list(WWW.glob("**/*.py*")), k=10)
 
 		for suffix in FILES_TO_SKIP:
+<<<<<<< HEAD
+			content = get_response_content(suffix.relative_to(WWW))
+			self.assertIn("404", content)
+=======
 			path: str = suffix.relative_to(WWW).as_posix()
 			content = get_response_content(path)
 			self.assertIn("<title>Not Found</title>", content)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_metatags(self):
 		content = get_response_content("/_test/_test_metatags")

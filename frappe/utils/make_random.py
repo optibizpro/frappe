@@ -18,7 +18,11 @@ def add_random_children(doc: "Document", fieldname: str, rows, randomize: dict, 
 	if rows > 1:
 		nrows = random.randrange(1, rows)
 
+<<<<<<< HEAD
+	for _i in range(nrows):
+=======
 	for _ in range(nrows):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		d = {}
 		for key, val in randomize.items():
 			if isinstance(val[0], str):

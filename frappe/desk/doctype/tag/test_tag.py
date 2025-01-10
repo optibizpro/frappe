@@ -1,6 +1,12 @@
 import frappe
 from frappe.desk.doctype.tag.tag import add_tag
 from frappe.desk.reportview import get_stats
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestTag(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -14,6 +20,7 @@ class UnitTestTag(UnitTestCase):
 
 
 class TestTag(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self) -> None:
 		frappe.db.delete("Tag")
 		frappe.db.sql("UPDATE `tabDocType` set _user_tags=''")

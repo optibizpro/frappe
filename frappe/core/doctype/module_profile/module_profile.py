@@ -8,6 +8,9 @@ class ModuleProfile(Document):
 	# begin: auto-generated types
 	# This code is auto-generated. Do not modify anything in this block.
 
+<<<<<<< HEAD
+		self.set_onload("all_modules", sorted(m.get("module_name") for m in get_modules_from_all_apps()))
+=======
 	from typing import TYPE_CHECKING
 
 	if TYPE_CHECKING:
@@ -25,3 +28,4 @@ class ModuleProfile(Document):
 
 	def get_permission_log_options(self, event=None):
 		return {"fields": ["block_modules"]}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

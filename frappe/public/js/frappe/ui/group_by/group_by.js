@@ -229,8 +229,13 @@ frappe.ui.GroupBy = class {
 		this.page.wrapper.find(".sort-selector").before(
 			$(`<div class="group-by-selector">
 				<button class="btn btn-default btn-sm group-by-button ellipsis">
+<<<<<<< HEAD
+					<span class="group-by-icon">
+						${frappe.utils.icon("group-by")}
+=======
 					<span class="group-by-icon button-icon">
 						${frappe.utils.icon("es-line-folder-alt")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</span>
 					<span class="button-label hidden-xs">
 						${__("Add Group")}
@@ -325,12 +330,20 @@ frappe.ui.GroupBy = class {
 			);
 
 			if (this.aggregate_function === "sum") {
+<<<<<<< HEAD
+				docfield.label = __("Sum of {0}", [__(docfield.label)]);
+=======
 				docfield.label = __("Sum of {0}", [__(docfield.label, null, docfield.parent)]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			} else {
 				if (docfield.fieldtype == "Int") {
 					docfield.fieldtype = "Float"; // average of ints can be a float
 				}
+<<<<<<< HEAD
+				docfield.label = __("Average of {0}", [__(docfield.label)]);
+=======
 				docfield.label = __("Average of {0}", [__(docfield.label, null, docfield.parent)]);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		}
 
@@ -367,6 +380,24 @@ frappe.ui.GroupBy = class {
 		this.group_by_fields = {};
 		this.all_fields = {};
 
+<<<<<<< HEAD
+		const fields = this.report_view.meta.fields.filter((f) =>
+			[
+				"Select",
+				"Link",
+				"Data",
+				"Int",
+				"Check",
+				"Dynamic Link",
+				"Autocomplete",
+				"Date",
+			].includes(f.fieldtype)
+		);
+		const tag_field = { fieldname: "_user_tags", fieldtype: "Data", label: __("Tags") };
+		this.group_by_fields[this.doctype] = fields
+			.concat(tag_field)
+			.sort((a, b) => __(cstr(a.label)).localeCompare(cstr(__(b.label))));
+=======
 		let excluded_fields = ["_liked_by", "idx", "name"];
 		const standard_fields = frappe.model.std_fields.filter(
 			(df) => !excluded_fields.includes(df.fieldname)
@@ -389,6 +420,7 @@ frappe.ui.GroupBy = class {
 		this.group_by_fields[this.doctype] = fields.sort((a, b) =>
 			__(cstr(a.label)).localeCompare(cstr(__(b.label)))
 		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.all_fields[this.doctype] = this.report_view.meta.fields;
 
 		const standard_fields_filter = (df) =>
@@ -412,9 +444,13 @@ frappe.ui.GroupBy = class {
 	update_group_by_button() {
 		const group_by_applied = Boolean(this.group_by_field);
 		const button_label = group_by_applied
+<<<<<<< HEAD
+			? __("Group By {0}", [this.get_group_by_field_label()])
+=======
 			? __("Grouped by <span style='font-weight:600;'>{0}</b>", [
 					this.get_group_by_field_label(),
 			  ])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			: __("Add Group");
 
 		this.group_by_button
@@ -424,6 +460,16 @@ frappe.ui.GroupBy = class {
 		this.group_by_button.find(".group-by-icon").toggleClass("active", group_by_applied);
 
 		this.group_by_button.find(".button-label").html(button_label);
+<<<<<<< HEAD
+		this.group_by_button.attr("title", button_label);
+	}
+
+	get_group_by_field_label() {
+		let field = this.group_by_fields[this.group_by_doctype].find(
+			(field) => field.fieldname == this.group_by_field
+		);
+		return field?.label || field?.fieldname;
+=======
 		this.group_by_button.attr(
 			"title",
 			`Results are Grouped by ${this.get_group_by_field_label()}`
@@ -435,5 +481,6 @@ frappe.ui.GroupBy = class {
 			(field) => field.fieldname == this.group_by_field
 		);
 		return field?.label ? __(field.label, null, field.parent) : field?.fieldname;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };

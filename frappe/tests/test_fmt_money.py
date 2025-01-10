@@ -1,11 +1,19 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import fmt_money
+
+
+class TestFmtMoney(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.utils import fmt_money
 
 
 class TestFmtMoney(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_standard(self):
 		frappe.db.set_default("number_format", "#,###.##")
 		self.assertEqual(fmt_money(100), "100.00")
@@ -100,3 +108,13 @@ class TestFmtMoney(IntegrationTestCase):
 		frappe.db.set_value("Currency", "JPY", "symbol_on_right", 1)
 		self.assertEqual(fmt_money(100.0, format="#,###.##", currency="JPY"), "100.00 ¥")
 		self.assertEqual(fmt_money(100.0, format="#,###.##", currency="USD"), "$ 100.00")
+<<<<<<< HEAD
+
+
+if __name__ == "__main__":
+	import unittest
+
+	frappe.connect()
+	unittest.main()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

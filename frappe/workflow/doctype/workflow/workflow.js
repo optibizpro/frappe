@@ -5,6 +5,8 @@ frappe.ui.form.on("Workflow", {
 		frm.set_query("document_type", { issingle: 0, istable: 0 });
 	},
 	refresh: function (frm) {
+<<<<<<< HEAD
+=======
 		frm.layout.message.empty();
 		let title, note;
 		let workflow_builder_url = "/app/workflow-builder";
@@ -40,6 +42,7 @@ frappe.ui.form.on("Workflow", {
 
 		frm.layout.show_message(message);
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (frm.doc.document_type) {
 			frm.add_custom_button(__("Go to {0} List", [frm.doc.document_type]), () => {
 				frappe.set_route("List", frm.doc.document_type);
@@ -76,6 +79,8 @@ frappe.ui.form.on("Workflow", {
 		if (frm.ignore_warning) {
 			return;
 		}
+<<<<<<< HEAD
+=======
 
 		let updated_states = [];
 		frm.doc.states.forEach((row) => {
@@ -93,6 +98,7 @@ frappe.ui.form.on("Workflow", {
 			);
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return frm.trigger("get_orphaned_states_and_count").then(() => {
 			if (frm.states && frm.states.length) {
 				frappe.validated = false;
@@ -105,8 +111,21 @@ frappe.ui.form.on("Workflow", {
 	},
 	update_field_options: function (frm) {
 		var doc = frm.doc;
+<<<<<<< HEAD
+		if (doc.document_type) {
+			const get_field_method =
+				"frappe.workflow.doctype.workflow.workflow.get_fieldnames_for";
+			frappe.xcall(get_field_method, { doctype: doc.document_type }).then((resp) => {
+				frm.fields_dict.states.grid.update_docfield_property(
+					"update_field",
+					"options",
+					[""].concat(resp)
+				);
+			});
+=======
 		if (!doc.document_type) {
 			return;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		frappe.model.with_doctype(doc.document_type, () => {
 			const fieldnames = frappe
@@ -218,11 +237,14 @@ frappe.ui.form.on("Workflow", {
 });
 
 frappe.ui.form.on("Workflow Document State", {
+<<<<<<< HEAD
+=======
 	state: function (_, cdt, cdn) {
 		var row = locals[cdt][cdn];
 		delete row.workflow_builder_id;
 	},
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	states_remove: function (frm) {
 		frm.trigger("get_orphaned_states_and_count").then(() => {
 			frm.trigger("render_state_table");

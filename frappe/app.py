@@ -1,7 +1,10 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+<<<<<<< HEAD
+=======
 import functools
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import gc
 import logging
 import os
@@ -24,10 +27,16 @@ import frappe.utils.response
 from frappe import _
 from frappe.auth import SAFE_HTTP_METHODS, UNSAFE_HTTP_METHODS, HTTPRequest, validate_auth
 from frappe.middlewares import StaticDataMiddleware
+<<<<<<< HEAD
+from frappe.utils import cint, get_site_name, sanitize_html
+from frappe.utils.data import escape_html
+from frappe.utils.error import make_error_snapshot
+=======
 from frappe.utils import CallbackManager, cint, get_site_name
 from frappe.utils.data import escape_html
 from frappe.utils.error import log_error_snapshot
 from frappe.website.page_renderers.error_page import ErrorPage
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.website.serve import get_response
 
 _site = None
@@ -67,6 +76,38 @@ import frappe.website.website_generator  # web page doctypes
 # end: module pre-loading
 
 
+<<<<<<< HEAD
+# If gc.freeze is done then importing modules before forking allows us to share the memory
+if frappe._tune_gc:
+	import babel.dates
+	import bleach
+	import num2words
+
+	import frappe.boot
+	import frappe.client
+	import frappe.core.doctype.file.file
+	import frappe.core.doctype.user.user
+	import frappe.database.mariadb.database  # Load database related utils
+	import frappe.database.query
+	import frappe.desk.desktop  # workspace
+	import frappe.desk.form.save
+	import frappe.model.db_query
+	import frappe.query_builder
+	import frappe.utils.background_jobs  # Enqueue is very common
+	import frappe.utils.data  # common utils
+	import frappe.utils.jinja  # web page rendering
+	import frappe.utils.jinja_globals
+	import frappe.utils.redis_wrapper  # Exact redis_wrapper
+	import frappe.utils.safe_exec
+	import frappe.website.path_resolver  # all the page types and resolver
+	import frappe.website.router  # Website router
+	import frappe.website.website_generator  # web page doctypes
+
+# end: module pre-loading
+
+
+@local_manager.middleware
+=======
 def after_response_wrapper(app):
 	"""Wrap a WSGI application to call after_response hooks after we have responded.
 
@@ -88,6 +129,7 @@ def after_response_wrapper(app):
 
 
 @after_response_wrapper
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @Request.application
 def application(request: Request):
 	response = None
@@ -97,7 +139,11 @@ def application(request: Request):
 
 		init_request(request)
 
+<<<<<<< HEAD
+		frappe.api.validate_auth()
+=======
 		validate_auth()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if request.method == "OPTIONS":
 			response = Response()
@@ -142,7 +188,11 @@ def application(request: Request):
 		# this function *must* always return a response, hence any exception thrown outside of
 		# try..catch block like this finally block needs to be handled appropriately.
 
+<<<<<<< HEAD
+		if request.method in UNSAFE_HTTP_METHODS and frappe.db and rollback:
+=======
 		if rollback and request.method in UNSAFE_HTTP_METHODS and frappe.db:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.db.rollback()
 
 		try:
@@ -172,7 +222,11 @@ def init_request(request):
 	frappe.local.is_ajax = frappe.get_request_header("X-Requested-With") == "XMLHttpRequest"
 
 	site = _site or request.headers.get("X-Frappe-Site-Name") or get_site_name(request.host)
+<<<<<<< HEAD
+	frappe.init(site=site, sites_path=_sites_path, force=True)
+=======
 	frappe.init(site, sites_path=_sites_path, force=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not (frappe.local.conf and frappe.local.conf.db_name):
 		# site does not exist
@@ -196,6 +250,27 @@ def init_request(request):
 
 	if request.method != "OPTIONS":
 		frappe.local.http_request = HTTPRequest()
+
+	for before_request_task in frappe.get_hooks("before_request"):
+		frappe.call(before_request_task)
+
+
+def setup_read_only_mode():
+	"""During maintenance_mode reads to DB can still be performed to reduce downtime. This
+	function sets up read only mode
+
+	- Setting global flag so other pages, desk and database can know that we are in read only mode.
+	- Setup read only database access either by:
+	    - Connecting to read replica if one exists
+	    - Or setting up read only SQL transactions.
+	"""
+	frappe.flags.read_only = True
+
+	# If replica is available then just connect replica, else setup read only transaction.
+	if frappe.conf.read_from_replica:
+		frappe.connect_replica()
+	else:
+		frappe.db.begin(read_only=True)
 
 	for before_request_task in frappe.get_hooks("before_request"):
 		frappe.call(before_request_task)
@@ -318,6 +393,15 @@ def make_form_dict(request: Request):
 		args.update(request.args or {})
 		args.update(request.form or {})
 
+<<<<<<< HEAD
+	if not isinstance(args, dict):
+		frappe.throw(_("Invalid request arguments"))
+
+	frappe.local.form_dict = frappe._dict(args)
+
+	# _ is passed by $.ajax so that the request is not cached by the browser. So, remove _ from form_dict
+	frappe.local.form_dict.pop("_", None)
+=======
 	if isinstance(args, dict):
 		frappe.local.form_dict = frappe._dict(args)
 		# _ is passed by $.ajax so that the request is not cached by the browser. So, remove _ from form_dict
@@ -326,6 +410,7 @@ def make_form_dict(request: Request):
 		frappe.local.form_dict["data"] = args
 	else:
 		frappe.throw(_("Invalid request arguments"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def handle_exception(e):
@@ -333,8 +418,16 @@ def handle_exception(e):
 	http_status_code = getattr(e, "http_status_code", 500)
 	accept_header = frappe.get_request_header("Accept") or ""
 	respond_as_json = (
+<<<<<<< HEAD
+		frappe.get_request_header("Accept")
+		and (frappe.local.is_ajax or "application/json" in accept_header)
+		or (frappe.local.request.path.startswith("/api/") and not accept_header.startswith("text"))
+	)
+	allow_traceback = frappe.get_system_settings("allow_error_traceback") if frappe.db else False
+=======
 		frappe.get_request_header("Accept") and (frappe.local.is_ajax or "application/json" in accept_header)
 	) or (frappe.local.request.path.startswith("/api/") and not accept_header.startswith("text"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not frappe.session.user:
 		# If session creation fails then user won't be unset. This causes a lot of code that
@@ -382,9 +475,21 @@ def handle_exception(e):
 		response = frappe.rate_limiter.respond()
 
 	else:
+<<<<<<< HEAD
+		traceback = "<pre>" + escape_html(frappe.get_traceback()) + "</pre>"
+		# disable traceback in production if flag is set
+		if frappe.local.flags.disable_traceback or not allow_traceback and not frappe.local.dev_server:
+			traceback = ""
+
+		frappe.respond_as_web_page(
+			"Server Error", traceback, http_status_code=http_status_code, indicator_color="red", width=640
+		)
+		return_as_message = True
+=======
 		response = ErrorPage(
 			http_status_code=http_status_code, title=_("Server Error"), message=_("Uncaught Exception")
 		).render()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if e.__class__ == frappe.AuthenticationError:
 		if hasattr(frappe.local, "login_manager"):
@@ -412,11 +517,18 @@ def sync_database(rollback: bool) -> bool:
 	# update session
 	if session := getattr(frappe.local, "session_obj", None):
 		if session.update():
+<<<<<<< HEAD
+			frappe.db.commit()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			rollback = False
 
 	return rollback
 
 
+<<<<<<< HEAD
+def serve(port=8000, profile=False, no_reload=False, no_threading=False, site=None, sites_path="."):
+=======
 # Always initialize sentry SDK if the DSN is sent
 if sentry_dsn := os.getenv("FRAPPE_SENTRY_DSN"):
 	import sentry_sdk
@@ -473,6 +585,7 @@ def serve(
 	sites_path=".",
 	proxy=False,
 ):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	global application, _site, _sites_path
 	_site = site
 	_sites_path = sites_path
@@ -483,7 +596,11 @@ def serve(
 		application = ProfilerMiddleware(application, sort_by=("cumtime", "calls"))
 
 	if not os.environ.get("NO_STATICS"):
+<<<<<<< HEAD
+		application = SharedDataMiddleware(application, {"/assets": str(os.path.join(sites_path, "assets"))})
+=======
 		application = application_with_statics()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if proxy or os.environ.get("USE_PROXY"):
 		application = ProxyFix(application, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
@@ -510,6 +627,20 @@ def serve(
 	)
 
 
+<<<<<<< HEAD
+# Both Gunicorn and RQ use forking to spawn workers. In an ideal world, the fork should be sharing
+# most of the memory if there are no writes made to data because of Copy on Write, however,
+# python's GC is not CoW friendly and writes to data even if user-code doesn't. Specifically, the
+# generational GC which stores and mutates every python object: `PyGC_Head`
+#
+# Calling gc.freeze() moves all the objects imported so far into permanant generation and hence
+# doesn't mutate `PyGC_Head`
+#
+# Refer to issue for more info: https://github.com/frappe/frappe/issues/18927
+if frappe._tune_gc:
+	gc.collect()  # clean up any garbage created so far before freeze
+	gc.freeze()
+=======
 def application_with_statics():
 	global application, _sites_path
 
@@ -518,3 +649,4 @@ def application_with_statics():
 	application = StaticDataMiddleware(application, {"/files": str(os.path.abspath(_sites_path))})
 
 	return application
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

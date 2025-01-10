@@ -1,5 +1,11 @@
 // Copyright (c) 2022, Frappe Technologies and contributors
 // For license information, please see license.txt
+<<<<<<< HEAD
+/* eslint-disable */
+
+frappe.query_reports["Database Storage Usage By Tables"] = {
+	filters: [],
+=======
 
 frappe.query_reports["Database Storage Usage By Tables"] = {
 	filters: [],
@@ -48,4 +54,5 @@ frappe.query_reports["Database Storage Usage By Tables"] = {
 			__("Actions")
 		);
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

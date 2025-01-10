@@ -14,10 +14,17 @@ from frappe.email.email_body import (
 	replace_filename_with_cid,
 )
 from frappe.email.receive import Email
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestEmailBody(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase
 
 
 class TestEmailBody(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		email_html = """
 <div>

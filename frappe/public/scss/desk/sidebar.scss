@@ -526,6 +526,10 @@ body {
 		display: none;
 	}
 
+	&.hide-sidebar {
+		display: none;
+	}
+
 	> .divider {
 		display: none !important;
 	}
@@ -608,7 +612,11 @@ body {
 		right: 0;
 		opacity: 0.3;
 		background: #000;
+<<<<<<< HEAD
+		z-index: 9998;
+=======
 		z-index: 1100;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		height: 100%;
 		width: 100%;
 	}
@@ -745,7 +753,11 @@ body {
 
 .attachment-row,
 .form-tag-row {
+<<<<<<< HEAD
+	margin-bottom: var(--margin-sm);
+=======
 	margin: var(--margin-xs) 0;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	max-width: 100%;
 	.data-pill {
 		@include get_textstyle("sm", "regular");
@@ -779,6 +791,24 @@ body {
 	display: inline-flex;
 }
 
+<<<<<<< HEAD
+.attachments-actions {
+	display: flex;
+	gap: 5px;
+	max-width: 100%;
+}
+
+.explore-full-btn,
+.attachments-actions {
+	margin-bottom: var(--margin-md);
+}
+
+.show-all-btn {
+	margin-top: var(--margin-md);
+	text-align: center;
+}
+
+=======
 .explore-link {
 	margin-top: var(--margin-sm);
 }
@@ -808,6 +838,7 @@ body {
 .add-assignment-btn,
 .add-attachment-btn,
 .add-review-btn,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 .shares,
 .add-tags-btn,
 .share-doc-btn,

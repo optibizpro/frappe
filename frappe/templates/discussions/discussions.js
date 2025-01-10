@@ -35,7 +35,11 @@ frappe.ready(() => {
 		}, 0);
 	});
 
+<<<<<<< HEAD
+	$(document).on("keydown", ".comment-field", (e) => {
+=======
 	$(document).on("keydown", ".discussions-comment", (e) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (
 			(e.ctrlKey || e.metaKey) &&
 			(e.keyCode == 13 || e.which == 13) &&
@@ -65,6 +69,13 @@ frappe.ready(() => {
 	$(document).on("click", ".reply-card .dropdown-menu", (e) => {
 		perform_action(e);
 	});
+<<<<<<< HEAD
+
+	$(document).on("input", ".discussion-on-page .comment-field", (e) => {
+		adjust_comment_box(e);
+	});
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 const show_new_topic_modal = (e) => {
@@ -92,6 +103,17 @@ const setup_socket_io = () => {
 };
 
 const publish_message = (data) => {
+<<<<<<< HEAD
+	const doctype = decodeURIComponent($(".discussions-parent").attr("data-doctype"));
+	const docname = decodeURIComponent($(".discussions-parent").attr("data-docname"));
+	const topic = data.topic_info;
+	const single_thread = $(".is-single-thread").length;
+	const first_topic = !$(".reply-card").length;
+	const document_match_found =
+		doctype == topic.reference_doctype && docname == topic.reference_docname;
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	post_message_cleanup();
 	data = enhance_template(data);
 	insert_message(data);
@@ -117,7 +139,11 @@ const insert_message = (data) => {
 		$(data.template).insertBefore(
 			`.discussion-on-page[data-topic=${topic.name}] .discussion-form`
 		);
+<<<<<<< HEAD
+	} else if (!first_topic && !single_thread && document_match_found) {
+=======
 	} else if (!first_topic && !this.single_thread && document_match_found) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		$(data.sidebar).insertBefore($(`.discussions-sidebar .sidebar-parent`).first());
 		$(`#discussion-group`).prepend(data.new_topic_template);
 		if (topic.owner == frappe.session.user) {
@@ -127,7 +153,11 @@ const insert_message = (data) => {
 				make_comment_editor($(".discussion-form:visible .discussions-comment"));
 			}, 1000);
 		}
+<<<<<<< HEAD
+	} else if (single_thread && document_match_found) {
+=======
 	} else if (this.single_thread && document_match_found) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		$(data.template).insertBefore(`.discussion-form`);
 		$(".discussion-on-page").attr("data-topic", topic.name);
 	} else if (topic.owner == frappe.session.user && document_match_found) {
@@ -289,7 +319,16 @@ const perform_action = (e) => {
 	if (action === "edit") {
 		edit_reply(e);
 	} else if (action === "delete") {
+<<<<<<< HEAD
+		frappe.call({
+			method: "frappe.website.doctype.discussion_reply.discussion_reply.delete_message",
+			args: {
+				reply_name: $(e.target).closest(".reply-card").data("reply"),
+			},
+		});
+=======
 		delete_reply(e);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 };
 

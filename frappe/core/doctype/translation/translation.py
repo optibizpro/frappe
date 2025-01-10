@@ -40,7 +40,63 @@ class Translation(Document):
 	def on_trash(self):
 		clear_user_translation_cache(self.language)
 
+<<<<<<< HEAD
+	def contribute(self):
+		pass
+
+	def get_contribution_status(self):
+		pass
+
+
+@frappe.whitelist()
+def create_translations(translation_map, language):
+	translation_map = json.loads(translation_map)
+	translation_map_to_send = frappe._dict({})
+	# first create / update local user translations
+	for source_id, translation_dict in translation_map.items():
+		translation_dict = frappe._dict(translation_dict)
+		existing_doc_name = frappe.get_all(
+			"Translation",
+			{
+				"source_text": translation_dict.source_text,
+				"context": translation_dict.context or "",
+				"language": language,
+			},
+		)
+		translation_map_to_send[source_id] = translation_dict
+		if existing_doc_name:
+			frappe.db.set_value(
+				"Translation",
+				existing_doc_name[0].name,
+				{
+					"translated_text": translation_dict.translated_text,
+					"contributed": 1,
+					"contribution_status": "Pending",
+				},
+			)
+			translation_map_to_send[source_id].name = existing_doc_name[0].name
+		else:
+			doc = frappe.get_doc(
+				{
+					"doctype": "Translation",
+					"source_text": translation_dict.source_text,
+					"contributed": 1,
+					"contribution_status": "Pending",
+					"translated_text": translation_dict.translated_text,
+					"context": translation_dict.context,
+					"language": language,
+				}
+			)
+			doc.insert()
+			translation_map_to_send[source_id].name = doc.name
+
+
+def clear_user_translation_cache(lang):
+	frappe.cache().hdel(USER_TRANSLATION_KEY, lang)
+	frappe.cache().hdel(MERGED_TRANSLATION_KEY, lang)
+=======
 
 def clear_user_translation_cache(lang):
 	frappe.cache.hdel(USER_TRANSLATION_KEY, lang)
 	frappe.cache.hdel(MERGED_TRANSLATION_KEY, lang)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

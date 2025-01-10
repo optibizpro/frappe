@@ -9,6 +9,18 @@ body {
 	font-weight: var(--weight-regular);
 	letter-spacing: 0.02em;
 	background-color: var(--bg-color);
+<<<<<<< HEAD
+
+	&.full-width {
+		@include media-breakpoint-up(md) {
+			.container {
+				width: 90%;
+				max-width: 100%;
+			}
+		}
+	}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 a {
@@ -87,6 +99,49 @@ pre {
 	white-space: pre-wrap;
 }
 
+<<<<<<< HEAD
+.col-xs-1 {
+	@extend .col-1;
+}
+.col-xs-2 {
+	@extend .col-2;
+}
+.col-xs-3 {
+	@extend .col-3;
+}
+.col-xs-4 {
+	@extend .col-4;
+}
+.col-xs-5 {
+	@extend .col-5;
+}
+.col-xs-6 {
+	@extend .col-6;
+}
+.col-xs-7 {
+	@extend .col-7;
+}
+.col-xs-8 {
+	@extend .col-8;
+}
+.col-xs-9 {
+	@extend .col-9;
+}
+.col-xs-10 {
+	@extend .col-10;
+}
+.col-xs-11 {
+	@extend .col-11;
+}
+.col-xs-12 {
+	@extend .col-12;
+}
+
+.btn-default {
+	@extend .btn-light;
+}
+
+=======
 .container {
 	max-width: 100%;
 }
@@ -132,6 +187,7 @@ pre {
 	@extend .btn-light;
 }
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 .hidden-xs,
 .hidden-sm {
 	@include media-breakpoint-between(xs, sm) {
@@ -209,6 +265,9 @@ h4 {
 	color: var(--text-color);
 	margin-bottom: var(--margin-md);
 }
+<<<<<<< HEAD
+
+=======
 // override default gray-900 from bootstrap to support dark mode.
 h1,
 h2,
@@ -224,6 +283,7 @@ h6,
 .h6 {
 	color: var(--heading-color);
 }
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 h1,
 h2,
 h3 {
@@ -307,6 +367,41 @@ h2 {
 	}
 }
 
+.btn-group {
+	.btn {
+		box-shadow: none;
+		outline: 1px solid var(--btn-group-border-color);
+
+		&:not(:first-child) {
+			margin-left: 1px;
+		}
+
+		&:focus {
+			outline: 2px solid var(--dark-border-color);
+		}
+	}
+}
+
+.select-group-btn {
+	.dropdown-toggle-split::after {
+		display: none;
+	}
+
+	.dropdown-item {
+		.tick-icon {
+			visibility: hidden;
+
+			&.selected {
+				visibility: visible;
+			}
+		}
+
+		.item-label {
+			font-weight: 500;
+		}
+	}
+}
+
 .btn-xs {
 	@extend .btn-sm;
 	line-height: 1.2;
@@ -373,7 +468,11 @@ select.input-xs {
 
 	.divider,
 	.dropdown-divider {
+<<<<<<< HEAD
+		margin: 0px;
+=======
 		margin: 4px;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	:last-child {
@@ -509,7 +608,11 @@ kbd {
 
 // freeze backdrop text
 #freeze {
+<<<<<<< HEAD
+	z-index: 1055;
+=======
 	z-index: 2000;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	bottom: 0;
 	opacity: 0;
 	background-color: var(--bg-color);

@@ -12,7 +12,11 @@ import git
 import yaml
 
 import frappe
+<<<<<<< HEAD
+from frappe.modules.patch_handler import get_all_patches
+=======
 from frappe.modules.patch_handler import get_all_patches, parse_as_configfile
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.boilerplate import (
 	PatchCreator,
 	_create_app_boilerplate,
@@ -176,6 +180,16 @@ class TestBoilerPlate(unittest.TestCase):
 				except Exception as e:
 					self.fail(f"Can't parse python file in new app: {python_file}\n" + str(e))
 
+<<<<<<< HEAD
+	def test_new_patch_util(self):
+		user_inputs = {
+			"app_name": "frappe",
+			"doctype": "User",
+			"docstring": "Delete all users",
+			"file_name": "",  # Accept default
+			"patch_folder_confirmation": "Y",
+		}
+=======
 	@unittest.skipUnless(
 		os.access(frappe.get_app_path("frappe"), os.W_OK), "Only run if frappe app paths is writable"
 	)
@@ -187,6 +201,7 @@ class TestBoilerPlate(unittest.TestCase):
 			"",  # file_name: accept default
 			"Y",  # confirm patch folder
 		]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		patches_txt = pathlib.Path(pathlib.Path(frappe.get_app_path("frappe", "patches.txt")))
 		original_patches = patches_txt.read_text()

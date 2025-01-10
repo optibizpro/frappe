@@ -110,6 +110,9 @@ def get_bootinfo():
 	bootinfo.link_title_doctypes = get_link_title_doctypes()
 	bootinfo.translated_doctypes = get_translated_doctypes()
 	bootinfo.subscription_conf = add_subscription_conf()
+<<<<<<< HEAD
+	bootinfo.changelog_feed = get_changelog_feed_items()
+=======
 	bootinfo.marketplace_apps = get_marketplace_apps()
 	bootinfo.changelog_feed = get_changelog_feed_items()
 	bootinfo.enable_address_autocompletion = frappe.db.get_single_value(
@@ -118,6 +121,7 @@ def get_bootinfo():
 
 	if sentry_dsn := get_sentry_dsn():
 		bootinfo.sentry_dsn = sentry_dsn
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return bootinfo
 
@@ -139,7 +143,11 @@ def load_conf_settings(bootinfo):
 	from frappe.core.api.file import get_max_file_size
 
 	bootinfo.max_file_size = get_max_file_size()
+<<<<<<< HEAD
+	for key in ("developer_mode", "socketio_port", "file_watcher_port"):
+=======
 	for key in ("developer_mode", "socketio_port", "file_watcher_port", "fc_communication_secret"):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if key in frappe.conf:
 			bootinfo[key] = frappe.conf.get(key)
 
@@ -147,8 +155,12 @@ def load_conf_settings(bootinfo):
 def load_desktop_data(bootinfo):
 	from frappe.desk.desktop import get_workspace_sidebar_items
 
+<<<<<<< HEAD
+	bootinfo.allowed_workspaces = get_workspace_sidebar_items().get("pages")
+=======
 	bootinfo.sidebar_pages = get_workspace_sidebar_items()
 	allowed_pages = [d.name for d in bootinfo.sidebar_pages.get("pages")]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	bootinfo.module_wise_workspaces = get_controller("Workspace").get_module_wise_workspaces()
 	bootinfo.dashboards = frappe.get_all("Dashboard")
 	bootinfo.app_data = []
@@ -289,6 +301,15 @@ def get_user_pages_or_reports(parent, cache=False):
 		frappe.qb.from_(hasRole).select(Count("*")).where(hasRole.parent == parentTable.name)
 	)
 
+<<<<<<< HEAD
+	# pages with no role are allowed
+	if parent == "Page":
+		pages_with_no_roles = (
+			frappe.qb.from_(parentTable)
+			.select(parentTable.name, parentTable.modified, *columns)
+			.where(no_of_roles == 0)
+		).run(as_dict=True)
+=======
 	# pages and reports with no role are allowed
 	rows_with_no_roles = (
 		frappe.qb.from_(parentTable)
@@ -301,11 +322,19 @@ def get_user_pages_or_reports(parent, cache=False):
 			has_role[r.name] = {"modified": r.modified, "title": r.title}
 			if is_report:
 				has_role[r.name] |= {"ref_doctype": r.ref_doctype}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if is_report:
 		if not has_permission("Report", print_logs=False):
 			return {}
 
+<<<<<<< HEAD
+	elif parent == "Report":
+		if not has_permission("Report", raise_exception=False):
+			return {}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		reports = frappe.get_list(
 			"Report",
 			fields=["name", "report_type"],
@@ -498,6 +527,8 @@ def load_currency_docs(bootinfo):
 	bootinfo.docs += currency_docs
 
 
+<<<<<<< HEAD
+=======
 def get_marketplace_apps():
 	import requests
 
@@ -524,11 +555,14 @@ def get_marketplace_apps():
 	return apps
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def add_subscription_conf():
 	try:
 		return frappe.conf.subscription
 	except Exception:
 		return ""
+<<<<<<< HEAD
+=======
 
 
 def get_sentry_dsn():
@@ -536,3 +570,4 @@ def get_sentry_dsn():
 		return
 
 	return os.getenv("FRAPPE_SENTRY_DSN")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

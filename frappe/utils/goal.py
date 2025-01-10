@@ -50,6 +50,10 @@ def get_monthly_goal_graph_data(
 	goal_doctype_link: str,
 	goal_field: str,
 	date_field: str,
+<<<<<<< HEAD
+	filter_str: str | None = None,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	aggregation: str = "sum",
 	filters: str | dict | None = None,
 ) -> dict:

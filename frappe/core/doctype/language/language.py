@@ -52,6 +52,10 @@ class Language(Document):
 		validate_with_regex(new, "Name")
 
 	def on_update(self):
+<<<<<<< HEAD
+		frappe.cache().delete_value("languages_with_name")
+		frappe.cache().delete_value("languages")
+=======
 		frappe.cache.delete_value("languages_with_name")
 		frappe.client_cache.delete_value("languages")
 		self.update_user_defaults()
@@ -70,6 +74,7 @@ class Language(Document):
 						set_default(key, new_value, user)
 					else:
 						clear_default(key, parent=user)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def validate_with_regex(name, label):
@@ -82,6 +87,20 @@ def validate_with_regex(name, label):
 		)
 
 
+<<<<<<< HEAD
+def export_languages_json():
+	"""Export list of all languages"""
+	languages = frappe.get_all("Language", fields=["name", "language_name"])
+	languages = [{"name": d.language_name, "code": d.name} for d in languages]
+
+	languages.sort(key=lambda a: a["code"])
+
+	with open(frappe.get_app_path("frappe", "geo", "languages.json"), "w") as f:
+		f.write(frappe.as_json(languages))
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def sync_languages():
 	"""Create Language records from frappe/geo/languages.csv"""
 	from csv import DictReader

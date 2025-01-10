@@ -7,7 +7,11 @@ from rauth import OAuth2Service
 import frappe
 from frappe.auth import CookieManager, LoginManager
 from frappe.integrations.doctype.social_login_key.social_login_key import BaseUrlNotSetError
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 from frappe.utils.oauth import login_via_oauth2
 
@@ -30,6 +34,10 @@ class TestSocialLoginKey(IntegrationTestCase):
 		super().setUp()
 		frappe.set_user("Guest")
 
+<<<<<<< HEAD
+class TestSocialLoginKey(FrappeTestCase):
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_adding_frappe_social_login_provider(self):
 		frappe.set_user("Administrator")
 		provider_name = "Frappe"

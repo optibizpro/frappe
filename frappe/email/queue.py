@@ -4,7 +4,10 @@
 import frappe
 from frappe import _, msgprint
 from frappe.utils import cint, cstr, get_url, now_datetime
+<<<<<<< HEAD
+=======
 from frappe.utils.data import getdate
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.verified_command import get_signed_params, verify_request
 
 # After this percent of failures in every batch, entire batch is aborted.
@@ -126,11 +129,17 @@ def return_unsubscribed_page(email, doctype, name):
 
 
 def flush():
+<<<<<<< HEAD
+	"""flush email queue, every time: called from scheduler"""
+	from frappe.email.doctype.email_queue.email_queue import send_mail
+	from frappe.utils.background_jobs import get_jobs
+=======
 	"""flush email queue, every time: called from scheduler.
 
 	This should not be called outside of background jobs.
 	"""
 	from frappe.email.doctype.email_queue.email_queue import EmailQueue
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# To avoid running jobs inside unit tests
 	if frappe.are_emails_muted():
@@ -146,12 +155,19 @@ def flush():
 	failed_email_queues = []
 	for row in email_queue_batch:
 		try:
+<<<<<<< HEAD
+			send_mail(email_queue_name=row.name)
+		except Exception:
+			frappe.get_doc("Email Queue", row.name).log_error()
+			failed_email_queues.append(row.name)
+=======
 			email_queue: EmailQueue = frappe.get_doc("Email Queue", row.name)
 			email_queue.send()
 		except Exception:
 			frappe.get_doc("Email Queue", row.name).log_error()
 			failed_email_queues.append(row.name)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (
 				len(failed_email_queues) / len(email_queue_batch)
 				> EMAIL_QUEUE_BATCH_FAILURE_THRESHOLD_PERCENT

@@ -47,7 +47,11 @@ input[type="checkbox"] {
 
 	&.disabled-selected,
 	&:disabled:checked {
+<<<<<<< HEAD
+		background-color: var(--gray-500);
+=======
 		background-color: var(--gray-600);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		background-image: $check-icon;
 		background-size: 57%;
 		box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.1);
@@ -55,6 +59,8 @@ input[type="checkbox"] {
 		pointer-events: none;
 	}
 }
+<<<<<<< HEAD
+=======
 
 /* The switch - the box around the slider */
 .switch {
@@ -122,3 +128,4 @@ label.switch {
 .slider.round:before {
 	border-radius: 50%;
 }
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

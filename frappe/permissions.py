@@ -26,7 +26,6 @@ rights = (
 	"share",
 )
 
-
 GUEST_ROLE = "Guest"
 ALL_USER_ROLE = "All"  # This includes website users too.
 SYSTEM_USER_ROLE = "Desk User"
@@ -37,13 +36,44 @@ ADMIN_ROLE = "Administrator"
 AUTOMATIC_ROLES = (GUEST_ROLE, ALL_USER_ROLE, SYSTEM_USER_ROLE, ADMIN_ROLE)
 
 
+<<<<<<< HEAD
+def check_admin_or_system_manager(user=None):
+	from frappe.utils.commands import warn
+
+	warn(
+		"The function check_admin_or_system_manager will be deprecated in version 15."
+		'Please use frappe.only_for("System Manager") instead.',
+		category=PendingDeprecationWarning,
+	)
+
+	if not user:
+		user = frappe.session.user
+=======
+GUEST_ROLE = "Guest"
+ALL_USER_ROLE = "All"  # This includes website users too.
+SYSTEM_USER_ROLE = "Desk User"
+ADMIN_ROLE = "Administrator"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+
+# These roles are automatically assigned based on user type
+AUTOMATIC_ROLES = (GUEST_ROLE, ALL_USER_ROLE, SYSTEM_USER_ROLE, ADMIN_ROLE)
+
+
 def print_has_permission_check_logs(func):
 	@functools.wraps(func)
 	def inner(*args, **kwargs):
+<<<<<<< HEAD
+		raise_exception = kwargs.get("raise_exception", True)
+		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
+
+		if raise_exception:
+=======
 		print_logs = kwargs.get("print_logs", True)
 		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
 
 		if print_logs:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.flags["has_permission_check_logs"] = []
 
 		result = func(*args, **kwargs)
@@ -53,7 +83,11 @@ def print_has_permission_check_logs(func):
 		if not result and self_perm_check and print_logs:
 			msgprint(("<br>").join(frappe.flags.get("has_permission_check_logs", [])))
 
+<<<<<<< HEAD
+		if raise_exception:
+=======
 		if print_logs:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.flags.pop("has_permission_check_logs", None)
 		return result
 
@@ -79,6 +113,10 @@ def has_permission(
 	ptype="read",
 	doc=None,
 	user=None,
+<<<<<<< HEAD
+	raise_exception=True,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	*,
 	parent_doctype=None,
 	print_logs=True,
@@ -90,9 +128,19 @@ def has_permission(
 	:param doctype: DocType to check permission for
 	:param ptype: Permission Type to check
 	:param doc: Check User Permissions for specified document.
+<<<<<<< HEAD
+	:param verbose: DEPRECATED, will be removed in a future release.
+	:param user: User to check permission for. Defaults to current user.
+	:param raise_exception:
+	        DOES NOT raise an exception.
+	        If not False, will display a message using frappe.msgprint
+	                which explains why the permission check failed.
+
+=======
 	:param user: User to check permission for. Defaults to current user.
 	:param print_logs: If True, will display a message using frappe.msgprint
 	                which explains why the permission check failed.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	:param parent_doctype:
 	        Required when checking permission for a child DocType (unless doc is specified)
 	"""
@@ -101,11 +149,17 @@ def has_permission(
 		user = frappe.session.user
 
 	if user == "Administrator":
+<<<<<<< HEAD
+		return True
+
+	if ptype == "share" and frappe.get_system_settings("disable_document_sharing"):
+=======
 		debug and _debug_log("Allowed everything because user is Administrator")
 		return True
 
 	if ptype == "share" and frappe.get_system_settings("disable_document_sharing"):
 		debug and _debug_log("User can't share because sharing is disabled globally from system settings")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return False
 
 	if not doc and hasattr(doctype, "doctype"):
@@ -114,6 +168,9 @@ def has_permission(
 		doctype = doc.doctype
 
 	if frappe.is_table(doctype):
+<<<<<<< HEAD
+		return has_child_permission(doctype, ptype, doc, user, raise_exception, parent_doctype)
+=======
 		return has_child_permission(
 			doctype,
 			ptype,
@@ -123,6 +180,7 @@ def has_permission(
 			debug=debug,
 			print_logs=print_logs,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	meta = frappe.get_meta(doctype)
 
@@ -131,6 +189,9 @@ def has_permission(
 			doc = frappe.get_doc(meta.name, doc)
 		perm = get_doc_permissions(doc, user=user, ptype=ptype, debug=debug).get(ptype)
 		if not perm:
+<<<<<<< HEAD
+			push_perm_check_log(_("User {0} does not have access to this document").format(frappe.bold(user)))
+=======
 			debug and _debug_log(
 				"Permission check failed from role permission system. Check if user's role grant them permission to the document."
 			)
@@ -138,6 +199,7 @@ def has_permission(
 			if frappe.has_permission(doc.doctype):
 				msg += f": {_(doc.doctype)} - {doc.name}"
 			push_perm_check_log(msg, debug=debug)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		if ptype == "submit" and not cint(meta.is_submittable):
 			push_perm_check_log(_("Document Type is not submittable"), debug=debug)
@@ -159,6 +221,33 @@ def has_permission(
 			push_perm_check_log(
 				_("User {0} does not have doctype access via role permission for document {1}").format(
 					frappe.bold(user), frappe.bold(_(doctype))
+<<<<<<< HEAD
+				)
+			)
+
+	def false_if_not_shared():
+		if ptype in ("read", "write", "share", "submit", "email", "print"):
+			rights = ["read" if ptype in ("email", "print") else ptype]
+
+			if doc:
+				doc_name = get_doc_name(doc)
+				shared = frappe.share.get_shared(
+					doctype,
+					user,
+					rights=rights,
+					filters=[["share_name", "=", doc_name]],
+					limit=1,
+				)
+
+				if shared:
+					if ptype in ("read", "write", "share", "submit") or meta.permissions[0].get(ptype):
+						return True
+
+			elif frappe.share.get_shared(doctype, user, rights=rights, limit=1):
+				# if atleast one shared doc of that type, then return True
+				# this is used in db_query to check if permission on DocType
+				return True
+=======
 				),
 				debug=debug,
 			)
@@ -187,6 +276,7 @@ def has_permission(
 			# this is used in db_query to check if permission on DocType
 			debug and _debug_log(f"At least one document is shared with user with perm: {rights}")
 			return True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return False
 
@@ -207,8 +297,13 @@ def get_doc_permissions(doc, user=None, ptype=None, debug=False):
 	def is_user_owner():
 		return (doc.get("owner") or "").lower() == user.lower()
 
+<<<<<<< HEAD
+	if has_controller_permissions(doc, ptype, user=user) is False:
+		push_perm_check_log(_("Not allowed via controller permission check"))
+=======
 	if not has_controller_permissions(doc, ptype, user=user, debug=debug):
 		push_perm_check_log(_("Not allowed via controller permission check"), debug=debug)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return {ptype: 0}
 
 	permissions = copy.deepcopy(get_role_permissions(meta, user=user, is_owner=is_user_owner(), debug=debug))
@@ -336,8 +431,11 @@ def has_user_permission(doc, user=None, debug=False):
 	apply_strict_user_permissions = (
 		False if doc.meta.issingle else frappe.get_system_settings("apply_strict_user_permissions")
 	)
+<<<<<<< HEAD
+=======
 	if apply_strict_user_permissions:
 		debug and _debug_log("Strict user permissions will be applied")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	doctype = doc.get("doctype")
 	docname = doc.get("name")
@@ -557,6 +655,18 @@ def add_user_permission(
 			frappe.throw(_("{0} {1} not found").format(_(doctype), name), frappe.DoesNotExistError)
 
 		frappe.get_doc(
+<<<<<<< HEAD
+			dict(
+				doctype="User Permission",
+				user=user,
+				allow=doctype,
+				for_value=name,
+				is_default=is_default,
+				applicable_for=applicable_for,
+				apply_to_all_doctypes=0 if applicable_for else 1,
+				hide_descendants=hide_descendants,
+			)
+=======
 			doctype="User Permission",
 			user=user,
 			allow=doctype,
@@ -565,6 +675,7 @@ def add_user_permission(
 			applicable_for=applicable_for,
 			apply_to_all_doctypes=0 if applicable_for else 1,
 			hide_descendants=hide_descendants,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert(ignore_permissions=ignore_permissions)
 
 
@@ -619,11 +730,19 @@ def update_permission_property(
 
 	out = setup_custom_perms(doctype)
 
+<<<<<<< HEAD
+	name = frappe.db.get_value(
+		"Custom DocPerm", dict(parent=doctype, role=role, permlevel=permlevel, if_owner=if_owner)
+	)
+	table = DocType("Custom DocPerm")
+	frappe.qb.update(table).set(ptype, value).where(table.name == name).run()
+=======
 	custom_docperm = frappe.db.get_value(
 		"Custom DocPerm", dict(parent=doctype, role=role, permlevel=permlevel)
 	)
 	if custom_docperm:
 		update_custom_docperm(custom_docperm, {ptype: value})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if validate:
 		validate_permissions_for_doctype(doctype)
@@ -752,11 +871,15 @@ def has_child_permission(
 	child_doc=None,
 	user=None,
 	parent_doctype=None,
+<<<<<<< HEAD
+):
+=======
 	*,
 	debug=False,
 	print_logs=True,
 ) -> bool:
 	debug and _debug_log("This doctype is a child table, permissions will be checked on parent.")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(child_doc, str):
 		child_doc = frappe.db.get_value(
 			child_doctype,
@@ -770,8 +893,12 @@ def has_child_permission(
 
 	if not parent_doctype:
 		push_perm_check_log(
+<<<<<<< HEAD
+			_("Please specify a valid parent DocType for {0}").format(frappe.bold(child_doctype))
+=======
 			_("Please specify a valid parent DocType for {0}").format(frappe.bold(child_doctype)),
 			debug=debug,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 		return False
 
@@ -785,8 +912,12 @@ def has_child_permission(
 		push_perm_check_log(
 			_("{0} is not a valid parent DocType for {1}").format(
 				frappe.bold(parent_doctype), frappe.bold(child_doctype)
+<<<<<<< HEAD
+			)
+=======
 			),
 			debug=debug,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 		return False
 
@@ -796,8 +927,12 @@ def has_child_permission(
 			push_perm_check_log(
 				_("Parentfield not specified in {0}: {1}").format(
 					frappe.bold(child_doctype), frappe.bold(child_doc.name)
+<<<<<<< HEAD
+				)
+=======
 				),
 				debug=debug,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 			return False
 
@@ -805,12 +940,21 @@ def has_child_permission(
 			push_perm_check_log(
 				_("{0} is not a valid parentfield for {1}").format(
 					frappe.bold(parentfield), frappe.bold(child_doctype)
+<<<<<<< HEAD
+				)
+=======
 				),
 				debug=debug,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 			return False
 
 		permlevel = parent_meta.get_field(parentfield).permlevel
+<<<<<<< HEAD
+		if permlevel > 0 and permlevel not in parent_meta.get_permlevel_access(ptype, user=user):
+			push_perm_check_log(
+				_("Insufficient Permission Level for {0}").format(frappe.bold(parent_doctype))
+=======
 		accessible_permlevels = parent_meta.get_permlevel_access(ptype, user=user)
 		if permlevel > 0 and permlevel not in accessible_permlevels:
 			push_perm_check_log(
@@ -818,6 +962,7 @@ def has_child_permission(
 			)
 			debug and _debug_log(
 				f"This table is perm level {permlevel} but user only has access to {accessible_permlevels}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 			return False
 

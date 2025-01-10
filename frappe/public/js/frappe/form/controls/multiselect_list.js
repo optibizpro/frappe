@@ -29,10 +29,13 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 		this.has_input = true;
 		this.$list_wrapper.prependTo(this.input_area);
 		this.$filter_input = this.$list_wrapper.find("input");
+<<<<<<< HEAD
+=======
 		this.values = [];
 		this._options = [];
 		this._selected_values = [];
 		this.highlighted = -1;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.$list_wrapper.on("click", ".dropdown-menu", (e) => {
 			e.stopPropagation();
 		});
@@ -92,12 +95,15 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 
 		this.$list_wrapper.on("show.bs.dropdown", () => {
 			this.set_options().then(() => {
+<<<<<<< HEAD
+=======
 				if (!this._selected_values || !this._selected_values.length) {
 					this._selected_values = this.process_options(this.values);
 				}
 				this._options = this._selected_values
 					.concat(this._options)
 					.uniqBy((opt) => opt.value);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				this.set_selectable_items(this._options);
 			});
 		});
@@ -148,6 +154,15 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 
 	set_value(value) {
 		if (!value) return Promise.resolve();
+<<<<<<< HEAD
+		if (typeof value === "string") {
+			value = [value];
+		}
+		this.values = value;
+		this.values.forEach((value) => {
+			this.update_selected_values(value);
+		});
+=======
 		this._selected_values = [];
 		if (typeof value === "string") {
 			value = [value];
@@ -166,6 +181,7 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 				.find(`.selectable-item[data-value=${CSS.escape(value)}]`)
 				.toggleClass("selected");
 		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.parse_validate_and_set_in_model("");
 		this.update_status();
 		return Promise.resolve();
@@ -173,10 +189,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 
 	update_selected_values(value) {
 		this._selected_values = this._selected_values || [];
+<<<<<<< HEAD
+		let option = this._options.find((opt) => opt.value === value);
+=======
 		let option = this._options
 			.concat(this._selected_values)
 			.uniqBy((opt) => opt.value)
 			.find((opt) => opt.value === value);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (option) {
 			if (this.values.includes(value)) {
 				this._selected_values.push(option);
@@ -206,6 +226,8 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 
 	set_status(text) {
 		this.$list_wrapper.find(".status-text").html(text);
+<<<<<<< HEAD
+=======
 	}
 
 	process_options(options) {
@@ -222,10 +244,30 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 			}
 			return option;
 		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	set_options() {
 		let promise = Promise.resolve();
+<<<<<<< HEAD
+
+		function process_options(options) {
+			return options.map((option) => {
+				if (typeof option === "string") {
+					return {
+						label: option,
+						value: option,
+					};
+				}
+				if (!option.label) {
+					option.label = option.value;
+				}
+				return option;
+			});
+		}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (this.df.get_data) {
 			let txt = this.$filter_input.val();
 			let value = this.df.get_data(txt);
@@ -233,7 +275,11 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 				this._options = [];
 			} else if (value.then) {
 				promise = value.then((options) => {
+<<<<<<< HEAD
+					this._options = process_options(options);
+=======
 					this._options = this.process_options(options);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				});
 			} else {
 				this._options = this.process_options(value);

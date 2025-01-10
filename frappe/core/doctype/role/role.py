@@ -4,7 +4,10 @@
 import frappe
 from frappe.model.document import Document
 from frappe.website.path_resolver import validate_path
+<<<<<<< HEAD
+=======
 from frappe.website.router import clear_routing_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 STANDARD_ROLES = ("Administrator", "System Manager", "Script Manager", "All", "Guest")
 
@@ -51,9 +54,12 @@ class Role(Document):
 		if frappe.request and self.home_page:
 			validate_path(self.home_page)
 
+<<<<<<< HEAD
+=======
 		if self.has_value_changed("home_page"):
 			clear_routing_cache()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def set_desk_properties(self):
 		# set if desk_access is not allowed, unset all desk properties
 		if self.name == "Guest":

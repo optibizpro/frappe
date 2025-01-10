@@ -9,7 +9,10 @@ frappe.ui.form.Layout = class Layout {
 		this.tabs = [];
 		this.sections = [];
 		this.page_breaks = [];
+<<<<<<< HEAD
+=======
 		this.sections_dict = {};
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.fields_list = [];
 		this.fields_dict = {};
 		this.section_count = 0;
@@ -45,7 +48,11 @@ frappe.ui.form.Layout = class Layout {
 				<ul class="nav form-tabs" id="form-tabs" role="tablist"></ul>
 			</div>
 		`).appendTo(this.page);
+<<<<<<< HEAD
+		this.tabs_list = this.page.find(".form-tabs");
+=======
 		this.tab_link_container = this.page.find(".form-tabs");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.tabs_content = $(`<div class="form-tab-content tab-content"></div>`).appendTo(
 			this.page
 		);
@@ -102,7 +109,10 @@ frappe.ui.form.Layout = class Layout {
 			// remove previous color
 			this.message.removeClass(this.message_color);
 		}
+<<<<<<< HEAD
+=======
 		let close_message = $(`<div class="close-message">${frappe.utils.icon("close")}</div>`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.message_color =
 			color && ["yellow", "blue", "red", "green", "orange"].includes(color) ? color : "blue";
 		if (html) {
@@ -212,7 +222,11 @@ frappe.ui.form.Layout = class Layout {
 		!this.section && this.make_section();
 		!this.column && this.make_column();
 
+<<<<<<< HEAD
+		const parent = this.column.wrapper.get(0);
+=======
 		const parent = this.column.form.get(0);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const fieldobj = this.init_field(df, parent, render);
 
 		// An invalid control name will return in a null fieldobj
@@ -253,6 +267,10 @@ frappe.ui.form.Layout = class Layout {
 	}
 
 	make_page(df) {
+<<<<<<< HEAD
+		// eslint-disable-line no-unused-vars
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		let me = this;
 		let head = $(`
 			<div class="form-clickable-section text-center">
@@ -286,6 +304,9 @@ frappe.ui.form.Layout = class Layout {
 		this.fold_btn.trigger("click");
 	}
 
+<<<<<<< HEAD
+	make_section(df) {
+=======
 	make_section(df = {}) {
 		this.section_count++;
 		if (!df.fieldname) {
@@ -293,14 +314,18 @@ frappe.ui.form.Layout = class Layout {
 			df.fieldtype = "Section Break";
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.section = new Section(
 			this.current_tab ? this.current_tab.wrapper : this.page,
 			df,
 			this.card_layout,
 			this
 		);
+<<<<<<< HEAD
+=======
 		this.sections.push(this.section);
 		this.sections_dict[df.fieldname] = this.section;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// append to layout fields
 		if (df) {
@@ -397,7 +422,11 @@ frappe.ui.form.Layout = class Layout {
 
 		const visible_tabs = this.tabs.filter((tab) => !tab.hidden);
 		if (visible_tabs && visible_tabs.length == 1) {
+<<<<<<< HEAD
+			visible_tabs[0].parent.toggleClass("hide show");
+=======
 			visible_tabs[0].tab_link.toggleClass("hide show");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		this.set_tab_as_active();
 	}
@@ -503,7 +532,11 @@ frappe.ui.form.Layout = class Layout {
 		let tabs_content = this.tabs_content[0];
 		if (!tabs_list.length) return;
 
+<<<<<<< HEAD
+		$(window).scroll(
+=======
 		$(".main-section").scroll(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.utils.throttle(() => {
 				let current_scroll = document.documentElement.scrollTop;
 				if (current_scroll > 0 && last_scroll <= current_scroll) {
@@ -517,7 +550,11 @@ frappe.ui.form.Layout = class Layout {
 			}, 500)
 		);
 
+<<<<<<< HEAD
+		this.tabs_list.off("click").on("click", ".nav-link", (e) => {
+=======
 		this.tab_link_container.off("click").on("click", ".nav-link", (e) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			$(e.currentTarget).tab("show");
@@ -641,7 +678,11 @@ frappe.ui.form.Layout = class Layout {
 					return true;
 				} else if (
 					field.df.fieldtype === "Table MultiSelect" ||
+<<<<<<< HEAD
+					!in_list(frappe.model.no_value_type, field.df.fieldtype)
+=======
 					!frappe.model.no_value_type.includes(field.df.fieldtype)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				) {
 					this.set_focus(field);
 					return true;

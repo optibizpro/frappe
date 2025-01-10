@@ -9,6 +9,45 @@
 		</div>
 	</div>
 </template>
+<<<<<<< HEAD
+<script>
+export default {
+	name: "BuildError",
+	data() {
+		return {
+			data: null,
+		};
+	},
+	methods: {
+		show(data) {
+			this.data = data;
+		},
+		hide() {
+			this.data = null;
+		},
+		open_in_editor(location) {
+			frappe.socketio.socket.emit("open_in_editor", location);
+		},
+		error_component(error, i) {
+			let location = this.data.error.errors[i].location;
+			let location_string = `${location.file}:${location.line}:${location.column}`;
+			let template = error.replace(
+				" > " + location_string,
+				` &gt; <a class="file-link" @click="open">${location_string}</a>`
+			);
+
+			return {
+				template: `<div>${template}</div>`,
+				methods: {
+					open() {
+						frappe.socketio.socket.emit("open_in_editor", location);
+					},
+				},
+			};
+		},
+	},
+};
+=======
 
 <script setup>
 import { ref } from "vue";
@@ -44,6 +83,7 @@ function error_component(error, i) {
 	};
 }
 defineExpose({ show, hide });
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 </script>
 
 <style scoped>

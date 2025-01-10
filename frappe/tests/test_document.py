@@ -9,7 +9,11 @@ from frappe.app import make_form_dict
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.doctype.note.note import Note
 from frappe.model.naming import make_autoname, parse_naming_series, revert_series_if_last
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, timeout
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import cint, now_datetime, set_request
 from frappe.website.serve import get_response
 
@@ -25,7 +29,11 @@ class CustomNoteWithoutProperty(Note):
 		return now_datetime() - self.creation
 
 
+<<<<<<< HEAD
+class TestDocument(FrappeTestCase):
+=======
 class TestDocument(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_return_empty_list_for_table_field_if_none(self):
 		d = frappe.get_doc({"doctype": "User"})
 		self.assertEqual(d.get("roles"), [])
@@ -221,10 +229,13 @@ class TestDocument(IntegrationTestCase):
 		with self.assertQueryCount(0):
 			user.db_set("user_type", "Magical Wizard")
 
+<<<<<<< HEAD
+=======
 	def test_new_doc_with_fields(self):
 		user = frappe.new_doc("User", first_name="wizard")
 		self.assertEqual(user.first_name, "wizard")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_update_after_submit(self):
 		d = self.test_insert()
 		d.starts_on = "2014-09-09"
@@ -490,6 +501,10 @@ class TestDocument(IntegrationTestCase):
 
 		self.assertRaises(frappe.DoesNotExistError, doc.save)
 
+<<<<<<< HEAD
+
+class TestDocumentWebView(FrappeTestCase):
+=======
 	def test_validate_from_to_dates(self):
 		doc = frappe.new_doc("Web Page")
 		doc.start_date = None
@@ -523,6 +538,7 @@ class TestDocument(IntegrationTestCase):
 
 
 class TestDocumentWebView(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def get(self, path, user="Guest"):
 		frappe.set_user(user)
 		set_request(method="GET", path=path)

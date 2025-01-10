@@ -44,12 +44,15 @@
   "bio",
   "column_break_22",
   "mobile_no",
+<<<<<<< HEAD
+=======
   "settings_tab",
   "desk_settings_section",
   "mute_sounds",
   "desk_theme",
   "code_editor_type",
   "banner_image",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "navigation_settings_section",
   "search_bar",
   "notifications",
@@ -109,8 +112,12 @@
   "generate_keys",
   "column_break_65",
   "api_secret",
+<<<<<<< HEAD
+  "onboarding_status"
+=======
   "onboarding_status",
   "connections_tab"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  ],
  "fields": [
   {
@@ -229,6 +236,7 @@
    "read_only": 1
   },
   {
+   "allow_in_quick_entry": 1,
    "fieldname": "role_profile_name",
    "fieldtype": "Link",
    "hidden": 1,
@@ -688,6 +696,8 @@
    "label": "Auto follow documents that are assigned to you"
   },
   {
+<<<<<<< HEAD
+=======
    "fieldname": "user_details_tab",
    "fieldtype": "Tab Break",
    "label": "User Details"
@@ -715,6 +725,7 @@
    "label": "Desk Settings"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "default": "{}",
    "fieldname": "onboarding_status",
    "fieldtype": "Small Text",
@@ -722,6 +733,8 @@
    "label": "Onboarding Status"
   },
   {
+<<<<<<< HEAD
+=======
    "allow_in_quick_entry": 1,
    "fieldname": "role_profiles",
    "fieldtype": "Table MultiSelect",
@@ -762,6 +775,7 @@
    "label": "Default App"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "collapsible": 1,
    "fieldname": "navigation_settings_section",
    "fieldtype": "Section Break",

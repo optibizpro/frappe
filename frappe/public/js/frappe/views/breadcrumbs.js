@@ -18,6 +18,10 @@ frappe.breadcrumbs = {
 		Workflow: "Settings",
 		Printing: "Settings",
 		Setup: "Settings",
+<<<<<<< HEAD
+		"Event Streaming": "Tools",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		Automation: "Tools",
 	},
 
@@ -152,12 +156,22 @@ frappe.breadcrumbs = {
 				frappe.boot.module_wise_workspaces[breadcrumbs.module]?.includes(last_workspace)
 			) {
 				breadcrumbs.workspace = last_workspace;
+<<<<<<< HEAD
+				return;
+			}
+		}
+
+		if (breadcrumbs.module) {
+			if (this.module_map[breadcrumbs.module]) {
+				breadcrumbs.module = this.module_map[breadcrumbs.module];
+=======
 			}
 		} else {
 			// choose from __workspaces
 			const doctype_meta = frappe.get_meta(breadcrumbs.doctype);
 			if (doctype_meta?.__workspaces?.length) {
 				breadcrumbs.workspace = doctype_meta.__workspaces[0];
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 
 			if (breadcrumbs.module) {
@@ -165,6 +179,14 @@ frappe.breadcrumbs = {
 					breadcrumbs.module = this.module_map[breadcrumbs.module];
 				}
 
+<<<<<<< HEAD
+			// set workspace
+			if (
+				breadcrumbs.module_info &&
+				frappe.boot.module_wise_workspaces[breadcrumbs.module]
+			) {
+				breadcrumbs.workspace = frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
+=======
 				breadcrumbs.module_info = frappe.get_module(breadcrumbs.module);
 
 				// set workspace
@@ -175,13 +197,18 @@ frappe.breadcrumbs = {
 					breadcrumbs.workspace =
 						frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
 				}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		}
 	},
 
 	set_list_breadcrumb(breadcrumbs) {
 		const doctype = breadcrumbs.doctype;
+<<<<<<< HEAD
+		const doctype_meta = frappe.get_doc("DocType", doctype);
+=======
 		const doctype_meta = frappe.get_meta(doctype);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (
 			(doctype === "User" && !frappe.user.has_role("System Manager")) ||
 			doctype_meta?.issingle

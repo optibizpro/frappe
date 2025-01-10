@@ -245,8 +245,13 @@ class NotificationsView extends BaseNotificationsView {
 	get_dropdown_item_html(notification_log) {
 		let doc_link = this.get_item_link(notification_log);
 
+<<<<<<< HEAD
+		let read_class = field.read ? "" : "unread";
+		let message = field.subject;
+=======
 		let read_class = notification_log.read ? "" : "unread";
 		let message = notification_log.subject;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		let title = message.match(/<b class="subject-title">(.*?)<\/b>/);
 		message = title
@@ -261,7 +266,11 @@ class NotificationsView extends BaseNotificationsView {
 			</div>
 		</div>`;
 
+<<<<<<< HEAD
+		let user = field.from_user;
+=======
 		let user = notification_log.from_user;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		let user_avatar = frappe.avatar(user, "avatar-medium user-avatar");
 
 		let item_html = $(`<a class="recent-item notification-item ${read_class}"
@@ -287,7 +296,11 @@ class NotificationsView extends BaseNotificationsView {
 		}
 
 		item_html.on("click", () => {
+<<<<<<< HEAD
+			!field.read && this.mark_as_read(field.name, item_html);
+=======
 			!notification_log.read && this.mark_as_read(notification_log.name, item_html);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.notifications_icon.trigger("click");
 		});
 
@@ -303,8 +316,13 @@ class NotificationsView extends BaseNotificationsView {
 		} else {
 			if (this.dropdown_items.length) {
 				this.container.empty();
+<<<<<<< HEAD
+				this.dropdown_items.forEach((field) => {
+					this.container.append(this.get_dropdown_item_html(field));
+=======
 				this.dropdown_items.forEach((notification_log) => {
 					this.container.append(this.get_dropdown_item_html(notification_log));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				});
 				this.container.append(`<a class="list-footer"
 					href="/app/List/Notification Log">
@@ -325,6 +343,15 @@ class NotificationsView extends BaseNotificationsView {
 	}
 
 	get_notifications_list(limit) {
+<<<<<<< HEAD
+		return frappe.call(
+			"frappe.desk.doctype.notification_log.notification_log.get_notification_logs",
+			{ limit: limit }
+		);
+	}
+
+	get_item_link(notification_doc) {
+=======
 		return frappe.call({
 			method: "frappe.desk.doctype.notification_log.notification_log.get_notification_logs",
 			args: { limit: limit },
@@ -336,6 +363,7 @@ class NotificationsView extends BaseNotificationsView {
 		if (notification_doc.link) {
 			return notification_doc.link;
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const link_doctype = notification_doc.document_type
 			? notification_doc.document_type
 			: "Notification Log";
@@ -386,6 +414,12 @@ class EventsView extends BaseNotificationsView {
 	make() {
 		let today = frappe.datetime.get_today();
 		frappe
+<<<<<<< HEAD
+			.xcall("frappe.desk.doctype.event.event.get_events", {
+				start: today,
+				end: today,
+			})
+=======
 			.xcall(
 				"frappe.desk.doctype.event.event.get_events",
 				{
@@ -394,6 +428,7 @@ class EventsView extends BaseNotificationsView {
 				},
 				"GET"
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			.then((event_list) => {
 				this.render_events_html(event_list);
 			});

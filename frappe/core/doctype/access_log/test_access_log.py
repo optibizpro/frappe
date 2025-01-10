@@ -14,6 +14,13 @@ from frappe.core.doctype.data_import.data_import import export_csv
 from frappe.core.doctype.user.user import generate_keys
 
 # imports - standard imports
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import cstr, get_site_url
+
+
+class TestAccessLog(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.utils import cstr, get_site_url
 
@@ -28,6 +35,7 @@ class UnitTestAccessLog(UnitTestCase):
 
 
 class TestAccessLog(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self):
 		# generate keys for current user to send requests for the following tests
 		generate_keys(frappe.session.user)

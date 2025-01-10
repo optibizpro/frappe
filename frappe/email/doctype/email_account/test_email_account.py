@@ -13,6 +13,12 @@ from frappe.desk.form.load import get_attachments
 from frappe.email.doctype.email_account.email_account import notify_unreplied
 from frappe.email.email_body import get_message_id
 from frappe.email.receive import Email, InboundMail, SentEmailInInboxError
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestEmailAccount(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
@@ -26,6 +32,7 @@ class UnitTestEmailAccount(UnitTestCase):
 
 
 class TestEmailAccount(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -72,8 +79,13 @@ class TestEmailAccount(IntegrationTestCase):
 	def test_unread_notification(self):
 		todo = frappe.get_last_doc("ToDo")
 
+<<<<<<< HEAD
+		comm = frappe.get_doc(
+			doctype="Communication",
+=======
 		comm = frappe.new_doc(
 			"Communication",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			sender="test_sender@example.com",
 			subject="test unread reminder",
 			sent_or_received="Received",
@@ -476,7 +488,11 @@ class TestEmailAccount(IntegrationTestCase):
 			email_account.receive()
 
 
+<<<<<<< HEAD
+class TestInboundMail(FrappeTestCase):
+=======
 class TestInboundMail(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()

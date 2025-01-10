@@ -7,14 +7,23 @@ import frappe
 from frappe import _
 from frappe.geo.country_info import get_country_info
 from frappe.permissions import AUTOMATIC_ROLES
+<<<<<<< HEAD
+from frappe.translate import get_messages_for_boot, send_translations, set_default_language
+from frappe.utils import cint, strip
+=======
 from frappe.translate import send_translations, set_default_language
 from frappe.utils import cint, now, strip
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.password import update_password
 
 from . import install_fixtures
 
 
+<<<<<<< HEAD
+def get_setup_stages(args):
+=======
 def get_setup_stages(args):  # nosemgrep
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# App setup stage functions should not include frappe.db.commit
 	# That is done by frappe after successful completion of all stages
 	stages = [
@@ -32,8 +41,13 @@ def get_setup_stages(args):  # nosemgrep
 	stages.append(
 		{
 			# post executing hooks
+<<<<<<< HEAD
+			"status": "Wrapping up",
+			"fail_msg": "Failed to complete setup",
+=======
 			"status": _("Wrapping up"),
 			"fail_msg": _("Failed to complete setup"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"tasks": [{"fn": run_post_setup_complete, "args": args, "fail_msg": "Failed to complete setup"}],
 		}
 	)
@@ -220,11 +234,17 @@ def create_or_update_user(args):  # nosemgrep
 				"last_name": last_name,
 			}
 		)
+<<<<<<< HEAD
+		doc.append_roles("System Manager")
+		doc.flags.no_welcome_mail = True
+		doc.insert()
+=======
 		user.append_roles(*_get_default_roles())
 		user.append_roles("System Manager")
 		user.flags.no_welcome_mail = True
 		user.insert()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.flags.mute_emails = _mute_emails
 
 	if args.get("password"):
@@ -268,7 +288,20 @@ def sanitize_input(args):
 
 def add_all_roles_to(name):
 	user = frappe.get_doc("User", name)
+<<<<<<< HEAD
+	for role in frappe.db.sql("""select name from tabRole"""):
+		if role[0] not in [
+			"Customer",
+			"Supplier",
+			"Partner",
+			"Employee",
+			*AUTOMATIC_ROLES,
+		]:
+			d = user.append("roles")
+			d.role = role[0]
+=======
 	user.append_roles(*_get_default_roles())
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	user.save()
 
 
@@ -285,6 +318,11 @@ def _get_default_roles() -> set[str]:
 
 def disable_future_access():
 	frappe.db.set_default("desktop:home_page", "workspace")
+<<<<<<< HEAD
+	frappe.db.set_single_value("System Settings", "setup_complete", 1)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# Enable onboarding after install
 	frappe.db.set_single_value("System Settings", "enable_onboarding", 1)
 

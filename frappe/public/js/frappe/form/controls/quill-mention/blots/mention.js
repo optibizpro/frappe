@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+/* eslint-disable */
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import Quill from "quill";
 
 const Embed = Quill.import("blots/embed");

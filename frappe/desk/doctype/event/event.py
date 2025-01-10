@@ -397,6 +397,8 @@ def get_events(start, end, user=None, for_reminder=False, filters=None) -> list[
 				try:
 					getdate(date)
 				except Exception:
+<<<<<<< HEAD
+=======
 					# Don't show any message to the user
 					frappe.clear_last_message()
 
@@ -462,6 +464,7 @@ def get_events(start, end, user=None, for_reminder=False, filters=None) -> list[
 					# Don't show any message to the user
 					frappe.clear_last_message()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					date = date.split("-")
 					date = date[0] + "-" + str(cint(date[1]) - 1) + "-" + date[2]
 

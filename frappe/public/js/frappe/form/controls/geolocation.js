@@ -13,6 +13,17 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		if (!this.disp_area) {
 			return;
 		}
+<<<<<<< HEAD
+
+		this.map_id = frappe.dom.get_unique_id();
+		this.map_area = $(
+			`<div class="map-wrapper border">
+				<div id="${this.map_id}" style="min-height: 400px; z-index: 1; max-width:100%"></div>
+			</div>`
+		);
+
+		$(this.disp_area).html(this.map_area);
+=======
 		if (!this.map_id) {
 			this.map_id = frappe.dom.get_unique_id();
 			this.map_area = $(
@@ -25,10 +36,17 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		}
 
 		// show again on idempotent invocations
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		$(this.disp_area).removeClass("like-disabled-input");
 		$(this.disp_area).css("display", "block");
 
 		if (this.frm) {
+<<<<<<< HEAD
+			this.make_map(value);
+		} else {
+			$(document).on("frappe.ui.Dialog:shown", () => {
+				this.make_map(value);
+=======
 			this.make_map();
 			if (value) {
 				this.bind_leaflet_data(value);
@@ -39,15 +57,21 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 				if (value) {
 					this.bind_leaflet_data(value);
 				}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 		}
 	}
 
 	make_map(value) {
+<<<<<<< HEAD
+		this.customize_draw_controls();
+		this.bind_leaflet_map();
+=======
 		if (!this.map) {
 			this.customize_draw_controls();
 			this.bind_leaflet_map();
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (this.disabled) {
 			this.map.dragging.disable();
 			this.map.touchZoom.disable();
@@ -58,17 +82,29 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 			this.map.zoomControl.remove();
 		} else {
 			this.bind_leaflet_draw_control();
+<<<<<<< HEAD
+			this.bind_leaflet_event_listeners();
+			this.bind_leaflet_locate_control();
+			this.bind_leaflet_data(value);
+=======
 			if (!this.bound_event_listeners) {
 				this.bind_leaflet_event_listeners();
 			}
 			if (!this.locate_control) {
 				this.bind_leaflet_locate_control();
 			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
 	bind_leaflet_data(value) {
 		/* render raw value from db into map */
+<<<<<<< HEAD
+		if (!this.map || !value) {
+			return;
+		}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.clear_editable_layers();
 
 		const data_layers = new L.FeatureGroup().addLayer(
@@ -170,6 +206,19 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 	}
 
 	bind_leaflet_draw_control() {
+<<<<<<< HEAD
+		if (
+			!frappe.perm.has_perm(this.doctype, this.df.permlevel, "write", this.doc) ||
+			this.df.read_only
+		) {
+			return;
+		}
+
+		this.draw_control = this.get_leaflet_controls();
+		this.map.addControl(this.draw_control);
+	}
+
+=======
 		if (!this.draw_control) {
 			this.draw_control = this.get_leaflet_controls();
 		}
@@ -180,6 +229,7 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		}
 	}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_leaflet_controls() {
 		return new L.Control.Draw({
 			position: "topleft",
@@ -215,7 +265,10 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 	}
 
 	bind_leaflet_event_listeners() {
+<<<<<<< HEAD
+=======
 		this.bound_event_listeners = true;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.map.on("draw:created", (e) => {
 			var type = e.layerType,
 				layer = e.layer;

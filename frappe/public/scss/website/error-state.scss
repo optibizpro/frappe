@@ -4,9 +4,19 @@
 	align-items: center;
 	justify-content: center;
 
+<<<<<<< HEAD
+	.img-404 {
+		width: 40%;
+		margin: var(--margin-2xl) auto;
+
+		@include media-breakpoint-down(sm) {
+			width: 80%;
+		}
+=======
 	p,
 	h4 {
 		color: var(--text-light);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	h4 {

@@ -8,7 +8,10 @@ import os
 import pathlib
 import re
 import textwrap
+<<<<<<< HEAD
+=======
 from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import click
 import git
@@ -159,8 +162,17 @@ def _create_app_boilerplate(dest, hooks, no_git=False):
 	with open(os.path.join(dest, hooks.app_name, "pyproject.toml"), "w") as f:
 		f.write(frappe.as_unicode(pyproject_template.format(**hooks)))
 
+<<<<<<< HEAD
+	with open(os.path.join(dest, hooks.app_name, "README.md"), "w") as f:
+		f.write(
+			frappe.as_unicode(
+				f"## {hooks.app_title}\n\n{hooks.app_description}\n\n#### License\n\n{hooks.app_license}"
+			)
+		)
+=======
 	with open(os.path.join(dest, hooks.app_name, ".pre-commit-config.yaml"), "w") as f:
 		f.write(frappe.as_unicode(precommit_template.format(**hooks)))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	license_body = get_license_text(license_name=hooks.app_license)
 	with open(os.path.join(dest, hooks.app_name, "license.txt"), "w") as f:
@@ -224,6 +236,15 @@ def _create_github_workflow_files(dest, hooks):
 	with open(linter_workflow, "w") as f:
 		f.write(linter_workflow_template)
 
+<<<<<<< HEAD
+PATCH_TEMPLATE = textwrap.dedent(
+	'''
+	import frappe
+
+	def execute():
+		"""{docstring}"""
+
+=======
 
 PATCH_TEMPLATE = textwrap.dedent(
 	'''
@@ -232,6 +253,7 @@ PATCH_TEMPLATE = textwrap.dedent(
 	def execute():
 		"""{docstring}"""
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		# Write your patch here.
 		pass
 '''
@@ -355,6 +377,8 @@ build-backend = "flit_core.buildapi"
 # These dependencies are only installed when developer mode is enabled
 [tool.bench.dev-dependencies]
 # package_name = "~=1.1.0"
+<<<<<<< HEAD
+=======
 
 [tool.ruff]
 line-length = 110
@@ -390,6 +414,7 @@ typing-modules = ["frappe.types.DF"]
 quote-style = "double"
 indent-style = "tab"
 docstring-code-format = true
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 """
 
 hooks_template = """app_name = "{app_name}"
@@ -631,6 +656,23 @@ app_license = "{app_license}"
 # auth_hooks = [
 # 	"{app_name}.auth.validate"
 # ]
+<<<<<<< HEAD
+"""
+
+desktop_template = """from frappe import _
+
+def get_data():
+	return [
+		{{
+			"module_name": "{app_title}",
+			"type": "module",
+			"label": _("{app_title}")
+		}}
+	]
+"""
+
+gitignore_template = """.DS_Store
+=======
 
 # Automatically update python controller files with type annotations for this app.
 # export_python_type_annotations = True
@@ -645,6 +687,7 @@ gitignore_template = """# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 *.pyc
 *.py~
 
@@ -737,6 +780,11 @@ jobs:
     steps:
       - name: Clone
         uses: actions/checkout@v3
+
+      - name: Find tests
+        run: |
+          echo "Finding tests"
+          grep -rn "def test" > /dev/null
 
       - name: Find tests
         run: |

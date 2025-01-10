@@ -169,10 +169,14 @@ class TestReport(IntegrationTestCase):
 		)
 		result = response.get("result")
 		columns = response.get("columns")
+<<<<<<< HEAD
+		self.assertListEqual(["name", "email", "user_type"], [column.get("fieldname") for column in columns])
+=======
 		self.assertListEqual(
 			["name", "email", "user_type"],
 			[column.get("fieldname") for column in columns],
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		admin_dict = frappe.core.utils.find(result, lambda d: d["name"] == "Administrator")
 		self.assertDictEqual(
 			{

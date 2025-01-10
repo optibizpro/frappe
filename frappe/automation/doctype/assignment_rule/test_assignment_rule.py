@@ -2,6 +2,14 @@
 # License: MIT. See LICENSE
 
 import frappe
+<<<<<<< HEAD
+from frappe.test_runner import make_test_records
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import random_string
+
+
+class TestAutoAssign(FrappeTestCase):
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.utils import make_test_records
 
@@ -18,6 +26,7 @@ class UnitTestAssignmentRule(UnitTestCase):
 
 
 class TestAutoAssign(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -97,6 +106,13 @@ class TestAutoAssign(IntegrationTestCase):
 		self.assignment_rule.save()
 
 		for _ in range(30):
+<<<<<<< HEAD
+			make_note(dict(public=1))
+
+		# check if each user has 10 assignments (?)
+		for user in ("test@example.com", "test1@example.com", "test2@example.com"):
+			self.assertEqual(len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type="Note"))), 10)
+=======
 			_make_test_record(public=1)
 
 		# check if each user has 10 assignments (?)
@@ -104,6 +120,7 @@ class TestAutoAssign(IntegrationTestCase):
 			self.assertEqual(
 				len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type=TEST_DOCTYPE))), 10
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# clear 5 assignments for first user
 		# can't do a limit in "delete" since postgres does not support it
@@ -113,6 +130,28 @@ class TestAutoAssign(IntegrationTestCase):
 			frappe.db.delete("ToDo", {"name": d.name})
 
 		# add 5 more assignments
+<<<<<<< HEAD
+		for _i in range(5):
+			make_note(dict(public=1))
+
+		# check if each user still has 10 assignments
+		for user in ("test@example.com", "test1@example.com", "test2@example.com"):
+			self.assertEqual(len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type="Note"))), 10)
+
+	def test_assingment_on_guest_submissions(self):
+		"""Sometimes documents are inserted as guest, check if assignment rules run on them. Use case: Web Forms"""
+		with self.set_user("Guest"):
+			doc = make_note({"public": 1}, ignore_permissions=True)
+
+		# check assignment to *anyone*
+		self.assertTrue(
+			frappe.db.get_value(
+				"ToDo",
+				{"reference_type": "Note", "reference_name": doc.name, "status": "Open"},
+				"allocated_to",
+			),
+		)
+=======
 		for _ in range(5):
 			_make_test_record(public=1)
 
@@ -121,6 +160,7 @@ class TestAutoAssign(IntegrationTestCase):
 			self.assertEqual(
 				len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type=TEST_DOCTYPE))), 10
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_assingment_on_guest_submissions(self):
 		"""Sometimes documents are inserted as guest, check if assignment rules run on them. Use case: Web Forms"""
@@ -392,18 +432,30 @@ def get_assignment_rule(days, assign=None):
 	return assignment_rule
 
 
+<<<<<<< HEAD
+def make_note(values=None, *, ignore_permissions=False):
+	note = frappe.get_doc(dict(doctype="Note", title=random_string(10), content=random_string(20)))
+=======
 def _make_test_record(
 	*,
 	ignore_permissions=False,
 	**kwargs,
 ):
 	doc = frappe.new_doc(TEST_DOCTYPE)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if kwargs:
 		doc.update(kwargs)
 
+<<<<<<< HEAD
+	note.insert(ignore_permissions=ignore_permissions)
+
+	return note
+
+=======
 	return doc.insert(ignore_permissions=ignore_permissions)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def create_test_doctype(doctype: str):
 	"""Create custom doctype."""

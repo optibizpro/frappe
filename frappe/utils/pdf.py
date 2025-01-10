@@ -6,6 +6,10 @@ import io
 import mimetypes
 import os
 import subprocess
+<<<<<<< HEAD
+from distutils.version import LooseVersion
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from urllib.parse import parse_qs, urlparse
 
 import cssutils
@@ -20,7 +24,10 @@ import frappe
 from frappe import _
 from frappe.core.doctype.file.utils import find_file_by_url
 from frappe.utils import cstr, scrub_urls
+<<<<<<< HEAD
+=======
 from frappe.utils.caching import redis_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.jinja_globals import bundled_asset, is_rtl
 
 cssutils.log.setLog(frappe.logger("cssutils"))
@@ -283,7 +290,11 @@ def _get_base64_image(src):
 		mime_type = mimetypes.guess_type(path)[0]
 		if mime_type is None or not mime_type.startswith("image/"):
 			return
+<<<<<<< HEAD
+		filename = query.get("fid") and query["fid"][0] or None
+=======
 		filename = (query.get("fid") and query["fid"][0]) or None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		file = find_file_by_url(path, name=filename)
 		if not file or not file.is_private:
 			return

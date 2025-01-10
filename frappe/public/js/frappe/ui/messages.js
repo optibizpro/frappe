@@ -111,6 +111,16 @@ frappe.prompt = function (fields, callback, title, primary_label) {
 frappe.msgprint = function (msg, title, is_minimizable) {
 	if (!msg) return;
 
+<<<<<<< HEAD
+	if ($.isPlainObject(msg)) {
+		var data = msg;
+	} else {
+		// passed as JSON
+		if (typeof msg === "string" && msg.substr(0, 1) === "{") {
+			var data = JSON.parse(msg);
+		} else {
+			var data = { message: msg, title: title };
+=======
 	let data;
 	if ($.isPlainObject(msg)) {
 		data = msg;
@@ -120,6 +130,7 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 			data = JSON.parse(msg);
 		} else {
 			data = { message: msg, title: title };
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 
@@ -144,6 +155,9 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 
 	if (data.message instanceof Array) {
 		let messages = data.message;
+<<<<<<< HEAD
+		const exceptions = messages.map((m) => JSON.parse(m)).filter((m) => m.raise_exception);
+=======
 		const exceptions = messages
 			.map((m) => {
 				if (typeof m == "string") {
@@ -153,6 +167,7 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 				}
 			})
 			.filter((m) => m.raise_exception);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		// only show exceptions if any exceptions exist
 		if (exceptions.length) {
@@ -201,7 +216,13 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 			data.primary_action.action = () => {
 				frappe.call({
 					method: data.primary_action.server_action,
+<<<<<<< HEAD
+					args: {
+						args: data.primary_action.args,
+					},
+=======
 					args: data.primary_action.args,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					callback() {
 						if (data.primary_action.hide_on_success) {
 							frappe.hide_msgprint();
@@ -468,3 +489,16 @@ frappe.show_alert = frappe.toast = function (message, seconds = 7, actions = {})
 
 	return div;
 };
+<<<<<<< HEAD
+
+// Proxy for frappe.show_alert
+Object.defineProperty(window, "show_alert", {
+	get: function () {
+		console.warn(
+			"Please use `frappe.show_alert` instead of `show_alert`. It will be deprecated soon."
+		);
+		return frappe.show_alert;
+	},
+});
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

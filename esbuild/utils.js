@@ -40,6 +40,20 @@ const bundle_map = app_list.reduce((out, app) => {
 }, {});
 
 const get_public_path = (app) => public_paths[app];
+<<<<<<< HEAD
+
+const get_build_json_path = (app) => path.resolve(get_public_path(app), "build.json");
+
+function get_build_json(app) {
+	try {
+		return require(get_build_json_path(app));
+	} catch (e) {
+		// build.json does not exist
+		return null;
+	}
+}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 function delete_file(path) {
 	if (fs.existsSync(path)) {
@@ -57,6 +71,11 @@ function run_serially(tasks) {
 	return result;
 }
 
+<<<<<<< HEAD
+const get_app_path = (app) => app_paths[app];
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 function get_apps_list() {
 	try {
 		/**
@@ -173,5 +192,8 @@ module.exports = {
 	log_warn,
 	log_error,
 	get_redis_subscriber,
+<<<<<<< HEAD
+=======
 	get_cloned_apps,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

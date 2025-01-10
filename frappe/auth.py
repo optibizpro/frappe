@@ -6,12 +6,17 @@ from urllib.parse import quote, urlencode, urlparse
 
 from werkzeug.wrappers import Response
 
+from werkzeug.wrappers import Response
+
 import frappe
 import frappe.database
 import frappe.utils
 import frappe.utils.user
 from frappe import _
+<<<<<<< HEAD
+=======
 from frappe.apps import get_default_path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.core.doctype.activity_log.activity_log import add_authentication_log
 from frappe.sessions import Session, clear_sessions, delete_session, get_expiry_in_seconds
 from frappe.translate import get_language
@@ -22,11 +27,18 @@ from frappe.twofactor import (
 	should_run_2fa,
 )
 from frappe.utils import cint, date_diff, datetime, get_datetime, today
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecation_warning
+from frappe.utils.password import check_password, get_decrypted_password
+from frappe.website.utils import get_home_page
+
+=======
 from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
 SAFE_HTTP_METHODS = frozenset(("GET", "HEAD", "OPTIONS"))
 UNSAFE_HTTP_METHODS = frozenset(("POST", "PUT", "DELETE", "PATCH"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 MAX_PASSWORD_SIZE = 512
 
 
@@ -96,6 +108,11 @@ class HTTPRequest:
 	def set_lang(self):
 		frappe.local.lang = get_language()
 
+<<<<<<< HEAD
+
+class LoginManager:
+	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+=======
 	def is_allowed_referrer(self):
 		referrer = frappe.get_request_header("Referer")
 		origin = frappe.get_request_header("Origin")
@@ -114,6 +131,7 @@ class HTTPRequest:
 
 class LoginManager:
 	__slots__ = ("full_name", "info", "resume", "user", "user_lang", "user_type")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def __init__(self):
 		self.user = None
@@ -141,8 +159,11 @@ class LoginManager:
 				self.set_user_info()
 
 	def login(self):
+<<<<<<< HEAD
+=======
 		self.run_trigger("before_login")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if frappe.get_system_settings("disable_user_pass_login"):
 			frappe.throw(_("Login with username and password is not allowed."), frappe.AuthenticationError)
 
@@ -379,6 +400,11 @@ class CookieManager:
 
 		if frappe.session.sid:
 			self.set_cookie("sid", frappe.session.sid, max_age=get_expiry_in_seconds(), httponly=True)
+<<<<<<< HEAD
+		if frappe.session.session_country:
+			self.set_cookie("country", frappe.session.session_country)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def set_cookie(
 		self,
@@ -434,9 +460,13 @@ def get_logged_user():
 def clear_cookies():
 	if hasattr(frappe.local, "session"):
 		frappe.session.sid = ""
+<<<<<<< HEAD
+	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
+=======
 	frappe.local.cookie_manager.delete_cookie(
 		["full_name", "user_id", "sid", "user_image", "user_lang", "system_user"]
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def validate_ip_address(user):
@@ -532,15 +562,30 @@ class LoginAttemptTracker:
 		:param lock_interval: Locking interval incase of maximum failed attempts
 		"""
 		if user_name:
+<<<<<<< HEAD
+			deprecation_warning("`username` parameter is deprecated, use `key` instead.")
+=======
 			from frappe.deprecation_dumpster import deprecation_warning
 
 			deprecation_warning("unknown", "v17", "`username` parameter is deprecated, use `key` instead.")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.key = key or user_name
 		self.lock_interval = datetime.timedelta(seconds=lock_interval)
 		self.max_failed_logins = max_consecutive_login_attempts
 
 	@property
 	def login_failed_count(self):
+<<<<<<< HEAD
+		return frappe.cache().hget("login_failed_count", self.key)
+
+	@login_failed_count.setter
+	def login_failed_count(self, count):
+		frappe.cache().hset("login_failed_count", self.key, count)
+
+	@login_failed_count.deleter
+	def login_failed_count(self):
+		frappe.cache().hdel("login_failed_count", self.key)
+=======
 		return frappe.cache.hget("login_failed_count", self.key)
 
 	@login_failed_count.setter
@@ -550,6 +595,7 @@ class LoginAttemptTracker:
 	@login_failed_count.deleter
 	def login_failed_count(self):
 		frappe.cache.hdel("login_failed_count", self.key)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@property
 	def login_failed_time(self):
@@ -557,6 +603,17 @@ class LoginAttemptTracker:
 
 		For every user we track only First failed login attempt time within lock interval of time.
 		"""
+<<<<<<< HEAD
+		return frappe.cache().hget("login_failed_time", self.key)
+
+	@login_failed_time.setter
+	def login_failed_time(self, timestamp):
+		frappe.cache().hset("login_failed_time", self.key, timestamp)
+
+	@login_failed_time.deleter
+	def login_failed_time(self):
+		frappe.cache().hdel("login_failed_time", self.key)
+=======
 		return frappe.cache.hget("login_failed_time", self.key)
 
 	@login_failed_time.setter
@@ -566,6 +623,7 @@ class LoginAttemptTracker:
 	@login_failed_time.deleter
 	def login_failed_time(self):
 		frappe.cache.hdel("login_failed_time", self.key)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def add_failure_attempt(self):
 		"""Log user failure attempts into the system.

@@ -177,6 +177,8 @@ frappe.ui.form.AssignToDialog = class AssignToDialog {
 				onchange: () => me.assign_to_me(),
 			},
 			{
+<<<<<<< HEAD
+=======
 				label: __("Assign To User Group"),
 				fieldtype: "Link",
 				fieldname: "assign_to_user_group",
@@ -184,6 +186,7 @@ frappe.ui.form.AssignToDialog = class AssignToDialog {
 				onchange: () => me.user_group_list(),
 			},
 			{
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fieldtype: "MultiSelectPills",
 				fieldname: "assign_to",
 				label: __("Assign To"),

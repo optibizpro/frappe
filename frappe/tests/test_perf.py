@@ -16,11 +16,18 @@ query. This test can be written like this.
 >>> 		get_controller("User")
 
 """
+<<<<<<< HEAD
+import gc
+import sys
+import time
+import unittest
+=======
 
 import gc
 import itertools
 import sys
 import time
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from unittest.mock import patch
 
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
@@ -29,6 +36,20 @@ import frappe
 from frappe.frappeclient import FrappeClient
 from frappe.model.base_document import get_controller
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase
+from frappe.utils import cint
+from frappe.website.path_resolver import PathResolver
+
+
+@run_only_if(db_type_is.MARIADB)
+class TestPerformance(FrappeTestCase):
+	def reset_request_specific_caches(self):
+		# To simulate close to request level of handling
+		frappe.destroy()  # releases everything on frappe.local
+		frappe.init(site=self.TEST_SITE)
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_api import FrappeAPITestCase
 from frappe.tests.test_query_builder import run_only_if
@@ -45,6 +66,7 @@ class TestPerformance(IntegrationTestCase):
 		# To simulate close to request level of handling
 		frappe.destroy()  # releases everything on frappe.local
 		frappe.init(self.TEST_SITE)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		frappe.clear_cache()
 
@@ -54,9 +76,13 @@ class TestPerformance(IntegrationTestCase):
 		self.reset_request_specific_caches()
 
 	def test_meta_caching(self):
+<<<<<<< HEAD
+		frappe.get_meta("User")
+=======
 		frappe.clear_cache()
 		frappe.get_meta("User")
 		frappe.clear_cache(doctype="ToDo")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		with self.assertQueryCount(0):
 			frappe.get_meta("User")
@@ -96,8 +122,13 @@ class TestPerformance(IntegrationTestCase):
 		# check both dict and list style filters
 		filters = [{"enabled": 1}, [["enabled", "=", 1]]]
 
+<<<<<<< HEAD
+		# Warm up code, becase get_list uses meta.
+		frappe.db.get_values("User", filters=filters[1], limit=1)
+=======
 		# Warm up code
 		frappe.db.get_values("User", filters=filters[0], limit=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for filter in filters:
 			with self.assertRowsRead(1):
 				self.assertEqual(1, len(frappe.db.get_values("User", filters=filter, limit=1)))
@@ -132,7 +163,11 @@ class TestPerformance(IntegrationTestCase):
 		"""Ideally should be ran against gunicorn worker, though I have not seen any difference
 		when using werkzeug's run_simple for synchronous requests."""
 
+<<<<<<< HEAD
+		EXPECTED_RPS = 55  # measured on GHA
+=======
 		EXPECTED_RPS = 120  # measured on GHA
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		FAILURE_THREASHOLD = 0.1
 
 		req_count = 1000
@@ -152,6 +187,10 @@ class TestPerformance(IntegrationTestCase):
 			"Possible performance regression in basic /api/Resource list  requests",
 		)
 
+<<<<<<< HEAD
+	@unittest.skip("Not implemented")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_homepage_resolver(self):
 		paths = ["/", "/app"]
 		for path in paths:
@@ -164,6 +203,8 @@ class TestPerformance(IntegrationTestCase):
 
 		self.assertEqual(get_build_version(), get_build_version())
 
+<<<<<<< HEAD
+=======
 	def test_get_list_single_query(self):
 		"""get_list should only perform single query."""
 
@@ -177,6 +218,7 @@ class TestPerformance(IntegrationTestCase):
 		with self.assertQueryCount(1):
 			frappe.get_list("User")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_no_ifnull_checks(self):
 		query = frappe.get_all("DocType", {"autoname": ("is", "set")}, run=0).lower()
 		self.assertNotIn("coalesce", query)
@@ -196,6 +238,8 @@ class TestPerformance(IntegrationTestCase):
 			result = frappe.db.sql(query, **kwargs)
 			self.assertEqual(sys.getrefcount(result), 2)  # Note: This always returns +1
 			self.assertFalse(gc.get_referrers(result))
+<<<<<<< HEAD
+=======
 
 	def test_no_cyclic_references(self):
 		doc = frappe.get_doc("User", "Administrator")
@@ -319,3 +363,4 @@ class TestOverheadCalls(FrappeAPITestCase):
 @redis_cache
 def redis_cached_func():
 	return 42
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

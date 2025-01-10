@@ -57,7 +57,11 @@ export default class WebFormList {
 							options: field.options,
 							input_class: "input-xs",
 							only_select: true,
+<<<<<<< HEAD
+							label: __(field.label),
+=======
 							label: __(field.label, null, field.parent),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							onchange: (event) => {
 								this.add_filter(field.fieldname, input.value, field.fieldtype);
 								this.refresh();
@@ -70,13 +74,21 @@ export default class WebFormList {
 
 					$(input.wrapper)
 						.addClass("col-md-2")
+<<<<<<< HEAD
+						.attr("title", __(field.label))
+=======
 						.attr("title", __(field.label, null, field.parent))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						.tooltip({
 							delay: { show: 600, hide: 100 },
 							trigger: "hover",
 						});
 
+<<<<<<< HEAD
+					input.$input.attr("placeholder", __(field.label));
+=======
 					input.$input.attr("placeholder", __(field.label, null, field.parent));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					this.filter_input.push(input);
 				});
 				this.refresh();

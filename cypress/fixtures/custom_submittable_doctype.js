@@ -47,7 +47,11 @@ export default {
 		},
 	],
 	quick_entry: 1,
+<<<<<<< HEAD
+	sort_field: "modified",
+=======
 	sort_field: "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	sort_order: "ASC",
 	track_changes: 1,
 };

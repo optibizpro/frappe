@@ -170,11 +170,19 @@ def get_mapped_doc(
 		with read_only_document("doc-mapper"):
 			postprocess(source_doc, target_doc)
 
+<<<<<<< HEAD
+	target_doc.run_method("after_mapping", source_doc)
+	target_doc.set_onload("load_after_mapping", True)
+
+	if apply_strict_user_permissions and not ignore_permissions and not target_doc.has_permission("create"):
+		target_doc.raise_no_permission_to("create")
+=======
 	ret_doc.run_method("after_mapping", source_doc)
 	ret_doc.set_onload("load_after_mapping", True)
 
 	if apply_strict_user_permissions and not ignore_permissions:
 		ret_doc.check_permission("create")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return ret_doc
 

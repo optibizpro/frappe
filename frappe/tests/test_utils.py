@@ -4,22 +4,34 @@
 import io
 import json
 import os
+<<<<<<< HEAD
+from datetime import date, datetime, time, timedelta
+=======
 import sys
 from datetime import date, datetime, time, timedelta, timezone
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from enum import Enum
 from io import StringIO
 from mimetypes import guess_type
 from unittest.mock import patch
 
+<<<<<<< HEAD
+import pytz
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from hypothesis import given
 from hypothesis import strategies as st
 from PIL import Image
 
 import frappe
 from frappe.installer import parse_app_name
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, change_settings
+=======
 from frappe.model.document import Document
 from frappe.tests import IntegrationTestCase, MockedRequestTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import (
 	add_trackers_to_url,
 	ceil,
@@ -31,7 +43,10 @@ from frappe.utils import (
 	format_timedelta,
 	get_bench_path,
 	get_file_timestamp,
+<<<<<<< HEAD
+=======
 	get_gravatar,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_site_info,
 	get_sites,
 	get_url,
@@ -39,8 +54,11 @@ from frappe.utils import (
 	money_in_words,
 	parse_and_map_trackers_from_url,
 	parse_timedelta,
+<<<<<<< HEAD
+=======
 	random_string,
 	remove_blanks,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	safe_json_loads,
 	scrub_urls,
 	validate_email_address,
@@ -58,9 +76,13 @@ from frappe.utils.data import (
 	cast,
 	cint,
 	cstr,
+<<<<<<< HEAD
+	expand_relative_urls,
+=======
 	duration_to_seconds,
 	expand_relative_urls,
 	get_datetime,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_first_day_of_week,
 	get_time,
 	get_timedelta,
@@ -70,10 +92,15 @@ from frappe.utils.data import (
 	getdate,
 	now_datetime,
 	nowtime,
+<<<<<<< HEAD
+	rounded,
+	sha256_hash,
+=======
 	pretty_date,
 	rounded,
 	sha256_hash,
 	to_timedelta,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	validate_python_code,
 )
 from frappe.utils.dateutils import get_dates_from_timegrain
@@ -85,6 +112,9 @@ from frappe.utils.response import json_handler
 from frappe.utils.synchronization import LockTimeoutError, filelock
 
 
+<<<<<<< HEAD
+class TestFilters(FrappeTestCase):
+=======
 class Capturing(list):
 	# ref: https://stackoverflow.com/a/16571630/10309266
 	def __enter__(self):
@@ -99,6 +129,7 @@ class Capturing(list):
 
 
 class TestFilters(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_simple_dict(self):
 		self.assertTrue(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Open"}))
 		self.assertFalse(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Closed"}))
@@ -163,14 +194,22 @@ class TestFilters(IntegrationTestCase):
 		# date fields
 		self.assertTrue(
 			evaluate_filters(
+<<<<<<< HEAD
+				{"doctype": "User", "birth_date": "2023-02-28"}, [("User", "birth_date", ">", "01-04-2022")]
+=======
 				{"doctype": "User", "birth_date": "2023-02-28"},
 				[("User", "birth_date", ">", "01-04-2022")],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 		)
 		self.assertFalse(
 			evaluate_filters(
+<<<<<<< HEAD
+				{"doctype": "User", "birth_date": "2023-02-28"}, [("User", "birth_date", "<", "28-02-2023")]
+=======
 				{"doctype": "User", "birth_date": "2023-02-28"},
 				[("User", "birth_date", "<", "28-02-2023")],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 		)
 
@@ -188,6 +227,10 @@ class TestFilters(IntegrationTestCase):
 			)
 		)
 
+<<<<<<< HEAD
+
+class TestMoney(FrappeTestCase):
+=======
 	def test_filter_evaluation(self):
 		doc = {
 			"doctype": "User",
@@ -219,6 +262,7 @@ class TestFilters(IntegrationTestCase):
 
 
 class TestMoney(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_money_in_words(self):
 		test_cases = {
 			"BHD": [
@@ -255,7 +299,11 @@ class TestMoney(IntegrationTestCase):
 				)
 
 
+<<<<<<< HEAD
+class TestDataManipulation(FrappeTestCase):
+=======
 class TestDataManipulation(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_scrub_urls(self):
 		html = """
 			<p>You have a new message from: <b>John</b></p>
@@ -282,7 +330,11 @@ class TestDataManipulation(IntegrationTestCase):
 		self.assertTrue('<a href="mailto:test@example.com">email</a>' in html)
 
 
+<<<<<<< HEAD
+class TestFieldCasting(FrappeTestCase):
+=======
 class TestFieldCasting(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_str_types(self):
 		STR_TYPES = (
 			"Data",
@@ -329,7 +381,11 @@ class TestFieldCasting(IntegrationTestCase):
 		self.assertIsInstance(cast("Time", value="12:03:34"), timedelta)
 
 
+<<<<<<< HEAD
+class TestMathUtils(FrappeTestCase):
+=======
 class TestMathUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_floor(self):
 		from decimal import Decimal
 
@@ -351,7 +407,11 @@ class TestMathUtils(IntegrationTestCase):
 		self.assertEqual(ceil(Decimal(29.45)), 30)
 
 
+<<<<<<< HEAD
+class TestHTMLUtils(FrappeTestCase):
+=======
 class TestHTMLUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_clean_email_html(self):
 		from frappe.utils.html_utils import clean_email_html
 
@@ -378,7 +438,11 @@ class TestHTMLUtils(IntegrationTestCase):
 		self.assertNotIn("xyz", clean)
 
 
+<<<<<<< HEAD
+class TestValidationUtils(FrappeTestCase):
+=======
 class TestValidationUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_valid_url(self):
 		# Edge cases
 		self.assertFalse(validate_url(""))
@@ -424,12 +488,16 @@ class TestValidationUtils(IntegrationTestCase):
 		self.assertFalse(validate_email_address("test@example.com test2@example.com,undisclosed-recipient"))
 
 		# Invalid with throw
+<<<<<<< HEAD
+		self.assertRaises(frappe.InvalidEmailAddressError, validate_email_address, "someone.com", throw=True)
+=======
 		self.assertRaises(
 			frappe.InvalidEmailAddressError,
 			validate_email_address,
 			"someone.com",
 			throw=True,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.assertEqual(validate_email_address("Some%20One@frappe.com"), "Some%20One@frappe.com")
 		self.assertEqual(
@@ -437,6 +505,9 @@ class TestValidationUtils(IntegrationTestCase):
 			"erp+Job%20Applicant=JA00004@frappe.com",
 		)
 
+<<<<<<< HEAD
+class TestImage(FrappeTestCase):
+=======
 	def test_valid_phone(self):
 		valid_phones = ["+91 1234567890", ""]
 
@@ -460,6 +531,7 @@ class TestValidationUtils(IntegrationTestCase):
 
 
 class TestImage(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_strip_exif_data(self):
 		original_image = Image.open(frappe.get_app_path("frappe", "tests", "data", "exif_sample_image.jpg"))
 		original_image_content = open(
@@ -487,7 +559,11 @@ class TestImage(IntegrationTestCase):
 		self.assertLess(len(optimized_content), len(original_content))
 
 
+<<<<<<< HEAD
+class TestPythonExpressions(FrappeTestCase):
+=======
 class TestPythonExpressions(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_validation_for_good_python_expression(self):
 		valid_expressions = [
 			"foo == bar",
@@ -514,7 +590,11 @@ class TestPythonExpressions(IntegrationTestCase):
 			self.assertRaises(frappe.ValidationError, validate_python_code, expr)
 
 
+<<<<<<< HEAD
+class TestDiffUtils(FrappeTestCase):
+=======
 class TestDiffUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -556,7 +636,11 @@ class TestDiffUtils(IntegrationTestCase):
 		self.assertIn("+42;", diff)
 
 
+<<<<<<< HEAD
+class TestDateUtils(FrappeTestCase):
+=======
 class TestDateUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_first_day_of_week(self):
 		# Monday as start of the week
 		with patch.object(frappe.utils.data, "get_first_day_of_the_week", return_value="Monday"):
@@ -570,6 +654,14 @@ class TestDateUtils(IntegrationTestCase):
 			)
 
 		# Sunday as start of the week
+<<<<<<< HEAD
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-20"))
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-21"), frappe.utils.getdate("2020-12-20"))
+
+	def test_last_day_of_week(self):
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-24"), frappe.utils.getdate("2020-12-26"))
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-28"), frappe.utils.getdate("2021-01-02"))
+=======
 		self.assertEqual(
 			frappe.utils.get_first_day_of_week("2020-12-25"),
 			frappe.utils.getdate("2020-12-20"),
@@ -588,6 +680,7 @@ class TestDateUtils(IntegrationTestCase):
 			frappe.utils.get_last_day_of_week("2020-12-28"),
 			frappe.utils.getdate("2021-01-02"),
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_is_last_day_of_the_month(self):
 		self.assertEqual(frappe.utils.is_last_day_of_the_month("2020-12-24"), False)
@@ -619,6 +712,8 @@ class TestDateUtils(IntegrationTestCase):
 		self.assertIsInstance(get_timedelta(str(timedelta_input)), timedelta)
 		self.assertIsInstance(get_timedelta(str(time_input)), timedelta)
 		self.assertIsInstance(get_timedelta(get_timedelta("100:2:12")), timedelta)
+<<<<<<< HEAD
+=======
 
 	def test_to_timedelta(self):
 		self.assertEqual(to_timedelta("00:00:01"), timedelta(seconds=1))
@@ -702,6 +797,7 @@ class TestDateUtils(IntegrationTestCase):
 
 		for dt, exp_message in test_cases.items():
 			self.assertEqual(pretty_date(dt), exp_message)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_date_from_timegrain(self):
 		start_date = getdate("2021-01-01")
@@ -729,7 +825,11 @@ class TestDateUtils(IntegrationTestCase):
 			self.assertEqual(d, add_to_date(start_date, years=idx, days=-1))
 
 
+<<<<<<< HEAD
+class TestResponse(FrappeTestCase):
+=======
 class TestResponse(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_json_handler(self):
 		class TEST(Enum):
 			ABC = "!@)@)!"
@@ -777,16 +877,24 @@ class TestResponse(IntegrationTestCase):
 			json.dumps(BAD_OBJECT, default=json_handler)
 
 
+<<<<<<< HEAD
+class TestTimeDeltaUtils(FrappeTestCase):
+=======
 class TestTimeDeltaUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_format_timedelta(self):
 		self.assertEqual(format_timedelta(timedelta(seconds=0)), "0:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=10)), "10:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=100)), "100:00:00")
 		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=129)), "0:01:40.000129")
+<<<<<<< HEAD
+		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=12212199129)), "3:25:12.199129")
+=======
 		self.assertEqual(
 			format_timedelta(timedelta(seconds=100, microseconds=12212199129)),
 			"3:25:12.199129",
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_parse_timedelta(self):
 		self.assertEqual(parse_timedelta("0:0:0"), timedelta(seconds=0))
@@ -798,7 +906,11 @@ class TestTimeDeltaUtils(IntegrationTestCase):
 		self.assertEqual(parse_timedelta("7 days, 0:32:18"), timedelta(days=7, seconds=1938))
 
 
+<<<<<<< HEAD
+class TestXlsxUtils(FrappeTestCase):
+=======
 class TestXlsxUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_unescape(self):
 		from frappe.utils.xlsxutils import handle_html
 
@@ -807,7 +919,11 @@ class TestXlsxUtils(IntegrationTestCase):
 		self.assertEqual("abc", handle_html("abc"))
 
 
+<<<<<<< HEAD
+class TestLinkTitle(FrappeTestCase):
+=======
 class TestLinkTitle(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_link_title_doctypes_in_boot_info(self):
 		"""
 		Test that doctypes are added to link_title_map in boot_info
@@ -898,7 +1014,11 @@ class TestLinkTitle(IntegrationTestCase):
 		prop_setter.delete()
 
 
+<<<<<<< HEAD
+class TestAppParser(FrappeTestCase):
+=======
 class TestAppParser(MockedRequestTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_app_name_parser(self):
 		self.responses.add(
 			"HEAD",
@@ -915,7 +1035,11 @@ class TestAppParser(MockedRequestTestCase):
 		self.assertEqual("healthcare", parse_app_name("frappe/healthcare@develop"))
 
 
+<<<<<<< HEAD
+class TestIntrospectionMagic(FrappeTestCase):
+=======
 class TestIntrospectionMagic(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Test utils that inspect live objects"""
 
 	def test_get_newargs(self):
@@ -941,6 +1065,9 @@ class TestIntrospectionMagic(IntegrationTestCase):
 		self.assertEqual(frappe.get_newargs(lambda: None, args), {})
 
 
+<<<<<<< HEAD
+class TestLocks(FrappeTestCase):
+=======
 class TestMakeRandom(IntegrationTestCase):
 	def test_get_random(self):
 		self.assertIsInstance(get_random("DocType", doc=True), Document)
@@ -1003,6 +1130,7 @@ class TestContainerUtils(IntegrationTestCase):
 
 
 class TestLocks(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_locktimeout(self):
 		lock_name = "test_lock"
 		with filelock(lock_name):
@@ -1018,7 +1146,11 @@ class TestLocks(IntegrationTestCase):
 					self.fail("Global locks not working")
 
 
+<<<<<<< HEAD
+class TestMiscUtils(FrappeTestCase):
+=======
 class TestMiscUtils(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_file_timestamp(self):
 		self.assertIsInstance(get_file_timestamp(__file__), str)
 
@@ -1029,6 +1161,8 @@ class TestMiscUtils(IntegrationTestCase):
 	def test_get_all_sites(self):
 		self.assertIn(frappe.local.site, get_sites())
 
+<<<<<<< HEAD
+=======
 	def test_get_site_info(self):
 		info = get_site_info()
 
@@ -1040,6 +1174,7 @@ class TestMiscUtils(IntegrationTestCase):
 		self.assertTrue(get_url_to_form("System Settings").endswith("/app/system-settings"))
 		self.assertTrue(get_url_to_form("User", "Test User").endswith("/app/user/Test%20User"))
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_safe_json_load(self):
 		self.assertEqual(safe_json_loads("{}"), {})
 		self.assertEqual(safe_json_loads("{ /}"), "{ /}")
@@ -1061,6 +1196,9 @@ class TestMiscUtils(IntegrationTestCase):
 			self.assertEqual(output, expand_relative_urls(input))
 
 
+<<<<<<< HEAD
+class TestTBSanitization(FrappeTestCase):
+=======
 class TestTypingValidations(IntegrationTestCase):
 	ERR_REGEX = "^Argument '.*' should be of type '.*' but got '.*' instead.$"
 
@@ -1096,6 +1234,7 @@ class TestTypingValidations(IntegrationTestCase):
 
 
 class TestTBSanitization(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_traceback_sanitzation(self):
 		try:
 			password = "42"  # noqa: F841
@@ -1110,8 +1249,13 @@ class TestTBSanitization(IntegrationTestCase):
 			self.assertIn("safe_value", traceback)
 
 
+<<<<<<< HEAD
+class TestRounding(FrappeTestCase):
+	@change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+=======
 class TestRounding(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_normal_rounding(self):
 		self.assertEqual(flt("what"), 0)
 
@@ -1188,11 +1332,16 @@ class TestRounding(IntegrationTestCase):
 		self.assertEqual(flt(2.25, 1, rounding_method=rounding_method), 2.3)
 		self.assertEqual(flt(3.35, 1, rounding_method=rounding_method), 3.4)
 
+<<<<<<< HEAD
+	@change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+	@given(st.decimals(min_value=-1e8, max_value=1e8), st.integers(min_value=-2, max_value=4))
+=======
 	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
 	@given(
 		st.decimals(min_value=-1e8, max_value=1e8),
 		st.integers(min_value=-2, max_value=4),
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_normal_rounding_property(self, number, precision):
 		with localcontext() as ctx:
 			ctx.rounding = ROUND_HALF_UP
@@ -1256,6 +1405,13 @@ class TestRounding(IntegrationTestCase):
 		self.assertEqual(flt(-2.25, 1, rounding_method=rounding_method), -2.2)
 		self.assertEqual(flt(-3.35, 1, rounding_method=rounding_method), -3.4)
 
+<<<<<<< HEAD
+	@change_settings("System Settings", {"rounding_method": "Banker's Rounding"})
+	@given(st.decimals(min_value=-1e8, max_value=1e8), st.integers(min_value=-2, max_value=4))
+	def test_bankers_rounding_property(self, number, precision):
+		self.assertEqual(Decimal(str(flt(float(number), precision))), round(number, precision))
+
+=======
 	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Banker's Rounding"})
 	@given(
 		st.decimals(min_value=-1e8, max_value=1e8),
@@ -1267,6 +1423,7 @@ class TestRounding(IntegrationTestCase):
 	def test_default_rounding(self):
 		self.assertEqual(frappe.get_system_settings("rounding_method"), "Banker's Rounding")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@given(
 		st.floats(min_value=-(2**32) - 1, max_value=2**32 + 1),
 		st.integers(min_value=-(2**63) - 1, max_value=2**63 + 1),
@@ -1277,6 +1434,9 @@ class TestRounding(IntegrationTestCase):
 		self.assertEqual(cint(str(floating_point)), int(floating_point))
 
 
+<<<<<<< HEAD
+class TestCrypto(FrappeTestCase):
+=======
 class TestArgumentTypingValidations(IntegrationTestCase):
 	def test_validate_argument_types(self):
 		from unittest.mock import AsyncMock, MagicMock, Mock
@@ -1360,12 +1520,15 @@ class TestChangeLog(IntegrationTestCase):
 
 
 class TestCrypto(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_hashing(self):
 		self.assertEqual(sha256_hash(""), "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
 		self.assertEqual(
 			sha256_hash(b"The quick brown fox jumps over the lazy dog"),
 			"d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
 		)
+<<<<<<< HEAD
+=======
 
 
 class TestURLTrackers(IntegrationTestCase):
@@ -1418,3 +1581,4 @@ class TestURLTrackers(IntegrationTestCase):
 		self.assertDocumentEqual(result["utm_medium"], expected["utm_medium"])
 		self.assertDocumentEqual(result["utm_campaign"], expected["utm_campaign"])
 		self.assertEqual(result["utm_content"], expected["utm_content"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

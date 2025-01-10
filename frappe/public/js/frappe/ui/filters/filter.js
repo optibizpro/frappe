@@ -20,17 +20,27 @@ frappe.ui.Filter = class {
 			["in", __("In")],
 			["not in", __("Not In")],
 			["is", __("Is")],
+<<<<<<< HEAD
+			[">", ">"],
+			["<", "<"],
+			[">=", ">="],
+			["<=", "<="],
+=======
 			[">", __("Greater Than")],
 			["<", __("Less Than")],
 			[">=", __("Greater Than Or Equal To")],
 			["<=", __("Less Than Or Equal To")],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			["Between", __("Between")],
 			["Timespan", __("Timespan")],
 		];
 
 		this.nested_set_conditions = [
 			["descendants of", __("Descendants Of")],
+<<<<<<< HEAD
+=======
 			["descendants of (inclusive)", __("Descendants Of (inclusive)")],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			["not descendants of", __("Not Descendants Of")],
 			["ancestors of", __("Ancestors Of")],
 			["not ancestors of", __("Not Ancestors Of")],
@@ -52,6 +62,8 @@ frappe.ui.Filter = class {
 			"Markdown Editor": ["Between", "Timespan", ">", "<", ">=", "<=", "in", "not in"],
 			Password: ["Between", "Timespan", ">", "<", ">=", "<=", "in", "not in"],
 			Rating: ["like", "not like", "Between", "in", "not in", "Timespan"],
+<<<<<<< HEAD
+=======
 			Int: ["like", "not like", "Between", "in", "not in", "Timespan"],
 			Float: ["like", "not like", "Between", "in", "not in", "Timespan"],
 			Percent: ["like", "not like", "Between", "in", "not in", "Timespan"],
@@ -70,6 +82,7 @@ frappe.ui.Filter = class {
 				"<=": __("On or Before"),
 				">=": __("On or After"),
 			},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 	}
 
@@ -567,7 +580,10 @@ frappe.ui.filter_utils = {
 				"=",
 				"!=",
 				"descendants of",
+<<<<<<< HEAD
+=======
 				"descendants of (inclusive)",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				"ancestors of",
 				"not descendants of",
 				"not ancestors of",

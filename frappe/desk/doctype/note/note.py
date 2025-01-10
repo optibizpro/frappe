@@ -48,9 +48,19 @@ class Note(Document):
 
 @frappe.whitelist()
 def mark_as_seen(note: str):
+<<<<<<< HEAD
+	if not isinstance(note, str):
+		raise ValueError("note must be a string")
+
+	note = frappe.get_doc("Note", note)
+	if frappe.session.user not in [d.user for d in note.seen_by]:
+		note.append("seen_by", {"user": frappe.session.user})
+		note.save(ignore_version=True, ignore_permissions=True)
+=======
 	note: Note = frappe.get_doc("Note", note)
 	note.mark_seen_by(frappe.session.user)
 	note.save(ignore_permissions=True, ignore_version=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_permission_query_conditions(user):

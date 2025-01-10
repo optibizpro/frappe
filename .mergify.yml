@@ -42,6 +42,29 @@ pull_request_rules:
           - "{{ author }}"
 
   - name: backport to version-14-hotfix
+<<<<<<< HEAD
+    conditions:
+      - label="backport version-14-hotfix"
+    actions:
+      backport:
+        branches:
+          - version-14-hotfix
+        assignees:
+          - "{{ author }}"
+
+  - name: backport to develop
+    conditions:
+      - label="backport develop"
+    actions:
+      backport:
+        branches:
+          - develop
+        assignees:
+          - "{{ author }}"
+
+  - name: backport to version-13-pre-release
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
     conditions:
       - label="backport version-14-hotfix"
     actions:

@@ -259,8 +259,11 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 					label: df_prop.label,
 					fieldname: setter,
 					options: df_prop.options,
+<<<<<<< HEAD
+=======
 					read_only:
 						(this?.read_only_setters && this.read_only_setters.includes(setter)) || 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					default: this.setters[setter],
 				});
 			});
@@ -606,8 +609,13 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 		}
 
 		this.results = [];
+<<<<<<< HEAD
+		if (res.values.length) {
+			res.values.forEach((result) => {
+=======
 		if (results.length) {
 			results.forEach((result) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				result.checked = 0;
 				this.results.push(result);
 			});
@@ -618,11 +626,20 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 	async get_filtered_parents_for_child_search() {
 		const parent_search_args = this.get_args_for_search();
 		parent_search_args.filter_fields = ["name"];
+<<<<<<< HEAD
+		// eslint-disable-next-line no-unused-vars
+		const [response, _] = await this.perform_search(parent_search_args);
+
+		let parent_names = [];
+		if (response.values.length) {
+			parent_names = response.values.map((v) => v.name);
+=======
 		const [results, _] = await this.perform_search(parent_search_args);
 
 		let parent_names = [];
 		if (results.length) {
 			parent_names = results.map((v) => v.name);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		return parent_names;
 	}

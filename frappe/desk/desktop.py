@@ -444,6 +444,9 @@ def get_workspace_sidebar_items():
 		"public",
 		"module",
 		"icon",
+<<<<<<< HEAD
+		"is_hidden",
+=======
 		"indicator_color",
 		"is_hidden",
 		"app",
@@ -451,6 +454,7 @@ def get_workspace_sidebar_items():
 		"link_type",
 		"link_to",
 		"external_link",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	]
 	all_pages = frappe.get_all(
 		"Workspace", fields=fields, filters=filters, order_by=order_by, ignore_permissions=True
@@ -499,6 +503,12 @@ def get_workspace_sidebar_items():
 		pages.extend(private_pages)
 
 	if len(pages) == 0:
+<<<<<<< HEAD
+		pages = [frappe.get_doc("Workspace", "Welcome Workspace").as_dict()]
+		pages[0]["label"] = _("Welcome Workspace")
+
+	return {"pages": pages, "has_access": has_access}
+=======
 		pages.append(next((x for x in all_pages if x["title"] == "Welcome Workspace"), None))
 
 	return {
@@ -509,6 +519,7 @@ def get_workspace_sidebar_items():
 		"has_access": has_access,
 		"has_create_access": frappe.has_permission(doctype="Workspace", ptype="create"),
 	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_table_with_counts():
