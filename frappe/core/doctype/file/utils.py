@@ -13,7 +13,6 @@ import frappe
 from frappe import _, safe_decode
 from frappe.utils import cint, cstr, encode, get_files_path, random_string, strip
 from frappe.utils.file_manager import safe_b64decode
-from frappe.utils.image import optimize_image
 
 if TYPE_CHECKING:
 	from PIL.ImageFile import ImageFile
@@ -26,7 +25,7 @@ if TYPE_CHECKING:
 
 def make_home_folder() -> None:
 	home = frappe.get_doc(
-		{"doctype": "File", "is_folder": 1, "is_home_folder": 1, "file_name": _("Home")}
+		{"doctype": "File", "is_folder": 1, "is_home_folder": 1, "file_name": "Home"}
 	).insert(ignore_if_duplicate=True)
 
 	frappe.get_doc(
@@ -35,13 +34,13 @@ def make_home_folder() -> None:
 			"folder": home.name,
 			"is_folder": 1,
 			"is_attachments_folder": 1,
-			"file_name": _("Attachments"),
+			"file_name": "Attachments",
 		}
 	).insert(ignore_if_duplicate=True)
 
 
 def setup_folder_path(filename: str, new_parent: str) -> None:
-	file: "File" = frappe.get_doc("File", filename)
+	file: File = frappe.get_doc("File", filename)
 	file.folder = new_parent
 	file.save()
 
@@ -217,9 +216,15 @@ def get_file_name(fname: str, optional_suffix: str | None = None) -> str:
 	return f"{partial}{suffix}{extn}"
 
 
-def extract_images_from_doc(doc: "Document", fieldname: str):
+def extract_images_from_doc(doc: "Document", fieldname: str, is_private=True):
 	content = doc.get(fieldname)
+<<<<<<< HEAD
 	content = extract_images_from_html(doc, content, is_private=(not doc.meta.make_attachments_public))
+=======
+	if doc.meta.make_attachments_public:
+		is_private = False
+	content = extract_images_from_html(doc, content, is_private=is_private)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.flags.has_dataurl:
 		doc.set(fieldname, content)
 
@@ -236,6 +241,7 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 			content = content.encode("utf-8")
 		if b"," in content:
 			content = content.split(b",")[1]
+<<<<<<< HEAD
 
 		if not content:
 			# if there is no content, return the original tag
@@ -246,8 +252,18 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 		except BinasciiError:
 			frappe.flags.has_dataurl = True
 			return f'<img src="#broken-image" alt="{get_corrupted_image_msg()}"'
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-		content = optimize_image(content, mtype)
+		if not content:
+			# if there is no content, return the original tag
+			return match.group(0)
+
+		try:
+			content = safe_b64decode(content)
+		except BinasciiError:
+			frappe.flags.has_dataurl = True
+			return f'<img src="#broken-image" alt="{get_corrupted_image_msg()}"'
 
 		if "filename=" in headers:
 			filename = headers.split("filename=")[-1]
@@ -360,7 +376,7 @@ def attach_files_to_document(doc: "Document", event) -> None:
 			)
 			continue
 
-		file: "File" = frappe.get_doc(
+		file: File = frappe.get_doc(
 			doctype="File",
 			file_url=value,
 			attached_to_name=doc.name,
@@ -438,6 +454,10 @@ def find_file_by_url(path: str, name: str | None = None) -> Optional["File"]:
 	# if the file is accessible from any one of those documents
 	# then it should be downloadable
 	for file_data in files:
+<<<<<<< HEAD
 		file: "File" = frappe.get_doc(doctype="File", **file_data)
+=======
+		file: File = frappe.get_doc(doctype="File", **file_data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if file.is_downloadable():
 			return file

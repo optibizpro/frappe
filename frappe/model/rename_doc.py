@@ -4,13 +4,14 @@ from types import NoneType
 from typing import TYPE_CHECKING
 
 import frappe
+import frappe.permissions
 from frappe import _, bold
 from frappe.model.document import Document
 from frappe.model.dynamic_links import get_dynamic_link_map
 from frappe.model.naming import validate_name
 from frappe.model.utils.user_settings import sync_user_settings, update_user_settings_data
 from frappe.query_builder import Field
-from frappe.utils.data import sbool
+from frappe.utils.data import cint, cstr, sbool
 from frappe.utils.password import rename_password
 from frappe.utils.scheduler import is_scheduler_inactive
 
@@ -30,8 +31,7 @@ def update_document_title(
 	**kwargs,
 ) -> str:
 	"""
-	Update the name or title of a document. Returns `name` if document was renamed,
-	`docname` if renaming operation was queued.
+	Update the name or title of a document. Return `name` if document was renamed, `docname` if renaming operation was queued.
 
 	:param doctype: DocType of the document
 	:param docname: Name of the document
@@ -118,8 +118,13 @@ def update_document_title(
 
 def rename_doc(
 	doctype: str | None = None,
+<<<<<<< HEAD
 	old: str | None = None,
 	new: str | None = None,
+=======
+	old: str | int | None = None,
+	new: str | int | None = None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	force: bool = False,
 	merge: bool = False,
 	ignore_permissions: bool = False,
@@ -156,6 +161,10 @@ def rename_doc(
 	force = sbool(force)
 	merge = sbool(merge)
 	meta = frappe.get_meta(doctype)
+
+	if meta.naming_rule == "Autoincrement":
+		old = cint(old)
+		new = cint(new)
 
 	if validate:
 		old_doc = doc or frappe.get_doc(doctype, old)
@@ -229,6 +238,15 @@ def rename_doc(
 			indicator="green",
 		)
 
+	# let people watching the old form know that it has been renamed
+	frappe.publish_realtime(
+		event="doc_rename",
+		message={"doctype": doctype, "old": old, "new": new},
+		doctype=doctype,
+		docname=old,
+		after_commit=True,
+	)
+
 	return new
 
 
@@ -250,7 +268,7 @@ def update_assignments(old: str, new: str, doctype: str) -> None:
 		)
 
 		for todo in todos:
-			frappe.delete_doc("ToDo", todo.name)
+			frappe.delete_doc("ToDo", todo.name, force=True)
 
 	unique_assignments = list(set(old_assignments + new_assignments))
 	frappe.db.set_value(doctype, new, "_assign", frappe.as_json(unique_assignments, indent=0))
@@ -274,7 +292,7 @@ def update_user_settings(old: str, new: str, link_fields: list[dict]) -> None:
 	user_settings_details = (
 		frappe.qb.from_(UserSettings)
 		.select("user", "doctype", "data")
-		.where(UserSettings.data.like(old) & UserSettings.doctype.isin(linked_doctypes))
+		.where(UserSettings.data.like(cstr(old)) & UserSettings.doctype.isin(linked_doctypes))
 		.run(as_dict=True)
 	)
 
@@ -341,8 +359,8 @@ def update_autoname_field(doctype: str, new: str, meta: "Meta") -> None:
 
 def validate_rename(
 	doctype: str,
-	old: str,
-	new: str,
+	old: str | int,
+	new: str | int,
 	meta: "Meta",
 	merge: bool,
 	force: bool = False,
@@ -375,6 +393,7 @@ def validate_rename(
 	if not merge and exists and not ignore_if_exists:
 		frappe.throw(_("Another {0} with name {1} exists, select another name").format(doctype, new))
 
+<<<<<<< HEAD
 	kwargs = {"doctype": doctype, "ptype": "write", "raise_exception": False}
 	if old_doc:
 		kwargs["doc"] = old_doc
@@ -386,8 +405,21 @@ def validate_rename(
 		kwargs["doc"] = frappe.get_doc(doctype, new)
 		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
 			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
+=======
+	kwargs = {"doctype": doctype, "ptype": "write", "print_logs": False}
+	if old_doc:
+		kwargs["doc"] = old_doc
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-	if not (force or ignore_permissions) and not meta.allow_rename:
+	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))
+
+	if merge:
+		kwargs["doc"] = frappe.get_doc(doctype, new)
+		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
+
+	if not force and not ignore_permissions and not meta.allow_rename:
 		frappe.throw(_("{0} not allowed to be renamed").format(_(doctype)))
 
 	# validate naming like it's done in doc.py
@@ -450,7 +482,9 @@ def update_link_field_values(link_fields: list[dict], old: str, new: str, doctyp
 			if parent == new and doctype == "DocType":
 				parent = old
 
-			frappe.db.set_value(parent, {docfield: old}, docfield, new, update_modified=False)
+			# when a document with autoincrement naming is renamed, the old and new values are int
+			# but link field values are always stored as varchar, so casting the values to string
+			frappe.db.set_value(parent, {docfield: cstr(old)}, docfield, cstr(new), update_modified=False)
 
 		# update cached link_fields as per new
 		if doctype == "DocType" and field["parent"] == old:

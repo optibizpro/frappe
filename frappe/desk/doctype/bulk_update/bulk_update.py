@@ -112,7 +112,11 @@ def _bulk_action(doctype, docnames, action, data, task_id=None):
 	return failed
 
 
+<<<<<<< HEAD
 @deprecated
 def show_progress(docnames, message, i, description):
 	n = len(docnames)
 	frappe.publish_progress(float(i) * 100 / n, title=message, description=description)
+=======
+from frappe.deprecation_dumpster import show_progress
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

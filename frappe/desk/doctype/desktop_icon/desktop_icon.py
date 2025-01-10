@@ -39,6 +39,7 @@ class DesktopIcon(Document):
 		type: DF.Literal["module", "list", "link", "page", "query-report"]
 
 	# end: auto-generated types
+
 	def validate(self):
 		if not self.label:
 			self.label = self.module_name
@@ -258,7 +259,7 @@ def set_desktop_icons(visible_list, ignore_duplicate=True):
 	an icon for the doctype"""
 
 	# clear all custom only if setup is not complete
-	if not int(frappe.defaults.get_defaults().setup_complete or 0):
+	if not frappe.defaults.get_defaults().get("setup_complete", 0):
 		frappe.db.delete("Desktop Icon", {"standard": 0})
 
 	# set standard as blocked and hidden if setting first active domain

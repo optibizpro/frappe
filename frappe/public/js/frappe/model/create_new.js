@@ -60,11 +60,15 @@ $.extend(frappe.model, {
 		if (frappe.route_options && !doc.parent) {
 			$.each(frappe.route_options, function (fieldname, value) {
 				var df = frappe.meta.has_field(doctype, fieldname);
+<<<<<<< HEAD
 				if (
 					df &&
 					["Link", "Data", "Select", "Dynamic Link"].includes(df.fieldtype) &&
 					!df.no_copy
 				) {
+=======
+				if (df && !df.no_copy) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					doc[fieldname] = value;
 				}
 			});

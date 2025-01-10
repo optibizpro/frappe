@@ -24,11 +24,19 @@
 			}
 		}
 	}
+
+	@include media-breakpoint-up(md) {
+		// only for small screens
+		.sidebar-toggle-btn {
+			display: none;
+		}
+	}
+
 	.title-area {
 		display: inline-flex;
 		align-items: center;
 		.title-text {
-			@include get_textstyle("2xl", "bold");
+			@include get_textstyle("xl", "semibold");
 			cursor: pointer;
 			margin-bottom: 0px;
 			margin-right: var(--margin-sm);
@@ -46,9 +54,9 @@
 .page-container {
 	background-color: var(--bg-color);
 
-	.page-body.full-width {
+	.page-body {
 		width: 100%;
-		max-width: 100%;
+		padding: 0px;
 	}
 }
 
@@ -85,14 +93,18 @@
 }
 
 .layout-main-section-wrapper {
-	min-width: 0;
+	width: 100%;
 }
 
 .layout-main-section.frappe-card {
 	overflow: hidden;
 	@include card($padding: 0px);
 	box-shadow: none;
+<<<<<<< HEAD
 	border: 1px solid var(--border-color);
+=======
+	border: none;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 .page-head {
@@ -100,8 +112,9 @@
 	position: sticky;
 	top: var(--navbar-height);
 	background: var(--bg-color);
-	margin-bottom: 5px;
+	border-bottom: 1px solid var(--border-color);
 	transition: 0.5s top;
+
 	.page-head-content {
 		height: var(--page-head-height);
 		padding: 8px 0px;
@@ -110,15 +123,18 @@
 
 .page-form {
 	margin: 0;
+<<<<<<< HEAD
 	padding: var(--padding-xs);
+=======
+	padding: var(--padding-xs) var(--padding-md);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	display: flex;
 	flex-wrap: wrap;
 	background-color: var(--card-bg);
-	border-bottom: 1px solid var(--border-color);
 
 	.form-group {
-		padding: 0px 5px;
-		margin: 5px 0px;
+		padding: 0 10px 0 0;
+		margin: 5px 0;
 	}
 	.checkbox {
 		margin-top: 4px;
@@ -162,6 +178,7 @@
 		margin-right: var(--margin-sm);
 	}
 }
+<<<<<<< HEAD
 .layout-main-section {
 	scroll-margin-top: var(--navbar-height);
 
@@ -173,6 +190,27 @@
 		.no-result,
 		.freeze {
 			min-height: #{"calc(100vh - 284px)"};
+=======
+
+.layout-main {
+	display: flex;
+	flex-direction: row;
+}
+
+.layout-main-section {
+	scroll-margin-top: var(--navbar-height);
+
+	.frappe-list,
+	.report-wrapper {
+		.result,
+		.no-result,
+		.freeze {
+			min-height: "200px";
+		}
+
+		.result {
+			overflow: auto;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 

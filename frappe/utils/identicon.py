@@ -5,6 +5,7 @@ from strings.
 It provides a (slighltly modified) version of https://github.com/evuez/identicons
 which has been released under the MIT license, as described in attributions.md.
 """
+
 from base64 import b64encode
 from hashlib import md5
 from io import BytesIO
@@ -28,9 +29,13 @@ class Identicon:
 		self.hash = self.digest(str_)
 
 	def digest(self, str_):
+<<<<<<< HEAD
 		"""
 		Returns a md5 numeric hash
 		"""
+=======
+		"""Return an MD5 numeric hash."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return int(md5(str_.encode("utf-8"), usedforsecurity=False).hexdigest(), 16)
 
 	def calculate(self):

@@ -30,6 +30,7 @@ class OAuthClient(Document):
 		user: DF.Link | None
 
 	# end: auto-generated types
+
 	def validate(self):
 		self.client_id = self.name
 		if not self.client_secret:
@@ -38,11 +39,8 @@ class OAuthClient(Document):
 		self.add_default_role()
 
 	def validate_grant_and_response(self):
-		if (
-			self.grant_type == "Authorization Code"
-			and self.response_type != "Code"
-			or self.grant_type == "Implicit"
-			and self.response_type != "Token"
+		if (self.grant_type == "Authorization Code" and self.response_type != "Code") or (
+			self.grant_type == "Implicit" and self.response_type != "Token"
 		):
 			frappe.throw(
 				_(

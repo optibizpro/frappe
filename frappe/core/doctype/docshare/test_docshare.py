@@ -4,12 +4,21 @@
 import frappe
 import frappe.share
 from frappe.automation.doctype.auto_repeat.test_auto_repeat import create_submittable_doctype
-from frappe.tests.utils import FrappeTestCase, change_settings
+from frappe.tests import IntegrationTestCase, UnitTestCase
 
-test_dependencies = ["User"]
+EXTRA_TEST_RECORD_DEPENDENCIES = ["User"]
 
 
-class TestDocShare(FrappeTestCase):
+class UnitTestDocshare(UnitTestCase):
+	"""
+	Unit tests for Docshare.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestDocShare(IntegrationTestCase):
 	def setUp(self):
 		self.user = "test@example.com"
 		self.event = frappe.get_doc(
@@ -136,7 +145,11 @@ class TestDocShare(FrappeTestCase):
 		doctype = "Test DocShare with Submit"
 		create_submittable_doctype(doctype, submit_perms=0)
 
+<<<<<<< HEAD
 		submittable_doc = frappe.get_doc(dict(doctype=doctype, test="test docshare with submit")).insert()
+=======
+		submittable_doc = frappe.get_doc(doctype=doctype, test="test docshare with submit").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		frappe.set_user(self.user)
 		self.assertFalse(frappe.has_permission(doctype, "submit", user=self.user))
@@ -167,7 +180,7 @@ class TestDocShare(FrappeTestCase):
 		test_doc.reload()
 		self.assertTrue(test_doc.has_permission("read"))
 
-	@change_settings("System Settings", {"disable_document_sharing": 1})
+	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
 	def test_share_disabled_add(self):
 		"Test if user loses share access on disabling share globally."
 		frappe.share.add("Event", self.event.name, self.user, share=1)  # Share as admin
@@ -179,7 +192,7 @@ class TestDocShare(FrappeTestCase):
 			frappe.PermissionError, frappe.share.add, "Event", self.event.name, "test1@example.com"
 		)
 
-	@change_settings("System Settings", {"disable_document_sharing": 1})
+	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
 	def test_share_disabled_add_with_ignore_permissions(self):
 		frappe.share.add("Event", self.event.name, self.user, share=1)
 		frappe.set_user(self.user)
@@ -192,7 +205,7 @@ class TestDocShare(FrappeTestCase):
 			"Event", self.event.name, "test1@example.com", flags={"ignore_share_permission": True}
 		)
 
-	@change_settings("System Settings", {"disable_document_sharing": 1})
+	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
 	def test_share_disabled_set_permission(self):
 		frappe.share.add("Event", self.event.name, self.user, share=1)
 		frappe.set_user(self.user)
@@ -208,7 +221,7 @@ class TestDocShare(FrappeTestCase):
 			"read",
 		)
 
-	@change_settings("System Settings", {"disable_document_sharing": 1})
+	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
 	def test_share_disabled_assign_to(self):
 		"""
 		Assigning a document to a user without access must not share the document,

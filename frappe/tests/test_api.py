@@ -15,8 +15,13 @@ from werkzeug.test import TestResponse
 
 import frappe
 from frappe.installer import update_site_config
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, patch_hooks
 from frappe.utils import cint, get_site_url, get_test_client, get_url
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.utils import cint, get_test_client, get_url
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 try:
 	_site = frappe.local.site
@@ -84,7 +89,7 @@ resource_key = {
 }
 
 
-class FrappeAPITestCase(FrappeTestCase):
+class FrappeAPITestCase(IntegrationTestCase):
 	version = ""  # Empty implies v1
 	TEST_CLIENT = get_test_client()
 
@@ -133,7 +138,11 @@ class FrappeAPITestCase(FrappeTestCase):
 
 class TestResourceAPI(FrappeAPITestCase):
 	DOCTYPE = "ToDo"
+<<<<<<< HEAD
 	GENERATED_DOCUMENTS: typing.ClassVar = []
+=======
+	GENERATED_DOCUMENTS: typing.ClassVar[list] = []
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@classmethod
 	def setUpClass(cls):
@@ -362,7 +371,7 @@ class TestWSGIApp(FrappeAPITestCase):
 	def test_request_hooks(self):
 		self.addCleanup(lambda: _test_REQ_HOOK.clear())
 
-		with patch_hooks(
+		with self.patch_hooks(
 			{
 				"before_request": ["frappe.tests.test_api.before_request"],
 				"after_request": ["frappe.tests.test_api.after_request"],

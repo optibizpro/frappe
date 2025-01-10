@@ -9,6 +9,7 @@ body {
 	font-weight: var(--weight-regular);
 	letter-spacing: 0.02em;
 	background-color: var(--bg-color);
+<<<<<<< HEAD
 
 	&.full-width {
 		@include media-breakpoint-up(md) {
@@ -18,6 +19,8 @@ body {
 			}
 		}
 	}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 a {
@@ -96,6 +99,7 @@ pre {
 	white-space: pre-wrap;
 }
 
+<<<<<<< HEAD
 .col-xs-1 {
 	@extend .col-1;
 }
@@ -137,6 +141,53 @@ pre {
 	@extend .btn-light;
 }
 
+=======
+.container {
+	max-width: 100%;
+}
+
+.col-xs-1 {
+	@extend .col-1;
+}
+.col-xs-2 {
+	@extend .col-2;
+}
+.col-xs-3 {
+	@extend .col-3;
+}
+.col-xs-4 {
+	@extend .col-4;
+}
+.col-xs-5 {
+	@extend .col-5;
+}
+.col-xs-6 {
+	@extend .col-6;
+}
+.col-xs-7 {
+	@extend .col-7;
+}
+.col-xs-8 {
+	@extend .col-8;
+}
+.col-xs-9 {
+	@extend .col-9;
+}
+.col-xs-10 {
+	@extend .col-10;
+}
+.col-xs-11 {
+	@extend .col-11;
+}
+.col-xs-12 {
+	@extend .col-12;
+}
+
+.btn-default {
+	@extend .btn-light;
+}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 .hidden-xs,
 .hidden-sm {
 	@include media-breakpoint-between(xs, sm) {
@@ -174,11 +225,6 @@ footer {
 
 .pull-right {
 	float: right;
-}
-
-img {
-	max-width: 100%;
-	height: auto;
 }
 
 .missing-image {
@@ -519,7 +565,7 @@ kbd {
 
 // freeze backdrop text
 #freeze {
-	z-index: 1055;
+	z-index: 2000;
 	bottom: 0;
 	opacity: 0;
 	background-color: var(--bg-color);
@@ -584,10 +630,6 @@ body.no-sidebar {
 	@include media-breakpoint-up(md) {
 		.layout-side-section {
 			display: none;
-		}
-
-		.layout-main-section-wrapper {
-			width: 100% !important;
 		}
 	}
 }

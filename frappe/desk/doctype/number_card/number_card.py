@@ -4,13 +4,16 @@
 import frappe
 from frappe import _
 from frappe.boot import get_allowed_report_names
-from frappe.config import get_modules_from_all_apps_for_user
 from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
 from frappe.modules.export_file import export_to_files
 from frappe.query_builder import Criterion
 from frappe.query_builder.utils import DocType
 from frappe.utils import cint, flt
+<<<<<<< HEAD
+=======
+from frappe.utils.modules import get_modules_from_all_apps_for_user
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class NumberCard(Document):
@@ -43,6 +46,7 @@ class NumberCard(Document):
 		type: DF.Literal["Document Type", "Report", "Custom"]
 
 	# end: auto-generated types
+
 	def autoname(self):
 		if not self.name:
 			self.name = self.label

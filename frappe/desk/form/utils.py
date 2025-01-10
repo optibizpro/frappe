@@ -69,7 +69,11 @@ def update_comment(name, content):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="modified"):
+=======
+def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="creation"):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	prev = int(prev)
 	if not filters:
 		filters = []

@@ -320,7 +320,7 @@ def load_languages():
 	}
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def load_country():
 	from frappe.sessions import get_geo_ip_country
 

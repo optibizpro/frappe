@@ -3,6 +3,32 @@
 
 import frappe
 
+supported_events = {
+	"after_insert",
+	"on_update",
+	"on_submit",
+	"on_cancel",
+	"on_trash",
+	"on_update_after_submit",
+	"on_change",
+}
+
+
+def get_all_webhooks():
+	# query webhooks
+	webhooks_list = frappe.get_all(
+		"Webhook",
+		fields=["name", "condition", "webhook_docevent", "webhook_doctype", "background_jobs_queue"],
+		filters={"enabled": True},
+	)
+
+	# make webhooks map
+	webhooks = {}
+	for w in webhooks_list:
+		webhooks.setdefault(w.webhook_doctype, []).append(w)
+
+	return webhooks
+
 
 def get_all_webhooks():
 	# query webhooks
@@ -22,12 +48,23 @@ def get_all_webhooks():
 
 def run_webhooks(doc, method):
 	"""Run webhooks for this method"""
+<<<<<<< HEAD
 
 	frappe_flags = frappe.local.flags
 
 	if frappe_flags.in_import or frappe_flags.in_patch or frappe_flags.in_install or frappe_flags.in_migrate:
 		return
 
+=======
+	if method not in supported_events:
+		return
+
+	frappe_flags = frappe.local.flags
+
+	if frappe_flags.in_import or frappe_flags.in_patch or frappe_flags.in_install or frappe_flags.in_migrate:
+		return
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# load all webhooks from cache / DB
 	webhooks = frappe.cache.get_value("webhooks", get_all_webhooks)
 

@@ -3,7 +3,10 @@ import os
 import subprocess
 import sys
 import typing
+<<<<<<< HEAD
 from shutil import which
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import click
 
@@ -13,6 +16,7 @@ from frappe.commands import get_site, pass_context
 from frappe.coverage import CodeCoverage
 from frappe.exceptions import SiteNotSpecifiedError
 from frappe.utils import cint, update_progress_bar
+from frappe.utils.bench_helper import CliCtxObj
 
 EXTRA_ARGS_CTX = {"ignore_unknown_options": True, "allow_extra_args": True}
 
@@ -41,6 +45,13 @@ if typing.TYPE_CHECKING:
 	default=False,
 	help="Saves esbuild metafiles for built assets. Useful for analyzing bundle size. More info: https://esbuild.github.io/api/#metafile",
 )
+@click.option(
+	"--using-cached",
+	is_flag=True,
+	default=False,
+	envvar="USING_CACHED",
+	help="Skips build and uses cached build artifacts (cache is set by Bench). Ignored if developer_mode enabled.",
+)
 def build(
 	app=None,
 	apps=None,
@@ -49,6 +60,7 @@ def build(
 	verbose=False,
 	force=False,
 	save_metafiles=False,
+	using_cached=False,
 ):
 	"Compile JS and CSS source files"
 	from frappe.build import bundle, download_frappe_assets
@@ -74,6 +86,9 @@ def build(
 		if production:
 			mode = "production"
 
+		if development:
+			using_cached = False
+
 		bundle(
 			mode,
 			apps=apps,
@@ -81,6 +96,7 @@ def build(
 			verbose=verbose,
 			skip_frappe=skip_frappe,
 			save_metafiles=save_metafiles,
+			using_cached=using_cached,
 		)
 
 		if apps and isinstance(apps, str):
@@ -106,14 +122,18 @@ def watch(apps=None):
 
 @click.command("clear-cache")
 @pass_context
-def clear_cache(context):
+def clear_cache(context: CliCtxObj):
 	"Clear cache, doctype cache and defaults"
 	import frappe.sessions
 	from frappe.website.utils import clear_website_cache
 
 	for site in context.sites:
 		try:
+<<<<<<< HEAD
 			frappe.init(site=site)
+=======
+			frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.connect()
 			frappe.clear_cache()
 			clear_website_cache()
@@ -125,13 +145,13 @@ def clear_cache(context):
 
 @click.command("clear-website-cache")
 @pass_context
-def clear_website_cache(context):
+def clear_website_cache(context: CliCtxObj):
 	"Clear website cache"
 	from frappe.website.utils import clear_website_cache
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			clear_website_cache()
 		finally:
@@ -143,13 +163,13 @@ def clear_website_cache(context):
 @click.command("destroy-all-sessions")
 @click.option("--reason")
 @pass_context
-def destroy_all_sessions(context, reason=None):
+def destroy_all_sessions(context: CliCtxObj, reason=None):
 	"Clear sessions of all users (logs them out)"
 	import frappe.sessions
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			frappe.sessions.clear_all_sessions(reason)
 			frappe.db.commit()
@@ -162,7 +182,7 @@ def destroy_all_sessions(context, reason=None):
 @click.command("show-config")
 @click.option("--format", "-f", type=click.Choice(["text", "json"]), default="text")
 @pass_context
-def show_config(context, format):
+def show_config(context: CliCtxObj, format):
 	"Print configuration file to STDOUT in speified format"
 
 	if not context.sites:
@@ -212,13 +232,13 @@ def show_config(context, format):
 
 @click.command("reset-perms")
 @pass_context
-def reset_perms(context):
+def reset_perms(context: CliCtxObj):
 	"Reset permissions for all doctypes"
 	from frappe.permissions import reset_perms
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			for d in frappe.db.sql_list(
 				"""select name from `tabDocType`
@@ -238,26 +258,26 @@ def reset_perms(context):
 @click.option("--kwargs")
 @click.option("--profile", is_flag=True, default=False)
 @pass_context
-def execute(context, method, args=None, kwargs=None, profile=False):
+def execute(context: CliCtxObj, method, args=None, kwargs=None, profile=False):
 	"Execute a function"
 	for site in context.sites:
 		ret = ""
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 
 			if args:
 				try:
-					args = eval(args)
+					fn_args = eval(args)
 				except NameError:
-					args = [args]
+					fn_args = [args]
 			else:
-				args = ()
+				fn_args = ()
 
 			if kwargs:
-				kwargs = eval(kwargs)
+				fn_kwargs = eval(kwargs)
 			else:
-				kwargs = {}
+				fn_kwargs = {}
 
 			if profile:
 				import cProfile
@@ -266,10 +286,15 @@ def execute(context, method, args=None, kwargs=None, profile=False):
 				pr.enable()
 
 			try:
-				ret = frappe.get_attr(method)(*args, **kwargs)
+				ret = frappe.get_attr(method)(*fn_args, **fn_kwargs)
 			except Exception:
 				# eval is safe here because input is from console
-				ret = eval(method + "(*args, **kwargs)", globals(), locals())  # nosemgrep
+				code = compile(method, "<bench execute>", "eval")
+				ret = eval(code, globals(), locals())  # nosemgrep
+				if callable(ret):
+					suffix = "(*fn_args, **fn_kwargs)"
+					code = compile(method + suffix, "<bench execute>", "eval")
+					ret = eval(code, globals(), locals())  # nosemgrep
 
 			if profile:
 				import pstats
@@ -287,7 +312,7 @@ def execute(context, method, args=None, kwargs=None, profile=False):
 		if ret:
 			from frappe.utils.response import json_handler
 
-			print(json.dumps(ret, default=json_handler))
+			print(json.dumps(ret, default=json_handler).strip('"'))
 
 	if not context.sites:
 		raise SiteNotSpecifiedError
@@ -296,7 +321,7 @@ def execute(context, method, args=None, kwargs=None, profile=False):
 @click.command("add-to-email-queue")
 @click.argument("email-path")
 @pass_context
-def add_to_email_queue(context, email_path):
+def add_to_email_queue(context: CliCtxObj, email_path):
 	"Add an email to the Email Queue"
 	site = get_site(context)
 
@@ -315,13 +340,13 @@ def add_to_email_queue(context, email_path):
 @click.argument("doctype")
 @click.argument("docname")
 @pass_context
-def export_doc(context, doctype, docname):
+def export_doc(context: CliCtxObj, doctype, docname):
 	"Export a single document to csv"
 	import frappe.modules
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			frappe.modules.export_doc(doctype, docname)
 		finally:
@@ -335,13 +360,13 @@ def export_doc(context, doctype, docname):
 @click.argument("path")
 @click.option("--name", help="Export only one document")
 @pass_context
-def export_json(context, doctype, path, name=None):
+def export_json(context: CliCtxObj, doctype, path, name=None):
 	"Export doclist as json to the given path, use '-' as name for Singles."
 	from frappe.core.doctype.data_import.data_import import export_json
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			export_json(doctype, path, name=name)
 		finally:
@@ -354,13 +379,13 @@ def export_json(context, doctype, path, name=None):
 @click.argument("doctype")
 @click.argument("path")
 @pass_context
-def export_csv(context, doctype, path):
+def export_csv(context: CliCtxObj, doctype, path):
 	"Export data import template with data for DocType"
 	from frappe.core.doctype.data_import.data_import import export_csv
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			export_csv(doctype, path)
 		finally:
@@ -372,13 +397,13 @@ def export_csv(context, doctype, path):
 @click.command("export-fixtures")
 @click.option("--app", default=None, help="Export fixtures of a specific app")
 @pass_context
-def export_fixtures(context, app=None):
+def export_fixtures(context: CliCtxObj, app=None):
 	"Export fixtures"
 	from frappe.utils.fixtures import export_fixtures
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			export_fixtures(app=app)
 		finally:
@@ -390,7 +415,7 @@ def export_fixtures(context, app=None):
 @click.command("import-doc")
 @click.argument("path")
 @pass_context
-def import_doc(context, path, force=False):
+def import_doc(context: CliCtxObj, path, force=False):
 	"Import (insert/update) doclist. If the argument is a directory, all files ending with .json are imported"
 	from frappe.core.doctype.data_import.data_import import import_doc
 
@@ -402,7 +427,7 @@ def import_doc(context, path, force=False):
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			import_doc(path)
 		finally:
@@ -433,13 +458,19 @@ def import_doc(context, path, force=False):
 @click.option("--submit-after-import", default=False, is_flag=True, help="Submit document after importing it")
 @click.option("--mute-emails", default=True, is_flag=True, help="Mute emails during import")
 @pass_context
+<<<<<<< HEAD
 def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
+=======
+def data_import(
+	context: CliCtxObj, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True
+):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"Import documents in bulk from CSV or XLSX using data import"
 	from frappe.core.doctype.data_import.data_import import import_file
 
 	site = get_site(context)
 
-	frappe.init(site=site)
+	frappe.init(site)
 	frappe.connect()
 	import_file(doctype, file_path, import_type, submit_after_import, console=True)
 	frappe.destroy()
@@ -449,7 +480,7 @@ def data_import(context, file_path, doctype, import_type=None, submit_after_impo
 @click.argument("doctype")
 @click.argument("path")
 @pass_context
-def bulk_rename(context, doctype, path):
+def bulk_rename(context: CliCtxObj, doctype, path):
 	"Rename multiple records via CSV file"
 	from frappe.model.rename_doc import bulk_rename
 	from frappe.utils.csvutils import read_csv_content
@@ -459,7 +490,7 @@ def bulk_rename(context, doctype, path):
 	with open(path) as csvfile:
 		rows = read_csv_content(csvfile.read())
 
-	frappe.init(site=site)
+	frappe.init(site)
 	frappe.connect()
 
 	bulk_rename(doctype, rows, via_console=True)
@@ -470,24 +501,32 @@ def bulk_rename(context, doctype, path):
 @click.command("db-console", context_settings=EXTRA_ARGS_CTX)
 @click.argument("extra_args", nargs=-1)
 @pass_context
-def database(context, extra_args):
+def database(context: CliCtxObj, extra_args):
 	"""
 	Enter into the Database console for given site.
 	"""
 	site = get_site(context)
+<<<<<<< HEAD
 	frappe.init(site=site)
+=======
+	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	_enter_console(extra_args=extra_args)
 
 
 @click.command("mariadb", context_settings=EXTRA_ARGS_CTX)
 @click.argument("extra_args", nargs=-1)
 @pass_context
-def mariadb(context, extra_args):
+def mariadb(context: CliCtxObj, extra_args):
 	"""
 	Enter into mariadb console for a given site.
 	"""
 	site = get_site(context)
+<<<<<<< HEAD
 	frappe.init(site=site)
+=======
+	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.conf.db_type = "mariadb"
 	_enter_console(extra_args=extra_args)
 
@@ -495,12 +534,16 @@ def mariadb(context, extra_args):
 @click.command("postgres", context_settings=EXTRA_ARGS_CTX)
 @click.argument("extra_args", nargs=-1)
 @pass_context
-def postgres(context, extra_args):
+def postgres(context: CliCtxObj, extra_args):
 	"""
 	Enter into postgres console for a given site.
 	"""
 	site = get_site(context)
+<<<<<<< HEAD
 	frappe.init(site=site)
+=======
+	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.conf.db_type = "postgres"
 	_enter_console(extra_args=extra_args)
 
@@ -518,7 +561,11 @@ def _enter_console(extra_args=None):
 		socket=frappe.conf.db_socket,
 		host=frappe.conf.db_host,
 		port=frappe.conf.db_port,
+<<<<<<< HEAD
 		user=frappe.conf.db_name,
+=======
+		user=frappe.conf.db_user,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		password=frappe.conf.db_password,
 		db_name=frappe.conf.db_name,
 		extra=list(extra_args) if extra_args else [],
@@ -533,7 +580,7 @@ def _enter_console(extra_args=None):
 
 @click.command("jupyter")
 @pass_context
-def jupyter(context):
+def jupyter(context: CliCtxObj):
 	"""Start an interactive jupyter notebook"""
 	installed_packages = (
 		r.split("==", 1)[0]
@@ -544,7 +591,7 @@ def jupyter(context):
 		subprocess.check_output([sys.executable, "-m", "pip", "install", "jupyter"])
 
 	site = get_site(context)
-	frappe.init(site=site)
+	frappe.init(site)
 
 	jupyter_notebooks_path = os.path.abspath(frappe.get_site_path("jupyter_notebooks"))
 	sites_path = os.path.abspath(frappe.get_site_path(".."))
@@ -561,9 +608,9 @@ Starting Jupyter notebook
 Run the following in your first cell to connect notebook to frappe
 ```
 import frappe
-frappe.init(site='{site}', sites_path='{sites_path}')
+frappe.init('{site}', sites_path='{sites_path}')
 frappe.connect()
-frappe.local.lang = frappe.db.get_default('lang')
+frappe.local.lang = frappe.get_system_settings('language')
 frappe.db.connect()
 ```
 	"""
@@ -599,12 +646,12 @@ def store_logs(terminal: "InteractiveShellEmbed") -> None:
 @click.command("console")
 @click.option("--autoreload", is_flag=True, help="Reload changes to code automatically")
 @pass_context
-def console(context, autoreload=False):
+def console(context: CliCtxObj, autoreload=False):
 	"Start ipython console for a site"
 	site = get_site(context)
-	frappe.init(site=site)
+	frappe.init(site)
 	frappe.connect()
-	frappe.local.lang = frappe.db.get_default("lang")
+	frappe.local.lang = frappe.get_system_settings("language")
 
 	from atexit import register
 
@@ -665,13 +712,13 @@ def console(context, autoreload=False):
 )
 @click.option("--failfast", is_flag=True, default=False, help="Exit on first failure occurred")
 @pass_context
-def transform_database(context, table, engine, row_format, failfast):
+def transform_database(context: CliCtxObj, table, engine, row_format, failfast):
 	"Transform site database through given parameters"
 	site = get_site(context)
 	check_table = []
 	add_line = False
 	skipped = 0
-	frappe.init(site=site)
+	frappe.init(site)
 
 	if frappe.conf.db_type != "mariadb":
 		click.secho("This command only has support for MariaDB databases at this point", fg="yellow")
@@ -730,6 +777,7 @@ def transform_database(context, table, engine, row_format, failfast):
 	frappe.destroy()
 
 
+<<<<<<< HEAD
 @click.command("run-tests")
 @click.option("--app", help="For App")
 @click.option("--doctype", help="For DocType")
@@ -938,6 +986,8 @@ def run_ui_tests(
 		raise click.exceptions.Exit(1) from e
 
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @click.command("serve")
 @click.option("--port", default=8000)
 @click.option("--profile", is_flag=True, default=False)
@@ -952,7 +1002,7 @@ def run_ui_tests(
 @click.option("--with-coverage", is_flag=True, default=False)
 @pass_context
 def serve(
-	context,
+	context: CliCtxObj,
 	port=None,
 	profile=False,
 	proxy=False,
@@ -989,14 +1039,14 @@ def serve(
 @click.option("--args", help="arguments like `?cmd=test&key=value` or `/api/request/method?..`")
 @click.option("--path", help="path to request JSON")
 @pass_context
-def request(context, args=None, path=None):
+def request(context: CliCtxObj, args=None, path=None):
 	"Run a request as an admin"
 	import frappe.api
 	import frappe.handler
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			if args:
 				if "?" in args:
@@ -1029,6 +1079,14 @@ def request(context, args=None, path=None):
 @click.option("--no-git", is_flag=True, default=False, help="Do not initialize git repository for the app")
 def make_app(destination, app_name, no_git=False):
 	"Creates a boilerplate app"
+	from frappe.utils import get_sites
+
+	if app_name in get_sites():
+		click.secho(
+			f"Your bench has a site called {app_name}, please choose another name for the app.", fg="red"
+		)
+		sys.exit(1)
+
 	from frappe.utils.boilerplate import make_boilerplate
 
 	make_boilerplate(destination, app_name, no_git=no_git)
@@ -1050,7 +1108,7 @@ def create_patch():
 @click.option("-g", "--global", "global_", is_flag=True, default=False, help="Set value in bench config")
 @click.option("-p", "--parse", is_flag=True, default=False, help="Evaluate as Python Object")
 @pass_context
-def set_config(context, key, value, global_=False, parse=False):
+def set_config(context: CliCtxObj, key, value, global_=False, parse=False):
 	"Insert/Update a value in site_config.json"
 	from frappe.installer import update_site_config
 
@@ -1067,7 +1125,7 @@ def set_config(context, key, value, global_=False, parse=False):
 		if not context.sites:
 			raise SiteNotSpecifiedError
 		for site in context.sites:
-			frappe.init(site=site)
+			frappe.init(site)
 			update_site_config(key, value, validate=False)
 			frappe.destroy()
 
@@ -1126,7 +1184,7 @@ def get_version(output):
 @click.command("rebuild-global-search")
 @click.option("--static-pages", is_flag=True, default=False, help="Rebuild global search for static pages")
 @pass_context
-def rebuild_global_search(context, static_pages=False):
+def rebuild_global_search(context: CliCtxObj, static_pages=False):
 	"""Setup help table in the current site (called after migrate)"""
 	from frappe.utils.global_search import (
 		add_route_to_global_search,
@@ -1160,6 +1218,39 @@ def rebuild_global_search(context, static_pages=False):
 		raise SiteNotSpecifiedError
 
 
+@click.command("list-sites")
+@click.option("--json", "output_json", is_flag=True, help="Output in JSON format")
+@pass_context
+def list_sites(context: CliCtxObj, output_json=False):
+	"List all the sites in current bench"
+	site_dir = os.getcwd()
+	# Get the current site from common_site_config.json
+	common_site_config_path = os.path.join(site_dir, "common_site_config.json")
+	default_site = None
+	if os.path.exists(common_site_config_path):
+		with open(common_site_config_path) as f:
+			config = json.load(f)
+			default_site = config.get("default_site")
+	sites = [
+		site
+		for site in os.listdir(site_dir)
+		if os.path.isdir(os.path.join(site_dir, site))
+		and not site.startswith(".")
+		and os.path.exists(os.path.join(site_dir, site, "site_config.json"))
+	]
+	if output_json:
+		click.echo(json.dumps(sites))
+	elif sites:
+		click.echo("Available sites:")
+		for site in sites:
+			if site == default_site:
+				click.echo(f"* {site}")
+			else:
+				click.echo(f"  {site}")
+	else:
+		click.echo("No sites found")
+
+
 commands = [
 	build,
 	clear_cache,
@@ -1183,8 +1274,6 @@ commands = [
 	postgres,
 	request,
 	reset_perms,
-	run_tests,
-	run_ui_tests,
 	serve,
 	set_config,
 	show_config,
@@ -1192,5 +1281,5 @@ commands = [
 	bulk_rename,
 	add_to_email_queue,
 	rebuild_global_search,
-	run_parallel_tests,
+	list_sites,
 ]

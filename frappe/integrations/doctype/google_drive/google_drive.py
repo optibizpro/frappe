@@ -42,6 +42,7 @@ class GoogleDrive(Document):
 		send_email_for_successful_backup: DF.Check
 
 	# end: auto-generated types
+
 	def validate(self):
 		doc_before_save = self.get_doc_before_save()
 		if doc_before_save and doc_before_save.backup_folder_name != self.backup_folder_name:
@@ -87,9 +88,7 @@ def authorize_access(reauthorize=False, code=None):
 
 
 def get_google_drive_object():
-	"""
-	Returns an object of Google Drive.
-	"""
+	"""Return an object of Google Drive."""
 	account = frappe.get_doc("Google Drive")
 	oauth_obj = GoogleOAuth("drive")
 

@@ -4,6 +4,10 @@
 from os.path import abspath, splitext
 from os.path import exists as path_exists
 from os.path import join as join_path
+<<<<<<< HEAD
+=======
+from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from typing import Optional
 
 import frappe
@@ -45,6 +49,7 @@ class WebsiteTheme(Document):
 		theme_url: DF.Data | None
 
 	# end: auto-generated types
+
 	def validate(self):
 		self.validate_if_customizable()
 		self.generate_bootstrap_theme()
@@ -53,7 +58,8 @@ class WebsiteTheme(Document):
 		if (
 			not self.custom
 			and frappe.local.conf.get("developer_mode")
-			and not (frappe.flags.in_import or frappe.flags.in_test)
+			and not frappe.flags.in_import
+			and not frappe.flags.in_test
 		):
 			self.export_doc()
 
@@ -123,9 +129,15 @@ class WebsiteTheme(Document):
 	def delete_old_theme_files(self, folder_path):
 		import os
 
+		theme_files: list[Path] = []
 		for fname in os.listdir(folder_path):
 			if fname.startswith(frappe.scrub(self.name) + "_") and fname.endswith(".css"):
-				os.remove(os.path.join(folder_path, fname))
+				theme_files.append(Path(folder_path) / fname)
+
+		theme_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
+		# Keep 3 recent files
+		for old_file in theme_files[2:]:
+			old_file.unlink()
 
 	@frappe.whitelist()
 	def set_as_default(self):

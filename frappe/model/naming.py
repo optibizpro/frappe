@@ -7,6 +7,9 @@ import re
 import time
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Optional
+from uuid import UUID
+
+import uuid_utils
 
 import frappe
 from frappe import _
@@ -20,7 +23,8 @@ if TYPE_CHECKING:
 
 
 NAMING_SERIES_PATTERN = re.compile(r"^[\w\- \/.#{}]+$", re.UNICODE)
-BRACED_PARAMS_PATTERN = re.compile(r"(\{[\w | #]+\})")
+BRACED_PARAMS_WORD_PATTERN = re.compile(r"(\{[\w]+\})")
+BRACED_PARAMS_HASH_PATTERN = re.compile(r"(\{[#]+\})")
 
 
 # Types that can be using in naming series fields
@@ -35,6 +39,10 @@ NAMING_SERIES_PART_TYPES = (
 
 
 class InvalidNamingSeriesError(frappe.ValidationError):
+	pass
+
+
+class InvalidUUIDValue(frappe.ValidationError):
 	pass
 
 
@@ -141,11 +149,23 @@ def set_new_name(doc):
 	meta = frappe.get_meta(doc.doctype)
 	autoname = meta.autoname or ""
 
-	if autoname.lower() != "prompt" and not frappe.flags.in_import:
+	if autoname.lower() not in ("prompt", "uuid") and not frappe.flags.in_import:
 		doc.name = None
 
 	if is_autoincremented(doc.doctype, meta):
 		doc.name = frappe.db.get_next_sequence_val(doc.doctype)
+		return
+
+	if meta.autoname == "UUID":
+		if not doc.name:
+			doc.name = str(uuid_utils.uuid7())
+		elif isinstance(doc.name, UUID | uuid_utils.UUID):
+			doc.name = str(doc.name)
+		elif isinstance(doc.name, str):  # validate
+			try:
+				UUID(doc.name)
+			except ValueError:
+				frappe.throw(_("Invalid value specified for UUID: {}").format(doc.name), InvalidUUIDValue)
 		return
 
 	if getattr(doc, "amended_from", None):
@@ -178,10 +198,7 @@ def is_autoincremented(doctype: str, meta: Optional["Meta"] = None) -> bool:
 	if not meta:
 		meta = frappe.get_meta(doctype)
 
-	if not getattr(meta, "issingle", False) and meta.autoname == "autoincrement":
-		return True
-
-	return False
+	return not getattr(meta, "issingle", False) and meta.autoname == "autoincrement"
 
 
 def set_name_from_naming_options(autoname, doc):
@@ -298,6 +315,7 @@ def parse_naming_series(
 	doctype=None,
 	doc: Optional["Document"] = None,
 	number_generator: Callable[[str, int], str] | None = None,
+	key: str | None = None,
 ) -> str:
 	"""Parse the naming series and get next name.
 
@@ -325,7 +343,10 @@ def parse_naming_series(
 		if e.startswith("#"):
 			if not series_set:
 				digits = len(e)
-				part = number_generator(name, digits)
+				if key:
+					part = number_generator(key, digits)
+				else:
+					part = number_generator(name, digits)
 				series_set = True
 		elif e == "YY":
 			part = today.strftime("%y")
@@ -356,7 +377,7 @@ def parse_naming_series(
 
 
 def has_custom_parser(e):
-	"""Returns true if the naming series part has a custom parser"""
+	"""Return True if the naming series part has a custom parser."""
 	return frappe.get_hooks("naming_series_variables", {}).get(e)
 
 
@@ -559,11 +580,19 @@ def _format_autoname(autoname: str, doc):
 	first_colon_index = autoname.find(":")
 	autoname_value = autoname[first_colon_index + 1 :]
 
-	def get_param_value_for_match(match):
+	def get_param_value_for_word_match(match):
 		param = match.group()
 		return parse_naming_series([param[1:-1]], doc=doc)
 
-	# Replace braced params with their parsed value
-	name = BRACED_PARAMS_PATTERN.sub(get_param_value_for_match, autoname_value)
+	def get_param_value_for_hash_match(patterned_string: str):
+		def get_param_value(match):
+			param = match.group()
+			key = patterned_string[: patterned_string.find(param)]
 
-	return name
+			return parse_naming_series([param[1:-1]], doc=doc, key=key)
+
+		return get_param_value
+
+	# Replace braced params with their parsed value
+	autoname_value = BRACED_PARAMS_WORD_PATTERN.sub(get_param_value_for_word_match, autoname_value)
+	return BRACED_PARAMS_HASH_PATTERN.sub(get_param_value_for_hash_match(autoname_value), autoname_value)

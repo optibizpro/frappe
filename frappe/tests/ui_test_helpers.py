@@ -7,7 +7,7 @@ UI_TEST_USER = "frappe@example.com"
 
 
 def whitelist_for_tests(fn):
-	if frappe.request and not (frappe.flags.in_test or getattr(frappe.local, "dev_server", 0)):
+	if frappe.request and not frappe.flags.in_test and not getattr(frappe.local, "dev_server", 0):
 		frappe.throw("Cannot run UI tests. Use a development server with `bench start`")
 
 	return frappe.whitelist()(fn)
@@ -130,6 +130,7 @@ def create_doctype(name, fields):
 			"doctype": "DocType",
 			"module": "Core",
 			"custom": 1,
+			"autoname": "autoincrement",
 			"fields": fields,
 			"permissions": [{"role": "System Manager", "read": 1}],
 			"name": name,
@@ -448,6 +449,8 @@ def create_test_user(username=None):
 		user.append("roles", {"role": role})
 
 	user.save()
+
+	frappe.db.set_single_value("Workspace Settings", "workspace_setup_completed", 1)
 
 
 @whitelist_for_tests

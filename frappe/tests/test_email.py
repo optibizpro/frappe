@@ -13,13 +13,18 @@ from frappe.desk.form.load import get_attachments
 from frappe.email.doctype.email_account.test_email_account import TestEmailAccount
 from frappe.email.doctype.email_queue.email_queue import QueueBuilder
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, change_settings
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-test_dependencies = ["Email Account"]
+EXTRA_TEST_RECORD_DEPENDENCIES = ["Email Account"]
 
 
-class TestEmail(FrappeTestCase):
+class TestEmail(IntegrationTestCase):
 	def setUp(self):
 		frappe.db.delete("Email Unsubscribe")
 		frappe.db.delete("Email Queue")
@@ -306,7 +311,7 @@ class TestEmail(FrappeTestCase):
 			email_account.enable_incoming = False
 
 
-class TestVerifiedRequests(FrappeTestCase):
+class TestVerifiedRequests(IntegrationTestCase):
 	def test_round_trip(self):
 		from frappe.utils import set_request
 		from frappe.utils.verified_command import get_signed_params, verify_request
@@ -320,7 +325,11 @@ class TestVerifiedRequests(FrappeTestCase):
 		frappe.local.request = None
 
 
+<<<<<<< HEAD
 class TestEmailIntegrationTest(FrappeTestCase):
+=======
+class TestEmailIntegrationTest(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Sends email to local SMTP server and verifies correctness.
 
 	SMTP4Dev runs as a service in unit test CI job.
@@ -372,7 +381,11 @@ class TestEmailIntegrationTest(FrappeTestCase):
 		self.assertSetEqual(set(recipients.split(",")), {m["to"][0] for m in sent_mails})
 
 	@run_only_if(db_type_is.MARIADB)
+<<<<<<< HEAD
 	@change_settings("System Settings", store_attached_pdf_document=1)
+=======
+	@IntegrationTestCase.change_settings("System Settings", store_attached_pdf_document=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_store_attachments(self):
 		""" "attach print" feature just tells email queue which document to attach, this is not
 		actually stored unless system setting says so."""

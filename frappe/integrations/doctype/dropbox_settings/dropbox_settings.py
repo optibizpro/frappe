@@ -45,6 +45,7 @@ class DropboxSettings(Document):
 		send_notifications_to: DF.Data
 
 	# end: auto-generated types
+
 	def onload(self):
 		if not self.app_access_key and frappe.conf.dropbox_access_key:
 			self.set_onload("dropbox_setup_via_site_config", 1)

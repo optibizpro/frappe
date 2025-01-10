@@ -3,6 +3,8 @@ import KanbanSettings from "./kanban_settings";
 frappe.provide("frappe.views");
 
 frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
+	static full_page = true;
+
 	static load_last_view() {
 		const route = frappe.get_route();
 		if (route.length === 3) {
@@ -142,7 +144,11 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 	}
 
 	setup_view() {
+<<<<<<< HEAD
 		if (this.board.columns.filter((col) => col.status !== "Archived").length > 5) {
+=======
+		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.page.container.addClass("full-width");
 		}
 		this.setup_realtime_updates();

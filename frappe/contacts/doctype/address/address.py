@@ -53,6 +53,7 @@ class Address(Document):
 		state: DF.Data | None
 
 	# end: auto-generated types
+
 	def __setup__(self):
 		self.flags.linked = False
 
@@ -141,7 +142,11 @@ def get_preferred_address(doctype, name, preferred_key="is_primary_address"):
 
 @frappe.whitelist()
 def get_default_address(doctype: str, name: str | None, sort_key: str = "is_primary_address") -> str | None:
+<<<<<<< HEAD
 	"""Returns default Address name for the given doctype, name"""
+=======
+	"""Return default Address name for the given doctype, name."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if sort_key not in ["is_shipping_address", "is_primary_address"]:
 		return None
 
@@ -223,7 +228,7 @@ def get_address_list(doctype, txt, filters, limit_start, limit_page_length=20, o
 
 
 def has_website_permission(doc, ptype, user, verbose=False):
-	"""Returns true if there is a related lead or contact related to this document"""
+	"""Return True if there is a related lead or contact related to this document."""
 	contact_name = frappe.db.get_value("Contact", {"email_id": frappe.session.user})
 
 	if contact_name:
@@ -264,20 +269,18 @@ def get_company_address(company):
 @frappe.whitelist()
 @frappe.validate_and_sanitize_search_inputs
 def address_query(doctype, txt, searchfield, start, page_len, filters):
-	from frappe.desk.reportview import get_match_cond
+	from frappe.desk.search import search_widget
 
-	doctype = "Address"
-	link_doctype = filters.pop("link_doctype")
-	link_name = filters.pop("link_name")
+	_filters = []
+	if link_doctype := filters.pop("link_doctype", None):
+		_filters.append(["Dynamic Link", "link_doctype", "=", link_doctype])
 
-	condition = ""
-	meta = frappe.get_meta(doctype)
-	for fieldname, value in filters.items():
-		if meta.get_field(fieldname) or fieldname in frappe.db.DEFAULT_COLUMNS:
-			condition += f" and {fieldname}={frappe.db.escape(value)}"
+	if link_name := filters.pop("link_name", None):
+		_filters.append(["Dynamic Link", "link_name", "=", link_name])
 
-	searchfields = meta.get_search_fields()
+	_filters.extend([key, "=", value] for key, value in filters.items())
 
+<<<<<<< HEAD
 	if searchfield and (meta.get_field(searchfield) or searchfield in frappe.db.DEFAULT_COLUMNS):
 		searchfields.append(searchfield)
 
@@ -335,11 +338,25 @@ def address_query(doctype, txt, searchfield, start, page_len, filters):
 			"link_name": link_name,
 			"link_doctype": link_doctype,
 		},
+=======
+	return search_widget(
+		"Address", txt, filters=_filters, searchfield=searchfield, start=start, page_length=page_len
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 
 
-def get_condensed_address(doc):
-	fields = ["address_title", "address_line1", "address_line2", "city", "county", "state", "country"]
+def get_condensed_address(doc, no_title=False):
+	fields = [
+		"address_title",
+		"address_line1",
+		"address_line2",
+		"city",
+		"county",
+		"state",
+		"country",
+	]
+	if no_title:
+		fields.remove("address_title")
 	return ", ".join(doc.get(d) for d in fields if doc.get(d))
 
 

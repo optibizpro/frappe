@@ -52,7 +52,6 @@
 
 			.layout-main-section-wrapper {
 				flex: 1;
-				max-width: 100%;
 			}
 		}
 	}
@@ -61,8 +60,13 @@
 .list-row-container {
 	display: flex;
 	flex-direction: column;
+<<<<<<< HEAD
 	outline: none;
 	padding: 0 var(--padding-xs);
+=======
+	padding: var(--padding-xs) var(--padding-md);
+	border-bottom: 1px solid $border-color;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	&:focus {
 		.list-row {
@@ -70,6 +74,7 @@
 		}
 	}
 
+<<<<<<< HEAD
 	.list-row-border {
 		border-bottom: 1px solid $border-color;
 		margin: 0 10px;
@@ -77,17 +82,31 @@
 
 	&:last-child .list-row-border {
 		display: none;
+=======
+	&:first-child {
+		padding-top: 0;
+		border-bottom: none;
+	}
+
+	&:last-child {
+		border-bottom: none;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 
 .list-row {
+<<<<<<< HEAD
 	padding: 15px 15px 15px 0px;
 	height: 40px;
+=======
+	padding-right: 15px;
+	height: var(--list-row-height);
+	border-radius: var(--border-radius);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	cursor: pointer;
 	transition: color 0.2s;
 	-webkit-transition: color 0.2s;
 	@include get_textstyle("base", "regular");
-	border-radius: var(--border-radius-md);
 
 	&:hover:not(.list-row-head) {
 		background-color: var(--highlight-color);
@@ -166,17 +185,24 @@
 	}
 }
 
+.select-like {
+	padding: var(--list-checkbox-padding);
+	cursor: default;
+}
+
 .list-row-head {
 	@extend .list-row;
 	cursor: default;
 	background-color: var(--subtle-fg);
+<<<<<<< HEAD
 	height: 30px;
 	margin: 0.5rem var(--padding-xs);
 	border-radius: var(--border-radius-md);
+=======
+	border-radius: var(--border-radius);
+	height: var(--list-row-height);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-	.list-check-all {
-		margin-left: 11px;
-	}
 	.list-subject {
 		font-weight: normal;
 	}
@@ -232,14 +258,21 @@ $level-margin-right: 8px;
 		}
 	}
 	.btn-paging {
-		background-color: var(--gray-50);
+		background-color: var(--control-bg);
 	}
 }
 
+<<<<<<< HEAD
 .frappe-card {
 	.list-paging-area,
 	.footnote-area {
 		padding: var(--padding-md);
+=======
+.layout-main-list {
+	.list-paging-area,
+	.footnote-area {
+		padding: var(--padding-sm) var(--padding-md);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 }
 
@@ -251,6 +284,7 @@ $level-margin-right: 8px;
 	margin-bottom: 1px;
 }
 
+<<<<<<< HEAD
 input.list-check-all,
 input.list-row-checkbox {
 	margin-top: 0px;
@@ -258,9 +292,24 @@ input.list-row-checkbox {
 	--checkbox-right-margin: calc(var(--checkbox-size) / 2 + #{$level-margin-right});
 	background-color: var(--card-bg);
 }
+=======
+input.list-row-checkbox,
+input.list-header-checkbox {
+	margin-top: 0;
+	margin-bottom: 0;
+	--checkbox-right-margin: 0;
+	background-color: var(--card-bg);
+	z-index: 1;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-input.list-check-all {
-	margin-left: 15px;
+	&::after {
+		// Extend the checkbox's clickable area
+		display: block;
+		content: "";
+		inset: calc(-1 * var(--list-checkbox-padding));
+		position: absolute;
+		opacity: 0;
+	}
 }
 
 .render-list-checkbox {
@@ -306,7 +355,7 @@ input.list-check-all {
 	align-items: center;
 	cursor: pointer;
 
-	height: 40px;
+	height: var(--list-row-height);
 	padding-left: 15px;
 
 	@include get_textstyle("base", "regular");
@@ -325,7 +374,7 @@ input.list-check-all {
 
 	&--head {
 		background-color: var(--highlight-color);
-		border-bottom: 1px solid $border-color;
+		// border-bottom: 1px solid $border-color;
 		cursor: auto;
 	}
 

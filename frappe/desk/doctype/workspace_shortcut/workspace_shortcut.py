@@ -15,7 +15,13 @@ class WorkspaceShortcut(Document):
 		from frappe.types import DF
 
 		color: DF.Color | None
+<<<<<<< HEAD
 		doc_view: DF.Literal["", "List", "Report Builder", "Dashboard", "Tree", "New", "Calendar", "Kanban"]
+=======
+		doc_view: DF.Literal[
+			"", "List", "Report Builder", "Dashboard", "Tree", "New", "Calendar", "Kanban", "Image"
+		]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		format: DF.Data | None
 		icon: DF.Data | None
 		kanban_board: DF.Link | None
@@ -29,4 +35,5 @@ class WorkspaceShortcut(Document):
 		type: DF.Literal["DocType", "Report", "Page", "Dashboard", "URL"]
 		url: DF.Data | None
 	# end: auto-generated types
+
 	pass

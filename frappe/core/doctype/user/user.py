@@ -32,7 +32,10 @@ from frappe.utils import (
 	today,
 )
 from frappe.utils.data import sha256_hash
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecated
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.password import check_password, get_password_reset_limit
 from frappe.utils.password import update_password as _update_password
 from frappe.utils.user import get_system_managers
@@ -61,6 +64,7 @@ class User(Document):
 		from frappe.core.doctype.defaultvalue.defaultvalue import DefaultValue
 		from frappe.core.doctype.has_role.has_role import HasRole
 		from frappe.core.doctype.user_email.user_email import UserEmail
+		from frappe.core.doctype.user_role_profile.user_role_profile import UserRoleProfile
 		from frappe.core.doctype.user_social_login.user_social_login import UserSocialLogin
 		from frappe.types import DF
 
@@ -73,6 +77,10 @@ class User(Document):
 		block_modules: DF.Table[BlockModule]
 		bulk_actions: DF.Check
 		bypass_restrict_ip_check_if_2fa_enabled: DF.Check
+<<<<<<< HEAD
+=======
+		code_editor_type: DF.Literal["vscode", "vim", "emacs"]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		dashboard: DF.Check
 		default_app: DF.Literal[None]
 		default_workspace: DF.Link | None
@@ -81,7 +89,7 @@ class User(Document):
 		document_follow_frequency: DF.Literal["Hourly", "Daily", "Weekly"]
 		document_follow_notify: DF.Check
 		email: DF.Data
-		email_signature: DF.SmallText | None
+		email_signature: DF.TextEditor | None
 		enabled: DF.Check
 		first_name: DF.Data
 		follow_assigned_documents: DF.Check
@@ -119,6 +127,7 @@ class User(Document):
 		reset_password_key: DF.Data | None
 		restrict_ip: DF.SmallText | None
 		role_profile_name: DF.Link | None
+		role_profiles: DF.TableMultiSelect[UserRoleProfile]
 		roles: DF.Table[HasRole]
 		search_bar: DF.Check
 		send_me_a_copy: DF.Check
@@ -135,6 +144,7 @@ class User(Document):
 		username: DF.Data | None
 		view_switcher: DF.Check
 	# end: auto-generated types
+
 	__new_password = None
 
 	def __setup__(self):
@@ -150,7 +160,7 @@ class User(Document):
 			self.name = self.email
 
 	def onload(self):
-		from frappe.config import get_modules_from_all_apps
+		from frappe.utils.modules import get_modules_from_all_apps
 
 		self.set_onload("all_modules", sorted(m.get("module_name") for m in get_modules_from_all_apps()))
 
@@ -175,17 +185,23 @@ class User(Document):
 			self.email = self.name
 			self.validate_email_type(self.name)
 
+<<<<<<< HEAD
+=======
+		self.move_role_profile_name_to_role_profiles()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.populate_role_profile_roles()
 		self.check_roles_added()
 		self.set_system_user()
 		self.set_full_name()
 		self.check_enable_disable()
 		self.ensure_unique_roles()
+		self.ensure_unique_role_profiles()
 		self.remove_all_roles_for_guest()
 		self.validate_username()
 		self.remove_disabled_roles()
 		self.validate_user_email_inbox()
-		ask_pass_update()
+		if self.user_emails:
+			ask_pass_update()
 		self.validate_allowed_modules()
 		self.validate_user_image()
 		self.set_time_zone()
@@ -196,15 +212,53 @@ class User(Document):
 		if (self.name not in ["Administrator", "Guest"]) and (not self.get_social_login_userid("frappe")):
 			self.set_social_login_userid("frappe", frappe.generate_hash(length=39))
 
-	def populate_role_profile_roles(self):
-		if self.role_profile_name:
-			role_profile = frappe.get_doc("Role Profile", self.role_profile_name)
-			self.set("roles", [])
-			self.append_roles(*[role.role for role in role_profile.roles])
+	def disable_email_fields_if_user_disabled(self):
+		if not self.enabled:
+			self.thread_notify = 0
+			self.send_me_a_copy = 0
+			self.allowed_in_mentions = 0
 
-	@deprecated
-	def validate_roles(self):
-		self.populate_role_profile_roles()
+	@frappe.whitelist()
+	def populate_role_profile_roles(self):
+		if not self.role_profiles:
+			return
+
+		if self.name in STANDARD_USERS:
+			self.role_profiles = []
+			return
+
+		new_roles = set()
+		for role_profile in self.role_profiles:
+			role_profile = frappe.get_cached_doc("Role Profile", role_profile.role_profile)
+			new_roles.update(role.role for role in role_profile.roles)
+
+		# Remove invalid roles and add new ones
+		self.roles = [r for r in self.roles if r.role in new_roles]
+		self.append_roles(*new_roles)
+
+	from frappe.deprecation_dumpster import validate_roles
+
+	def move_role_profile_name_to_role_profiles(self):
+		"""This handles old role_profile_name field if programatically set.
+
+		This behaviour will be remoed in future versions."""
+		if not self.role_profile_name:
+			return
+
+		current_role_profiles = [r.role_profile for r in self.role_profiles]
+		if self.role_profile_name in current_role_profiles:
+			self.role_profile_name = None
+			return
+
+		from frappe.deprecation_dumpster import deprecation_warning
+
+		deprecation_warning(
+			"unknown",
+			"v16",
+			"The field `role_profile_name` is deprecated and will be removed in v16, use `role_profiles` child table instead.",
+		)
+		self.append("role_profiles", {"role_profile": self.role_profile_name})
+		self.role_profile_name = None
 
 	def validate_allowed_modules(self):
 		if self.module_profile:
@@ -244,6 +298,18 @@ class User(Document):
 		if self.time_zone:
 			frappe.defaults.set_default("time_zone", self.time_zone, self.name)
 
+		if self.has_value_changed("language"):
+			locale_keys = ("date_format", "time_format", "number_format", "first_day_of_the_week")
+			if self.language:
+				language = frappe.get_doc("Language", self.language)
+				for key in locale_keys:
+					value = language.get(key)
+					if value:
+						frappe.defaults.set_default(key, value, self.name)
+			else:
+				for key in locale_keys:
+					frappe.defaults.clear_default(key, parent=self.name)
+
 		if self.has_value_changed("enabled"):
 			frappe.cache.delete_key("users_for_mentions")
 			frappe.cache.delete_key("enabled_users")
@@ -251,7 +317,7 @@ class User(Document):
 			frappe.cache.delete_key("users_for_mentions")
 
 	def has_website_permission(self, ptype, user, verbose=False):
-		"""Returns true if current user is the session user"""
+		"""Return True if current user is the session user."""
 		return self.name == frappe.session.user
 
 	def set_full_name(self):
@@ -267,7 +333,12 @@ class User(Document):
 			frappe.local.login_manager.logout(user=self.name)
 
 		# toggle notifications based on the user's status
+<<<<<<< HEAD
 		toggle_notifications(self.name, enable=cint(self.enabled))
+=======
+		toggle_notifications(self.name, enable=cint(self.enabled), ignore_permissions=True)
+		self.disable_email_fields_if_user_disabled()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def email_new_password(self, new_password=None):
 		if new_password and not self.flags.in_insert:
@@ -384,7 +455,7 @@ class User(Document):
 
 	def get_fullname(self):
 		"""get first_name space last_name"""
-		return (self.first_name or "") + (self.first_name and " " or "") + (self.last_name or "")
+		return (self.first_name or "") + ((self.first_name and " ") or "") + (self.last_name or "")
 
 	def password_reset_mail(self, link):
 		reset_password_template = frappe.db.get_system_setting("reset_password_template")
@@ -444,8 +515,8 @@ class User(Document):
 		args.update(add_args)
 
 		sender = (
-			frappe.session.user not in STANDARD_USERS and get_formatted_email(frappe.session.user) or None
-		)
+			frappe.session.user not in STANDARD_USERS and get_formatted_email(frappe.session.user)
+		) or None
 
 		if custom_template:
 			from frappe.email.doctype.email_template.email_template import get_email_template
@@ -490,17 +561,6 @@ class User(Document):
 
 		# delete shares
 		frappe.db.delete("DocShare", {"user": self.name})
-		# delete messages
-		table = DocType("Communication")
-		frappe.db.delete(
-			table,
-			filters=(
-				(table.communication_type.isin(["Chat", "Notification"]))
-				& (table.reference_doctype == "User")
-				& ((table.reference_name == self.name) | table.owner == self.name)
-			),
-			run=False,
-		)
 		# unlink contact
 		table = DocType("Contact")
 		frappe.qb.update(table).where(table.user == self.name).set(table.user, None).run()
@@ -579,7 +639,7 @@ class User(Document):
 
 	def append_roles(self, *roles):
 		"""Add roles to user"""
-		current_roles = [d.role for d in self.get("roles")]
+		current_roles = {d.role for d in self.get("roles")}
 		for role in roles:
 			if role in current_roles:
 				continue
@@ -609,12 +669,23 @@ class User(Document):
 				self.get("roles").remove(role)
 
 	def ensure_unique_roles(self):
+<<<<<<< HEAD
 		exists = []
 		for d in self.get("roles"):
+=======
+		exists = set()
+		for d in list(self.roles):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (not d.role) or (d.role in exists):
-				self.get("roles").remove(d)
-			else:
-				exists.append(d.role)
+				self.roles.remove(d)
+			exists.add(d.role)
+
+	def ensure_unique_role_profiles(self):
+		seen = set()
+		for rp in list(self.role_profiles):
+			if rp.role_profile in seen:
+				self.role_profiles.remove(rp)
+			seen.add(rp.role_profile)
 
 	def validate_username(self):
 		if not self.username and self.is_new() and self.first_name:
@@ -669,7 +740,7 @@ class User(Document):
 		return frappe.db.get_value("User", {"username": username or self.username, "name": ("!=", self.name)})
 
 	def get_blocked_modules(self):
-		"""Returns list of modules blocked for that user"""
+		"""Return list of modules blocked for that user."""
 		return [d.module for d in self.block_modules] if self.block_modules else []
 
 	def validate_user_email_inbox(self):
@@ -708,12 +779,8 @@ class User(Document):
 		3. If allow_login_using_user_name is set, you can use username while finding the user.
 		"""
 
-		login_with_mobile = cint(
-			frappe.db.get_single_value("System Settings", "allow_login_using_mobile_number")
-		)
-		login_with_username = cint(
-			frappe.db.get_single_value("System Settings", "allow_login_using_user_name")
-		)
+		login_with_mobile = cint(frappe.get_system_settings("allow_login_using_mobile_number"))
+		login_with_username = cint(frappe.get_system_settings("allow_login_using_user_name"))
 
 		or_filters = [{"name": user_name}]
 		if login_with_mobile:
@@ -739,6 +806,9 @@ class User(Document):
 		if not self.time_zone:
 			self.time_zone = get_system_timezone()
 
+	def get_permission_log_options(self, event=None):
+		return {"fields": ("role_profile_name", "roles", "module_profile", "block_modules")}
+
 	def check_roles_added(self):
 		if self.user_type != "System User" or self.roles or not self.is_new():
 			return
@@ -757,9 +827,9 @@ class User(Document):
 
 @frappe.whitelist()
 def get_timezones():
-	import pytz
+	import zoneinfo
 
-	return {"timezones": pytz.all_timezones}
+	return {"timezones": zoneinfo.available_timezones()}
 
 
 @frappe.whitelist()
@@ -783,7 +853,7 @@ def get_all_roles():
 @frappe.whitelist()
 def get_roles(arg=None):
 	"""get roles for a user"""
-	return frappe.get_roles(frappe.form_dict["uid"])
+	return frappe.get_roles(frappe.form_dict.get("uid", frappe.session.user))
 
 
 @frappe.whitelist()
@@ -801,10 +871,10 @@ def update_password(
 	"""Update password for the current user.
 
 	Args:
-	        new_password (str): New password.
-	        logout_all_sessions (int, optional): If set to 1, all other sessions will be logged out. Defaults to 0.
-	        key (str, optional): Password reset key. Defaults to None.
-	        old_password (str, optional): Old password. Defaults to None.
+	    new_password (str): New password.
+	    logout_all_sessions (int, optional): If set to 1, all other sessions will be logged out. Defaults to 0.
+	    key (str, optional): Password reset key. Defaults to None.
+	    old_password (str, optional): Old password. Defaults to None.
 	"""
 
 	if len(new_password) > MAX_PASSWORD_SIZE:
@@ -823,9 +893,7 @@ def update_password(
 	else:
 		user = res["user"]
 
-	logout_all_sessions = cint(logout_all_sessions) or frappe.db.get_single_value(
-		"System Settings", "logout_on_password_reset"
-	)
+	logout_all_sessions = cint(logout_all_sessions) or frappe.get_system_settings("logout_on_password_reset")
 	_update_password(user, new_password, logout_all_sessions=cint(logout_all_sessions))
 
 	user_doc, redirect_url = reset_user_data(user)
@@ -849,15 +917,22 @@ def update_password(
 
 @frappe.whitelist(allow_guest=True)
 def test_password_strength(new_password: str, key=None, old_password=None, user_data: tuple | None = None):
+<<<<<<< HEAD
 	from frappe.utils.deprecations import deprecation_warning
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.password_strength import test_password_strength as _test_password_strength
 
 	if key is not None or old_password is not None:
+		from frappe.deprecation_dumpster import deprecation_warning
+
 		deprecation_warning(
-			"Arguments `key` and `old_password` are deprecated in function `test_password_strength`."
+			"unknown",
+			"v17",
+			"Arguments `key` and `old_password` are deprecated in function `test_password_strength`.",
 		)
 
-	enable_password_policy = frappe.get_system_settings("enable_password_policy") or 0
+	enable_password_policy = frappe.get_system_settings("enable_password_policy")
 
 	if not enable_password_policy:
 		return {}
@@ -870,7 +945,7 @@ def test_password_strength(new_password: str, key=None, old_password=None, user_
 	if new_password:
 		result = _test_password_strength(new_password, user_inputs=user_data)
 		password_policy_validation_passed = False
-		minimum_password_score = cint(frappe.get_system_settings("minimum_password_score")) or 0
+		minimum_password_score = cint(frappe.get_system_settings("minimum_password_score"))
 
 		# score should be greater than 0 and minimum_password_score
 		if result.get("score") and result.get("score") >= minimum_password_score:
@@ -916,7 +991,7 @@ def _get_user_for_update_password(key, old_password):
 		result.user, last_reset_password_key_generated_on = user or (None, None)
 		if result.user:
 			reset_password_link_expiry = cint(
-				frappe.db.get_single_value("System Settings", "reset_password_link_expiry_duration")
+				frappe.get_system_settings("reset_password_link_expiry_duration")
 			)
 			if (
 				reset_password_link_expiry
@@ -1014,7 +1089,7 @@ def reset_password(user: str) -> str:
 		user.reset_password(send_email=True)
 
 		return frappe.msgprint(
-			msg=_("Password reset instructions have been sent to your email"),
+			msg=_("Password reset instructions have been sent to {}'s email").format(user.full_name),
 			title=_("Password Email Sent"),
 		)
 	except frappe.DoesNotExistError:
@@ -1058,7 +1133,7 @@ def user_query(doctype, txt, searchfield, start, page_len, filters):
 
 
 def get_total_users():
-	"""Returns total no. of system users"""
+	"""Return total number of system users."""
 	return flt(
 		frappe.db.sql(
 			"""SELECT SUM(`simultaneous_sessions`)
@@ -1091,7 +1166,7 @@ def get_system_users(exclude_users: Iterable[str] | str | None = None, limit: in
 
 
 def get_active_users():
-	"""Returns No. of system users who logged in, in the last 3 days"""
+	"""Return number of system users who logged in, in the last 3 days."""
 	return frappe.db.sql(
 		"""select count(*) from `tabUser`
 		where enabled = 1 and user_type != 'Website User'
@@ -1102,16 +1177,16 @@ def get_active_users():
 
 
 def get_website_users():
-	"""Returns total no. of website users"""
+	"""Return total number of website users."""
 	return frappe.db.count("User", filters={"enabled": True, "user_type": "Website User"})
 
 
 def get_active_website_users():
-	"""Returns No. of website users who logged in, in the last 3 days"""
+	"""Return number of website users who logged in, in the last 3 days."""
 	return frappe.db.sql(
 		"""select count(*) from `tabUser`
-		where enabled = 1 and user_type = 'Website User'
-		and hour(timediff(now(), last_active)) < 72"""
+        where enabled = 1 and user_type = 'Website User'
+        and hour(timediff(now(), last_active)) < 72"""
 	)[0][0]
 
 
@@ -1128,6 +1203,7 @@ def has_permission(doc, user):
 	if (user != "Administrator") and (doc.name in STANDARD_USERS):
 		# dont allow non Administrator user to view / edit Administrator user
 		return False
+	return True
 
 
 def notify_admin_access_to_system_manager(login_manager=None):
@@ -1176,11 +1252,6 @@ def throttle_user_creation():
 
 	if frappe.db.get_creation_count("User", 60) > frappe.local.conf.get("throttle_user_limit", 60):
 		frappe.throw(_("Throttled"))
-
-
-@frappe.whitelist()
-def get_role_profile(role_profile: str):
-	return frappe.get_doc("Role Profile", {"role_profile": role_profile}).roles
 
 
 @frappe.whitelist()

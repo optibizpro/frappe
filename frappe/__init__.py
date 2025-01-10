@@ -10,27 +10,51 @@ be used to build database driven apps.
 
 Read the documentation: https://frappeframework.com/docs
 """
+<<<<<<< HEAD
 import copy
 import faulthandler
+=======
+
+import copy
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import functools
-import gc
 import importlib
 import inspect
 import json
 import os
+<<<<<<< HEAD
 import re
 import signal
 import traceback
 import unicodedata
+=======
+import sys
+import threading
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import warnings
-from collections.abc import Callable
-from typing import TYPE_CHECKING, Any, Literal, Optional, TypeAlias, overload
+from collections import defaultdict
+from collections.abc import Callable, Iterable
+from typing import (
+	TYPE_CHECKING,
+	Any,
+	Generic,
+	Literal,
+	Optional,
+	TypeAlias,
+	TypeVar,
+	Union,
+	overload,
+)
 
 import click
-from werkzeug.local import Local, release_local
+from werkzeug.local import Local, LocalProxy, release_local
 
 import frappe
+<<<<<<< HEAD
 from frappe.query_builder import (
+=======
+from frappe.query_builder.utils import (
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	get_query,
 	get_query_builder,
 	patch_query_aggregation,
@@ -41,7 +65,11 @@ from frappe.utils.data import cint, cstr, sbool
 
 # Local application imports
 from .exceptions import *
+<<<<<<< HEAD
 from .types.frappedict import _dict
+=======
+from .types import Filters, FilterSignature, FilterTuple, _dict
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from .utils.jinja import (
 	get_email_from_template,
 	get_jenv,
@@ -49,14 +77,23 @@ from .utils.jinja import (
 	get_template,
 	render_template,
 )
-from .utils.lazy_loader import lazy_import
 
+<<<<<<< HEAD
 __version__ = "15.51.2"
 __title__ = "Frappe Framework"
 
 # This if block is never executed when running the code. It is only used for
 # telling static code analyzer where to find dynamically defined attributes.
 if TYPE_CHECKING:  # pragma: no cover
+=======
+__version__ = "16.0.0-dev"
+__title__ = "Frappe Framework"
+
+if TYPE_CHECKING:  # pragma: no cover
+	from logging import Logger
+	from types import ModuleType
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from werkzeug.wrappers import Request
 
 	from frappe.database.mariadb.database import MariaDBDatabase
@@ -64,6 +101,7 @@ if TYPE_CHECKING:  # pragma: no cover
 	from frappe.email.doctype.email_queue.email_queue import EmailQueue
 	from frappe.model.document import Document
 	from frappe.query_builder.builder import MariaDB, Postgres
+<<<<<<< HEAD
 	from frappe.utils.redis_wrapper import RedisWrapper
 
 	db: MariaDBDatabase | PostgresDatabase
@@ -84,13 +122,23 @@ if TYPE_CHECKING:  # pragma: no cover
 
 
 controllers = {}
+=======
+	from frappe.types.lazytranslatedstring import _LazyTranslate
+	from frappe.utils.redis_wrapper import ClientCache, RedisWrapper
+
+controllers: dict[str, "Document"] = {}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 local = Local()
-cache = None
+cache: Optional["RedisWrapper"] = None
+client_cache: Optional["ClientCache"] = None
 STANDARD_USERS = ("Guest", "Administrator")
 
+<<<<<<< HEAD
 _one_time_setup = {}
+=======
+_one_time_setup: dict[str, bool] = {}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 _dev_server = int(sbool(os.environ.get("DEV_SERVER", False)))
-_tune_gc = bool(sbool(os.environ.get("FRAPPE_TUNE_GC", True)))
 
 if _dev_server:
 	warnings.simplefilter("always", DeprecationWarning)
@@ -133,7 +181,11 @@ def _(msg: str, lang: str | None = None, context: str | None = None) -> str:
 	return translated_string or non_translated_string
 
 
+<<<<<<< HEAD
 def _lt(msg: str, lang: str | None = None, context: str | None = None):
+=======
+def _lt(msg: str, lang: str | None = None, context: str | None = None) -> "_LazyTranslate":
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Lazily translate a string.
 
 
@@ -170,7 +222,19 @@ def set_user_lang(user: str, user_language: str | None = None) -> None:
 
 
 # local-globals
+ConfType: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+# TODO: make session a dataclass instead of undtyped _dict
+SessionType: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+# TODO: implement dataclass
+LogMessageType: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+# TODO: implement dataclass
+# holds job metadata if the code is run in a background job context
+JobMetaType: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+ResponseDict: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+FlagsDict: TypeAlias = _dict[str, Any]  # type: ignore[no-any-explicit]
+FormDict: TypeAlias = _dict[str, str]
 
+<<<<<<< HEAD
 db = local("db")
 qb = local("qb")
 conf = local("conf")
@@ -181,15 +245,53 @@ response = local("response")
 session = local("session")
 user = local("user")
 flags = local("flags")
+=======
+db: LocalProxy[Union["MariaDBDatabase", "PostgresDatabase"]] = local("db")
+qb: LocalProxy[Union["MariaDB", "Postgres"]] = local("qb")
+conf: LocalProxy[ConfType] = local("conf")
+form_dict: LocalProxy[FormDict] = local("form_dict")
+form = form_dict
+request: LocalProxy["Request"] = local("request")
+job: LocalProxy[JobMetaType] = local("job")
+response: LocalProxy[ResponseDict] = local("response")
+session: LocalProxy[SessionType] = local("session")
+user: LocalProxy[str] = local("user")
+flags: LocalProxy[FlagsDict] = local("flags")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-error_log = local("error_log")
-debug_log = local("debug_log")
-message_log = local("message_log")
+error_log: LocalProxy[list[dict[str, str]]] = local("error_log")
+debug_log: LocalProxy[list[str]] = local("debug_log")
+message_log: LocalProxy[list[LogMessageType]] = local("message_log")
 
-lang = local("lang")
+lang: LocalProxy[str] = local("lang")
 
+<<<<<<< HEAD
 
 def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) -> None:
+=======
+if TYPE_CHECKING:  # pragma: no cover
+	# trick because some type checkers fail to follow "RedisWrapper", etc (written as string literal)
+	# trough a generic wrapper; seems to be a bug
+	db: MariaDBDatabase | PostgresDatabase
+	qb: MariaDB | Postgres
+	conf: ConfType
+	form_dict: FormDict
+	request: Request
+	job: JobMetaType
+	response: ResponseDict
+	session: SessionType
+	user: str
+	flags: FlagsDict
+
+	error_log: list[dict[str, str]]
+	debug_log: list[str]
+	message_log: list[LogMessageType]
+
+	lang: str
+
+
+def init(site: str, sites_path: str = ".", new_site: bool = False, force: bool = False) -> None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Initialize frappe for the current site. Reset thread locals `frappe.local`"""
 	if getattr(local, "initialised", None) and not force:
 		return
@@ -213,19 +315,21 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) 
 			"read_only": False,
 		}
 	)
-	local.locked_documents = []
-	local.test_objects = {}
+	local.locked_documents: list[Document] = []
+	local.test_objects = defaultdict(list)
 
 	local.site = site
+	local.site_name = site  # implicitly scopes bench
 	local.sites_path = sites_path
-	local.site_path = os.path.join(sites_path, site)
+	site_path = os.path.join(sites_path, site)
+	local.site_path = site_path
 	local.all_apps = None
 
 	local.request_ip = None
 	local.response = _dict({"docs": []})
 	local.task_id = None
 
-	local.conf = _dict(get_site_config())
+	local.conf = get_site_config(sites_path=sites_path, site_path=site_path, cached=bool(frappe.request))
 	local.lang = local.conf.lang or "en"
 
 	local.module_app = None
@@ -238,6 +342,7 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) 
 	local.valid_columns = {}
 	local.new_doc_templates = {}
 
+	local.request_cache = defaultdict(dict)
 	local.jenv = None
 	local.jloader = None
 	local.cache = {}
@@ -247,12 +352,21 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) 
 	local.dev_server = _dev_server
 	local.qb = get_query_builder(local.conf.db_type)
 	local.qb.get_query = get_query
+<<<<<<< HEAD
 	setup_redis_cache_connection()
+=======
+	if not cache or not client_cache:
+		setup_redis_cache_connection()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not _one_time_setup.get(local.conf.db_type):
 		patch_query_execute()
 		patch_query_aggregation()
+<<<<<<< HEAD
 		_register_fault_handler()
+=======
+		frappe._optimizations.register_fault_handler()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		_one_time_setup[local.conf.db_type] = True
 
 	setup_module_map(include_all_apps=not (frappe.request or frappe.job or frappe.flags.in_migrate))
@@ -263,14 +377,35 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) 
 def connect(site: str | None = None, db_name: str | None = None, set_admin_as_user: bool = True) -> None:
 	"""Connect to site database instance.
 
-	:param site: If site is given, calls `frappe.init`.
-	:param db_name: Optional. Will use from `site_config.json`.
+	:param site: (Deprecated) If site is given, calls `frappe.init`.
+	:param db_name: (Deprecated) Optional. Will use from `site_config.json`.
 	:param set_admin_as_user: Set Administrator as current user.
 	"""
 	from frappe.database import get_db
 
 	if site:
+		from frappe.deprecation_dumpster import deprecation_warning
+
+		deprecation_warning(
+			"unknown",
+			"v17",
+			"Calling frappe.connect with the site argument is deprecated and will be removed in next major version. "
+			"Instead, explicitly invoke frappe.init(site) prior to calling frappe.connect(), if initializing the site is necessary.",
+		)
 		init(site)
+	if db_name:
+		from frappe.deprecation_dumpster import deprecation_warning
+
+		deprecation_warning(
+			"unknown",
+			"v17",
+			"Calling frappe.connect with the db_name argument is deprecated and will be removed in next major version. "
+			"Instead, explicitly invoke frappe.init(site) with the right config prior to calling frappe.connect(), if necessary.",
+		)
+
+	assert db_name or local.conf.db_user, "site must be fully initialized, db_user missing"
+	assert db_name or local.conf.db_name, "site must be fully initialized, db_name missing"
+	assert local.conf.db_password, "site must be fully initialized, db_password missing"
 
 	assert db_name or local.conf.db_name, "site must be fully initialized, db_name missing"
 	assert local.conf.db_password, "site must be fully initialized, db_password missing"
@@ -279,7 +414,11 @@ def connect(site: str | None = None, db_name: str | None = None, set_admin_as_us
 		socket=local.conf.db_socket,
 		host=local.conf.db_host,
 		port=local.conf.db_port,
+<<<<<<< HEAD
 		user=local.conf.db_name or db_name,
+=======
+		user=local.conf.db_user or db_name,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		password=local.conf.db_password,
 		cur_db_name=local.conf.db_name or db_name,
 	)
@@ -290,15 +429,15 @@ def connect(site: str | None = None, db_name: str | None = None, set_admin_as_us
 def connect_replica() -> bool:
 	from frappe.database import get_db
 
-	if local and hasattr(local, "replica_db") and hasattr(local, "primary_db"):
+	if hasattr(local, "replica_db") and hasattr(local, "primary_db"):
 		return False
 
-	user = local.conf.db_name
+	user = local.conf.db_user
 	password = local.conf.db_password
 	port = local.conf.replica_db_port
 
 	if local.conf.different_credentials_for_replica:
-		user = local.conf.replica_db_name
+		user = local.conf.replica_db_user or local.conf.replica_db_name
 		password = local.conf.replica_db_password
 
 	local.replica_db = get_db(
@@ -317,6 +456,7 @@ def connect_replica() -> bool:
 	return True
 
 
+<<<<<<< HEAD
 def get_site_config(sites_path: str | None = None, site_path: str | None = None) -> dict[str, Any]:
 	"""Returns `site_config.json` combined with `sites/common_site_config.json`.
 	`site_config` is a set of site wide settings like database name, password, email etc."""
@@ -396,6 +536,9 @@ def get_common_site_config(sites_path: str | None = None) -> dict[str, Any]:
 
 
 def get_conf(site: str | None = None) -> dict[str, Any]:
+=======
+def get_conf(site: str | None = None) -> _dict[str, Any]:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if hasattr(local, "conf"):
 		return local.conf
 
@@ -425,18 +568,32 @@ def destroy():
 	release_local(local)
 
 
+_redis_init_lock = threading.Lock()
+
+
 def setup_redis_cache_connection():
 	"""Defines `frappe.cache` as `RedisWrapper` instance"""
-	global cache
+	from frappe.utils.redis_wrapper import ClientCache, setup_cache
 
+	global cache
+	global client_cache
+
+<<<<<<< HEAD
 	if not cache:
 		from frappe.utils.redis_wrapper import setup_cache
 
 		cache = setup_cache()
+=======
+	with _redis_init_lock:
+		# We need to check again since someone else might have setup connection before us.
+		if not cache:
+			cache = setup_cache()
+			client_cache = ClientCache()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_traceback(with_context: bool = False) -> str:
-	"""Returns error traceback."""
+	"""Return error traceback."""
 	from frappe.utils import get_traceback
 
 	return get_traceback(with_context=with_context)
@@ -454,16 +611,23 @@ def errprint(msg: str) -> None:
 
 
 def print_sql(enable: bool = True) -> None:
-	return cache.set_value("flag_print_sql", enable)
+	if frappe.conf.allow_tests and frappe.conf.developer_mode:
+		cache.set_value("flag_print_sql", enable)
+	else:
+		frappe.throw("`frappe.print_sql` only works in `developer_mode` with `allow_tests` enabled on site.")
 
 
 def log(msg: str) -> None:
 	"""Add to `debug_log`
 
 	:param msg: Message."""
+<<<<<<< HEAD
 	if not request:
 		print(repr(msg))
 
+=======
+	print(msg, file=sys.stderr)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	debug_log.append(as_unicode(msg))
 
 
@@ -474,6 +638,14 @@ def _strip_html_tags(message):
 	return strip_html_tags(message)
 
 
+<<<<<<< HEAD
+=======
+ServerAction: TypeAlias = dict
+ClientAction: TypeAlias = dict
+Action: TypeAlias = ServerAction | ClientAction
+
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def msgprint(
 	msg: str,
 	title: str | None = None,
@@ -482,7 +654,11 @@ def msgprint(
 	as_list: bool = False,
 	indicator: Literal["blue", "green", "orange", "red", "yellow"] | None = None,
 	alert: bool = False,
+<<<<<<< HEAD
 	primary_action: str | None = None,
+=======
+	primary_action: Action | None = None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	is_minimizable: bool = False,
 	wide: bool = False,
 	*,
@@ -503,7 +679,10 @@ def msgprint(
 	:param realtime: Publish message immediately using websocket.
 	"""
 	import inspect
+<<<<<<< HEAD
 	import sys
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	msg = safe_decode(msg)
 	out = _dict(message=msg)
@@ -568,6 +747,10 @@ def msgprint(
 	_raise_exception()
 
 
+def toast(message: str, indicator: Literal["blue", "green", "orange", "red", "yellow"] | None = None):
+	frappe.msgprint(message, indicator=indicator, alert=True)
+
+
 def clear_messages():
 	local.message_log = []
 
@@ -612,6 +795,10 @@ def throw(
 	)
 
 
+def throw_permission_error():
+	throw(_("Not permitted"), PermissionError)
+
+
 def create_folder(path, with_init=False):
 	"""Create a folder in the given path and add an `__init__.py` file (optional).
 
@@ -650,7 +837,7 @@ def get_user():
 
 
 def get_roles(username=None) -> list[str]:
-	"""Returns roles of current user."""
+	"""Return roles of current user."""
 	if not local.session or not local.session.user:
 		return ["Guest"]
 	import frappe.permissions
@@ -792,10 +979,10 @@ def sendmail(
 	return builder.process(send_now=now)
 
 
-whitelisted = []
-guest_methods = []
-xss_safe_methods = []
-allowed_http_methods_for_whitelisted_func = {}
+whitelisted: set[Callable] = set()
+guest_methods: set[Callable] = set()
+xss_safe_methods: set[Callable] = set()
+allowed_http_methods_for_whitelisted_func: dict[Callable, list[str]] = {}
 
 
 def whitelist(allow_guest=False, xss_safe=False, methods=None):
@@ -833,14 +1020,14 @@ def whitelist(allow_guest=False, xss_safe=False, methods=None):
 		else:
 			fn = validate_argument_types(fn, apply_condition=in_request_or_test)
 
-		whitelisted.append(fn)
+		whitelisted.add(fn)
 		allowed_http_methods_for_whitelisted_func[fn] = methods
 
 		if allow_guest:
-			guest_methods.append(fn)
+			guest_methods.add(fn)
 
 			if xss_safe:
-				xss_safe_methods.append(fn)
+				xss_safe_methods.add(fn)
 
 		return method or fn
 
@@ -851,7 +1038,7 @@ def is_whitelisted(method):
 	from frappe.utils import sanitize_html
 
 	is_guest = session["user"] == "Guest"
-	if method not in whitelisted or is_guest and method not in guest_methods:
+	if method not in whitelisted or (is_guest and method not in guest_methods):
 		summary = _("You are not permitted to access this resource.")
 		detail = _("Function {0} is not whitelisted.").format(bold(f"{method.__module__}.{method.__name__}"))
 		msg = f"<details><summary>{summary}</summary>{detail}</details>"
@@ -878,7 +1065,7 @@ def read_only():
 			try:
 				retval = fn(*args, **get_newargs(fn, kwargs))
 			finally:
-				if switched_connection and local and hasattr(local, "primary_db"):
+				if switched_connection and hasattr(local, "primary_db"):
 					local.db.close()
 					local.db = local.primary_db
 
@@ -983,7 +1170,10 @@ def clear_cache(user: str | None = None, doctype: str | None = None):
 		for fn in get_hooks("clear_cache"):
 			get_attr(fn)()
 
-	frappe.utils.caching._SITE_CACHE.clear()
+	if (not doctype and not user) or doctype == "DocType":
+		frappe.utils.caching._SITE_CACHE.clear()
+		frappe.client_cache.clear_cache()
+
 	local.role_permissions = {}
 	if hasattr(local, "request_cache"):
 		local.request_cache.clear()
@@ -1018,8 +1208,9 @@ def has_permission(
 	debug=False,
 ):
 	"""
-	Returns True if the user has permission `ptype` for given `doctype` or `doc`
-	Raises `frappe.PermissionError` if user isn't permitted and `throw` is truthy
+	Return True if the user has permission `ptype` for given `doctype` or `doc`.
+
+	Raise `frappe.PermissionError` if user isn't permitted and `throw` is truthy
 
 	:param doctype: DocType for which permission is to be check.
 	:param ptype: Permission type (`read`, `write`, `create`, `submit`, `cancel`, `amend`). Default: `read`.
@@ -1037,7 +1228,7 @@ def has_permission(
 		ptype,
 		doc=doc,
 		user=user,
-		raise_exception=throw,
+		print_logs=throw,
 		parent_doctype=parent_doctype,
 		debug=debug,
 	)
@@ -1090,12 +1281,12 @@ def has_website_permission(doc=None, ptype="read", user=None, verbose=False, doc
 
 
 def is_table(doctype: str) -> bool:
-	"""Returns True if `istable` property (indicating child Table) is set for given DocType."""
-
-	def get_tables():
-		return db.get_values("DocType", filters={"istable": 1}, order_by=None, pluck=True)
-
-	tables = cache.get_value("is_table", get_tables)
+	"""Return True if `istable` property (indicating child Table) is set for given DocType."""
+	key = "is_table"
+	tables = client_cache.get_value(key)
+	if tables is None:
+		tables = db.get_values("DocType", filters={"istable": 1}, order_by=None, pluck=True)
+		client_cache.set_value(key, tables)
 	return doctype in tables
 
 
@@ -1113,8 +1304,12 @@ def generate_hash(txt: str | None = None, length: int = 56) -> str:
 	import math
 	import secrets
 
-	if not length:
-		length = 56
+	if txt:
+		from frappe.deprecation_dumpster import deprecation_warning
+
+		deprecation_warning(
+			"unknown", "v17", "The `txt` parameter is deprecated and will be removed in a future release."
+		)
 
 	return secrets.token_hex(math.ceil(length / 2))[:length]
 
@@ -1134,7 +1329,7 @@ def new_doc(
 	as_dict: bool = False,
 	**kwargs,
 ) -> "Document":
-	"""Returns a new document of the given DocType with defaults set.
+	"""Return a new document of the given DocType with defaults set.
 
 	:param doctype: DocType of the new document.
 	:param parent_doc: [optional] add to parent document.
@@ -1157,7 +1352,8 @@ def set_value(doctype, docname, fieldname, value=None):
 	return frappe.client.set_value(doctype, docname, fieldname, value)
 
 
-def get_cached_doc(*args, **kwargs) -> "Document":
+def get_cached_doc(*args: Any, **kwargs: Any) -> "Document":
+	"""Identical to `frappe.get_doc`, but return from cache if available."""
 	if (key := can_cache_doc(args)) and (doc := cache.get_value(key)):
 		return doc
 
@@ -1174,13 +1370,13 @@ def get_cached_doc(*args, **kwargs) -> "Document":
 
 
 def _set_document_in_cache(key: str, doc: "Document") -> None:
-	cache.set_value(key, doc)
+	cache.set_value(key, doc, expires_in_sec=3600)
 
 
 def can_cache_doc(args) -> str | None:
 	"""
 	Determine if document should be cached based on get_doc params.
-	Returns cache key if doc can be cached, None otherwise.
+	Return cache key if doc can be cached, None otherwise.
 	"""
 
 	if not args:
@@ -1217,7 +1413,13 @@ def clear_document_cache(doctype: str, name: str | None = None) -> None:
 		delattr(local, "website_settings")
 
 
+<<<<<<< HEAD
 def get_cached_value(doctype: str, name: str, fieldname: str = "name", as_dict: bool = False) -> Any:
+=======
+def get_cached_value(
+	doctype: str, name: str | dict, fieldname: str | Iterable[str] = "name", as_dict: bool = False
+) -> Any:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	try:
 		doc = get_cached_doc(doctype, name)
 	except DoesNotExistError:
@@ -1270,7 +1472,7 @@ def get_doc(documentdict: dict) -> "_NewDocument":
 	pass
 
 
-def get_doc(*args, **kwargs):
+def get_doc(*args: Any, **kwargs: Any) -> "Document":
 	"""Return a `frappe.model.document.Document` object of the given type and name.
 
 	:param arg1: DocType name as string **or** document JSON.
@@ -1288,16 +1490,16 @@ def get_doc(*args, **kwargs):
 	"""
 	import frappe.model.document
 
-	doc = frappe.model.document.get_doc(*args, **kwargs)
-
-	# Replace cache if stale one exists
-	if not kwargs.get("for_update") and (key := can_cache_doc(args)) and cache.exists(key):
-		_set_document_in_cache(key, doc)
-
-	return doc
+	return frappe.model.document.get_doc(*args, **kwargs)
 
 
-def get_last_doc(doctype, filters=None, order_by="creation desc", *, for_update=False):
+def get_last_doc(
+	doctype,
+	filters: FilterSignature | None = None,
+	order_by="creation desc",
+	*,
+	for_update=False,
+):
 	"""Get last created document of this type."""
 	d = get_all(doctype, filters=filters, limit_page_length=1, order_by=order_by, pluck="name")
 	if d:
@@ -1326,12 +1528,12 @@ def get_meta_module(doctype):
 
 def delete_doc(
 	doctype: str | None = None,
-	name: str | None = None,
+	name: str | dict | None = None,
 	force: bool = False,
 	ignore_doctypes: list[str] | None = None,
 	for_reload: bool = False,
 	ignore_permissions: bool = False,
-	flags: None = None,
+	flags: _dict | None = None,
 	ignore_on_trash: bool = False,
 	ignore_missing: bool = True,
 	delete_permanently: bool = False,
@@ -1400,8 +1602,8 @@ def reload_doc(
 @whitelist(methods=["POST", "PUT"])
 def rename_doc(
 	doctype: str,
-	old: str,
-	new: str,
+	old: str | int,
+	new: str | int,
 	force: bool = False,
 	merge: bool = False,
 	*,
@@ -1429,18 +1631,18 @@ def rename_doc(
 	)
 
 
-def get_module(modulename):
-	"""Returns a module object for given Python module name using `importlib.import_module`."""
+def get_module(modulename: str) -> "ModuleType":
+	"""Return a module object for given Python module name using `importlib.import_module`."""
 	return importlib.import_module(modulename)
 
 
 def scrub(txt: str) -> str:
-	"""Returns sluggified string. e.g. `Sales Order` becomes `sales_order`."""
+	"""Return sluggified string. e.g. `Sales Order` becomes `sales_order`."""
 	return cstr(txt).replace(" ", "_").replace("-", "_").lower()
 
 
 def unscrub(txt: str) -> str:
-	"""Returns titlified string. e.g. `sales_order` becomes `Sales Order`."""
+	"""Return titlified string. e.g. `sales_order` becomes `Sales Order`."""
 	return txt.replace("_", " ").replace("-", " ").title()
 
 
@@ -1518,7 +1720,7 @@ def get_all_apps(with_internal_apps=True, sites_path=None):
 
 
 @request_cache
-def get_installed_apps(*, _ensure_on_bench=False) -> list[str]:
+def get_installed_apps(*, _ensure_on_bench: bool = False) -> list[str]:
 	"""
 	Get list of installed apps in current site.
 
@@ -1540,7 +1742,7 @@ def get_installed_apps(*, _ensure_on_bench=False) -> list[str]:
 
 
 def get_doc_hooks():
-	"""Returns hooked methods for given doc. It will expand the dict tuple if required."""
+	"""Return hooked methods for given doc. Expand the dict tuple if required."""
 	if not hasattr(local, "doc_events_hooks"):
 		hooks = get_hooks("doc_events", {})
 		out = {}
@@ -1593,16 +1795,18 @@ def get_hooks(
 	:param app_name: Filter by app."""
 
 	if app_name:
-		hooks = _dict(_load_app_hooks(app_name))
+		hooks = _load_app_hooks(app_name)
 	else:
 		if conf.developer_mode:
-			hooks = _dict(_load_app_hooks())
+			hooks = _load_app_hooks()
 		else:
-			hooks = _dict(cache.get_value("app_hooks", _load_app_hooks))
-
+			hooks = client_cache.get_value("app_hooks")
+			if hooks is None:
+				hooks = _load_app_hooks()
+				client_cache.set_value("app_hooks", hooks)
 	if hook:
 		return hooks.get(hook, ([] if default == "_KEEP_DEFAULT_LIST" else default))
-	return hooks
+	return _dict(hooks)
 
 
 def append_hook(target, key, value):
@@ -1636,7 +1840,11 @@ def setup_module_map(include_all_apps: bool = True) -> None:
 	if include_all_apps:
 		local.app_modules = cache.get_value("app_modules")
 	else:
+<<<<<<< HEAD
 		local.app_modules = cache.get_value("installed_app_modules")
+=======
+		local.app_modules = client_cache.get_value("installed_app_modules")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not local.app_modules:
 		local.app_modules = {}
@@ -1654,7 +1862,11 @@ def setup_module_map(include_all_apps: bool = True) -> None:
 		if include_all_apps:
 			cache.set_value("app_modules", local.app_modules)
 		else:
+<<<<<<< HEAD
 			cache.set_value("installed_app_modules", local.app_modules)
+=======
+			client_cache.set_value("installed_app_modules", local.app_modules)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# Init module_app (reverse mapping)
 	local.module_app = {}
@@ -1669,7 +1881,7 @@ def setup_module_map(include_all_apps: bool = True) -> None:
 
 
 def get_file_items(path, raise_not_found=False, ignore_empty_lines=True):
-	"""Returns items from text file as a list. Ignores empty lines."""
+	"""Return items from text file as a list. Ignore empty lines."""
 	import frappe.utils
 
 	content = read_file(path, raise_not_found=raise_not_found)
@@ -1726,6 +1938,9 @@ def call(fn: str | Callable, *args, **kwargs):
 	return fn(*args, **newargs)
 
 
+_cached_inspect_signature = functools.lru_cache(inspect.signature)
+
+
 def get_newargs(fn: Callable, kwargs: dict[str, Any]) -> dict[str, Any]:
 	"""Remove any kwargs that are not supported by the function.
 
@@ -1741,7 +1956,11 @@ def get_newargs(fn: Callable, kwargs: dict[str, Any]) -> dict[str, Any]:
 	# Ref: https://docs.python.org/3/library/inspect.html#inspect.Parameter.kind
 	varkw_exist = False
 
+<<<<<<< HEAD
 	signature = inspect.signature(fn)
+=======
+	signature = _cached_inspect_signature(fn)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	fnargs = list(signature.parameters)
 
 	for param_name, parameter in signature.parameters.items():
@@ -1827,6 +2046,9 @@ def import_doc(path):
 def copy_doc(doc: "Document", ignore_no_copy: bool = True) -> "Document":
 	"""No_copy fields also get copied."""
 	import copy
+	from types import MappingProxyType
+
+	from frappe.model.base_document import BaseDocument
 
 	def remove_no_copy_fields(d):
 		for df in d.meta.get("fields", {"no_copy": 1}):
@@ -1838,8 +2060,10 @@ def copy_doc(doc: "Document", ignore_no_copy: bool = True) -> "Document":
 	if not local.flags.in_test:
 		fields_to_clear.append("docstatus")
 
-	if not isinstance(doc, dict):
+	if isinstance(doc, BaseDocument) or hasattr(doc, "as_dict"):
 		d = doc.as_dict()
+	elif isinstance(doc, MappingProxyType):  # global test record
+		d = dict(doc)
 	else:
 		d = doc
 
@@ -1851,7 +2075,11 @@ def copy_doc(doc: "Document", ignore_no_copy: bool = True) -> "Document":
 	if not ignore_no_copy:
 		remove_no_copy_fields(newdoc)
 
+<<<<<<< HEAD
 	for _i, d in enumerate(newdoc.get_all_children()):
+=======
+	for d in newdoc.get_all_children():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		d.set("__islocal", 1)
 
 		for fieldname in fields_to_clear:
@@ -1973,7 +2201,7 @@ def get_list(doctype, *args, **kwargs):
 	:param doctype: DocType on which query is to be made.
 	:param fields: List of fields or `*`.
 	:param filters: List of filters (see example).
-	:param order_by: Order By e.g. `modified desc`.
+	:param order_by: Order By e.g. `creation desc`.
 	:param limit_start: Start results at record #. Default 0.
 	:param limit_page_length: No of records in the page. Default 20.
 
@@ -1997,7 +2225,7 @@ def get_all(doctype, *args, **kwargs):
 	:param doctype: DocType on which query is to be made.
 	:param fields: List of fields or `*`. Default is: `["name"]`.
 	:param filters: List of filters (see example).
-	:param order_by: Order By e.g. `modified desc`.
+	:param order_by: Order By e.g. `creation desc`.
 	:param limit_start: Start results at record #. Default 0.
 	:param limit_page_length: No of records in the page. Default 20.
 
@@ -2016,7 +2244,7 @@ def get_all(doctype, *args, **kwargs):
 
 
 def get_value(*args, **kwargs):
-	"""Returns a document property or list of properties.
+	"""Return a document property or list of properties.
 
 	Alias for `frappe.db.get_value`
 
@@ -2031,6 +2259,7 @@ def get_value(*args, **kwargs):
 
 
 def as_json(obj: dict | list, indent=1, separators=None, ensure_ascii=True) -> str:
+	"""Return the JSON string representation of the given `obj`."""
 	from frappe.utils.response import json_handler
 
 	if separators is None:
@@ -2059,21 +2288,10 @@ def as_json(obj: dict | list, indent=1, separators=None, ensure_ascii=True) -> s
 
 
 def are_emails_muted():
-	return flags.mute_emails or cint(conf.get("mute_emails") or 0) or False
+	return flags.mute_emails or cint(conf.get("mute_emails", 0))
 
 
-def get_test_records(doctype):
-	"""Returns list of objects from `test_records.json` in the given doctype's folder."""
-	from frappe.modules import get_doctype_module, get_module_path
-
-	path = os.path.join(
-		get_module_path(get_doctype_module(doctype)), "doctype", scrub(doctype), "test_records.json"
-	)
-	if os.path.exists(path):
-		with open(path) as f:
-			return json.loads(f.read())
-	else:
-		return []
+from frappe.deprecation_dumpster import frappe_get_test_records as get_test_records
 
 
 def format_value(*args, **kwargs):
@@ -2295,12 +2513,19 @@ def get_doctype_app(doctype):
 	return local_cache("doctype_app", doctype, generator=_get_doctype_app)
 
 
-loggers = {}
-log_level = None
+loggers: dict[str, "Logger"] = {}
+log_level: int | None = None
 
 
+<<<<<<< HEAD
 def logger(module=None, with_more_info=False, allow_site=True, filter=None, max_size=100_000, file_count=20):
 	"""Returns a python logger that uses StreamHandler"""
+=======
+def logger(
+	module=None, with_more_info=False, allow_site=True, filter=None, max_size=100_000, file_count=20
+) -> "Logger":
+	"""Return a python logger that uses StreamHandler."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.logger import get_logger
 
 	return get_logger(
@@ -2321,7 +2546,8 @@ def get_desk_link(doctype, name):
 	return html.format(doctype=doctype, name=name, doctype_local=_(doctype), title_local=_(title))
 
 
-def bold(text):
+def bold(text: str | int | float) -> str:
+	"""Return `text` wrapped in `<strong>` tags."""
 	return f"<strong>{text}</strong>"
 
 
@@ -2344,17 +2570,6 @@ def get_website_settings(key):
 	return local.website_settings.get(key)
 
 
-def get_system_settings(key):
-	if not hasattr(local, "system_settings"):
-		try:
-			local.system_settings = get_cached_doc("System Settings")
-		except DoesNotExistError:  # possible during new install
-			clear_last_message()
-			return
-
-	return local.system_settings.get(key)
-
-
 def get_active_domains():
 	from frappe.core.doctype.domain_settings.domain_settings import get_active_domains
 
@@ -2363,7 +2578,7 @@ def get_active_domains():
 
 def get_version(doctype, name, limit=None, head=False, raise_err=True):
 	"""
-	Returns a list of version information of a given DocType.
+	Return a list of version information for the given DocType.
 
 	Note: Applicable only if DocType has changes tracked.
 
@@ -2459,7 +2674,11 @@ def mock(type, size=1, locale="en"):
 	if type not in dir(fake):
 		raise ValueError("Not a valid mock type.")
 	else:
+<<<<<<< HEAD
 		for _i in range(size):
+=======
+		for _ in range(size):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			data = getattr(fake, type)()
 			results.append(data)
 
@@ -2486,6 +2705,7 @@ def validate_and_sanitize_search_inputs(fn):
 	return wrapper
 
 
+<<<<<<< HEAD
 def _register_fault_handler():
 	import io
 	import sys
@@ -2496,15 +2716,13 @@ def _register_fault_handler():
 
 
 from frappe.utils.error import log_error
+=======
+import frappe._optimizations
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-if _tune_gc:
-	# generational GC gets triggered after certain allocs (g0) which is 700 by default.
-	# This number is quite small for frappe where a single query can potentially create 700+
-	# objects easily.
-	# Bump this number higher, this will make GC less aggressive but that improves performance of
-	# everything else.
-	g0, g1, g2 = gc.get_threshold()  # defaults are 700, 10, 10.
-	gc.set_threshold(g0 * 10, g1 * 2, g2 * 2)
+# Backward compatibility
+from frappe.config import get_common_site_config, get_site_config
+from frappe.core.doctype.system_settings.system_settings import get_system_settings
+from frappe.utils.error import log_error
 
-# Remove references to pattern that are pre-compiled and loaded to global scopes.
-re.purge()
+frappe._optimizations.optimize_all()

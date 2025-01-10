@@ -21,6 +21,7 @@ class BlogCategory(WebsiteGenerator):
 		title: DF.Data
 
 	# end: auto-generated types
+
 	def autoname(self):
 		# to override autoname of WebsiteGenerator
 		self.name = self.scrub(self.title)

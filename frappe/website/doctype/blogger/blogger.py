@@ -25,6 +25,7 @@ class Blogger(Document):
 		user: DF.Link | None
 
 	# end: auto-generated types
+
 	def validate(self):
 		if self.user and not frappe.db.exists("User", self.user):
 			# for data import

@@ -19,7 +19,11 @@
 			<div class="combo-box-items">
 				<ComboboxOption
 					as="template"
+<<<<<<< HEAD
 					v-for="(field, i) in filteredOptions"
+=======
+					v-for="(field, i) in sortedOptions"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					:key="i"
 					:value="field"
 					v-slot="{ active }"
@@ -85,11 +89,24 @@ const selectedValue = computed({
 });
 
 const filteredOptions = computed(() => {
+<<<<<<< HEAD
 	return query.value
 		? props.options.filter((option) => {
 				return option.label.toLowerCase().includes(query.value.toLowerCase());
 		  })
 		: props.options;
+=======
+	if (!query.value) return props.options;
+	return props.options.filter((option) => {
+		return option.label.toLocaleLowerCase().includes(query.value.toLocaleLowerCase());
+	});
+});
+
+const sortedOptions = computed(() => {
+	return filteredOptions.value.sort((a, b) => {
+		return a.label.localeCompare(b.label);
+	});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 function clear_search() {
@@ -126,6 +143,11 @@ watch(showOptions, (val) => {
 	border-radius: var(--border-radius-sm);
 	padding: 6px 10px;
 	width: 100%;
+<<<<<<< HEAD
+=======
+	cursor: pointer;
+	user-select: none;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	&:hover,
 	&.active {

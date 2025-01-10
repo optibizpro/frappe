@@ -24,11 +24,13 @@ from frappe import _
 from frappe.core.utils import html2text
 from frappe.frappeclient import FrappeClient
 from frappe.handler import execute_cmd
+from frappe.locale import get_date_format, get_number_format, get_time_format
 from frappe.model.delete_doc import delete_doc
 from frappe.model.mapper import get_mapped_doc
 from frappe.model.rename_doc import rename_doc
 from frappe.modules import scrub
 from frappe.utils.background_jobs import enqueue, get_jobs
+from frappe.utils.number_format import NumberFormat
 from frappe.website.utils import get_next_link, get_toc
 from frappe.www.printview import get_visible_columns
 
@@ -77,7 +79,7 @@ class FrappePrintCollector(PrintCollector):
 
 def is_safe_exec_enabled() -> bool:
 	# server scripts can only be enabled via common_site_config.json
-	return bool(frappe.get_common_site_config().get(SAFE_EXEC_CONFIG_KEY))
+	return bool(frappe.get_common_site_config(cached=bool(frappe.request)).get(SAFE_EXEC_CONFIG_KEY))
 
 
 def safe_exec(
@@ -151,7 +153,11 @@ def _validate_safe_eval_syntax(code):
 
 @contextmanager
 def safe_exec_flags():
+<<<<<<< HEAD
 	if not frappe.flags.in_safe_exec:
+=======
+	if frappe.flags.in_safe_exec is None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.flags.in_safe_exec = 0
 
 	frappe.flags.in_safe_exec += 1
@@ -167,11 +173,13 @@ def get_safe_globals():
 	datautils = frappe._dict()
 
 	if frappe.db:
-		date_format = frappe.db.get_default("date_format") or "yyyy-mm-dd"
-		time_format = frappe.db.get_default("time_format") or "HH:mm:ss"
+		date_format = get_date_format()
+		time_format = get_time_format()
+		number_format = get_number_format()
 	else:
 		date_format = "yyyy-mm-dd"
 		time_format = "HH:mm:ss"
+		number_format = NumberFormat.from_string("#,###.##")
 
 	add_data_utils(datautils)
 
@@ -180,7 +188,7 @@ def get_safe_globals():
 	if "_" in form_dict:
 		del frappe.local.form_dict["_"]
 
-	user = getattr(frappe.local, "session", None) and frappe.local.session.user or "Guest"
+	user = (getattr(frappe.local, "session", None) and frappe.local.session.user) or "Guest"
 
 	out = NamespaceDict(
 		# make available limited methods of frappe
@@ -197,6 +205,7 @@ def get_safe_globals():
 			format_value=frappe.format_value,
 			date_format=date_format,
 			time_format=time_format,
+			number_format=number_format,
 			format_date=frappe.utils.data.global_date_format,
 			form_dict=form_dict,
 			bold=frappe.bold,
@@ -264,6 +273,13 @@ def get_safe_globals():
 				after_rollback=frappe.db.after_rollback,
 				before_rollback=frappe.db.before_rollback,
 				add_index=frappe.db.add_index,
+			),
+			website=NamespaceDict(
+				abs_url=frappe.website.utils.abs_url,
+				extract_title=frappe.website.utils.extract_title,
+				get_boot_data=frappe.website.utils.get_boot_data,
+				get_home_page=frappe.website.utils.get_home_page,
+				get_html_content_based_on_type=frappe.website.utils.get_html_content_based_on_type,
 			),
 			lang=getattr(frappe.local, "lang", "en"),
 		),
@@ -444,7 +460,13 @@ def get_python_builtins():
 	}
 
 
-def get_hooks(hook=None, default=None, app_name=None):
+def get_hooks(hook: str | None = None, default=None, app_name: str | None = None) -> frappe._dict:
+	"""Get hooks via `app/hooks.py`
+
+	:param hook: Name of the hook. Will gather all hooks for this name and return as a list.
+	:param default: Default if no hook found.
+	:param app_name: Filter by app."""
+
 	hooks = frappe.get_hooks(hook=hook, default=default, app_name=app_name)
 	return copy.deepcopy(hooks)
 
@@ -614,6 +636,7 @@ VALID_UTILS = (
 	"get_quarter_ending",
 	"get_first_day_of_week",
 	"get_year_start",
+	"get_year_ending",
 	"get_last_day_of_week",
 	"get_last_day",
 	"get_time",
@@ -660,6 +683,9 @@ VALID_UTILS = (
 	"comma_sep",
 	"new_line_sep",
 	"filter_strip_join",
+	"add_trackers_to_url",
+	"parse_and_map_trackers_from_url",
+	"map_trackers",
 	"get_url",
 	"get_host_name_from_request",
 	"url_contains_port",

@@ -175,15 +175,23 @@ def normalize_query(query: str) -> str:
 
 
 def record(force=False):
+<<<<<<< HEAD
 	if __debug__:
 		if frappe.cache.get_value(RECORDER_INTERCEPT_FLAG) or force:
 			frappe.local._recorder = Recorder(force=force)
+=======
+	flag_value = frappe.client_cache.get_value(RECORDER_INTERCEPT_FLAG)
+	if flag_value or force:
+		frappe.local._recorder = Recorder(force=force)
+	elif flag_value is None:
+		# Explicitly set it once so next requests can use client-side cache
+		frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def dump():
-	if __debug__:
-		if hasattr(frappe.local, "_recorder"):
-			frappe.local._recorder.dump()
+	if hasattr(frappe.local, "_recorder"):
+		frappe.local._recorder.dump()
 
 
 class Recorder:
@@ -344,14 +352,22 @@ def start(
 		request_filter=request_filter,
 		jobs_filter=jobs_filter,
 	).store()
+<<<<<<< HEAD
 	frappe.cache.set_value(RECORDER_INTERCEPT_FLAG, 1, expires_in_sec=RECORDER_AUTO_DISABLE)
+=======
+	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @frappe.whitelist()
 @do_not_record
 @administrator_only
 def stop(*args, **kwargs):
+<<<<<<< HEAD
 	frappe.cache.delete_value(RECORDER_INTERCEPT_FLAG)
+=======
+	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.enqueue(post_process, now=frappe.flags.in_test)
 
 

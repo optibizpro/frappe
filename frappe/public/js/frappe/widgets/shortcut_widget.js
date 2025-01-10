@@ -49,12 +49,7 @@ export default class ShortcutWidget extends Widget {
 			}
 
 			if (this.type == "URL") {
-				if (frappe.open_in_new_tab) {
-					window.open(this.url, "_blank");
-					frappe.open_in_new_tab = false;
-				} else {
-					window.location.href = this.url;
-				}
+				window.open(this.url, "_blank");
 				return;
 			}
 
@@ -80,10 +75,18 @@ export default class ShortcutWidget extends Widget {
 
 		let filters = frappe.utils.process_filter_expression(this.stats_filter);
 
+<<<<<<< HEAD
 		if (this.type == "DocType" && this.doc_view != "New" && filters) {
+=======
+		if (
+			this.type == "DocType" &&
+			this.doc_view != "New" &&
+			!frappe.boot.single_types.includes(this.link_to)
+		) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.db
 				.count(this.link_to, {
-					filters: filters,
+					filters: filters || [],
 				})
 				.then((count) => this.set_count(count));
 		}

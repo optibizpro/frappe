@@ -10,7 +10,10 @@ import yaml
 from werkzeug.wrappers import Response
 
 import frappe
+<<<<<<< HEAD
 from frappe import _
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.apps import get_apps, get_default_path, is_desk_apps
 from frappe.model.document import Document
 from frappe.utils import (
@@ -31,14 +34,13 @@ CLEANUP_PATTERN_3 = re.compile(r"(-)\1+")
 
 
 def delete_page_cache(path):
-	frappe.cache.delete_value("full_index")
-	groups = ("website_page", "page_context")
+	groups = ["website_page", "page_context"]
 	if path:
-		for name in groups:
-			frappe.cache.hdel(name, path)
+		frappe.cache.hdel_names(groups, path)
+		frappe.cache.delete_value("full_index")
 	else:
-		for name in groups:
-			frappe.cache.delete_key(name)
+		groups.append("full_index")
+		frappe.cache.delete_value(groups)
 
 
 def find_first_image(html):
@@ -166,6 +168,7 @@ def get_home_page_via_hooks():
 
 
 def get_boot_data():
+<<<<<<< HEAD
 	apps = get_apps() or []
 	return {
 		"lang": frappe.local.lang or "en",
@@ -180,6 +183,23 @@ def get_boot_data():
 			"time_format": frappe.get_system_settings("time_format") or "HH:mm:ss",
 			"first_day_of_the_week": frappe.get_system_settings("first_day_of_the_week") or "Sunday",
 			"number_format": frappe.get_system_settings("number_format") or "#,###.##",
+=======
+	from frappe.locale import get_date_format, get_first_day_of_the_week, get_number_format, get_time_format
+
+	return {
+		"lang": frappe.local.lang or "en",
+		"apps_data": {
+			"apps": get_apps() or [],
+			"is_desk_apps": 1 if bool(is_desk_apps(get_apps())) else 0,
+			"default_path": get_default_path() or "",
+		},
+		"sysdefaults": {
+			"float_precision": cint(frappe.get_system_settings("float_precision")) or 3,
+			"date_format": get_date_format(),
+			"time_format": get_time_format(),
+			"first_day_of_the_week": get_first_day_of_the_week(),
+			"number_format": get_number_format().string,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"currency": frappe.get_system_settings("currency"),
 		},
 		"time_zone": {
@@ -259,7 +279,7 @@ def get_next_link(route, url_prefix=None, app=None):
 
 
 def get_full_index(route=None, app=None):
-	"""Returns full index of the website for www upto the n-th level"""
+	"""Return full index of the website for www upto the n-th level."""
 	from frappe.website.router import get_pages
 
 	if not frappe.local.flags.children_map:
@@ -313,7 +333,7 @@ def get_full_index(route=None, app=None):
 
 
 def extract_title(source, path):
-	"""Returns title from `&lt;!-- title --&gt;` or &lt;h1&gt; or path"""
+	"""Return title from `&lt;!-- title --&gt;` or &lt;h1&gt; or path."""
 	title = extract_comment_tag(source, "title")
 
 	if not title and "<h1>" in source:
@@ -371,25 +391,24 @@ def clear_cache(path=None):
 	:param path: (optional) for the given path"""
 	from frappe.website.router import clear_routing_cache
 
-	for key in (
+	clear_routing_cache()
+
+	keys = [
 		"website_generator_routes",
 		"website_pages",
 		"website_full_index",
 		"languages_with_name",
 		"languages",
-	):
-		frappe.cache.delete_value(key)
+		"website_404",
+	]
 
-	clear_routing_cache()
-
-	frappe.cache.delete_value("website_404")
 	if path:
 		frappe.cache.hdel("website_redirects", path)
 		delete_page_cache(path)
 	else:
 		clear_sitemap()
 		frappe.clear_cache("Guest")
-		for key in (
+		keys += [
 			"portal_menu_items",
 			"home_page",
 			"website_route_rules",
@@ -397,8 +416,9 @@ def clear_cache(path=None):
 			"website_redirects",
 			"page_context",
 			"website_page",
-		):
-			frappe.cache.delete_value(key)
+		]
+
+	frappe.cache.delete_value(keys)
 
 	for method in frappe.get_hooks("website_clear_cache"):
 		frappe.get_attr(method)(path)
@@ -527,6 +547,7 @@ def cache_html(func):
 				html = page_cache[frappe.local.lang]
 			if html:
 				frappe.local.response.from_cache = True
+				frappe.local.response.can_cache = True
 				return html
 		html = func(*args, **kwargs)
 		context = args[0].context
@@ -534,6 +555,7 @@ def cache_html(func):
 			page_cache = frappe.cache.hget("website_page", args[0].path) or {}
 			page_cache[frappe.local.lang] = html
 			frappe.cache.hset("website_page", args[0].path, page_cache)
+			frappe.local.response.can_cache = True
 
 		return html
 
@@ -582,9 +604,14 @@ def add_preload_for_bundled_assets(response):
 	links.extend(f"<{js}>; rel=preload; as=script" for js in frappe.local.preload_assets["script"])
 
 	version = get_build_version()
+<<<<<<< HEAD
 	# include_icons = frappe.get_hooks().get("app_include_icons", [])
 	links.extend(
 		f"</assets/{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
+=======
+	links.extend(
+		f"<{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for svg in frappe.local.preload_assets["icons"]
 	)
 

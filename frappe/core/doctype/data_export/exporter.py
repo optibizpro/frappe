@@ -307,7 +307,11 @@ class DataExporter:
 		self.tablerow.append("")
 		self.fieldrow.append(docfield.fieldname)
 		self.labelrow.append(_(docfield.label, context=docfield.parent))
+<<<<<<< HEAD
 		self.mandatoryrow.append(docfield.reqd and "Yes" or "No")
+=======
+		self.mandatoryrow.append((docfield.reqd and "Yes") or "No")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.typerow.append(docfield.fieldtype)
 		self.inforow.append(self.getinforow(docfield))
 		self.columns.append(docfield.fieldname)
@@ -328,9 +332,9 @@ class DataExporter:
 			if not docfield.options:
 				return ""
 			else:
-				return _("One of") + ": %s" % ", ".join(filter(None, docfield.options.split("\n")))
+				return _("One of") + ": {}".format(", ".join(filter(None, docfield.options.split("\n"))))
 		elif docfield.fieldtype == "Link":
-			return "Valid %s" % docfield.options
+			return "Valid {}".format(docfield.options)
 		elif docfield.fieldtype == "Int":
 			return "Integer"
 		elif docfield.fieldtype == "Check":

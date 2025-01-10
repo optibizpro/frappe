@@ -10,7 +10,7 @@ from rq.job import Job
 import frappe
 from frappe.core.doctype.rq_job.rq_job import RQJob, remove_failed_jobs, stop_job
 from frappe.installer import update_site_config
-from frappe.tests.utils import FrappeTestCase, timeout
+from frappe.tests import IntegrationTestCase, UnitTestCase, timeout
 from frappe.utils import cstr, execute_in_shell
 from frappe.utils.background_jobs import get_job_status, is_job_enqueued
 
@@ -23,7 +23,16 @@ def wait_for_completion(job: Job):
 		time.sleep(0.2)
 
 
-class TestRQJob(FrappeTestCase):
+class UnitTestRqJob(UnitTestCase):
+	"""
+	Unit tests for RqJob.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestRQJob(IntegrationTestCase):
 	BG_JOB = "frappe.core.doctype.rq_job.test_rq_job.test_func"
 
 	def check_status(self, job: Job, status, wait=True):
@@ -62,18 +71,22 @@ class TestRQJob(FrappeTestCase):
 	def test_get_list_filtering(self):
 		# Check failed job clearning and filtering
 		remove_failed_jobs()
-		jobs = RQJob.get_list({"filters": [["RQ Job", "status", "=", "failed"]]})
+		jobs = frappe.get_all("RQ Job", {"status": "failed"})
 		self.assertEqual(jobs, [])
+
+		# Pass a job
+		job = frappe.enqueue(method=self.BG_JOB, queue="short")
+		self.check_status(job, "finished")
 
 		# Fail a job
 		job = frappe.enqueue(method=self.BG_JOB, queue="short", fail=True)
 		self.check_status(job, "failed")
-		jobs = RQJob.get_list({"filters": [["RQ Job", "status", "=", "failed"]]})
+		jobs = frappe.get_all("RQ Job", {"status": "failed"})
 		self.assertEqual(len(jobs), 1)
 		self.assertTrue(jobs[0].exc_info)
 
 		# Assert that non-failed job still exists
-		non_failed_jobs = RQJob.get_list({"filters": [["RQ Job", "status", "!=", "failed"]]})
+		non_failed_jobs = frappe.get_all("RQ Job", {"status": ("!=", "failed")})
 		self.assertGreaterEqual(len(non_failed_jobs), 1)
 
 		# Create a slow job and check if it's stuck in "Started"
@@ -171,7 +184,11 @@ class TestRQJob(FrappeTestCase):
 
 		jobs = [frappe.enqueue(method=self.BG_JOB, queue="short", fail=True) for _ in range(limit * 2)]
 		self.check_status(jobs[-1], "failed")
+<<<<<<< HEAD
 		self.assertLessEqual(RQJob.get_count({"filters": [["RQ Job", "status", "=", "failed"]]}), limit * 1.1)
+=======
+		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def test_func(fail=False, sleep=0):

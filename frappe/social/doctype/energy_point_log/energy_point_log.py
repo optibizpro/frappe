@@ -39,6 +39,7 @@ class EnergyPointLog(Document):
 		user: DF.Link
 
 	# end: auto-generated types
+
 	def validate(self):
 		self.map_milestone_reference()
 		if self.type in ["Appreciation", "Criticism"] and self.user == self.owner:

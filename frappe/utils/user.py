@@ -216,6 +216,7 @@ class UserPermissions:
 			[
 				"creation",
 				"desk_theme",
+				"code_editor_type",
 				"document_follow_notify",
 				"email",
 				"email_signature",
@@ -299,7 +300,7 @@ def get_fullname_and_avatar(user: str) -> _dict:
 
 
 def get_system_managers(only_name: bool = False) -> list[str]:
-	"""returns all system manager's user details"""
+	"""Return all system manager's user details."""
 	HasRole = DocType("Has Role")
 	User = DocType("User")
 

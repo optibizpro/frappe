@@ -18,17 +18,21 @@ from frappe.website.utils import can_cache, get_home_page
 
 
 class PathResolver:
-	__slots__ = ("path", "http_status_code")
+	__slots__ = ("http_status_code", "path")
 
 	def __init__(self, path, http_status_code=None):
 		self.path = path.strip("/ ")
 		self.http_status_code = http_status_code
 
 	def resolve(self):
-		"""Returns endpoint and a renderer instance that can render the endpoint"""
+		"""Return endpoint and a renderer instance that can render the endpoint."""
 		request = frappe._dict()
 		if hasattr(frappe.local, "request"):
 			request = frappe.local.request or request
+
+		# WARN: Hardcoded for better performance
+		if self.path == "app" or self.path.startswith("app/"):
+			return "app", TemplatePage("app", self.http_status_code)
 
 		# check if the request url is in 404 list
 		if request.url and can_cache() and frappe.cache.hget("website_404", request.url):
@@ -48,10 +52,13 @@ class PathResolver:
 			except werkzeug.routing.exceptions.RequestRedirect as e:
 				frappe.flags.redirect_location = e.new_url
 				return frappe.flags.redirect_location, RedirectPage(e.new_url, e.code)
+<<<<<<< HEAD
 
 		# WARN: Hardcoded for better performance
 		if endpoint == "app":
 			return endpoint, TemplatePage(endpoint, self.http_status_code)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		custom_renderers = self.get_custom_page_renderers()
 		renderers = [

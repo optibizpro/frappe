@@ -223,7 +223,11 @@
    "role": "Desk User"
   }
  ],
+<<<<<<< HEAD
  "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

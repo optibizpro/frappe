@@ -3,12 +3,13 @@ import os
 from . import __version__ as app_version
 
 app_name = "frappe"
-app_title = "Frappe Framework"
+app_title = "Framework"
 app_publisher = "Frappe Technologies"
 app_description = "Full stack web framework with Python, Javascript, MariaDB, Redis, Node"
 app_license = "MIT"
 app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
 develop_version = "15.x.x-develop"
+app_home = "/app/build"
 
 app_email = "developers@frappe.io"
 
@@ -34,8 +35,8 @@ app_include_css = [
 	"report.bundle.css",
 ]
 app_include_icons = [
-	"frappe/icons/timeless/icons.svg",
-	"frappe/icons/espresso/icons.svg",
+	"/assets/frappe/icons/timeless/icons.svg",
+	"/assets/frappe/icons/espresso/icons.svg",
 ]
 
 doctype_js = {
@@ -44,8 +45,11 @@ doctype_js = {
 }
 
 web_include_js = ["website_script.js"]
-
 web_include_css = []
+web_include_icons = [
+	"/assets/frappe/icons/timeless/icons.svg",
+	"/assets/frappe/icons/espresso/icons.svg",
+]
 
 email_css = ["email.bundle.css"]
 
@@ -155,6 +159,7 @@ doc_events = {
 			"frappe.automation.doctype.assignment_rule.assignment_rule.apply",
 			"frappe.automation.doctype.assignment_rule.assignment_rule.update_due_date",
 			"frappe.core.doctype.user_type.user_type.apply_permissions_for_non_standard_user_type",
+			"frappe.core.doctype.permission_log.permission_log.make_perm_log",
 		],
 		"after_rename": "frappe.desk.notifications.clear_doctype_notifications",
 		"on_cancel": [
@@ -176,6 +181,7 @@ doc_events = {
 			"frappe.social.doctype.energy_point_rule.energy_point_rule.process_energy_points",
 			"frappe.automation.doctype.milestone_tracker.milestone_tracker.evaluate_milestone",
 		],
+		"after_delete": ["frappe.core.doctype.permission_log.permission_log.make_perm_log"],
 	},
 	"Event": {
 		"after_insert": "frappe.integrations.doctype.google_calendar.google_calendar.insert_event_in_google_calendar",
@@ -187,15 +193,22 @@ doc_events = {
 		"on_update": "frappe.integrations.doctype.google_contacts.google_contacts.update_contacts_to_google_contacts",
 	},
 	"DocType": {
-		"on_update": "frappe.cache_manager.build_domain_restriced_doctype_cache",
+		"on_update": "frappe.cache_manager.build_domain_restricted_doctype_cache",
 	},
 	"Page": {
-		"on_update": "frappe.cache_manager.build_domain_restriced_page_cache",
+		"on_update": "frappe.cache_manager.build_domain_restricted_page_cache",
 	},
 }
 
 scheduler_events = {
 	"cron": {
+<<<<<<< HEAD
+=======
+		# 5 minutes
+		"0/5 * * * *": [
+			"frappe.email.doctype.notification.notification.trigger_offset_alerts",
+		],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		# 15 minutes
 		"0/15 * * * *": [
 			"frappe.oauth.delete_oauth2_data",
@@ -416,6 +429,10 @@ ignore_links_on_delete = [
 	"Workspace",
 	"Route History",
 	"Access Log",
+<<<<<<< HEAD
+=======
+	"Permission Log",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ]
 
 # Request Hooks
@@ -461,6 +478,7 @@ export_python_type_annotations = True
 
 standard_navbar_items = [
 	{
+<<<<<<< HEAD
 		"item_label": "My Profile",
 		"item_type": "Route",
 		"route": "/app/user-profile",
@@ -470,6 +488,17 @@ standard_navbar_items = [
 		"item_label": "My Settings",
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.route_to_user()",
+=======
+		"item_label": "User Settings",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.route_to_user()",
+		"is_standard": 1,
+	},
+	{
+		"item_label": "Workspace Settings",
+		"item_type": "Action",
+		"action": "frappe.quick_edit('Workspace Settings')",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"is_standard": 1,
 	},
 	{
@@ -542,6 +571,15 @@ standard_help_items = [
 		"is_standard": 1,
 	},
 	{
+<<<<<<< HEAD
+=======
+		"item_label": "System Health",
+		"item_type": "Route",
+		"route": "/app/system-health-report",
+		"is_standard": 1,
+	},
+	{
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"item_label": "Frappe Support",
 		"item_type": "Route",
 		"route": "https://frappe.io/support",

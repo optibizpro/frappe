@@ -3,13 +3,20 @@
 
 import time
 import unittest
+<<<<<<< HEAD
 
+=======
+from uuid import UUID
+
+import uuid_utils
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_full_jitter
 
 import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.model.naming import (
 	InvalidNamingSeriesError,
+	InvalidUUIDValue,
 	NamingSeries,
 	append_number_if_name_exists,
 	determine_consecutive_week_number,
@@ -19,12 +26,17 @@ from frappe.model.naming import (
 	revert_series_if_last,
 )
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, patch_hooks
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import now_datetime, nowdate, nowtime
 
 
-class TestNaming(FrappeTestCase):
+class TestNaming(IntegrationTestCase):
 	def setUp(self):
 		frappe.db.delete("Note")
 
@@ -100,7 +112,8 @@ class TestNaming(FrappeTestCase):
 		doc.some_fieldname = description
 		doc.insert()
 
-		series = getseries("", 2)
+		series = getseries(f"TODO-{now_datetime().strftime('%m')}-{description}-", 2)
+
 		series = int(series) - 1
 
 		self.assertEqual(doc.name, f"TODO-{now_datetime().strftime('%m')}-{description}-{series:02}")
@@ -114,7 +127,7 @@ class TestNaming(FrappeTestCase):
 			doc.field = field
 			doc.insert()
 
-			series = getseries("", 2)
+			series = getseries(f"TODO-{field}-", 2)
 			series = int(series) - 1
 
 			self.assertEqual(doc.name, f"TODO-{field}-{series:02}")
@@ -135,14 +148,12 @@ class TestNaming(FrappeTestCase):
 		todo.description = description
 		todo.insert()
 
-		series = getseries("", 2)
-
+		week = determine_consecutive_week_number(now_datetime())
+		series = getseries(f"TODO-{week}-", 2)
 		series = str(int(series) - 1)
 
 		if len(series) < 2:
 			series = "0" + series
-
-		week = determine_consecutive_week_number(now_datetime())
 
 		self.assertEqual(todo.name, f"TODO-{week}-{series}")
 
@@ -324,8 +335,13 @@ class TestNaming(FrappeTestCase):
 
 	def test_naming_series_validation(self):
 		dns = frappe.get_doc("Document Naming Settings")
+<<<<<<< HEAD
 		exisiting_series = dns.get_transactions_and_prefixes()["prefixes"]
 		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *exisiting_series]
+=======
+		existing_series = dns.get_transactions_and_prefixes()["prefixes"]
+		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *existing_series]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		invalid = ["$INV-", r"WINDOWS\NAMING"]
 
 		for series in valid:
@@ -394,7 +410,7 @@ class TestNaming(FrappeTestCase):
 		series = "TODO-.PM.-.####"
 
 		frappe.clear_cache()
-		with patch_hooks(
+		with self.patch_hooks(
 			{
 				"naming_series_variables": {
 					"PM": ["frappe.tests.test_naming.parse_naming_series_variable"],
@@ -420,6 +436,30 @@ class TestNaming(FrappeTestCase):
 			names.append(make_autoname("hash"))
 		self.assertEqual(names, sorted(names))
 
+<<<<<<< HEAD
+=======
+	def test_uuid_naming(self):
+		uuid_doctype = new_doctype(autoname="UUID").insert().name
+		self.assertEqual("uuid", frappe.db.get_column_type(uuid_doctype, "name"))
+
+		# Auto set names
+		document = frappe.new_doc(uuid_doctype).insert()
+		uid = UUID(document.name)
+		self.assertEqual(uid.version, 7)  # Default version
+
+		# Applications can specify UUID themselves, useful for APIs to set name themselves.
+		for uid in (uuid_utils.uuid4(), uuid_utils.uuid7()):
+			doc = frappe.new_doc(uuid_doctype, name=uid).insert()
+			self.assertEqual(doc.name, str(uid))
+
+		# Can specify valid UUID strings too
+		for uid in (uuid_utils.uuid4(), uuid_utils.uuid7()):
+			doc = frappe.new_doc(uuid_doctype, name=str(uid)).insert()
+			self.assertEqual(doc.name, str(uid))
+
+		self.assertRaises(InvalidUUIDValue, frappe.new_doc(uuid_doctype, name="XYZ").insert)
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def parse_naming_series_variable(doc, variable):
 	if variable == "PM":
