@@ -7,6 +7,9 @@ from unittest import skip
 import responses
 from responses.matchers import json_params_matcher
 
+import responses
+from responses.matchers import json_params_matcher
+
 import frappe
 from frappe.integrations.doctype.webhook import flush_webhook_execution_queue
 from frappe.integrations.doctype.webhook.webhook import (
@@ -14,12 +17,20 @@ from frappe.integrations.doctype.webhook.webhook import (
 	get_webhook_data,
 	get_webhook_headers,
 )
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+from frappe.tests.classes.context_managers import timeout
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @contextmanager
 def get_test_webhook(config):
-	wh = frappe.get_doc(config).insert()
+	wh = frappe.get_doc(config)
+	if not wh.name:
+		wh.name = frappe.generate_hash()
+	wh.insert()
 	wh.reload()
 	try:
 		yield wh
@@ -27,7 +38,20 @@ def get_test_webhook(config):
 		wh.delete()
 
 
+<<<<<<< HEAD
 class TestWebhook(FrappeTestCase):
+=======
+class UnitTestWebhook(UnitTestCase):
+	"""
+	Unit tests for Webhook.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestWebhook(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		# delete any existing webhooks
@@ -42,6 +66,7 @@ class TestWebhook(FrappeTestCase):
 	def create_sample_webhooks(cls):
 		samples_webhooks_data = [
 			{
+				"name": frappe.generate_hash(),
 				"webhook_doctype": "User",
 				"webhook_docevent": "after_insert",
 				"request_url": "https://httpbin.org/post",
@@ -49,6 +74,7 @@ class TestWebhook(FrappeTestCase):
 				"enabled": True,
 			},
 			{
+				"name": frappe.generate_hash(),
 				"webhook_doctype": "User",
 				"webhook_docevent": "after_insert",
 				"request_url": "https://httpbin.org/post",
@@ -71,8 +97,19 @@ class TestWebhook(FrappeTestCase):
 		frappe.db.delete("Webhook")
 		frappe.db.commit()
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def setUp(self):
 		# retrieve or create a User webhook for `after_insert`
+		self.responses = responses.RequestsMock()
+		self.responses.start()
+
+		self.responses.add(
+			responses.POST,
+			"https://httpbin.org/post",
+			status=200,
+			json={},
+		)
+
 		webhook_fields = {
 			"webhook_doctype": "User",
 			"webhook_docevent": "after_insert",
@@ -96,9 +133,12 @@ class TestWebhook(FrappeTestCase):
 		self.test_user.email = "user1@integration.webhooks.test.com"
 		self.test_user.first_name = "user1"
 		self.test_user.send_welcome_email = False
+<<<<<<< HEAD
 
 		self.responses = responses.RequestsMock()
 		self.responses.start()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def tearDown(self) -> None:
 		self.user.delete()
@@ -108,14 +148,20 @@ class TestWebhook(FrappeTestCase):
 		self.responses.reset()
 		super().tearDown()
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_webhook_trigger_with_enabled_webhooks(self):
 		"""Test webhook trigger for enabled webhooks"""
 
+<<<<<<< HEAD
 		frappe.cache().delete_value("webhooks")
+=======
+		frappe.cache.delete_value("webhooks")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# Insert the user to db
 		self.test_user.insert()
 
+<<<<<<< HEAD
 		webhooks = frappe.cache().get_value("webhooks")
 		self.assertTrue("User" in webhooks)
 		self.assertEqual(len(webhooks.get("User")), 1)
@@ -125,19 +171,33 @@ class TestWebhook(FrappeTestCase):
 		execution = frappe.local._webhook_queue[0]
 		self.assertEqual(execution.webhook.name, self.sample_webhooks[0].name)
 		self.assertEqual(execution.doc.name, self.test_user.name)
+=======
+		webhooks = frappe.cache.get_value("webhooks")
+		self.assertTrue("User" in webhooks)
+		self.assertEqual(len(webhooks.get("User")), 1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+		# only 1 hook (enabled) must be queued
+		self.assertEqual(len(frappe.local._webhook_queue), 1)
+		execution = frappe.local._webhook_queue[0]
+		self.assertEqual(execution.webhook.name, self.sample_webhooks[0].name)
+		self.assertEqual(execution.doc.name, self.test_user.name)
+
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_validate_doc_events(self):
 		"Test creating a submit-related webhook for a non-submittable DocType"
 
 		self.webhook.webhook_docevent = "on_submit"
 		self.assertRaises(frappe.ValidationError, self.webhook.save)
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_validate_request_url(self):
 		"Test validation for the webhook request URL"
 
 		self.webhook.request_url = "httpbin.org?post"
 		self.assertRaises(frappe.ValidationError, self.webhook.save)
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_validate_headers(self):
 		"Test validation for request headers"
 
@@ -153,6 +213,7 @@ class TestWebhook(FrappeTestCase):
 		headers = get_webhook_headers(doc=None, webhook=self.webhook)
 		self.assertEqual(headers, {"Content-Type": "application/json"})
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_validate_request_body_form(self):
 		"Test validation of Form URL-Encoded request body"
 
@@ -167,6 +228,7 @@ class TestWebhook(FrappeTestCase):
 		data = get_webhook_data(doc=self.user, webhook=self.webhook)
 		self.assertEqual(data, {"name": self.user.name})
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_validate_request_body_json(self):
 		"Test validation of JSON request body"
 
@@ -181,6 +243,7 @@ class TestWebhook(FrappeTestCase):
 		data = get_webhook_data(doc=self.user, webhook=self.webhook)
 		self.assertEqual(data, {"name": self.user.name})
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_webhook_req_log_creation(self):
 		self.responses.add(
 			responses.POST,
@@ -201,6 +264,7 @@ class TestWebhook(FrappeTestCase):
 
 		self.assertTrue(frappe.get_all("Webhook Request Log", pluck="name"))
 
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
 	def test_webhook_with_array_body(self):
 		"""Check if array request body are supported."""
 		wh_config = {
@@ -245,3 +309,70 @@ class TestWebhook(FrappeTestCase):
 			flush_webhook_execution_queue()
 			log = frappe.get_last_doc("Webhook Request Log")
 			self.assertEqual(len(json.loads(log.response)), 3)
+<<<<<<< HEAD
+=======
+
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
+	def test_webhook_with_dynamic_url_enabled(self):
+		wh_config = {
+			"doctype": "Webhook",
+			"webhook_doctype": "Note",
+			"webhook_docevent": "after_insert",
+			"enabled": 1,
+			"request_url": "https://httpbin.org/anything/{{ doc.doctype }}",
+			"is_dynamic_url": 1,
+			"request_method": "POST",
+			"request_structure": "JSON",
+			"webhook_json": "{}",
+			"meets_condition": "Yes",
+			"webhook_headers": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+				}
+			],
+		}
+
+		self.responses.add(
+			responses.POST,
+			"https://httpbin.org/anything/Note",
+			status=200,
+		)
+
+		with get_test_webhook(wh_config) as wh:
+			doc = frappe.new_doc("Note")
+			doc.title = "Test Webhook Note"
+			enqueue_webhook(doc, wh)
+
+	@timeout(5, "Test webhooks should never wait, check mocked responses.")
+	def test_webhook_with_dynamic_url_disabled(self):
+		wh_config = {
+			"doctype": "Webhook",
+			"webhook_doctype": "Note",
+			"webhook_docevent": "after_insert",
+			"enabled": 1,
+			"request_url": "https://httpbin.org/anything/{{doc.doctype}}",
+			"is_dynamic_url": 0,
+			"request_method": "POST",
+			"request_structure": "JSON",
+			"webhook_json": "{}",
+			"meets_condition": "Yes",
+			"webhook_headers": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+				}
+			],
+		}
+
+		self.responses.add(
+			responses.POST,
+			"https://httpbin.org/anything/{{doc.doctype}}",
+			status=200,
+		)
+
+		with get_test_webhook(wh_config) as wh:
+			doc = frappe.new_doc("Note")
+			doc.title = "Test Webhook Note"
+			enqueue_webhook(doc, wh)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

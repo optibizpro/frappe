@@ -2,6 +2,7 @@
 // MIT License. See license.txt
 
 frappe.ui.is_liked = function (doc) {
+<<<<<<< HEAD
 	var liked = frappe.ui.get_liked_by(doc);
 	return liked.indexOf(frappe.session.user) === -1 ? false : true;
 };
@@ -17,6 +18,17 @@ frappe.ui.get_liked_by = function (doc) {
 
 frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
 	var add = $btn.hasClass("not-liked") ? "Yes" : "No";
+=======
+	return frappe.ui.get_liked_by(doc).includes(frappe.session.user);
+};
+
+frappe.ui.get_liked_by = function (doc) {
+	return doc._liked_by ? JSON.parse(doc._liked_by) : [];
+};
+
+frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
+	const add = $btn.hasClass("not-liked") ? "Yes" : "No";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	// disable click
 	$btn.css("pointer-events", "none");
 
@@ -32,6 +44,7 @@ frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
 			// renable click
 			$btn.css("pointer-events", "auto");
 
+<<<<<<< HEAD
 			if (!r.exc) {
 				for (const like of document.querySelectorAll(".like-action")) {
 					if (like.dataset.name === name && like.dataset.doctype === doctype) {
@@ -59,11 +72,40 @@ frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
 					callback();
 				}
 			}
+=======
+			if (r.exc) {
+				return;
+			}
+
+			$btn.toggleClass("not-liked", add === "No");
+			$btn.toggleClass("liked", add === "Yes");
+
+			// update in locals (form)
+			const doc = locals[doctype] && locals[doctype][name];
+			if (doc) {
+				let liked_by = frappe.ui.get_liked_by(doc);
+
+				if (add === "Yes" && !liked_by.includes(frappe.session.user)) {
+					liked_by.push(frappe.session.user);
+				}
+
+				if (add === "No" && liked_by.includes(frappe.session.user)) {
+					liked_by = liked_by.filter((user) => user !== frappe.session.user);
+				}
+
+				doc._liked_by = JSON.stringify(liked_by);
+			}
+
+			if (callback) {
+				callback();
+			}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 	});
 };
 
 frappe.ui.click_toggle_like = function () {
+<<<<<<< HEAD
 	var $btn = $(this);
 	var $count = $btn.siblings(".likes-count");
 	var not_liked = $btn.hasClass("not-liked");
@@ -82,6 +124,12 @@ frappe.ui.click_toggle_like = function () {
 };
 
 frappe.ui.setup_like_popover = ($parent, selector, check_not_liked = true) => {
+=======
+	console.warn("`frappe.ui.click_toggle_like` is deprecated and has no effect.");
+};
+
+frappe.ui.setup_like_popover = ($parent, selector) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if (frappe.dom.is_touchscreen()) {
 		return;
 	}
@@ -101,6 +149,7 @@ frappe.ui.setup_like_popover = ($parent, selector, check_not_liked = true) => {
 				liked_by = liked_by ? decodeURI(liked_by) : "[]";
 				liked_by = JSON.parse(liked_by);
 
+<<<<<<< HEAD
 				const user = frappe.session.user;
 				// hack
 				if (check_not_liked) {
@@ -115,6 +164,8 @@ frappe.ui.setup_like_popover = ($parent, selector, check_not_liked = true) => {
 					}
 				}
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				if (!liked_by.length) {
 					return "";
 				}

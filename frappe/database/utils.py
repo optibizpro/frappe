@@ -6,9 +6,17 @@ from functools import cached_property, wraps
 import frappe
 from frappe.query_builder.builder import MariaDB, Postgres
 from frappe.query_builder.functions import Function
+<<<<<<< HEAD
 
 Query = str | MariaDB | Postgres
 QueryValues = tuple | list | dict | None
+=======
+from frappe.types import DocRef
+
+Query = str | MariaDB | Postgres
+QueryValues = tuple | list | dict | None
+FilterValue = DocRef | str | int | bool
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 EmptyQueryValues = object()
 FallBackDateTimeStr = "0001-01-01 00:00:00.000000"
@@ -18,10 +26,22 @@ NestedSetHierarchy = (
 	"descendants of",
 	"not ancestors of",
 	"not descendants of",
+<<<<<<< HEAD
+=======
+	"descendants of (inclusive)",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 )
 
 
-def is_query_type(query: str, query_type: str | tuple[str]) -> bool:
+def convert_to_value(o: FilterValue):
+	if hasattr(o, "__value__"):
+		return o.__value__()
+	if isinstance(o, bool):
+		return int(o)
+	return o
+
+
+def is_query_type(query: str, query_type: str | tuple[str, ...]) -> bool:
 	return query.lstrip().split(maxsplit=1)[0].lower().startswith(query_type)
 
 
@@ -33,12 +53,16 @@ def get_doctype_name(table_name: str) -> str:
 	if table_name.startswith(("tab", "`tab", '"tab')):
 		table_name = table_name.replace("tab", "", 1)
 	table_name = table_name.replace("`", "")
+<<<<<<< HEAD
 	table_name = table_name.replace('"', "")
 	return table_name
+=======
+	return table_name.replace('"', "")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class LazyString:
-	def _setup(self) -> None:
+	def _setup(self) -> str:
 		raise NotImplementedError
 
 	@cached_property
@@ -58,7 +82,7 @@ class LazyDecode(LazyString):
 	def __init__(self, value: str) -> None:
 		self._value = value
 
-	def _setup(self) -> None:
+	def _setup(self) -> str:
 		return self._value.decode()
 
 

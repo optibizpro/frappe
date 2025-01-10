@@ -37,6 +37,7 @@ frappe.ui.form.ControlAutocomplete = class ControlAutoComplete extends frappe.ui
 	get_awesomplete_settings() {
 		var me = this;
 		return {
+			tabSelect: true,
 			minChars: 0,
 			maxItems: this.df.max_items || 99,
 			autoFirst: true,
@@ -66,7 +67,11 @@ frappe.ui.form.ControlAutocomplete = class ControlAutoComplete extends frappe.ui
 					d.label = d.value;
 				}
 
+<<<<<<< HEAD
 				var _label = me.translate_values ? __(d.label) : d.label;
+=======
+				var _label = me.translate_values ? __(d.label, null, d.parent) : d.label;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				var html = "<strong>" + _label + "</strong>";
 				if (d.description) {
 					html += '<br><span class="small">' + __(d.description) + "</span>";

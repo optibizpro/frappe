@@ -36,6 +36,10 @@ def pop_csv_params(form_dict):
 	return {
 		"delimiter": cstr(form_dict.pop("csv_delimiter", ","))[0],
 		"quoting": cint(form_dict.pop("csv_quoting", QUOTE_NONNUMERIC)),
+<<<<<<< HEAD
+=======
+		"decimal_sep": cstr(form_dict.pop("csv_decimal_sep", ".")),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 
@@ -44,15 +48,48 @@ def get_csv_bytes(data: list[list], csv_params: dict) -> bytes:
 	from csv import writer
 	from io import StringIO
 
+<<<<<<< HEAD
 	file = StringIO()
 	csv_writer = writer(file, **csv_params)
 	csv_writer.writerows(data)
+=======
+	decimal_sep = csv_params.pop("decimal_sep", None)
+
+	_data = data.copy()
+	if decimal_sep:
+		_data = apply_csv_decimal_sep(data, decimal_sep)
+
+	file = StringIO()
+	csv_writer = writer(file, **csv_params)
+	csv_writer.writerows(_data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return file.getvalue().encode("utf-8")
 
 
+<<<<<<< HEAD
 def provide_binary_file(filename: str, extension: str, content: bytes) -> None:
 	"""Provide a binary file to the client."""
 	frappe.response["type"] = "binary"
 	frappe.response["filecontent"] = content
 	frappe.response["filename"] = f"{filename}.{extension}"
+=======
+def apply_csv_decimal_sep(data: list[list], decimal_sep: str) -> list[list]:
+	"""Apply decimal separator to csv data."""
+	if decimal_sep == ".":
+		return data
+
+	return [
+		[str(value).replace(".", decimal_sep, 1) if isinstance(value, float) else value for value in row]
+		for row in data
+	]
+
+
+def provide_binary_file(filename: str, extension: str, content: bytes) -> None:
+	"""Provide a binary file to the client."""
+	from frappe import _
+
+	frappe.response["type"] = "binary"
+	frappe.response["filecontent"] = content
+	frappe.response["filename"] = f"{_(filename)}.{extension}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

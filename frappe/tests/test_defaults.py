@@ -1,16 +1,27 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+<<<<<<< HEAD
 from contextlib import contextmanager
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import frappe
 from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.defaults import *
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDefaults(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+
+
+class TestDefaults(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_global(self):
 		clear_user_default("key1")
 		set_global_default("key1", "value1")
@@ -93,29 +104,59 @@ def as_restricted_user():
 		clear_user_default("Country")
 
 		perm_doc = frappe.get_doc(
+<<<<<<< HEAD
 			dict(
 				doctype="User Permission",
 				user=frappe.session.user,
 				allow="Country",
 				for_value="India",
 			)
+=======
+			doctype="User Permission", user=frappe.session.user, allow="Language", for_value="en-GB"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert(ignore_permissions=True)
 
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 1)
 		set_global_default("Country", "United States")
 		self.assertEqual(get_user_default("Country"), "India")
 
+<<<<<<< HEAD
+=======
+		frappe.delete_doc("User Permission", perm_doc.name)
+		frappe.set_user(old_user)
+
+	@run_only_if(db_type_is.MARIADB)
+	def test_user_permission_defaults(self):
+		# Create user permission
+		create_user("user_default_test@example.com", "Blogger")
+		frappe.set_user("user_default_test@example.com")
+		set_global_default("Country", "")
+		clear_user_default("Country")
+
+		perm_doc = frappe.get_doc(
+			doctype="User Permission", user=frappe.session.user, allow="Country", for_value="India"
+		).insert(ignore_permissions=True)
+
+		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 1)
+		set_global_default("Country", "United States")
+		self.assertEqual(get_user_default("Country"), "India")
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 0)
 		clear_user_default("Country")
 		self.assertEqual(get_user_default("Country"), None)
 
 		perm_doc = frappe.get_doc(
+<<<<<<< HEAD
 			dict(
 				doctype="User Permission",
 				user=frappe.session.user,
 				allow="Country",
 				for_value="United States",
 			)
+=======
+			doctype="User Permission", user=frappe.session.user, allow="Country", for_value="United States"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert(ignore_permissions=True)
 
 		self.assertEqual(get_user_default("Country"), "United States")

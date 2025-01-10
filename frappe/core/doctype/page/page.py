@@ -2,9 +2,10 @@
 # License: MIT. See LICENSE
 
 import os
+import shutil
 
 import frappe
-from frappe import _, conf, safe_decode
+from frappe import _, conf, get_module_path, safe_decode
 from frappe.build import html_to_js_template
 from frappe.core.doctype.custom_role.custom_role import get_custom_allowed_roles
 from frappe.desk.form.meta import get_code_files_via_hooks, get_js
@@ -14,6 +15,25 @@ from frappe.model.utils import render_include
 
 
 class Page(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.types import DF
+
+		icon: DF.Data | None
+		module: DF.Link
+		page_name: DF.Data
+		restrict_to_domain: DF.Link | None
+		roles: DF.Table[HasRole]
+		standard: DF.Literal["Yes", "No"]
+		system_page: DF.Check
+		title: DF.Data | None
+	# end: auto-generated types
+
 	def autoname(self):
 		"""
 		Creates a url friendly name for this page.
@@ -27,8 +47,7 @@ class Page(Document):
 			if frappe.db.exists("Page", self.name):
 				cnt = frappe.db.sql(
 					"""select name from tabPage
-					where name like "%s-%%" order by name desc limit 1"""
-					% self.name
+					where name like "{}-%" order by name desc limit 1""".format(self.name)
 				)
 				if cnt:
 					cnt = cint(cnt[0][0].split("-")[-1]) + 1
@@ -45,6 +64,9 @@ class Page(Document):
 		# setting ignore_permissions via update_setup_wizard_access (setup_wizard.py)
 		if frappe.session.user != "Administrator" and not self.flags.ignore_permissions:
 			frappe.throw(_("Only Administrator can edit"))
+
+	def get_permission_log_options(self, event=None):
+		return {"fields": ["roles"]}
 
 	# export
 	def on_update(self):
@@ -77,17 +99,28 @@ class Page(Document):
 }}"""
 					)
 
-	def as_dict(self, no_nulls=False):
-		d = super().as_dict(no_nulls=no_nulls)
+	def as_dict(self, **kwargs):
+		d = super().as_dict(**kwargs)
 		for key in ("script", "style", "content"):
 			d[key] = self.get(key)
 		return d
 
 	def on_trash(self):
+		if not frappe.conf.developer_mode and not frappe.flags.in_migrate:
+			frappe.throw(_("Deletion of this document is only permitted in developer mode."))
+
 		delete_custom_role("page", self.name)
+		frappe.db.after_commit(self.delete_folder_with_contents)
+
+	def delete_folder_with_contents(self):
+		module_path = get_module_path(self.module)
+		dir_path = os.path.join(module_path, "page", frappe.scrub(self.name))
+
+		if os.path.exists(dir_path):
+			shutil.rmtree(dir_path, ignore_errors=True)
 
 	def is_permitted(self):
-		"""Returns true if Has Role is not set or the user is allowed."""
+		"""Return True if `Has Role` is not set or the user is allowed."""
 		from frappe.utils import has_common
 
 		allowed = [d.role for d in frappe.get_all("Has Role", fields=["role"], filters={"parent": self.name})]
@@ -153,11 +186,6 @@ class Page(Document):
 
 					# flag for not caching this page
 					self._dynamic_page = True
-
-		if frappe.lang != "en":
-			from frappe.translate import get_lang_js
-
-			self.script += get_lang_js("page", self.name)
 
 		for path in get_code_files_via_hooks("page_js", self.name):
 			js = get_js(path)

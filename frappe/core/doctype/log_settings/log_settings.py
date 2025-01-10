@@ -10,6 +10,7 @@ from frappe.model.document import Document
 from frappe.utils import cint
 from frappe.utils.caching import site_cache
 
+<<<<<<< HEAD
 DEFAULT_LOGTYPES_RETENTION = {
 	"Error Log": 30,
 	"Activity Log": 90,
@@ -21,14 +22,15 @@ DEFAULT_LOGTYPES_RETENTION = {
 	"Webhook Request Log": 30,
 }
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @runtime_checkable
 class LogType(Protocol):
 	"""Interface requirement for doctypes that can be cleared using log settings."""
 
 	@staticmethod
-	def clear_old_logs(days: int) -> None:
-		...
+	def clear_old_logs(days: int) -> None: ...
 
 
 @site_cache
@@ -41,12 +43,32 @@ def _supports_log_clearing(doctype: str) -> bool:
 
 
 class LogSettings(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.logs_to_clear.logs_to_clear import LogsToClear
+		from frappe.types import DF
+
+		logs_to_clear: DF.Table[LogsToClear]
+	# end: auto-generated types
+
 	def validate(self):
+<<<<<<< HEAD
 		self._remove_unsupported_doctypes()
 		self._deduplicate_entries()
 		self.add_default_logtypes()
 
 	def _remove_unsupported_doctypes(self):
+=======
+		self.remove_unsupported_doctypes()
+		self._deduplicate_entries()
+		self.add_default_logtypes()
+
+	def remove_unsupported_doctypes(self):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for entry in list(self.logs_to_clear):
 			if _supports_log_clearing(entry.ref_doctype):
 				continue
@@ -67,12 +89,18 @@ class LogSettings(Document):
 	def add_default_logtypes(self):
 		existing_logtypes = {d.ref_doctype for d in self.logs_to_clear}
 		added_logtypes = set()
-		for logtype, retention in DEFAULT_LOGTYPES_RETENTION.items():
+		default_logtypes_retention = frappe.get_hooks("default_log_clearing_doctypes", {})
+
+		for logtype, retentions in default_logtypes_retention.items():
 			if logtype not in existing_logtypes and _supports_log_clearing(logtype):
 				if not frappe.db.exists("DocType", logtype):
 					continue
 
+<<<<<<< HEAD
 				self.append("logs_to_clear", {"ref_doctype": logtype, "days": cint(retention)})
+=======
+				self.append("logs_to_clear", {"ref_doctype": logtype, "days": cint(retentions[-1])})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				added_logtypes.add(logtype)
 
 		if added_logtypes:
@@ -109,6 +137,7 @@ class LogSettings(Document):
 
 def run_log_clean_up():
 	doc = frappe.get_doc("Log Settings")
+	doc.remove_unsupported_doctypes()
 	doc.add_default_logtypes()
 	doc.save()
 	doc.clear_logs()
@@ -150,7 +179,6 @@ LOG_DOCTYPES = [
 	"Route History",
 	"Email Queue",
 	"Email Queue Recipient",
-	"Error Snapshot",
 	"Error Log",
 ]
 
@@ -178,7 +206,7 @@ def clear_log_table(doctype, days=90):
 		frappe.db.sql(
 			f"""INSERT INTO `{temporary}`
 				SELECT * FROM `{original}`
-				WHERE `{original}`.`modified` > NOW() - INTERVAL '{days}' DAY"""
+				WHERE `{original}`.`creation` > NOW() - INTERVAL '{days}' DAY"""
 		)
 		frappe.db.sql_ddl(f"RENAME TABLE `{original}` TO `{backup}`, `{temporary}` TO `{original}`")
 	except Exception:

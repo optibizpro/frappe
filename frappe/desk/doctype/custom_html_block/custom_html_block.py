@@ -7,6 +7,25 @@ from frappe.query_builder.utils import DocType
 
 
 class CustomHTMLBlock(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.types import DF
+
+		html: DF.Code | None
+		private: DF.Check
+		roles: DF.Table[HasRole]
+		script: DF.Code | None
+		style: DF.Code | None
+	# end: auto-generated types
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	pass
 
 
@@ -15,7 +34,11 @@ def get_custom_blocks_for_user(doctype, txt, searchfield, start, page_len, filte
 	# return logged in users private blocks and all public blocks
 	customHTMLBlock = DocType("Custom HTML Block")
 
+<<<<<<< HEAD
 	condition_query = frappe.qb.get_query(customHTMLBlock)
+=======
+	condition_query = frappe.qb.from_(customHTMLBlock)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return (
 		condition_query.select(customHTMLBlock.name).where(

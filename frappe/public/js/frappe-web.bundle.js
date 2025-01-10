@@ -1,8 +1,10 @@
 import "./libs.bundle.js";
+<<<<<<< HEAD
 import "./jquery-bootstrap";
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import "./frappe/class.js";
 import "./frappe/polyfill.js";
-import "./lib/moment.js";
 import "./frappe/provide.js";
 import "./frappe/translate.js";
 import "./frappe/form/formatters.js";
@@ -26,3 +28,4 @@ import "./bootstrap-4-web.bundle";
 
 import "../../website/js/website.js";
 import "./frappe/socketio_client.js";
+import "./frappe/utils/logout.js";

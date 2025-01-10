@@ -3,14 +3,27 @@
 import frappe
 from frappe.desk.form.assign_to import add as assign_to
 from frappe.desk.page.user_profile.user_profile import get_energy_points_heatmap_data
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.testutils import add_custom_field, clear_custom_fields
 
 from .energy_point_log import create_review_points_log, review
 from .energy_point_log import get_energy_points as _get_energy_points
 
 
-class TestEnergyPointLog(FrappeTestCase):
+class UnitTestEnergyPointLog(UnitTestCase):
+	"""
+	Unit tests for EnergyPointLog.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestEnergyPointLog(IntegrationTestCase):
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -25,13 +38,13 @@ class TestEnergyPointLog(FrappeTestCase):
 		settings.save()
 
 	def setUp(self):
-		frappe.cache().delete_value("energy_point_rule_map")
+		frappe.cache.delete_value("energy_point_rule_map")
 
 	def tearDown(self):
 		frappe.set_user("Administrator")
 		frappe.db.delete("Energy Point Log")
 		frappe.db.delete("Energy Point Rule")
-		frappe.cache().delete_value("energy_point_rule_map")
+		frappe.cache.delete_value("energy_point_rule_map")
 
 	def test_user_energy_point(self):
 		frappe.set_user("test@example.com")
@@ -311,8 +324,9 @@ class TestEnergyPointLog(FrappeTestCase):
 		# do not update energy points for disabled user
 		self.assertEqual(points_after_closing_todo, energy_point_of_user)
 
-		user.enabled = 1
-		user.save()
+		with self.set_user("Administrator"):
+			user.enabled = 1
+			user.save()
 
 		created_todo.save()
 		points_after_re_saving_todo = get_points("test@example.com")
@@ -364,7 +378,7 @@ def create_a_todo(description=None):
 
 
 def get_points(user, point_type="energy_points"):
-	return _get_energy_points(user).get(point_type) or 0
+	return _get_energy_points(user).get(point_type, 0)
 
 
 def assign_users_to_todo(todo_name, users):

@@ -19,6 +19,7 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 		var me = this;
 
 		this.start = 0;
+		this.page_length = 10;
 		this.dialog = new frappe.ui.Dialog({
 			title: __("Select {0}", [this.doctype == "[Select]" ? __("value") : __(this.doctype)]),
 			fields: [
@@ -37,7 +38,11 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 					fieldname: "more",
 					label: __("More"),
 					click: () => {
+<<<<<<< HEAD
 						me.start += 20;
+=======
+						me.start += me.page_length;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						me.search();
 					},
 				},
@@ -65,6 +70,10 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 			txt: this.dialog.fields_dict.txt.get_value(),
 			searchfield: "name",
 			start: this.start,
+<<<<<<< HEAD
+=======
+			page_length: this.page_length,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 		var me = this;
 
@@ -84,14 +93,23 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 		frappe.link_search(
 			this.doctype,
 			args,
+<<<<<<< HEAD
 			function (r) {
+=======
+			function (results) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				var parent = me.dialog.fields_dict.results.$wrapper;
 				if (args.start === 0) {
 					parent.empty();
 				}
 
+<<<<<<< HEAD
 				if (r.values.length) {
 					$.each(r.values, function (i, v) {
+=======
+				if (results.length) {
+					for (const v of results) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						var row = $(
 							repl(
 								'<div class="row link-select-row">\
@@ -126,7 +144,11 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 								}
 								return false;
 							});
+<<<<<<< HEAD
 					});
+=======
+					}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				} else {
 					$(
 						'<p><br><span class="text-muted">' +
@@ -147,7 +169,11 @@ frappe.ui.form.LinkSelector = class LinkSelector {
 				}
 
 				var more_btn = me.dialog.fields_dict.more.$wrapper;
+<<<<<<< HEAD
 				if (r.values.length < 20) {
+=======
+				if (results.length < me.page_length) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					more_btn.hide();
 				} else {
 					more_btn.show();
@@ -244,7 +270,7 @@ frappe.link_search = function (doctype, args, callback, btn) {
 		type: "GET",
 		args: args,
 		callback: function (r) {
-			callback && callback(r);
+			callback && callback(r.message);
 		},
 		btn: btn,
 	});

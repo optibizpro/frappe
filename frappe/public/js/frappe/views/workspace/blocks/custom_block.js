@@ -32,7 +32,11 @@ export default class CustomBlock extends Block {
 
 		if (this.data && this.data.custom_block_name) {
 			let has_data = this.make("custom_block", this.data.custom_block_name);
+<<<<<<< HEAD
 			if (!has_data) return;
+=======
+			if (!has_data) return this.wrapper;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		if (!this.readOnly) {

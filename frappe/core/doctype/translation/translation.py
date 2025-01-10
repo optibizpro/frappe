@@ -10,6 +10,23 @@ from frappe.utils import is_html, strip_html_tags
 
 
 class Translation(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		context: DF.Data | None
+		contributed: DF.Check
+		contribution_docname: DF.Data | None
+		contribution_status: DF.Literal["", "Pending", "Verified", "Rejected"]
+		language: DF.Link
+		source_text: DF.Code
+		translated_text: DF.Code
+	# end: auto-generated types
+
 	def validate(self):
 		if is_html(self.source_text):
 			self.remove_html_from_source()
@@ -23,6 +40,7 @@ class Translation(Document):
 	def on_trash(self):
 		clear_user_translation_cache(self.language)
 
+<<<<<<< HEAD
 	def contribute(self):
 		pass
 
@@ -76,3 +94,9 @@ def create_translations(translation_map, language):
 def clear_user_translation_cache(lang):
 	frappe.cache().hdel(USER_TRANSLATION_KEY, lang)
 	frappe.cache().hdel(MERGED_TRANSLATION_KEY, lang)
+=======
+
+def clear_user_translation_cache(lang):
+	frappe.cache.hdel(USER_TRANSLATION_KEY, lang)
+	frappe.cache.hdel(MERGED_TRANSLATION_KEY, lang)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

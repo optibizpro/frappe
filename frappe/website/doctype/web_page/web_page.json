@@ -357,8 +357,8 @@
  ],
  "search_fields": "title",
  "show_name_in_global_search": 1,
- "sort_field": "modified",
- "sort_order": "ASC",
+ "sort_field": "creation",
+ "sort_order": "DESC",
  "states": [],
  "title_field": "title",
  "track_changes": 1

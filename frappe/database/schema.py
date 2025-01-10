@@ -3,8 +3,11 @@ import re
 import frappe
 from frappe import _
 from frappe.utils import cint, cstr, flt
+from frappe.utils.defaults import get_not_null_defaults
 
+# This matches anything that isn't [a-zA-Z0-9_]
 SPECIAL_CHAR_PATTERN = re.compile(r"[\W]", flags=re.UNICODE)
+
 VARCHAR_CAST_PATTERN = re.compile(r"varchar\(([\d]+)\)")
 
 
@@ -24,6 +27,10 @@ class DBTable:
 		self.add_column: list[DbColumn] = []
 		self.change_type: list[DbColumn] = []
 		self.change_name: list[DbColumn] = []
+<<<<<<< HEAD
+=======
+		self.change_nullability: list[DbColumn] = []
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.add_unique: list[DbColumn] = []
 		self.add_index: list[DbColumn] = []
 		self.drop_unique: list[DbColumn] = []
@@ -40,7 +47,7 @@ class DBTable:
 		if self.is_new():
 			self.create()
 		else:
-			frappe.cache().hdel("table_columns", self.table_name)
+			frappe.client_cache.delete_value(f"table_columns::{self.table_name}")
 			self.alter()
 
 	def create(self):
@@ -58,16 +65,16 @@ class DBTable:
 		return ret
 
 	def get_index_definitions(self):
-		ret = []
-		for key, col in self.columns.items():
+		return [
+			"index `" + key + "`(`" + key + "`)"
+			for key, col in self.columns.items()
 			if (
 				col.set_index
 				and not col.unique
 				and col.fieldtype in frappe.db.type_map
 				and frappe.db.type_map.get(col.fieldtype)[0] not in ("text", "longtext")
-			):
-				ret.append("index `" + key + "`(`" + key + "`)")
-		return ret
+			)
+		]
 
 	def get_columns_from_docfields(self):
 		"""
@@ -89,15 +96,16 @@ class DBTable:
 				continue
 
 			self.columns[field.get("fieldname")] = DbColumn(
-				self,
-				field.get("fieldname"),
-				field.get("fieldtype"),
-				field.get("length"),
-				field.get("default"),
-				field.get("search_index"),
-				field.get("options"),
-				field.get("unique"),
-				field.get("precision"),
+				table=self,
+				fieldname=field.get("fieldname"),
+				fieldtype=field.get("fieldtype"),
+				length=field.get("length"),
+				default=field.get("default"),
+				set_index=field.get("search_index"),
+				options=field.get("options"),
+				unique=field.get("unique"),
+				precision=field.get("precision"),
+				not_nullable=field.get("not_nullable"),
 			)
 
 	def validate(self):
@@ -171,7 +179,24 @@ class DBTable:
 
 
 class DbColumn:
+<<<<<<< HEAD
 	def __init__(self, table, fieldname, fieldtype, length, default, set_index, options, unique, precision):
+=======
+	def __init__(
+		self,
+		*,
+		table,
+		fieldname,
+		fieldtype,
+		length,
+		default,
+		set_index,
+		options,
+		unique,
+		precision,
+		not_nullable,
+	):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.table = table
 		self.fieldname = fieldname
 		self.fieldtype = fieldtype
@@ -181,31 +206,65 @@ class DbColumn:
 		self.options = options
 		self.unique = unique
 		self.precision = precision
+		self.not_nullable = not_nullable
 
 	def get_definition(self, for_modification=False):
+<<<<<<< HEAD
 		column_def = get_definition(self.fieldtype, precision=self.precision, length=self.length)
+=======
+		column_def = get_definition(
+			self.fieldtype,
+			precision=self.precision,
+			length=self.length,
+			options=self.options,
+		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not column_def:
 			return column_def
 
+		null = True
+		default = None
+		unique = False
+
 		if self.fieldtype in ("Check", "Int"):
-			default_value = cint(self.default) or 0
-			column_def += f" not null default {default_value}"
+			default = cint(self.default)
+			null = False
 
 		elif self.fieldtype in ("Currency", "Float", "Percent"):
-			default_value = flt(self.default) or 0
-			column_def += f" not null default {default_value}"
+			default = flt(self.default)
+			null = False
 
 		elif (
 			self.default
 			and (self.default not in frappe.db.DEFAULT_SHORTCUTS)
 			and not cstr(self.default).startswith(":")
 		):
-			column_def += f" default {frappe.db.escape(self.default)}"
+			default = frappe.db.escape(self.default)
 
+<<<<<<< HEAD
 		if self.unique and not for_modification and (column_def not in ("text", "longtext")):
 			column_def += " unique"
+=======
+		if self.not_nullable and null:
+			if default is None:
+				default = get_not_null_defaults(self.fieldtype)
+				if isinstance(default, str):
+					default = frappe.db.escape(default)
+			null = False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+		if self.unique and not for_modification and (column_def not in ("text", "longtext")):
+			unique = True
+
+		if not null:
+			column_def += " NOT NULL"
+
+		if default is not None:
+			column_def += f" DEFAULT {default}"
+
+		if unique:
+			column_def += " UNIQUE"
 		return column_def
 
 	def build_for_alter_table(self, current_def):
@@ -244,6 +303,10 @@ class DbColumn:
 			and not cstr(self.default).startswith(":")
 		):
 			self.table.set_default.append(self)
+
+		# nullability
+		if self.not_nullable is not None and (self.not_nullable != current_def["not_nullable"]):
+			self.table.change_nullability.append(self)
 
 		# index should be applied or dropped irrespective of type change
 		if (current_def["index"] and not self.set_index) and column_type not in ("text", "longtext"):
@@ -316,8 +379,19 @@ def validate_column_length(fieldname):
 		frappe.throw(_("Fieldname is limited to 64 characters ({0})").format(fieldname))
 
 
-def get_definition(fieldtype, precision=None, length=None):
+def get_definition(fieldtype, precision=None, length=None, *, options=None):
 	d = frappe.db.type_map.get(fieldtype)
+
+	if (
+		fieldtype == "Link"
+		and options
+		# XXX: This might not trigger if referred doctype is not yet created
+		# This is largely limitation of how migration happens though.
+		# Maybe we can sort by creation and then modified?
+		and frappe.db.exists("DocType", options)
+		and frappe.get_meta(options).autoname == "UUID"
+	):
+		d = ("uuid", None)
 
 	if not d:
 		return

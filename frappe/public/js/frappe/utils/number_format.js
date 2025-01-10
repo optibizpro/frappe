@@ -7,13 +7,17 @@ if (!window.frappe) window.frappe = {};
 
 function flt(v, decimals, number_format, rounding_method) {
 	if (v == null || v == "") return 0;
+<<<<<<< HEAD
 
 	if (!(typeof v === "number" || String(parseFloat(v)) == v)) {
 		// cases in which this block should not run
 		// 1. 'v' is already a number
 		// 2. v is already parsed but in string form
 		// if (typeof v !== "number") {
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+	if (typeof v !== "number") {
 		v = v + "";
 
 		// strip currency symbol if exists
@@ -29,7 +33,10 @@ function flt(v, decimals, number_format, rounding_method) {
 		if (isNaN(v)) v = 0;
 	}
 
+<<<<<<< HEAD
 	v = parseFloat(v);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if (decimals != null) return _round(v, decimals, rounding_method);
 	return v;
 }
@@ -208,9 +215,13 @@ function get_number_format_info(format) {
 
 function _round(num, precision, rounding_method) {
 	rounding_method =
+<<<<<<< HEAD
 		rounding_method ||
 		frappe.boot.sysdefaults?.rounding_method ||
 		"Banker's Rounding (legacy)";
+=======
+		rounding_method || frappe.boot.sysdefaults.rounding_method || "Banker's Rounding (legacy)";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	let is_negative = num < 0 ? true : false;
 
@@ -287,10 +298,11 @@ function in_list(list, item) {
 function remainder(numerator, denominator, precision) {
 	precision = cint(precision);
 	var multiplier = Math.pow(10, precision);
+	let _remainder;
 	if (precision) {
-		var _remainder = ((numerator * multiplier) % (denominator * multiplier)) / multiplier;
+		_remainder = ((numerator * multiplier) % (denominator * multiplier)) / multiplier;
 	} else {
-		var _remainder = numerator % denominator;
+		_remainder = numerator % denominator;
 	}
 
 	return flt(_remainder, precision);

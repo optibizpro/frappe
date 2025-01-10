@@ -26,7 +26,9 @@ global_cache_keys = (
 	"installed_apps",
 	"all_apps",
 	"app_modules",
+	"installed_app_modules",
 	"module_app",
+	"module_installed_app",
 	"system_settings",
 	"scheduler_events",
 	"time_zone",
@@ -39,7 +41,6 @@ global_cache_keys = (
 	"domain_restricted_doctypes",
 	"domain_restricted_pages",
 	"information_schema:counts",
-	"sitemap_routes",
 	"db_tables",
 	"server_script_autocompletion_items",
 	*doctype_map_keys,
@@ -65,42 +66,54 @@ user_cache_keys = (
 )
 
 doctype_cache_keys = (
+<<<<<<< HEAD
 	"doctype_meta",
 	"doctype_form_meta",
 	"table_columns",
+=======
+	"doctype_form_meta",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"last_modified",
 	"linked_doctypes",
 	"notifications",
 	"workflow",
 	"data_import_column_header_map",
 )
+<<<<<<< HEAD
+=======
+
+wildcard_keys = (
+	"document_cache::*",
+	"table_columns::*",
+)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_user_cache(user=None):
 	from frappe.desk.notifications import clear_notifications
+<<<<<<< HEAD
 
 	cache = frappe.cache()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# this will automatically reload the global cache
 	# so it is important to clear this first
 	clear_notifications(user)
 
 	if user:
-		for name in user_cache_keys:
-			cache.hdel(name, user)
-		cache.delete_keys("user:" + user)
+		frappe.cache.hdel_names(user_cache_keys, user)
+		frappe.cache.delete_keys("user:" + user)
 		clear_defaults_cache(user)
 	else:
-		for name in user_cache_keys:
-			cache.delete_key(name)
+		frappe.cache.delete_key(user_cache_keys)
 		clear_defaults_cache()
 		clear_global_cache()
 
 
 def clear_domain_cache(user=None):
-	cache = frappe.cache()
 	domain_cache_keys = ("domain_restricted_doctypes", "domain_restricted_pages")
-	cache.delete_value(domain_cache_keys)
+	frappe.cache.delete_value(domain_cache_keys)
 
 
 def clear_global_cache():
@@ -108,36 +121,53 @@ def clear_global_cache():
 
 	clear_doctype_cache()
 	clear_website_cache()
-	frappe.cache().delete_value(global_cache_keys)
-	frappe.cache().delete_value(bench_cache_keys)
+	frappe.cache.delete_value(global_cache_keys + bench_cache_keys)
 	frappe.setup_module_map()
 
 
 def clear_defaults_cache(user=None):
 	if user:
+<<<<<<< HEAD
 		for p in [user, *common_default_keys]:
 			frappe.cache().hdel("defaults", p)
+=======
+		for key in [user, *common_default_keys]:
+			frappe.client_cache.delete_value(f"defaults::{key}")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	elif frappe.flags.in_install != "frappe":
-		frappe.cache().delete_key("defaults")
+		frappe.client_cache.delete_keys("defaults::*")
 
 
 def clear_doctype_cache(doctype=None):
+<<<<<<< HEAD
 	from frappe.desk.notifications import delete_notification_count_for
 
 	clear_controller_cache(doctype)
 
 	cache = frappe.cache()
+=======
+	clear_controller_cache(doctype)
 
-	for key in ("is_table", "doctype_modules", "document_cache"):
-		cache.delete_value(key)
+	_clear_doctype_cache_from_redis(doctype)
+	if hasattr(frappe.db, "after_commit"):
+		frappe.db.after_commit.add(lambda: _clear_doctype_cache_from_redis(doctype))
+		frappe.db.after_rollback.add(lambda: _clear_doctype_cache_from_redis(doctype))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-	frappe.local.document_cache = {}
 
-	def clear_single(dt):
-		for name in doctype_cache_keys:
-			cache.hdel(name, dt)
+def _clear_doctype_cache_from_redis(doctype: str | None = None):
+	from frappe.desk.notifications import delete_notification_count_for
+	from frappe.model.meta import clear_meta_cache
+
+	to_del = ["is_table", "doctype_modules"]
 
 	if doctype:
+
+		def clear_single(dt):
+			frappe.clear_document_cache(dt)
+			frappe.cache.hdel_names(doctype_cache_keys, dt)
+			clear_meta_cache(dt)
+
 		clear_single(doctype)
 
 		# clear all parent doctypes
@@ -158,8 +188,12 @@ def clear_doctype_cache(doctype=None):
 
 	else:
 		# clear all
-		for name in doctype_cache_keys:
-			cache.delete_value(name)
+		to_del += doctype_cache_keys
+		for pattern in wildcard_keys:
+			to_del += frappe.cache.get_keys(pattern)
+		clear_meta_cache()
+
+	frappe.cache.delete_value(to_del)
 
 
 def clear_controller_cache(doctype=None):
@@ -172,7 +206,11 @@ def clear_controller_cache(doctype=None):
 
 
 def get_doctype_map(doctype, name, filters=None, order_by=None):
+<<<<<<< HEAD
 	return frappe.cache().hget(
+=======
+	return frappe.cache.hget(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		get_doctype_map_key(doctype),
 		name,
 		lambda: frappe.get_all(doctype, filters=filters, order_by=order_by, ignore_ddl=True),
@@ -180,7 +218,7 @@ def get_doctype_map(doctype, name, filters=None, order_by=None):
 
 
 def clear_doctype_map(doctype, name):
-	frappe.cache().hdel(frappe.scrub(doctype) + "_map", name)
+	frappe.cache.hdel(frappe.scrub(doctype) + "_map", name)
 
 
 def build_table_count_cache():
@@ -193,19 +231,18 @@ def build_table_count_cache():
 	):
 		return
 
-	_cache = frappe.cache()
 	table_name = frappe.qb.Field("table_name").as_("name")
 	table_rows = frappe.qb.Field("table_rows").as_("count")
 	information_schema = frappe.qb.Schema("information_schema")
 
 	data = (frappe.qb.from_(information_schema.tables).select(table_name, table_rows)).run(as_dict=True)
 	counts = {d.get("name").replace("tab", "", 1): d.get("count", None) for d in data}
-	_cache.set_value("information_schema:counts", counts)
+	frappe.cache.set_value("information_schema:counts", counts)
 
 	return counts
 
 
-def build_domain_restriced_doctype_cache(*args, **kwargs):
+def build_domain_restricted_doctype_cache(*args, **kwargs):
 	if (
 		frappe.flags.in_patch
 		or frappe.flags.in_install
@@ -214,16 +251,15 @@ def build_domain_restriced_doctype_cache(*args, **kwargs):
 		or frappe.flags.in_setup_wizard
 	):
 		return
-	_cache = frappe.cache()
 	active_domains = frappe.get_active_domains()
 	doctypes = frappe.get_all("DocType", filters={"restrict_to_domain": ("IN", active_domains)})
 	doctypes = [doc.name for doc in doctypes]
-	_cache.set_value("domain_restricted_doctypes", doctypes)
+	frappe.cache.set_value("domain_restricted_doctypes", doctypes)
 
 	return doctypes
 
 
-def build_domain_restriced_page_cache(*args, **kwargs):
+def build_domain_restricted_page_cache(*args, **kwargs):
 	if (
 		frappe.flags.in_patch
 		or frappe.flags.in_install
@@ -232,10 +268,9 @@ def build_domain_restriced_page_cache(*args, **kwargs):
 		or frappe.flags.in_setup_wizard
 	):
 		return
-	_cache = frappe.cache()
 	active_domains = frappe.get_active_domains()
 	pages = frappe.get_all("Page", filters={"restrict_to_domain": ("IN", active_domains)})
 	pages = [page.name for page in pages]
-	_cache.set_value("domain_restricted_pages", pages)
+	frappe.cache.set_value("domain_restricted_pages", pages)
 
 	return pages

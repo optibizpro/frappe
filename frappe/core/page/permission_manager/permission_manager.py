@@ -61,8 +61,8 @@ def get_roles_and_doctypes():
 	roles_list = [{"label": _(d.get("name")), "value": d.get("name")} for d in roles]
 
 	return {
-		"doctypes": sorted(doctypes_list, key=lambda d: d["label"]),
-		"roles": sorted(roles_list, key=lambda d: d["label"]),
+		"doctypes": sorted(doctypes_list, key=lambda d: d["label"].casefold()),
+		"roles": sorted(roles_list, key=lambda d: d["label"].casefold()),
 	}
 
 
@@ -109,8 +109,13 @@ def add(parent, role, permlevel):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def update(doctype, role, permlevel, ptype, value=None, if_owner=0):
 	"""Update role permission params
+=======
+def update(doctype: str, role: str, permlevel: int, ptype: str, value=None, if_owner=0) -> str | None:
+	"""Update role permission params.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	Args:
 	        doctype (str): Name of the DocType to update params for
@@ -119,9 +124,13 @@ def update(doctype, role, permlevel, ptype, value=None, if_owner=0):
 	        ptype (str): permission type, example "read", "delete", etc.
 	        value (None, optional): value for ptype, None indicates False
 
-	Returns:
-	        str: Refresh flag is permission is updated successfully
+	Return:
+	        str: Refresh flag if permission is updated successfully
 	"""
+
+	def clear_cache():
+		frappe.clear_cache(doctype=doctype)
+
 	frappe.only_for("System Manager")
 
 	if ptype == "report" and value == "1" and if_owner == "1":
@@ -132,6 +141,11 @@ def update(doctype, role, permlevel, ptype, value=None, if_owner=0):
 	if ptype == "if_owner" and value == "1":
 		update_permission_property(doctype, role, permlevel, "report", "0", if_owner=value)
 
+<<<<<<< HEAD
+=======
+	frappe.db.after_commit.add(clear_cache)
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return "refresh" if out else None
 
 
@@ -140,10 +154,18 @@ def remove(doctype, role, permlevel, if_owner=0):
 	frappe.only_for("System Manager")
 	setup_custom_perms(doctype)
 
+<<<<<<< HEAD
 	frappe.db.delete(
 		"Custom DocPerm",
 		{"parent": doctype, "role": role, "permlevel": permlevel, "if_owner": if_owner},
 	)
+=======
+	custom_docperms = frappe.db.get_values(
+		"Custom DocPerm", {"parent": doctype, "role": role, "permlevel": permlevel, "if_owner": if_owner}
+	)
+	for name in custom_docperms:
+		frappe.delete_doc("Custom DocPerm", name, ignore_permissions=True, force=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not frappe.get_all("Custom DocPerm", {"parent": doctype}):
 		frappe.throw(_("There must be atleast one permission rule."), title=_("Cannot Remove"))

@@ -13,8 +13,10 @@ frappe.ui.Dialog = class Dialog extends frappe.ui.FieldGroup {
 		this.display = false;
 		this.is_dialog = true;
 
-		$.extend(this, { animate: true, size: null }, opts);
-		this.make();
+		$.extend(this, { animate: true, size: null, auto_make: true }, opts);
+		if (this.auto_make) {
+			this.make();
+		}
 	}
 
 	make() {
@@ -90,6 +92,8 @@ frappe.ui.Dialog = class Dialog extends frappe.ui.FieldGroup {
 				me.display = false;
 				me.is_minimized = false;
 				me.hide_scrollbar(false);
+				// hide any grid row form if open
+				frappe.ui.form.get_open_grid_form?.()?.hide_form();
 
 				if (frappe.ui.open_dialogs[frappe.ui.open_dialogs.length - 1] === me) {
 					frappe.ui.open_dialogs.pop();
@@ -156,6 +160,20 @@ frappe.ui.Dialog = class Dialog extends frappe.ui.FieldGroup {
 
 	get_minimize_btn() {
 		return this.$wrapper.find(".modal-header .btn-modal-minimize");
+	}
+
+	set_alert(text, alert_class = "info") {
+		this.clear_alert();
+		this.$alert = $(`<div class="alert alert-${alert_class}">${text}</div>`).prependTo(
+			this.body
+		);
+		this.$message.text(text);
+	}
+
+	clear_alert() {
+		if (this.$alert) {
+			this.$alert.remove();
+		}
 	}
 
 	set_message(text) {
@@ -299,6 +317,8 @@ frappe.ui.Dialog = class Dialog extends frappe.ui.FieldGroup {
 
 		action && action_button.click(action);
 	}
+
+	add_custom_button() {}
 };
 
 frappe.ui.hide_open_dialog = () => {

@@ -9,6 +9,10 @@ frappe.ui.form.on("Form Tour", {
 		frm.set_query("reference_doctype", () => {
 			return { filters: { istable: 0 } };
 		});
+<<<<<<< HEAD
+=======
+		frm.trigger("reference_doctype");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frm.set_query("report_name", () => {
 			if (frm.doc.reference_doctype) {
 				return {
@@ -107,8 +111,13 @@ let add_custom_button = (frm) => {
 							tour_name: frm.doc.name,
 						},
 					});
+<<<<<<< HEAD
 				},
 				delete frappe.boot.user.onboarding_status[frm.doc.name]
+=======
+					delete frappe.boot.user.onboarding_status[frm.doc.name];
+				}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			);
 		});
 	} else {

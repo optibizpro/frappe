@@ -67,7 +67,11 @@ frappe.ui.form.on("Custom Field", {
 							return v.value;
 						});
 
+<<<<<<< HEAD
 						if (insert_after == null || !in_list(fieldnames, insert_after)) {
+=======
+						if (insert_after == null || !fieldnames.includes(insert_after)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							insert_after = fieldnames[-1];
 						}
 

@@ -1,7 +1,11 @@
 import frappe
 import frappe.defaults
 from frappe.contacts.report.addresses_and_contacts.addresses_and_contacts import get_data
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_custom_linked_doctype():
@@ -27,13 +31,12 @@ def get_custom_linked_doctype():
 
 def get_custom_doc_for_address_and_contacts():
 	get_custom_linked_doctype()
-	linked_doc = frappe.get_doc(
+	return frappe.get_doc(
 		{
 			"doctype": "Test Custom Doctype",
 			"test_field": "Hello",
 		}
 	).insert()
-	return linked_doc
 
 
 def create_linked_address(link_list):
@@ -77,7 +80,7 @@ def create_linked_contact(link_list, address):
 		}
 	)
 	contact.add_email("test_contact@example.com", is_primary=True)
-	contact.add_phone("+91 0000000000", is_primary_phone=True)
+	contact.add_phone("+91 0000000020", is_primary_phone=True)
 
 	for name in link_list:
 		contact.append("links", {"link_doctype": "Test Custom Doctype", "link_name": name})
@@ -86,7 +89,11 @@ def create_linked_contact(link_list, address):
 	frappe.flags.test_contact_created = True
 
 
+<<<<<<< HEAD
 class TestAddressesAndContacts(FrappeTestCase):
+=======
+class TestAddressesAndContacts(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_data(self):
 		linked_docs = [get_custom_doc_for_address_and_contacts()]
 		links_list = [item.name for item in linked_docs]
@@ -106,7 +113,7 @@ class TestAddressesAndContacts(FrappeTestCase):
 				"_Test First Name",
 				"_Test Last Name",
 				"_Test Address-Billing",
-				"+91 0000000000",
+				"+91 0000000020",
 				"",
 				"test_contact@example.com",
 				1,

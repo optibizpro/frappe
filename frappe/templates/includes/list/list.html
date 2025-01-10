@@ -3,12 +3,18 @@
 {% endif %}
 {% if not result -%}
 	<div class="empty-apps-state">
-		<img class="empty-list-icon" src="/assets/frappe/images/ui-states/list-empty-state.svg"/>
+		<svg class="icon icon-xl" style="stroke: var(--text-light);">
+			<use href="#icon-small-file"></use>
+		</svg>
 		<div class="mt-4">{{ no_result_message or _("Nothing to show") }}</div>
 	</div>
 {% else %}
 	<div class="website-list" data-doctype="{{ doctype }}"
+<<<<<<< HEAD
 		data-txt="{{ txt|e or '[notxt]'  }}">
+=======
+		data-txt="{{ (txt or '')|e }}">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		<!-- {% if not hide_filters -%}
 			{% include "templates/includes/list/filters.html" %}
 		{%- endif %} -->

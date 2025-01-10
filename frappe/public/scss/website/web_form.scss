@@ -19,6 +19,13 @@
 				max-width: 800px;
 				margin: auto;
 
+<<<<<<< HEAD
+=======
+				.tooltip-content {
+					display: none;
+				}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				h1 {
 					font-size: 2.25rem;
 					margin-top: 0;
@@ -76,7 +83,11 @@
 								flex: 1;
 
 								.btn {
+<<<<<<< HEAD
 									font-size: var(--text-base);
+=======
+									@include get_textstyle("base", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								}
 							}
 						}
@@ -114,7 +125,11 @@
 							background-color: var(--control-bg);
 
 							@include media-breakpoint-down(sm) {
+<<<<<<< HEAD
 								font-size: var(--text-sm);
+=======
+								@include get_textstyle("sm", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							}
 						}
 
@@ -139,7 +154,11 @@
 								position: relative;
 
 								@include media-breakpoint-down(sm) {
+<<<<<<< HEAD
 									font-size: var(--text-sm);
+=======
+									@include get_textstyle("sm", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								}
 
 								&[data-fieldtype="Rating"] {
@@ -153,10 +172,13 @@
 									}
 								}
 
+<<<<<<< HEAD
 								.selected-phone {
 									top: calc(50% + 4px);
 								}
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								.selected-color {
 									top: 6px;
 								}
@@ -230,10 +252,17 @@
 							flex-wrap: wrap;
 
 							.btn {
+<<<<<<< HEAD
 								font-size: var(--text-base);
 
 								@include media-breakpoint-down(sm) {
 									font-size: var(--text-sm);
+=======
+								@include get_textstyle("base", "regular");
+
+								@include media-breakpoint-down(sm) {
+									@include get_textstyle("sm", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 								}
 							}
 
@@ -258,7 +287,11 @@
 							.center-area {
 								display: flex;
 								align-items: center;
+<<<<<<< HEAD
 								font-size: var(--text-base);
+=======
+								@include get_textstyle("base", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 								.slides-progress {
 									display: flex;
@@ -359,7 +392,11 @@
 						justify-content: space-between;
 						gap: 6px;
 						color: var(--text-muted);
+<<<<<<< HEAD
 						font-size: var(--text-md);
+=======
+						@include get_textstyle("base", "regular");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 						&:hover {
 							text-decoration: none;

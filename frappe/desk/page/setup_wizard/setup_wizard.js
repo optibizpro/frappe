@@ -31,6 +31,12 @@ frappe.setup = {
 };
 
 frappe.pages["setup-wizard"].on_page_load = function (wrapper) {
+<<<<<<< HEAD
+=======
+	if (frappe.boot.setup_complete) {
+		window.location.href = frappe.boot.apps_data.default_path || "/app";
+	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	let requires = frappe.boot.setup_wizard_requires || [];
 	frappe.require(requires, function () {
 		frappe.call({
@@ -97,10 +103,20 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 
 	handle_enter_press(e) {
 		if (e.which === frappe.ui.keyCode.ENTER) {
+<<<<<<< HEAD
 			var $target = $(e.target);
 			if ($target.hasClass("prev-btn")) {
 				$target.trigger("click");
 			} else {
+=======
+			let $target = $(e.target);
+			if ($target.hasClass("prev-btn") || $target.hasClass("next-btn")) {
+				$target.trigger("click");
+			} else {
+				// hitting enter on autocomplete field shouldn't trigger next slide.
+				if ($target.data().fieldtype == "Autocomplete") return;
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				this.container.find(".next-btn").trigger("click");
 				e.preventDefault();
 			}
@@ -190,7 +206,11 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 					this.abort_setup(r.message.fail);
 				}
 			},
+<<<<<<< HEAD
 			error: () => this.abort_setup("Error in setup"),
+=======
+			error: () => this.abort_setup(),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 	}
 
@@ -201,17 +221,33 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 		}
 		setTimeout(function () {
 			// Reload
+<<<<<<< HEAD
 			window.location.href = "/app";
+=======
+			window.location.href = frappe.boot.apps_data.default_path || "/app";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}, 2000);
 	}
 
 	abort_setup(fail_msg) {
 		this.$working_state.find(".state-icon-container").html("");
+<<<<<<< HEAD
 		fail_msg = fail_msg ? fail_msg : __("Failed to complete setup");
 
 		this.update_setup_message("Could not start up: " + fail_msg);
 
 		this.$working_state.find(".title").html("Setup failed");
+=======
+		fail_msg = fail_msg
+			? fail_msg
+			: frappe.last_response.setup_wizard_failure_message
+			? frappe.last_response.setup_wizard_failure_message
+			: __("Failed to complete setup");
+
+		this.update_setup_message(__("Could not start up: ") + fail_msg);
+
+		this.$working_state.find(".title").html(__("Setup failed"));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		this.$abort_btn.show();
 	}
@@ -387,7 +423,6 @@ frappe.setup.slides_settings = [
 				fieldtype: "Select",
 				reqd: 1,
 			},
-			{ fieldtype: "Column Break" },
 			{
 				fieldname: "currency",
 				label: __("Currency"),
@@ -400,9 +435,16 @@ frappe.setup.slides_settings = [
 			},
 			{
 				fieldname: "enable_telemetry",
+<<<<<<< HEAD
 				label: __("Allow Sending Usage Data for Improving Applications"),
 				fieldtype: "Check",
 				default: 1,
+=======
+				label: __("Allow sending usage data for improving applications"),
+				fieldtype: "Check",
+				default: cint(frappe.telemetry.can_enable()),
+				depends_on: "eval:frappe.telemetry.can_enable()",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			},
 		],
 
@@ -466,18 +508,22 @@ frappe.setup.slides_settings = [
 
 		onload: function (slide) {
 			if (frappe.session.user !== "Administrator") {
-				slide.form.fields_dict.email.$wrapper.toggle(false);
-				slide.form.fields_dict.password.$wrapper.toggle(false);
-
-				// remove password field
-				delete slide.form.fields_dict.password;
-
-				if (frappe.boot.user.first_name || frappe.boot.user.last_name) {
+				const { first_name, last_name, email } = frappe.boot.user;
+				if (first_name || last_name) {
 					slide.form.fields_dict.full_name.set_input(
+<<<<<<< HEAD
 						[frappe.boot.user.first_name, frappe.boot.user.last_name].join(" ").trim()
 					);
 				}
 				delete slide.form.fields_dict.email;
+=======
+						[first_name, last_name].join(" ").trim()
+					);
+				}
+				slide.form.fields_dict.email.set_input(email);
+				slide.form.fields_dict.email.df.read_only = 1;
+				slide.form.fields_dict.email.refresh();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			} else {
 				slide.form.fields_dict.email.df.reqd = 1;
 				slide.form.fields_dict.email.refresh();
@@ -556,6 +602,7 @@ frappe.setup.utils = {
 			);
 
 		slide.get_input("timezone").empty().add_options(data.all_timezones);
+<<<<<<< HEAD
 
 		// set values if present
 		if (frappe.wizard.values.country) {
@@ -563,9 +610,22 @@ frappe.setup.utils = {
 		} else if (data.default_country) {
 			country_field.set_input(data.default_country);
 		}
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		slide.get_field("currency").set_input(frappe.wizard.values.currency);
 		slide.get_field("timezone").set_input(frappe.wizard.values.timezone);
+
+		// set values if present
+		let country =
+			frappe.wizard.values.country ||
+			data.default_country ||
+			guess_country(frappe.setup.data.regional_data.country_info);
+
+		if (country) {
+			country_field.set_input(country);
+			$(country_field.input).change();
+		}
 	},
 
 	bind_language_events: function (slide) {
@@ -644,3 +704,22 @@ frappe.setup.utils = {
 		});
 	},
 };
+
+// https://github.com/eggert/tz/blob/main/backward add more if required.
+const TZ_BACKWARD_COMPATBILITY_MAP = {
+	"Asia/Calcutta": "Asia/Kolkata",
+};
+
+function guess_country(country_info) {
+	try {
+		let system_timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+		system_timezone = TZ_BACKWARD_COMPATBILITY_MAP[system_timezone] || system_timezone;
+
+		for (let [country, info] of Object.entries(country_info)) {
+			let possible_timezones = (info.timezones || []).filter((t) => t == system_timezone);
+			if (possible_timezones.length) return country;
+		}
+	} catch (e) {
+		console.log("Could not guess country", e);
+	}
+}

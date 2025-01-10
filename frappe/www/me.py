@@ -13,4 +13,8 @@ def get_context(context):
 		frappe.throw(_("You need to be logged in to access this page"), frappe.PermissionError)
 
 	context.current_user = frappe.get_doc("User", frappe.session.user)
+<<<<<<< HEAD
 	context.show_sidebar = True
+=======
+	context.show_sidebar = False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

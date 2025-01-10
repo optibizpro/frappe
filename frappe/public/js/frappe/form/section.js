@@ -4,6 +4,7 @@ export default class Section {
 		this.card_layout = card_layout;
 		this.parent = parent;
 		this.df = df || {};
+		this.columns = [];
 		this.fields_list = [];
 		this.fields_dict = {};
 
@@ -26,14 +27,19 @@ export default class Section {
 
 	make() {
 		let make_card = this.card_layout;
+<<<<<<< HEAD
 		this.wrapper = $(`<div class="row
 				${this.df.is_dashboard_section ? "form-dashboard-section" : "form-section"}
 				${make_card ? "card-section" : ""}">
+=======
+		this.wrapper = $(`<div class=
+				"${this.df.is_dashboard_section ? "form-dashboard-section" : "form-section"}
+				${make_card ? "card-section" : ""}" data-fieldname="${this.df.fieldname}">
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			`).appendTo(this.parent);
-		this.layout && this.layout.sections.push(this);
 
 		if (this.df) {
-			if (this.df.label) {
+			if (this.df.label && !this.df.hide_label) {
 				this.make_head();
 			}
 			if (this.df.description) {
@@ -63,7 +69,7 @@ export default class Section {
 	make_head() {
 		this.head = $(`
 			<div class="section-head">
-				${__(this.df.label)}
+				${__(this.df.label, null, this.df.parent)}
 				<span class="ml-2 collapse-indicator mb-1"></span>
 			</div>
 		`);
@@ -93,6 +99,15 @@ export default class Section {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	add_field(fieldobj) {
+		this.fields_list.push(fieldobj);
+		this.fields_dict[fieldobj.df.fieldname] = fieldobj;
+		fieldobj.section = this;
+	}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	refresh(hide) {
 		if (!this.df) return;
 		// hide if explicitly hidden
@@ -123,7 +138,11 @@ export default class Section {
 	}
 
 	set_icon(hide) {
+<<<<<<< HEAD
 		let indicator_icon = hide ? "down" : "up-line";
+=======
+		let indicator_icon = hide ? "es-line-down" : "es-line-up";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.indicator && this.indicator.html(frappe.utils.icon(indicator_icon, "sm", "mb-1"));
 	}
 

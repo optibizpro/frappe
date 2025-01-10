@@ -6,6 +6,26 @@ from frappe.model.document import Document
 
 
 class SystemHealthReportWorkers(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		count: DF.Int
+		failed_jobs: DF.Int
+		parent: DF.Data
+		parentfield: DF.Data
+		parenttype: DF.Data
+		queues: DF.Data | None
+		utilization: DF.Percent
+	# end: auto-generated types
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def db_insert(self, *args, **kwargs):
 		raise NotImplementedError
 

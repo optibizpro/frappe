@@ -3,8 +3,15 @@
 import requests
 
 import frappe
+<<<<<<< HEAD
 from frappe.core.doctype.scheduled_job_type.scheduled_job_type import sync_jobs
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJobType, sync_jobs
+from frappe.core.doctype.server_script.server_script import ServerScript
+from frappe.frappeclient import FrappeClient, FrappeException
+from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import get_site_url
 
 scripts = [
@@ -83,10 +90,43 @@ frappe.db.commit()
 frappe.db.add_index("Todo", ["color", "date"])
 """,
 	),
+	dict(
+		name="test_before_rename",
+		script_type="DocType Event",
+		doctype_event="After Rename",
+		reference_doctype="Role",
+		script="""
+doc.desk_access =0
+doc.save()
+""",
+	),
+	dict(
+		name="test_after_rename",
+		script_type="DocType Event",
+		doctype_event="After Rename",
+		reference_doctype="Role",
+		script="""
+doc.disabled =1
+doc.save()
+""",
+	),
 ]
 
 
+<<<<<<< HEAD
 class TestServerScript(FrappeTestCase):
+=======
+class UnitTestServerScript(UnitTestCase):
+	"""
+	Unit tests for ServerScript.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestServerScript(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -96,28 +136,35 @@ class TestServerScript(FrappeTestCase):
 			script_doc = frappe.get_doc(doctype="Server Script")
 			script_doc.update(script)
 			script_doc.insert()
-
+		cls.enterClassContext(cls.enable_safe_exec())
 		frappe.db.commit()
+		return super().setUpClass()
 
 	@classmethod
 	def tearDownClass(cls):
 		frappe.db.commit()
 		frappe.db.truncate("Server Script")
-		frappe.cache().delete_value("server_script_map")
+		frappe.client_cache.delete_value("server_script_map")
 
 	def setUp(self):
-		frappe.cache().delete_value("server_script_map")
+		frappe.client_cache.delete_value("server_script_map")
 
 	def test_doctype_event(self):
-		todo = frappe.get_doc(dict(doctype="ToDo", description="hello")).insert()
+		todo = frappe.get_doc(doctype="ToDo", description="hello").insert()
 		self.assertEqual(todo.status, "Open")
 
-		todo = frappe.get_doc(dict(doctype="ToDo", description="test todo")).insert()
+		todo = frappe.get_doc(doctype="ToDo", description="test todo").insert()
 		self.assertEqual(todo.status, "Closed")
 
 		self.assertRaises(
-			frappe.ValidationError, frappe.get_doc(dict(doctype="ToDo", description="validate me")).insert
+			frappe.ValidationError, frappe.get_doc(doctype="ToDo", description="validate me").insert
 		)
+
+		role = frappe.get_doc(doctype="Role", role_name="_Test Role 9").insert(ignore_if_duplicate=True)
+		role.rename("_Test Role 10")
+		role.reload()
+		self.assertEqual(role.disabled, 1)
+		self.assertEqual(role.desk_access, 0)
 
 	def test_api(self):
 		response = requests.post(get_site_url(frappe.local.site) + "/api/method/test_server_script")
@@ -155,7 +202,11 @@ class TestServerScript(FrappeTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
+		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()
@@ -165,7 +216,11 @@ class TestServerScript(FrappeTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
+		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()
@@ -231,6 +286,57 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script.insert()
 		script.execute_method()
 
+<<<<<<< HEAD
+=======
+	def test_server_script_rate_limiting(self):
+		script1 = frappe.get_doc(
+			doctype="Server Script",
+			name="rate_limited_server_script",
+			script_type="API",
+			enable_rate_limit=1,
+			allow_guest=1,
+			rate_limit_count=5,
+			api_method="rate_limited_endpoint",
+			script="""frappe.flags = {"test": True}""",
+		)
+
+		script1.insert()
+
+		script2 = frappe.get_doc(
+			doctype="Server Script",
+			name="rate_limited_server_script2",
+			script_type="API",
+			enable_rate_limit=1,
+			allow_guest=1,
+			rate_limit_count=5,
+			api_method="rate_limited_endpoint2",
+			script="""frappe.flags = {"test": False}""",
+		)
+
+		script2.insert()
+
+		frappe.db.commit()
+
+		site = frappe.utils.get_site_url(frappe.local.site)
+		client = FrappeClient(site)
+
+		# Exhaust rate limit
+		for _ in range(5):
+			client.get_api(script1.api_method)
+
+		self.assertRaises(FrappeException, client.get_api, script1.api_method)
+
+		# Exhaust rate limit
+		for _ in range(5):
+			client.get_api(script2.api_method)
+
+		self.assertRaises(FrappeException, client.get_api, script2.api_method)
+
+		script1.delete()
+		script2.delete()
+		frappe.db.commit()
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_server_script_scheduled(self):
 		scheduled_script = frappe.get_doc(
 			doctype="Server Script",
@@ -262,5 +368,53 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 
 		cron_script.cron_format = "0 0 2 1 *"  # 2nd january
 		cron_script.save()
+<<<<<<< HEAD
 		cron_job.reload()
 		self.assertEqual(cron_job.next_execution.day, 2)
+=======
+
+		updated_cron_job_name = frappe.db.get_value("Scheduled Job Type", {"server_script": cron_script.name})
+		updated_cron_job = frappe.get_doc("Scheduled Job Type", updated_cron_job_name)
+		self.assertEqual(updated_cron_job.next_execution.day, 2)
+
+	def test_server_script_state_changes(self):
+		script: ServerScript = frappe.get_doc(
+			doctype="Server Script",
+			name="scheduled_script_state_change",
+			script_type="Scheduler Event",
+			script="""frappe.flags = {"test": True}""",
+			event_frequency="Hourly",
+		).insert()
+
+		job: ScheduledJobType = frappe.get_doc("Scheduled Job Type", {"server_script": script.name})
+
+		script.script_type = "API"
+		script.save()
+		self.assertTrue(job.reload().stopped)
+
+		script.script_type = "Scheduler Event"
+		script.save()
+		self.assertFalse(job.reload().stopped)
+
+		# Change to different frequency
+		script.event_frequency = "Monthly"
+		script.save()
+		self.assertEqual(job.reload().frequency, "Monthly")
+
+		# change cron expr
+		script.event_frequency = "Cron"
+		script.cron_format = "* * * * *"
+		script.save()
+		self.assertEqual(job.reload().frequency, "Cron")
+		self.assertEqual(job.reload().cron_format, script.cron_format)
+
+		# manually disable
+
+		script.disabled = 1
+		script.save()
+		self.assertTrue(job.reload().stopped)
+
+		script.disabled = 0
+		script.save()
+		self.assertFalse(job.reload().stopped)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

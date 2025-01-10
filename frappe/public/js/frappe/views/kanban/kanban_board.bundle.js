@@ -1,6 +1,10 @@
 // TODO: Refactor for better UX
 
+<<<<<<< HEAD
 import Vuex from "vuex";
+=======
+import { createStore } from "vuex";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 frappe.provide("frappe.views");
 
@@ -9,7 +13,7 @@ frappe.provide("frappe.views");
 
 	let columns_unwatcher = null;
 
-	var store = new Vuex.Store({
+	var store = createStore({
 		state: {
 			doctype: "",
 			board: {},
@@ -95,7 +99,11 @@ frappe.provide("frappe.views");
 							});
 						},
 						function (err) {
+<<<<<<< HEAD
 							console.error(err); // eslint-disable-line
+=======
+							console.error(err);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						}
 					);
 			},
@@ -376,8 +384,18 @@ frappe.provide("frappe.views");
 		}
 
 		function bind_add_column() {
+<<<<<<< HEAD
 			if (!self.board_perms.write) {
 				// If no write access to board, editing board (by adding column) should be blocked
+=======
+			let doctype = self.cur_list.doctype;
+			let fieldname = self.cur_list.board.field_name;
+			const is_custom_field = frappe.meta.get_docfield(doctype, fieldname)?.is_custom_field;
+
+			if (!self.board_perms.write || !is_custom_field) {
+				// If no write access to board, editing board (by adding column) should be blocked
+				// If standard field then users can't add options
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				self.$kanban_board.find(".add-new-column").remove();
 				return;
 			}
@@ -730,7 +748,13 @@ frappe.provide("frappe.views");
 				let field =
 					frappe.meta.docfield_map[card.doctype]?.[field_name] ||
 					frappe.model.get_std_field(field_name);
+<<<<<<< HEAD
 				let label = cur_list.board.show_labels ? `<span>${__(field.label)}: </span>` : "";
+=======
+				let label = cur_list.board.show_labels
+					? `<span>${__(field.label, null, field.parent)}: </span>`
+					: "";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				let value = frappe.format(card.doc[field_name], field);
 				fields.push(`
 					<div class="text-muted text-truncate">
@@ -756,7 +780,11 @@ frappe.provide("frappe.views");
 
 			if (card.comment_count > 0)
 				html += `<span class="list-comment-count small text-muted ">
+<<<<<<< HEAD
 					${frappe.utils.icon("small-message")}
+=======
+					${frappe.utils.icon("es-line-chat-alt")}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					${card.comment_count}
 				</span>`;
 

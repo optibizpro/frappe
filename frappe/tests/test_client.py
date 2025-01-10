@@ -3,12 +3,20 @@
 from unittest.mock import patch
 
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestClient(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.utils import get_site_url
+
+
+class TestClient(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_set_value(self):
-		todo = frappe.get_doc(dict(doctype="ToDo", description="test")).insert()
+		todo = frappe.get_doc(doctype="ToDo", description="test").insert()
 		frappe.set_value("ToDo", todo.name, "description", "test 1")
 		self.assertEqual(frappe.get_value("ToDo", todo.name, "description"), "test 1")
 
@@ -73,19 +81,16 @@ class TestClient(FrappeTestCase):
 	def test_run_doc_method(self):
 		from frappe.handler import execute_cmd
 
-		if not frappe.db.exists("Report", "Test Run Doc Method"):
-			report = frappe.get_doc(
-				{
-					"doctype": "Report",
-					"ref_doctype": "User",
-					"report_name": "Test Run Doc Method",
-					"report_type": "Query Report",
-					"is_standard": "No",
-					"roles": [{"role": "System Manager"}],
-				}
-			).insert()
-		else:
-			report = frappe.get_doc("Report", "Test Run Doc Method")
+		report = frappe.get_doc(
+			{
+				"doctype": "Report",
+				"ref_doctype": "User",
+				"report_name": frappe.generate_hash(),
+				"report_type": "Query Report",
+				"is_standard": "No",
+				"roles": [{"role": "System Manager"}],
+			}
+		).insert()
 
 		frappe.local.request = frappe._dict()
 		frappe.local.request.method = "GET"
@@ -134,14 +139,19 @@ class TestClient(FrappeTestCase):
 			"accept": "application/json",
 			"content-type": "application/json",
 		}
+<<<<<<< HEAD
 		url = f"http://{frappe.local.site}:{frappe.conf.webserver_port}/api/method/frappe.client.get_list"
+=======
+		url = get_site_url(frappe.local.site)
+		url += "/api/method/frappe.client.get_list"
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		res = requests.post(url, json=params, headers=headers)
 		self.assertEqual(res.status_code, 200)
 		data = res.json()
 		first_item = data["message"][0]
 		self.assertTrue("name" in first_item)
 		self.assertTrue("modified" in first_item)
-		frappe.local.login_manager.logout()
 
 	def test_client_get(self):
 		from frappe.client import get
@@ -235,8 +245,13 @@ class TestClient(FrappeTestCase):
 		docs = insert_many(doc_list)
 
 		self.assertEqual(len(docs), 7)
+<<<<<<< HEAD
 		self.assertEqual(docs[3], "not-a-random-title")
 		self.assertEqual(docs[6], "another-note-title")
+=======
+		self.assertEqual(frappe.db.get_value("Note", docs[3], "title"), "not-a-random-title")
+		self.assertEqual(frappe.db.get_value("Note", docs[6], "title"), "another-note-title")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.assertIn(note1.name, docs)
 
 		# cleanup

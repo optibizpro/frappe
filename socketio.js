@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const cookie = require("cookie");
 const request = require("superagent");
 
@@ -348,3 +349,6 @@ function send_users(args, action) {
 		users: Array.from(new Set(users)),
 	});
 }
+=======
+require("./realtime");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

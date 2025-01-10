@@ -7,20 +7,82 @@ import os
 import frappe
 from frappe import _, scrub
 from frappe.core.api.file import get_max_file_size
+<<<<<<< HEAD
 from frappe.core.doctype.file import remove_file_by_url
+=======
+from frappe.core.doctype.file.utils import remove_file_by_url
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.desk.form.meta import get_code_files_via_hooks
 from frappe.modules.utils import export_module_json, get_doc_module
 from frappe.rate_limiter import rate_limit
 from frappe.utils import dict_with_keys, strip_html
+<<<<<<< HEAD
+=======
+from frappe.utils.caching import redis_cache
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.website.utils import get_boot_data, get_comment_list, get_sidebar_items
 from frappe.website.website_generator import WebsiteGenerator
 
 
 class WebForm(WebsiteGenerator):
-	website = frappe._dict(no_cache=1)
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
 
+<<<<<<< HEAD
 	def onload(self):
 		super().onload()
+=======
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+		from frappe.website.doctype.web_form_field.web_form_field import WebFormField
+		from frappe.website.doctype.web_form_list_column.web_form_list_column import WebFormListColumn
+
+		allow_comments: DF.Check
+		allow_delete: DF.Check
+		allow_edit: DF.Check
+		allow_incomplete: DF.Check
+		allow_multiple: DF.Check
+		allow_print: DF.Check
+		allowed_embedding_domains: DF.SmallText | None
+		anonymous: DF.Check
+		apply_document_permissions: DF.Check
+		banner_image: DF.AttachImage | None
+		breadcrumbs: DF.Code | None
+		button_label: DF.Data | None
+		client_script: DF.Code | None
+		condition_json: DF.JSON | None
+		custom_css: DF.Code | None
+		doc_type: DF.Link
+		hide_footer: DF.Check
+		hide_navbar: DF.Check
+		introduction_text: DF.TextEditor | None
+		is_standard: DF.Check
+		list_columns: DF.Table[WebFormListColumn]
+		list_title: DF.Data | None
+		login_required: DF.Check
+		max_attachment_size: DF.Int
+		meta_description: DF.SmallText | None
+		meta_image: DF.AttachImage | None
+		meta_title: DF.Data | None
+		module: DF.Link | None
+		print_format: DF.Link | None
+		published: DF.Check
+		route: DF.Data | None
+		show_attachments: DF.Check
+		show_list: DF.Check
+		show_sidebar: DF.Check
+		success_message: DF.Text | None
+		success_title: DF.Data | None
+		success_url: DF.Data | None
+		title: DF.Data
+		web_form_fields: DF.Table[WebFormField]
+		website_sidebar: DF.Link | None
+	# end: auto-generated types
+
+	website = frappe._dict(no_cache=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def validate(self):
 		super().validate()
@@ -50,17 +112,18 @@ class WebForm(WebsiteGenerator):
 		"""Validate all fields are present"""
 		from frappe.model import no_value_fields
 
-		missing = []
 		meta = frappe.get_meta(self.doc_type)
-		for df in self.web_form_fields:
-			if df.fieldname and (df.fieldtype not in no_value_fields and not meta.has_field(df.fieldname)):
-				missing.append(df.fieldname)
+		missing = [
+			df.fieldname
+			for df in self.web_form_fields
+			if df.fieldname and (df.fieldtype not in no_value_fields and not meta.has_field(df.fieldname))
+		]
 
 		if missing:
 			frappe.throw(_("Following fields are missing:") + "<br>" + "<br>".join(missing))
 
 	def reset_field_parent(self):
-		"""Convert link fields to select with names as options"""
+		"""Convert link fields to select with names as options."""
 		for df in self.web_form_fields:
 			df.parent = self.doc_type
 
@@ -208,16 +271,37 @@ def get_context(context):
 			description = self.introduction_text[:140]
 
 		context.metatags = {
+<<<<<<< HEAD
 			"name": self.meta_title or self.title,
+=======
+			"title": self.meta_title or self.title,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"description": description,
 			"image": self.meta_image,
 		}
 
 	def load_translations(self, context):
-		translated_messages = frappe.translate.get_dict("doctype", self.doc_type)
-		# Sr is not added by default, had to be added manually
-		translated_messages["Sr"] = _("Sr")
-		context.translated_messages = frappe.as_json(translated_messages)
+		messages = [
+			"Sr",
+			"Attach",
+			self.title,
+			self.introduction_text,
+			self.success_title,
+			self.success_message,
+			self.list_title,
+			self.button_label,
+			self.meta_title,
+			self.meta_description,
+		]
+
+		for field in self.web_form_fields:
+			messages.extend([field.label, field.description])
+			if field.fieldtype == "Select" and field.options:
+				messages.extend(field.options.split("\n"))
+
+		messages.extend(col.get("label") if col else "" for col in self.list_columns)
+
+		context.translated_messages = frappe.as_json({message: _(message) for message in messages if message})
 
 	def load_list_data(self, context):
 		if not self.list_columns:
@@ -340,11 +424,7 @@ def get_context(context):
 
 	def validate_mandatory(self, doc):
 		"""Validate mandatory web form fields"""
-		missing = []
-		for f in self.web_form_fields:
-			if f.reqd and doc.get(f.fieldname) in (None, [], ""):
-				missing.append(f)
-
+		missing = [f for f in self.web_form_fields if f.reqd and doc.get(f.fieldname) in (None, [], "")]
 		if missing:
 			frappe.throw(
 				_("Mandatory Information missing:")
@@ -618,3 +698,11 @@ def get_link_options(web_form_name, doctype, allow_read_on_all_link_options=Fals
 		return json.dumps(link_options, default=str)
 	else:
 		return "\n".join([str(doc.value) for doc in link_options])
+<<<<<<< HEAD
+=======
+
+
+@redis_cache(ttl=60 * 60)
+def get_published_web_forms() -> dict[str, str]:
+	return frappe.get_all("Web Form", ["name", "route", "modified"], {"published": 1})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

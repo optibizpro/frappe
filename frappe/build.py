@@ -4,9 +4,8 @@ import os
 import re
 import shutil
 import subprocess
-from distutils.spawn import find_executable
 from subprocess import getoutput
-from tempfile import mkdtemp, mktemp
+from tempfile import mkdtemp
 from urllib.parse import urlparse
 
 import click
@@ -79,8 +78,8 @@ def get_assets_link(frappe_head) -> str:
 	import requests
 
 	tag = getoutput(
-		r"cd ../apps/frappe && git show-ref --tags -d | grep %s | sed -e 's,.*"
-		r" refs/tags/,,' -e 's/\^{}//'" % frappe_head
+		r"cd ../apps/frappe && git show-ref --tags -d | grep {} | sed -e 's,.*"
+		r" refs/tags/,,' -e 's/\^{{}}//'".format(frappe_head)
 	)
 
 	if tag:
@@ -134,10 +133,9 @@ def setup_assets(assets_archive):
 	return directories_created
 
 
-def download_frappe_assets(verbose=True):
-	"""Downloads and sets up Frappe assets if they exist based on the current
-	commit HEAD.
-	Returns True if correctly setup else returns False.
+def download_frappe_assets(verbose=True) -> bool:
+	"""Download and set up Frappe assets if they exist based on the current commit HEAD.
+	Return True if correctly setup else return False.
 	"""
 	frappe_head = getoutput("cd ../apps/frappe && git rev-parse HEAD")
 
@@ -179,12 +177,9 @@ def symlink(target, link_name, overwrite=False):
 	if not overwrite:
 		return os.symlink(target, link_name)
 
-	# os.replace() may fail if files are on different filesystems
-	link_dir = os.path.dirname(link_name)
-
 	# Create link to target with temporary filename
 	while True:
-		temp_link_name = mktemp(dir=link_dir)
+		temp_link_name = f"tmp{frappe.generate_hash()}"
 
 		# os.* functions mimic as closely as possible system functions
 		# The POSIX symlink() returns EEXIST if link_name already exists
@@ -227,11 +222,11 @@ def bundle(
 	mode,
 	apps=None,
 	hard_link=False,
-	make_copy=False,
-	restore=False,
 	verbose=False,
 	skip_frappe=False,
 	files=None,
+	save_metafiles=False,
+	using_cached=False,
 ):
 	"""concat / minify js files"""
 	setup()
@@ -249,10 +244,19 @@ def bundle(
 	if files:
 		command += " --files {files}".format(files=",".join(files))
 
-	command += " --run-build-command"
+	if using_cached:
+		command += " --using-cached"
+	else:
+		command += " --run-build-command"
+
+	if save_metafiles:
+		command += " --save-metafiles"
+
+	if not apps or apps == "frappe":
+		command += " && cd billing && yarn build"
 
 	check_node_executable()
-	frappe_app_path = frappe.get_app_path("frappe", "..")
+	frappe_app_path = frappe.get_app_source_path("frappe")
 	frappe.commands.popen(command, cwd=frappe_app_path, env=get_node_env(), raise_err=True)
 
 
@@ -270,23 +274,22 @@ def watch(apps=None):
 		command += " --live-reload"
 
 	check_node_executable()
-	frappe_app_path = frappe.get_app_path("frappe", "..")
+	frappe_app_path = frappe.get_app_source_path("frappe")
 	frappe.commands.popen(command, cwd=frappe_app_path, env=get_node_env())
 
 
 def check_node_executable():
 	node_version = Version(subprocess.getoutput("node -v")[1:])
 	warn = "⚠️ "
-	if node_version.major < 14:
-		click.echo(f"{warn} Please update your node version to 14")
-	if not find_executable("yarn"):
+	if node_version.major < 18:
+		click.echo(f"{warn} Please update your node version to 18")
+	if not shutil.which("yarn"):
 		click.echo(f"{warn} Please install yarn using below command and try again.\nnpm install -g yarn")
 	click.echo()
 
 
 def get_node_env():
-	node_env = {"NODE_OPTIONS": f"--max_old_space_size={get_safe_max_old_space_size()}"}
-	return node_env
+	return {"NODE_OPTIONS": f"--max_old_space_size={get_safe_max_old_space_size()}"}
 
 
 def get_safe_max_old_space_size():
@@ -382,8 +385,9 @@ def make_asset_dirs(hard_link=False):
 		try:
 			print(start_message, end="\r")
 			link_assets_dir(source, target, hard_link=hard_link)
-		except Exception:
-			print(fail_message, end="\r")
+		except Exception as e:
+			print(e)
+			print(fail_message)
 
 	click.echo(unstrip(click.style("✔", fg="green") + " Application Assets Linked") + "\n")
 
@@ -405,7 +409,7 @@ def link_assets_dir(source, target, hard_link=False):
 
 
 def scrub_html_template(content):
-	"""Returns HTML content with removed whitespace and comments"""
+	"""Return HTML content with removed whitespace and comments."""
 	# remove whitespace to a single space
 	content = WHITESPACE_PATTERN.sub(" ", content)
 
@@ -416,7 +420,7 @@ def scrub_html_template(content):
 
 
 def html_to_js_template(path, content):
-	"""returns HTML template content as Javascript code, adding it to `frappe.templates`"""
+	"""Return HTML template content as Javascript code, by adding it to `frappe.templates`."""
 	return """frappe.templates["{key}"] = '{content}';\n""".format(
 		key=path.rsplit("/", 1)[-1][:-5], content=scrub_html_template(content)
 	)

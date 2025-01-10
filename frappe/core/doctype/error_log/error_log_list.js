@@ -7,7 +7,11 @@ frappe.listview_settings["Error Log"] = {
 			return [__("Not Seen"), "red", "seen,=,0"];
 		}
 	},
+<<<<<<< HEAD
 	order_by: "seen asc, modified desc",
+=======
+	order_by: "creation desc",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	onload: function (listview) {
 		listview.page.add_menu_item(__("Clear Error Logs"), function () {
 			frappe.call({

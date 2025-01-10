@@ -52,9 +52,12 @@ frappe.ui.form.Dashboard = class FormDashboard {
 
 		this.links_area = this.make_section({
 			label: __("Connections"),
+<<<<<<< HEAD
+=======
+			hide_label: true,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			css_class: "form-links",
 			hidden: 1,
-			collapsible: 1,
 			is_dashboard_section: 1,
 			body_html: this.transactions_area,
 		});
@@ -175,10 +178,16 @@ frappe.ui.form.Dashboard = class FormDashboard {
 
 	make_progress_chart(title) {
 		this.progress_area.show();
+<<<<<<< HEAD
 		let progress_chart = $(
 			'<div class="progress-chart" title="' + (title || "") + '"></div>'
 		).appendTo(this.progress_area.body);
 		return progress_chart;
+=======
+		return $('<div class="progress-chart" title="' + (title || "") + '"></div>').appendTo(
+			this.progress_area.body
+		);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	refresh() {
@@ -563,7 +572,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 				.addClass("indicator-column");
 		}
 
+<<<<<<< HEAD
 		let indicator = $(
+=======
+		return $(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			'<div class="col-sm-' +
 				colspan +
 				' indicator-column"><span class="indicator ' +
@@ -572,8 +585,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 				label +
 				"</span></div>"
 		).appendTo(this.stats_area_row);
+<<<<<<< HEAD
 
 		return indicator;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	// graphs
@@ -636,8 +652,8 @@ frappe.ui.form.Dashboard = class FormDashboard {
 	}
 
 	// TODO: Review! code related to headline should be the part of layout/form
-	set_headline(html, color) {
-		this.frm.layout.show_message(html, color);
+	set_headline(html, color, permanent = false) {
+		this.frm.layout.show_message(html, color, permanent);
 	}
 
 	clear_headline() {
@@ -645,7 +661,7 @@ frappe.ui.form.Dashboard = class FormDashboard {
 	}
 
 	add_comment(text, alert_class, permanent) {
-		this.set_headline_alert(text, alert_class);
+		this.set_headline_alert(text, alert_class, permanent);
 		if (!permanent) {
 			setTimeout(() => {
 				this.clear_headline();
@@ -657,9 +673,9 @@ frappe.ui.form.Dashboard = class FormDashboard {
 		this.clear_headline();
 	}
 
-	set_headline_alert(text, color) {
+	set_headline_alert(text, color, permanent = false) {
 		if (text) {
-			this.set_headline(`<div>${text}</div>`, color);
+			this.set_headline(`<div>${text}</div>`, color, permanent);
 		} else {
 			this.clear_headline();
 		}

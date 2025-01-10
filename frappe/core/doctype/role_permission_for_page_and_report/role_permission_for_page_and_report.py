@@ -2,13 +2,32 @@
 # License: MIT. See LICENSE
 
 import frappe
-from frappe.core.doctype.report.report import is_prepared_report_disabled
+from frappe.core.doctype.report.report import is_prepared_report_enabled
 from frappe.model.document import Document
 from frappe.permissions import ALL_USER_ROLE
+<<<<<<< HEAD
 from frappe.utils import cint
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class RolePermissionforPageandReport(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.types import DF
+
+		enable_prepared_report: DF.Check
+		page: DF.Link | None
+		report: DF.Link | None
+		roles: DF.Table[HasRole]
+		set_role_for: DF.Literal["", "Page", "Report"]
+	# end: auto-generated types
+
 	@frappe.whitelist()
 	def set_report_page_data(self):
 		self.set_custom_roles()
@@ -29,7 +48,7 @@ class RolePermissionforPageandReport(Document):
 
 	def check_prepared_report_disabled(self):
 		if self.report:
-			self.disable_prepared_report = is_prepared_report_disabled(self.report)
+			self.enable_prepared_report = is_prepared_report_enabled(self.report)
 
 	def get_standard_roles(self):
 		doctype = self.set_role_for
@@ -51,16 +70,17 @@ class RolePermissionforPageandReport(Document):
 
 	def update_custom_roles(self):
 		args = self.get_args()
+		roles = self.get_roles()
 		name = frappe.db.get_value("Custom Role", args, "name")
 
-		args.update({"doctype": "Custom Role", "roles": self.get_roles()})
+		args.update({"doctype": "Custom Role", "roles": roles})
 
 		if self.report:
 			args.update({"ref_doctype": frappe.db.get_value("Report", self.report, "ref_doctype")})
 
 		if name:
 			custom_role = frappe.get_doc("Custom Role", name)
-			custom_role.set("roles", self.get_roles())
+			custom_role.set("roles", roles)
 			custom_role.save()
 		else:
 			frappe.get_doc(args).insert()
@@ -69,9 +89,15 @@ class RolePermissionforPageandReport(Document):
 		if self.report:
 			# intentionally written update query in frappe.db.sql instead of frappe.db.set_value
 			frappe.db.sql(
+<<<<<<< HEAD
 				"""update `tabReport` set disable_prepared_report = %s, prepared_report = %s
 				where name = %s""",
 				(self.disable_prepared_report, not self.disable_prepared_report, self.report),
+=======
+				"""update `tabReport` set prepared_report = %s
+				where name = %s""",
+				(self.enable_prepared_report, self.report),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 
 	def get_args(self, row=None):

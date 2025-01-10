@@ -49,7 +49,11 @@ frappe.views.InteractionComposer = class InteractionComposer {
 		let me = this;
 		let interaction_docs = Object.keys(get_doc_mappings());
 
+<<<<<<< HEAD
 		let fields = [
+=======
+		return [
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{
 				label: __("Reference"),
 				fieldtype: "Select",
@@ -75,7 +79,11 @@ frappe.views.InteractionComposer = class InteractionComposer {
 				options: "",
 				hidden: 1,
 			},
+<<<<<<< HEAD
 			{ label: __("Public"), fieldtype: "Check", fieldname: "public", default: "1" },
+=======
+			{ label: __("Public"), fieldtype: "Check", fieldname: "public", default: "0" },
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{ fieldtype: "Column Break" },
 			{ label: __("Date"), fieldtype: "Datetime", fieldname: "due_date" },
 			{
@@ -95,8 +103,11 @@ frappe.views.InteractionComposer = class InteractionComposer {
 				fieldname: "select_attachments",
 			},
 		];
+<<<<<<< HEAD
 
 		return fields;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_event_categories() {
@@ -283,6 +294,7 @@ frappe.views.InteractionComposer = class InteractionComposer {
 	}
 
 	assign_document(doc, assignee) {
+<<<<<<< HEAD
 		if (doc.doctype != "ToDo") {
 			frappe.call({
 				method: "frappe.desk.form.assign_to.add",
@@ -308,6 +320,31 @@ frappe.views.InteractionComposer = class InteractionComposer {
 				},
 			});
 		}
+=======
+		frappe.call({
+			method: "frappe.desk.form.assign_to.add",
+			args: {
+				doctype: doc.doctype,
+				name: doc.name,
+				assign_to: JSON.stringify([assignee]),
+			},
+			callback: function (r) {
+				if (!r.exc) {
+					frappe.show_alert({
+						message: __("The document has been assigned to {0}", [assignee]),
+						indicator: "green",
+					});
+					return;
+				} else {
+					frappe.show_alert({
+						message: __("The document could not be correctly assigned"),
+						indicator: "orange",
+					});
+					return;
+				}
+			},
+		});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	add_attachments(doc, attachments) {
@@ -336,7 +373,11 @@ frappe.views.InteractionComposer = class InteractionComposer {
 };
 
 function get_doc_mappings() {
+<<<<<<< HEAD
 	const doc_map = {
+=======
+	return {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		Event: {
 			field_map: {
 				interaction_type: "doctype",
@@ -362,6 +403,4 @@ function get_doc_mappings() {
 			hidden_fields: ["public", "category"],
 		},
 	};
-
-	return doc_map;
 }

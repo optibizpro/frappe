@@ -11,6 +11,25 @@ from frappe.utils import compare
 
 
 class AuditTrail(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		doctype_name: DF.Link
+		document: DF.DynamicLink
+		end_date: DF.Date | None
+		start_date: DF.Date | None
+	# end: auto-generated types
+
+	pass
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def validate(self):
 		self.validate_fields()
 		self.validate_document()

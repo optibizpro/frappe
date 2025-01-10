@@ -106,12 +106,21 @@ export default class Onboarding extends Block {
 	}
 
 	render() {
+<<<<<<< HEAD
+=======
+		if (frappe.is_mobile()) return;
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.wrapper = document.createElement("div");
 		this.new("onboarding");
 
 		if (this.data && this.data.onboarding_name) {
 			let has_data = this.make("onboarding", this.data.onboarding_name);
+<<<<<<< HEAD
 			if (!has_data) return;
+=======
+			if (!has_data) return this.wrapper;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 
 		if (!this.readOnly) {
@@ -119,7 +128,6 @@ export default class Onboarding extends Block {
 			this.add_settings_button();
 			this.add_new_block_button();
 		}
-		$(this.wrapper).css("padding-bottom", "20px");
 		return this.wrapper;
 	}
 

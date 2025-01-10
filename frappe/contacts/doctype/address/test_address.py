@@ -4,10 +4,26 @@ from functools import partial
 
 import frappe
 from frappe.contacts.doctype.address.address import address_query, get_address_display
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestAddress(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestAddress(UnitTestCase):
+	"""
+	Unit tests for Address.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestAddress(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_template_works(self):
 		if not frappe.db.exists("Address Template", "India"):
 			frappe.get_doc({"doctype": "Address Template", "country": "India", "is_default": 1}).insert()

@@ -3,11 +3,34 @@
 
 import frappe
 from frappe import _
-from frappe.model import no_value_fields
 from frappe.model.document import Document
+from frappe.utils import cint
 
 
 class Workflow(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+		from frappe.workflow.doctype.workflow_document_state.workflow_document_state import (
+			WorkflowDocumentState,
+		)
+		from frappe.workflow.doctype.workflow_transition.workflow_transition import WorkflowTransition
+
+		document_type: DF.Link
+		is_active: DF.Check
+		override_status: DF.Check
+		send_email_alert: DF.Check
+		states: DF.Table[WorkflowDocumentState]
+		transitions: DF.Table[WorkflowTransition]
+		workflow_data: DF.JSON | None
+		workflow_name: DF.Data
+		workflow_state_field: DF.Data
+	# end: auto-generated types
+
 	def validate(self):
 		self.set_active()
 		self.create_custom_field_for_workflow_state()
@@ -87,7 +110,7 @@ class Workflow(Document):
 				frappe.throw(frappe._("Cannot cancel before submitting. See Transition {0}").format(t.idx))
 
 	def set_active(self):
-		if int(self.is_active or 0):
+		if cint(self.is_active):
 			# clear all other
 			frappe.db.sql(
 				"""UPDATE `tabWorkflow` SET `is_active`=0
@@ -97,12 +120,15 @@ class Workflow(Document):
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def get_fieldnames_for(doctype):
 	frappe.has_permission(doctype=doctype, ptype="read", throw=True)
 	return [f.fieldname for f in frappe.get_meta(doctype).fields if f.fieldname not in no_value_fields]
 
 
 @frappe.whitelist()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_workflow_state_count(doctype, workflow_state_field, states):
 	frappe.has_permission(doctype=doctype, ptype="read", throw=True)
 	states = frappe.parse_json(states)

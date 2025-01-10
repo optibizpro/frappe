@@ -126,7 +126,11 @@ frappe.ui.form.ControlTable = class ControlTable extends frappe.ui.form.Control 
 				return (
 					field.fieldname.toLowerCase() === field_name ||
 					(field.label || "").toLowerCase() === field_name ||
+<<<<<<< HEAD
 					(__(field.label) || "").toLowerCase() === field_name
+=======
+					(__(field.label, null, field.parent) || "").toLowerCase() === field_name
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				);
 			};
 

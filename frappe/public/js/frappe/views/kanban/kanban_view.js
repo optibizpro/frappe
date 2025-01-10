@@ -3,6 +3,8 @@ import KanbanSettings from "./kanban_settings";
 frappe.provide("frappe.views");
 
 frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
+	static full_page = true;
+
 	static load_last_view() {
 		const route = frappe.get_route();
 		if (route.length === 3) {
@@ -136,10 +138,17 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 		this.hide_card_layout = true;
 		this.hide_sort_selector = true;
 		super.setup_page();
+
+		this.page.disable_sidebar_toggle = true;
+		this.page.setup_sidebar_toggle();
 	}
 
 	setup_view() {
+<<<<<<< HEAD
 		if (this.board.columns.length > 5) {
+=======
+		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.page.container.addClass("full-width");
 		}
 		this.setup_realtime_updates();
@@ -229,7 +238,11 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 
 		this.meta.fields.forEach((df) => {
 			const is_valid_field =
+<<<<<<< HEAD
 				in_list(["Data", "Text", "Small Text", "Text Editor"], df.fieldtype) && !df.hidden;
+=======
+				["Data", "Text", "Small Text", "Text Editor"].includes(df.fieldtype) && !df.hidden;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			if (is_valid_field && !title_field) {
 				// can be mapped to textarea

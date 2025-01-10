@@ -49,7 +49,11 @@ context("Rounding behaviour", () => {
 				let rounding_method = "Banker's Rounding";
 
 				expect(flt("0.5", 0, null, rounding_method)).eq(0);
+<<<<<<< HEAD
 				expect(flt("0.3", null, rounding_method)).eq(0.3);
+=======
+				expect(flt("0.3", null, null, rounding_method)).eq(0.3);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				expect(flt("1.5", 0, null, rounding_method)).eq(2);
 

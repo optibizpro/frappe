@@ -13,8 +13,9 @@ no_cache = 1
 
 
 def get_context(context, **dict_params):
-	"""Returns context for a list standard list page.
-	Will also update `get_list_context` from the doctype module file"""
+	"""Return context for a list standard list page.
+
+	Also update `get_list_context` from the doctype module file."""
 	frappe.local.form_dict.update(dict_params)
 	doctype = frappe.local.form_dict.doctype
 	context.parents = [{"route": "me", "title": _("My Account")}]
@@ -27,7 +28,7 @@ def get_context(context, **dict_params):
 
 @frappe.whitelist(allow_guest=True)
 def get(doctype, txt=None, limit_start=0, limit=20, pathname=None, **kwargs):
-	"""Returns processed HTML page for a standard listing."""
+	"""Return processed HTML page for a standard listing."""
 	limit_start = cint(limit_start)
 	raw_result = get_list_data(doctype, txt, limit_start, limit=limit + 1, **kwargs)
 	show_more = len(raw_result) > limit
@@ -77,7 +78,7 @@ def get(doctype, txt=None, limit_start=0, limit=20, pathname=None, **kwargs):
 def get_list_data(
 	doctype, txt=None, limit_start=0, fields=None, cmd=None, limit=20, web_form_name=None, **kwargs
 ):
-	"""Returns processed HTML page for a standard listing."""
+	"""Return processed HTML page for a standard listing."""
 	limit_start = cint(limit_start)
 
 	if frappe.is_table(doctype):
@@ -107,7 +108,7 @@ def get_list_data(
 		filters=filters,
 		limit_start=limit_start,
 		limit_page_length=limit,
-		order_by=list_context.order_by or "modified desc",
+		order_by=list_context.order_by or "creation desc",
 	)
 
 	# allow guest if flag is set
@@ -227,6 +228,7 @@ def get_list(
 
 	if txt:
 		if meta.search_fields:
+<<<<<<< HEAD
 			for f in meta.get_search_fields():
 				if f == "name" or meta.get_field(f).fieldtype in (
 					"Data",
@@ -235,6 +237,13 @@ def get_list(
 					"Text Editor",
 				):
 					or_filters.append([doctype, f, "like", "%" + txt + "%"])
+=======
+			or_filters.extend(
+				[doctype, f, "like", "%" + txt + "%"]
+				for f in meta.get_search_fields()
+				if f == "name" or meta.get_field(f).fieldtype in ("Data", "Text", "Small Text", "Text Editor")
+			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		else:
 			if isinstance(filters, dict):
 				filters["name"] = ("like", "%" + txt + "%")

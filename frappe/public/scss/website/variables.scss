@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 $gray-50: #f9fafa !default;
 $gray-100: #f4f5f6 !default;
 $gray-200: #eef0f2 !default;
@@ -13,6 +14,13 @@ $black: #000 !default;
 $primary: #2490ef !default;
 $primary-light: lighten($primary, 42%) !default;
 $light: $gray-50 !default;
+=======
+@import "../espresso/colors";
+@import "../espresso/typography";
+@import "../espresso/shadows";
+@import "../espresso/spacing";
+@import "../espresso/borders";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 $body-color: $gray-700 !default;
 $text-muted: $gray-600 !default;
@@ -20,6 +28,7 @@ $border-color: $gray-300 !default;
 $headings-color: $gray-900 !default;
 $breadcrumb-bg: transparent !default;
 $navbar-bg: white !default;
+$navbar-height: 48px;
 
 $container-max-widths: (
 	sm: 540px,

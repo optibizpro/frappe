@@ -10,6 +10,11 @@ export default class BulkOperations {
 		const is_submittable = frappe.model.is_submittable(this.doctype);
 		const allow_print_for_cancelled = cint(print_settings.allow_print_for_cancelled);
 		const letterheads = this.get_letterhead_options();
+<<<<<<< HEAD
+=======
+		const MAX_PRINT_LIMIT = 500;
+		const BACKGROUND_PRINT_THRESHOLD = 25;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		const valid_docs = docs
 			.filter((doc) => {
@@ -35,8 +40,15 @@ export default class BulkOperations {
 			return;
 		}
 
+<<<<<<< HEAD
 		if (valid_docs.length > 50) {
 			frappe.msgprint(__("You can only print upto 50 documents at a time"));
+=======
+		if (valid_docs.length > MAX_PRINT_LIMIT) {
+			frappe.msgprint(
+				__("You can only print upto {0} documents at a time", [MAX_PRINT_LIMIT])
+			);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return;
 		}
 
@@ -78,6 +90,16 @@ export default class BulkOperations {
 					depends_on: 'eval:doc.page_size == "Custom"',
 					default: print_settings.pdf_page_width,
 				},
+<<<<<<< HEAD
+=======
+				{
+					fieldtype: "Check",
+					label: __("Background Print (required for >25 documents)"),
+					fieldname: "background_print",
+					default: valid_docs.length > BACKGROUND_PRINT_THRESHOLD,
+					read_only: valid_docs.length > BACKGROUND_PRINT_THRESHOLD,
+				},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			],
 		});
 
@@ -102,6 +124,7 @@ export default class BulkOperations {
 				pdf_options = JSON.stringify({ "page-size": args.page_size });
 			}
 
+<<<<<<< HEAD
 			const w = window.open(
 				"/api/method/frappe.utils.print_format.download_multi_pdf?" +
 					"doctype=" +
@@ -121,9 +144,58 @@ export default class BulkOperations {
 			if (!w) {
 				frappe.msgprint(__("Please enable pop-ups"));
 				return;
-			}
-		});
+=======
+			if (args.background_print) {
+				frappe
+					.call("frappe.utils.print_format.download_multi_pdf_async", {
+						doctype: this.doctype,
+						name: json_string,
+						format: print_format,
+						no_letterhead: with_letterhead ? "0" : "1",
+						letterhead: letterhead,
+						options: pdf_options,
+					})
+					.then((response) => {
+						let task_id = response.message.task_id;
+						frappe.realtime.task_subscribe(task_id);
+						frappe.realtime.on(`task_complete:${task_id}`, (data) => {
+							frappe.msgprint({
+								title: __("Bulk PDF Export"),
+								message: __("Your PDF is ready for download"),
+								primary_action: {
+									label: __("Download PDF"),
+									client_action: "window.open",
+									args: data.file_url,
+								},
+							});
+							frappe.realtime.task_unsubscribe(task_id);
+							frappe.realtime.off(`task_complete:${task_id}`);
+						});
+					});
+			} else {
+				const w = window.open(
+					"/api/method/frappe.utils.print_format.download_multi_pdf?" +
+						"doctype=" +
+						encodeURIComponent(this.doctype) +
+						"&name=" +
+						encodeURIComponent(json_string) +
+						"&format=" +
+						encodeURIComponent(print_format) +
+						"&no_letterhead=" +
+						(with_letterhead ? "0" : "1") +
+						"&letterhead=" +
+						encodeURIComponent(letterhead) +
+						"&options=" +
+						encodeURIComponent(pdf_options)
+				);
 
+				if (!w) {
+					frappe.msgprint(__("Please enable pop-ups"));
+				}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			}
+			dialog.hide();
+		});
 		dialog.show();
 	}
 
@@ -164,6 +236,7 @@ export default class BulkOperations {
 						: null,
 				args: {
 					items: docnames,
+<<<<<<< HEAD
 					doctype: this.doctype,
 				},
 			})
@@ -231,11 +304,109 @@ export default class BulkOperations {
 					frappe.throw(
 						__("Cannot {0} {1}", [action, failed.map((f) => f.bold()).join(", ")])
 					);
+=======
+					doctype: this.doctype,
+				},
+			})
+			.then((r) => {
+				let failed = r.message;
+				if (!failed) failed = [];
+
+				if (failed.length && !r._server_messages) {
+					frappe.throw(
+						__("Cannot delete {0}", [failed.map((f) => f.bold()).join(", ")])
+					);
 				}
 				if (failed.length < docnames.length) {
+					frappe.utils.play_sound("delete");
+					if (done) done();
+				}
+			});
+	}
+
+	assign(docnames, done) {
+		if (docnames.length > 0) {
+			const assign_to = new frappe.ui.form.AssignToDialog({
+				obj: this,
+				method: "frappe.desk.form.assign_to.add_multiple",
+				doctype: this.doctype,
+				docname: docnames,
+				bulk_assign: true,
+				re_assign: true,
+				callback: done,
+			});
+			assign_to.dialog.clear();
+			assign_to.dialog.show();
+		} else {
+			frappe.msgprint(__("Select records for assignment"));
+		}
+	}
+
+	clear_assignment(docnames, done) {
+		if (docnames.length > 0) {
+			frappe
+				.call({
+					method: "frappe.desk.form.assign_to.remove_multiple",
+					args: {
+						doctype: this.doctype,
+						names: docnames,
+						ignore_permissions: true,
+					},
+					freeze: true,
+					freeze_message: "Removing assignments...",
+				})
+				.then(() => {
+					done();
+				});
+		} else {
+			frappe.msgprint(__("Select records for removing assignment"));
+		}
+	}
+
+	apply_assignment_rule(docnames, done) {
+		if (docnames.length > 0) {
+			frappe
+				.call("frappe.automation.doctype.assignment_rule.assignment_rule.bulk_apply", {
+					doctype: this.doctype,
+					docnames: docnames,
+				})
+				.then(() => done());
+		}
+	}
+
+	submit_or_cancel(docnames, action = "submit", done = null) {
+		action = action.toLowerCase();
+		const task_id = Math.random().toString(36).slice(-5);
+		frappe.realtime.task_subscribe(task_id);
+		return frappe
+			.xcall("frappe.desk.doctype.bulk_update.bulk_update.submit_cancel_or_update_docs", {
+				doctype: this.doctype,
+				action: action,
+				docnames: docnames,
+				task_id: task_id,
+			})
+			.then((failed_docnames) => {
+				if (failed_docnames?.length) {
+					const comma_separated_records = frappe.utils.comma_and(failed_docnames);
+					switch (action) {
+						case "submit":
+							frappe.throw(__("Cannot submit {0}.", [comma_separated_records]));
+							break;
+						case "cancel":
+							frappe.throw(__("Cannot cancel {0}.", [comma_separated_records]));
+							break;
+						default:
+							frappe.throw(__("Cannot {0} {1}.", [action, comma_separated_records]));
+					}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+				}
+				if (failed_docnames?.length < docnames.length) {
 					frappe.utils.play_sound(action);
 					if (done) done();
 				}
+			})
+			.finally(() => {
+				frappe.realtime.task_unsubscribe(task_id);
 			});
 	}
 

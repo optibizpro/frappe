@@ -30,7 +30,10 @@ $.extend(frappe.perm, {
 		"print",
 		"email",
 		"share",
+<<<<<<< HEAD
 		"set_user_permissions",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	],
 
 	doctype_perm: {},
@@ -54,7 +57,11 @@ $.extend(frappe.perm, {
 	_get_perm: (doctype, doc) => {
 		let perm = [{ read: 0, permlevel: 0 }];
 
+<<<<<<< HEAD
 		let meta = frappe.get_doc("DocType", doctype);
+=======
+		let meta = frappe.get_meta(doctype);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		const user = frappe.session.user;
 
 		if (user === "Administrator" || frappe.user_roles.includes("Administrator")) {
@@ -241,7 +248,11 @@ $.extend(frappe.perm, {
 			// fields updated by workflow must be read-only
 			if (
 				cint(cur_frm.read_only) ||
+<<<<<<< HEAD
 				in_list(cur_frm.states.update_fields, df.fieldname) ||
+=======
+				cur_frm.states.update_fields.includes(df.fieldname) ||
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				df.fieldname == cur_frm.state_fieldname
 			) {
 				status = "Read";

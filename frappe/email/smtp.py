@@ -40,9 +40,7 @@ class SMTPServer:
 
 		if not self.server:
 			frappe.msgprint(
-				_(
-					"Email Account not setup. Please create a new Email Account from Setup > Email > Email Account"
-				),
+				_("Email Account not setup. Please create a new Email Account from Settings > Email Account"),
 				raise_exception=frappe.OutgoingEmailError,
 			)
 
@@ -64,6 +62,10 @@ class SMTPServer:
 
 	@property
 	def session(self):
+		"""Get SMTP session.
+
+		We make best effort to revive connection if it's disconnected by checking the connection
+		health before returning it to user."""
 		if self.is_session_active():
 			return self._session
 
@@ -89,6 +91,7 @@ class SMTPServer:
 					frappe.msgprint(res[1], raise_exception=frappe.OutgoingEmailError)
 
 			self._session = _session
+			self._enqueue_connection_closure()
 			return self._session
 
 		except smtplib.SMTPAuthenticationError:
@@ -100,6 +103,20 @@ class SMTPServer:
 				_("Invalid Outgoing Mail Server or Port: {0}").format(str(e)),
 				title=_("Incorrect Configuration"),
 			)
+<<<<<<< HEAD
+=======
+
+	def _enqueue_connection_closure(self):
+		if frappe.request and hasattr(frappe.request, "after_response"):
+			frappe.request.after_response.add(self.quit)
+		elif frappe.job:
+			frappe.job.after_job.add(self.quit)
+		elif not frappe.flags.in_test:
+			# Console?
+			import atexit
+
+			atexit.register(self.quit)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def is_session_active(self):
 		if self._session:

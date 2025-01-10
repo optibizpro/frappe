@@ -24,7 +24,11 @@ export default {
 		},
 		{
 			divisor: 1.0e5,
+<<<<<<< HEAD
 			symbol: __("Lakh", null, "Number system"),
+=======
+			symbol: __("L", null, "Number system"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		},
 		{
 			divisor: 1.0e3,

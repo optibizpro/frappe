@@ -5,6 +5,10 @@ import "./review";
 import "./document_follow";
 import "./user_image";
 import "./form_sidebar_users";
+<<<<<<< HEAD
+=======
+import { get_user_link, get_user_message } from "../footer/version_timeline_content_builder";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 frappe.ui.form.Sidebar = class {
 	constructor(opts) {
@@ -15,13 +19,16 @@ frappe.ui.form.Sidebar = class {
 		var sidebar_content = frappe.render_template("form_sidebar", {
 			doctype: this.frm.doctype,
 			frm: this.frm,
+<<<<<<< HEAD
+=======
+			can_write: frappe.model.can_write(this.frm.doctype, this.frm.docname),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		});
 
 		this.sidebar = $('<div class="form-sidebar overlay-sidebar hidden-xs hidden-sm"></div>')
 			.html(sidebar_content)
 			.appendTo(this.page.sidebar.empty());
 
-		this.comments = this.sidebar.find(".form-sidebar-stats .comments");
 		this.user_actions = this.sidebar.find(".user-actions");
 		this.image_section = this.sidebar.find(".sidebar-image-section");
 		this.image_wrapper = this.image_section.find(".sidebar-image-wrapper");
@@ -31,15 +38,15 @@ frappe.ui.form.Sidebar = class {
 		this.make_shared();
 
 		this.make_tags();
-		this.make_like();
-		this.make_follow();
 
-		this.bind_events();
 		this.setup_keyboard_shortcuts();
 		this.show_auto_repeat_status();
+		this.show_error_log_status();
+		this.show_webhook_request_log_status();
 		frappe.ui.form.setup_user_image_event(this.frm);
 
 		this.refresh();
+<<<<<<< HEAD
 	}
 
 	bind_events() {
@@ -55,6 +62,8 @@ frappe.ui.form.Sidebar = class {
 				me.refresh_like();
 			});
 		});
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	setup_keyboard_shortcuts() {
@@ -76,6 +85,7 @@ frappe.ui.form.Sidebar = class {
 
 			this.frm.tags && this.frm.tags.refresh(this.frm.get_docinfo().tags);
 
+<<<<<<< HEAD
 			if (this.frm.doc.route && cint(frappe.boot.website_tracking_enabled)) {
 				let route = this.frm.doc.route;
 				frappe.utils.get_page_view_count(route).then((res) => {
@@ -113,7 +123,77 @@ frappe.ui.form.Sidebar = class {
 			this.refresh_like();
 			this.refresh_follow();
 			this.refresh_comments_count();
+=======
+			this.refresh_web_view_count();
+			this.refresh_creation_modified();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.ui.form.set_user_image(this.frm);
+		}
+	}
+
+	refresh_web_view_count() {
+		if (this.frm.doc.route && cint(frappe.boot.website_tracking_enabled)) {
+			let route = this.frm.doc.route;
+			frappe.utils.get_page_view_count(route).then((res) => {
+				this.sidebar
+					.find(".pageview-count")
+					.removeClass("hidden")
+					.html(__("{0} Web page views", [String(res.message).bold()]));
+			});
+		}
+	}
+
+	refresh_creation_modified() {
+		let user_list = [this.frm.doc.owner, this.frm.doc.modified_by];
+		if (this.frm.doc.owner === this.frm.doc.modified_by) {
+			user_list = [this.frm.doc.owner];
+		}
+
+		let avatar_group = frappe.avatar_group(user_list, 5, {
+			align: "left",
+			overlap: true,
+		});
+
+		this.sidebar.find(".created-modified-section").append(avatar_group);
+
+		let creation_message =
+			get_user_message(
+				this.frm.doc.owner,
+				__("You created this", null),
+				__("{0} created this", [get_user_link(this.frm.doc.owner)])
+			) +
+			" · " +
+			comment_when(this.frm.doc.creation);
+
+		let modified_message =
+			get_user_message(
+				this.frm.doc.modified_by,
+				__("You last edited this", null),
+				__("{0} last edited this", [get_user_link(this.frm.doc.modified_by)])
+			) +
+			" · " +
+			comment_when(this.frm.doc.modified);
+
+		if (user_list.length === 1) {
+			// same user created and edited
+
+			avatar_group.find(".avatar").popover({
+				trigger: "hover",
+				html: true,
+				content: creation_message + "<br>" + modified_message,
+			});
+		} else {
+			avatar_group.find(".avatar:first-child").popover({
+				trigger: "hover",
+				html: true,
+				content: creation_message,
+			});
+
+			avatar_group.find(".avatar:last-child").popover({
+				trigger: "hover",
+				html: true,
+				content: modified_message,
+			});
 		}
 	}
 
@@ -130,6 +210,7 @@ frappe.ui.form.Sidebar = class {
 					fieldname: ["frequency"],
 				},
 				callback: function (res) {
+<<<<<<< HEAD
 					me.sidebar
 						.find(".auto-repeat-status")
 						.html(__("Repeats {0}", [__(res.message.frequency)]));
@@ -137,6 +218,46 @@ frappe.ui.form.Sidebar = class {
 						frappe.set_route("Form", "Auto Repeat", me.frm.doc.auto_repeat);
 					});
 				},
+=======
+					let el = me.sidebar.find(".auto-repeat-status");
+					el.find("span").html(__("Repeats {0}", [__(res.message.frequency)]));
+					el.closest(".sidebar-section").removeClass("hidden");
+					el.show();
+					el.on("click", function () {
+						frappe.set_route("Form", "Auto Repeat", me.frm.doc.auto_repeat);
+					});
+				},
+			});
+		}
+	}
+
+	show_error_log_status() {
+		const docinfo = this.frm.get_docinfo();
+		if (docinfo.error_log_exists) {
+			let el = this.sidebar.find(".error-log-status");
+			el.closest(".sidebar-section").removeClass("hidden");
+			el.show();
+			el.on("click", () => {
+				frappe.set_route("List", "Error Log", {
+					reference_doctype: this.frm.doc.doctype,
+					reference_name: this.frm.doc.name,
+				});
+			});
+		}
+	}
+
+	show_webhook_request_log_status() {
+		const docinfo = this.frm.get_docinfo();
+		if (docinfo.webhook_request_log_exists) {
+			let el = this.sidebar.find(".webhook-request-log-status");
+			el.closest(".sidebar-section").removeClass("hidden");
+			el.show();
+			el.on("click", () => {
+				frappe.set_route("List", "Webhook Request Log", {
+					reference_doctype: this.frm.doc.doctype,
+					reference_document: this.frm.doc.name,
+				});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 		}
 	}
@@ -185,7 +306,13 @@ frappe.ui.form.Sidebar = class {
 		return $("<a>")
 			.html(label)
 			.appendTo(
+<<<<<<< HEAD
 				$('<li class="user-action-row">').appendTo(this.user_actions.removeClass("hidden"))
+=======
+				$('<div class="user-action-row"></div>').appendTo(
+					this.user_actions.removeClass("hidden")
+				)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 			.on("click", click);
 	}
@@ -195,6 +322,7 @@ frappe.ui.form.Sidebar = class {
 		this.user_actions.find(".user-action-row").remove();
 	}
 
+<<<<<<< HEAD
 	make_like() {
 		this.like_wrapper = this.sidebar.find(".liked-by");
 		this.like_icon = this.sidebar.find(".liked-by .like-icon");
@@ -253,6 +381,8 @@ frappe.ui.form.Sidebar = class {
 		this.comments.find(".comments-count").html(count);
 	}
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	refresh_image() {}
 
 	make_review() {

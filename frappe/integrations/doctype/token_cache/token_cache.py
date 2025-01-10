@@ -1,22 +1,46 @@
 # Copyright (c) 2019, Frappe Technologies and contributors
 # License: MIT. See LICENSE
 
-from datetime import datetime, timedelta
+import datetime
+from zoneinfo import ZoneInfo
 
 import pytz
 
 import frappe
 from frappe import _
 from frappe.model.document import Document
+<<<<<<< HEAD
 from frappe.utils import cint, cstr, get_system_timezone
+=======
+from frappe.utils import cint, cstr, get_datetime, get_system_timezone
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class TokenCache(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.integrations.doctype.oauth_scope.oauth_scope import OAuthScope
+		from frappe.types import DF
+
+		access_token: DF.Password | None
+		connected_app: DF.Link | None
+		expires_in: DF.Int
+		provider_name: DF.Data | None
+		refresh_token: DF.Password | None
+		scopes: DF.Table[OAuthScope]
+		state: DF.Data | None
+		success_uri: DF.Data | None
+		token_type: DF.Data | None
+		user: DF.Link | None
+	# end: auto-generated types
+
 	def get_auth_header(self):
 		if self.access_token:
-			headers = {"Authorization": "Bearer " + self.get_password("access_token")}
-			return headers
-
+			return {"Authorization": "Bearer " + self.get_password("access_token")}
 		raise frappe.exceptions.DoesNotExistError
 
 	def update_data(self, data):
@@ -54,11 +78,18 @@ class TokenCache(Document):
 		return self
 
 	def get_expires_in(self):
+<<<<<<< HEAD
 		system_timezone = pytz.timezone(get_system_timezone())
 		modified = frappe.utils.get_datetime(self.modified)
 		modified = system_timezone.localize(modified)
 		expiry_utc = modified.astimezone(pytz.utc) + timedelta(seconds=self.expires_in)
 		now_utc = datetime.utcnow().replace(tzinfo=pytz.utc)
+=======
+		system_timezone = ZoneInfo(get_system_timezone())
+		modified: datetime.datetime = get_datetime(self.modified).replace(tzinfo=system_timezone)
+		expiry_utc = modified.astimezone(datetime.timezone.utc) + datetime.timedelta(seconds=self.expires_in)
+		now_utc = datetime.datetime.now(datetime.timezone.utc)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return cint((expiry_utc - now_utc).total_seconds())
 
 	def is_expired(self):

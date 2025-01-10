@@ -6,11 +6,66 @@ from urllib.parse import quote
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import encode, get_request_site_address
+from frappe.utils import cint, encode, get_request_site_address
 from frappe.website.utils import get_boot_data
 
 
 class WebsiteSettings(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+		from frappe.website.doctype.top_bar_item.top_bar_item import TopBarItem
+		from frappe.website.doctype.website_route_redirect.website_route_redirect import (
+			WebsiteRouteRedirect,
+		)
+
+		address: DF.SmallText | None
+		app_logo: DF.AttachImage | None
+		app_name: DF.Data | None
+		auto_account_deletion: DF.Int
+		banner_html: DF.Code | None
+		banner_image: DF.AttachImage | None
+		brand_html: DF.Code | None
+		call_to_action: DF.Data | None
+		call_to_action_url: DF.Data | None
+		copyright: DF.Data | None
+		disable_signup: DF.Check
+		enable_google_indexing: DF.Check
+		enable_view_tracking: DF.Check
+		favicon: DF.Attach | None
+		footer_items: DF.Table[TopBarItem]
+		footer_logo: DF.AttachImage | None
+		footer_powered: DF.SmallText | None
+		footer_template: DF.Link | None
+		footer_template_values: DF.Code | None
+		google_analytics_anonymize_ip: DF.Check
+		google_analytics_id: DF.Data | None
+		head_html: DF.Code | None
+		hide_footer_signup: DF.Check
+		hide_login: DF.Check
+		home_page: DF.Data | None
+		indexing_authorization_code: DF.Data | None
+		indexing_refresh_token: DF.Data | None
+		navbar_search: DF.Check
+		navbar_template: DF.Link | None
+		navbar_template_values: DF.Code | None
+		robots_txt: DF.Code | None
+		route_redirects: DF.Table[WebsiteRouteRedirect]
+		show_account_deletion_link: DF.Check
+		show_footer_on_login: DF.Check
+		show_language_picker: DF.Check
+		splash_image: DF.AttachImage | None
+		subdomain: DF.SmallText | None
+		title_prefix: DF.Data | None
+		top_bar_items: DF.Table[TopBarItem]
+		website_theme: DF.Link | None
+		website_theme_image_link: DF.Code | None
+	# end: auto-generated types
+
 	def validate(self):
 		self.validate_top_bar_items()
 		self.validate_footer_items()
@@ -116,7 +171,11 @@ class WebsiteSettings(Document):
 def get_website_settings(context=None):
 	hooks = frappe.get_hooks()
 	context = frappe._dict(context or {})
+<<<<<<< HEAD
 	settings: "WebsiteSettings" = frappe.get_cached_doc("Website Settings")
+=======
+	settings: WebsiteSettings = frappe.get_cached_doc("Website Settings")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	context = context.update(
 		{
@@ -163,7 +222,7 @@ def get_website_settings(context=None):
 		"linked_in_share",
 		"disable_signup",
 	]:
-		context[k] = int(context.get(k) or 0)
+		context[k] = cint(context.get(k))
 
 	if settings.address:
 		context["footer_address"] = settings.address
@@ -174,8 +233,8 @@ def get_website_settings(context=None):
 	context.encoded_title = quote(encode(context.title or ""), "")
 
 	context.web_include_js = hooks.web_include_js or []
-
 	context.web_include_css = hooks.web_include_css or []
+	context.web_include_icons = hooks.web_include_icons or []
 
 	via_hooks = hooks.website_context or []
 	for key in via_hooks:

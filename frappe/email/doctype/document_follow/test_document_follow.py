@@ -11,10 +11,26 @@ from frappe.desk.like import toggle_like
 from frappe.query_builder import DocType
 from frappe.query_builder.functions import Cast_
 from frappe.share import add as share
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDocumentFollow(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestDocumentFollow(UnitTestCase):
+	"""
+	Unit tests for DocumentFollow.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestDocumentFollow(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_document_follow_version(self):
 		user = get_user()
 		event_doc = get_event()

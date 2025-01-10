@@ -104,8 +104,21 @@ export default class Header extends Block {
 		this._data = this.normalizeData(data);
 
 		if (data.text !== undefined) {
+<<<<<<< HEAD
 			let text = this._data.text || "";
 			const contains_html_tag = /<[a-z][\s\S]*>/i.test(text);
+=======
+			let text = __(this._data.text) || "";
+			const contains_html_tag = /<[a-z][\s\S]*>/i.test(text);
+
+			// apply translation to header text
+			let div = document.createElement("div");
+			div.innerHTML = text;
+			let only_text = div.innerText;
+			only_text = frappe.utils.escape_html(only_text);
+			text = text.replace(only_text, __(only_text));
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this._element.innerHTML = contains_html_tag
 				? text
 				: `<span class="h${this._settings.default_size}">${text}</span>`;

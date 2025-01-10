@@ -54,6 +54,13 @@ String.prototype.plural = function (revert) {
 		"(octop)us$": "$1i",
 		"(ax|test)is$": "$1es",
 		"(us)$": "$1es",
+		"(f)oot$": "$1eet",
+		"(g)oose$": "$1eese",
+		"(sex)$": "$1es",
+		"(child)$": "$1ren",
+		"(m)an$": "$1en",
+		"(t)ooth$": "$1eeth",
+		"(pe)rson$": "$1ople",
 		"([^s]+)$": "$1s",
 	};
 
@@ -85,18 +92,14 @@ String.prototype.plural = function (revert) {
 		"(h|bl)ouses$": "$1ouse",
 		"(corpse)s$": "$1",
 		"(us)es$": "$1",
+		"(f)eet$": "$1oot",
+		"(g)eese$": "$1oose",
+		"(sex)es$": "$1",
+		"(child)ren$": "$1",
+		"(m)en$": "$1an",
+		"(t)eeth$": "$1ooth",
+		"(pe)ople$": "$1rson",
 		s$: "",
-	};
-
-	const irregular = {
-		move: "moves",
-		foot: "feet",
-		goose: "geese",
-		sex: "sexes",
-		child: "children",
-		man: "men",
-		tooth: "teeth",
-		person: "people",
 	};
 
 	const uncountable = [
@@ -115,29 +118,12 @@ String.prototype.plural = function (revert) {
 	// save some time in the case that singular and plural are the same
 	if (uncountable.indexOf(this.toLowerCase()) >= 0) return this;
 
-	// check for irregular forms
-	let word;
-	let pattern;
-	let replace;
-	for (word in irregular) {
-		if (revert) {
-			pattern = new RegExp(irregular[word] + "$", "i");
-			replace = word;
-		} else {
-			pattern = new RegExp(word + "$", "i");
-			replace = irregular[word];
-		}
-		if (pattern.test(this)) return this.replace(pattern, replace);
-	}
-
-	let array;
-	if (revert) array = singular;
-	else array = plural;
-
 	// check for matches using regular expressions
+	const array = revert ? singular : plural;
+
 	let reg;
 	for (reg in array) {
-		pattern = new RegExp(reg, "i");
+		const pattern = new RegExp(reg, "i");
 
 		if (pattern.test(this)) return this.replace(pattern, array[reg]);
 	}
@@ -313,6 +299,12 @@ Object.assign(frappe.utils, {
 			);
 		return content.html();
 	},
+<<<<<<< HEAD
+=======
+	scroll_page_to_top() {
+		$(".main-section").scrollTop(0);
+	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	scroll_to: function (
 		element,
 		animate = true,
@@ -372,8 +364,12 @@ Object.assign(frappe.utils, {
 	get_scroll_position: function (element, additional_offset) {
 		let header_offset =
 			$(".navbar").height() + $(".page-head:visible").height() || $(".navbar").height();
+<<<<<<< HEAD
 		let scroll_top = $(element).offset().top - header_offset - cint(additional_offset);
 		return scroll_top;
+=======
+		return $(element).offset().top - header_offset - cint(additional_offset);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 	filter_dict: function (dict, filters) {
 		var ret = [];
@@ -479,7 +475,11 @@ Object.assign(frappe.utils, {
 				break;
 			case "url":
 				regExp =
+<<<<<<< HEAD
 					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i;
+=======
+					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i; // eslint-disable-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				break;
 			case "dateIso":
 				regExp = /^(\d{4})\D?(0[1-9]|1[0-2])\D?([12]\d|0[1-9]|3[01])$/;
@@ -495,6 +495,7 @@ Object.assign(frappe.utils, {
 		var style = default_style || "default";
 		var colour = "gray";
 		if (text) {
+			text = cstr(text);
 			if (has_words(["Pending", "Review", "Medium", "Not Approved"], text)) {
 				style = "warning";
 				colour = "orange";
@@ -790,10 +791,13 @@ Object.assign(frappe.utils, {
 		frappe.msgprint(__("Note: Changing the Page Name will break previous URL to this page."));
 	},
 
+<<<<<<< HEAD
 	notify: function (subject, body, route, onclick) {
 		console.log("push notifications are evil and deprecated");
 	},
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	set_title: function (title) {
 		frappe._original_title = title;
 		if (frappe._title_prefix) {
@@ -936,6 +940,7 @@ Object.assign(frappe.utils, {
 		let route = route_str.split("/");
 
 		if (route[2] === "Report" || route[0] === "query-report") {
+<<<<<<< HEAD
 			return __("{0} Report", [__(route[3]) || __(route[1])]);
 		}
 		if (route[0] === "List") {
@@ -947,6 +952,22 @@ Object.assign(frappe.utils, {
 		if (route[0] === "dashboard") {
 			return __("{0} Dashboard", [__(route[1])]);
 		}
+=======
+			return (__(route[3]) || __(route[1])).bold() + " " + __("Report");
+		}
+		if (route[0] === "List") {
+			return __(route[1]).bold() + " " + __("List");
+		}
+		if (route[0] === "modules") {
+			return __(route[1]).bold() + " " + __("Module");
+		}
+		if (route[0] === "Workspaces") {
+			return __(route[1]).bold() + " " + __("Workspace");
+		}
+		if (route[0] === "dashboard") {
+			return __(route[1]).bold() + " " + __("Dashboard");
+		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return __(frappe.utils.to_title_case(__(route[0]), true));
 	},
 	report_column_total: function (values, column, type) {
@@ -1086,8 +1107,13 @@ Object.assign(frappe.utils, {
 			let expression_function = new Function(...variable_names, code);
 			return expression_function(...variables);
 		} catch (error) {
+<<<<<<< HEAD
 			console.log("Error evaluating the following expression:"); // eslint-disable-line no-console
 			console.error(code); // eslint-disable-line no-console
+=======
+			console.log("Error evaluating the following expression:");
+			console.error(code);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			throw error;
 		}
 	},
@@ -1182,11 +1208,14 @@ Object.assign(frappe.utils, {
 	},
 
 	get_duration_options: function (docfield) {
+<<<<<<< HEAD
 		let duration_options = {
+=======
+		return {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			hide_days: docfield.hide_days,
 			hide_seconds: docfield.hide_seconds,
 		};
-		return duration_options;
 	},
 
 	get_number_system: function (country) {
@@ -1202,7 +1231,11 @@ Object.assign(frappe.utils, {
 	map_defaults: {
 		center: [19.08, 72.8961],
 		zoom: 13,
+<<<<<<< HEAD
 		tiles: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+=======
+		tiles: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		options: {
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -1212,21 +1245,27 @@ Object.assign(frappe.utils, {
 
 	icon(icon_name, size = "sm", icon_class = "", icon_style = "", svg_class = "") {
 		let size_class = "";
+		let is_espresso = icon_name.startsWith("es-");
 
+		icon_name = is_espresso ? `${"#" + icon_name}` : `${"#icon-" + icon_name}`;
 		if (typeof size == "object") {
 			icon_style += ` width: ${size.width}; height: ${size.height}`;
 		} else {
 			size_class = `icon-${size}`;
 		}
-		return `<svg class="icon ${svg_class} ${size_class}" style="${icon_style}">
-			<use class="${icon_class}" href="#icon-${icon_name}"></use>
+		return `<svg class="${
+			is_espresso
+				? icon_name.startsWith("es-solid")
+					? "es-icon es-solid"
+					: "es-icon es-line"
+				: "icon"
+		} ${svg_class} ${size_class}" style="${icon_style}" aria-hidden="true">
+			<use class="${icon_class}" href="${icon_name}"></use>
 		</svg>`;
 	},
 
 	flag(country_code) {
-		return `<img
-		src="https://flagcdn.com/${country_code}.svg"
-		width="20" height="15">`;
+		return `<img loading="lazy" src="https://flagcdn.com/${country_code}.svg" width="20" height="15">`;
 	},
 
 	make_chart(wrapper, custom_options = {}) {
@@ -1300,6 +1339,12 @@ Object.assign(frappe.utils, {
 								route += `/${item.kanban_board}`;
 							}
 							break;
+<<<<<<< HEAD
+=======
+						case "Image":
+							route = `${doctype_slug}/view/image`;
+							break;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						default:
 							route = doctype_slug;
 					}
@@ -1307,10 +1352,10 @@ Object.assign(frappe.utils, {
 			} else if (type === "report") {
 				if (item.is_query_report) {
 					route = "query-report/" + item.name;
-				} else if (!item.doctype) {
-					route = "/report/" + item.name;
+				} else if (!item.is_query_report && item.report_ref_doctype) {
+					route = frappe.router.slug(item.report_ref_doctype) + "/view/report/";
 				} else {
-					route = frappe.router.slug(item.doctype) + "/view/report/" + item.name;
+					route = "report/" + item.name;
 				}
 			} else if (type === "page") {
 				route = item.name;
@@ -1577,8 +1622,13 @@ Object.assign(frappe.utils, {
 					return title;
 				});
 		} catch (error) {
+<<<<<<< HEAD
 			console.log("Error while fetching link title."); // eslint-disable-line
 			console.log(error); // eslint-disable-line
+=======
+			console.log("Error while fetching link title.");
+			console.log(error);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return Promise.resolve(name);
 		}
 	},
@@ -1586,7 +1636,11 @@ Object.assign(frappe.utils, {
 	only_allow_num_decimal(input) {
 		input.on("input", (e) => {
 			let self = $(e.target);
+<<<<<<< HEAD
 			self.val(self.val().replace(/[^0-9.]/g, ""));
+=======
+			self.val(self.val().replace(/[^0-9.\-]/g, ""));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (
 				(e.which != 46 || self.val().indexOf(".") != -1) &&
 				(e.which < 48 || e.which > 57)
@@ -1707,4 +1761,111 @@ Object.assign(frappe.utils, {
 			});
 		},
 	},
+<<<<<<< HEAD
+=======
+	generate_tracking_url() {
+		frappe.prompt(
+			[
+				{
+					fieldname: "url",
+					label: __("Web Page URL"),
+					fieldtype: "Data",
+					options: "URL",
+					reqd: 1,
+					default: localStorage.getItem("tracker_url:url"),
+				},
+				{
+					fieldname: "source",
+					label: __("Source"),
+					fieldtype: "Link",
+					reqd: 1,
+					options: "UTM Source",
+					description: "The referrer (e.g. google, newsletter)",
+					default: localStorage.getItem("tracker_url:source"),
+				},
+				{
+					fieldname: "campaign",
+					label: __("Campaign"),
+					fieldtype: "Link",
+					ignore_link_validation: 1,
+					options: "UTM Campaign",
+					default: localStorage.getItem("tracker_url:campaign"),
+				},
+				{
+					fieldname: "medium",
+					label: __("Medium"),
+					fieldtype: "Link",
+					options: "UTM Medium",
+					description: "Marketing medium (e.g. cpc, banner, email)",
+					default: localStorage.getItem("tracker_url:medium"),
+				},
+				{
+					fieldname: "content",
+					label: __("Content"),
+					fieldtype: "Data",
+					description: "Use to differentiate ad variants (e.g. A/B testing)",
+					default: localStorage.getItem("tracker_url:content"),
+				},
+			],
+			async function (data) {
+				let url = data.url;
+				localStorage.setItem("tracker_url:url", data.url);
+
+				const { message } = await frappe.db.get_value("UTM Source", data.source, "slug");
+				url += "?utm_source=" + encodeURIComponent(message.slug || data.source);
+				localStorage.setItem("tracker_url:source", data.source);
+				if (data.campaign) {
+					const { message } = await frappe.db.get_value(
+						"UTM Campaign",
+						data.campaign,
+						"slug"
+					);
+					url += "&utm_campaign=" + encodeURIComponent(message.slug || data.campaign);
+					localStorage.setItem("tracker_url:campaign", data.campaign);
+				}
+				if (data.medium) {
+					const { message } = await frappe.db.get_value(
+						"UTM Medium",
+						data.medium,
+						"slug"
+					);
+					url += "&utm_medium=" + encodeURIComponent(message.slug || data.medium);
+					localStorage.setItem("tracker_url:medium", data.medium);
+				}
+				if (data.content) {
+					url += "&utm_content=" + encodeURIComponent(data.content);
+					localStorage.setItem("tracker_url:content", data.content);
+				}
+
+				frappe.utils.copy_to_clipboard(url);
+
+				frappe.msgprint(
+					__("Tracking URL generated and copied to clipboard") +
+						": <br>" +
+						`<a href="${url}">${url.bold()}</a>`,
+					__("Here's your tracking URL")
+				);
+			},
+			__("Generate Tracking URL")
+		);
+	},
+
+	/**
+	 * Checks if a value is empty.
+	 *
+	 * Returns false for: "hello", 0, 1, 3.1415, {"a": 1}, [1, 2, 3]
+	 * Returns true for: "", null, undefined, {}, []
+	 *
+	 * @param {*} value - The value to check.
+	 * @returns {boolean} - Returns `true` if the value is empty, `false` otherwise.
+	 */
+	is_empty(value) {
+		if (!value && value !== 0) return true;
+
+		if (typeof value === "object")
+			return (Array.isArray(value) ? value : Object.keys(value)).length === 0;
+
+		return false;
+	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });

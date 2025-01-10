@@ -55,16 +55,41 @@ frappe.search.SearchDialog = class {
 					let results = frappe.search.utils.get_nav_results(keywords);
 					frappe.search.utils.get_global_results(keywords, start, limit).then(
 						(global_results) => {
+<<<<<<< HEAD
+=======
 							results = results.concat(global_results);
 							callback(results, keywords);
 						},
 						(err) => {
-							// eslint-disable-next-line no-console
 							console.error(err);
 						}
 					);
 				},
 			},
+			tags: {
+				input_placeholder: __("Search"),
+				empty_state_text: __("Search for anything"),
+				no_results_status: (keyword) =>
+					"<div>" + __("No documents found tagged with {0}", [keyword]) + "</div>",
+				get_results: (keywords, callback) => {
+					var results = frappe.search.utils.get_nav_results(keywords);
+					frappe.tags.utils.get_tag_results(keywords).then(
+						(global_results) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+							results = results.concat(global_results);
+							callback(results, keywords);
+						},
+						(err) => {
+<<<<<<< HEAD
+							// eslint-disable-next-line no-console
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+							console.error(err);
+						}
+					);
+				},
+			},
+<<<<<<< HEAD
 			tags: {
 				input_placeholder: __("Search"),
 				empty_state_text: __("Search for anything"),
@@ -84,6 +109,8 @@ frappe.search.SearchDialog = class {
 					);
 				},
 			},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		};
 	}
 
@@ -177,7 +204,10 @@ frappe.search.SearchDialog = class {
 							doctype_results.length && this.add_more_results(doctype_results);
 						},
 						(err) => {
+<<<<<<< HEAD
 							// eslint-disable-next-line no-console
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							console.error(err);
 						}
 					);

@@ -75,7 +75,7 @@
    "label": "Event Type",
    "oldfieldname": "event_type",
    "oldfieldtype": "Select",
-   "options": "Private\nPublic\nCancelled",
+   "options": "Private\nPublic",
    "reqd": 1,
    "search_index": 1
   },
@@ -123,7 +123,7 @@
    "fieldtype": "Select",
    "in_global_search": 1,
    "label": "Repeat On",
-   "options": "\nDaily\nWeekly\nMonthly\nYearly"
+   "options": "\nDaily\nWeekly\nMonthly\nQuarterly\nHalf Yearly\nYearly"
   },
   {
    "depends_on": "repeat_this_event",
@@ -223,7 +223,11 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
+<<<<<<< HEAD
    "options": "Open\nCompleted\nClosed"
+=======
+   "options": "Open\nCompleted\nClosed\nCancelled"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "collapsible": 1,
@@ -296,7 +300,11 @@
  "icon": "fa fa-calendar",
  "idx": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2022-08-12 19:24:34.794098",
+=======
+ "modified": "2024-03-23 16:03:25.511756",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Event",
@@ -329,7 +337,7 @@
  ],
  "read_only": 1,
  "sender_field": "sender",
- "sort_field": "modified",
+ "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "subject_field": "subject",

@@ -136,7 +136,11 @@ export default class GridRowForm {
 				var first = me.form_area.find("input:first");
 				if (
 					first.length &&
+<<<<<<< HEAD
 					!in_list(["Date", "Datetime", "Time"], first.attr("data-fieldtype"))
+=======
+					!["Date", "Datetime", "Time"].includes(first.attr("data-fieldtype"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				) {
 					try {
 						first.get(0).focus();

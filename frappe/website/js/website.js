@@ -1,7 +1,10 @@
 // Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 // MIT License. See license.txt
+<<<<<<< HEAD
 /* eslint-disable no-console */
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import hljs from "./syntax_highlight";
 
 frappe.provide("website");
@@ -9,18 +12,32 @@ frappe.provide("frappe.awesome_bar_path");
 window.cur_frm = null;
 
 $.extend(frappe, {
+<<<<<<< HEAD
 	boot: {
 		lang: "en",
 	},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	_assets_loaded: [],
 	require: async function (links, callback) {
 		if (typeof links === "string") {
 			links = [links];
 		}
+		links = links.map((link) => frappe.bundled_asset(link));
 		for (let link of links) {
 			await this.add_asset_to_head(link);
 		}
 		callback && callback();
+	},
+	bundled_asset(path, is_rtl = null) {
+		if (!path.startsWith("/assets") && path.includes(".bundle.")) {
+			if (path.endsWith(".css") && is_rtl) {
+				path = `rtl_${path}`;
+			}
+			path = frappe.boot.assets_json[path] || path;
+			return path;
+		}
+		return path;
 	},
 	add_asset_to_head(link) {
 		return new Promise((resolve) => {
@@ -76,7 +93,7 @@ $.extend(frappe, {
 		}
 		return $.ajax({
 			type: opts.type || "POST",
-			url: "/",
+			url: opts.url || "/",
 			data: opts.args,
 			dataType: "json",
 			headers: {
@@ -205,6 +222,7 @@ $.extend(frappe, {
 			)
 			.appendTo(document.body);
 	},
+<<<<<<< HEAD
 	send_message: function (opts, btn) {
 		return frappe.call({
 			type: "POST",
@@ -214,6 +232,8 @@ $.extend(frappe, {
 			callback: opts.callback,
 		});
 	},
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	has_permission: function (doctype, docname, perm_type, callback) {
 		return frappe.call({
 			type: "GET",
@@ -336,9 +356,15 @@ $.extend(frappe, {
 	},
 	make_navbar_active: function () {
 		var pathname = window.location.pathname;
+<<<<<<< HEAD
 		$(".navbar-nav a.active").removeClass("active");
 		$(".navbar-nav a").each(function () {
 			var href = $(this).attr("href");
+=======
+		$(".navbar-nav li.active").removeClass("active");
+		$(".navbar-nav li").each(function () {
+			var href = $(this.getElementsByTagName("a")).attr("href");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (href === pathname) {
 				$(this).addClass("active");
 				return false;
@@ -354,6 +380,13 @@ $.extend(frappe, {
 	add_switch_to_desk: function () {
 		$(".switch-to-desk").removeClass("hidden");
 	},
+<<<<<<< HEAD
+=======
+	add_apps: function (obj) {
+		$(".logged-in .apps").attr("href", obj.route).text(obj.label);
+		$(".logged-in .apps").removeClass("hidden");
+	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	add_link_to_headings: function () {
 		$(".doc-content .from-markdown")
 			.find("h2, h3, h4, h5, h6")
@@ -369,6 +402,7 @@ $.extend(frappe, {
 					</svg>
 				`);
 				$($heading).append($a);
+<<<<<<< HEAD
 			});
 	},
 	setup_lazy_images: function () {
@@ -414,6 +448,9 @@ $.extend(frappe, {
 			// Start observing an element
 			io.observe(el);
 		});
+=======
+			});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 	show_language_picker() {
 		if (frappe.session.user === "Guest" && window.show_language_picker) {
@@ -468,7 +505,9 @@ frappe.setup_search = function (target, search_scope) {
 	}
 
 	let $search_input = $(`<div class="dropdown" id="dropdownMenuSearch">
-			<input type="search" class="form-control" placeholder="Search the docs (Press / to focus)" />
+			<input type="search" class="form-control" placeholder="${__(
+				"Search the docs (Press / to focus)"
+			)}" />
 			<div class="overflow-hidden shadow dropdown-menu w-100" aria-labelledby="dropdownMenuSearch">
 			</div>
 			<div class="search-icon">
@@ -603,14 +642,19 @@ frappe.setup_search = function (target, search_scope) {
 
 // Utility functions
 window.valid_email = function (id) {
+<<<<<<< HEAD
 	// eslint-disable-next-line
 	// copied regex from frappe/utils.js validate_type
+=======
+	// copied regex from frappe/utils.js validate_type
+	// eslint-disable-next-line
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/.test(
 		id.toLowerCase()
 	);
 };
 
-window.validate_email = valid_email;
+window.validate_email = window.valid_email;
 
 window.cstr = function (s) {
 	return s == null ? "" : s + "";
@@ -654,13 +698,29 @@ $(document).ready(function () {
 
 	frappe.bind_navbar_search();
 
+	// add apps link
+	let apps = frappe.boot?.apps_data?.apps;
+	let obj = {
+		label: __("Apps"),
+		route: "/apps",
+	};
+	if (apps?.length) {
+		if (apps.length == 1) {
+			obj = {
+				label: __(apps[0].title),
+				route: apps[0].route,
+			};
+		}
+		let is_desk_apps = frappe.boot?.apps_data?.is_desk_apps;
+		!is_desk_apps && frappe.add_apps(obj);
+	}
+
 	// switch to app link
 	if (frappe.get_cookie("system_user") === "yes" && logged_in) {
 		frappe.add_switch_to_desk();
 	}
 
 	frappe.render_user();
-	frappe.setup_lazy_images();
 
 	$(document).trigger("page-change");
 });
@@ -694,5 +754,5 @@ $(document).on("page-change", function () {
 frappe.ready(function () {
 	frappe.show_language_picker();
 	frappe.setup_videos();
-	frappe.socketio.init(window.socketio_port);
+	frappe.realtime.init(window.socketio_port, true); // lazy connection
 });

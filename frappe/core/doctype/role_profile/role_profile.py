@@ -8,12 +8,35 @@ from frappe.model.document import Document
 
 
 class RoleProfile(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.types import DF
+
+		role_profile: DF.Data
+		roles: DF.Table[HasRole]
+	# end: auto-generated types
+
 	def autoname(self):
 		"""set name as Role Profile name"""
 		self.name = self.role_profile
 
 	def on_update(self):
+		self.clear_cache()
+		self.queue_action(
+			"update_all_users",
+			now=frappe.flags.in_test or frappe.flags.in_install,
+			enqueue_after_commit=True,
+			queue="long",
+		)
+
+	def update_all_users(self):
 		"""Changes in role_profile reflected across all its user"""
+<<<<<<< HEAD
 		has_role = frappe.qb.DocType("Has Role")
 		user = frappe.qb.DocType("User")
 
@@ -35,3 +58,12 @@ class RoleProfile(Document):
 				user = frappe.get_doc("User", user)
 				user.roles = []
 				user.add_roles(*role_profile_roles)
+=======
+		users = frappe.get_all("User Role Profile", filters={"role_profile": self.name}, pluck="parent")
+		for user in users:
+			user = frappe.get_doc("User", user)
+			user.save()  # resaving syncs roles
+
+	def get_permission_log_options(self, event=None):
+		return {"fields": ["roles"]}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

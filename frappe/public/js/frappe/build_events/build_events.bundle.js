@@ -1,3 +1,4 @@
+import { createApp } from "vue";
 import BuildError from "./BuildError.vue";
 import BuildSuccess from "./BuildSuccess.vue";
 
@@ -16,7 +17,11 @@ frappe.realtime.on("build_event", (data) => {
 					if (parts.length === 2) {
 						let filename = parts[0].split("/").slice(-1)[0];
 
+<<<<<<< HEAD
 						frappe.assets.executed_ = frappe.assets.executed_.filter(
+=======
+						frappe.assets._executed = frappe.assets._executed.filter(
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							(asset) => !asset.includes(`${filename}.bundle`)
 						);
 					}
@@ -48,11 +53,15 @@ function show_build_success(data) {
 
 	if (!success) {
 		let target = $('<div class="build-success-container">').appendTo($container).get(0);
+<<<<<<< HEAD
 		let vm = new Vue({
 			el: target,
 			render: (h) => h(BuildSuccess),
 		});
 		success = vm.$children[0];
+=======
+		success = createApp(BuildSuccess).mount(target);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	success.show(data);
 }
@@ -63,11 +72,15 @@ function show_build_error(data) {
 	}
 	if (!error) {
 		let target = $('<div class="build-error-container">').appendTo($container).get(0);
+<<<<<<< HEAD
 		let vm = new Vue({
 			el: target,
 			render: (h) => h(BuildError),
 		});
 		error = vm.$children[0];
+=======
+		error = createApp(BuildError).mount(target);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	error.show(data);
 }

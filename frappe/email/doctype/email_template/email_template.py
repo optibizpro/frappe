@@ -9,6 +9,23 @@ from frappe.utils.jinja import validate_template
 
 
 class EmailTemplate(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		response: DF.TextEditor | None
+		response_html: DF.Code | None
+		subject: DF.Data
+		use_html: DF.Check
+	# end: auto-generated types
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@property
 	def response_(self):
 		return self.response_html if self.use_html else self.response
@@ -35,7 +52,11 @@ class EmailTemplate(Document):
 
 @frappe.whitelist()
 def get_email_template(template_name, doc):
+<<<<<<< HEAD
 	"""Returns the processed HTML of a email template with the given doc"""
+=======
+	"""Return the processed HTML of a email template with the given doc"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	email_template = frappe.get_doc("Email Template", template_name)
 	return email_template.get_formatted_email(doc)

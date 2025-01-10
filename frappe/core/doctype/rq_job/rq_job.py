@@ -39,6 +39,29 @@ def check_permissions(method):
 
 
 class RQJob(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		arguments: DF.Code | None
+		ended_at: DF.Datetime | None
+		exc_info: DF.Code | None
+		job_id: DF.Data | None
+		job_name: DF.Data | None
+		queue: DF.Literal["default", "short", "long"]
+		started_at: DF.Datetime | None
+		status: DF.Literal["queued", "started", "finished", "failed", "deferred", "scheduled", "canceled"]
+		time_taken: DF.Duration | None
+		timeout: DF.Duration | None
+	# end: auto-generated types
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def load_from_db(self):
 		try:
 			job = Job.fetch(self.name, connection=get_redis_conn())
@@ -56,6 +79,7 @@ class RQJob(Document):
 		return self._job_obj
 
 	@staticmethod
+<<<<<<< HEAD
 	def get_list(args):
 		start = cint(args.get("start")) or 0
 		page_length = cint(args.get("page_length")) or 20
@@ -80,6 +104,20 @@ class RQJob(Document):
 	@staticmethod
 	def get_matching_job_ids(args):
 		filters = make_filter_dict(args.get("filters"))
+=======
+	def get_list(filters=None, start=0, page_length=20, order_by="creation desc"):
+		matched_job_ids = RQJob.get_matching_job_ids(filters=filters)[start : start + page_length]
+
+		conn = get_redis_conn()
+		jobs = [serialize_job(job) for job in Job.fetch_many(job_ids=matched_job_ids, connection=conn) if job]
+
+		order_desc = "desc" in order_by
+		return sorted(jobs, key=lambda j: j.creation, reverse=order_desc)
+
+	@staticmethod
+	def get_matching_job_ids(filters) -> list[str]:
+		filters = make_filter_dict(filters or [])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		queues = _eval_filters(filters.get("queue"), QUEUES)
 		statuses = _eval_filters(filters.get("status"), JOB_STATUSES)
@@ -91,7 +129,11 @@ class RQJob(Document):
 			for status in statuses:
 				matched_job_ids.extend(fetch_job_ids(queue, status))
 
+<<<<<<< HEAD
 		return matched_job_ids
+=======
+		return filter_current_site_jobs(matched_job_ids)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	@check_permissions
 	def delete(self):
@@ -105,6 +147,7 @@ class RQJob(Document):
 			frappe.msgprint(_("Job is not running."), title=_("Invalid Operation"))
 
 	@staticmethod
+<<<<<<< HEAD
 	def get_count(args) -> int:
 		# Can not be implemented efficiently due to site filtering hence ignored.
 		return 0
@@ -112,6 +155,14 @@ class RQJob(Document):
 	# None of these methods apply to virtual job doctype, overriden for sanity.
 	@staticmethod
 	def get_stats(args):
+=======
+	def get_count(filters=None) -> int:
+		return len(RQJob.get_matching_job_ids(filters))
+
+	# None of these methods apply to virtual job doctype, overriden for sanity.
+	@staticmethod
+	def get_stats():
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return {}
 
 	def db_insert(self, *args, **kwargs):
@@ -123,13 +174,32 @@ class RQJob(Document):
 
 def serialize_job(job: Job) -> frappe._dict:
 	modified = job.last_heartbeat or job.ended_at or job.started_at or job.created_at
+<<<<<<< HEAD
 	job_name = job.kwargs.get("kwargs", {}).get("job_type") or str(job.kwargs.get("job_name"))
+=======
+	job_kwargs = job.kwargs.get("kwargs", {})
+	job_name = job_kwargs.get("job_type") or str(job.kwargs.get("job_name"))
+	if job_name == "frappe.utils.background_jobs.run_doc_method":
+		doctype = job_kwargs.get("doctype")
+		doc_method = job_kwargs.get("doc_method")
+		if doctype and doc_method:
+			job_name = f"{doctype}.{doc_method}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# function objects have this repr: '<function functionname at 0xmemory_address >'
 	# This regex just removes unnecessary things around it.
 	if matches := re.match(r"<function (?P<func_name>.*) at 0x.*>", job_name):
 		job_name = matches.group("func_name")
 
+<<<<<<< HEAD
+=======
+	exc_info = None
+
+	# Get exc_string from the job result if it exists
+	if job_result := job.latest_result():
+		exc_info = job_result.exc_string
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return frappe._dict(
 		name=job.id,
 		job_id=job.id,
@@ -139,7 +209,11 @@ def serialize_job(job: Job) -> frappe._dict:
 		started_at=convert_utc_to_system_timezone(job.started_at) if job.started_at else "",
 		ended_at=convert_utc_to_system_timezone(job.ended_at) if job.ended_at else "",
 		time_taken=(job.ended_at - job.started_at).total_seconds() if job.ended_at else "",
+<<<<<<< HEAD
 		exc_info=job.exc_info,
+=======
+		exc_info=exc_info,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		arguments=frappe.as_json(job.kwargs),
 		timeout=job.timeout,
 		creation=convert_utc_to_system_timezone(job.created_at),
@@ -154,6 +228,15 @@ def for_current_site(job: Job) -> bool:
 	return job.kwargs.get("site") == frappe.local.site
 
 
+<<<<<<< HEAD
+=======
+def filter_current_site_jobs(job_ids: list[str]) -> list[str]:
+	site = frappe.local.site
+
+	return [j for j in job_ids if j.startswith(site)]
+
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def _eval_filters(filter, values: list[str]) -> list[str]:
 	if filter:
 		operator, operand = filter
@@ -185,10 +268,20 @@ def remove_failed_jobs():
 	frappe.only_for("System Manager")
 	for queue in get_queues():
 		fail_registry = queue.failed_job_registry
+<<<<<<< HEAD
 		for job_ids in create_batch(fail_registry.get_job_ids(), 100):
 			for job in Job.fetch_many(job_ids=job_ids, connection=get_redis_conn()):
 				if job and for_current_site(job):
 					fail_registry.remove(job, delete_job=True)
+=======
+		failed_jobs = filter_current_site_jobs(fail_registry.get_job_ids())
+
+		# Delete in batches to avoid loading too many things in memory
+		conn = get_redis_conn()
+		for job_ids in create_batch(failed_jobs, 100):
+			for job in Job.fetch_many(job_ids=job_ids, connection=conn):
+				job and fail_registry.remove(job, delete_job=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_all_queued_jobs():

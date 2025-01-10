@@ -3,10 +3,26 @@
 import frappe
 from frappe.core.doctype.user.user import get_system_users
 from frappe.desk.form.assign_to import add as assign_task
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestNotificationLog(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestNotificationLog(UnitTestCase):
+	"""
+	Unit tests for NotificationLog.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestNotificationLog(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_assignment(self):
 		todo = get_todo()
 		user = get_user()

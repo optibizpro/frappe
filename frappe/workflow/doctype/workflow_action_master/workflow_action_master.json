@@ -22,11 +22,18 @@
  "icon": "fa fa-flag",
  "idx": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2023-04-14 15:11:21.447781",
  "modified_by": "Administrator",
  "module": "Workflow",
  "name": "Workflow Action Master",
  "naming_rule": "By fieldname",
+=======
+ "modified": "2024-03-23 16:04:05.108415",
+ "modified_by": "Administrator",
+ "module": "Workflow",
+ "name": "Workflow Action Master",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "owner": "Administrator",
  "permissions": [
   {
@@ -41,7 +48,11 @@
   }
  ],
  "quick_entry": 1,
+<<<<<<< HEAD
  "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

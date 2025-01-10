@@ -1,17 +1,31 @@
 import os
 import time
+from datetime import datetime, timedelta
 from unittest import TestCase
 from unittest.mock import patch
 
 import frappe
 from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJobType, sync_jobs
+from frappe.tests import IntegrationTestCase
 from frappe.utils import add_days, get_datetime
+<<<<<<< HEAD
 from frappe.utils.doctor import purge_pending_jobs
 from frappe.utils.scheduler import (
 	_get_last_modified_timestamp,
 	enqueue_events,
 	is_dormant,
 	schedule_jobs_based_on_activity,
+=======
+from frappe.utils.data import now_datetime
+from frappe.utils.doctor import purge_pending_jobs
+from frappe.utils.scheduler import (
+	DEFAULT_SCHEDULER_TICK,
+	_get_last_creation_timestamp,
+	enqueue_events,
+	is_dormant,
+	schedule_jobs_based_on_activity,
+	sleep_duration,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 )
 
 
@@ -23,7 +37,7 @@ def test_method():
 	pass
 
 
-class TestScheduler(TestCase):
+class TestScheduler(IntegrationTestCase):
 	def setUp(self):
 		frappe.db.rollback()
 
@@ -34,18 +48,19 @@ class TestScheduler(TestCase):
 		if not frappe.get_all("Scheduled Job Type", limit=1):
 			sync_jobs()
 
+	def tearDown(self):
+		purge_pending_jobs()
+
 	def test_enqueue_jobs(self):
 		frappe.db.sql("update `tabScheduled Job Type` set last_execution = '2010-01-01 00:00:00'")
 
-		frappe.flags.execute_job = True
-		enqueue_events(site=frappe.local.site)
-		frappe.flags.execute_job = False
+		enqueued_jobs = enqueue_events()
 
-		self.assertTrue("frappe.email.queue.set_expiry_for_email_queue", frappe.flags.enqueued_jobs)
-		self.assertTrue("frappe.utils.change_log.check_for_update", frappe.flags.enqueued_jobs)
-		self.assertTrue(
+		self.assertIn("frappe.desk.notifications.clear_notifications", enqueued_jobs)
+		self.assertIn("frappe.utils.change_log.check_for_update", enqueued_jobs)
+		self.assertIn(
 			"frappe.email.doctype.auto_email_report.auto_email_report.send_monthly",
-			frappe.flags.enqueued_jobs,
+			enqueued_jobs,
 		)
 
 	def test_queue_peeking(self):
@@ -74,33 +89,63 @@ class TestScheduler(TestCase):
 		job.execute()
 		job_log = frappe.get_doc("Scheduled Job Log", dict(scheduled_job_type=job.name))
 		job_log.db_set(
+<<<<<<< HEAD
 			"modified", add_days(_get_last_modified_timestamp("Activity Log"), 5), update_modified=False
 		)
+=======
+			"creation", add_days(_get_last_creation_timestamp("Activity Log"), 5), update_modified=False
+		)
+		schedule_jobs_based_on_activity.clear_cache()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# inactive site with recent job, don't run
 		self.assertFalse(
 			schedule_jobs_based_on_activity(
+<<<<<<< HEAD
 				check_time=add_days(_get_last_modified_timestamp("Activity Log"), 5)
+=======
+				check_time=add_days(_get_last_creation_timestamp("Activity Log"), 5)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 		)
 
 		# one more day has passed
 		self.assertTrue(
 			schedule_jobs_based_on_activity(
+<<<<<<< HEAD
 				check_time=add_days(_get_last_modified_timestamp("Activity Log"), 6)
+=======
+				check_time=add_days(_get_last_creation_timestamp("Activity Log"), 6)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			)
 		)
 
+	def test_real_time_alignment(self):
+		test_cases = {
+			timedelta(minutes=0): DEFAULT_SCHEDULER_TICK,
+			timedelta(minutes=0, seconds=12): DEFAULT_SCHEDULER_TICK - 12,
+			timedelta(minutes=1, seconds=12): DEFAULT_SCHEDULER_TICK - (1 * 60 + 12),
+			timedelta(hours=23, minutes=59): 60,
+			timedelta(hours=23, minutes=59, seconds=30): 30,
+			timedelta(minutes=0, seconds=1): DEFAULT_SCHEDULER_TICK - 1,
+			timedelta(minutes=2): DEFAULT_SCHEDULER_TICK - 2 * 60,
+		}
+		for delta, expected_sleep in test_cases.items():
+			fake_time = datetime(2024, 1, 1) + delta
+			with self.freeze_time(fake_time, is_utc=True):
+				self.assertEqual(sleep_duration(DEFAULT_SCHEDULER_TICK), expected_sleep, delta)
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_test_job(method="frappe.tests.test_scheduler.test_timeout_10", frequency="All") -> ScheduledJobType:
 	if not frappe.db.exists("Scheduled Job Type", dict(method=method)):
 		job = frappe.get_doc(
-			dict(
-				doctype="Scheduled Job Type",
-				method=method,
-				last_execution="2010-01-01 00:00:00",
-				frequency=frequency,
-			)
+			doctype="Scheduled Job Type",
+			method=method,
+			last_execution="2010-01-01 00:00:00",
+			frequency=frequency,
 		).insert()
 	else:
 		job = frappe.get_doc("Scheduled Job Type", dict(method=method))

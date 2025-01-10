@@ -9,16 +9,19 @@ from unittest.mock import patch
 
 import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
+<<<<<<< HEAD
 from frappe.exceptions import DoesNotExistError, ValidationError
+=======
+from frappe.exceptions import DoesNotExistError
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.model.base_document import get_controller
-from frappe.model.rename_doc import (
-	bulk_rename,
-	get_fetch_fields,
-	update_document_title,
-	update_linked_doctypes,
-)
+from frappe.model.rename_doc import bulk_rename, update_document_title
 from frappe.modules.utils import get_doc_path
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import add_to_date, now
 
 
@@ -42,7 +45,11 @@ def patch_db(endpoints: list[str] | None = None):
 		frappe.db.rollback(save_point=savepoint)
 
 
+<<<<<<< HEAD
 class TestRenameDoc(FrappeTestCase):
+=======
+class TestRenameDoc(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@classmethod
 	def setUpClass(self):
 		"""Setting Up data for the tests defined under TestRenameDoc"""
@@ -220,7 +227,7 @@ class TestRenameDoc(FrappeTestCase):
 		new_name = f"{dn}-new"
 
 		# pass invalid types to API
-		with self.assertRaises(ValidationError):
+		with self.assertRaises(TypeError):
 			update_document_title(doctype=dt, docname=dn, title={}, name={"hack": "this"})
 
 		doc_before = frappe.get_doc(test_doctype, dn)
@@ -249,16 +256,6 @@ class TestRenameDoc(FrappeTestCase):
 				"frappe.utils.global_search.rebuild_for_doctype",
 				doctype=self.test_doctype,
 			)
-
-	def test_deprecated_utils(self):
-		stdout = StringIO()
-
-		with redirect_stdout(stdout), patch_db(["set_value"]):
-			get_fetch_fields("User", "ToDo", ["Activity Log"])
-			self.assertTrue("Function frappe.model.rename_doc.get_fetch_fields" in stdout.getvalue())
-
-			update_linked_doctypes("User", "ToDo", "str", "str")
-			self.assertTrue("Function frappe.model.rename_doc.update_linked_doctypes" in stdout.getvalue())
 
 	def test_doc_rename_method(self):
 		name = choice(self.available_documents)
@@ -294,3 +291,49 @@ class TestRenameDoc(FrappeTestCase):
 
 		self.assertEqual(len(parent_a_instance.test_table), 1)
 		self.assertEqual(len(parent_b_instance.test_table), 1)
+<<<<<<< HEAD
+=======
+
+	def test_rename_autoincrement_doc(self):
+		if not frappe.db.exists("DocType", "Autoincrement DocType"):
+			new_doctype(
+				"Autoincrement DocType",
+				naming_rule="Autoincrement",
+				autoname="autoincrement",
+				fields=[
+					{
+						"label": "First Name",
+						"fieldname": "first_name",
+						"fieldtype": "Data",
+					}
+				],
+			).insert()
+
+		if not frappe.db.exists("DocType", "Autoincrement Linked DocType"):
+			new_doctype(
+				"Autoincrement Linked DocType",
+				fields=[
+					{
+						"label": "Autoincrement DocType",
+						"fieldname": "autoincrement_doctype",
+						"fieldtype": "Link",
+						"options": "Autoincrement DocType",
+					}
+				],
+			).insert()
+
+		# create records
+		mary = frappe.new_doc("Autoincrement DocType", first_name="Mary").insert()
+		marilyn = frappe.new_doc("Autoincrement DocType", first_name="Marilyn").insert()
+		linked_with_marilyn = frappe.new_doc(
+			"Autoincrement Linked DocType", autoincrement_doctype=marilyn.name
+		).insert()
+		self.assertEqual(marilyn.name, linked_with_marilyn.autoincrement_doctype)
+
+		# rename marilyn to mary
+		frappe.rename_doc("Autoincrement DocType", marilyn.name, mary.name, merge=True)
+		linked_with_marilyn.reload()
+
+		self.assertTrue(frappe.db.exists("Autoincrement DocType", marilyn.name) is None)
+		self.assertEqual(linked_with_marilyn.autoincrement_doctype, frappe.utils.cstr(mary.name))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

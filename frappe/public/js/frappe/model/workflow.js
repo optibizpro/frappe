@@ -45,8 +45,12 @@ frappe.workflow = {
 		let workflow_states =
 			frappe.get_children(frappe.workflow.workflows[doctype], "states", { state: state }) ||
 			[];
+<<<<<<< HEAD
 		let allow_edit_list = workflow_states.map((d) => d.allow_edit);
 		return allow_edit_list;
+=======
+		return workflow_states.map((d) => d.allow_edit);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 	is_self_approval_enabled: function (doctype) {
 		return frappe.workflow.workflows[doctype].allow_self_approval;

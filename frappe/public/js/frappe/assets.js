@@ -19,11 +19,30 @@ frappe.require = function (items, callback) {
 	});
 };
 
+<<<<<<< HEAD
 frappe.assets = {
 	check: function () {
 		// if version is different then clear localstorage
 		if (window._version_number != localStorage.getItem("_version_number")) {
 			frappe.assets.clear_local_storage();
+=======
+class AssetManager {
+	constructor() {
+		this._executed = [];
+		this._handlers = {
+			js: function (txt) {
+				frappe.dom.eval(txt);
+			},
+			css: function (txt) {
+				frappe.dom.set_style(txt);
+			},
+		};
+	}
+	check() {
+		// if version is different then clear localstorage
+		if (window._version_number != localStorage.getItem("_version_number")) {
+			this.clear_local_storage();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			console.log("Cleared App Cache.");
 		}
 
@@ -33,15 +52,20 @@ frappe.assets = {
 			// Evict cache if page is reloaded within 10 seconds. Which could be user trying to
 			// refresh if things feel broken.
 			if ((not_updated_since < 5000 && is_reload()) || not_updated_since > 2 * 86400000) {
+<<<<<<< HEAD
 				frappe.assets.clear_local_storage();
+=======
+				this.clear_local_storage();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 		} else {
-			frappe.assets.clear_local_storage();
+			this.clear_local_storage();
 		}
 
-		frappe.assets.init_local_storage();
-	},
+		this.init_local_storage();
+	}
 
+<<<<<<< HEAD
 	init_local_storage: function () {
 		localStorage._last_load = new Date();
 		localStorage._version_number = window._version_number;
@@ -63,13 +87,33 @@ frappe.assets = {
 				key.indexOf("_page:") === 0 ||
 				key.indexOf("_doctype:") === 0 ||
 				key.indexOf("preferred_breadcrumbs:") === 0
+=======
+	init_local_storage() {
+		localStorage._last_load = new Date();
+		localStorage._version_number = window._version_number;
+		if (frappe.boot) localStorage.metadata_version = frappe.boot.metadata_version;
+	}
+
+	clear_local_storage() {
+		["_last_load", "_version_number", "metadata_version", "page_info", "last_visited"].forEach(
+			(key) => localStorage.removeItem(key)
+		);
+
+		// clear assets
+		for (let key in localStorage) {
+			if (
+				key.startsWith("_page:") ||
+				key.startsWith("_doctype:") ||
+				key.startsWith("preferred_breadcrumbs:")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			) {
 				localStorage.removeItem(key);
 			}
 		}
 		console.log("localStorage cleared");
-	},
+	}
 
+<<<<<<< HEAD
 	// keep track of executed assets
 	executed_: [],
 
@@ -121,9 +165,20 @@ frappe.assets = {
 
 	// load an asset via
 	fetch: function (items, callback) {
-		// this is virtual page load, only get the the source
-		// *without* the template
+=======
+	eval_assets(path, content) {
+		if (!this._executed.includes(path)) {
+			this._handlers[this.extn(path)](content);
+			this._executed.push(path);
+		}
+	}
 
+	execute(items, callback) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+		// this is virtual page load, only get the the source
+		let me = this;
+
+<<<<<<< HEAD
 		frappe.call({
 			type: "GET",
 			method: "frappe.client.get_js",
@@ -148,10 +203,24 @@ frappe.assets = {
 				// if quota is exceeded, clear local storage and set item
 				frappe.assets.clear_local_storage();
 				frappe.assets.set(src, txt);
-			}
-		}
-	},
+=======
+		const version_string =
+			frappe.boot.developer_mode || window.dev_server ? Date.now() : window._version_number;
 
+		let fetched_assets = {};
+		async function fetch_item(path) {
+			// Add the version to the URL to bust the cache for non-bundled assets
+			let url = new URL(path, window.location.origin);
+
+			if (!path.includes(".bundle.") && !url.searchParams.get("v")) {
+				url.searchParams.append("v", version_string);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			}
+			const response = await fetch(url.toString());
+			fetched_assets[path] = await response.text();
+		}
+
+<<<<<<< HEAD
 	get: function (src) {
 		return localStorage.getItem("desk_assets:" + src);
 	},
@@ -161,10 +230,26 @@ frappe.assets = {
 	},
 
 	extn: function (src) {
+=======
+		frappe.dom.freeze();
+		const fetch_promises = items.map(fetch_item);
+		Promise.all(fetch_promises).then(() => {
+			items.forEach((path) => {
+				let body = fetched_assets[path];
+				me.eval_assets(path, body);
+			});
+			frappe.dom.unfreeze();
+			callback?.();
+		});
+	}
+
+	extn(src) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if (src.indexOf("?") != -1) {
 			src = src.split("?").slice(-1)[0];
 		}
 		return src.split(".").slice(-1)[0];
+<<<<<<< HEAD
 	},
 
 	handler: {
@@ -176,6 +261,10 @@ frappe.assets = {
 		},
 	},
 
+=======
+	}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	bundled_asset(path, is_rtl = null) {
 		if (!path.startsWith("/assets") && path.includes(".bundle.")) {
 			if (path.endsWith(".css") && is_rtl) {
@@ -185,8 +274,13 @@ frappe.assets = {
 			return path;
 		}
 		return path;
+<<<<<<< HEAD
 	},
 };
+=======
+	}
+}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 function is_reload() {
 	try {
@@ -199,3 +293,8 @@ function is_reload() {
 		return true;
 	}
 }
+<<<<<<< HEAD
+=======
+
+frappe.assets = new AssetManager();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

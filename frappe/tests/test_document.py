@@ -9,11 +9,13 @@ from frappe.app import make_form_dict
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.doctype.note.note import Note
 from frappe.model.naming import make_autoname, parse_naming_series, revert_series_if_last
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, timeout
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import cint, now_datetime, set_request
 from frappe.website.serve import get_response
-
-from . import update_system_settings
 
 
 class CustomTestNote(Note):
@@ -27,7 +29,11 @@ class CustomNoteWithoutProperty(Note):
 		return now_datetime() - self.creation
 
 
+<<<<<<< HEAD
 class TestDocument(FrappeTestCase):
+=======
+class TestDocument(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_return_empty_list_for_table_field_if_none(self):
 		d = frappe.get_doc({"doctype": "User"})
 		self.assertEqual(d.get("roles"), [])
@@ -97,6 +103,37 @@ class TestDocument(FrappeTestCase):
 		d.save()
 
 		self.assertEqual(frappe.db.get_value(d.doctype, d.name, "subject"), "subject changed")
+
+	def test_discard_transitions(self):
+		d = self.test_insert()
+		self.assertEqual(d.docstatus, 0)
+
+		# invalid: Submit > Discard, Cancel > Discard
+		d.submit()
+		self.assertRaises(frappe.ValidationError, d.discard)
+		d.reload()
+
+		d.cancel()
+		self.assertRaises(frappe.ValidationError, d.discard)
+
+		# valid: Draft > Discard
+		d2 = self.test_insert()
+		d2.discard()
+		self.assertEqual(d2.docstatus, 2)
+
+	def test_save_on_discard_throws(self):
+		from frappe.desk.doctype.event.event import Event
+
+		d3 = self.test_insert()
+
+		def test_on_discard(d3):
+			d3.subject = d3.subject + "update"
+			d3.save()
+
+		d3.on_discard = (test_on_discard)(d3)
+		d3.on_discard = test_on_discard.__get__(d3, Event)
+
+		self.assertRaises(frappe.ValidationError, d3.discard)
 
 	def test_value_changed(self):
 		d = self.test_insert()
@@ -192,6 +229,13 @@ class TestDocument(FrappeTestCase):
 		with self.assertQueryCount(0):
 			user.db_set("user_type", "Magical Wizard")
 
+<<<<<<< HEAD
+=======
+	def test_new_doc_with_fields(self):
+		user = frappe.new_doc("User", first_name="wizard")
+		self.assertEqual(user.first_name, "wizard")
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_update_after_submit(self):
 		d = self.test_insert()
 		d.starts_on = "2014-09-09"
@@ -457,8 +501,44 @@ class TestDocument(FrappeTestCase):
 
 		self.assertRaises(frappe.DoesNotExistError, doc.save)
 
+<<<<<<< HEAD
 
 class TestDocumentWebView(FrappeTestCase):
+=======
+	def test_validate_from_to_dates(self):
+		doc = frappe.new_doc("Web Page")
+		doc.start_date = None
+		doc.end_date = None
+		doc.validate_from_to_dates("start_date", "end_date")
+
+		doc.start_date = "2020-01-01"
+		doc.end_date = None
+		doc.validate_from_to_dates("start_date", "end_date")
+
+		doc.start_date = None
+		doc.end_date = "2020-12-31"
+		doc.validate_from_to_dates("start_date", "end_date")
+
+		doc.start_date = "2020-01-01"
+		doc.end_date = "2020-12-31"
+		doc.validate_from_to_dates("start_date", "end_date")
+
+		doc.end_date = "2020-01-01"
+		doc.start_date = "2020-12-31"
+		self.assertRaises(
+			frappe.exceptions.InvalidDates, doc.validate_from_to_dates, "start_date", "end_date"
+		)
+
+	def test_db_set_singles(self):
+		c = frappe.get_doc("Contact Us Settings")
+		key, val = "email_id", "admin1@example.com"
+		c.db_set(key, val)
+		changed_val = frappe.db.get_single_value(c.doctype, key)
+		self.assertEqual(val, changed_val)
+
+
+class TestDocumentWebView(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def get(self, path, user="Guest"):
 		frappe.set_user(user)
 		set_request(method="GET", path=path)
@@ -472,13 +552,13 @@ class TestDocumentWebView(FrappeTestCase):
 		document_key = todo.get_document_share_key()
 
 		# with old-style signature key
-		update_system_settings({"allow_older_web_view_links": True}, True)
-		old_document_key = todo.get_signature()
-		url = f"/ToDo/{todo.name}?key={old_document_key}"
-		self.assertEqual(self.get(url).status, "200 OK")
+		with self.change_settings("System Settings", {"allow_older_web_view_links": True}):
+			old_document_key = todo.get_signature()
+			url = f"/ToDo/{todo.name}?key={old_document_key}"
+			self.assertEqual(self.get(url).status, "200 OK")
 
-		update_system_settings({"allow_older_web_view_links": False}, True)
-		self.assertEqual(self.get(url).status, "401 UNAUTHORIZED")
+		with self.change_settings("System Settings", {"allow_older_web_view_links": False}):
+			self.assertEqual(self.get(url).status, "401 UNAUTHORIZED")
 
 		# with valid key
 		url = f"/ToDo/{todo.name}?key={document_key}"
@@ -502,3 +582,95 @@ class TestDocumentWebView(FrappeTestCase):
 
 		# Logged-in user can access the page without key
 		self.assertEqual(self.get(url_without_key, "Administrator").status, "200 OK")
+
+	def test_base_class_set_correctly_on_has_web_view_change(self):
+		from pathlib import Path
+
+		from frappe.modules.utils import get_doc_path, scrub
+
+		frappe.flags.allow_doctype_export = True
+
+		frappe.delete_doc_if_exists("DocType", "Test WebViewDocType", force=1)
+		test_doctype = new_doctype(
+			"Test WebViewDocType",
+			custom=0,
+			fields=[
+				{"fieldname": "test_field", "fieldtype": "Data"},
+				{"fieldname": "route", "fieldtype": "Data"},
+				{"fieldname": "is_published", "fieldtype": "Check"},
+			],
+		)
+		test_doctype.insert()
+
+		doc_path = Path(get_doc_path(test_doctype.module, test_doctype.doctype, test_doctype.name))
+		controller_file_path = doc_path / f"{scrub(test_doctype.name)}.py"
+
+		# enable web view
+		test_doctype.has_web_view = 1
+		test_doctype.is_published_field = "is_published"
+		test_doctype.save()
+
+		# check if base class was updated to "WebsiteGenerator"
+		with open(controller_file_path) as f:
+			file_content = f.read()
+			self.assertIn(
+				"import WebsiteGenerator",
+				file_content,
+				"`WebsiteGenerator` not imported when web view is enabled!",
+			)
+			self.assertIn(
+				"(WebsiteGenerator)",
+				file_content,
+				"`Document` class not replaced with `WebsiteGenerator` when web view is enabled!",
+			)
+
+		# disable web view
+		test_doctype.has_web_view = 0
+		test_doctype.save()
+
+		# check if base class was updated to "Document" again
+		with open(controller_file_path) as f:
+			file_content = f.read()
+			self.assertIn(
+				"import Document", file_content, "`Document` not imported when web view is disabled!"
+			)
+			self.assertIn(
+				"(Document)",
+				file_content,
+				"`WebsiteGenerator` class not replaced with `Document` when web view is disabled!",
+			)
+
+	def test_bulk_inserts(self):
+		from frappe.model.document import bulk_insert
+
+		doctype = "Role Profile"
+		child_field = "roles"
+		child_doctype = frappe.get_meta(doctype).get_field(child_field).options
+
+		sent_docs = set()
+		sent_child_docs = set()
+
+		def doc_generator():
+			for _ in range(21):
+				doc = frappe.new_doc(doctype)
+				doc.role_profile = frappe.generate_hash()
+				doc.append("roles", {"role": "System Manager"})
+
+				doc.set_new_name()
+				doc.set_parent_in_children()
+
+				sent_docs.add(doc.name)
+				sent_child_docs.add(doc.roles[0].name)
+
+				yield doc
+
+		bulk_insert(doctype, doc_generator(), chunk_size=5)
+
+		all_docs = set(frappe.get_all(doctype, pluck="name"))
+		all_child_docs = set(
+			frappe.get_all(
+				child_doctype, filters={"parenttype": doctype, "parentfield": child_field}, pluck="name"
+			)
+		)
+		self.assertEqual(sent_docs - all_docs, set(), "All docs should be inserted")
+		self.assertEqual(sent_child_docs - all_child_docs, set(), "All child docs should be inserted")

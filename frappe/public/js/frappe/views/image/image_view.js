@@ -40,14 +40,16 @@ frappe.views.ImageView = class ImageView extends frappe.views.ListView {
 	}
 
 	render() {
-		this.get_attached_images().then(() => {
-			this.render_image_view();
+		this.load_lib.then(() => {
+			this.get_attached_images().then(() => {
+				this.render_image_view();
 
-			if (!this.gallery) {
-				this.setup_gallery();
-			} else {
-				this.gallery.prepare_pswp_items(this.items, this.images_map);
-			}
+				if (!this.gallery) {
+					this.setup_gallery();
+				} else {
+					this.gallery.prepare_pswp_items(this.items, this.images_map);
+				}
+			});
 		});
 	}
 
@@ -155,24 +157,6 @@ frappe.views.ImageView = class ImageView extends frappe.views.ListView {
 			});
 	}
 
-	get_header_html() {
-		// return this.get_header_html_skeleton(`
-		// 	<div class="list-image-header">
-		// 		<div class="list-image-header-item">
-		// 			<input class="level-item list-check-all hidden-xs" type="checkbox" title="Select All">
-		// 			<div>${__(this.doctype)} &nbsp;</div>
-		// 			(<span class="text-muted list-count"></span>)
-		// 		</div>
-		// 		<div class="list-image-header-item">
-		// 			<div class="level-item list-liked-by-me">
-		// 				${frappe.utils.icon('heart', 'sm', 'like-icon')}
-		// 			</div>
-		// 			<div>${__('Liked')}</div>
-		// 		</div>
-		// 	</div>
-		// `);
-	}
-
 	setup_gallery() {
 		var me = this;
 		this.gallery = new frappe.views.GalleryView({
@@ -190,17 +174,28 @@ frappe.views.ImageView = class ImageView extends frappe.views.ListView {
 			return false;
 		});
 	}
+
+	get required_libs() {
+		return [
+			"assets/frappe/node_modules/photoswipe/src/photoswipe.css",
+			"photoswipe.bundle.js",
+		];
+	}
 };
 
 frappe.views.GalleryView = class GalleryView {
 	constructor(opts) {
 		$.extend(this, opts);
 		var me = this;
+<<<<<<< HEAD
 
 		this.lib_ready = this.load_lib();
 		this.lib_ready.then(function () {
 			me.prepare();
 		});
+=======
+		me.prepare();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	prepare() {
 		// keep only one pswp dom element
@@ -220,16 +215,25 @@ frappe.views.GalleryView = class GalleryView {
 		}
 
 		return new Promise((resolve) => {
+<<<<<<< HEAD
 			const items = this.items.map(function (i) {
 				const query = 'img[data-name="' + i._name + '"]';
 				let el = me.wrapper.find(query).get(0);
+=======
+			const items = this.items
+				.filter((i) => i.image !== null)
+				.map(function (i) {
+					const query = 'img[data-name="' + i._name + '"]';
+					let el = me.wrapper.find(query).get(0);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
-				let width, height;
-				if (el) {
-					width = el.naturalWidth;
-					height = el.naturalHeight;
-				}
+					let width, height;
+					if (el) {
+						width = el.naturalWidth;
+						height = el.naturalHeight;
+					}
 
+<<<<<<< HEAD
 				if (!el) {
 					el = me.wrapper.find('.image-field[data-name="' + i._name + '"]').get(0);
 					width = el.getBoundingClientRect().width;
@@ -245,20 +249,39 @@ frappe.views.GalleryView = class GalleryView {
 					el: el,
 				};
 			});
+=======
+					if (!el) {
+						el = me.wrapper.find('.image-field[data-name="' + i._name + '"]').get(0);
+						width = el.getBoundingClientRect().width;
+						height = el.getBoundingClientRect().height;
+					}
+
+					return {
+						src: i._image_url,
+						name: i.name,
+						width: width,
+						height: height,
+					};
+				});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.pswp_items = items;
 			resolve();
 		});
 	}
 	show(docname) {
+<<<<<<< HEAD
 		this.lib_ready.then(() => this.prepare_pswp_items()).then(() => this._show(docname));
+=======
+		this.prepare_pswp_items().then(() => this._show(docname));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	_show(docname) {
-		const me = this;
 		const items = this.pswp_items;
 		const item_index = items.findIndex((item) => item.name === docname);
 
 		var options = {
 			index: item_index,
+<<<<<<< HEAD
 			getThumbBoundsFn: function (index) {
 				const query = 'img[data-name="' + items[index]._name + '"]';
 				let thumbnail = me.wrapper.find(query).get(0);
@@ -362,4 +385,15 @@ frappe.views.GalleryView = class GalleryView {
 			);
 		});
 	}
+=======
+			history: false,
+			shareEl: false,
+			dataSource: items,
+		};
+
+		// init
+		this.pswp = new frappe.PhotoSwipe(options);
+		this.pswp.init();
+	}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 };

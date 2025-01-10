@@ -38,3 +38,30 @@ def execute(filters=None):
 		as_dict=1,
 	)
 	return COLUMNS, data
+<<<<<<< HEAD
+=======
+
+
+@frappe.whitelist()
+def optimize_doctype(doctype_name: str):
+	frappe.only_for("System Manager")
+	frappe.enqueue(
+		optimize_doctype_job,
+		queue="long",
+		job_id=f"optimize-{doctype_name}",
+		doctype_name=doctype_name,
+		deduplicate=True,
+	)
+
+
+def optimize_doctype_job(doctype_name: str):
+	from frappe.utils import get_table_name
+
+	doctype_table = get_table_name(doctype_name, wrap_in_backticks=True)
+	if frappe.db.db_type == "mariadb":
+		query = f"OPTIMIZE TABLE {doctype_table};"
+	else:
+		query = f"VACUUM (ANALYZE) {doctype_table};"
+
+	frappe.db.sql(query)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
