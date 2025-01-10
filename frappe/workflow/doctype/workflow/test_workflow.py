@@ -108,9 +108,26 @@ class TestWorkflow(IntegrationTestCase):
 		# test if status of workflow actions are updated on approval
 		self.test_approve(doc)
 		user.remove_roles("Test Approver", "System Manager")
+<<<<<<< HEAD
 		workflow_actions = frappe.get_all("Workflow Action", fields=["*"])
 		self.assertEqual(len(workflow_actions), 1)
 		self.assertEqual(workflow_actions[0].status, "Completed")
+
+	def test_if_workflow_actions_were_processed_using_user(self):
+		user = frappe.get_doc("User", "test2@example.com")
+		user.add_roles("Test Approver", "System Manager")
+		frappe.set_user("test2@example.com")
+
+		doc = self.test_default_condition()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+		workflow_actions = frappe.get_all("Workflow Action", fields=["*"])
+		self.assertEqual(len(workflow_actions), 1)
+		self.assertEqual(workflow_actions[0].status, "Completed")
+<<<<<<< HEAD
+		frappe.set_user("Administrator")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_if_workflow_set_on_action(self):
 		self.workflow._update_state_docstatus = True

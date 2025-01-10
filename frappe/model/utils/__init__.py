@@ -61,7 +61,11 @@ def render_include(content):
 	content = cstr(content)
 
 	# try 5 levels of includes
+<<<<<<< HEAD
+	for _ignore in range(5):
+=======
 	for _ in range(5):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if "{% include" in content:
 			paths = INCLUDE_DIRECTIVE_PATTERN.findall(content)
 			if not paths:

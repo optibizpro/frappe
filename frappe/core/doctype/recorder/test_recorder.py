@@ -8,8 +8,13 @@ import frappe.recorder
 from frappe.core.doctype.recorder.recorder import _optimize_query, serialize_request
 from frappe.query_builder.utils import db_type_is
 from frappe.recorder import get as get_recorder_data
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import set_request
 
 
@@ -88,7 +93,11 @@ class TestRecorder(IntegrationTestCase):
 		self.assertIsInstance(serialize_request(request_doc), dict)
 
 
+<<<<<<< HEAD
+class TestQueryOptimization(FrappeTestCase):
+=======
 class TestQueryOptimization(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@run_only_if(db_type_is.MARIADB)
 	def test_query_optimizer(self):
 		suggested_index = _optimize_query(
@@ -97,7 +106,11 @@ class TestQueryOptimization(IntegrationTestCase):
 			join `tabHas Role` r
 			on r.parent = u.name
 			where email='xyz'
+<<<<<<< HEAD
+			and modified > '2023'
+=======
 			and creation > '2023'
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			and bio like '%xyz%'
 			"""
 		)

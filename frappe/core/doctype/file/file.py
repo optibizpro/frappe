@@ -805,6 +805,12 @@ def has_permission(doc, ptype=None, user=None, debug=False):
 	if user == "Administrator":
 		return True
 
+<<<<<<< HEAD
+	if ptype == "create":
+		return frappe.has_permission("File", "create", user=user, debug=debug)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if not doc.is_private and ptype in ("read", "select"):
 		return True
 

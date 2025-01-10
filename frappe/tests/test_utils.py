@@ -424,12 +424,16 @@ class TestValidationUtils(IntegrationTestCase):
 		self.assertFalse(validate_email_address("test@example.com test2@example.com,undisclosed-recipient"))
 
 		# Invalid with throw
+<<<<<<< HEAD
+		self.assertRaises(frappe.InvalidEmailAddressError, validate_email_address, "someone.com", throw=True)
+=======
 		self.assertRaises(
 			frappe.InvalidEmailAddressError,
 			validate_email_address,
 			"someone.com",
 			throw=True,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.assertEqual(validate_email_address("Some%20One@frappe.com"), "Some%20One@frappe.com")
 		self.assertEqual(
@@ -570,6 +574,14 @@ class TestDateUtils(IntegrationTestCase):
 			)
 
 		# Sunday as start of the week
+<<<<<<< HEAD
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-20"))
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-21"), frappe.utils.getdate("2020-12-20"))
+
+	def test_last_day_of_week(self):
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-24"), frappe.utils.getdate("2020-12-26"))
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-28"), frappe.utils.getdate("2021-01-02"))
+=======
 		self.assertEqual(
 			frappe.utils.get_first_day_of_week("2020-12-25"),
 			frappe.utils.getdate("2020-12-20"),
@@ -588,6 +600,7 @@ class TestDateUtils(IntegrationTestCase):
 			frappe.utils.get_last_day_of_week("2020-12-28"),
 			frappe.utils.getdate("2021-01-02"),
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_is_last_day_of_the_month(self):
 		self.assertEqual(frappe.utils.is_last_day_of_the_month("2020-12-24"), False)
@@ -783,10 +796,14 @@ class TestTimeDeltaUtils(IntegrationTestCase):
 		self.assertEqual(format_timedelta(timedelta(hours=10)), "10:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=100)), "100:00:00")
 		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=129)), "0:01:40.000129")
+<<<<<<< HEAD
+		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=12212199129)), "3:25:12.199129")
+=======
 		self.assertEqual(
 			format_timedelta(timedelta(seconds=100, microseconds=12212199129)),
 			"3:25:12.199129",
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def test_parse_timedelta(self):
 		self.assertEqual(parse_timedelta("0:0:0"), timedelta(seconds=0))
@@ -1061,7 +1078,11 @@ class TestMiscUtils(IntegrationTestCase):
 			self.assertEqual(output, expand_relative_urls(input))
 
 
+<<<<<<< HEAD
+class TestTypingValidations(FrappeTestCase):
+=======
 class TestTypingValidations(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	ERR_REGEX = "^Argument '.*' should be of type '.*' but got '.*' instead.$"
 
 	def test_validate_whitelisted_api(self):
@@ -1098,13 +1119,19 @@ class TestTypingValidations(IntegrationTestCase):
 class TestTBSanitization(IntegrationTestCase):
 	def test_traceback_sanitzation(self):
 		try:
+<<<<<<< HEAD
+			password = frappe.generate_hash()
+			args = {"password": "42", "pwd": password, "safe": "safe_value"}
+			args = frappe._dict({"password": "42", "pwd": password, "safe": "safe_value"})  # noqa: F841
+=======
 			password = "42"  # noqa: F841
 			args = {"password": "42", "pwd": "42", "safe": "safe_value"}
 			args = frappe._dict({"password": "42", "pwd": "42", "safe": "safe_value"})  # noqa: F841
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			raise Exception
 		except Exception:
 			traceback = frappe.get_traceback(with_context=True)
-			self.assertNotIn("42", traceback)
+			self.assertNotIn(password, traceback)
 			self.assertIn("********", traceback)
 			self.assertIn("password =", traceback)
 			self.assertIn("safe_value", traceback)
@@ -1277,7 +1304,11 @@ class TestRounding(IntegrationTestCase):
 		self.assertEqual(cint(str(floating_point)), int(floating_point))
 
 
+<<<<<<< HEAD
+class TestArgumentTypingValidations(FrappeTestCase):
+=======
 class TestArgumentTypingValidations(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_validate_argument_types(self):
 		from unittest.mock import AsyncMock, MagicMock, Mock
 
@@ -1326,6 +1357,10 @@ class TestArgumentTypingValidations(IntegrationTestCase):
 		with self.assertRaises(FrappeTypeError):
 			test_doctypes("a")
 
+<<<<<<< HEAD
+
+class TestChangeLog(FrappeTestCase):
+=======
 		self.assertEqual(test_mocks("Hello World"), "Hello World")
 		for obj in (AsyncMock, MagicMock, Mock):
 			obj_instance = obj()
@@ -1335,6 +1370,7 @@ class TestArgumentTypingValidations(IntegrationTestCase):
 
 
 class TestChangeLog(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_get_remote_url(self):
 		self.assertIsInstance(get_source_url("frappe"), str)
 
@@ -1359,13 +1395,19 @@ class TestChangeLog(IntegrationTestCase):
 		self.assertRaises(ValueError, parse_github_url, remote_url=None)
 
 
+<<<<<<< HEAD
+class TestCrypto(FrappeTestCase):
+=======
 class TestCrypto(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_hashing(self):
 		self.assertEqual(sha256_hash(""), "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
 		self.assertEqual(
 			sha256_hash(b"The quick brown fox jumps over the lazy dog"),
 			"d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
 		)
+<<<<<<< HEAD
+=======
 
 
 class TestURLTrackers(IntegrationTestCase):
@@ -1418,3 +1460,4 @@ class TestURLTrackers(IntegrationTestCase):
 		self.assertDocumentEqual(result["utm_medium"], expected["utm_medium"])
 		self.assertDocumentEqual(result["utm_campaign"], expected["utm_campaign"])
 		self.assertEqual(result["utm_content"], expected["utm_content"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

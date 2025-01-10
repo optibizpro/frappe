@@ -469,8 +469,11 @@ def has_permission(doc, ptype, user=None, debug=False):
 			return frappe.has_permission(
 				doc.reference_doctype, ptype="read", doc=doc.reference_name, user=user, debug=debug
 			)
+<<<<<<< HEAD
+=======
 
 	return True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_permission_query_conditions_for_communication(user):
@@ -552,14 +555,36 @@ def parse_email(email_strings):
 	When automatic email linking is enabled, an email from email_strings can contain
 	a doctype and docname ie in the format `admin+doctype+docname@example.com` or `admin+doctype=docname@example.com`,
 	the email is parsed and doctype and docname is extracted.
+<<<<<<< HEAD
+=======
 
 	see: RFC5233
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	for email_string in email_strings:
 		if not email_string:
 			continue
 
 		for email in email_string.split(","):
+<<<<<<< HEAD
+			email_username = email.split("@", 1)[0]
+			email_local_parts = email_username.split("+")
+			docname = doctype = None
+			if len(email_local_parts) == 3:
+				doctype = unquote(email_local_parts[1])
+				docname = unquote(email_local_parts[2])
+
+			elif len(email_local_parts) == 2:
+				document_parts = email_local_parts[1].split("=", 1)
+				if len(document_parts) != 2:
+					continue
+
+				doctype = unquote(document_parts[0])
+				docname = unquote(document_parts[1])
+
+			if doctype and docname:
+				yield doctype, docname
+=======
 			local_part = email.split("@", 1)[0].strip('"')
 			user, detail = None, None
 			if "+" in local_part:
@@ -582,6 +607,7 @@ def parse_email(email_strings):
 			doctype = unquote_plus(document_parts[0])
 			docname = unquote_plus(document_parts[1])
 			yield doctype, docname
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_email_without_link(email):
@@ -623,7 +649,13 @@ def update_parent_document_on_communication(doc):
 
 		# if status has a "Open" option and status is "Replied", then update the status for received communication
 		if (
+<<<<<<< HEAD
+			("Open" in options)
+			and parent.status == "Replied"
+			and doc.sent_or_received == "Received"
+=======
 			(("Open" in options) and parent.status == "Replied" and doc.sent_or_received == "Received")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			or (
 				parent.doctype == "Issue" and ("Open" in options) and doc.sent_or_received == "Received"
 			)  # For 'Issue', current status is not considered.

@@ -1,6 +1,10 @@
 from collections.abc import Callable
 from functools import lru_cache, wraps
+<<<<<<< HEAD
+from inspect import _empty, isclass, signature
+=======
 from inspect import _empty, isclass
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from types import EllipsisType
 from typing import ForwardRef, TypeVar, Union
 from unittest import mock
@@ -54,11 +58,15 @@ def qualified_name(obj) -> str:
 
 
 def raise_type_error(
+<<<<<<< HEAD
+	arg_name: str, arg_type: type, arg_value: object, current_exception: Exception | None = None
+=======
 	func: callable,
 	arg_name: str,
 	arg_type: type,
 	arg_value: object,
 	current_exception: Exception | None = None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ):
 	"""
 	Raise a TypeError with a message that includes the name of the argument, the expected type
@@ -138,9 +146,12 @@ def transform_parameter_types(func: Callable, args: tuple, kwargs: dict):
 		if isinstance(current_arg_type, ForwardRef | str):
 			continue
 		elif any(isinstance(x, ForwardRef | str) for x in getattr(current_arg_type, "__args__", [])):
+<<<<<<< HEAD
+=======
 			continue
 		# ignore unittest.mock objects
 		elif isinstance(current_arg_value, mock.Mock):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			continue
 
 		# allow slack for Frappe types

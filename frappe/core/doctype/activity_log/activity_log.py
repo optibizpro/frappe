@@ -33,6 +33,7 @@ class ActivityLog(Document):
 		timeline_doctype: DF.Link | None
 		timeline_name: DF.DynamicLink | None
 		user: DF.Link | None
+
 	# end: auto-generated types
 
 	def before_insert(self):

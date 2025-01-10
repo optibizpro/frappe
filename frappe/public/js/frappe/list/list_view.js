@@ -601,7 +601,10 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 	render_list() {
 		// clear rows
 		this.$result.find(".list-row-container").remove();
+<<<<<<< HEAD
+=======
 		this.render_header();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if (this.data.length > 0) {
 			// append rows
@@ -743,6 +746,7 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 						${right}
 					</div>
 				</div>
+				<div class="list-row-border"></div>
 			</div>
 		`;
 	}
@@ -1924,7 +1928,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 				label: __("Clear Assignment", null, "Button in list view actions menu"),
 				action: () => {
 					frappe.confirm(
+<<<<<<< HEAD
+						"Are you sure you want to clear the assignments?",
+=======
 						__("Are you sure you want to clear the assignments?"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						() => {
 							this.disable_list_update = true;
 							bulk_operations.clear_assignment(this.get_checked_items(true), () => {
@@ -2244,7 +2252,11 @@ class ElementFactory {
 	create_like_element(doctype) {
 		const like = document.createElement("span");
 		like.classList.add("like-action");
+<<<<<<< HEAD
+		like.innerHTML = frappe.utils.icon("es-solid-heart", "sm", "like-icon");
+=======
 		like.innerHTML = `<svg class="icon icon-sm like-icon"><use href="#icon-heart"></use></svg>`;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		like.dataset.doctype = doctype;
 
 		return like;

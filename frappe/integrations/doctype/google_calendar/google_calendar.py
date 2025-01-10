@@ -82,6 +82,7 @@ class GoogleCalendar(Document):
 		push_to_google_calendar: DF.Check
 		refresh_token: DF.Password | None
 		user: DF.Link
+
 	# end: auto-generated types
 
 	def validate(self):

@@ -27,6 +27,7 @@ class UserPermission(Document):
 		hide_descendants: DF.Check
 		is_default: DF.Check
 		user: DF.Link
+
 	# end: auto-generated types
 
 	def validate(self):

@@ -381,7 +381,11 @@ class BackupGenerator:
 		import frappe.utils
 		from frappe.utils.change_log import get_app_branch
 
+<<<<<<< HEAD
+		gzip_exc = which("gzip")
+=======
 		gzip_exc: str = which("gzip")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		if not gzip_exc:
 			frappe.throw(
 				_("gzip not found in PATH! This is required to take a backup."), exc=frappe.ExecutableNotFound
@@ -517,6 +521,8 @@ download only after 24 hours."""
 		for path in paths:
 			self.add_to_rollback(lambda: os.remove(path))
 
+<<<<<<< HEAD
+=======
 
 def _get_tables(doctypes: list[str], existing_tables: list[str]) -> list[str]:
 	"""Return a list of tables for the given doctypes that exist in the database."""
@@ -529,6 +535,7 @@ def _get_tables(doctypes: list[str], existing_tables: list[str]) -> list[str]:
 			tables.append(table)
 	return tables
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @frappe.whitelist()
 def fetch_latest_backups(partial=False) -> dict:

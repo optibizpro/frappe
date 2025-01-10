@@ -3,7 +3,11 @@
 
 import frappe
 from frappe.desk.reportview import export_query, extract_fieldnames
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class TestReportview(IntegrationTestCase):

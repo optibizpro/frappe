@@ -132,7 +132,15 @@ class TestAutoRepeat(IntegrationTestCase):
 		self.monthly_auto_repeat("ToDo", todo.name, start_date, end_date)
 		# test without end_date
 		todo = frappe.get_doc(
+<<<<<<< HEAD
+			dict(
+				doctype="ToDo",
+				description="test recurring todo without end_date",
+				assigned_by="Administrator",
+			)
+=======
 			doctype="ToDo", description="test recurring todo without end_date", assigned_by="Administrator"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert()
 		self.monthly_auto_repeat("ToDo", todo.name, start_date)
 
@@ -201,7 +209,11 @@ class TestAutoRepeat(IntegrationTestCase):
 		self.assertTrue(doc.next_schedule_date >= current_date)
 
 		todo = frappe.get_doc(
+<<<<<<< HEAD
+			dict(doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator")
+=======
 			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert()
 		doc = make_auto_repeat(
 			frequency="Daily", reference_document=todo.name, start_date=add_days(today(), -2)

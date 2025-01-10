@@ -35,7 +35,18 @@ _sites_path = os.environ.get("SITES_PATH", ".")
 
 
 # If gc.freeze is done then importing modules before forking allows us to share the memory
+<<<<<<< HEAD
+if frappe._tune_gc:
+	import gettext
+
+	import babel
+	import babel.messages
+	import bleach
+	import num2words
+	import pydantic
+=======
 import gettext
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import babel
 import babel.messages

@@ -84,7 +84,11 @@
  "icon": "fa fa-globe",
  "in_create": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-06-06 18:25:01.010821",
+=======
  "modified": "2024-07-21 08:25:25.130166",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Language",

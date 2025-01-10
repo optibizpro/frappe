@@ -98,7 +98,11 @@ frappe.views.ReportView = class ReportView extends frappe.views.ListView {
 		);
 		this.$paging_area
 			.find(".level-left")
+<<<<<<< HEAD
+			.after(`<span class="comparison-message text-muted">${message}</span>`);
+=======
 			.after(`<span class="comparison-message text-extra-muted">${message}</span>`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	setup_sort_selector() {

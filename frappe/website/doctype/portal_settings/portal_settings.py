@@ -21,6 +21,7 @@ class PortalSettings(Document):
 		default_role: DF.Link | None
 		hide_standard_menu: DF.Check
 		menu: DF.Table[PortalMenuItem]
+
 	# end: auto-generated types
 
 	def add_item(self, item):

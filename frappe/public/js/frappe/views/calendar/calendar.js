@@ -246,7 +246,12 @@ frappe.views.Calendar = class Calendar {
 	}
 
 	get_system_datetime(date) {
+<<<<<<< HEAD
+		date._offset = moment(date).tz(frappe.sys_defaults.time_zone)._offset;
+		return frappe.datetime.convert_to_system_tz(moment(date).locale("en"));
+=======
 		return frappe.datetime.convert_to_system_tz(date, true);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 	setup_options(defaults) {
 		var me = this;

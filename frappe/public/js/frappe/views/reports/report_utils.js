@@ -264,18 +264,25 @@ frappe.report_utils = {
 
 		dialog.fields_dict["file_format"].df.onchange = () => update_csv_preview(dialog);
 		dialog.fields_dict["csv_quoting"].df.onchange = () => update_csv_preview(dialog);
+<<<<<<< HEAD
+		dialog.fields_dict["csv_delimiter"].df.onchange = () => update_csv_preview(dialog);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		dialog.fields_dict["csv_delimiter"].df.onchange = () => {
 			if (!dialog.get_value("csv_delimiter")) {
 				dialog.set_value("csv_delimiter", ",");
 			}
 			update_csv_preview(dialog);
 		};
+<<<<<<< HEAD
+=======
 		dialog.fields_dict["csv_decimal_sep"].df.onchange = () => {
 			if (!dialog.get_value("csv_decimal_sep")) {
 				dialog.set_value("csv_decimal_sep", ".");
 			}
 			update_csv_preview(dialog);
 		};
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		return dialog;
 	},

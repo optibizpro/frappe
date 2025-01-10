@@ -8,7 +8,10 @@ import mimetypes
 import os
 import sys
 import uuid
+<<<<<<< HEAD
+=======
 from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from typing import TYPE_CHECKING
 from urllib.parse import quote
 
@@ -237,12 +240,15 @@ def json_handler(obj):
 	elif isinstance(obj, uuid.UUID):
 		return str(obj)
 
+<<<<<<< HEAD
+=======
 	elif isinstance(obj, Path):
 		return str(obj)
 
 	elif hasattr(obj, "__value__"):  # order imporant: defer to __json__ if implemented
 		return obj.__value__()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		raise TypeError(f"""Object of type {type(obj)} with value of {obj!r} is not JSON serializable""")
 

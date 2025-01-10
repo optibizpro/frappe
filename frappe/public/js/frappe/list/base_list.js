@@ -45,7 +45,10 @@ frappe.views.BaseList = class BaseList {
 
 		this.start = 0;
 		this.page_length = frappe.is_large_screen() ? 100 : 20;
+<<<<<<< HEAD
+=======
 		this.selected_page_count = this.page_length;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.data = [];
 		this.method = "frappe.desk.reportview.get";
 
@@ -411,6 +414,21 @@ frappe.views.BaseList = class BaseList {
 			this.$paging_area.find(".btn-paging").removeClass("btn-info").prop("disabled", false);
 			$this.addClass("btn-info").prop("disabled", true);
 
+<<<<<<< HEAD
+			// set active button
+			this.$paging_area.find(".btn-paging").removeClass("btn-info");
+			$this.addClass("btn-info");
+
+			this.start = 0;
+			this.page_length = this.selected_page_count = $this.data().value;
+
+			this.refresh();
+		});
+
+		this.$paging_area.on("click", ".btn-more", (e) => {
+			this.start += this.page_length;
+			this.page_length = this.selected_page_count || 20;
+=======
 			const old_page_length = this.page_length;
 			const new_page_length = $this.data().value;
 
@@ -431,6 +449,7 @@ frappe.views.BaseList = class BaseList {
 		this.$paging_area.on("click", ".btn-more", (e) => {
 			this.start = this.data.length;
 			this.page_length = this.selected_page_count;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.refresh();
 		});
 	}
@@ -804,6 +823,15 @@ class FilterArea {
 				condition: "like",
 				fieldname: "name",
 				onchange: () => this.debounced_refresh_list_view(),
+<<<<<<< HEAD
+			});
+		}
+
+		if (this.list_view.custom_filter_configs) {
+			this.list_view.custom_filter_configs.forEach((config) => {
+				config.onchange = () => this.debounced_refresh_list_view();
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			});
 		}
 

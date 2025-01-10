@@ -19,6 +19,7 @@ class EmailUnsubscribe(Document):
 		global_unsubscribe: DF.Check
 		reference_doctype: DF.Link | None
 		reference_name: DF.DynamicLink | None
+
 	# end: auto-generated types
 
 	def validate(self):

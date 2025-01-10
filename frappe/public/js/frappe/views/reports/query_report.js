@@ -1485,7 +1485,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 				const docfield = frappe.query_report.get_filter(fieldname).df;
 				const value = applied_filters[fieldname];
 
+<<<<<<< HEAD
+				if (docfield.hidden_due_to_dependency) {
+=======
 				if (frappe.utils.is_empty(value) || docfield.hidden_due_to_dependency) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					return null;
 				}
 
@@ -1530,7 +1534,10 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 				include_filters,
 				csv_delimiter,
 				csv_quoting,
+<<<<<<< HEAD
+=======
 				csv_decimal_sep,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}) => {
 				this.make_access_log("Export", file_format);
 

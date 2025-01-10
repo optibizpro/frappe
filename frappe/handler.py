@@ -121,6 +121,51 @@ def web_logout():
 	)
 
 
+<<<<<<< HEAD
+@frappe.whitelist()
+def uploadfile():
+	deprecation_warning(
+		"uploadfile is deprecated and will be removed in v16. Use upload_file instead.",
+	)
+	ret = None
+	check_write_permission(frappe.form_dict.doctype, frappe.form_dict.docname)
+
+	try:
+		if frappe.form_dict.get("from_form"):
+			try:
+				ret = frappe.get_doc(
+					{
+						"doctype": "File",
+						"attached_to_name": frappe.form_dict.docname,
+						"attached_to_doctype": frappe.form_dict.doctype,
+						"attached_to_field": frappe.form_dict.docfield,
+						"file_url": frappe.form_dict.file_url,
+						"file_name": frappe.form_dict.filename,
+						"is_private": frappe.utils.cint(frappe.form_dict.is_private),
+						"content": frappe.form_dict.filedata,
+						"decode": True,
+					}
+				)
+				ret.save()
+			except frappe.DuplicateEntryError:
+				# ignore pass
+				ret = None
+				frappe.db.rollback()
+		else:
+			if frappe.form_dict.get("method"):
+				method = frappe.get_attr(frappe.form_dict.method)
+				is_whitelisted(method)
+				ret = method()
+	except Exception:
+		frappe.errprint(frappe.utils.get_traceback())
+		frappe.response["http_status_code"] = 500
+		ret = None
+
+	return ret
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @frappe.whitelist(allow_guest=True)
 def upload_file():
 	user = None

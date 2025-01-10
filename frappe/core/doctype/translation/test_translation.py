@@ -2,7 +2,11 @@
 # License: MIT. See LICENSE
 import frappe
 from frappe import _
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class UnitTestTranslation(UnitTestCase):

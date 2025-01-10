@@ -5,7 +5,11 @@ from frappe import _
 
 @functools.total_ordering
 class _LazyTranslate:
+<<<<<<< HEAD
+	__slots__ = ("msg", "lang", "context")
+=======
 	__slots__ = ("context", "lang", "msg")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def __init__(self, msg: str, lang: str | None = None, context: str | None = None) -> None:
 		self.msg = msg

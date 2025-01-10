@@ -38,6 +38,7 @@ class S3BackupSettings(Document):
 		notify_email: DF.Data
 		secret_access_key: DF.Password
 		send_email_for_successful_backup: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):

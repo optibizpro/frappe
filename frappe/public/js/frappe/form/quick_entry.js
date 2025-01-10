@@ -64,7 +64,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		this.meta = frappe.get_meta(this.doctype);
 		let fields = this.meta.fields;
 
+<<<<<<< HEAD
+		this.mandatory = fields.filter((df) => {
+=======
 		this.docfields = fields.filter((df) => {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return (
 				(df.reqd || df.allow_in_quick_entry) &&
 				!df.read_only &&

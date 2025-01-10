@@ -30,6 +30,7 @@ class PersonalDataDeletionRequest(Document):
 		deletion_steps: DF.Table[PersonalDataDeletionStep]
 		email: DF.Data
 		status: DF.Literal["Pending Verification", "Pending Approval", "On Hold", "Deleted"]
+
 	# end: auto-generated types
 
 	def __init__(self, *args, **kwargs):

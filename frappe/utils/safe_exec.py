@@ -153,7 +153,11 @@ def _validate_safe_eval_syntax(code):
 
 @contextmanager
 def safe_exec_flags():
+<<<<<<< HEAD
+	if not frappe.flags.in_safe_exec:
+=======
 	if frappe.flags.in_safe_exec is None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.flags.in_safe_exec = 0
 
 	frappe.flags.in_safe_exec += 1

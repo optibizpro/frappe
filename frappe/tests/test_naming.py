@@ -3,9 +3,13 @@
 
 import time
 import unittest
+<<<<<<< HEAD
+
+=======
 from uuid import UUID
 
 import uuid_utils
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_full_jitter
 
 import frappe
@@ -22,8 +26,13 @@ from frappe.model.naming import (
 	revert_series_if_last,
 )
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase, patch_hooks
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import now_datetime, nowdate, nowtime
 
 
@@ -326,8 +335,13 @@ class TestNaming(IntegrationTestCase):
 
 	def test_naming_series_validation(self):
 		dns = frappe.get_doc("Document Naming Settings")
+<<<<<<< HEAD
+		exisiting_series = dns.get_transactions_and_prefixes()["prefixes"]
+		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *exisiting_series]
+=======
 		existing_series = dns.get_transactions_and_prefixes()["prefixes"]
 		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *existing_series]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		invalid = ["$INV-", r"WINDOWS\NAMING"]
 
 		for series in valid:
@@ -422,6 +436,8 @@ class TestNaming(IntegrationTestCase):
 			names.append(make_autoname("hash"))
 		self.assertEqual(names, sorted(names))
 
+<<<<<<< HEAD
+=======
 	def test_uuid_naming(self):
 		uuid_doctype = new_doctype(autoname="UUID").insert().name
 		self.assertEqual("uuid", frappe.db.get_column_type(uuid_doctype, "name"))
@@ -443,6 +459,7 @@ class TestNaming(IntegrationTestCase):
 
 		self.assertRaises(InvalidUUIDValue, frappe.new_doc(uuid_doctype, name="XYZ").insert)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def parse_naming_series_variable(doc, variable):
 	if variable == "PM":

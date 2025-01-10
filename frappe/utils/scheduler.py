@@ -14,10 +14,16 @@ import random
 import time
 from typing import NoReturn
 
+<<<<<<< HEAD
+from croniter import CroniterBadCronError
+
+# imports - module imports
+=======
 import setproctitle
 from croniter import CroniterBadCronError
 from filelock import FileLock, Timeout
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import frappe
 from frappe.utils import cint, get_bench_path, get_datetime, get_sites, now_datetime
 from frappe.utils.background_jobs import set_niceness
@@ -204,7 +210,11 @@ def is_dormant(check_time=None):
 	# Assume never dormant if developer_mode is enabled
 	if frappe.conf.developer_mode:
 		return False
+<<<<<<< HEAD
+	last_activity_log_timestamp = _get_last_modified_timestamp("Activity Log")
+=======
 	last_activity_log_timestamp = _get_last_creation_timestamp("Activity Log")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	since = (frappe.get_system_settings("dormant_days") or 4) * 86400
 	if not last_activity_log_timestamp:
 		return True
@@ -213,8 +223,13 @@ def is_dormant(check_time=None):
 	return False
 
 
+<<<<<<< HEAD
+def _get_last_modified_timestamp(doctype):
+	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="modified", order_by="modified desc")
+=======
 def _get_last_creation_timestamp(doctype):
 	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="creation", order_by="creation desc")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if timestamp:
 		return get_datetime(timestamp)
 
@@ -242,5 +257,9 @@ def get_scheduler_status():
 
 
 def get_scheduler_tick() -> int:
+<<<<<<< HEAD
+	return cint(frappe.get_conf().scheduler_tick_interval) or 60
+=======
 	conf = frappe.get_conf()
 	return cint(conf.scheduler_tick_interval) or DEFAULT_SCHEDULER_TICK
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

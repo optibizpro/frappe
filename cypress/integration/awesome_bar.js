@@ -31,6 +31,8 @@ context("Awesome Bar", () => {
 		cy.location("pathname").should("eq", "/app/todo");
 	});
 
+<<<<<<< HEAD
+=======
 	it("finds text in doctype list", () => {
 		cy.get("@awesome_bar").type("test in todo");
 		cy.wait(150); // Wait a bit before hitting enter.
@@ -61,6 +63,7 @@ context("Awesome Bar", () => {
 		cy.location("search").should("be.empty");
 	});
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	it("navigates to new form", () => {
 		cy.get("@awesome_bar").type("new blog post");
 		cy.wait(150); // Wait a bit before hitting enter

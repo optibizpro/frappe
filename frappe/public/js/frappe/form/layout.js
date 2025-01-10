@@ -415,6 +415,8 @@ frappe.ui.form.Layout = class Layout {
 	}
 
 	set_tab_as_active() {
+<<<<<<< HEAD
+=======
 		// Set active tab based on hash
 		const tab_from_hash = window.location.hash.replace("#", "");
 		const tab = this.tabs.find((tab) => tab.df.fieldname === tab_from_hash);
@@ -423,6 +425,7 @@ frappe.ui.form.Layout = class Layout {
 			return;
 		}
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		let frm_active_tab = this.frm?.get_active_tab?.();
 		if (frm_active_tab) {
 			frm_active_tab.set_active();

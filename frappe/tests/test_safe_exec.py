@@ -122,6 +122,10 @@ class TestSafeExec(IntegrationTestCase):
 		test_str = frappe.generate_hash()
 		safe_exec(f"print('{test_str}')")
 		self.assertEqual(frappe.local.debug_log[-1], test_str)
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class TestNoSafeExec(IntegrationTestCase):

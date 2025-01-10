@@ -16,9 +16,13 @@ query. This test can be written like this.
 >>> 		get_controller("User")
 
 """
+<<<<<<< HEAD
+import gc
+=======
 
 import gc
 import itertools
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import sys
 import time
 from unittest.mock import patch
@@ -29,7 +33,10 @@ import frappe
 from frappe.frappeclient import FrappeClient
 from frappe.model.base_document import get_controller
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.tests.test_api import FrappeAPITestCase
 from frappe.tests.test_query_builder import run_only_if
 from frappe.utils import cint
@@ -203,6 +210,11 @@ class TestPerformance(IntegrationTestCase):
 
 	def test_get_doc_cache_calls(self):
 		frappe.get_doc("User", "Administrator")
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(1):
+			frappe.get_doc("User", "Administrator")
+
+=======
 		with self.assertRedisCallCounts(0):
 			frappe.get_doc("User", "Administrator")
 
@@ -277,6 +289,7 @@ class TestPerformance(IntegrationTestCase):
 		core = assign_core(1, 4, 4, enabled_cores, affinity)
 		self.assertEqual(core, 2)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @run_only_if(db_type_is.MARIADB)
 class TestOverheadCalls(FrappeAPITestCase):
@@ -291,6 +304,11 @@ class TestOverheadCalls(FrappeAPITestCase):
 
 	def test_ping_overheads(self):
 		self.get(self.method("ping"), {"sid": "Guest"})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(13), self.assertQueryCount(self.BASE_SQL_CALLS):
+			self.get(self.method("ping"), {"sid": "Guest"})
+
+=======
 		with self.assertRedisCallCounts(2), self.assertQueryCount(self.BASE_SQL_CALLS):
 			self.get(self.method("ping"), {"sid": "Guest"})
 
@@ -300,11 +318,16 @@ class TestOverheadCalls(FrappeAPITestCase):
 		with self.assertRedisCallCounts(3), self.assertQueryCount(self.BASE_SQL_CALLS):
 			self.get(self.method("ping"), {"sid": sid})
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_list_view_overheads(self):
 		sid = self.sid
 		self.get(self.resource("ToDo"), {"sid": sid})
 		self.get(self.resource("ToDo"), {"sid": sid})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(24), self.assertQueryCount(self.BASE_SQL_CALLS + 1):
+=======
 		with self.assertRedisCallCounts(6), self.assertQueryCount(self.BASE_SQL_CALLS + 1):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.get(self.resource("ToDo"), {"sid": sid})
 
 	def test_get_doc_overheads(self):
@@ -312,6 +335,10 @@ class TestOverheadCalls(FrappeAPITestCase):
 		tables = len(frappe.get_meta("User").get_table_fields())
 		self.get(self.resource("User", "Administrator"), {"sid": sid})
 		self.get(self.resource("User", "Administrator"), {"sid": sid})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(19), self.assertQueryCount(self.BASE_SQL_CALLS + 1 + tables):
+			self.get(self.resource("User", "Administrator"), {"sid": sid})
+=======
 		with self.assertRedisCallCounts(3), self.assertQueryCount(self.BASE_SQL_CALLS + 1 + tables):
 			self.get(self.resource("User", "Administrator"), {"sid": sid})
 
@@ -319,3 +346,4 @@ class TestOverheadCalls(FrappeAPITestCase):
 @redis_cache
 def redis_cached_func():
 	return 42
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

@@ -28,6 +28,7 @@ class OAuthClient(Document):
 		scopes: DF.Text
 		skip_authorization: DF.Check
 		user: DF.Link | None
+
 	# end: auto-generated types
 
 	def validate(self):

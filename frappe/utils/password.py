@@ -34,6 +34,9 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 	).run()
 
 	if result and result[0][0]:
+<<<<<<< HEAD
+		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
+=======
 		try:
 			return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
 		except frappe.ValidationError as e:
@@ -41,6 +44,7 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 				raise e
 
 			return None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	elif raise_exception:
 		frappe.throw(

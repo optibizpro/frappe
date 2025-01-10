@@ -18,7 +18,11 @@ frappe.notification = {
 
 				return {
 					value: select_value,
+<<<<<<< HEAD
+					label: df.fieldname + " (" + __(df.label, null, df.parent) + ")",
+=======
 					label: path + " (" + __(df.label, null, df.parent) + ")",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				};
 			};
 
@@ -94,8 +98,13 @@ frappe.notification = {
 					return df.options == "Email";
 				});
 			} else if (["WhatsApp", "SMS"].includes(frm.doc.channel)) {
+<<<<<<< HEAD
+				receiver_fields = $.map(fields, function (d) {
+					return d.options == "Phone" ? get_select_options(d) : null;
+=======
 				receiver_fields = get_receiver_fields(fields, function (df) {
 					df.options == "Phone" || df.options == "Mobile";
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				});
 			}
 

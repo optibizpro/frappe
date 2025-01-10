@@ -390,8 +390,13 @@ frappe.ui.form.Toolbar = class Toolbar {
 		}
 	}
 
+<<<<<<< HEAD
+		// duplicate
+		if (frappe.boot.user.can_create.includes(me.frm.doctype) && !me.frm.meta.allow_copy) {
+=======
 	add_duplicate() {
 		if (frappe.boot.user.can_create.includes(this.frm.doctype) && !this.frm.meta.allow_copy) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.page.add_menu_item(
 				__("Duplicate"),
 				() => {

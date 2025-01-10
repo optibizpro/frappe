@@ -140,7 +140,10 @@ def is_ci(file):
 
 
 def is_frontend_code(file):
+<<<<<<< HEAD
+=======
 	"""Check if the file is frontend code."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return file.lower().endswith((".css", ".scss", ".less", ".sass", ".styl", ".js", ".ts", ".vue", ".html"))
 
 

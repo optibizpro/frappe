@@ -354,7 +354,11 @@ class RedisWrapper(redis.Redis):
 		return RedisearchWrapper(client=self, index_name=self.make_key(index_name))
 
 
+<<<<<<< HEAD
+def setup_cache():
+=======
 def setup_cache() -> RedisWrapper:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.conf.redis_cache_sentinel_enabled:
 		sentinels = [tuple(node.split(":")) for node in frappe.conf.get("redis_cache_sentinels", [])]
 		sentinel = get_sentinel_connection(
@@ -394,6 +398,8 @@ def get_sentinel_connection(
 		username=master_username,
 		password=master_password,
 	)
+<<<<<<< HEAD
+=======
 
 
 class _TrackedConnection(redis.Connection):
@@ -597,3 +603,4 @@ class ClientCache:
 
 	def reset_statistics(self):
 		self.hits = self.misses = 0
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

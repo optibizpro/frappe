@@ -99,6 +99,10 @@ class TestDBUpdate(IntegrationTestCase):
 			len(indexes), 1, msg=f"There should be 1 index on {doctype}.{field}, found {indexes}"
 		)
 
+<<<<<<< HEAD
+	@run_only_if(db_type_is.MARIADB)  # postgres uses invalid type for <=15
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_bigint_conversion(self):
 		doctype = new_doctype(fields=[{"fieldname": "int_field", "fieldtype": "Int"}]).insert()
 

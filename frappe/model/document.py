@@ -23,8 +23,13 @@ from frappe.model.docstatus import DocStatus
 from frappe.model.naming import set_new_name, validate_name
 from frappe.model.utils import is_virtual_doctype, simple_singledispatch
 from frappe.model.workflow import set_workflow_state_on_action, validate_workflow
+<<<<<<< HEAD
+from frappe.types import DF
+from frappe.utils import compare, cstr, date_diff, file_lock, flt, get_datetime_str, now
+=======
 from frappe.types import DF, DocRef
 from frappe.utils import compare, cstr, date_diff, file_lock, flt, get_table_name, now
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.data import get_absolute_url, get_datetime, get_timedelta, getdate
 from frappe.utils.global_search import update_global_search
 
@@ -38,9 +43,14 @@ DOCUMENT_LOCK_EXPIRTY = 12 * 60 * 60  # All locks expire in 12 hours automatical
 DOCUMENT_LOCK_SOFT_EXPIRY = 60 * 60  # Let users force-unlock after 60 minutes
 
 
+<<<<<<< HEAD
+def get_doc(*args, **kwargs):
+	"""returns a frappe.model.Document object.
+=======
 @simple_singledispatch
 def get_doc(*args, **kwargs) -> "Document":
 	"""Return a `frappe.model.Document` object.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param arg1: Document dict or DocType name.
 	:param arg2: [optional] document name.
@@ -232,6 +242,15 @@ class Document(BaseDocument, DocRef):
 			self._fix_numeric_types()
 
 		else:
+<<<<<<< HEAD
+			get_value_kwargs = {"for_update": self.flags.for_update, "as_dict": True}
+			if not isinstance(self.name, dict | list):
+				get_value_kwargs["order_by"] = None
+
+			d = frappe.db.get_value(
+				doctype=self.doctype, filters=self.name, fieldname="*", **get_value_kwargs
+			)
+=======
 			if isinstance(self.name, str) and self.doctype != "DocType":
 				# Fast path - use raw SQL to avoid QB/ORM overheads.
 				d = frappe.db.sql(
@@ -251,6 +270,7 @@ class Document(BaseDocument, DocRef):
 					for_update=self.flags.for_update,
 					as_dict=True,
 				)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			if not d:
 				frappe.throw(
@@ -307,7 +327,13 @@ class Document(BaseDocument, DocRef):
 
 		return self
 
+<<<<<<< HEAD
+		return self
+
+	def reload(self):
+=======
 	def reload(self) -> "Self":
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"""Reload document from database"""
 		return self.load_from_db()
 
@@ -544,7 +570,11 @@ class Document(BaseDocument, DocRef):
 
 	def update_child_table(self, fieldname: str, df: Optional["DocField"] = None):
 		"""sync child table for given fieldname"""
+<<<<<<< HEAD
+		df: "DocField" = df or self.meta.get_field(fieldname)
+=======
 		df: DocField = df or self.meta.get_field(fieldname)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		all_rows = self.get(df.fieldname)
 
 		# delete rows that do not match the ones in the document
@@ -566,6 +596,16 @@ class Document(BaseDocument, DocRef):
 
 			if existing_row_names:
 				qry = qry.where(tbl.name.notin(existing_row_names))
+<<<<<<< HEAD
+
+			qry.run()
+
+		# update / insert
+		for d in all_rows:
+			d: Document
+			d.db_update()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			qry.run()
 
@@ -597,6 +637,8 @@ class Document(BaseDocument, DocRef):
 			current_value = get_timedelta(current_value)
 
 		return previous_value != current_value
+<<<<<<< HEAD
+=======
 
 	def get_value_before_save(self, fieldname):
 		"""Returns value of a field before saving
@@ -607,6 +649,7 @@ class Document(BaseDocument, DocRef):
 		if not previous:
 			return
 		return previous.get(fieldname)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def set_new_name(self, force=False, set_name=None, set_child_names=True):
 		"""Calls `frappe.naming.set_new_name` for parent and child docs."""
@@ -1912,6 +1955,15 @@ def _document_values_generator(
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
+def unlock_document(doctype: str | None = None, name: str | None = None, args=None):
+	# Backward compatibility
+	if not doctype and not name and args:
+		args = json.loads(args)
+		doctype = str(args["doctype"])
+		name = str(args["name"])
+=======
 def unlock_document(doctype: str, name: str):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.get_doc(doctype, name).unlock()
 	frappe.msgprint(frappe._("Document Unlocked"), alert=True)

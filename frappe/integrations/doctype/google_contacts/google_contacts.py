@@ -29,6 +29,7 @@ class GoogleContacts(Document):
 		pull_from_google_contacts: DF.Check
 		push_to_google_contacts: DF.Check
 		refresh_token: DF.Password | None
+
 	# end: auto-generated types
 
 	def validate(self):

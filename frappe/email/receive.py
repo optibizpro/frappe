@@ -10,6 +10,10 @@ import json
 import poplib
 import re
 import ssl
+<<<<<<< HEAD
+import time
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from contextlib import suppress
 from email.errors import HeaderParseError
 from email.header import decode_header
@@ -231,6 +235,21 @@ class EmailServer:
 				# Remove {"} quotes that are added to handle spaces in IMAP Folder names
 				if folder[0] == folder[-1] == '"':
 					folder = folder[1:-1]
+<<<<<<< HEAD
+				# new update for the IMAP Folder DocType
+				IMAPFolder = frappe.qb.DocType("IMAP Folder")
+				frappe.qb.update(IMAPFolder).set(IMAPFolder.uidvalidity, current_uid_validity).set(
+					IMAPFolder.uidnext, uidnext
+				).where(IMAPFolder.parent == self.settings.email_account_name).where(
+					IMAPFolder.folder_name == folder
+				).run()
+			else:
+				EmailAccount = frappe.qb.DocType("Email Account")
+				frappe.qb.update(EmailAccount).set(EmailAccount.uidvalidity, current_uid_validity).set(
+					EmailAccount.uidnext, uidnext
+				).where(EmailAccount.name == self.settings.email_account_name).run()
+
+=======
 
 				frappe.db.set_value(
 					"IMAP Folder",
@@ -246,6 +265,7 @@ class EmailServer:
 					update_modified=False,
 				)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			sync_count = 100 if uid_validity else int(self.settings.initial_sync_count)
 			from_uid = 1 if uidnext < (sync_count + 1) or (uidnext - sync_count) < 1 else uidnext - sync_count
 			# sync last 100 email
@@ -457,7 +477,11 @@ class Email:
 			return ", ".join(emails)
 
 		decoded = ""
+<<<<<<< HEAD
+		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
+=======
 		for part, encoding in parts:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if encoding:
 				decoded += part.decode(encoding, "replace")
 			else:

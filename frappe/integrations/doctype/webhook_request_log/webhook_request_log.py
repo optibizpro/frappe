@@ -23,6 +23,7 @@ class WebhookRequestLog(Document):
 		url: DF.Data | None
 		user: DF.Link | None
 		webhook: DF.Link | None
+
 	# end: auto-generated types
 
 	@staticmethod

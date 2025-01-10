@@ -53,6 +53,7 @@ class BlogPost(WebsiteGenerator):
 		read_time: DF.Int
 		route: DF.Data | None
 		title: DF.Data
+
 	# end: auto-generated types
 
 	@frappe.whitelist()

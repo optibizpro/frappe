@@ -9,7 +9,11 @@ import frappe
 from frappe.utils import get_request_session
 
 
+<<<<<<< HEAD
+def make_request(method, url, auth=None, headers=None, data=None, json=None, params=None):
+=======
 def make_request(method: str, url: str, auth=None, headers=None, data=None, json=None, params=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	auth = auth or ""
 	data = data or {}
 	headers = headers or {}
@@ -78,6 +82,13 @@ def make_put_request(url: str, **kwargs):
 	return make_request("PUT", url, **kwargs)
 
 
+<<<<<<< HEAD
+def make_patch_request(url, **kwargs):
+	return make_request("PATCH", url, **kwargs)
+
+
+def make_delete_request(url, **kwargs):
+=======
 def make_patch_request(url: str, **kwargs):
 	"""Make a 'PATCH' HTTP request to the given `url` and return processed response.
 
@@ -103,6 +114,7 @@ def make_delete_request(url: str, **kwargs):
 	* `params`: Query parameters to be passed in the request.
 	* `auth`: Auth credentials.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return make_request("DELETE", url, **kwargs)
 
 

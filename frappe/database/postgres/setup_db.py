@@ -7,12 +7,28 @@ from frappe.utils import cint
 
 
 def setup_database():
+<<<<<<< HEAD
+	root_conn = get_root_connection(frappe.flags.root_login, frappe.flags.root_password)
+=======
 	root_conn = get_root_connection()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	root_conn.commit()
 	root_conn.sql("end")
 	root_conn.sql(f'DROP DATABASE IF EXISTS "{frappe.conf.db_name}"')
 
 	# If user exists, just update password
+<<<<<<< HEAD
+	if root_conn.sql(f"SELECT 1 FROM pg_roles WHERE rolname='{frappe.conf.db_name}'"):
+		root_conn.sql(f"ALTER USER \"{frappe.conf.db_name}\" WITH PASSWORD '{frappe.conf.db_password}'")
+	else:
+		root_conn.sql(f"CREATE USER \"{frappe.conf.db_name}\" WITH PASSWORD '{frappe.conf.db_password}'")
+	root_conn.sql(f'CREATE DATABASE "{frappe.conf.db_name}"')
+	root_conn.sql(f'GRANT ALL PRIVILEGES ON DATABASE "{frappe.conf.db_name}" TO "{frappe.conf.db_name}"')
+	if psql_version := root_conn.sql("SHOW server_version_num", as_dict=True):
+		semver_version_num = psql_version[0].get("server_version_num") or "140000"
+		if cint(semver_version_num) > 150000:
+			root_conn.sql(f'ALTER DATABASE "{frappe.conf.db_name}" OWNER TO "{frappe.conf.db_name}"')
+=======
 	if root_conn.sql(f"SELECT 1 FROM pg_roles WHERE rolname='{frappe.conf.db_user}'"):
 		root_conn.sql(f"ALTER USER \"{frappe.conf.db_user}\" WITH PASSWORD '{frappe.conf.db_password}'")
 	else:
@@ -23,12 +39,17 @@ def setup_database():
 		semver_version_num = psql_version[0].get("server_version_num") or "140000"
 		if cint(semver_version_num) > 150000:
 			root_conn.sql(f'ALTER DATABASE "{frappe.conf.db_name}" OWNER TO "{frappe.conf.db_user}"')
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	root_conn.close()
 
 
 def bootstrap_database(verbose, source_sql=None):
 	frappe.connect()
 	import_db_from_sql(source_sql, verbose)
+<<<<<<< HEAD
+	frappe.connect()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	frappe.connect()
 	if "tabDefaultValue" not in frappe.db.get_tables():
@@ -52,10 +73,17 @@ def import_db_from_sql(source_sql=None, verbose=False):
 	if not source_sql:
 		source_sql = os.path.join(os.path.dirname(__file__), "framework_postgres.sql")
 	DbManager(frappe.local.db).restore_database(
+<<<<<<< HEAD
+		verbose, db_name, source_sql, db_name, frappe.conf.db_password
+	)
+	if verbose:
+		print("Imported from database %s" % source_sql)
+=======
 		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
 	)
 	if verbose:
 		print("Imported from database {}".format(source_sql))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_root_connection():
@@ -82,9 +110,15 @@ def get_root_connection():
 			socket=frappe.conf.db_socket,
 			host=frappe.conf.db_host,
 			port=frappe.conf.db_port,
+<<<<<<< HEAD
+			user=root_login,
+			password=root_password,
+			cur_db_name=root_login,
+=======
 			user=frappe.flags.root_login,
 			password=frappe.flags.root_password,
 			cur_db_name=frappe.flags.root_login,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 
 	return frappe.local.flags.root_connection

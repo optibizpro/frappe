@@ -176,6 +176,9 @@ class DBTable:
 
 
 class DbColumn:
+<<<<<<< HEAD
+	def __init__(self, table, fieldname, fieldtype, length, default, set_index, options, unique, precision):
+=======
 	def __init__(
 		self,
 		*,
@@ -190,6 +193,7 @@ class DbColumn:
 		precision,
 		not_nullable,
 	):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.table = table
 		self.fieldname = fieldname
 		self.fieldtype = fieldtype

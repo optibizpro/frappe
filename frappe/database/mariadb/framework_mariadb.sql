@@ -173,12 +173,21 @@ CREATE TABLE `tabDocType` (
   `docstatus` tinyint NOT NULL DEFAULT 0,
   `idx` int NOT NULL DEFAULT 0,
   `search_fields` varchar(255) DEFAULT NULL,
+<<<<<<< HEAD
+  `issingle` int(1) NOT NULL DEFAULT 0,
+  `is_virtual` int(1) NOT NULL DEFAULT 0,
+  `is_tree` int(1) NOT NULL DEFAULT 0,
+  `istable` int(1) NOT NULL DEFAULT 0,
+  `editable_grid` int(1) NOT NULL DEFAULT 1,
+  `track_changes` int(1) NOT NULL DEFAULT 0,
+=======
   `issingle` tinyint NOT NULL DEFAULT 0,
   `is_virtual` tinyint NOT NULL DEFAULT 0,
   `is_tree` tinyint NOT NULL DEFAULT 0,
   `istable` tinyint NOT NULL DEFAULT 0,
   `editable_grid` tinyint NOT NULL DEFAULT 1,
   `track_changes` tinyint NOT NULL DEFAULT 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   `module` varchar(255) DEFAULT NULL,
   `restrict_to_domain` varchar(255) DEFAULT NULL,
   `app` varchar(255) DEFAULT NULL,

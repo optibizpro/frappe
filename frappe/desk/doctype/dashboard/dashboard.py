@@ -29,6 +29,7 @@ class Dashboard(Document):
 		is_default: DF.Check
 		is_standard: DF.Check
 		module: DF.Link | None
+
 	# end: auto-generated types
 
 	def on_update(self):

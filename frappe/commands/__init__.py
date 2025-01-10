@@ -117,7 +117,10 @@ def get_commands():
 	all_commands = (
 		scheduler_commands
 		+ site_commands
+<<<<<<< HEAD
+=======
 		+ testing_commands
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		+ translate_commands
 		+ gettext_commands
 		+ utils_commands

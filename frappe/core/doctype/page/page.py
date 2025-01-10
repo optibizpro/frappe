@@ -32,6 +32,7 @@ class Page(Document):
 		standard: DF.Literal["Yes", "No"]
 		system_page: DF.Check
 		title: DF.Data | None
+
 	# end: auto-generated types
 
 	def autoname(self):

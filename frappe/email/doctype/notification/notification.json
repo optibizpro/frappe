@@ -289,6 +289,8 @@
    "fieldtype": "Select",
    "label": "Message Type",
    "options": "Markdown\nHTML\nPlain Text"
+<<<<<<< HEAD
+=======
   },
   {
    "depends_on": "eval:doc.document_type && (doc.event==\"Minutes After\" || doc.event==\"Minutes Before\")",
@@ -311,12 +313,17 @@
    "fieldtype": "Datetime",
    "label": "Last Run",
    "read_only": 1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "icon": "fa fa-envelope",
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-07-04 05:53:40.595130",
+=======
  "modified": "2024-09-12 10:28:35.077180",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Email",
  "name": "Notification",

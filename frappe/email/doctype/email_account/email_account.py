@@ -102,9 +102,13 @@ class EmailAccount(Document):
 		send_notification_to: DF.SmallText | None
 		send_unsubscribe_message: DF.Check
 		sent_folder_name: DF.Data | None
+<<<<<<< HEAD
+		service: DF.Literal["", "GMail", "Sendgrid", "SparkPost", "Yahoo Mail", "Outlook.com", "Yandex.Mail"]
+=======
 		service: DF.Literal[
 			"", "Frappe Mail", "GMail", "Sendgrid", "SparkPost", "Yahoo Mail", "Outlook.com", "Yandex.Mail"
 		]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		signature: DF.TextEditor | None
 		smtp_port: DF.Data | None
 		smtp_server: DF.Data | None
@@ -269,7 +273,11 @@ class EmailAccount(Document):
 		return frappe.db.get_value("Email Domain", domain, EMAIL_DOMAIN_FIELDS, as_dict=True)
 
 	def get_incoming_server(self, in_receive=False, email_sync_rule="UNSEEN"):
+<<<<<<< HEAD
+		"""Returns logged in POP3/IMAP connection object."""
+=======
 		"""Return logged in POP3/IMAP connection object."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		oauth_token = self.get_oauth_token()
 		args = frappe._dict(
 			{
@@ -524,6 +532,17 @@ class EmailAccount(Document):
 		config = self.sendmail_config()
 		return SMTPServer(**config)
 
+<<<<<<< HEAD
+	def remove_unpicklable_values(self, state):
+		super().remove_unpicklable_values(state)
+		state.pop("_smtp_server_instance", None)
+
+	def handle_incoming_connect_error(self, description):
+		if self.get_failed_attempts_count() > 5:
+			# This is done in background to avoid committing here.
+			frappe.enqueue(self._disable_broken_incoming_account, description=description)
+		else:
+=======
 	def get_frappe_mail_client(self):
 		return self._frappe_mail_client
 
@@ -553,6 +572,7 @@ class EmailAccount(Document):
 			# This is done in background to avoid committing here.
 			frappe.enqueue(self._disable_broken_incoming_account, description=description)
 		else:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.set_failed_attempts_count(self.get_failed_attempts_count() + 1)
 
 	def _disable_broken_incoming_account(self, description):

@@ -37,6 +37,7 @@ class EnergyPointLog(Document):
 		seen: DF.Check
 		type: DF.Literal["Auto", "Appreciation", "Criticism", "Review", "Revert"]
 		user: DF.Link
+
 	# end: auto-generated types
 
 	def validate(self):

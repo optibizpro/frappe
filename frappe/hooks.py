@@ -202,10 +202,13 @@ doc_events = {
 
 scheduler_events = {
 	"cron": {
+<<<<<<< HEAD
+=======
 		# 5 minutes
 		"0/5 * * * *": [
 			"frappe.email.doctype.notification.notification.trigger_offset_alerts",
 		],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		# 15 minutes
 		"0/15 * * * *": [
 			"frappe.oauth.delete_oauth2_data",
@@ -426,7 +429,10 @@ ignore_links_on_delete = [
 	"Workspace",
 	"Route History",
 	"Access Log",
+<<<<<<< HEAD
+=======
 	"Permission Log",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ]
 
 # Request Hooks
@@ -472,6 +478,17 @@ export_python_type_annotations = True
 
 standard_navbar_items = [
 	{
+<<<<<<< HEAD
+		"item_label": "My Profile",
+		"item_type": "Route",
+		"route": "/app/user-profile",
+		"is_standard": 1,
+	},
+	{
+		"item_label": "My Settings",
+		"item_type": "Action",
+		"action": "frappe.ui.toolbar.route_to_user()",
+=======
 		"item_label": "User Settings",
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.route_to_user()",
@@ -481,6 +498,7 @@ standard_navbar_items = [
 		"item_label": "Workspace Settings",
 		"item_type": "Action",
 		"action": "frappe.quick_edit('Workspace Settings')",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"is_standard": 1,
 	},
 	{
@@ -553,12 +571,15 @@ standard_help_items = [
 		"is_standard": 1,
 	},
 	{
+<<<<<<< HEAD
+=======
 		"item_label": "System Health",
 		"item_type": "Route",
 		"route": "/app/system-health-report",
 		"is_standard": 1,
 	},
 	{
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		"item_label": "Frappe Support",
 		"item_type": "Route",
 		"route": "https://frappe.io/support",

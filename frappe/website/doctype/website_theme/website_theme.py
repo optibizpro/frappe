@@ -4,7 +4,10 @@
 from os.path import abspath, splitext
 from os.path import exists as path_exists
 from os.path import join as join_path
+<<<<<<< HEAD
+=======
 from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from typing import Optional
 
 import frappe
@@ -44,6 +47,7 @@ class WebsiteTheme(Document):
 		theme: DF.Data
 		theme_scss: DF.Code | None
 		theme_url: DF.Data | None
+
 	# end: auto-generated types
 
 	def validate(self):

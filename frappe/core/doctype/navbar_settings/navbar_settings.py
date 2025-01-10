@@ -20,7 +20,30 @@ class NavbarSettings(Document):
 		app_logo: DF.AttachImage | None
 		help_dropdown: DF.Table[NavbarItem]
 		settings_dropdown: DF.Table[NavbarItem]
+
 	# end: auto-generated types
+<<<<<<< HEAD
+	def validate(self):
+		self.validate_standard_navbar_items()
+
+	def validate_standard_navbar_items(self):
+		doc_before_save = self.get_doc_before_save()
+
+		if not doc_before_save:
+			return
+
+		before_save_items = [
+			item
+			for item in doc_before_save.help_dropdown + doc_before_save.settings_dropdown
+			if item.is_standard
+		]
+
+		after_save_items = [item for item in self.help_dropdown + self.settings_dropdown if item.is_standard]
+
+		if not frappe.flags.in_patch and (len(before_save_items) > len(after_save_items)):
+			frappe.throw(_("Please hide the standard navbar items instead of deleting them"))
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_app_logo():

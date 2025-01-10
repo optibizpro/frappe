@@ -166,6 +166,11 @@ module.exports = {
 	apps_path,
 	bundle_map,
 	get_public_path,
+<<<<<<< HEAD
+	get_build_json_path,
+	get_build_json,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	delete_file,
 	run_serially,
 	get_cli_arg,

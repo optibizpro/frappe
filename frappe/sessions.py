@@ -51,7 +51,11 @@ def clear_sessions(user=None, keep_current=False, force=False):
 
 
 def get_sessions_to_clear(user=None, keep_current=False, force=False):
+<<<<<<< HEAD
+	"""Returns sessions of the current user. Called at login / logout
+=======
 	"""Return sessions of the current user. Called at login / logout.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param user: user name (default: current user)
 	:param keep_current: keep current session (default: false)
@@ -98,6 +102,10 @@ def delete_session(sid=None, user=None, reason="Session Expired"):
 	frappe.db.commit()
 
 	frappe.cache.hdel("session", sid)
+<<<<<<< HEAD
+	frappe.cache.hdel("last_db_session_update", sid)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_all_sessions(reason=None):
@@ -169,10 +177,18 @@ def get():
 	bootinfo["disable_async"] = frappe.conf.disable_async
 
 	bootinfo["setup_complete"] = cint(frappe.get_system_settings("setup_complete"))
+<<<<<<< HEAD
+	apps = get_apps() or []
+	bootinfo["apps_data"] = {
+		"apps": apps,
+		"is_desk_apps": 1 if bool(is_desk_apps(apps)) else 0,
+		"default_path": get_default_path(apps) or "",
+=======
 	bootinfo["apps_data"] = {
 		"apps": get_apps() or [],
 		"is_desk_apps": 1 if bool(is_desk_apps(get_apps())) else 0,
 		"default_path": get_default_path() or "",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	bootinfo["desk_theme"] = frappe.db.get_value("User", frappe.session.user, "desk_theme") or "Light"
@@ -202,12 +218,19 @@ def generate_csrf_token():
 
 
 class Session:
+<<<<<<< HEAD
+	__slots__ = ("user", "user_type", "full_name", "data", "time_diff", "sid", "_update_in_cache")
+
+	def __init__(self, user, resume=False, full_name=None, user_type=None):
+		self.sid = cstr(frappe.form_dict.get("sid") or unquote(frappe.request.cookies.get("sid", "Guest")))
+=======
 	__slots__ = ("_update_in_cache", "data", "full_name", "sid", "time_diff", "user", "user_type")
 
 	def __init__(self, user, resume=False, full_name=None, user_type=None):
 		self.sid = cstr(
 			frappe.form_dict.pop("sid", None) or unquote(frappe.request.cookies.get("sid", "Guest"))
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.user = user
 		self.user_type = user_type
 		self.full_name = full_name
@@ -281,6 +304,9 @@ class Session:
 		(
 			frappe.qb.into(Sessions)
 			.columns(Sessions.sessiondata, Sessions.user, Sessions.lastupdate, Sessions.sid, Sessions.status)
+<<<<<<< HEAD
+			.insert((str(self.data["data"]), self.data["user"], now, self.data["sid"], "Active"))
+=======
 			.insert(
 				(
 					frappe.as_json(self.data["data"], indent=None, separators=(",", ":")),
@@ -290,6 +316,7 @@ class Session:
 					"Active",
 				)
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).run()
 		frappe.cache.hset("session", self.data.sid, self.data)
 
@@ -303,6 +330,7 @@ class Session:
 		if data:
 			self.data.update({"data": data, "user": data.user, "sid": self.sid})
 			self.user = data.user
+			self.validate_user()
 			validate_ip_address(self.user)
 		else:
 			self.start_as_guest()
@@ -414,6 +442,11 @@ class Session:
 
 			frappe.db.commit()
 			updated_in_db = True
+<<<<<<< HEAD
+
+			frappe.cache.hset("last_db_session_update", self.sid, now)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.cache.hset("session", self.sid, self.data)
 
 		return updated_in_db
@@ -449,7 +482,11 @@ def get_expired_threshold():
 
 
 def get_expiry_period():
+<<<<<<< HEAD
+	exp_sec = frappe.defaults.get_global_default("session_expiry") or "240:00:00"
+=======
 	exp_sec = frappe.get_system_settings("session_expiry") or "240:00:00"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# incase seconds is missing
 	if len(exp_sec.split(":")) == 2:

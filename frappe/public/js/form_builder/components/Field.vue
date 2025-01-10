@@ -177,11 +177,14 @@ function is_filter_applied() {
 	}
 }
 
+<<<<<<< HEAD
+=======
 function open_child_doctype() {
 	if (!props.field?.df?.options) return;
 	window.open(`/app/doctype/${props.field.df.options}`, "_blank");
 }
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 onMounted(() => selected.value && label_input.value.focus_on_label());
 </script>
 
@@ -214,7 +217,11 @@ onMounted(() => selected.value && label_input.value.focus_on_label());
 						class="help-icon"
 						v-if="field.df.documentation_url"
 						v-html="frappe.utils.icon('help', 'sm')"
+<<<<<<< HEAD
+					></div>
+=======
 					/>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				</div>
 			</template>
 			<template #actions>
@@ -225,7 +232,11 @@ onMounted(() => selected.value && label_input.value.focus_on_label());
 						:class="is_filter_applied()"
 						@click="edit_filters"
 					>
+<<<<<<< HEAD
+						<div v-html="frappe.utils.icon('filter', 'sm')"></div>
+=======
 						<div v-html="frappe.utils.icon('filter', 'sm')" />
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</button>
 					<AddFieldButton ref="add_field_ref" :column="column" :field="field">
 						<div v-html="frappe.utils.icon('add', 'sm')" />
@@ -245,6 +256,11 @@ onMounted(() => selected.value && label_input.value.focus_on_label());
 						:title="__('Duplicate field')"
 						@click.stop="duplicate_field"
 					>
+<<<<<<< HEAD
+						<div v-html="frappe.utils.icon('duplicate', 'sm')"></div>
+					</button>
+					<button
+=======
 						<div v-html="frappe.utils.icon('duplicate', 'sm')" />
 					</button>
 					<button
@@ -256,11 +272,16 @@ onMounted(() => selected.value && label_input.value.focus_on_label());
 						<div v-html="frappe.utils.icon('external-link', 'sm')" />
 					</button>
 					<button
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						class="btn btn-xs btn-icon"
 						:title="__('Remove field')"
 						@click.stop="remove_field"
 					>
+<<<<<<< HEAD
+						<div v-html="frappe.utils.icon('remove', 'sm')"></div>
+=======
 						<div v-html="frappe.utils.icon('remove', 'sm')" />
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					</button>
 				</div>
 			</template>

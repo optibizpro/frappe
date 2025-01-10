@@ -722,6 +722,8 @@
    "label": "Onboarding Status"
   },
   {
+<<<<<<< HEAD
+=======
    "allow_in_quick_entry": 1,
    "fieldname": "role_profiles",
    "fieldtype": "Table MultiSelect",
@@ -730,6 +732,7 @@
    "permlevel": 1
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "description": "If left empty, the default workspace will be the last visited workspace",
    "fieldname": "default_workspace",
    "fieldtype": "Link",
@@ -743,6 +746,8 @@
    "label": "Workspace"
   },
   {
+<<<<<<< HEAD
+=======
    "default": "vscode",
    "fieldname": "code_editor_type",
    "fieldtype": "Select",
@@ -750,6 +755,7 @@
    "options": "vscode\nvim\nemacs"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "collapsible": 1,
    "fieldname": "app_section",
    "fieldtype": "Section Break",
@@ -759,7 +765,12 @@
    "description": "Redirect to the selected app after login",
    "fieldname": "default_app",
    "fieldtype": "Select",
+<<<<<<< HEAD
+   "label": "Default App",
+   "options": ""
+=======
    "label": "Default App"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "collapsible": 1,

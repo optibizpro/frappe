@@ -7,8 +7,11 @@ import datetime
 import json
 import re
 from collections import Counter
+<<<<<<< HEAD
+=======
 from collections.abc import Mapping, Sequence
 from functools import cached_property
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 import frappe.defaults
@@ -30,6 +33,11 @@ from frappe.utils import (
 	get_filter,
 	get_time,
 	get_timespan_date_range,
+<<<<<<< HEAD
+	make_filter_tuple,
+	sanitize_column,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 )
 from frappe.utils.data import DateTimeLikeObject, get_datetime, getdate, sbool
 
@@ -584,7 +592,14 @@ class DatabaseQuery:
 			self.flags.ignore_permissions = ignore_permissions
 
 		for f in filters:
+<<<<<<< HEAD
+			if isinstance(f, str):
+				conditions.append(sanitize_column(f))
+			else:
+				conditions.append(self.prepare_filter_condition(f))
+=======
 			conditions.append(self.prepare_filter_condition(f))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def remove_field(self, idx: int):
 		if self.as_list:
@@ -707,6 +722,12 @@ class DatabaseQuery:
 		if f.operator.lower() in additional_filters_config:
 			f.update(get_additional_filter_field(additional_filters_config, f, f.value))
 
+<<<<<<< HEAD
+		meta = frappe.get_meta(f.doctype)
+
+		# primary key is never nullable, modified is usually indexed by default and always present
+		can_be_null = f.fieldname not in ("name", "modified", "creation")
+=======
 		meta = self.get_meta(f.doctype)
 		df = meta.get("fields", {"fieldname": f.fieldname})
 		df = df[0] if df else None
@@ -715,6 +736,7 @@ class DatabaseQuery:
 		can_be_null = f.fieldname not in ("name", "modified", "creation")
 
 		value = None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# prepare in condition
 		if f.operator.lower() in NestedSetHierarchy:
@@ -1089,7 +1111,11 @@ class DatabaseQuery:
 					sort_order = (self.doctype_meta.sort_field and self.doctype_meta.sort_order) or "desc"
 					if self.order_by:
 						args.order_by = (
+<<<<<<< HEAD
+							f"`tab{self.doctype}`.`{sort_field or 'modified'}` {sort_order or 'desc'}"
+=======
 							f"`tab{self.doctype}`.`{sort_field or 'creation'}` {sort_order or 'desc'}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						)
 
 	def validate_order_by_and_group_by(self, parameters: str):
@@ -1245,7 +1271,11 @@ def get_between_date_filter(value, df=None):
 	        no change is applied.
 	"""
 
+<<<<<<< HEAD
+	fieldtype = df and df.fieldtype or "Datetime"
+=======
 	fieldtype = (df and df.fieldtype) or "Datetime"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	from_date = frappe.utils.nowdate()
 	to_date = frappe.utils.nowdate()

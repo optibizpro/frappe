@@ -47,6 +47,7 @@ class Contact(Document):
 		sync_with_google_contacts: DF.Check
 		unsubscribed: DF.Check
 		user: DF.Link | None
+
 	# end: auto-generated types
 
 	def autoname(self):

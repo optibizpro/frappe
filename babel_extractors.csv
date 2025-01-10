@@ -9,5 +9,8 @@
 **.js,frappe.gettext.extractors.javascript.extract
 **.html,frappe.gettext.extractors.html_template.extract
 **.vue,frappe.gettext.extractors.html_template.extract
+<<<<<<< HEAD
+=======
 **/custom/*.json,frappe.gettext.extractors.customization.extract
 **/fixtures/custom_field.json,frappe.gettext.extractors.custom_field.extract
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
