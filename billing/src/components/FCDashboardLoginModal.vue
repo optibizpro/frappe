@@ -2,7 +2,7 @@
 	<Dialog
 		v-model="show"
 		:options="{
-			title: loginLink ? 'Login successful!' : 'Login to Frappe Cloud Dashboard',
+			title: loginLink ? 'Login successful!' : 'Login to OptiBizPro Cloud Dashboard',
 		}"
 	>
 		<template #body-content>
