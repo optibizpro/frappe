@@ -9797,7 +9797,7 @@ msgid "Failed to render subject: {}"
 msgstr ""
 
 #: frappe/integrations/frappe_providers/frappecloud_billing.py:104
-msgid "Failed to request login to Frappe Cloud"
+msgid "Failed to request login to OptiBizPro Cloud"
 msgstr ""
 
 #: frappe/email/doctype/email_queue/email_queue.py:283
