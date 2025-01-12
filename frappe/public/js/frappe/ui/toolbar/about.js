@@ -21,8 +21,8 @@ frappe.ui.misc.about = function () {
 						Twitter: <a href='https://twitter.com/optibizpro' target='_blank'>https://twitter.com/optibizpro</a></p>
 					<p><i class='fa fa-youtube fa-fw'></i>
 						YouTube: <a href='https://www.youtube.com/@optibizpro' target='_blank'>https://www.youtube.com/@optibizpro</a></p>
-						<p><i class='fa fa-tiktok fa-fw'></i>
-						YouTube: <a href='https://www.tiktok.com/@optibizpro' target='_blank'>https://www.tiktok.com/@optibizpro</a></p>
+						<p><i class="fa-brands fa-tiktok"></i>
+						TikTok: <a href='https://www.tiktok.com/@optibizpro' target='_blank'>https://www.tiktok.com/@optibizpro</a></p>
 					<hr>
 					<h4>${__("Installed Apps")}</h4>
 					<div id='about-app-versions'>${__("Loading versions...")}</div>
