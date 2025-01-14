@@ -67,6 +67,7 @@ class SocialLoginKey(Document):
 			"Keycloak",
 		]
 		user_id_property: DF.Data | None
+
 	# end: auto-generated types
 
 	def autoname(self):

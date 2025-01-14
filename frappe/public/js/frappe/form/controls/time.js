@@ -47,6 +47,16 @@ frappe.ui.form.ControlTime = class ControlTime extends frappe.ui.form.ControlDat
 		if (!this.datepicker) {
 			return;
 		}
+<<<<<<< HEAD
+		if (
+			value &&
+			((this.last_value && this.last_value !== this.value) ||
+				!this.datepicker.selectedDates.length)
+		) {
+			let time_format = frappe.sys_defaults.time_format || "HH:mm:ss";
+			var date_obj = frappe.datetime.moment_to_date_obj(moment(value, time_format));
+			this.datepicker.selectDate(date_obj);
+=======
 		if (!value) {
 			this.datepicker.clear();
 			return;
@@ -72,6 +82,7 @@ frappe.ui.form.ControlTime = class ControlTime extends frappe.ui.form.ControlDat
 			this.datepicker.selectDate(
 				frappe.datetime.moment_to_date_obj(moment(value, time_format))
 			);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 	set_datepicker() {

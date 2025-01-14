@@ -32,6 +32,8 @@ jobs:
           npm install @commitlint/cli @commitlint/config-conventional
           npx commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
 
+<<<<<<< HEAD
+=======
   docs-required:
     name: 'Documentation Required'
     runs-on: ubuntu-latest
@@ -51,6 +53,7 @@ jobs:
           pip install requests --quiet
           python $GITHUB_WORKSPACE/.github/helper/documentation.py $PR_NUMBER
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   linter:
     name: 'Semgrep Rules'
     runs-on: ubuntu-latest
@@ -95,6 +98,9 @@ jobs:
         run: |
           pip install pip-audit
           cd ${GITHUB_WORKSPACE}
+<<<<<<< HEAD
+          pip-audit --desc on --ignore-vuln GHSA-4xqq-73wg-5mjp .
+=======
           pip-audit --desc on .
 
   precommit:
@@ -109,3 +115,4 @@ jobs:
           python-version: '3.13'
           cache: pip
       - uses: pre-commit/action@v3.0.1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

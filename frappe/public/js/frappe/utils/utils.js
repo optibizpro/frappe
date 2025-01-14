@@ -921,6 +921,18 @@ Object.assign(frappe.utils, {
 		let route = route_str.split("/");
 
 		if (route[2] === "Report" || route[0] === "query-report") {
+<<<<<<< HEAD
+			return __("{0} Report", [__(route[3]) || __(route[1])]);
+		}
+		if (route[0] === "List") {
+			return __("{0} List", [__(route[1])]);
+		}
+		if (route[0] === "modules") {
+			return __("{0} Modules", [__(route[1])]);
+		}
+		if (route[0] === "dashboard") {
+			return __("{0} Dashboard", [__(route[1])]);
+=======
 			return (__(route[3]) || __(route[1])).bold() + " " + __("Report");
 		}
 		if (route[0] === "List") {
@@ -934,6 +946,7 @@ Object.assign(frappe.utils, {
 		}
 		if (route[0] === "dashboard") {
 			return __(route[1]).bold() + " " + __("Dashboard");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 		return __(frappe.utils.to_title_case(__(route[0]), true));
 	},
@@ -1304,9 +1317,16 @@ Object.assign(frappe.utils, {
 				if (item.is_query_report) {
 					route = "query-report/" + item.name;
 				} else if (!item.is_query_report && item.report_ref_doctype) {
+<<<<<<< HEAD
+					route =
+						frappe.router.slug(item.report_ref_doctype) + "/view/report/" + item.name;
+				} else {
+					route = "/report/" + item.name;
+=======
 					route = frappe.router.slug(item.report_ref_doctype) + "/view/report/";
 				} else {
 					route = "report/" + item.name;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				}
 			} else if (type === "page") {
 				route = item.name;

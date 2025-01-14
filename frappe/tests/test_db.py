@@ -16,8 +16,13 @@ from frappe.query_builder import Field
 from frappe.query_builder.functions import Concat_ws
 from frappe.tests import IntegrationTestCase, timeout
 from frappe.tests.test_query_builder import db_type_is, run_only_if
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, timeout
+from frappe.utils import add_days, now, random_string, set_request
+=======
 from frappe.utils import add_days, now, random_string, set_request
 from frappe.utils.data import now_datetime
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.testutils import clear_custom_fields
 
 
@@ -180,11 +185,14 @@ class TestDB(IntegrationTestCase):
 		self.assertEqual(lang, frappe.db.get_single_value("System Settings", "language"))
 		self.assertEqual(date_format, frappe.db.get_single_value("System Settings", "date_format"))
 
+<<<<<<< HEAD
+=======
 	def test_singles_get_values_variant(self):
 		[[lang, date_format]] = frappe.db.get_values("System Settings", fieldname=["language", "date_format"])
 		self.assertEqual(lang, frappe.db.get_single_value("System Settings", "language"))
 		self.assertEqual(date_format, frappe.db.get_single_value("System Settings", "date_format"))
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_log_touched_tables(self):
 		frappe.flags.in_migrate = True
 		frappe.flags.touched_tables = set()
@@ -1074,7 +1082,11 @@ class TestReplicaConnections(IntegrationTestCase):
 			self.assertEqual(write_connection, db_id())
 
 
+<<<<<<< HEAD
+class TestConcurrency(FrappeTestCase):
+=======
 class TestConcurrency(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@timeout(5, "There shouldn't be any lock wait")
 	def test_skip_locking(self):
 		with self.primary_connection():
@@ -1112,6 +1124,9 @@ class TestConcurrency(IntegrationTestCase):
 			self.assertRaises(frappe.QueryTimeoutError, frappe.delete_doc, note.doctype, note.name)
 
 
+<<<<<<< HEAD
+class TestSqlIterator(FrappeTestCase):
+=======
 def bad_hook(*args, **kwargs):
 	frappe.db.commit()
 	frappe.db.rollback()
@@ -1124,6 +1139,7 @@ def bad_nested_hook(doc, *args, **kwargs):
 
 
 class TestSqlIterator(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_db_sql_iterator(self):
 		test_queries = [
 			"select * from `tabCountry` order by name",
@@ -1154,6 +1170,8 @@ class TestSqlIterator(IntegrationTestCase):
 	def test_unbuffered_cursor(self):
 		with frappe.db.unbuffered_cursor():
 			self.test_db_sql_iterator()
+<<<<<<< HEAD
+=======
 
 
 class ExtIntegrationTestCase(IntegrationTestCase):
@@ -1421,3 +1439,4 @@ class TestDbConnectWithEnvCredentials(IntegrationTestCase):
 		frappe.init(self.current_site, force=True)
 		frappe.connect()
 		frappe.db.connect()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

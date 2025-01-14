@@ -39,6 +39,7 @@ class FormTour(Document):
 		ui_tour: DF.Check
 		view_name: DF.Literal["Workspaces", "List", "Form", "Tree", "Page"]
 		workspace_name: DF.Link | None
+
 	# end: auto-generated types
 
 	def before_save(self):

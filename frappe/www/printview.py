@@ -125,8 +125,13 @@ def get_rendered_template(
 	no_letterhead: bool | None = None,
 	letterhead: str | None = None,
 	trigger_print: bool = False,
+<<<<<<< HEAD
+	settings=None,
+):
+=======
 	settings: dict | None = None,
 ) -> str:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	print_settings = frappe.get_single("Print Settings").as_dict()
 	print_settings.update(settings or {})
 
@@ -374,7 +379,11 @@ def get_rendered_raw_commands(doc: str, name: str | None = None, print_format: s
 	}
 
 
+<<<<<<< HEAD
+def validate_print_permission(doc):
+=======
 def validate_print_permission(doc: "Document") -> None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if frappe.has_website_permission(doc):
 		return
 

@@ -11,7 +11,11 @@ import warnings
 from collections.abc import Hashable, Iterable, Sequence
 from contextlib import contextmanager, suppress
 from time import time
+<<<<<<< HEAD
+from typing import TYPE_CHECKING, Any, Union
+=======
 from typing import TYPE_CHECKING, Any
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 from pypika.dialects import MySQLQueryBuilder, PostgreSQLQueryBuilder
 
@@ -35,12 +39,20 @@ from frappe.query_builder import Case
 from frappe.query_builder.functions import Count
 from frappe.utils import CallbackManager, cint, get_datetime, get_table_name, getdate, now, sbool
 from frappe.utils import cast as cast_fieldtype
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecated, deprecation_warning
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 if TYPE_CHECKING:
 	from psycopg2 import connection as PostgresConnection
 	from psycopg2 import cursor as PostgresCursor
 	from pymysql.connections import Connection as MariadbConnection
 	from pymysql.cursors import Cursor as MariadbCursor
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 IFNULL_PATTERN = re.compile(r"ifnull\(", flags=re.IGNORECASE)
 INDEX_PATTERN = re.compile(r"\s*\([^)]+\)\s*")
@@ -49,11 +61,14 @@ MULTI_WORD_PATTERN = re.compile(r'([`"])(tab([A-Z]\w+)( [A-Z]\w+)+)\1')
 
 SQL_ITERATOR_BATCH_SIZE = 100
 
+<<<<<<< HEAD
+=======
 
 TRANSACTION_DISABLED_MSG = """Commit/rollback are disabled during certain events. This command will
 be ignored. Commit/Rollback from here WILL CAUSE very hard to debug problems with atomicity and
 concurrent data update bugs."""
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 class Database:
 	"""
@@ -83,6 +98,10 @@ class Database:
 		password=None,
 		port=None,
 		cur_db_name=None,
+<<<<<<< HEAD
+		socket=None,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	):
 		self.setup_type_map()
 		self.socket = socket
@@ -117,8 +136,13 @@ class Database:
 
 	def connect(self):
 		"""Connects to a database as set in `site_config.json`."""
+<<<<<<< HEAD
+		self._conn: "MariadbConnection" | "PostgresConnection" = self.get_connection()
+		self._cursor: "MariadbCursor" | "PostgresCursor" = self._conn.cursor()
+=======
 		self._conn: MariadbConnection | PostgresConnection = self.get_connection()
 		self._cursor: MariadbCursor | PostgresCursor = self._conn.cursor()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		try:
 			if execution_timeout := get_query_execution_timeout():
@@ -405,7 +429,11 @@ class Database:
 		except Exception as e:
 			frappe.log(f"error in query explain: {e}")
 		else:
+<<<<<<< HEAD
+			frappe.log(json.dumps(self.fetch_as_dict(), indent=1))
+=======
 			frappe.log(json.dumps(results, indent=1))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.log("--- query explain end ---")
 
 	def sql_list(self, query, values=(), debug=False, **kwargs):
@@ -491,11 +519,19 @@ class Database:
 		cache: bool = False,
 		for_update: bool = False,
 		*,
+<<<<<<< HEAD
+		run=True,
+		pluck=False,
+		distinct=False,
+		skip_locked=False,
+		wait=True,
+=======
 		run: bool = True,
 		pluck: bool = False,
 		distinct: bool = False,
 		skip_locked: bool = False,
 		wait: bool = True,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	):
 		"""Return a document property or list of properties.
 
@@ -571,12 +607,21 @@ class Database:
 		cache: bool = False,
 		for_update: bool = False,
 		*,
+<<<<<<< HEAD
+		run=True,
+		pluck=False,
+		distinct=False,
+		limit=None,
+		skip_locked=False,
+		wait=True,
+=======
 		run: bool = True,
 		pluck: bool = False,
 		distinct: bool = False,
 		limit: int | None = None,
 		skip_locked: bool = False,
 		wait: bool = True,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	):
 		"""Return multiple document properties.
 
@@ -608,6 +653,24 @@ class Database:
 			order_by = None
 
 		if isinstance(filters, list):
+<<<<<<< HEAD
+			out = self._get_value_for_many_names(
+				doctype=doctype,
+				names=filters,
+				field=fieldname,
+				order_by=order_by,
+				debug=debug,
+				run=run,
+				pluck=pluck,
+				distinct=distinct,
+				limit=limit,
+				as_dict=as_dict,
+				skip_locked=skip_locked,
+				wait=True,
+				for_update=for_update,
+			)
+
+=======
 			if filters := list(f for f in filters if f is not None):
 				out = frappe.qb.get_query(
 					table=doctype,
@@ -623,6 +686,7 @@ class Database:
 				).run(debug=debug, run=run, as_dict=as_dict, pluck=pluck)
 			else:
 				out = {}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		else:
 			if (filters is not None) and (filters != doctype or doctype == "DocType"):
 				try:
@@ -633,6 +697,16 @@ class Database:
 						table=doctype,
 						filters=filters,
 						order_by=order_by,
+<<<<<<< HEAD
+						update=update,
+						run=run,
+						pluck=pluck,
+						distinct=distinct,
+						limit=limit,
+						for_update=for_update,
+						skip_locked=skip_locked,
+						wait=wait,
+=======
 						for_update=for_update,
 						skip_locked=skip_locked,
 						wait=wait,
@@ -640,6 +714,7 @@ class Database:
 						distinct=distinct,
 						limit=limit,
 						validate_filters=True,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					)
 					if isinstance(fieldname, str) and fieldname == "*":
 						as_dict = True
@@ -888,6 +963,76 @@ class Database:
 		"""Alias for get_single_value"""
 		return self.get_single_value(*args, **kwargs)
 
+<<<<<<< HEAD
+	def _get_values_from_table(
+		self,
+		fields,
+		filters,
+		doctype,
+		as_dict,
+		*,
+		debug=False,
+		order_by=None,
+		update=None,
+		for_update=False,
+		skip_locked=False,
+		wait=True,
+		run=True,
+		pluck=False,
+		distinct=False,
+		limit=None,
+	):
+		query = frappe.qb.get_query(
+			table=doctype,
+			filters=filters,
+			order_by=order_by,
+			for_update=for_update,
+			skip_locked=skip_locked,
+			wait=wait,
+			fields=fields,
+			distinct=distinct,
+			limit=limit,
+			validate_filters=True,
+		)
+		if isinstance(fields, str) and fields == "*":
+			as_dict = True
+
+		return query.run(as_dict=as_dict, debug=debug, update=update, run=run, pluck=pluck)
+
+	def _get_value_for_many_names(
+		self,
+		doctype,
+		names,
+		field,
+		order_by,
+		*,
+		debug=False,
+		run=True,
+		pluck=False,
+		distinct=False,
+		limit=None,
+		as_dict=False,
+		for_update=False,
+		skip_locked=False,
+		wait=True,
+	):
+		if names := list(filter(None, names)):
+			return frappe.qb.get_query(
+				doctype,
+				fields=field,
+				filters=names,
+				order_by=order_by,
+				distinct=distinct,
+				limit=limit,
+				validate_filters=True,
+				for_update=for_update,
+				skip_locked=skip_locked,
+				wait=wait,
+			).run(debug=debug, run=run, as_dict=as_dict, pluck=pluck)
+		return {}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def set_value(
 		self,
 		dt: str,
@@ -1337,9 +1482,16 @@ class Database:
 		# implemented in specific class
 		raise NotImplementedError
 
+<<<<<<< HEAD
+	@staticmethod
+	@deprecated
+	def is_column_missing(e):
+		return frappe.db.is_missing_column(e)
+=======
 	from frappe.deprecation_dumpster import is_column_missing as _is_column_missing
 
 	is_column_missing = staticmethod(_is_column_missing)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def get_descendants(self, doctype, name):
 		"""Return descendants of the group node in tree"""

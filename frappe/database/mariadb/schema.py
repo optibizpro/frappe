@@ -74,7 +74,11 @@ class MariaDBTable(DBTable):
 			col.build_for_alter_table(self.current_columns.get(col.fieldname.lower()))
 
 		add_column_query = [f"ADD COLUMN `{col.fieldname}` {col.get_definition()}" for col in self.add_column]
+<<<<<<< HEAD
+		columns_to_modify = set(self.change_type + self.set_default)
+=======
 		columns_to_modify = set(self.change_type + self.set_default + self.change_nullability)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		modify_column_query = [
 			f"MODIFY `{col.fieldname}` {col.get_definition(for_modification=True)}"
 			for col in columns_to_modify
@@ -91,10 +95,17 @@ class MariaDBTable(DBTable):
 			if not frappe.db.get_column_index(self.table_name, col.fieldname, unique=False)
 		]
 
+<<<<<<< HEAD
+		if self.meta.sort_field == "creation" and not frappe.db.get_column_index(
+			self.table_name, "creation", unique=False
+		):
+			add_index_query.append("ADD INDEX `creation`(`creation`)")
+=======
 		if self.meta.sort_field == "modified" and not frappe.db.get_column_index(
 			self.table_name, "modified", unique=False
 		):
 			add_index_query.append("ADD INDEX `modified`(`modified`)")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		drop_index_query = []
 
@@ -128,7 +139,10 @@ class MariaDBTable(DBTable):
 				if query_parts:
 					query_body = ", ".join(query_parts)
 					query = f"ALTER TABLE `{self.table_name}` {query_body}"
+<<<<<<< HEAD
+=======
 					# nosemgrep
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					frappe.db.sql_ddl(query)
 
 		except Exception as e:

@@ -43,6 +43,7 @@ class DropboxSettings(Document):
 		no_of_backups: DF.Int
 		send_email_for_successful_backup: DF.Check
 		send_notifications_to: DF.Data
+
 	# end: auto-generated types
 
 	def onload(self):

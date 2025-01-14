@@ -205,6 +205,10 @@ export default class QuickListWidget extends Widget {
 
 			let add_fields = frappe.listview_settings?.[this.document_type]?.add_fields;
 			if (Array.isArray(add_fields)) {
+<<<<<<< HEAD
+				fields.push(...add_fields);
+				fields = [...new Set(fields)];
+=======
 				for (const fieldname of add_fields) {
 					// Only keep fields that exist and are permitted
 					if (frappe.meta.has_field(this.document_type, fieldname)) {
@@ -212,6 +216,7 @@ export default class QuickListWidget extends Widget {
 					}
 				}
 				fields = [...new Set(fields)]; // Remove duplicates
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 
 			let quick_list_filter = frappe.utils.process_filter_expression(this.quick_list_filter);

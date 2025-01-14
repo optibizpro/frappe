@@ -1,3 +1,9 @@
+<<<<<<< HEAD:realtime/handlers/frappe_handlers.js
+const { frappe_request } = require("../utils");
+const log = console.log;
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:realtime/handlers.js
 const WEBSITE_ROOM = "website";
 const SITE_ROOM = "all";
 
@@ -9,6 +15,8 @@ function frappe_handlers(socket) {
 		socket.join(SITE_ROOM);
 	}
 
+<<<<<<< HEAD:realtime/handlers/frappe_handlers.js
+=======
 	socket.has_permission = (doctype, name) => {
 		return new Promise((resolve) => {
 			socket
@@ -26,6 +34,7 @@ function frappe_handlers(socket) {
 		});
 	};
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:realtime/handlers.js
 	socket.on("ping", () => {
 		socket.emit("pong");
 	});
@@ -113,6 +122,31 @@ function notify_disconnected_documents(socket) {
 	}
 }
 
+<<<<<<< HEAD:realtime/handlers/frappe_handlers.js
+function can_subscribe_doctype(args) {
+	if (!args) return;
+	if (!args.doctype) return;
+	frappe_request("/api/method/frappe.realtime.can_subscribe_doctype", args.socket)
+		.type("form")
+		.query({
+			doctype: args.doctype,
+		})
+		.end(function (err, res) {
+			if (!res || res.status == 403 || err) {
+				if (err) {
+					log(err);
+				}
+				return false;
+			} else if (res.status == 200) {
+				args.callback && args.callback(err, res);
+				return true;
+			}
+			log("ERROR (can_subscribe_doctype): ", err, res);
+		});
+}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:realtime/handlers.js
 function notify_subscribed_doc_users(args) {
 	if (!(args && args.doctype && args.docname)) {
 		return;
@@ -141,6 +175,33 @@ function notify_subscribed_doc_users(args) {
 	});
 }
 
+<<<<<<< HEAD:realtime/handlers/frappe_handlers.js
+function can_subscribe_doc(args) {
+	if (!args) return;
+	if (!args.doctype || !args.docname) return;
+	frappe_request("/api/method/frappe.realtime.can_subscribe_doc", args.socket)
+		.type("form")
+		.query({
+			doctype: args.doctype,
+			docname: args.docname,
+		})
+		.end(function (err, res) {
+			if (!res) {
+				log("No response for doc_subscribe");
+			} else if (res.status == 403) {
+				return;
+			} else if (err) {
+				log(err);
+			} else if (res.status == 200) {
+				args.callback(err, res);
+			} else {
+				log("Something went wrong", err, res);
+			}
+		});
+}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:realtime/handlers.js
 const doc_room = (doctype, docname) => "doc:" + doctype + "/" + docname;
 const open_doc_room = (doctype, docname) => "open_doc:" + doctype + "/" + docname;
 const user_room = (user) => "user:" + user;

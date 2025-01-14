@@ -24,6 +24,10 @@ class EmailGroup(Document):
 		total_subscribers: DF.Int
 		welcome_email_template: DF.Link | None
 		welcome_url: DF.Data | None
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def onload(self):

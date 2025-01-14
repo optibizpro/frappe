@@ -37,12 +37,20 @@ def getdoc(doctype, name):
 		frappe.clear_last_message()
 		return []
 
+<<<<<<< HEAD
+	if not doc.has_permission("read"):
+		frappe.flags.error_message = _("Insufficient Permission for {0}").format(
+			frappe.bold(_(doctype) + " " + name)
+		)
+		raise frappe.PermissionError(("read", doctype, name))
+=======
 	doc.check_permission("read")
 
 	# Replace cache if stale one exists
 	# PERF: This should be eventually removed completely when we are sure about caching correctness
 	if (key := frappe.can_cache_doc((doctype, name))) and frappe.cache.exists(key):
 		frappe._set_document_in_cache(key, doc)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	run_onload(doc)
 	doc.apply_fieldlevel_read_permissions()
@@ -438,7 +446,13 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		link_fields = meta.get_link_fields() + meta.get_dynamic_link_fields()
 
 	for field in link_fields:
+<<<<<<< HEAD
+		link_docname = getattr(doc, field.fieldname, None)
+
+		if not link_docname:
+=======
 		if not (doc_fieldvalue := getattr(doc, field.fieldname, None)):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			continue
 
 		doctype = field.options if field.fieldtype == "Link" else doc.get(field.options)
@@ -447,8 +461,13 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		if not meta or not meta.title_field or not meta.show_title_field_in_link:
 			continue
 
+<<<<<<< HEAD
+		link_title = frappe.db.get_value(doctype, link_docname, meta.title_field, cache=True, order_by=None)
+		link_titles.update({doctype + "::" + link_docname: link_title})
+=======
 		link_title = frappe.db.get_value(doctype, doc_fieldvalue, meta.title_field, cache=True, order_by=None)
 		link_titles.update({doctype + "::" + doc_fieldvalue: link_title or doc_fieldvalue})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return link_titles
 

@@ -602,7 +602,12 @@ class Meta(Document):
 	def get_fieldnames_with_value(self, with_field_meta=False, with_virtual_fields=False):
 		def is_value_field(docfield):
 			return not (
+<<<<<<< HEAD
+				not with_virtual_fields
+				and docfield.get("is_virtual")
+=======
 				(not with_virtual_fields and docfield.get("is_virtual"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				or docfield.fieldtype in no_value_fields
 			)
 

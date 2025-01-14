@@ -158,7 +158,11 @@
  "icon": "fa fa-comment",
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-02-24 16:31:16.253153",
+=======
  "modified": "2024-03-23 16:01:26.898094",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Activity Log",

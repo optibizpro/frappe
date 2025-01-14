@@ -1,6 +1,16 @@
 import json
 
+<<<<<<< HEAD
+EXCLUDE_SELECT_OPTIONS = [
+	"naming_series",
+	"number_format",
+	"float_precision",
+	"currency_precision",
+	"minimum_password_score",
+]
+=======
 from .utils import extract_messages_from_docfield, extract_messages_from_links
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def extract(fileobj, *args, **kwargs):
@@ -23,12 +33,64 @@ def extract(fileobj, *args, **kwargs):
 		yield None, "_", doctype_description, ["Description of a DocType"]
 
 	messages = []
+<<<<<<< HEAD
+	fields = data.get("fields", [])
+	links = data.get("links", [])
+
+	for field in fields:
+		fieldtype = field.get("fieldtype")
+		fieldname = field.get("fieldname")
+		label = field.get("label")
+
+		if label:
+			messages.append((label, f"Label of a {fieldtype} field in DocType '{doctype}'"))
+			_label = label
+		else:
+			_label = fieldname
+
+		if description := field.get("description"):
+			messages.append(
+				(description, f"Description of the '{_label}' ({fieldtype}) field in DocType '{doctype}'")
+			)
+
+		if message := field.get("options"):
+			if fieldtype == "Select":
+				if fieldname in EXCLUDE_SELECT_OPTIONS:
+					continue
+
+				select_options = [option for option in message.split("\n") if option and not option.isdigit()]
+
+				if select_options and "icon" in select_options[0]:
+					continue
+
+				messages.extend(
+					(
+						option,
+						f"Option for the '{_label}' ({fieldtype}) field in DocType '{doctype}'",
+					)
+					for option in select_options
+				)
+			elif fieldtype == "HTML":
+				messages.append(
+					(message, f"Content of the '{_label}' ({fieldtype}) field in DocType '{doctype}'")
+				)
+
+	for link in links:
+		if group := link.get("group"):
+			messages.append((group, f"Group in {doctype}'s connections"))
+
+		if link_doctype := link.get("link_doctype"):
+			messages.append((link_doctype, f"Linked DocType in {doctype}'s connections"))
+
+	# By using "pgettext" as the function name we can supply the doctype as context
+=======
 
 	for field in data.get("fields", []):
 		messages.extend(extract_messages_from_docfield(doctype, field))
 
 	messages.extend(extract_messages_from_links(doctype, data.get("links", [])))
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	yield from ((None, "_", message, [comment]) for message, comment in messages)
 
 	# Role names do not get context because they are used with multiple doctypes

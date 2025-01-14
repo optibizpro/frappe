@@ -13,6 +13,10 @@ from frappe.frappeclient import AuthError, FrappeClient
 from frappe.sessions import Session, get_expired_sessions, get_expiry_in_seconds
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.test_api import FrappeAPITestCase
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import get_datetime, get_site_url, now
 from frappe.utils.data import add_to_date
 from frappe.www.login import _generate_temporary_login_link
@@ -160,7 +164,18 @@ class TestAuth(IntegrationTestCase):
 			self.fail("Rate limting not working")
 
 	def test_correct_cookie_expiry_set(self):
+<<<<<<< HEAD
+		import pytz
+
 		client = FrappeClient(self.HOST_NAME, self.test_user_email, self.test_user_password)
+
+		expiry_time = next(x for x in client.session.cookies if x.name == "sid").expires
+		current_time = datetime.datetime.now(tz=pytz.UTC).timestamp()
+		self.assertAlmostEqual(get_expiry_in_seconds(), expiry_time - current_time, delta=60 * 60)
+
+=======
+		client = FrappeClient(self.HOST_NAME, self.test_user_email, self.test_user_password)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		expiry_time = next(x for x in client.session.cookies if x.name == "sid").expires
 		current_time = datetime.datetime.now(tz=datetime.UTC).timestamp()

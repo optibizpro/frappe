@@ -1133,8 +1133,13 @@ export default class GridRow {
 		let ignore_fieldtypes = ["Text", "Small Text", "Code", "Text Editor", "HTML Editor"];
 		if (field.$input) {
 			field.$input.on("keydown", function (e) {
+<<<<<<< HEAD
+				var { TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
+				if (![TAB, UP_ARROW, DOWN_ARROW].includes(e.which)) {
+=======
 				var { ESCAPE, TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
 				if (![TAB, UP_ARROW, DOWN_ARROW, ESCAPE].includes(e.which)) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					return;
 				}
 

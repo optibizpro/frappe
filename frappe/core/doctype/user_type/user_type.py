@@ -32,6 +32,7 @@ class UserType(Document):
 		user_doctypes: DF.Table[UserDocumentType]
 		user_id_field: DF.Literal[None]
 		user_type_modules: DF.Table[UserTypeModule]
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -143,7 +144,11 @@ class UserType(Document):
 			docperm = add_role_permissions(row.document_type, self.role)
 			values = {perm: row.get(perm, default=0) for perm in perms}
 
+<<<<<<< HEAD
+			frappe.db.set_value("Custom DocPerm", docperm, values)
+=======
 			update_custom_docperm(docperm, values)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def add_select_perm_doctypes(self):
 		if frappe.flags.ignore_select_perm:

@@ -934,12 +934,20 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 		file_name = "test" + frappe.generate_hash()
 		content = file_name.encode()
 
+<<<<<<< HEAD
+		doc_pub: "File" = frappe.new_doc("File")  # type: ignore
+=======
 		doc_pub: File = frappe.new_doc("File")  # type: ignore
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		doc_pub.file_url = f"/files/{file_name}.txt"
 		doc_pub.content = content
 		doc_pub.save()
 
+<<<<<<< HEAD
+		doc_pri: "File" = frappe.new_doc("File")  # type: ignore
+=======
 		doc_pri: File = frappe.new_doc("File")  # type: ignore
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		doc_pri.file_url = f"/private/files/{file_name}.txt"
 		doc_pri.is_private = False
 		doc_pri.content = content

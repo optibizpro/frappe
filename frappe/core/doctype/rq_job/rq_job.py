@@ -76,8 +76,18 @@ class RQJob(Document):
 		return self._job_obj
 
 	@staticmethod
+<<<<<<< HEAD
+	def get_list(args):
+		start = cint(args.get("start")) or 0
+		page_length = cint(args.get("page_length")) or 20
+
+		order_desc = "desc" in args.get("order_by", "")
+
+		matched_job_ids = RQJob.get_matching_job_ids(args)[start : start + page_length]
+=======
 	def get_list(filters=None, start=0, page_length=20, order_by="creation desc"):
 		matched_job_ids = RQJob.get_matching_job_ids(filters=filters)[start : start + page_length]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		conn = get_redis_conn()
 		jobs = [serialize_job(job) for job in Job.fetch_many(job_ids=matched_job_ids, connection=conn) if job]

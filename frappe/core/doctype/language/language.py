@@ -29,6 +29,9 @@ class Language(Document):
 		flag: DF.Data | None
 		language_code: DF.Data
 		language_name: DF.Data
+<<<<<<< HEAD
+
+=======
 		number_format: DF.Literal[
 			"",
 			"#,###.##",
@@ -43,6 +46,7 @@ class Language(Document):
 			"#,###",
 		]
 		time_format: DF.Literal["", "HH:mm:ss", "HH:mm"]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def validate(self):

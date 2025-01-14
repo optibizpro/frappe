@@ -3,8 +3,13 @@
 import frappe
 from frappe.cache_manager import clear_controller_cache
 from frappe.desk.doctype.todo.todo import ToDo
+<<<<<<< HEAD
+from frappe.tests.test_api import FrappeAPITestCase
+from frappe.tests.utils import FrappeTestCase, patch_hooks
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_api import FrappeAPITestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class TestHooks(IntegrationTestCase):
@@ -198,10 +203,28 @@ class TestAPIHooks(FrappeAPITestCase):
 			self.assertTrue(response.json.get("message") == "test@example.com")
 
 
+class TestAPIHooks(FrappeAPITestCase):
+	def test_auth_hook(self):
+		with patch_hooks({"auth_hooks": ["frappe.tests.test_hooks.custom_auth"]}):
+			site_url = frappe.utils.get_site_url(frappe.local.site)
+			response = self.get(
+				site_url + "/api/method/frappe.auth.get_logged_user",
+				headers={"Authorization": "Bearer set_test_example_user"},
+			)
+			# Test!
+			self.assertTrue(response.json.get("message") == "test@example.com")
+
+
 def custom_has_permission(doc, ptype, user):
 	if doc.flags.dont_touch_me:
 		return False
 	return True
+
+
+def custom_auth():
+	auth_type, token = frappe.get_request_header("Authorization", "Bearer ").split(" ")
+	if token == "set_test_example_user":
+		frappe.set_user("test@example.com")
 
 
 def custom_auth():

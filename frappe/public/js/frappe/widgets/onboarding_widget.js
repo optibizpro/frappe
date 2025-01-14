@@ -129,9 +129,15 @@ export default class OnboardingWidget extends Widget {
 					.on("click", toggle_video);
 			} else {
 				$(
+<<<<<<< HEAD
+					`<button class="btn btn-default btn-sm">${__(
+						step.action_label || step.action
+					)}</button>`
+=======
 					`<button class="btn btn-default btn-sm">${
 						__(step.action_label) || __(step.action)
 					}</button>`
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				)
 					.appendTo(this.step_footer)
 					.on("click", () => actions[step.action](step));

@@ -681,6 +681,19 @@
 	}
 }
 
+<<<<<<< HEAD
+@media (min-width: map-get($grid-breakpoints, "md")) {
+	.form-grid-container {
+		overflow-x: unset !important;
+
+		.form-grid {
+			position: unset !important;
+		}
+	}
+}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @media (max-width: map-get($grid-breakpoints, "sm")) {
 	.form-in-grid .form-section .form-column {
 		padding-left: 0 !important;

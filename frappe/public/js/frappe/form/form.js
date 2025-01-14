@@ -2151,6 +2151,9 @@ frappe.ui.form.Form = class FrappeForm {
 		this.active_tab_map ??= {};
 		this.active_tab_map[this.docname] = tab;
 
+<<<<<<< HEAD
+		this.script_manager.trigger("on_tab_change");
+=======
 		// Update URL hash to reflect the active tab
 		const new_hash = next_tab_name.replace("__details", "");
 		const url = new URL(window.location.href);
@@ -2172,6 +2175,7 @@ frappe.ui.form.Form = class FrappeForm {
 				field.on_section_collapse(!in_tab); // hide = !in_tab
 			}
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_active_tab() {

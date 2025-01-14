@@ -145,7 +145,11 @@ class TestDocShare(IntegrationTestCase):
 		doctype = "Test DocShare with Submit"
 		create_submittable_doctype(doctype, submit_perms=0)
 
+<<<<<<< HEAD
+		submittable_doc = frappe.get_doc(dict(doctype=doctype, test="test docshare with submit")).insert()
+=======
 		submittable_doc = frappe.get_doc(doctype=doctype, test="test docshare with submit").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		frappe.set_user(self.user)
 		self.assertFalse(frappe.has_permission(doctype, "submit", user=self.user))

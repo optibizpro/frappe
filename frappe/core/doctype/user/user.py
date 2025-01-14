@@ -32,6 +32,10 @@ from frappe.utils import (
 	today,
 )
 from frappe.utils.data import sha256_hash
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecated
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.password import check_password, get_password_reset_limit
 from frappe.utils.password import update_password as _update_password
 from frappe.utils.user import get_system_managers
@@ -73,7 +77,10 @@ class User(Document):
 		block_modules: DF.Table[BlockModule]
 		bulk_actions: DF.Check
 		bypass_restrict_ip_check_if_2fa_enabled: DF.Check
+<<<<<<< HEAD
+=======
 		code_editor_type: DF.Literal["vscode", "vim", "emacs"]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		dashboard: DF.Check
 		default_app: DF.Literal[None]
 		default_workspace: DF.Link | None
@@ -178,7 +185,10 @@ class User(Document):
 			self.email = self.name
 			self.validate_email_type(self.name)
 
+<<<<<<< HEAD
+=======
 		self.move_role_profile_name_to_role_profiles()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.populate_role_profile_roles()
 		self.check_roles_added()
 		self.set_system_user()
@@ -323,8 +333,12 @@ class User(Document):
 			frappe.local.login_manager.logout(user=self.name)
 
 		# toggle notifications based on the user's status
+<<<<<<< HEAD
+		toggle_notifications(self.name, enable=cint(self.enabled))
+=======
 		toggle_notifications(self.name, enable=cint(self.enabled), ignore_permissions=True)
 		self.disable_email_fields_if_user_disabled()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def email_new_password(self, new_password=None):
 		if new_password and not self.flags.in_insert:
@@ -655,8 +669,13 @@ class User(Document):
 				self.get("roles").remove(role)
 
 	def ensure_unique_roles(self):
+<<<<<<< HEAD
+		exists = []
+		for d in self.get("roles"):
+=======
 		exists = set()
 		for d in list(self.roles):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			if (not d.role) or (d.role in exists):
 				self.roles.remove(d)
 			exists.add(d.role)
@@ -898,6 +917,10 @@ def update_password(
 
 @frappe.whitelist(allow_guest=True)
 def test_password_strength(new_password: str, key=None, old_password=None, user_data: tuple | None = None):
+<<<<<<< HEAD
+	from frappe.utils.deprecations import deprecation_warning
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.password_strength import test_password_strength as _test_password_strength
 
 	if key is not None or old_password is not None:

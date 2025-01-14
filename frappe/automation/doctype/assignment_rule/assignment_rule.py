@@ -38,6 +38,7 @@ class AssignmentRule(Document):
 		rule: DF.Literal["Round Robin", "Load Balancing", "Based on Field"]
 		unassign_condition: DF.Code | None
 		users: DF.TableMultiSelect[AssignmentRuleUser]
+
 	# end: auto-generated types
 
 	def validate(self):

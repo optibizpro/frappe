@@ -70,7 +70,6 @@ coverage.xml
 
 # Translations
 *.mo
-*.pot
 
 # Django stuff:
 *.log
@@ -194,10 +193,13 @@ cypress/videos
 
 # JetBrains IDEs
 .idea/
+<<<<<<< HEAD
+=======
 # Helix Editor
 .helix/
 # Aider AI Chat
 .aider*
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 # frappecloud billing
 billing/node_modules

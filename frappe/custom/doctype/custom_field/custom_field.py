@@ -117,6 +117,7 @@ class CustomField(Document):
 		translatable: DF.Check
 		unique: DF.Check
 		width: DF.Data | None
+
 	# end: auto-generated types
 
 	def autoname(self):

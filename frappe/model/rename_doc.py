@@ -118,8 +118,13 @@ def update_document_title(
 
 def rename_doc(
 	doctype: str | None = None,
+<<<<<<< HEAD
+	old: str | None = None,
+	new: str | None = None,
+=======
 	old: str | int | None = None,
 	new: str | int | None = None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	force: bool = False,
 	merge: bool = False,
 	ignore_permissions: bool = False,
@@ -388,9 +393,23 @@ def validate_rename(
 	if not merge and exists and not ignore_if_exists:
 		frappe.throw(_("Another {0} with name {1} exists, select another name").format(doctype, new))
 
+<<<<<<< HEAD
+	kwargs = {"doctype": doctype, "ptype": "write", "raise_exception": False}
+	if old_doc:
+		kwargs["doc"] = old_doc
+
+	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))
+
+	if merge:
+		kwargs["doc"] = frappe.get_doc(doctype, new)
+		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
+=======
 	kwargs = {"doctype": doctype, "ptype": "write", "print_logs": False}
 	if old_doc:
 		kwargs["doc"] = old_doc
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
 		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))

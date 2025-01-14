@@ -33,8 +33,11 @@
   "max_attachment_size",
   "show_attachments",
   "column_break_hhec",
+<<<<<<< HEAD
+=======
   "hide_navbar",
   "hide_footer",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "allowed_embedding_domains",
   "condition_section",
   "condition_description",
@@ -99,7 +102,11 @@
    "default": "0",
    "fieldname": "is_standard",
    "fieldtype": "Check",
+<<<<<<< HEAD
+   "label": "Is Standard",
+=======
    "label": "Is standard",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "no_copy": 1
   },
   {
@@ -393,6 +400,8 @@
    "label": "Condition JSON"
   },
   {
+<<<<<<< HEAD
+=======
    "default": "0",
    "fieldname": "hide_navbar",
    "fieldtype": "Check",
@@ -405,6 +414,7 @@
    "label": "Hide footer"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "description": "Specify the domains or origins that are permitted to embed this form. Enter one domain per line (e.g., https://example.com). If no domains are specified, the form can only be embedded on the same origin.",
    "fieldname": "allowed_embedding_domains",
    "fieldtype": "Small Text",

@@ -35,12 +35,20 @@ def new_language(context: CliCtxObj, lang_code, app):
 		raise Exception("--site is required")
 
 	# init site
+<<<<<<< HEAD
+	frappe.init(site=context["sites"][0])
+=======
 	frappe.init(site=context.sites[0])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.connect()
 	frappe.translate.write_translations_file(app, lang_code)
 
 	print(f"File created at ./apps/{app}/{app}/translations/{lang_code}.csv")
+<<<<<<< HEAD
+	print("You will need to add the language in frappe/geo/languages.json, if you haven't done it already.")
+=======
 	print("You will need to add the language in frappe/geo/languages.csv, if you haven't done it already.")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("get-untranslated")

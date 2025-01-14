@@ -52,6 +52,13 @@ class PathResolver:
 			except werkzeug.routing.exceptions.RequestRedirect as e:
 				frappe.flags.redirect_location = e.new_url
 				return frappe.flags.redirect_location, RedirectPage(e.new_url, e.code)
+<<<<<<< HEAD
+
+		# WARN: Hardcoded for better performance
+		if endpoint == "app":
+			return endpoint, TemplatePage(endpoint, self.http_status_code)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		custom_renderers = self.get_custom_page_renderers()
 		renderers = [

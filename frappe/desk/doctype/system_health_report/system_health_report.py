@@ -13,6 +13,13 @@ Metrics:
 - Storage - files usage
 - Backups
 - User - new users, sessions stats, failed login attempts
+<<<<<<< HEAD
+
+
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 """
 
 import functools
@@ -186,6 +193,21 @@ class SystemHealthReport(Document):
 		# Exclude "maybe" curently executing job
 		upper_threshold = add_to_date(None, minutes=-30, as_datetime=True)
 		self.scheduler_status = get_scheduler_status().get("status")
+<<<<<<< HEAD
+		failing_jobs = frappe.db.sql(
+			"""
+			select scheduled_job_type,
+				   avg(CASE WHEN status != 'Complete' THEN 1 ELSE 0 END) * 100 as failure_rate
+			from `tabScheduled Job Log`
+			where
+				creation > %(lower_threshold)s
+				and modified > %(lower_threshold)s
+				and creation < %(upper_threshold)s
+			group by scheduled_job_type
+			having failure_rate > 0
+			order by failure_rate desc
+			limit 5""",
+=======
 
 		mariadb_query = """
   				SELECT scheduled_job_type,
@@ -220,6 +242,7 @@ class SystemHealthReport(Document):
 				"mariadb": mariadb_query,
 				"postgres": postgres_query,
 			},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			{"lower_threshold": lower_threshold, "upper_threshold": upper_threshold},
 			as_dict=True,
 		)

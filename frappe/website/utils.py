@@ -10,6 +10,10 @@ import yaml
 from werkzeug.wrappers import Response
 
 import frappe
+<<<<<<< HEAD
+from frappe import _
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.apps import get_apps, get_default_path, is_desk_apps
 from frappe.model.document import Document
 from frappe.utils import (
@@ -164,6 +168,22 @@ def get_home_page_via_hooks():
 
 
 def get_boot_data():
+<<<<<<< HEAD
+	apps = get_apps() or []
+	return {
+		"lang": frappe.local.lang or "en",
+		"apps_data": {
+			"apps": apps,
+			"is_desk_apps": 1 if bool(is_desk_apps(apps)) else 0,
+			"default_path": get_default_path(apps) or "",
+		},
+		"sysdefaults": {
+			"float_precision": cint(frappe.get_system_settings("float_precision")) or 3,
+			"date_format": frappe.get_system_settings("date_format") or "yyyy-mm-dd",
+			"time_format": frappe.get_system_settings("time_format") or "HH:mm:ss",
+			"first_day_of_the_week": frappe.get_system_settings("first_day_of_the_week") or "Sunday",
+			"number_format": frappe.get_system_settings("number_format") or "#,###.##",
+=======
 	from frappe.locale import get_date_format, get_first_day_of_the_week, get_number_format, get_time_format
 
 	return {
@@ -179,6 +199,7 @@ def get_boot_data():
 			"time_format": get_time_format(),
 			"first_day_of_the_week": get_first_day_of_the_week(),
 			"number_format": get_number_format().string,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			"currency": frappe.get_system_settings("currency"),
 		},
 		"time_zone": {
@@ -584,8 +605,14 @@ def add_preload_for_bundled_assets(response):
 	links.extend(f"<{js}>; rel=preload; as=script" for js in frappe.local.preload_assets["script"])
 
 	version = get_build_version()
+<<<<<<< HEAD
+	# include_icons = frappe.get_hooks().get("app_include_icons", [])
+	links.extend(
+		f"</assets/{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
+=======
 	links.extend(
 		f"<{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		for svg in frappe.local.preload_assets["icons"]
 	)
 

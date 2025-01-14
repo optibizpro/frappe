@@ -25,7 +25,11 @@ from frappe.utils.synchronization import filelock
 def _is_scheduler_enabled(site) -> bool:
 	enable_scheduler = False
 	try:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		enable_scheduler = cint(frappe.db.get_single_value("System Settings", "enable_scheduler"))
 	except Exception:
@@ -46,15 +50,25 @@ def _new_site(
 	install_apps=None,
 	source_sql=None,
 	force=False,
+<<<<<<< HEAD
+	reinstall=False,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	db_password=None,
 	db_type=None,
 	db_socket=None,
 	db_host=None,
 	db_port=None,
+<<<<<<< HEAD
+	setup_db=True,
+	mariadb_user_host_login_scope=None,
+	db_socket=None,
+=======
 	db_user=None,
 	setup_db=True,
 	rollback_callback=None,
 	mariadb_user_host_login_scope=None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ):
 	"""Install a new Frappe site"""
 
@@ -64,10 +78,28 @@ def _new_site(
 		print(f"Site {site} already exists, use `--force` to proceed anyway")
 		sys.exit(1)
 
+<<<<<<< HEAD
+	if mariadb_user_host_login_scope and not db_type == "mariadb":
+		print("--no-mariadb-socket requires db_type to be set to mariadb.")
+		sys.exit(1)
+
+	frappe.init(site=site)
+
+	if not db_name:
+		import hashlib
+
+		db_name = (
+			"_"
+			+ hashlib.sha1(
+				os.path.realpath(frappe.get_site_path()).encode(), usedforsecurity=False
+			).hexdigest()[:16]
+		)
+=======
 	frappe.init(site)
 
 	if not db_name:
 		db_name = f"_{frappe.generate_hash(length=16)}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	try:
 		# enable scheduler post install?
@@ -93,6 +125,13 @@ def _new_site(
 			db_socket=db_socket,
 			db_host=db_host,
 			db_port=db_port,
+<<<<<<< HEAD
+			setup=setup_db,
+			mariadb_user_host_login_scope=mariadb_user_host_login_scope,
+		)
+
+		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps) or [])
+=======
 			db_user=db_user,
 			setup=setup_db,
 			rollback_callback=rollback_callback,
@@ -100,6 +139,7 @@ def _new_site(
 		)
 
 		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps or []))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		for app in apps_to_install:
 			# NOTE: not using force here for 2 reasons:
@@ -131,6 +171,14 @@ def install_db(
 	db_socket=None,
 	db_host=None,
 	db_port=None,
+<<<<<<< HEAD
+	setup=True,
+	mariadb_user_host_login_scope=None,
+	db_socket=None,
+):
+	import frappe.database
+	from frappe.database import bootstrap_database, setup_database
+=======
 	db_user=None,
 	setup=True,
 	rollback_callback=None,
@@ -138,6 +186,7 @@ def install_db(
 ):
 	import frappe.database
 	from frappe.database import bootstrap_database, drop_user_and_database, setup_database
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if not db_type:
 		db_type = frappe.conf.db_type
@@ -154,6 +203,13 @@ def install_db(
 	)
 	frappe.flags.in_install_db = True
 
+<<<<<<< HEAD
+	frappe.flags.root_login = root_login
+	frappe.flags.root_password = root_password
+
+	if setup:
+		setup_database(force, verbose, mariadb_user_host_login_scope)
+=======
 	if root_login:
 		frappe.flags.root_login = root_login
 
@@ -164,6 +220,7 @@ def install_db(
 		setup_database(force, verbose, mariadb_user_host_login_scope)
 		if rollback_callback:
 			rollback_callback.add(lambda: drop_user_and_database(db_name, db_user or db_name))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	bootstrap_database(
 		verbose=verbose,
@@ -542,10 +599,16 @@ def make_conf(
 	db_password=None,
 	site_config=None,
 	db_type=None,
+<<<<<<< HEAD
+	db_host=None,
+	db_port=None,
+	db_socket=None,
+=======
 	db_socket=None,
 	db_host=None,
 	db_port=None,
 	db_user=None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ):
 	site = frappe.local.site
 	make_site_config(
@@ -553,10 +616,16 @@ def make_conf(
 		db_password,
 		site_config,
 		db_type=db_type,
+<<<<<<< HEAD
+		db_host=db_host,
+		db_port=db_port,
+		db_socket=db_socket,
+=======
 		db_socket=db_socket,
 		db_host=db_host,
 		db_port=db_port,
 		db_user=db_user,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 	sites_path = frappe.local.sites_path
 	frappe.destroy()
@@ -571,7 +640,10 @@ def make_site_config(
 	db_socket=None,
 	db_host=None,
 	db_port=None,
+<<<<<<< HEAD
+=======
 	db_user=None,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ):
 	frappe.create_folder(os.path.join(frappe.local.site_path))
 	site_file = get_site_config_path()
@@ -851,7 +923,11 @@ def partial_restore(sql_file_path, verbose=False):
 			" partial restore operation for PostgreSQL databases",
 			fg="yellow",
 		)
+<<<<<<< HEAD
+		warnings.warn(warn, stacklevel=1)
+=======
 		warnings.warn(warn, stacklevel=2)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		click.secho("Unsupported database type", fg="red")
 		return

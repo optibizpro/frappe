@@ -71,6 +71,21 @@ frappe.ui.Filter = class {
 				">=": __("On or After"),
 			},
 		};
+
+		this.special_condition_labels = {
+			Date: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+			Datetime: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+		};
 	}
 
 	set_conditions_from_config() {

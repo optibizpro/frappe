@@ -5,7 +5,7 @@ from frappe import _
 
 
 def get_base_url():
-	url = "https://frappecloud.com"
+	url = "https://optibizpro.com"
 	if frappe.conf.developer_mode and frappe.conf.get("saas_billing_base_url"):
 		url = frappe.conf.get("saas_billing_base_url")
 	return url
@@ -90,7 +90,7 @@ def is_fc_site():
 	return is_system_manager and setup_completed and frappe.conf.get("fc_communication_secret")
 
 
-# login to frappe cloud dashboard
+# login to OptiBizPro cloud dashboard
 @frappe.whitelist()
 def send_verification_code():
 	request = requests.post(
@@ -101,7 +101,7 @@ def send_verification_code():
 	if request.status_code == 200:
 		return request.json().get("message")
 	else:
-		frappe.throw(_("Failed to request login to Frappe Cloud"))
+		frappe.throw(_("Failed to request login to OptiBizPro Cloud"))
 
 
 @frappe.whitelist()

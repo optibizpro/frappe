@@ -14,8 +14,13 @@ from frappe.handler import execute_cmd
 from frappe.model.db_query import DatabaseQuery, get_between_date_filter
 from frappe.permissions import add_user_permission, clear_user_permissions_for_doctype
 from frappe.query_builder import Column
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import db_type_is, run_only_if
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import db_type_is, run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.testutils import add_custom_field, clear_custom_fields
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["User", "Blog Post", "Blog Category", "Blogger"]
@@ -1084,10 +1089,18 @@ class TestDBQuery(IntegrationTestCase):
 			def get_list(args=None, limit_page_length=0, doctype=None):
 				from frappe.types.filter import FilterTuple
 
+<<<<<<< HEAD
+		with patch(
+			"frappe.controllers",
+			new={frappe.local.site: {"Virtual DocType": VirtualDocType}},
+		):
+			VirtualDocType.get_list = MagicMock()
+=======
 				# Backward compatibility
 				self.assertEqual(
 					args["filters"], [FilterTuple(doctype="Virtual DocType", fieldname="name", value="test")]
 				)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				self.assertEqual(limit_page_length, 1)
 				self.assertEqual(doctype, "Virtual DocType")
@@ -1195,9 +1208,15 @@ class TestDBQuery(IntegrationTestCase):
 		count = frappe.get_list("Language", ["SUM(1)", "COUNT(*)"], as_list=1, order_by=None)[0]
 		self.assertEqual(count[0], frappe.db.count("Language"))
 		self.assertEqual(count[1], frappe.db.count("Language"))
+<<<<<<< HEAD
+
+
+class TestReportView(FrappeTestCase):
+=======
 
 
 class TestReportView(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@run_only_if(db_type_is.MARIADB)  # TODO: postgres name casting is messed up
 	def test_get_count(self):
 		frappe.local.request = frappe._dict()
@@ -1272,6 +1291,23 @@ class TestReportView(IntegrationTestCase):
 		self.assertIsInstance(count, int)
 		self.assertLessEqual(count, limit)
 
+<<<<<<< HEAD
+		# doctype with space in name
+		limit = 2
+		frappe.local.form_dict = frappe._dict(
+			{
+				"doctype": "Role Profile",
+				"fields": [],
+				"distinct": "true",
+				"limit": limit,
+			}
+		)
+		count = execute_cmd("frappe.desk.reportview.get_count")
+		self.assertIsInstance(count, int)
+		self.assertLessEqual(count, limit)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_reportview_get(self):
 		user = frappe.get_doc("User", "test@example.com")
 		add_child_table_to_blog_post()

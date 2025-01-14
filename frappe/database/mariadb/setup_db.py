@@ -30,10 +30,13 @@ def setup_database(force, verbose, mariadb_user_host_login_scope=None):
 
 	if mariadb_user_host_login_scope is not None:
 		dbman_kwargs["host"] = mariadb_user_host_login_scope
+<<<<<<< HEAD
+=======
 
 	dbman.create_user(db_user, frappe.conf.db_password, **dbman_kwargs)
 	if verbose:
 		print(f"Created or updated user {db_user}")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if force or (db_name not in dbman.get_database_list()):
 		dbman.drop_database(db_name)
@@ -54,11 +57,16 @@ def setup_database(force, verbose, mariadb_user_host_login_scope=None):
 	root_conn.close()
 
 
+<<<<<<< HEAD
+def drop_user_and_database(db_name, root_login, root_password):
+	frappe.local.db = get_root_connection(root_login, root_password)
+=======
 def drop_user_and_database(
 	db_name,
 	db_user,
 ):
 	frappe.local.db = get_root_connection()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	dbman = DbManager(frappe.local.db)
 	dbman.drop_database(db_name)
 	dbman.delete_user(db_user, host="%")
@@ -72,8 +80,12 @@ def bootstrap_database(verbose, source_sql=None):
 	check_compatible_versions()
 
 	import_db_from_sql(source_sql, verbose)
-
 	frappe.connect()
+
+<<<<<<< HEAD
+=======
+	frappe.connect()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if "tabDefaultValue" not in frappe.db.get_tables(cached=False):
 		from click import secho
 
@@ -93,10 +105,17 @@ def import_db_from_sql(source_sql=None, verbose=False):
 	if not source_sql:
 		source_sql = os.path.join(os.path.dirname(__file__), "framework_mariadb.sql")
 	DbManager(frappe.local.db).restore_database(
+<<<<<<< HEAD
+		verbose, db_name, source_sql, db_name, frappe.conf.db_password
+	)
+	if verbose:
+		print("Imported from database %s" % source_sql)
+=======
 		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
 	)
 	if verbose:
 		print("Imported from database {}".format(source_sql))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def check_compatible_versions():
@@ -144,8 +163,13 @@ def get_root_connection():
 			socket=frappe.conf.db_socket,
 			host=frappe.conf.db_host,
 			port=frappe.conf.db_port,
+<<<<<<< HEAD
+			user=root_login,
+			password=root_password,
+=======
 			user=frappe.flags.root_login,
 			password=frappe.flags.root_password,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			cur_db_name=None,
 		)
 

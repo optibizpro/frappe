@@ -62,7 +62,11 @@ class TestPackage(IntegrationTestCase):
 def make_test_package():
 	if not frappe.db.exists("Package", "Test Package"):
 		frappe.get_doc(
+<<<<<<< HEAD
+			dict(doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package")
+=======
 			doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).insert()
 
 

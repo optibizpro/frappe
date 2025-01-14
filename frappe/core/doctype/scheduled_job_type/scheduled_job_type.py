@@ -47,6 +47,7 @@ class ScheduledJobType(Document):
 		scheduler_event: DF.Link | None
 		server_script: DF.Link | None
 		stopped: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):

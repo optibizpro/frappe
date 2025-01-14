@@ -90,6 +90,8 @@ class TestWebhook(IntegrationTestCase):
 		# retrieve or create a User webhook for `after_insert`
 		self.responses = responses.RequestsMock()
 		self.responses.start()
+<<<<<<< HEAD
+=======
 
 		self.responses.add(
 			responses.POST,
@@ -98,6 +100,7 @@ class TestWebhook(IntegrationTestCase):
 			json={},
 		)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		webhook_fields = {
 			"webhook_doctype": "User",
 			"webhook_docevent": "after_insert",
@@ -142,6 +145,15 @@ class TestWebhook(IntegrationTestCase):
 		webhooks = frappe.cache.get_value("webhooks")
 		self.assertTrue("User" in webhooks)
 		self.assertEqual(len(webhooks.get("User")), 1)
+<<<<<<< HEAD
+
+		# only 1 hook (enabled) must be queued
+		self.assertEqual(len(frappe.local._webhook_queue), 1)
+		execution = frappe.local._webhook_queue[0]
+		self.assertEqual(execution.webhook.name, self.sample_webhooks[0].name)
+		self.assertEqual(execution.doc.name, self.test_user.name)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# only 1 hook (enabled) must be queued
 		self.assertEqual(len(frappe.local._webhook_queue), 1)

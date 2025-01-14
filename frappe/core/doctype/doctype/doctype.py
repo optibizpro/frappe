@@ -134,6 +134,7 @@ class DocType(Document):
 		is_virtual: DF.Check
 		issingle: DF.Check
 		istable: DF.Check
+		link_filters: DF.JSON
 		links: DF.Table[DocTypeLink]
 		make_attachments_public: DF.Check
 		max_attachments: DF.Int
@@ -346,7 +347,11 @@ class DocType(Document):
 
 		self.flags.update_fields_to_fetch_queries = []
 
+<<<<<<< HEAD
+		new_fields_to_fetch = [df for df in new_meta.get_fields_to_fetch()]
+=======
 		new_fields_to_fetch = new_meta.get_fields_to_fetch()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if set(old_fields_to_fetch) != {df.fieldname for df in new_fields_to_fetch}:
 			for df in new_fields_to_fetch:
@@ -1684,7 +1689,11 @@ def validate_fields(meta: Meta):
 		validate_fetch_from(d)
 		validate_data_field_type(d)
 
+<<<<<<< HEAD
+		if not frappe.flags.in_migrate:
+=======
 		if not frappe.flags.in_migrate or in_ci:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			check_unique_fieldname(meta.get("name"), d.fieldname)
 			check_link_table_options(meta.get("name"), d)
 			check_illegal_mandatory(meta.get("name"), d)

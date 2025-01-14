@@ -29,6 +29,7 @@ class Workflow(Document):
 		workflow_data: DF.JSON | None
 		workflow_name: DF.Data
 		workflow_state_field: DF.Data
+
 	# end: auto-generated types
 
 	def validate(self):

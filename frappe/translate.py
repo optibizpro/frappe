@@ -100,7 +100,11 @@ def get_user_lang(user: str | None = None) -> str:
 	# User.language => Session Defaults => frappe.local.lang => 'en'
 	return (
 		frappe.get_cached_value("User", user, "language")
+<<<<<<< HEAD
+		or frappe.db.get_default("lang")
+=======
 		or frappe.get_system_settings("language")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		or frappe.local.lang
 		or "en"
 	)
@@ -173,6 +177,8 @@ def get_all_translations(lang: str) -> dict[str, str]:
 	try:
 		return frappe.cache.hget(MERGED_TRANSLATION_KEY, lang, generator=_merge_translations)
 	except Exception:
+		if frappe.flags and frappe.flags.in_test:
+			raise
 		# People mistakenly call translation function on global variables
 		# where locals are not initialized, translations don't make much sense there
 		frappe.logger().error("Unable to load translations", exc_info=True)
@@ -939,6 +945,12 @@ def get_translations(source_text):
 @frappe.whitelist(allow_guest=True)
 def get_all_languages(with_language_name: bool = False) -> list:
 	"""Return all enabled language codes ar, ch etc."""
+<<<<<<< HEAD
+
+	def get_language_codes():
+		return frappe.get_all("Language", filters={"enabled": 1}, pluck="name")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def get_all_language_with_name():
 		return frappe.get_all("Language", ["language_code", "language_name"], {"enabled": 1})

@@ -307,7 +307,11 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 				content text,
 				fulltext(content),
 				route varchar({self.VARCHAR_LEN}),
+<<<<<<< HEAD
+				published int(1) not null default 0,
+=======
 				published TINYINT not null default 0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				unique `doctype_name` (doctype, name))
 				COLLATE=utf8mb4_unicode_ci
 				ENGINE=MyISAM

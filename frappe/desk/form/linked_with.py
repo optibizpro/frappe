@@ -139,7 +139,11 @@ class SubmittableDocumentTree:
 		return self._references_across_doctypes.get(doctype, [])
 
 	def get_document_sources(self):
+<<<<<<< HEAD
+		"""Returns list of doctypes from where we access submittable documents."""
+=======
 		"""Return list of doctypes from where we access submittable documents."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return list(set([*self.get_link_sources(), self.root_doctype]))
 
 	def get_link_sources(self):
@@ -156,7 +160,11 @@ class SubmittableDocumentTree:
 
 
 def get_child_tables_of_doctypes(doctypes: list[str] | None = None):
+<<<<<<< HEAD
+	"""Returns child tables by doctype."""
+=======
 	"""Return child tables by doctype."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	filters = [["fieldtype", "=", "Table"]]
 	filters_for_docfield = filters
 	filters_for_customfield = filters

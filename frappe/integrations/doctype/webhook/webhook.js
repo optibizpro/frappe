@@ -85,6 +85,8 @@ frappe.ui.form.on("Webhook", {
 			"background_jobs_queue",
 			"frappe.integrations.doctype.webhook.webhook.get_all_queues"
 		);
+<<<<<<< HEAD
+=======
 
 		if (frm.doc.webhook_doctype) {
 			frm.add_custom_button(__("Preview"), () => {
@@ -108,6 +110,7 @@ frappe.ui.form.on("Webhook", {
 				return dialog;
 			});
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	request_structure: (frm) => {

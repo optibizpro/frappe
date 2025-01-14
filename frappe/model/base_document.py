@@ -177,11 +177,14 @@ class BaseDocument:
 		state.pop("meta", None)
 		state.pop("permitted_fieldnames", None)
 		state.pop("_parent_doc", None)
+<<<<<<< HEAD
+=======
 		state.pop("flags", None)
 
 	def __setstate__(self, state):
 		self.__dict__ = state
 		self.flags = _dict()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def update(self, d):
 		"""Update multiple fields of a doctype using a dictionary of key-value pairs.
@@ -756,13 +759,23 @@ class BaseDocument:
 
 		def get_msg(df):
 			if df.fieldtype in table_fields:
+<<<<<<< HEAD
+				return "{}: {}: {}".format(
+					_("Error"), _("Data missing in table"), _(df.label, context=df.parent)
+				)
+=======
 				return _("Error: Data missing in table {0}").format(_(df.label, context=df.parent))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			# check if parentfield exists (only applicable for child table doctype)
 			elif self.get("parentfield"):
 				return _("Error: {0} Row #{1}: Value missing for: {2}").format(
 					frappe.bold(_(self.doctype)),
 					self.idx,
+<<<<<<< HEAD
+					_("Value missing for"),
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					_(df.label, context=df.parent),
 				)
 

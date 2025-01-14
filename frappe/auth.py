@@ -13,6 +13,10 @@ import frappe.utils.user
 from frappe import _
 from frappe.apps import get_default_path
 from frappe.core.doctype.activity_log.activity_log import add_authentication_log
+<<<<<<< HEAD
+from frappe.desk.utils import slug
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.sessions import Session, clear_sessions, delete_session, get_expiry_in_seconds
 from frappe.translate import get_language
 from frappe.twofactor import (
@@ -22,6 +26,10 @@ from frappe.twofactor import (
 	should_run_2fa,
 )
 from frappe.utils import cint, date_diff, datetime, get_datetime, today
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecation_warning
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
@@ -113,7 +121,11 @@ class HTTPRequest:
 
 
 class LoginManager:
+<<<<<<< HEAD
+	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+=======
 	__slots__ = ("full_name", "info", "resume", "user", "user_lang", "user_type")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def __init__(self):
 		self.user = None
@@ -174,7 +186,10 @@ class LoginManager:
 
 	def get_user_info(self):
 		self.info = frappe.get_cached_value(
-			"User", self.user, ["user_type", "first_name", "last_name", "user_image"], as_dict=1
+			"User",
+			self.user,
+			["user_type", "first_name", "last_name", "user_image", "default_workspace"],
+			as_dict=1,
 		)
 		self.user_lang = frappe.translate.get_user_lang()
 		self.user_type = self.info.user_type
@@ -199,7 +214,15 @@ class LoginManager:
 			frappe.local.cookie_manager.set_cookie("system_user", "yes")
 			if not resume:
 				frappe.local.response["message"] = "Logged In"
+<<<<<<< HEAD
+				default_workspace = self.info.default_workspace
+				if default_workspace:
+					frappe.local.response["home_page"] = "/app/" + slug(default_workspace)
+				else:
+					frappe.local.response["home_page"] = get_default_path() or "/app"
+=======
 				frappe.local.response["home_page"] = get_default_path() or "/app"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not resume:
 			frappe.response["full_name"] = self.full_name
@@ -434,9 +457,13 @@ def get_logged_user():
 def clear_cookies():
 	if hasattr(frappe.local, "session"):
 		frappe.session.sid = ""
+<<<<<<< HEAD
+	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
+=======
 	frappe.local.cookie_manager.delete_cookie(
 		["full_name", "user_id", "sid", "user_image", "user_lang", "system_user"]
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def validate_ip_address(user):

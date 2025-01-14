@@ -22,7 +22,7 @@ def get_remote_script(remote_site):
 
 
 def frappecloud_migrator():
-	remote_site_name = "frappecloud.com"
+	remote_site_name = "optibizpro.com"
 	script_contents = get_remote_script(remote_site=remote_site_name)
 	import os
 	import sys

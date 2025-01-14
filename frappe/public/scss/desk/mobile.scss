@@ -242,6 +242,51 @@ body {
 			right: 10px;
 			left: -10px;
 			width: 100%;
+<<<<<<< HEAD
+		}
+	}
+
+	#page-chat {
+		.layout-side-section {
+			position: relative;
+			left: 0px;
+			border-right: 1px solid var(--border-color);
+			padding-left: 0px;
+			float: left;
+
+			// hack! to prevent overlap of borders
+			width: 76px;
+		}
+
+		.layout-main-section-wrapper {
+			position: absolute;
+			left: 75px;
+			right: 0px;
+			border-left: 1px solid var(--border-color);
+			float: left;
+		}
+
+		.module-sidebar-item {
+			margin: 0px;
+
+			.chat-sidebar-link {
+				padding: var(--padding-md);
+			}
+		}
+
+		.timeline-head {
+			padding: 15px 15px 7px;
+		}
+
+		.list-row {
+			padding: 7px 0px;
+		}
+
+		.message-row-right {
+			margin-top: var(--margin-sm);
+			text-align: left;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
 	}
 

@@ -19,14 +19,22 @@
 			</div>
 
 			<div class="flex config-area">
+<<<<<<< HEAD
+				<label v-if="is_optimizable" class="frappe-checkbox"
+=======
 				<label v-if="allow_toggle_optimize" class="frappe-checkbox"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					><input
 						type="checkbox"
 						:checked="optimize"
 						@change="emit('toggle_optimize')"
 					/>{{ __("Optimize") }}</label
 				>
+<<<<<<< HEAD
+				<label class="frappe-checkbox"
+=======
 				<label v-if="allow_toggle_private" class="frappe-checkbox"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					><input
 						type="checkbox"
 						:checked="file.private"
@@ -104,6 +112,11 @@ let uploaded = computed(() => {
 let is_image = computed(() => {
 	return props.file.file_obj.type.startsWith("image");
 });
+<<<<<<< HEAD
+let is_optimizable = computed(() => {
+	let is_svg = props.file.file_obj.type == "image/svg+xml";
+	return is_image.value && !is_svg && !uploaded.value && !props.file.failed;
+=======
 let allow_toggle_optimize = computed(() => {
 	let is_svg = props.file.file_obj.type == "image/svg+xml";
 	return (
@@ -113,6 +126,7 @@ let allow_toggle_optimize = computed(() => {
 		!uploaded.value &&
 		!props.file.failed
 	);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 let is_cropable = computed(() => {
 	let croppable_types = ["image/jpeg", "image/png"];

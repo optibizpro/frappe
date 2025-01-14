@@ -18,6 +18,7 @@ from typing import Any, Literal, Optional, TypeVar
 from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlparse, urlunparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
+import pytz
 from click import secho
 from dateutil import parser
 from dateutil.parser import ParserError
@@ -32,6 +33,8 @@ from frappe.utils.number_format import NUMBER_FORMAT_MAP, NumberFormat
 
 DateTimeLikeObject = str | datetime.date | datetime.datetime
 NumericType = int | float
+<<<<<<< HEAD
+=======
 TimespanOptions = Literal[
 	"last week",
 	"last month",
@@ -51,6 +54,7 @@ TimespanOptions = Literal[
 	"next 6 months",
 	"next year",
 ]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 if typing.TYPE_CHECKING:
@@ -139,6 +143,12 @@ def getdate(
 def get_datetime(
 	datetime_str: Optional["DateTimeLikeObject"] | tuple | list = None,
 ) -> datetime.datetime | None:
+<<<<<<< HEAD
+	if datetime_str is None:
+		return now_datetime()
+
+	if isinstance(datetime_str, datetime.datetime | datetime.timedelta):
+=======
 	"""Return the below mentioned values based on the given `datetime_str`:
 
 	* If `datetime_str` is None, returns datetime object of current datetime
@@ -154,6 +164,7 @@ def get_datetime(
 		return now_datetime()
 
 	elif isinstance(datetime_str, datetime.datetime | datetime.timedelta):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return datetime_str
 
 	elif isinstance(datetime_str, list | tuple):
@@ -357,9 +368,15 @@ def time_diff_in_hours(string_ed_date: DateTimeLikeObject, string_st_date: DateT
 	return round(float(time_diff(string_ed_date, string_st_date).total_seconds()) / 3600, 6)
 
 
+<<<<<<< HEAD
+def now_datetime():
+	dt = convert_utc_to_system_timezone(datetime.datetime.now(pytz.UTC))
+	return dt.replace(tzinfo=None)
+=======
 def now_datetime() -> datetime.datetime:
 	"""Return the current datetime in system timezone."""
 	return datetime.datetime.now(ZoneInfo(get_system_timezone())).replace(tzinfo=None)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_timestamp(date: Optional["DateTimeLikeObject"] = None) -> float:
@@ -379,6 +396,21 @@ def get_system_timezone() -> str:
 	return frappe.get_system_settings("time_zone") or "Asia/Kolkata"  # Default to India ?!
 
 
+<<<<<<< HEAD
+def convert_utc_to_timezone(utc_timestamp, time_zone):
+	from pytz import UnknownTimeZoneError, timezone
+
+	if utc_timestamp.tzinfo is None:
+		utc_timestamp = timezone("UTC").localize(utc_timestamp)
+	try:
+		return utc_timestamp.astimezone(timezone(time_zone))
+	except UnknownTimeZoneError:
+		return utc_timestamp
+
+
+def get_datetime_in_timezone(time_zone):
+	utc_timestamp = datetime.datetime.now(pytz.UTC)
+=======
 def convert_utc_to_timezone(utc_timestamp: datetime.datetime, time_zone: str) -> datetime.datetime:
 	if utc_timestamp.tzinfo is None:
 		utc_timestamp = utc_timestamp.replace(tzinfo=ZoneInfo("UTC"))
@@ -392,6 +424,7 @@ def convert_utc_to_timezone(utc_timestamp: datetime.datetime, time_zone: str) ->
 def get_datetime_in_timezone(time_zone: str) -> datetime.datetime:
 	"""Return the current datetime in the given timezone (e.g. 'Asia/Kolkata')."""
 	utc_timestamp = datetime.datetime.now(datetime.timezone.utc)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return convert_utc_to_timezone(utc_timestamp, time_zone)
 
 
@@ -457,9 +490,15 @@ def get_first_day(dt, d_years=0, d_months=0, as_str: Literal[True] = False) -> s
 
 # TODO: first arg
 def get_first_day(dt, d_years: int = 0, d_months: int = 0, as_str: bool = False) -> str | datetime.date:
+<<<<<<< HEAD
+	"""
+	Returns the first day of the month for the date specified by date object
+	Also adds `d_years` and `d_months` if specified
+=======
 	"""Return the first day of the month for the date specified by date object.
 
 	Also, add `d_years` and `d_months` if specified.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 	dt = getdate(dt)
 
@@ -692,8 +731,12 @@ def get_user_time_format() -> str:
 
 
 def format_date(string_date=None, format_string: str | None = None, parse_day_first: bool = False) -> str:
+<<<<<<< HEAD
+	"""Converts the given string date to :data:`user_date_format`
+=======
 	"""Convert the given string date to :data:`user_date_format`.
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	User format specified in defaults
 
 	Examples:
@@ -879,7 +922,10 @@ def get_weekday(datetime: DateTimeLikeObject | None = None) -> str:
 
 def get_month(datetime: DateTimeLikeObject | None = None) -> str:
 	"""Return the month name (e.g. 'January') for the given datetime like object (datetime.date, datetime.datetime, string).
+<<<<<<< HEAD
+=======
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	If `datetime` argument is not provided, the current month name is returned.
 	"""
 	if not datetime:
@@ -891,10 +937,14 @@ def get_month(datetime: DateTimeLikeObject | None = None) -> str:
 	return calendar.month_name[datetime.month]
 
 
+<<<<<<< HEAD
+def get_timespan_date_range(timespan: str) -> tuple[datetime.datetime, datetime.datetime] | None:
+=======
 def get_timespan_date_range(
 	timespan: TimespanOptions,
 ) -> tuple[datetime.datetime, datetime.datetime] | None:
 	"""Return the date range (start_date, end_date) tuple for the given timespan."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	today = getdate()
 
 	match timespan:
@@ -1079,10 +1129,15 @@ def flt(s: NumericType | str, precision: int | None = None) -> float: ...
 def flt(s: None) -> Literal[0.0]: ...
 
 
+<<<<<<< HEAD
+def flt(s: NumericType | str, precision: int | None = None, rounding_method: str | None = None) -> float:
+	"""Convert to float (ignoring commas in string)
+=======
 def flt(
 	s: NumericType | str | None, precision: int | None = None, rounding_method: str | None = None
 ) -> float:
 	"""Convert to float (ignoring commas in string).
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param s: Number in string or other numeric format.
 	:param precision: optional argument to specify precision for rounding.
@@ -1139,8 +1194,18 @@ def cint(s: NumericType | str | None, default: int = 0) -> int:
 	0
 
 	"""
+<<<<<<< HEAD
+	try:
+		return int(s)
+	except Exception:
+		try:
+			return int(float(s))
+		except Exception:
+			return default
+=======
 	if s is None:
 		return default
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	try:
 		return int(s)
@@ -1343,7 +1408,11 @@ def encode(obj, encoding="utf-8"):
 
 
 def parse_val(v):
+<<<<<<< HEAD
+	"""Converts to simple datatypes from SQL query results"""
+=======
 	"""Convert to simple datatypes from SQL query results."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(v, datetime.date | datetime.datetime):
 		v = str(v)
 	elif isinstance(v, datetime.timedelta):
@@ -1510,8 +1579,23 @@ def money_in_words(
 	if number_format.string == "#,##,###.##":
 		in_million = False
 
+<<<<<<< HEAD
+	# 0.00
+	if main == "0" and fraction in ["00", "000"]:
+		out = _(main_currency, context="Currency") + " " + _("Zero")
+	# 0.XX
+	elif main == "0":
+		out = in_words(fraction, in_million).title() + " " + fraction_currency
+	else:
+		out = _(main_currency, context="Currency") + " " + in_words(main, in_million).title()
+		if cint(fraction):
+			out = (
+				out + " " + _("and") + " " + in_words(fraction, in_million).title() + " " + fraction_currency
+			)
+=======
 	def fraction_in_words() -> str:
 		return in_words(float(f"0.{fraction}") * fraction_units, in_million).title()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# 0.00
 	if main == "0" and fraction in ["0", "00", "000"]:
@@ -1706,6 +1790,9 @@ def comma_and(some_list: list | tuple, add_quotes=True) -> str:
 	return comma_sep(some_list, frappe._("{0} and {1}"), add_quotes)
 
 
+<<<<<<< HEAD
+def comma_sep(some_list, pattern, add_quotes=True):
+=======
 def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 	"""Return the given list or tuple as a comma separated string, with the last item joined by the given string format pattern.
 
@@ -1713,6 +1800,7 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 
 	e.g. if `some_list` is ['a', 'b', 'c'] and `pattern` is '{0} or {1}', the output will be 'a, b or c'
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -1729,11 +1817,15 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 		return some_list
 
 
+<<<<<<< HEAD
+def new_line_sep(some_list):
+=======
 def new_line_sep(some_list: list | tuple) -> str:
 	"""Return the given list or tuple as a new line separated string.
 
 	e.g. ['', 'Paid', 'Unpaid'] -> '\n Paid\n Unpaid'
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -1994,6 +2086,21 @@ operator_map = {
 }
 
 
+<<<<<<< HEAD
+def evaluate_filters(doc, filters: dict | list | tuple):
+	"""Returns true if doc matches filters"""
+	if isinstance(filters, dict):
+		for key, value in filters.items():
+			f = get_filter(None, {key: value})
+			if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
+				return False
+
+	elif isinstance(filters, list | tuple):
+		for d in filters:
+			f = get_filter(None, d)
+			if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
+				return False
+=======
 def evaluate_filters(doc: "Mapping", filters: FilterSignature):
 	"""Return True if doc matches filters."""
 	if not isinstance(filters, Filters):
@@ -2002,6 +2109,7 @@ def evaluate_filters(doc: "Mapping", filters: FilterSignature):
 		f = get_filter(None, d)
 		if not compare(doc.get(f.fieldname), f.operator, f.value, f.fieldtype):
 			return False
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	return True
 
@@ -2038,7 +2146,23 @@ def get_filter(doctype: str, filters: FilterSignature, filters_config=None) -> "
 	else:
 		ft = filters[0]
 
+<<<<<<< HEAD
+	if not isinstance(f, list | tuple):
+		frappe.throw(frappe._("Filter must be a tuple or list (in a list)"))
+
+	if len(f) == 3:
+		f = (doctype, f[0], f[1], f[2])
+	elif len(f) > 4:
+		f = f[0:4]
+	elif len(f) != 4:
+		frappe.throw(
+			frappe._("Filter must have 4 values (doctype, fieldname, operator, value): {0}").format(str(f))
+		)
+
+	f = frappe._dict(doctype=f[0], fieldname=f[1], operator=f[2], value=f[3])
+=======
 	f = frappe._dict(doctype=ft[0], fieldname=ft[1], operator=ft[2], value=ft[3])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	sanitize_column(f.fieldname)
 

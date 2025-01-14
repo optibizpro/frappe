@@ -178,6 +178,12 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		} else {
 			this.draw_control.remove();
 		}
+<<<<<<< HEAD
+
+		this.draw_control = this.get_leaflet_controls();
+		this.map.addControl(this.draw_control);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_leaflet_controls() {

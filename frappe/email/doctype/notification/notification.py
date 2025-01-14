@@ -4,7 +4,10 @@
 import json
 import os
 from collections import namedtuple
+<<<<<<< HEAD
+=======
 from functools import partial
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _
@@ -14,7 +17,11 @@ from frappe.desk.doctype.notification_log.notification_log import enqueue_create
 from frappe.integrations.doctype.slack_webhook_url.slack_webhook_url import send_slack_message
 from frappe.model.document import Document
 from frappe.modules.utils import export_module_json, get_doc_module
+<<<<<<< HEAD
+from frappe.utils import add_to_date, cast, nowdate, validate_email_address
+=======
 from frappe.utils import add_to_date, cast, now_datetime, nowdate, validate_email_address
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.jinja import validate_template
 from frappe.utils.safe_exec import get_safe_globals
 
@@ -37,8 +44,11 @@ class Notification(Document):
 		channel: DF.Literal["Email", "Slack", "System Notification", "SMS"]
 		condition: DF.Code | None
 		date_changed: DF.Literal[None]
+<<<<<<< HEAD
+=======
 		datetime_changed: DF.Literal[None]
 		datetime_last_run: DF.Datetime | None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		days_in_advance: DF.Int
 		document_type: DF.Link
 		enabled: DF.Check
@@ -572,7 +582,11 @@ def get_context(context):
 			# For sending messages to specified role
 			if recipient.receiver_by_role:
 				receiver_list += get_info_based_on_role(
+<<<<<<< HEAD
+					recipient.receiver_by_role, "mobile_no", ignore_permissions=True
+=======
 					recipient.receiver_by_role, field_on_user, ignore_permissions=True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				)
 
 		return list(set(receiver_list))
@@ -735,12 +749,20 @@ def evaluate_alert(doc: Document, alert, event=None):
 
 
 def get_context(doc):
+<<<<<<< HEAD
+	Frappe = namedtuple("frappe", ["utils"])
+	return {
+		"doc": doc,
+		"nowdate": nowdate,
+		"frappe": Frappe(utils=get_safe_globals().get("frappe").get("utils")),
+=======
 	Frappe = namedtuple("Frappe", ["frappe"])
 	frappe = Frappe(frappe=get_safe_globals().get("frappe"))
 	return {
 		"doc": doc,
 		"nowdate": nowdate,
 		"frappe": frappe.frappe,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 
@@ -769,6 +791,8 @@ def get_reference_doctype(doc):
 
 def get_reference_name(doc):
 	return doc.parent if doc.meta.istable else doc.name
+<<<<<<< HEAD
+=======
 
 
 def _parse_receiver_by_document_field(s):
@@ -779,3 +803,4 @@ def _parse_receiver_by_document_field(s):
 	else:
 		data_field, child_field = fragments[0], None
 	return data_field, child_field
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

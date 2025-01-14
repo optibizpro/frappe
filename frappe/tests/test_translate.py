@@ -9,7 +9,11 @@ import frappe
 import frappe.translate
 from frappe import _, _lt
 from frappe.gettext.extractors.javascript import extract_javascript
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.translate import (
 	MERGED_TRANSLATION_KEY,
 	USER_TRANSLATION_KEY,
@@ -35,7 +39,11 @@ first_lang, second_lang, third_lang, fourth_lang, fifth_lang = choices(
 _lazy_translations = _lt("Communication")
 
 
+<<<<<<< HEAD
+class TestTranslate(FrappeTestCase):
+=======
 class TestTranslate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	guest_sessions_required = (
 		"test_guest_request_language_resolution_with_cookie",
 		"test_guest_request_language_resolution_with_request_header",
@@ -94,6 +102,8 @@ class TestTranslate(IntegrationTestCase):
 			self.assertEqual(_("Mobile No"), "Mobile No")
 
 	def test_translation_with_context(self):
+<<<<<<< HEAD
+=======
 		t1 = frappe.new_doc("Translation")
 		t1.language = "fr"
 		t1.source_text = "Change"
@@ -107,13 +117,17 @@ class TestTranslate(IntegrationTestCase):
 		t2.context = "Coins"
 		t2.save()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.local.lang = "fr"
 		self.assertEqual(_("Change"), "Changement")
 		self.assertEqual(_("Change", context="Coins"), "la monnaie")
 
+<<<<<<< HEAD
+=======
 		t1.delete()
 		t2.delete()
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_lazy_translations(self):
 		frappe.local.lang = "de"
 		eager_translation = _("Communication")

@@ -14,8 +14,12 @@ import requests
 import frappe
 from frappe.tests.utils import make_test_records
 
+<<<<<<< HEAD
+from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
+=======
 from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
 from .testing.result import TestResult
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 click_ctx = click.get_current_context(True)
 if click_ctx:
@@ -56,7 +60,10 @@ class ParallelTestRunner:
 		frappe.flags.in_test = True
 		frappe.clear_cache()
 		frappe.utils.scheduler.disable_scheduler()
+<<<<<<< HEAD
+=======
 		_decorate_all_methods_and_functions_with_type_checker()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.before_test_setup()
 
 	def before_test_setup(self):

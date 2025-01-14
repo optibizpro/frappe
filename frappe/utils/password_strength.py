@@ -8,6 +8,8 @@ from zxcvbn.scoring import ALL_UPPER, START_UPPER
 
 import frappe
 from frappe import _, _lt
+<<<<<<< HEAD
+=======
 
 if TYPE_CHECKING:
 	from collections.abc import Iterable
@@ -15,6 +17,7 @@ if TYPE_CHECKING:
 	from zxcvbn import _Result
 	from zxcvbn.feedback import _Feedback as PasswordStrengthFeedback
 	from zxcvbn.matching import _Match
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def test_password_strength(password: str, user_inputs: "Iterable[object] | None" = None) -> "_Result":
@@ -50,7 +53,11 @@ default_feedback: "PasswordStrengthFeedback" = {
 def get_feedback(score: int, sequence: list) -> "PasswordStrengthFeedback":
 	"""Return the feedback dictionary consisting of ("warning","suggestions") for the given sequences."""
 	global default_feedback
+<<<<<<< HEAD
+	minimum_password_score = int(frappe.db.get_single_value("System Settings", "minimum_password_score") or 2)
+=======
 	minimum_password_score = int(frappe.get_system_settings("minimum_password_score") or 2)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# Starting feedback
 	if len(sequence) == 0:

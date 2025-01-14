@@ -112,9 +112,12 @@ def get_bootinfo():
 	bootinfo.subscription_conf = add_subscription_conf()
 	bootinfo.marketplace_apps = get_marketplace_apps()
 	bootinfo.changelog_feed = get_changelog_feed_items()
+<<<<<<< HEAD
+=======
 	bootinfo.enable_address_autocompletion = frappe.db.get_single_value(
 		"Geolocation Settings", "enable_address_autocompletion"
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if sentry_dsn := get_sentry_dsn():
 		bootinfo.sentry_dsn = sentry_dsn
@@ -303,7 +306,11 @@ def get_user_pages_or_reports(parent, cache=False):
 				has_role[r.name] |= {"ref_doctype": r.ref_doctype}
 
 	if is_report:
+<<<<<<< HEAD
+		if not has_permission("Report", raise_exception=False):
+=======
 		if not has_permission("Report", print_logs=False):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return {}
 
 		reports = frappe.get_list(
@@ -508,7 +515,7 @@ def get_marketplace_apps():
 		return apps
 
 	def get_apps_from_fc():
-		remote_site = frappe.conf.frappecloud_url or "frappecloud.com"
+		remote_site = frappe.conf.frappecloud_url or "optibizpro.com"
 		request_url = f"https://{remote_site}/api/method/press.api.marketplace.get_marketplace_apps"
 		request = requests.get(request_url, timeout=2.0)
 		return request.json()["message"]

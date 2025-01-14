@@ -39,6 +39,7 @@ class LogSettings(Document):
 		from frappe.types import DF
 
 		logs_to_clear: DF.Table[LogsToClear]
+
 	# end: auto-generated types
 
 	def validate(self):

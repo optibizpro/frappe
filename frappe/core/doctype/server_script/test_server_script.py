@@ -193,7 +193,11 @@ class TestServerScript(IntegrationTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
+		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()
@@ -203,7 +207,11 @@ class TestServerScript(IntegrationTestCase):
 		server_script.disabled = 0
 		server_script.save()
 
+<<<<<<< HEAD
+		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
+=======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		server_script.disabled = 1
 		server_script.save()

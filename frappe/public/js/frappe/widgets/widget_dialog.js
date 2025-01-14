@@ -292,6 +292,20 @@ class CardDialog extends WidgetDialog {
 								};
 							}
 						},
+<<<<<<< HEAD
+					},
+					{
+						fieldname: "label",
+						fieldtype: "Data",
+						in_list_view: 1,
+						label: __("Label"),
+					},
+					{
+						fieldname: "icon",
+						fieldtype: "Icon",
+						label: "Icon",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					},
 					{
 						fieldname: "label",
@@ -409,6 +423,18 @@ class ShortcutDialog extends WidgetDialog {
 				},
 			},
 			{
+<<<<<<< HEAD
+				fieldtype: "Data",
+				fieldname: "label",
+				label: __("Label"),
+			},
+			{
+				fieldtype: "Column Break",
+				fieldname: "column_break_4",
+			},
+			{
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				fieldtype: "Dynamic Link",
 				fieldname: "link_to",
 				label: __("Link To"),
@@ -464,7 +490,11 @@ class ShortcutDialog extends WidgetDialog {
 				fieldtype: "Select",
 				fieldname: "doc_view",
 				label: __("DocType View"),
+<<<<<<< HEAD
+				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban",
+=======
 				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban\nImage",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				description: __(
 					"Which view of the associated DocType should this shortcut take you to?"
 				),

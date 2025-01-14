@@ -24,6 +24,7 @@ class ModuleDef(Document):
 		module_name: DF.Data
 		package: DF.Link | None
 		restrict_to_domain: DF.Link | None
+
 	# end: auto-generated types
 
 	def validate(self):

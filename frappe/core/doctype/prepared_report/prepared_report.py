@@ -40,6 +40,7 @@ class PreparedReport(Document):
 		report_end_time: DF.Datetime | None
 		report_name: DF.Data
 		status: DF.Literal["Error", "Queued", "Completed", "Started"]
+
 	# end: auto-generated types
 
 	@property

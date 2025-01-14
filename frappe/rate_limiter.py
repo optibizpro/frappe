@@ -1,10 +1,15 @@
 # Copyright (c) 2020, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+<<<<<<< HEAD
+import datetime
+=======
 import time
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from collections.abc import Callable
 from functools import wraps
 
+import pytz
 from werkzeug.wrappers import Response
 
 import frappe
@@ -49,7 +54,12 @@ class RateLimiter:
 		self.limit = int(limit * 1000000)
 		self.window = window
 
+<<<<<<< HEAD
+		self.start = datetime.datetime.now(pytz.UTC)
+		timestamp = int(frappe.utils.now_datetime().timestamp())
+=======
 		self.start = time.time()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.window_number, self.spent = divmod(int(self.start), self.window)
 		self.key = frappe.cache.make_key(f"rate-limit-counter-{self.window_number}")
@@ -93,8 +103,13 @@ class RateLimiter:
 	def record_request_end(self):
 		if self.end is not None:
 			return
+<<<<<<< HEAD
+		self.end = datetime.datetime.now(pytz.UTC)
+		self.duration = int((self.end - self.start).total_seconds() * 1000000)
+=======
 		self.end = time.time()
 		self.duration = int((self.end - self.start) * 1000000)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def respond(self):
 		if self.rejected:

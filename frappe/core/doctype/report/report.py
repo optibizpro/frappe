@@ -46,6 +46,10 @@ class Report(Document):
 		report_type: DF.Literal["Report Builder", "Query Report", "Script Report", "Custom Report"]
 		roles: DF.Table[HasRole]
 		timeout: DF.Int
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def validate(self):
@@ -134,7 +138,11 @@ class Report(Document):
 		if frappe.flags.in_import:
 			return
 
+<<<<<<< HEAD
+		if self.is_standard == "Yes" and (frappe.local.conf.get("developer_mode") or 0) == 1:
+=======
 		if self.is_standard == "Yes" and frappe.conf.developer_mode:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			export_to_files(record_list=[["Report", self.name]], record_module=self.module, create_init=True)
 
 			self.create_report_py()

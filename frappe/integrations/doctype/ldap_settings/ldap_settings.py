@@ -63,6 +63,7 @@ class LDAPSettings(Document):
 		password: DF.Password
 		require_trusted_certificate: DF.Literal["No", "Yes"]
 		ssl_tls_mode: DF.Literal["Off", "StartTLS"]
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -205,7 +206,11 @@ class LDAPSettings(Document):
 		user.remove_roles(*roles_to_remove)
 
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
+<<<<<<< HEAD
+		user: "User" = None
+=======
 		user: User = None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		role: str = None
 
 		if frappe.db.exists("User", user_data["email"]):

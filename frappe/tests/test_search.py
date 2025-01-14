@@ -248,3 +248,24 @@ def teardown_test_link_field_order(TestCase):
 	)
 
 	TestCase.tree_doc.delete()
+<<<<<<< HEAD
+
+
+class TestWebsiteSearch(FrappeTestCase):
+	def get(self, path, user="Guest"):
+		frappe.set_user(user)
+		set_request(method="GET", path=path)
+		make_form_dict(frappe.local.request)
+		response = get_response()
+		frappe.set_user("Administrator")
+		return response
+
+	def test_basic_search(self):
+		no_search = self.get("/search")
+		self.assertEqual(no_search.status_code, 200)
+
+		response = self.get("/search?q=b")
+		self.assertEqual(response.status_code, 200)
+		self.assertIn("Search Results", response.get_data(as_text=True))
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

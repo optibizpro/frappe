@@ -55,7 +55,11 @@ def get_count() -> int:
 
 	if is_virtual_doctype(args.doctype):
 		controller = get_controller(args.doctype)
+<<<<<<< HEAD
+		count = controller.get_count(args)
+=======
 		count = frappe.call(controller.get_count, args=args, **args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		args.distinct = sbool(args.distinct)
 		distinct = "distinct " if args.distinct else ""
@@ -188,7 +192,11 @@ def is_standard(fieldname):
 	return fieldname in default_fields or fieldname in optional_fields or fieldname in child_table_fields
 
 
+<<<<<<< HEAD
+@lru_cache
+=======
 @lru_cache(maxsize=1024)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def extract_fieldnames(field):
 	from frappe.database.schema import SPECIAL_CHAR_PATTERN
 
@@ -678,7 +686,11 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 			tagcount = frappe.get_list(
 				doctype,
 				fields=[tag["name"], "count(*)"],
+<<<<<<< HEAD
+				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
+=======
 				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				group_by=tag["name"],
 				as_list=True,
 			)

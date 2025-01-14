@@ -200,7 +200,11 @@ def start_scheduler():
 	help="Dequeuing strategy to use",
 )
 def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=False, strategy=None):
+<<<<<<< HEAD
+	"""Start a backgrond worker"""
+=======
 	"""Start a background worker"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.utils.background_jobs import start_worker
 
 	start_worker(

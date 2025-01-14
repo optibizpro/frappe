@@ -29,6 +29,11 @@
 
 .form-section,
 .form-dashboard-section {
+<<<<<<< HEAD
+	margin: 0px;
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	.form-section-description {
 		max-width: var(--page-max-width);
 		margin: auto;
@@ -43,6 +48,11 @@
 		color: var(--text-color);
 		width: 100%;
 		padding: var(--padding-sm) var(--padding-md);
+<<<<<<< HEAD
+		margin: 0;
+		margin-bottom: var(--margin-sm);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		cursor: default;
 
 		.collapse-indicator {
@@ -250,7 +260,11 @@
 			background-color: var(--subtle-bg);
 			font-size: var(--text-xs);
 			padding: 0 var(--padding-sm);
+<<<<<<< HEAD
+			color: var(--gray-700);
+=======
 			color: var(--text-color);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			border-radius: var(--border-radius);
 			cursor: pointer;
 		}

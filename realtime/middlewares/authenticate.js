@@ -31,6 +31,22 @@ function authenticate_with_frappe(socket, next) {
 	socket.sid = cookies.sid;
 	socket.authorization_header = authorization_header;
 
+<<<<<<< HEAD
+	let auth_req = request.get(get_url(socket, "/api/method/frappe.realtime.get_user_info"));
+	if (cookies.sid) {
+		auth_req = auth_req.query({ sid: cookies.sid });
+	} else {
+		auth_req = auth_req.set("Authorization", authorization_header);
+	}
+
+	auth_req
+		.type("form")
+		.then((res) => {
+			socket.user = res.body.message.user;
+			socket.user_type = res.body.message.user_type;
+			socket.sid = cookies.sid;
+			socket.authorization_header = authorization_header;
+=======
 	socket.frappe_request = (path, args = {}, opts = {}) => {
 		let query_args = new URLSearchParams(args);
 		if (query_args.toString()) {
@@ -57,6 +73,7 @@ function authenticate_with_frappe(socket, next) {
 			socket.user = message.user;
 			socket.user_type = message.user_type;
 			socket.installed_apps = message.installed_apps;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			next();
 		})
 		.catch((e) => {

@@ -10,6 +10,8 @@
  "field_order": [
   "form_builder_tab",
   "form_builder",
+<<<<<<< HEAD
+=======
   "permissions_tab",
   "permissions",
   "restrict_to_domain",
@@ -21,6 +23,7 @@
   "column_break_nexu",
   "title_field",
   "allow_rename",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "settings_tab",
   "sb0",
   "module",
@@ -40,6 +43,10 @@
   "is_virtual",
   "queue_in_background",
   "description",
+<<<<<<< HEAD
+  "documentation",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "form_settings_section",
   "image_field",
   "timeline_field",
@@ -75,9 +82,17 @@
   "sender_field",
   "sender_name_field",
   "subject_field",
+<<<<<<< HEAD
+  "sb2",
+  "permissions",
+  "restrict_to_domain",
+  "read_only",
+  "in_create",
+=======
   "fields_tab",
   "fields_section",
   "fields",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "actions_section",
   "actions",
   "links_section",
@@ -94,6 +109,11 @@
   "advanced",
   "engine",
   "migration_hash",
+<<<<<<< HEAD
+  "fields_section",
+  "fields",
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "connections_tab"
  ],
  "fields": [
@@ -657,6 +677,8 @@
    "fieldname": "sender_name_field",
    "fieldtype": "Data",
    "label": "Sender Name Field"
+<<<<<<< HEAD
+=======
   },
   {
    "fieldname": "permissions_tab",
@@ -671,6 +693,7 @@
    "fieldname": "fields_tab",
    "fieldtype": "Tab Break",
    "label": "Fields"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   }
  ],
  "icon": "fa fa-bolt",
@@ -753,7 +776,11 @@
    "link_fieldname": "reference_doctype"
   }
  ],
+<<<<<<< HEAD
+ "modified": "2023-12-01 18:37:16.799471",
+=======
  "modified": "2024-11-30 16:09:21.536704",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "DocType",

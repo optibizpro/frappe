@@ -32,6 +32,7 @@ from frappe.utils import (
 	sbool,
 	split_emails,
 )
+from frappe.utils.deprecations import deprecated
 from frappe.utils.verified_command import get_signed_params
 
 
@@ -158,8 +159,13 @@ class EmailQueue(Document):
 		if not self.can_send_now():
 			return
 
+<<<<<<< HEAD
+		with SendMailContext(self, smtp_server_instance) as ctx:
+			ctx.fetch_smtp_server()
+=======
 		with SendMailContext(self, smtp_server_instance, frappe_mail_client) as ctx:
 			ctx.fetch_outgoing_server()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			message = None
 			for recipient in self.recipients:
 				if recipient.is_mail_sent():
@@ -168,6 +174,10 @@ class EmailQueue(Document):
 				message = ctx.build_message(recipient.recipient)
 				if method := get_hook_method("override_email_send"):
 					method(self, self.sender, recipient.recipient, message)
+<<<<<<< HEAD
+				else:
+					if not frappe.flags.in_test or frappe.flags.testing_email:
+=======
 				elif not frappe.flags.in_test or frappe.flags.testing_email:
 					if ctx.email_account_doc.service == "Frappe Mail":
 						is_newsletter = self.reference_doctype == "Newsletter"
@@ -178,6 +188,7 @@ class EmailQueue(Document):
 							is_newsletter=is_newsletter,
 						)
 					else:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						ctx.smtp_server.session.sendmail(
 							from_addr=self.sender,
 							to_addrs=recipient.recipient,
@@ -204,7 +215,11 @@ class EmailQueue(Document):
 
 		# Delete queue table
 		(
+<<<<<<< HEAD
+			frappe.qb.from_(email_queue).delete().where(email_queue.modified < (Now() - Interval(days=days)))
+=======
 			frappe.qb.from_(email_queue).delete().where(email_queue.creation < (Now() - Interval(days=days)))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).run()
 
 		# delete child tables, note that this has potential to leave some orphan
@@ -219,7 +234,19 @@ class EmailQueue(Document):
 
 from frappe.deprecation_dumpster import send_mail as _send_mail
 
+<<<<<<< HEAD
+@task(queue="short")
+@deprecated
+def send_mail(email_queue_name, smtp_server_instance: SMTPServer = None):
+	"""This is equivalent to EmailQueue.send.
+
+	This provides a way to make sending mail as a background job.
+	"""
+	record = EmailQueue.find(email_queue_name)
+	record.send(smtp_server_instance=smtp_server_instance)
+=======
 send_mail = task(queue="short")(_send_mail)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class SendMailContext:
@@ -231,12 +258,20 @@ class SendMailContext:
 	):
 		self.queue_doc: EmailQueue = queue_doc
 		self.smtp_server: SMTPServer = smtp_server_instance
+<<<<<<< HEAD
+=======
 		self.frappe_mail_client: FrappeMail = frappe_mail_client
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.sent_to_atleast_one_recipient = any(
 			rec.recipient for rec in self.queue_doc.recipients if rec.is_mail_sent()
 		)
 		self.email_account_doc = None
 
+<<<<<<< HEAD
+	def fetch_smtp_server(self):
+		self.email_account_doc = self.queue_doc.get_email_account(raise_error=True)
+		if not self.smtp_server:
+=======
 	def fetch_outgoing_server(self):
 		self.email_account_doc = self.queue_doc.get_email_account(raise_error=True)
 
@@ -244,6 +279,7 @@ class SendMailContext:
 			if not self.frappe_mail_client:
 				self.frappe_mail_client = self.email_account_doc.get_frappe_mail_client()
 		elif not self.smtp_server:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.smtp_server = self.email_account_doc.get_smtp_server()
 
 	def __enter__(self):
@@ -756,6 +792,11 @@ class QueueBuilder:
 		for r in final_recipients:
 			recipients = list(set([r, *self.final_cc(), *self.bcc]))
 			q = EmailQueue.new({**queue_data, **{"recipients": recipients}}, ignore_permissions=True)
+<<<<<<< HEAD
+			if not smtp_server_instance:
+				email_account = q.get_email_account(raise_error=True)
+				smtp_server_instance = email_account.get_smtp_server()
+=======
 			if not frappe_mail_client and not smtp_server_instance:
 				email_account = q.get_email_account(raise_error=True)
 
@@ -763,6 +804,7 @@ class QueueBuilder:
 					frappe_mail_client = email_account.get_frappe_mail_client()
 				else:
 					smtp_server_instance = email_account.get_smtp_server()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			with suppress(Exception):
 				q.send(smtp_server_instance=smtp_server_instance, frappe_mail_client=frappe_mail_client)

@@ -22,6 +22,7 @@ class ErrorLog(Document):
 		reference_name: DF.Data | None
 		seen: DF.Check
 		trace_id: DF.Data | None
+
 	# end: auto-generated types
 
 	def validate(self):

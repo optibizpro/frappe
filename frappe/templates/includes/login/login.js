@@ -303,6 +303,10 @@ frappe.ready(function () {
 		$("body .web-footer").show();
 	}
 
+	if (window.show_footer_on_login) {
+		$("body .web-footer").show();
+	}
+
 	$(".form-signup, .form-forgot, .form-login-with-email-link").removeClass("hide");
 	$(document).trigger('login_rendered');
 });
@@ -386,4 +390,8 @@ var continue_email = function (setup, prompt) {
 	}
 }
 
+<<<<<<< HEAD
 login.route();
+=======
+login.route();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

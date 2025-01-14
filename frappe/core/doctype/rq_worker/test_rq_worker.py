@@ -22,5 +22,9 @@ class TestRQWorker(IntegrationTestCase):
 		self.assertTrue(any("short" in w.queue_type for w in workers))
 
 	def test_worker_serialization(self):
+<<<<<<< HEAD
+		workers = RQWorker.get_list({})
+=======
 		workers = RQWorker.get_list()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.get_doc("RQ Worker", workers[0].name)

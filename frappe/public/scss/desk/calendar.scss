@@ -60,6 +60,15 @@ th.fc-col-header-cell {
 	}
 }
 
+<<<<<<< HEAD
+// .fc-highlight {
+// background-color: $light-yellow !important;
+// }
+
+.fc-event {
+	// border: 1px solid #E8DDFF; /* default BORDER color */
+	background-color: #e8ddff;
+=======
 .fc-event {
 	background-color: rgb(237, 246, 253);
 	border: none !important;
@@ -67,6 +76,7 @@ th.fc-col-header-cell {
 
 .fc-event-main .fc-event-time {
 	display: none;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 }
 
 .fc-time-grid-event {
@@ -134,7 +144,11 @@ th.fc-col-header-cell {
 	width: 80px;
 }
 
+<<<<<<< HEAD
+.fc-state-active {
+=======
 .fc-button-active {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	box-shadow: none !important;
 	background: var(--gray-500) !important;
 	color: var(--fg-color) !important;

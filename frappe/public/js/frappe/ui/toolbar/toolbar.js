@@ -20,7 +20,10 @@ frappe.ui.toolbar.Toolbar = class {
 		this.setup_awesomebar();
 		this.setup_notifications();
 		this.setup_help();
+<<<<<<< HEAD
+=======
 		this.setup_read_only_mode();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		this.setup_announcement_widget();
 		this.make();
 	}

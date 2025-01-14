@@ -12,7 +12,10 @@ import frappe
 from frappe.commands import get_site, pass_context
 from frappe.exceptions import SiteNotSpecifiedError
 from frappe.utils import CallbackManager
+<<<<<<< HEAD
+=======
 from frappe.utils.bench_helper import CliCtxObj
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 @click.command("new-site")
@@ -91,6 +94,35 @@ def new_site(
 
 	frappe.init(site, new_site=True)
 
+<<<<<<< HEAD
+	if no_mariadb_socket:
+		click.secho(
+			"--no-mariadb-socket is DEPRECATED; "
+			"use --mariadb-user-host-login-scope='%' (wildcard) or --mariadb-user-host-login-scope=<myhostscope>, instead. "
+			"The name of this option was misleading: it had nothing to do with sockets.",
+			fg="yellow",
+		)
+		mariadb_user_host_login_scope = "%"
+
+	_new_site(
+		db_name,
+		site,
+		db_root_username=db_root_username,
+		db_root_password=db_root_password,
+		admin_password=admin_password,
+		verbose=verbose,
+		install_apps=install_app,
+		source_sql=source_sql,
+		force=force,
+		db_password=db_password,
+		db_type=db_type,
+		db_socket=db_socket,
+		db_host=db_host,
+		db_port=db_port,
+		setup_db=setup_db,
+		mariadb_user_host_login_scope=mariadb_user_host_login_scope,
+	)
+=======
 	if site in frappe.get_all_apps():
 		click.secho(
 			f"Your bench has an app called {site}, please choose another name for the site.", fg="red"
@@ -105,6 +137,7 @@ def new_site(
 			fg="yellow",
 		)
 		mariadb_user_host_login_scope = "%"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	rollback_callback = CallbackManager()
 
@@ -367,7 +400,11 @@ def restore_backup(
 @click.option("--verbose", "-v", is_flag=True)
 @click.option("--encryption-key", help="Backup encryption key")
 @pass_context
+<<<<<<< HEAD
+def partial_restore(context, sql_file_path, verbose, encryption_key=None):
+=======
 def partial_restore(context: CliCtxObj, sql_file_path, verbose, encryption_key=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	from frappe.installer import is_partial, partial_restore
 	from frappe.utils.backups import decrypt_backup, get_or_generate_backup_encryption_key
 
@@ -377,7 +414,11 @@ def partial_restore(context: CliCtxObj, sql_file_path, verbose, encryption_key=N
 
 	site = get_site(context)
 	verbose = context.verbose or verbose
+<<<<<<< HEAD
+	frappe.init(site=site)
+=======
 	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.connect()
 	err, out = frappe.utils.execute_in_shell(f"file {sql_file_path}", check_exit_code=True)
 	if err:
@@ -430,9 +471,13 @@ def partial_restore(context: CliCtxObj, sql_file_path, verbose, encryption_key=N
 @click.option("--db-root-password", "--mariadb-root-password", help="Root password for MariaDB or PostgreSQL")
 @click.option("--yes", is_flag=True, default=False, help="Pass --yes to skip confirmation")
 @pass_context
+<<<<<<< HEAD
+def reinstall(context, admin_password=None, db_root_username=None, db_root_password=None, yes=False):
+=======
 def reinstall(
 	context: CliCtxObj, admin_password=None, db_root_username=None, db_root_password=None, yes=False
 ):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"Reinstall site ie. wipe all data and start over"
 	site = get_site(context)
 	_reinstall(site, admin_password, db_root_username, db_root_password, yes, verbose=context.verbose)
@@ -565,13 +610,21 @@ def list_apps(context: CliCtxObj, format):
 	help="Column to index. Multiple columns will create multi-column index in given order. To create a multiple, single column index, execute the command multiple times.",
 )
 @pass_context
+<<<<<<< HEAD
+def add_db_index(context, doctype, column):
+=======
 def add_db_index(context: CliCtxObj, doctype, column):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"Adds a new DB index and creates a property setter to persist it."
 	from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
 	columns = column  # correct naming
 	for site in context.sites:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		try:
 			frappe.db.add_index(doctype, columns)
@@ -642,7 +695,11 @@ def add_system_manager(context: CliCtxObj, email, first_name, last_name, send_we
 	import frappe.utils.user
 
 	for site in context.sites:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		try:
 			frappe.utils.user.add_system_manager(email, first_name, last_name, send_welcome_email, password)
@@ -669,7 +726,11 @@ def add_user_for_sites(
 	import frappe.utils.user
 
 	for site in context.sites:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		try:
 			add_new_user(email, first_name, last_name, user_type, send_welcome_email, password, add_role)
@@ -1312,7 +1373,11 @@ def build_search_index(context):
 @click.option("--days", type=int, help="Keep records for days")
 @click.option("--no-backup", is_flag=True, default=False, help="Do not backup the table")
 @pass_context
+<<<<<<< HEAD
+def clear_log_table(context, doctype, days, no_backup):
+=======
 def clear_log_table(context: CliCtxObj, doctype, days, no_backup):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""If any logtype table grows too large then clearing it with DELETE query
 	is not feasible in reasonable time. This command copies recent data to new
 	table and replaces current table with new smaller table.
@@ -1549,6 +1614,8 @@ def ensure_app_not_frappe(app: str) -> None:
 		sys.exit(1)
 
 
+<<<<<<< HEAD
+=======
 @click.command("bypass-patch")
 @click.argument("patch_name")
 @click.option("--yes", "-y", is_flag=True, default=False, help="Pass --yes to skip confirmation")
@@ -1576,6 +1643,7 @@ def bypass_patch(context: CliCtxObj, patch_name: str, yes: bool):
 			frappe.destroy()
 
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 commands = [
 	add_system_manager,
 	add_user_for_sites,

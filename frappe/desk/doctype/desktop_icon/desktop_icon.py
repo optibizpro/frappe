@@ -37,6 +37,7 @@ class DesktopIcon(Document):
 		reverse: DF.Check
 		standard: DF.Check
 		type: DF.Literal["module", "list", "link", "page", "query-report"]
+
 	# end: auto-generated types
 
 	def validate(self):

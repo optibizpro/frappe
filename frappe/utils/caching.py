@@ -1,11 +1,20 @@
 # Copyright (c) 2022, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. Check LICENSE
 
+<<<<<<< HEAD
+import datetime
+import json
+from collections import defaultdict
+from collections.abc import Callable
+=======
 import time
 from collections import defaultdict
 from collections.abc import Callable
 from contextlib import suppress
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from functools import wraps
+
+import pytz
 
 import frappe
 
@@ -111,7 +120,11 @@ def site_cache(ttl: int | None = None, maxsize: int | None = None) -> Callable:
 
 		if ttl is not None and not callable(ttl):
 			func.ttl = ttl
+<<<<<<< HEAD
+			func.expiration = datetime.datetime.now(pytz.UTC) + datetime.timedelta(seconds=func.ttl)
+=======
 			func.expiration = time.monotonic() + func.ttl
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if maxsize is not None and not callable(maxsize):
 			func.maxsize = maxsize
@@ -122,7 +135,13 @@ def site_cache(ttl: int | None = None, maxsize: int | None = None) -> Callable:
 			if not site:
 				return func(*args, **kwargs)
 
+<<<<<<< HEAD
+				if hasattr(func, "ttl") and datetime.datetime.now(pytz.UTC) >= func.expiration:
+					func.clear_cache()
+					func.expiration = datetime.datetime.now(pytz.UTC) + datetime.timedelta(seconds=func.ttl)
+=======
 			arguments_key = f"{site}::{__generate_request_cache_key(args, kwargs)}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			if hasattr(func, "ttl") and time.monotonic() >= func.expiration:
 				func.clear_cache()
@@ -180,6 +199,10 @@ def redis_cache(ttl: int | None = 3600, user: str | bool | None = None, shared: 
 		@wraps(func)
 		def redis_cache_wrapper(*args, **kwargs):
 			func_call_key = func_key + "::" + str(__generate_request_cache_key(args, kwargs))
+<<<<<<< HEAD
+			if frappe.cache.exists(func_call_key, user=user, shared=shared):
+				return frappe.cache.get_value(func_call_key, user=user, shared=shared)
+=======
 			cached_val = frappe.cache.get_value(func_call_key, user=user, shared=shared)
 			if cached_val is not None:
 				return cached_val
@@ -189,6 +212,7 @@ def redis_cache(ttl: int | None = 3600, user: str | bool | None = None, shared: 
 			if frappe.cache.exists(func_call_key, user=user, shared=shared):
 				return None
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			val = func(*args, **kwargs)
 			ttl = getattr(func, "ttl", 3600)
 			frappe.cache.set_value(func_call_key, val, expires_in_sec=ttl, user=user, shared=shared)

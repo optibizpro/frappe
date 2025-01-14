@@ -189,10 +189,14 @@
 					@toggle_image_cropper="toggle_image_cropper(i)"
 				/>
 			</div>
+<<<<<<< HEAD
+			<div class="flex align-center" v-if="show_upload_button && currently_uploading === -1">
+=======
 			<div
 				class="flex align-items-center justify-content-end"
 				v-if="show_upload_button && currently_uploading === -1"
 			>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				<button class="btn btn-primary btn-sm margin-right" @click="() => upload_files()">
 					<span v-if="files.length === 1">
 						{{ __("Upload file") }}
@@ -201,6 +205,12 @@
 						{{ __("Upload {0} files", [files.length]) }}
 					</span>
 				</button>
+<<<<<<< HEAD
+				<div class="text-muted text-medium">
+					{{ __("Click on the lock icon to toggle public/private") }}
+				</div>
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			</div>
 		</div>
 		<ImageCropper
@@ -276,6 +286,8 @@ const props = defineProps({
 	upload_notes: {
 		default: null, // "Images or video, upto 2MB"
 	},
+<<<<<<< HEAD
+=======
 	allow_web_link: {
 		default: true,
 	},
@@ -288,6 +300,7 @@ const props = defineProps({
 	allow_toggle_optimize: {
 		default: true,
 	},
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 
 // variables
@@ -651,11 +664,16 @@ function upload_file(file, i) {
 			form_data.append("library_file_name", file.library_file_name);
 		}
 
+<<<<<<< HEAD
+		if (props.doctype && props.docname) {
+			form_data.append("doctype", props.doctype);
+=======
 		if (props.doctype) {
 			form_data.append("doctype", props.doctype);
 		}
 
 		if (props.docname) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			form_data.append("docname", props.docname);
 		}
 

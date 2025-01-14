@@ -33,6 +33,7 @@ class LetterHead(Document):
 		is_default: DF.Check
 		letter_head_name: DF.Data
 		source: DF.Literal["Image", "HTML"]
+
 	# end: auto-generated types
 
 	def before_insert(self):

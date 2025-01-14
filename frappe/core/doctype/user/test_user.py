@@ -22,9 +22,14 @@ from frappe.core.doctype.user.user import (
 from frappe.desk.notifications import extract_mentions
 from frappe.frappeclient import FrappeClient
 from frappe.model.delete_doc import delete_doc
+<<<<<<< HEAD
+from frappe.tests.test_api import FrappeAPITestCase
+from frappe.tests.utils import FrappeTestCase, change_settings
+=======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.classes.context_managers import change_settings
 from frappe.tests.test_api import FrappeAPITestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import get_url
 
 user_module = frappe.core.doctype.user.user
@@ -211,9 +216,19 @@ class TestUser(IntegrationTestCase):
 				frappe.exceptions.ValidationError, handle_password_test_fail, result
 			)  # test backwards compatibility
 
+<<<<<<< HEAD
+		# Score 1; should now fail
+		result = test_password_strength("bee2ve")
+		self.assertEqual(result["feedback"]["password_policy_validation_passed"], False)
+		self.assertRaises(frappe.exceptions.ValidationError, handle_password_test_fail, result["feedback"])
+		self.assertRaises(
+			frappe.exceptions.ValidationError, handle_password_test_fail, result
+		)  # test backwards compatibility
+=======
 			# Score 4; should pass
 			result = test_password_strength("Eastern_43A1W")
 			self.assertEqual(result["feedback"]["password_policy_validation_passed"], True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			# test password strength while saving user with new password
 			user = frappe.get_doc("User", "test@example.com")
@@ -285,7 +300,11 @@ class TestUser(IntegrationTestCase):
 		"""
 		self.assertListEqual(extract_mentions(comment), ["test@example.com", "test1@example.com"])
 
+<<<<<<< HEAD
+	@change_settings("System Settings", commit=True, password_reset_limit=1)
+=======
 	@IntegrationTestCase.change_settings("System Settings", commit=True, password_reset_limit=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_rate_limiting_for_reset_password(self):
 		url = get_url()
 		data = {"cmd": "frappe.core.doctype.user.user.reset_password", "user": "test@test.com"}
@@ -364,7 +383,11 @@ class TestUser(IntegrationTestCase):
 				"/signup",
 			)
 
+<<<<<<< HEAD
+	@change_settings("System Settings", password_reset_limit=6)
+=======
 	@IntegrationTestCase.change_settings("System Settings", password_reset_limit=6)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_reset_password(self):
 		from frappe.auth import CookieManager, LoginManager
 		from frappe.utils import set_request
@@ -450,7 +473,11 @@ class TestUser(IntegrationTestCase):
 			sorted(m.get("module_name") for m in get_modules_from_all_apps()),
 		)
 
+<<<<<<< HEAD
+	@change_settings("System Settings", reset_password_link_expiry_duration=1)
+=======
 	@IntegrationTestCase.change_settings("System Settings", reset_password_link_expiry_duration=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_reset_password_link_expiry(self):
 		new_password = "new_password"
 		frappe.set_user("testpassword@example.com")

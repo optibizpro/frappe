@@ -23,10 +23,14 @@ from typing import TypedDict
 
 from werkzeug.test import Client
 
+<<<<<<< HEAD
+=======
 from frappe.deprecation_dumpster import gzip_compress, gzip_decompress, make_esc
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 # utility functions like cint, int, flt, etc.
 from frappe.utils.data import *
+from frappe.utils.deprecations import deprecated
 from frappe.utils.html_utils import sanitize_html
 
 EMAIL_NAME_PATTERN = re.compile(r"[^A-Za-z0-9\u00C0-\u024F\/\_\' ]+")
@@ -284,11 +288,14 @@ def has_gravatar(email: str) -> str:
 
 
 def get_gravatar_url(email: str, default: Literal["mm", "404"] = "mm") -> str:
+<<<<<<< HEAD
+=======
 	"""Return gravatar URL for the given email.
 
 	If `default` is set to "404", gravatar URL will return 404 if no avatar is found.
 	If `default` is set to "mm", a placeholder image will be returned.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	hexdigest = hashlib.md5(frappe.as_unicode(email).encode("utf-8"), usedforsecurity=False).hexdigest()
 	return f"https://secure.gravatar.com/avatar/{hexdigest}?d={default}&s=200"
 
@@ -368,7 +375,13 @@ def log(event, details):
 
 
 def dict_to_str(args: dict[str, Any], sep: str = "&") -> str:
+<<<<<<< HEAD
+	"""
+	Converts a dictionary to URL
+	"""
+=======
 	"""Convert a dictionary to URL."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return sep.join(f"{k!s}=" + quote(str(args[k] or "")) for k in list(args))
 
 
@@ -881,6 +894,37 @@ def call(fn, *args, **kwargs):
 	return json.loads(frappe.as_json(frappe.call(fn, *args, **kwargs)))
 
 
+<<<<<<< HEAD
+# Following methods are aken as-is from Python 3 codebase
+# since gzip.compress and gzip.decompress are not available in Python 2.7
+
+
+@deprecated
+def gzip_compress(data, compresslevel=9):
+	"""Compress data in one shot and return the compressed string.
+	Optional argument is the compression level, in range of 0-9.
+	"""
+	from gzip import GzipFile
+
+	buf = io.BytesIO()
+	with GzipFile(fileobj=buf, mode="wb", compresslevel=compresslevel) as f:
+		f.write(data)
+	return buf.getvalue()
+
+
+@deprecated
+def gzip_decompress(data):
+	"""Decompress a gzip compressed string in one shot.
+	Return the decompressed string.
+	"""
+	from gzip import GzipFile
+
+	with GzipFile(fileobj=io.BytesIO(data)) as f:
+		return f.read()
+
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def get_safe_filters(filters):
 	try:
 		filters = json.loads(filters)

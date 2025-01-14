@@ -75,7 +75,12 @@ def get_permission_query_conditions(user):
 		.where(WorkflowActionPermittedRole.role.isin(roles))
 	).get_sql()
 
+<<<<<<< HEAD
+	return f"""(`tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+		or `tabWorkflow Action`.`user`={frappe.db.escape(user)})
+=======
 	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		and `tabWorkflow Action`.`status`='Open'
 	"""
 

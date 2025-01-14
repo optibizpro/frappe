@@ -375,6 +375,7 @@ class DashboardChart(Document):
 		value_based_on: DF.Literal[None]
 		x_field: DF.Literal[None]
 		y_axis: DF.Table[DashboardChartField]
+
 	# end: auto-generated types
 
 	def on_update(self):

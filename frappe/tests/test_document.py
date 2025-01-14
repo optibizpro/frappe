@@ -9,7 +9,11 @@ from frappe.app import make_form_dict
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.doctype.note.note import Note
 from frappe.model.naming import make_autoname, parse_naming_series, revert_series_if_last
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, timeout
+=======
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils import cint, now_datetime, set_request
 from frappe.website.serve import get_response
 

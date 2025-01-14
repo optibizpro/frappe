@@ -119,8 +119,13 @@ class Engine:
 		if filters is None:
 			return
 
+<<<<<<< HEAD
+		if isinstance(filters, str | int):
+			filters = {"name": str(filters)}
+=======
 		if isinstance(filters, FilterValue):
 			filters = {"name": convert_to_value(filters)}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if isinstance(filters, Criterion):
 			self.query = self.query.where(filters)
@@ -129,11 +134,19 @@ class Engine:
 			self.apply_dict_filters(filters)
 
 		elif isinstance(filters, list | tuple):
+<<<<<<< HEAD
+			if all(isinstance(d, str | int) for d in filters) and len(filters) > 0:
+				self.apply_dict_filters({"name": ("in", filters)})
+			else:
+				for filter in filters:
+					if isinstance(filter, str | int | Criterion | dict):
+=======
 			if all(isinstance(d, FilterValue) for d in filters) and len(filters) > 0:
 				self.apply_dict_filters({"name": ("in", tuple(convert_to_value(f) for f in filters))})
 			else:
 				for filter in filters:
 					if isinstance(filter, FilterValue | Criterion | dict):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						self.apply_filters(filter)
 					elif isinstance(filter, list | tuple):
 						self.apply_list_filters(filter)
@@ -192,7 +205,11 @@ class Engine:
 
 		_value = convert_to_value(_value)
 
+<<<<<<< HEAD
+		elif not _value and isinstance(_value, list | tuple):
+=======
 		if not _value and isinstance(_value, list | tuple | set):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			_value = ("",)
 
 		# Nested set
@@ -276,11 +293,24 @@ class Engine:
 			return Function(func, *_args, alias=alias or None)
 
 	def sanitize_fields(self, fields: str | list | tuple):
+<<<<<<< HEAD
+		def _sanitize_field(field: str):
+			if not isinstance(field, str):
+				return field
+			stripped_field = sqlparse.format(field, strip_comments=True, keyword_case="lower")
+			if self.is_mariadb:
+				return MARIADB_SPECIFIC_COMMENT.sub("", stripped_field)
+			return stripped_field
+
+		if isinstance(fields, list | tuple):
+			return [_sanitize_field(field) for field in fields]
+=======
 		if isinstance(fields, list | tuple):
 			return [
 				_sanitize_field(field, self.is_mariadb) if isinstance(field, str) else field
 				for field in fields
 			]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		elif isinstance(fields, str):
 			return _sanitize_field(fields, self.is_mariadb)
 		return fields

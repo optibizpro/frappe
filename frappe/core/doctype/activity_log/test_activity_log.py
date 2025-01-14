@@ -7,6 +7,9 @@ from frappe.auth import CookieManager, LoginManager
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 
+<<<<<<< HEAD
+class TestActivityLog(FrappeTestCase):
+=======
 class UnitTestActivityLog(UnitTestCase):
 	"""
 	Unit tests for ActivityLog.
@@ -17,6 +20,7 @@ class UnitTestActivityLog(UnitTestCase):
 
 
 class TestActivityLog(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def setUp(self) -> None:
 		frappe.set_user("Administrator")
 

@@ -211,7 +211,11 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 	retval = None
 
 	if is_async:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		if os.environ.get("CI"):
 			frappe.flags.in_test = True
@@ -225,9 +229,12 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 	else:
 		method_name = f"{method.__module__}.{method.__qualname__}"
 
+<<<<<<< HEAD
+=======
 	actual_func_name = kwargs.get("job_type") if "run_scheduled_job" in method_name else method_name
 	setproctitle.setproctitle(f"rq: Started running {actual_func_name} at {time.time()}")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.local.job = frappe._dict(
 		site=site,
 		method=method_name,
@@ -295,13 +302,21 @@ def start_worker(
 	rq_password: str | None = None,
 	burst: bool = False,
 	strategy: DequeueStrategy | None = DequeueStrategy.DEFAULT,
+<<<<<<< HEAD
+) -> None:  # pragma: no cover
+=======
 ) -> NoReturn:  # pragma: no cover
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Wrapper to start rq worker. Connects to redis and monitors these queues."""
 
 	if not strategy:
 		strategy = DequeueStrategy.DEFAULT
 
 	_start_sentry()
+<<<<<<< HEAD
+	_freeze_gc()
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	with frappe.init_site():
 		# empty init is required to get redis_queue from common_site_config.json
@@ -383,12 +398,23 @@ def start_worker_pool(
 	# If gc.freeze is done then importing modules before forking allows us to share the memory
 	import frappe.database.query  # sqlparse and indirect imports
 	import frappe.query_builder  # pypika
+<<<<<<< HEAD
+	import frappe.utils.data  # common utils
+	import frappe.utils.safe_exec
+	import frappe.utils.typing_validations  # any whitelisted method uses this
+	import frappe.website.path_resolver  # all the page types and resolver
+
+	# end: module pre-loading
+
+	_freeze_gc()
+=======
 	import frappe.utils  # common utils
 	import frappe.utils.safe_exec
 	import frappe.utils.scheduler
 	import frappe.utils.typing_validations  # any whitelisted method uses this
 	import frappe.website.path_resolver  # all the page types and resolver
 	# end: module pre-loading
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	with frappe.init_site():
 		redis_connection = get_redis_conn()

@@ -40,6 +40,7 @@ class GoogleDrive(Document):
 		last_backup_on: DF.Datetime | None
 		refresh_token: DF.Data | None
 		send_email_for_successful_backup: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):

@@ -40,10 +40,17 @@ AUTOMATIC_ROLES = (GUEST_ROLE, ALL_USER_ROLE, SYSTEM_USER_ROLE, ADMIN_ROLE)
 def print_has_permission_check_logs(func):
 	@functools.wraps(func)
 	def inner(*args, **kwargs):
+<<<<<<< HEAD
+		raise_exception = kwargs.get("raise_exception", True)
+		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
+
+		if raise_exception:
+=======
 		print_logs = kwargs.get("print_logs", True)
 		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
 
 		if print_logs:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.flags["has_permission_check_logs"] = []
 
 		result = func(*args, **kwargs)
@@ -53,7 +60,11 @@ def print_has_permission_check_logs(func):
 		if not result and self_perm_check and print_logs:
 			msgprint(("<br>").join(frappe.flags.get("has_permission_check_logs", [])))
 
+<<<<<<< HEAD
+		if raise_exception:
+=======
 		if print_logs:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.flags.pop("has_permission_check_logs", None)
 		return result
 
@@ -81,7 +92,10 @@ def has_permission(
 	user=None,
 	*,
 	parent_doctype=None,
+<<<<<<< HEAD
+=======
 	print_logs=True,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	debug=False,
 ) -> bool:
 	"""Return True if user has permission `ptype` for given `doctype`.
@@ -114,6 +128,9 @@ def has_permission(
 		doctype = doc.doctype
 
 	if frappe.is_table(doctype):
+<<<<<<< HEAD
+		return has_child_permission(doctype, ptype, doc, user, raise_exception, parent_doctype, debug=debug)
+=======
 		return has_child_permission(
 			doctype,
 			ptype,
@@ -123,6 +140,7 @@ def has_permission(
 			debug=debug,
 			print_logs=print_logs,
 		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	meta = frappe.get_meta(doctype)
 
@@ -444,9 +462,16 @@ def has_controller_permissions(doc, ptype, user=None, debug=False) -> bool:
 	for method in reversed(methods):
 		controller_permission = frappe.call(method, doc=doc, ptype=ptype, user=user, debug=debug)
 		debug and _debug_log(f"Controller permission check from {method}: {controller_permission}")
+<<<<<<< HEAD
+		if controller_permission is not None:
+			return bool(controller_permission)
+
+	# None of the controller hooks returned anything conclusive
+=======
 		if not controller_permission:
 			return bool(controller_permission)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return True
 
 
@@ -754,7 +779,10 @@ def has_child_permission(
 	parent_doctype=None,
 	*,
 	debug=False,
+<<<<<<< HEAD
+=======
 	print_logs=True,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 ) -> bool:
 	debug and _debug_log("This doctype is a child table, permissions will be checked on parent.")
 	if isinstance(child_doc, str):
@@ -826,7 +854,11 @@ def has_child_permission(
 		ptype=ptype,
 		doc=child_doc and getattr(child_doc, "parent_doc", child_doc.parent),
 		user=user,
+<<<<<<< HEAD
+		raise_exception=raise_exception,
+=======
 		print_logs=print_logs,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		debug=debug,
 	)
 

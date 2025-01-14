@@ -124,7 +124,10 @@ frappe.ui.form.Control = class BaseControl {
 			status === "Read" &&
 			!this.only_input &&
 			is_null(value) &&
+<<<<<<< HEAD
+=======
 			cint(frappe.boot.sysdefaults.hide_empty_read_only_fields) &&
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			!["HTML", "Image", "Button", "Geolocation"].includes(this.df.fieldtype)
 		) {
 			if (explain) console.log("By Hide Read-only, null fields: None");

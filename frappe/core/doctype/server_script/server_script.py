@@ -3,7 +3,10 @@
 
 from functools import partial
 from itertools import chain
+<<<<<<< HEAD
+=======
 from typing import TYPE_CHECKING
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 import frappe
 from frappe import _
@@ -16,9 +19,12 @@ from frappe.utils.safe_exec import (
 	is_safe_exec_enabled,
 	safe_exec,
 )
+<<<<<<< HEAD
+=======
 
 if TYPE_CHECKING:
 	from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJobType
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 class ServerScript(Document):
@@ -80,6 +86,7 @@ class ServerScript(Document):
 		reference_doctype: DF.Link | None
 		script: DF.Code
 		script_type: DF.Literal["DocType Event", "Scheduler Event", "Permission Query", "API"]
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -127,6 +134,30 @@ class ServerScript(Document):
 			get_scheduled_job().update({"stopped": 1}).save()
 			return
 
+<<<<<<< HEAD
+		for scheduled_job in self.scheduled_jobs:
+			if bool(scheduled_job.stopped) != bool(self.disabled):
+				job = frappe.get_doc("Scheduled Job Type", scheduled_job.name)
+				job.stopped = self.disabled
+				job.save()
+
+	def sync_scheduler_events(self):
+		"""Create or update Scheduled Job Type documents for Scheduler Event Server Scripts"""
+		if not self.disabled and self.event_frequency and self.script_type == "Scheduler Event":
+			cron_format = self.cron_format if self.event_frequency == "Cron" else None
+			setup_scheduler_events(
+				script_name=self.name, frequency=self.event_frequency, cron_format=cron_format
+			)
+
+	def clear_scheduled_events(self):
+		"""Deletes existing scheduled jobs by Server Script if self.event_frequency or self.cron_format has changed"""
+		if (
+			self.script_type == "Scheduler Event"
+			and (self.has_value_changed("event_frequency") or self.has_value_changed("cron_format"))
+		) or (self.has_value_changed("script_type") and self.script_type != "Scheduler Event"):
+			for scheduled_job in self.scheduled_jobs:
+				frappe.delete_doc("Scheduled Job Type", scheduled_job.name, delete_permanently=1)
+=======
 		if self.script_type != "Scheduler Event" or not (
 			self.has_value_changed("event_frequency")
 			or self.has_value_changed("cron_format")
@@ -145,6 +176,7 @@ class ServerScript(Document):
 		).save()
 
 		frappe.msgprint(_("Scheduled execution for script {0} has updated").format(self.name), alert=True)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def check_if_compilable_in_restricted_context(self):
 		"""Check compilation errors and send them back as warnings."""
@@ -221,7 +253,27 @@ def get_autocompletion_items():
 	"""Generate a list of autocompletion strings from the context dict
 	that is used while executing a Server Script.
 
+<<<<<<< HEAD
+		return frappe.cache.get_value(
+			"server_script_autocompletion_items",
+			generator=lambda: list(
+				chain.from_iterable(
+					get_keys_for_autocomplete(key, value, meta="utils")
+					for key, value in get_safe_globals().items()
+				),
+			),
+		)
+
+
+def setup_scheduler_events(script_name: str, frequency: str, cron_format: str | None = None):
+	"""Creates or Updates Scheduled Job Type documents based on the specified script name and frequency
+
+	Args:
+	        script_name (str): Name of the Server Script document
+	        frequency (str): Event label compatible with the Frappe scheduler
+=======
 	e.g., ["frappe.utils.cint", "frappe.get_all", ...]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""
 
 	return frappe.cache.get_value(

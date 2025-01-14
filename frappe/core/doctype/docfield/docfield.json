@@ -578,6 +578,8 @@
   },
   {
    "default": "0",
+<<<<<<< HEAD
+=======
    "depends_on": "eval:!in_list([\"Check\", \"Currency\", \"Float\", \"Int\", \"Percent\", \"Rating\", \"Select\", \"Table\", \"Table MultiSelect\"], doc.fieldtype)",
    "fieldname": "not_nullable",
    "fieldtype": "Check",
@@ -585,6 +587,7 @@
   },
   {
    "default": "0",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "depends_on": "eval: doc.hidden",
    "fieldname": "show_on_timeline",
    "fieldtype": "Check",
@@ -607,7 +610,11 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
+<<<<<<< HEAD
+ "modified": "2024-10-01 07:26:16.380090",
+=======
  "modified": "2024-10-15 23:33:03.926033",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "modified_by": "Administrator",
  "module": "Core",
  "name": "DocField",
