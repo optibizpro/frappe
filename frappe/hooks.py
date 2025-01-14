@@ -11,7 +11,7 @@ app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
 develop_version = "15.x.x-develop"
 app_home = "/app/build"
 
-app_email = "developers@frappe.io"
+app_email = "support@optibizpro.com"
 
 before_install = "frappe.utils.install.before_install"
 after_install = "frappe.utils.install.after_install"
