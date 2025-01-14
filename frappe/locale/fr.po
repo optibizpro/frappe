@@ -4,11 +4,15 @@ msgstr ""
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
 <<<<<<< HEAD
 "POT-Creation-Date: 2024-12-29 17:34+0000\n"
+<<<<<<< HEAD
 "PO-Revision-Date: 2024-12-29 21:29\n"
 =======
 "POT-Creation-Date: 2025-01-05 09:33+0000\n"
 "PO-Revision-Date: 2025-01-05 22:28\n"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+"PO-Revision-Date: 2025-01-13 00:35\n"
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 "Last-Translator: developers@frappe.io\n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -35763,7 +35767,7 @@ msgstr "Afficher le tableau de bord"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/core/doctype/access_log/access_log.json
 msgid "Show Document"
-msgstr "Afficher le document"
+msgstr ""
 
 <<<<<<< HEAD
 #: frappe/www/error.html:41 frappe/www/error.html:59

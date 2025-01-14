@@ -95,6 +95,15 @@ def new_site(
 	frappe.init(site, new_site=True)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if site in frappe.get_all_apps():
+		click.secho(
+			f"Your bench has an app called {site}, please choose another name for the site.", fg="red"
+		)
+		sys.exit(1)
+
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	if no_mariadb_socket:
 		click.secho(
 			"--no-mariadb-socket is DEPRECATED; "

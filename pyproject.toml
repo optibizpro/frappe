@@ -39,6 +39,7 @@ dependencies = [
     "email-reply-parser~=0.5.12",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "gunicorn~=22.0.0",
 =======
     "gunicorn~=23.0.0",
@@ -46,6 +47,9 @@ dependencies = [
 =======
     "gunicorn @ git+https://github.com/frappe/gunicorn@2f5b4923399d18c28e4221f6514792b5cc7d2c21",
 >>>>>>> 0804594c6c5460ff22f014116af83ef1a3e69654
+=======
+    "gunicorn @ git+https://github.com/frappe/gunicorn@2f5b4923399d18c28e4221f6514792b5cc7d2c21",
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
     "html5lib~=1.1",
     "ipython~=8.15.0",
     "ldap3~=2.9",

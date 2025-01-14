@@ -264,6 +264,7 @@ def insert_single_event(frequency: str, event: str, cron_format: str | None = No
 			doc.insert()
 
 
+<<<<<<< HEAD
 def clear_events(scheduler_events: dict):
 	def event_exists(event) -> bool:
 		if event.server_script:
@@ -280,6 +281,19 @@ def clear_events(scheduler_events: dict):
 
 	for event in frappe.get_all("Scheduled Job Type", fields=["*"]):
 		if not event_exists(event):
+=======
+def clear_events(all_events: list):
+	for event in frappe.get_all(
+		"Scheduled Job Type", fields=["name", "method", "server_script", "scheduler_event"]
+	):
+		is_server_script = event.server_script
+		is_defined_in_hooks = event.method in all_events
+
+		if event.scheduler_event:
+			continue
+
+		if not (is_defined_in_hooks or is_server_script):
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 			frappe.delete_doc("Scheduled Job Type", event.name)
 
 
