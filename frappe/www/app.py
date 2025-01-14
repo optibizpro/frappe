@@ -39,6 +39,7 @@ def get_context(context):
 
 	frappe.db.commit()
 
+<<<<<<< HEAD
 	boot_json = frappe.as_json(boot, indent=None, separators=(",", ":"))
 
 	# remove script tags from boot
@@ -56,6 +57,8 @@ def get_context(context):
 	if frappe.get_system_settings("enable_telemetry") and os.getenv("FRAPPE_SENTRY_DSN"):
 		include_js.append("sentry.bundle.js")
 =======
+=======
+>>>>>>> c72e91f4653d639300c4d8d8a7951c2aa8a95c2c
 	hooks = frappe.get_hooks()
 	app_include_js = hooks.get("app_include_js", []) + frappe.conf.get("app_include_js", [])
 	app_include_css = hooks.get("app_include_css", []) + frappe.conf.get("app_include_css", [])
@@ -75,7 +78,7 @@ def get_context(context):
 			"layout_direction": "rtl" if is_rtl() else "ltr",
 			"lang": frappe.local.lang,
 			"sounds": hooks["sounds"],
-			"boot": boot if context.get("for_mobile") else json.loads(boot_json),
+			"boot": boot,
 			"desk_theme": boot.get("desk_theme") or "Light",
 			"csrf_token": csrf_token,
 			"google_analytics_id": frappe.conf.get("google_analytics_id"),
