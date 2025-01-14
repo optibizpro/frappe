@@ -71,7 +71,10 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 		group_by=f"`tab{doctype}`.{field}",
 		fields=["count(*) as count", f"`{field}` as name"],
 		order_by="count desc",
+<<<<<<< HEAD
 		limit=1000,
+=======
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	)
 
 	if field == "owner":
@@ -89,6 +92,7 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 	else:
 		data = data[0:50]
 
+<<<<<<< HEAD
 	# Add in title if it's a link field and `show_title_field_in_link` is set
 	if (field_meta := meta.get_field(field)) and field_meta.fieldtype == "Link":
 		link_meta = frappe.get_meta(field_meta.options)
@@ -97,4 +101,6 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 			for item in data:
 				item.title = frappe.get_value(field_meta.options, item.name, title_field)
 
+=======
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	return data

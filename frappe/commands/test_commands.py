@@ -8,7 +8,10 @@ import os
 import secrets
 import shlex
 import signal
+<<<<<<< HEAD:frappe/commands/test_commands.py
 import string
+=======
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c:frappe/tests/test_commands.py
 import subprocess
 import sys
 import time
@@ -1008,6 +1011,7 @@ class TestSchedulerCLI(BaseTestCommands):
 		self.assertRegex(self.stdout, r"Scheduler is resumed for site .*")
 
 
+<<<<<<< HEAD:frappe/commands/test_commands.py
 class TestCLIImplementation(BaseTestCommands):
 	def test_missing_commands(self):
 		self.execute("bench --site {site} migrat")
@@ -1016,6 +1020,9 @@ class TestCLIImplementation(BaseTestCommands):
 
 
 class TestGunicornWorker(IntegrationTestCase):
+=======
+class TestGunicornWorker(FrappeTestCase):
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c:frappe/tests/test_commands.py
 	port = 8005
 
 	def spawn_gunicorn(self, args):

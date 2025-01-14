@@ -2,6 +2,7 @@
 # See license.txt
 
 # import frappe
+<<<<<<< HEAD
 from frappe.tests import IntegrationTestCase, UnitTestCase
 
 # On IntegrationTestCase, the doctype test records and all
@@ -26,4 +27,10 @@ class IntegrationTestSchedulerEvent(IntegrationTestCase):
 	Use this class for testing interactions between multiple components.
 	"""
 
+=======
+from frappe.tests.utils import FrappeTestCase
+
+
+class TestSchedulerEvent(FrappeTestCase):
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	pass
