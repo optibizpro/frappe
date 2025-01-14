@@ -95,9 +95,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://optibizpro.com/"
-Repository = "https://github.com/optibizpro/frappe.git"
-"Bug Reports" = "https://github.com/optibizpro/frappe/issues"
+Homepage = "https://frappeframework.com/"
+Repository = "https://github.com/frappe/frappe.git"
+"Bug Reports" = "https://github.com/frappe/frappe/issues"
 
 [project.optional-dependencies]
 dev = [
