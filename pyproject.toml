@@ -1,7 +1,7 @@
 [project]
 name = "frappe"
 authors = [
-    { name = "Frappe Technologies Pvt Ltd", email = "developers@frappe.io"}
+    { name = "Frappe Technologies Pvt Ltd", email = "support@optibizpro.com"}
 ]
 description = "Metadata driven, full-stack low code web framework"
 requires-python = ">=3.10,<3.14"
@@ -95,9 +95,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://frappeframework.com/"
-Repository = "https://github.com/frappe/frappe.git"
-"Bug Reports" = "https://github.com/frappe/frappe/issues"
+Homepage = "https://optibizpro.com/"
+Repository = "https://github.com/optibizpro/frappe.git"
+"Bug Reports" = "https://github.com/optibizpro/frappe/issues"
 
 [project.optional-dependencies]
 dev = [

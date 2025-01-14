@@ -9,17 +9,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/frappe/frappe.git"
+    "url": "git+https://github.com/optibizpro/frappe.git"
   },
   "author": "Frappe Technologies Pvt. Ltd.",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/frappe/frappe/issues"
+    "url": "https://github.com/optibizpro/frappe/issues"
   },
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://frappeframework.com",
+  "homepage": "https://optibizpro.com",
   "dependencies": {
     "@editorjs/editorjs": "^2.28.2",
     "@frappe/esbuild-plugin-postcss2": "^0.1.3",
