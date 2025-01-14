@@ -44,6 +44,7 @@ class ScheduledJobType(Document):
 		last_execution: DF.Datetime | None
 		method: DF.Data
 		next_execution: DF.Datetime | None
+		scheduler_event: DF.Link | None
 		server_script: DF.Link | None
 		stopped: DF.Check
 
@@ -266,6 +267,9 @@ def insert_single_event(frequency: str, event: str, cron_format: str | None = No
 def clear_events(scheduler_events: dict):
 	def event_exists(event) -> bool:
 		if event.server_script:
+			return True
+
+		if event.scheduler_event:
 			return True
 
 		freq = frappe.scrub(event.frequency)
