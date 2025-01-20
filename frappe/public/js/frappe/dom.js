@@ -62,7 +62,11 @@ frappe.dom = {
 		const body = doc.body;
 		let found = !!doc.head.innerHTML;
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		for (const tag of evil_tags) {
 			for (const element of body.getElementsByTagName(tag)) {
 				found = true;
@@ -310,7 +314,11 @@ frappe.timeout = (seconds) => {
 frappe.scrub = function (text, spacer = "_") {
 =======
 frappe.scrub = frappe.slug = function (text, spacer = "_") {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return text.replace(/ /g, spacer).toLowerCase();
 };
 
@@ -334,7 +342,11 @@ frappe.get_data_pill = (
 		color = frappe.get_palette(label);
 	}
 	style = `background-color: var(${color[0]}); color: var(${color[1]})`;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	let data_pill_wrapper = $(`
 		<button class="data-pill btn" style="${style}">
 			<div class="flex align-center ellipsis">
@@ -343,7 +355,11 @@ frappe.get_data_pill = (
 				<span class="pill-label ${image ? "ml-2" : ""}">${label}</span>
 =======
 				<span class="pill-label">${label} </span>
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			</div>
 		</button>
 	`);
@@ -354,7 +370,11 @@ frappe.get_data_pill = (
 				${frappe.utils.icon("close", "sm")}
 =======
 				${frappe.utils.icon("close", "sm", "es-icon")}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			</span>
 		`);
 		if (typeof remove_action === "function") {

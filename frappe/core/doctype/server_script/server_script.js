@@ -21,7 +21,11 @@ frappe.ui.form.on("Server Script", {
 =======
 		frappe
 			.call("frappe.core.doctype.server_script.server_script.get_autocompletion_items")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.then((r) => r.message)
 			.then((items) => {
 				frm.set_df_property("script", "autocompletions", items);

@@ -29,7 +29,11 @@
 =======
   "api_key",
   "api_secret",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "connected_app",
   "connected_user",
   "login_id_is_different",
@@ -46,7 +50,11 @@
 <<<<<<< HEAD
 =======
   "validate_ssl_certificate",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "use_starttls",
   "email_server",
   "incoming_port",
@@ -106,7 +114,11 @@
   },
   {
    "default": "0",
+<<<<<<< HEAD
+   "depends_on": "eval: !doc.backend_app_flow",
+=======
    "depends_on": "eval: doc.service != \"Frappe Mail\" && !doc.backend_app_flow",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fieldname": "login_id_is_different",
    "fieldtype": "Check",
    "hide_days": 1,
@@ -178,7 +190,11 @@
    "options": "\nGMail\nSendgrid\nSparkPost\nYahoo Mail\nOutlook.com\nYandex.Mail"
 =======
    "options": "\nFrappe Mail\nGMail\nSendgrid\nSparkPost\nYahoo Mail\nOutlook.com\nYandex.Mail"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "depends_on": "eval: doc.service != \"Frappe Mail\"",
@@ -227,7 +243,11 @@
 <<<<<<< HEAD
    "depends_on": "eval:!doc.domain && doc.enable_incoming",
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "description": "Ignore attachments over this size",
    "fetch_from": "domain.attachment_limit",
    "fieldname": "attachment_limit",
@@ -241,7 +261,11 @@
    "depends_on": "eval: doc.enable_incoming && !doc.use_imap",
 =======
    "depends_on": "eval: !doc.use_imap",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "description": "Append as communication against this DocType (must have fields: \"Sender\" and \"Subject\"). These fields can be defined in the email settings section of the appended doctype.",
    "fieldname": "append_to",
    "fieldtype": "Link",
@@ -603,8 +627,17 @@
 <<<<<<< HEAD
    "depends_on": "eval: doc.auth_method === \"OAuth\" && !doc.__islocal && !doc.__unsaved",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+   "depends_on": "eval: doc.auth_method === \"OAuth\" && !doc.__islocal && !doc.__unsaved && !doc.backend_app_flow",
+=======
    "depends_on": "eval: doc.auth_method === \"OAuth\" && doc.connected_app && doc.connected_user && !doc.backend_app_flow",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+   "depends_on": "eval: doc.auth_method === \"OAuth\" && doc.connected_app && doc.connected_user && !doc.backend_app_flow",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fieldname": "authorize_api_access",
    "fieldtype": "Button",
    "label": "Authorize API Access"
@@ -622,7 +655,11 @@
    "depends_on": "eval:!doc.domain && doc.enable_incoming && doc.use_imap && !doc.use_ssl",
 =======
    "depends_on": "eval: doc.use_imap && !doc.use_ssl",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fetch_from": "domain.use_starttls",
    "fieldname": "use_starttls",
    "fieldtype": "Check",
@@ -653,6 +690,8 @@
    "options": "User"
   },
   {
+<<<<<<< HEAD
+=======
    "default": "1",
    "depends_on": "use_ssl",
    "fetch_from": "domain.use_ssl",
@@ -721,6 +760,7 @@
    "mandatory_depends_on": "eval: doc.service == \"Frappe Mail\" && doc.auth_method == \"Basic\""
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "default": "0",
    "depends_on": "eval: doc.auth_method === \"OAuth\"",
    "fieldname": "backend_app_flow",
@@ -728,12 +768,20 @@
    "label": "Authenticate as Service Principal"
   },
   {
+<<<<<<< HEAD
+   "depends_on": "eval:!doc.domain && doc.enable_outgoing && doc.enable_incoming && doc.use_imap && doc.append_emails_to_sent_folder",
+=======
    "depends_on": "eval:!doc.domain && doc.enable_outgoing && doc.enable_incoming && doc.use_imap",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "fetch_from": "domain.sent_folder_name",
    "fieldname": "sent_folder_name",
    "fieldtype": "Data",
    "label": "Sent Folder Name"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "icon": "fa fa-inbox",
@@ -742,8 +790,17 @@
 <<<<<<< HEAD
  "modified": "2023-06-05 15:03:08.538819",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+ "modified": "2024-12-05 12:45:15.801652",
+=======
  "modified": "2024-12-04 23:30:37.622353",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-12-04 23:30:37.622353",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Email",
  "name": "Email Account",

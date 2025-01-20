@@ -6,8 +6,16 @@ import os
 from collections import namedtuple
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 from functools import partial
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from functools import partial
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe import _
@@ -20,8 +28,17 @@ from frappe.modules.utils import export_module_json, get_doc_module
 <<<<<<< HEAD
 from frappe.utils import add_to_date, cast, nowdate, validate_email_address
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from frappe.utils import add_to_date, cast, nowdate, validate_email_address
+=======
 from frappe.utils import add_to_date, cast, now_datetime, nowdate, validate_email_address
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe.utils import add_to_date, cast, now_datetime, nowdate, validate_email_address
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.jinja import validate_template
 from frappe.utils.safe_exec import get_safe_globals
 
@@ -44,8 +61,11 @@ class Notification(Document):
 		channel: DF.Literal["Email", "Slack", "System Notification", "SMS"]
 		condition: DF.Code | None
 		date_changed: DF.Literal[None]
+<<<<<<< HEAD
+=======
 		datetime_changed: DF.Literal[None]
 		datetime_last_run: DF.Datetime | None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		days_in_advance: DF.Int
 		document_type: DF.Link
 		enabled: DF.Check
@@ -174,7 +194,11 @@ class Notification(Document):
 		frappe.cache().hdel("notifications", self.document_type)
 =======
 		frappe.cache.hdel("notifications", self.document_type)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		path = export_module_json(self, self.is_standard, self.module)
 		if path and self.message:
 			extension = FORMATS.get(self.message_type, ".md")
@@ -446,7 +470,11 @@ def get_context(context):
 			print_letterhead=((attachments and attachments[0].get("print_letterhead")) or False),
 		)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		communication = None
 		# Add mail notification to communication list
@@ -599,7 +627,11 @@ def get_context(context):
 			# For sending messages to specified role
 			if recipient.receiver_by_role:
 				receiver_list += get_info_based_on_role(
+<<<<<<< HEAD
+					recipient.receiver_by_role, "mobile_no", ignore_permissions=True
+=======
 					recipient.receiver_by_role, field_on_user, ignore_permissions=True
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 				)
 
 		return list(set(receiver_list))
@@ -672,7 +704,11 @@ def get_context(context):
 		frappe.cache().hdel("notifications", self.document_type)
 =======
 		frappe.cache.hdel("notifications", self.document_type)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()
@@ -766,18 +802,33 @@ def evaluate_alert(doc: Document, alert, event=None):
 =======
 		message = frappe.get_traceback(with_context=True)
 		frappe.log_error(title=title, message=message)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		msg = f"<details><summary>{title}</summary>{message}</details>"
 		frappe.throw(msg, title=_("Error in Notification"))
 
 
 def get_context(doc):
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	Frappe = namedtuple("frappe", ["utils"])
 	return {
 		"doc": doc,
 		"nowdate": nowdate,
 		"frappe": Frappe(utils=get_safe_globals().get("frappe").get("utils")),
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	Frappe = namedtuple("Frappe", ["frappe"])
 	frappe = Frappe(frappe=get_safe_globals().get("frappe"))
@@ -786,6 +837,10 @@ def get_context(doc):
 		"nowdate": nowdate,
 		"frappe": frappe.frappe,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 
@@ -803,7 +858,11 @@ def get_assignees(doc):
 	return recipients
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def get_emails_from_template(template, context):
 	if not template:
@@ -821,6 +880,11 @@ def get_reference_name(doc):
 	return doc.parent if doc.meta.istable else doc.name
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def _parse_receiver_by_document_field(s):
@@ -832,3 +896,7 @@ def _parse_receiver_by_document_field(s):
 		data_field, child_field = fragments[0], None
 	return data_field, child_field
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

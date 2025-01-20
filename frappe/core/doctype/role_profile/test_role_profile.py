@@ -5,7 +5,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Role"]
 
@@ -25,7 +29,11 @@ class UnitTestRoleProfile(UnitTestCase):
 
 class TestRoleProfile(IntegrationTestCase):
 	def test_make_new_role_profiles(self):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.delete_doc_if_exists("Role Profile", "Test 1", force=1)
 		new_role_profile = frappe.get_doc(doctype="Role Profile", role_profile="Test 1").insert()
 

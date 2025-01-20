@@ -18,9 +18,20 @@ from frappe.query_builder import Column
 from frappe.tests.test_query_builder import db_type_is, run_only_if
 from frappe.tests.utils import FrappeTestCase
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import db_type_is, run_only_if
+from frappe.tests.utils import FrappeTestCase
+=======
 from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import db_type_is, run_only_if
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import db_type_is, run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.testutils import add_custom_field, clear_custom_fields
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["User", "Blog Post", "Blog Category", "Blogger"]
@@ -63,7 +74,11 @@ def enable_permlevel_restrictions():
 class TestReportview(FrappeTestCase):
 =======
 class TestDBQuery(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		frappe.set_user("Administrator")
 		return super().setUp()
@@ -129,7 +144,11 @@ class TestDBQuery(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 				"autoname": "Prompt",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"custom": 1,
 				"fields": [
 					{"label": "Title", "fieldname": "title", "fieldtype": "Data"},
@@ -151,7 +170,11 @@ class TestDBQuery(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 				"autoname": "Prompt",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"module": "Custom",
 				"custom": 1,
 				"fields": [
@@ -183,7 +206,11 @@ class TestDBQuery(IntegrationTestCase):
 				{"title": "parent 1 child record 1"},
 				{"title": "parent 1 child record 2"},
 			],
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			__newname="test_parent",
 		).insert(ignore_if_duplicate=True)
 		frappe.get_doc(
@@ -300,7 +327,11 @@ class TestDBQuery(IntegrationTestCase):
 			frappe.get_all("DocType", as_list=True), frappe.get_all("DocType", fields="name", as_list=True)
 		)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_none_filter(self):
 		query = frappe.qb.get_query("DocType", fields="name", filters={"restrict_to_domain": None})
 		sql = str(query).replace("`", "").replace('"', "")
@@ -543,7 +574,11 @@ class TestDBQuery(IntegrationTestCase):
 					"issingle",
 					"if (issingle=1, (select name from tabUser), count(name))",
 				],
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				limit_start=0,
 				limit_page_length=1,
 			)
@@ -558,7 +593,11 @@ class TestDBQuery(IntegrationTestCase):
 					"issingle",
 					"if(issingle=1, (select name from tabUser), count(name))",
 				],
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				limit_start=0,
 				limit_page_length=1,
 			)
@@ -889,7 +928,11 @@ class TestDBQuery(IntegrationTestCase):
 				filters={"published": 1},
 				fields=["name", "published"],
 				limit=1,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 			self.assertFalse("published" in data[0])
 			self.assertTrue("name" in data[0])
@@ -1124,10 +1167,18 @@ class TestDBQuery(IntegrationTestCase):
 			def get_list(args=None, limit_page_length=0, doctype=None):
 				from frappe.types.filter import FilterTuple
 
+<<<<<<< HEAD
+		with patch(
+			"frappe.controllers",
+			new={frappe.local.site: {"Virtual DocType": VirtualDocType}},
+		):
+			VirtualDocType.get_list = MagicMock()
+=======
 				# Backward compatibility
 				self.assertEqual(
 					args["filters"], [FilterTuple(doctype="Virtual DocType", fieldname="name", value="test")]
 				)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 				self.assertEqual(limit_page_length, 1)
 				self.assertEqual(doctype, "Virtual DocType")
@@ -1235,9 +1286,15 @@ class TestDBQuery(IntegrationTestCase):
 		count = frappe.get_list("Language", ["SUM(1)", "COUNT(*)"], as_list=1, order_by=None)[0]
 		self.assertEqual(count[0], frappe.db.count("Language"))
 		self.assertEqual(count[1], frappe.db.count("Language"))
+<<<<<<< HEAD
+
+
+class TestReportView(FrappeTestCase):
+=======
 
 
 class TestReportView(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	@run_only_if(db_type_is.MARIADB)  # TODO: postgres name casting is messed up
 	def test_get_count(self):
 		frappe.local.request = frappe._dict()
@@ -1312,10 +1369,31 @@ class TestReportView(IntegrationTestCase):
 		self.assertIsInstance(count, int)
 		self.assertLessEqual(count, limit)
 
+<<<<<<< HEAD
+		# doctype with space in name
+		limit = 2
+		frappe.local.form_dict = frappe._dict(
+			{
+				"doctype": "Role Profile",
+				"fields": [],
+				"distinct": "true",
+				"limit": limit,
+			}
+		)
+		count = execute_cmd("frappe.desk.reportview.get_count")
+		self.assertIsInstance(count, int)
+		self.assertLessEqual(count, limit)
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_reportview_get(self):
 		user = frappe.get_doc("User", "test@example.com")
 		add_child_table_to_blog_post()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			data = frappe.get_list(
 				"Blog Post", filters={"published": 1}, fields=["name", "`published`"], limit=1
@@ -1481,7 +1559,11 @@ class TestReportView(IntegrationTestCase):
 
 		response = execute_cmd("frappe.desk.reportview.get")
 		self.assertListEqual(response["keys"], ["field_label", "field_name", "_aggregate_column"])
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_reportview_get_permlevel_system_users(self):
 		with setup_patched_blog_post(), setup_test_user(set_user=True):
@@ -1874,7 +1956,11 @@ class TestReportView(FrappeTestCase):
 		self.assertListEqual(response["keys"], ["field_label", "field_name", "_aggregate_column"])
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def add_child_table_to_blog_post():
 	child_table = frappe.get_doc(

@@ -42,7 +42,11 @@ class AssetManager {
 		// if version is different then clear localstorage
 		if (window._version_number != localStorage.getItem("_version_number")) {
 			this.clear_local_storage();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			console.log("Cleared App Cache.");
 		}
 
@@ -56,7 +60,11 @@ class AssetManager {
 				frappe.assets.clear_local_storage();
 =======
 				this.clear_local_storage();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		} else {
 			this.clear_local_storage();
@@ -105,7 +113,11 @@ class AssetManager {
 				key.startsWith("_page:") ||
 				key.startsWith("_doctype:") ||
 				key.startsWith("preferred_breadcrumbs:")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			) {
 				localStorage.removeItem(key);
 			}
@@ -174,7 +186,11 @@ class AssetManager {
 	}
 
 	execute(items, callback) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// this is virtual page load, only get the the source
 		let me = this;
 
@@ -214,7 +230,11 @@ class AssetManager {
 
 			if (!path.includes(".bundle.") && !url.searchParams.get("v")) {
 				url.searchParams.append("v", version_string);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 			const response = await fetch(url.toString());
 			fetched_assets[path] = await response.text();
@@ -244,7 +264,11 @@ class AssetManager {
 	}
 
 	extn(src) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (src.indexOf("?") != -1) {
 			src = src.split("?").slice(-1)[0];
 		}
@@ -264,7 +288,11 @@ class AssetManager {
 =======
 	}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	bundled_asset(path, is_rtl = null) {
 		if (!path.startsWith("/assets") && path.includes(".bundle.")) {
 			if (path.endsWith(".css") && is_rtl) {
@@ -280,7 +308,11 @@ class AssetManager {
 =======
 	}
 }
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 function is_reload() {
 	try {
@@ -297,4 +329,8 @@ function is_reload() {
 =======
 
 frappe.assets = new AssetManager();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

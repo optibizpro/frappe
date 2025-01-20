@@ -9,9 +9,18 @@ import re
 from collections import Counter
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 from collections.abc import Mapping, Sequence
 from functools import cached_property
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from collections.abc import Mapping, Sequence
+from functools import cached_property
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 import frappe.defaults
@@ -36,8 +45,16 @@ from frappe.utils import (
 <<<<<<< HEAD
 	make_filter_tuple,
 	sanitize_column,
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 )
 from frappe.utils.data import DateTimeLikeObject, get_datetime, getdate, sbool
 
@@ -60,7 +77,11 @@ SPECIAL_FIELD_CHARS = frozenset(("(", "`", ".", "'", '"', "*"))
 =======
 SPECIAL_FIELD_CHARS = frozenset(("(", "`", ".", "'", '"', "*"))
 # XXX: These are just matching brackets to not confuse code formatters: ))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class DatabaseQuery:
@@ -98,7 +119,11 @@ class DatabaseQuery:
 		if doctype not in self._metas:
 			self._metas[doctype] = frappe.get_meta(doctype)
 		return self._metas[doctype]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@property
 	def query_tables(self):
@@ -224,7 +249,11 @@ class DatabaseQuery:
 			return controller.get_list(kwargs)
 =======
 			return frappe.call(controller.get_list, args=kwargs, **kwargs)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		self.columns = self.get_table_columns()
 
@@ -394,7 +423,11 @@ class DatabaseQuery:
 				linked_field = self.doctype_meta.get_field(linked_fieldname)
 =======
 				linked_field = self.get_meta(self.doctype).get_field(linked_fieldname)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				# this is not a link field
 				if not linked_field:
 					continue
@@ -598,7 +631,11 @@ class DatabaseQuery:
 				if f in fld and f not in self.columns:
 					to_remove.append(fld)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		self.fields[:] = [f for f in self.fields if f not in optional_fields or f in self.columns]
 		self.filters[:] = [
@@ -621,7 +658,11 @@ class DatabaseQuery:
 	def build_filter_conditions(self, filters, conditions: list, ignore_permissions=None):
 =======
 	def build_filter_conditions(self, filters: Filters, conditions: list, ignore_permissions=None):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"""build conditions from user filters"""
 		if ignore_permissions is not None:
 			self.flags.ignore_permissions = ignore_permissions
@@ -632,7 +673,113 @@ class DatabaseQuery:
 				conditions.append(sanitize_column(f))
 			else:
 				conditions.append(self.prepare_filter_condition(f))
+=======
+			conditions.append(self.prepare_filter_condition(f))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+	def remove_field(self, idx: int):
+		if self.as_list:
+			self.fields[idx] = None
+		else:
+			self.fields.pop(idx)
+
+	def apply_fieldlevel_read_permissions(self):
+		"""Apply fieldlevel read permissions to the query
+
+		Note: Does not apply to `frappe.model.core_doctype_list`
+
+		Remove fields that user is not allowed to read. If `fields=["*"]` is passed, only permitted fields will
+		be returned.
+
+		Example:
+		        - User has read permission only on `title` for DocType `Note`
+		        - Query: fields=["*"]
+		        - Result: fields=["title", ...] // will also include Frappe's meta field like `name`, `owner`, etc.
+		"""
+		from frappe.desk.reportview import extract_fieldnames
+
+		if self.flags.ignore_permissions:
+			return
+
+		asterisk_fields = []
+		permitted_fields = get_permitted_fields(
+			doctype=self.doctype,
+			parenttype=self.parent_doctype,
+			permission_type=self.permission_map.get(self.doctype),
+			ignore_virtual=True,
+		)
+
+		for i, field in enumerate(self.fields):
+			# field: 'count(distinct `tabPhoto`.name) as total_count'
+			# column: 'tabPhoto.name'
+			# field: 'count(`tabPhoto`.name) as total_count'
+			# column: 'tabPhoto.name'
+			columns = extract_fieldnames(field)
+			if not columns:
+				continue
+
+			column = columns[0]
+			if column == "*" and "*" in field:
+				if not in_function("*", field):
+					asterisk_fields.append(i)
+				continue
+
+			# handle pseudo columns
+			elif not column or column.isnumeric():
+				continue
+
+			# labels / pseudo columns or frappe internals
+			elif column[0] in {"'", '"'} or column in optional_fields:
+				continue
+
+			# handle child / joined table fields
+			elif "." in field:
+				table, column = column.split(".", 1)
+				ch_doctype = table
+
+				if ch_doctype in self.linked_table_aliases:
+					ch_doctype = self.linked_table_aliases[ch_doctype]
+
+				ch_doctype = ch_doctype.replace("`", "").replace("tab", "", 1)
+
+				if wrap_grave_quotes(table) in self.query_tables:
+					permitted_child_table_fields = get_permitted_fields(
+						doctype=ch_doctype, parenttype=self.doctype, ignore_virtual=True
+					)
+					if column in permitted_child_table_fields or column in optional_fields:
+						continue
+					else:
+						self.remove_field(i)
+				else:
+					raise frappe.PermissionError(ch_doctype)
+
+			elif column in permitted_fields:
+				continue
+
+			# field inside function calls / * handles things like count(*)
+			elif "(" in field:
+				if "*" in field:
+					continue
+				else:
+					for column in columns:
+						if column not in permitted_fields:
+							self.remove_field(i)
+							break
+					continue
+			# remove if access not allowed
+			else:
+				self.remove_field(i)
+
+		# handle * fields
+		j = 0
+		for i in asterisk_fields:
+			self.fields[i + j : i + j + 1] = permitted_fields
+			j = j + len(permitted_fields) - 1
+
+	def prepare_filter_condition(self, ft: FilterTuple) -> str:
+		"""Return a filter condition in the format:
+
+<<<<<<< HEAD
 	def remove_field(self, idx: int):
 		if self.as_list:
 			self.fields[idx] = None
@@ -747,6 +894,9 @@ class DatabaseQuery:
 	def prepare_filter_condition(self, f):
 		"""Returns a filter condition in the format:
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 			conditions.append(self.prepare_filter_condition(f))
 
 	def remove_field(self, idx: int):
@@ -852,6 +1002,7 @@ class DatabaseQuery:
 		"""Return a filter condition in the format:
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		ifnull(`tabDocType`.`fieldname`, fallback) operator "value"
 		"""
 
@@ -876,12 +1027,17 @@ class DatabaseQuery:
 
 		# primary key is never nullable, modified is usually indexed by default and always present
 		can_be_null = f.fieldname not in ("name", "modified", "creation")
+<<<<<<< HEAD
 
 		# prepare in condition
 		if f.operator.lower() in NestedSetHierarchy:
 			values = f.value or ""
 
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		meta = self.get_meta(f.doctype)
 		df = meta.get("fields", {"fieldname": f.fieldname})
 		df = df[0] if df else None
@@ -890,10 +1046,15 @@ class DatabaseQuery:
 		can_be_null = f.fieldname not in ("name", "modified", "creation")
 
 		value = None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		# prepare in condition
 		if f.operator.lower() in NestedSetHierarchy:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			# TODO: handle list and tuple
 			# if not isinstance(values, (list, tuple)):
 			# 	values = values.split(",")
@@ -958,7 +1119,11 @@ class DatabaseQuery:
 			can_be_null &= not getattr(df, "not_nullable", False)
 			if f.operator.lower() == "in":
 				can_be_null &= not f.value or any(v is None or v == "" for v in f.value)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if value is None:
 				values = f.value or ""
@@ -978,7 +1143,11 @@ class DatabaseQuery:
 			df = meta.get("fields", {"fieldname": f.fieldname})
 			df = df[0] if df else None
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if df and (
 				df.fieldtype in ("Check", "Float", "Int", "Currency", "Percent")
@@ -1038,7 +1207,11 @@ class DatabaseQuery:
 					can_be_null = True
 =======
 					can_be_null = not getattr(df, "not_nullable", False)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				value = ""
 
@@ -1126,7 +1299,11 @@ class DatabaseQuery:
 			not self.doctype_meta.istable
 			and not role_permissions.get("select")
 			and not role_permissions.get("read")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			and not self.flags.ignore_permissions
 			and not has_any_user_permission_for_doctype(self.doctype, self.user, self.reference_doctype)
 		):
@@ -1188,7 +1365,11 @@ class DatabaseQuery:
 <<<<<<< HEAD
 		doctype_link_fields = []
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		doctype_link_fields = self.doctype_meta.get_link_fields()
 
 		# append current doctype with fieldname as 'name' as first link field
@@ -1267,7 +1448,11 @@ class DatabaseQuery:
 		if self.order_by and self.order_by != DefaultOrderBy:
 =======
 		if self.order_by and self.order_by != "KEEP_DEFAULT_ORDERING":
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			args.order_by = self.order_by
 		else:
 			args.order_by = ""
@@ -1310,8 +1495,15 @@ class DatabaseQuery:
 					sort_order = (self.doctype_meta.sort_field and self.doctype_meta.sort_order) or "desc"
 					if self.order_by:
 						args.order_by = (
+<<<<<<< HEAD
+							f"`tab{self.doctype}`.`{sort_field or 'modified'}` {sort_order or 'desc'}"
+=======
 							f"`tab{self.doctype}`.`{sort_field or 'creation'}` {sort_order or 'desc'}"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						)
 
 	def validate_order_by_and_group_by(self, parameters: str):
@@ -1470,8 +1662,17 @@ def get_between_date_filter(value, df=None):
 <<<<<<< HEAD
 	fieldtype = df and df.fieldtype or "Datetime"
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	fieldtype = df and df.fieldtype or "Datetime"
+=======
 	fieldtype = (df and df.fieldtype) or "Datetime"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	fieldtype = (df and df.fieldtype) or "Datetime"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	from_date = frappe.utils.nowdate()
 	to_date = frappe.utils.nowdate()

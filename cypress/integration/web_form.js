@@ -10,7 +10,11 @@ context("Web Form", () => {
 				return frappe.xcall("frappe.tests.ui_test_helpers.clear_notes");
 =======
 				return frappe.xcall("frappe.tests.ui_test_helpers.prepare_webform_test");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 	});
 
@@ -97,7 +101,11 @@ context("Web Form", () => {
 		cy.wait(100);
 		cy.get(".section-head").contains("List Settings").scrollIntoView();
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.fill_field("list_title", "Note List");
 
 		cy.save();
@@ -115,7 +123,11 @@ context("Web Form", () => {
 		cy.get(".web-list-table thead th").contains("Name");
 =======
 		cy.get(".web-list-table thead th").contains("Sr.");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".web-list-table thead th").contains("Title");
 
 		cy.visit("/app/web-form/note");
@@ -152,7 +164,11 @@ context("Web Form", () => {
 <<<<<<< HEAD
 =======
 		cy.get(".web-list-table thead th").contains("Sr.");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".web-list-table thead th").contains("Title");
 		cy.get(".web-list-table thead th").contains("Public");
 		cy.get(".web-list-table thead th").contains("Content");
@@ -189,7 +205,11 @@ context("Web Form", () => {
 		);
 	});
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	it("Read Only", () => {
 		cy.login("Administrator");
 		cy.visit("/note");
@@ -200,7 +220,11 @@ context("Web Form", () => {
 		cy.get('.web-list-table tbody tr[id="Note 1"]').click();
 =======
 		cy.get(".web-list-table tbody tr:last").click();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get('.frappe-control[data-fieldname="title"] .control-input').should(
 			"have.css",
 			"display",
@@ -229,7 +253,11 @@ context("Web Form", () => {
 
 		cy.get(".web-form-actions a").contains("Edit").click();
 		cy.url().should("include", "/edit");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// Editable Field
 		cy.get_field("title").should("have.value", "Note 1");
@@ -275,7 +303,11 @@ context("Web Form", () => {
 =======
 		cy.get(".web-list-table tbody tr:nth-child(1) .list-col-checkbox input").click();
 		cy.get(".web-list-table tbody tr:nth-child(2) .list-col-checkbox input").click();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".web-list-actions button:visible").contains("Delete").click({ force: true });
 
 		cy.get(".web-list-actions button").contains("Delete").should("not.be.visible");
@@ -287,7 +319,11 @@ context("Web Form", () => {
 		cy.get('.web-list-table tbody tr[id="Guest Note 1"]').should("exist");
 =======
 		cy.get(".web-list-table tbody tr:nth-child(1)").should("not.exist");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	});
 
 	it("Navigate and Submit a WebForm", () => {
@@ -297,7 +333,11 @@ context("Web Form", () => {
 		cy.get(".web-form-actions a").contains("Edit Response").click();
 =======
 		cy.get(".web-form-actions a").contains("Edit").click();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		cy.fill_field("middle_name", "_Test User");
 
@@ -313,7 +353,11 @@ context("Web Form", () => {
 			cy.get(".web-form-actions a").contains("Edit Response").click();
 =======
 			cy.get(".web-form-actions a").contains("Edit").click();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			cy.fill_field("middle_name", "_Test User");
 

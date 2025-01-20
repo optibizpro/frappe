@@ -20,7 +20,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 		remove_empty_rows();
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$(frm.wrapper).addClass("validated-form");
 		if ((action !== "Save" || frm.is_dirty()) && check_mandatory()) {
 			_call({
@@ -90,7 +94,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 	};
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	var cancel = function () {
 		var args = {
 			doctype: frm.doc.doctype,
@@ -174,7 +182,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 					var message = __("Mandatory fields required in table {0}, Row {1}", [
 =======
 					message = __("Mandatory fields required in table {0}, Row {1}", [
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						table_label,
 						doc.idx,
 					]);
@@ -183,7 +195,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 					var message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
 =======
 					message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 				message = message + "<br><br><ul><li>" + error_fields.join("</li><li>") + "</ul>";
 				frappe.msgprint({

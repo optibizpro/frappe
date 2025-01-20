@@ -58,7 +58,11 @@ context("Attach Control", () => {
 		cy.get(".actions-btn-group > .btn").contains("Actions").click();
 		cy.get('.actions-btn-group > .dropdown-menu [data-label="Delete"]').click();
 		cy.click_modal_primary_button("Yes");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	});
 
 	it('Checking functionality for "Library" button in the "Attach" fieldtype', () => {

@@ -2,12 +2,23 @@
 # License: MIT. See LICENSE
 import frappe
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.config import get_modules_from_all_apps_for_user
 from frappe.core.doctype.user.test_user import test_user
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDashboard(FrappeTestCase):
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 from frappe.core.doctype.user.test_user import test_user
 from frappe.tests import IntegrationTestCase, UnitTestCase
@@ -25,6 +36,10 @@ class UnitTestDashboard(UnitTestCase):
 
 class TestDashboard(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_permission_query(self):
 		for user in ["Administrator", "test@example.com"]:
 			with self.set_user(user):

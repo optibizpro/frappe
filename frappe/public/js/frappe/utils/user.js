@@ -8,7 +8,11 @@ frappe.user_info = function (uid) {
 	let user_info;
 	if (!(frappe.boot.user_info && frappe.boot.user_info[uid])) {
 		user_info = { fullname: uid || "Unknown" };
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	} else {
 		user_info = frappe.boot.user_info[uid];
 	}

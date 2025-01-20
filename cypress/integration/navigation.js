@@ -27,7 +27,11 @@ context("Navigation", () => {
 		);
 		cy.visit(`/app/client-script/${encodeURIComponent("ABC#123")}`);
 		cy.title().should("eq", "ABC#123");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.go("back");
 		cy.title().should("eq", "Website");
 	});
@@ -36,7 +40,11 @@ context("Navigation", () => {
 	it.only("Navigate to previous page after login", () => {
 =======
 	it("Navigate to previous page after login", () => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.visit("/app/todo");
 		cy.get(".page-head").findByTitle("To Do").should("be.visible");
 		cy.clear_filters();

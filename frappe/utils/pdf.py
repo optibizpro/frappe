@@ -9,7 +9,11 @@ import subprocess
 <<<<<<< HEAD
 from distutils.version import LooseVersion
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from urllib.parse import parse_qs, urlparse
 
 import cssutils
@@ -27,10 +31,17 @@ from frappe.utils import cstr, scrub_urls
 <<<<<<< HEAD
 =======
 from frappe.utils.caching import redis_cache
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.jinja_globals import bundled_asset, is_rtl
+<<<<<<< HEAD
+=======
 
 cssutils.log.setLog(frappe.logger("cssutils"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 PDF_CONTENT_ERRORS = [
 	"ContentNotFoundError",
@@ -293,8 +304,17 @@ def _get_base64_image(src):
 <<<<<<< HEAD
 		filename = query.get("fid") and query["fid"][0] or None
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		filename = query.get("fid") and query["fid"][0] or None
+=======
 		filename = (query.get("fid") and query["fid"][0]) or None
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		filename = (query.get("fid") and query["fid"][0]) or None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		file = find_file_by_url(path, name=filename)
 		if not file or not file.is_private:
 			return

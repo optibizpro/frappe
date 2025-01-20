@@ -62,7 +62,11 @@ frappe.search.AwesomeBar = class AwesomeBar {
 				return $("<li></li>")
 					.data("item.autocomplete", d)
 					.html(`<a style="font-weight:normal" href="${target}">${html}</a>`)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					.get(0);
 			},
 			sort: function (a, b) {
@@ -141,7 +145,11 @@ frappe.search.AwesomeBar = class AwesomeBar {
 					window.open(item.route[0], "_blank");
 					return;
 				}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frappe.set_route(item.route);
 			}
 			$input.val("");
@@ -237,7 +245,11 @@ frappe.search.AwesomeBar = class AwesomeBar {
 =======
 				frappe.search.utils.get_executables(txt),
 				frappe.search.utils.get_marketplace_apps(txt)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			);
 		if (txt.charAt(0) === "#") {
 			options = frappe.tags.utils.get_tags(txt);
@@ -365,7 +377,11 @@ frappe.search.AwesomeBar = class AwesomeBar {
 			return num.toString().split(".")[1].length || 0;
 		}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var first = txt.substr(0, 1);
 		if (first == parseInt(first) || first === "(" || first === "=") {
 			if (first === "=") {
@@ -403,7 +419,11 @@ frappe.search.AwesomeBar = class AwesomeBar {
 					label: formatted_value,
 					value: __("{0} = {1}", [txt, rounded_val]),
 					match: rounded_val,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					index: 80,
 					default: "Calculator",
 					onclick: function () {

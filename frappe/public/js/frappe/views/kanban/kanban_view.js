@@ -147,8 +147,17 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 <<<<<<< HEAD
 		if (this.board.columns.length > 5) {
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		if (this.board.columns.filter((col) => col.status !== "Archived").length > 5) {
+=======
 		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.page.container.addClass("full-width");
 		}
 		this.setup_realtime_updates();
@@ -242,7 +251,11 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 				in_list(["Data", "Text", "Small Text", "Text Editor"], df.fieldtype) && !df.hidden;
 =======
 				["Data", "Text", "Small Text", "Text Editor"].includes(df.fieldtype) && !df.hidden;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if (is_valid_field && !title_field) {
 				// can be mapped to textarea

@@ -17,8 +17,17 @@ $.extend(frappe.contacts, {
 					frappe.new_doc("Address");
 				});
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				.on("click", () => new_record("Address", frm.doc));
+=======
 				.on("click", () => new_record("Address", frm));
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				.on("click", () => new_record("Address", frm));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		// render contact
@@ -31,8 +40,17 @@ $.extend(frappe.contacts, {
 					frappe.new_doc("Contact");
 				});
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				.on("click", () => new_record("Contact", frm.doc));
+=======
 				.on("click", () => new_record("Contact", frm));
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				.on("click", () => new_record("Contact", frm));
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	},
 	get_last_doc: function (frm) {
@@ -73,6 +91,16 @@ $.extend(frappe.contacts, {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+function new_record(doctype, source_doc) {
+	frappe.dynamic_link = {
+		doctype: source_doc.doctype,
+		doc: source_doc,
+		fieldname: "name",
+	};
+
+	return frappe.new_doc(doctype);
+=======
 function new_record(doctype, frm) {
 	frappe.dynamic_link = {
 		doctype: frm.doc.doctype,
@@ -92,5 +120,10 @@ function new_record(doctype, frm) {
 	} else {
 		frappe.new_doc(doctype);
 	}
-}
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

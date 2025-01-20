@@ -8,7 +8,11 @@ from frappe.permissions import ALL_USER_ROLE
 <<<<<<< HEAD
 from frappe.utils import cint
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class RolePermissionforPageandReport(Document):
@@ -26,6 +30,7 @@ class RolePermissionforPageandReport(Document):
 		report: DF.Link | None
 		roles: DF.Table[HasRole]
 		set_role_for: DF.Literal["", "Page", "Report"]
+
 	# end: auto-generated types
 
 	@frappe.whitelist()
@@ -97,7 +102,11 @@ class RolePermissionforPageandReport(Document):
 				"""update `tabReport` set prepared_report = %s
 				where name = %s""",
 				(self.enable_prepared_report, self.report),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 
 	def get_args(self, row=None):

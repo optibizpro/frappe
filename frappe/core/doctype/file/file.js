@@ -32,7 +32,11 @@ frappe.ui.form.on("File", {
 		if (frm.doc.file_url) {
 			frm.add_web_link(frm.doc.file_url, __("View file"));
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	preview_file: function (frm) {
@@ -47,7 +51,11 @@ frappe.ui.form.on("File", {
 					src="${frm.doc.file_url}"
 =======
 					src="${frappe.utils.escape_html(frm.doc.file_url)}"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					onerror="${frm.toggle_display("preview", false)}"
 				/>
 			</div>`);
@@ -58,7 +66,11 @@ frappe.ui.form.on("File", {
 					<source src="${frm.doc.file_url}">
 =======
 					<source src="${frappe.utils.escape_html(frm.doc.file_url)}">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					${__("Your browser does not support the video element.")}
 				</video>
 			</div>`);
@@ -73,7 +85,11 @@ frappe.ui.form.on("File", {
 						src="${frm.doc.file_url}" type="application/pdf"
 =======
 						src="${frappe.utils.escape_html(frm.doc.file_url)}" type="application/pdf"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					>
 				</object>
 			</div>`);
@@ -84,7 +100,11 @@ frappe.ui.form.on("File", {
 					<source src="${frm.doc.file_url}" type="audio/mpeg">
 =======
 					<source src="${frappe.utils.escape_html(frm.doc.file_url)}" type="audio/mpeg">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					${__("Your browser does not support the audio element.")}
 				</audio >
 			</div>`);
@@ -114,7 +134,11 @@ frappe.ui.form.on("File", {
 		document.body.appendChild(link);
 		link.click();
 		document.body.removeChild(link);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	optimize: function (frm) {

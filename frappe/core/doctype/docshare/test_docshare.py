@@ -8,7 +8,11 @@ from frappe.automation.doctype.auto_repeat.test_auto_repeat import create_submit
 from frappe.tests.utils import FrappeTestCase, change_settings
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["User"]
 
@@ -26,7 +30,11 @@ class UnitTestDocshare(UnitTestCase):
 
 
 class TestDocShare(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		self.user = "test@example.com"
 		self.event = frappe.get_doc(
@@ -92,7 +100,11 @@ class TestDocShare(IntegrationTestCase):
 		doc.delete(ignore_permissions=True)
 		with self.assertRaises(frappe.PermissionError):
 			frappe.get_list("Web Page")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_share_permission(self):
 		frappe.share.add("Event", self.event.name, self.user, write=1, share=1)
@@ -159,8 +171,17 @@ class TestDocShare(IntegrationTestCase):
 <<<<<<< HEAD
 		submittable_doc = frappe.get_doc(dict(doctype=doctype, test="test docshare with submit")).insert()
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		submittable_doc = frappe.get_doc(dict(doctype=doctype, test="test docshare with submit")).insert()
+=======
 		submittable_doc = frappe.get_doc(doctype=doctype, test="test docshare with submit").insert()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		submittable_doc = frappe.get_doc(doctype=doctype, test="test docshare with submit").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		frappe.set_user(self.user)
 		self.assertFalse(frappe.has_permission(doctype, "submit", user=self.user))
@@ -195,7 +216,11 @@ class TestDocShare(IntegrationTestCase):
 	@change_settings("System Settings", {"disable_document_sharing": 1})
 =======
 	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_share_disabled_add(self):
 		"Test if user loses share access on disabling share globally."
 		frappe.share.add("Event", self.event.name, self.user, share=1)  # Share as admin
@@ -211,7 +236,11 @@ class TestDocShare(IntegrationTestCase):
 	@change_settings("System Settings", {"disable_document_sharing": 1})
 =======
 	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_share_disabled_add_with_ignore_permissions(self):
 		frappe.share.add("Event", self.event.name, self.user, share=1)
 		frappe.set_user(self.user)
@@ -228,7 +257,11 @@ class TestDocShare(IntegrationTestCase):
 	@change_settings("System Settings", {"disable_document_sharing": 1})
 =======
 	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_share_disabled_set_permission(self):
 		frappe.share.add("Event", self.event.name, self.user, share=1)
 		frappe.set_user(self.user)
@@ -248,7 +281,11 @@ class TestDocShare(IntegrationTestCase):
 	@change_settings("System Settings", {"disable_document_sharing": 1})
 =======
 	@IntegrationTestCase.change_settings("System Settings", {"disable_document_sharing": 1})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_share_disabled_assign_to(self):
 		"""
 		Assigning a document to a user without access must not share the document,

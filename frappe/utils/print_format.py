@@ -4,7 +4,11 @@ import os
 <<<<<<< HEAD
 =======
 import uuid
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from io import BytesIO
 
 from pypdf import PdfWriter
@@ -16,7 +20,11 @@ from frappe.translate import print_language
 <<<<<<< HEAD
 from frappe.utils.deprecations import deprecated
 =======
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecated
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.pdf import get_pdf
 
 no_cache = 1
@@ -39,13 +47,67 @@ def download_multi_pdf(
 	letterhead: str | None = None,
 	options: str | None = None,
 ):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""
 	Calls _download_multi_pdf with the given parameters and returns the response
 	"""
 	return _download_multi_pdf(doctype, name, format, no_letterhead, letterhead, options)
+<<<<<<< HEAD
 
 
+@frappe.whitelist()
+def download_multi_pdf_async(
+	doctype: str | dict[str, list[str]],
+	name: str | list[str],
+	format: str | None = None,
+	no_letterhead: bool = False,
+	letterhead: str | None = None,
+	options: str | None = None,
+):
+	"""
+	Calls _download_multi_pdf with the given parameters in a background job, returns task ID
+	"""
+	task_id = str(uuid.uuid4())
+	if isinstance(doctype, dict):
+		doc_count = sum([len(doctype[dt]) for dt in doctype])
+	else:
+		doc_count = len(json.loads(name))
+
+	frappe.enqueue(
+		_download_multi_pdf,
+		doctype=doctype,
+		name=name,
+		task_id=task_id,
+		format=format,
+		no_letterhead=no_letterhead,
+		letterhead=letterhead,
+		options=options,
+		queue="long" if doc_count > 20 else "short",
+	)
+	frappe.local.response["http_status_code"] = http.HTTPStatus.CREATED
+	return {"task_id": task_id}
+
+
+def _download_multi_pdf(
+	doctype: str | dict[str, list[str]],
+	name: str | list[str],
+	format: str | None = None,
+	no_letterhead: bool = False,
+	letterhead: str | None = None,
+	options: str | None = None,
+	task_id: str | None = None,
+):
+	"""Return a PDF compiled by concatenating multiple documents.
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+
+<<<<<<< HEAD
+=======
 @frappe.whitelist()
 def download_multi_pdf_async(
 	doctype: str | dict[str, list[str]],
@@ -92,6 +154,7 @@ def _download_multi_pdf(
 
 	The documents can be from a single DocType or multiple DocTypes.
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	Note: The design may seem a little weird, but it  exists to ensure backward compatibility.
 	          The correct way to use this function is to pass a dict to doctype as described below
 
@@ -126,7 +189,11 @@ def _download_multi_pdf(
 	import json
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	pdf_writer = PdfWriter()
 
 	if isinstance(options, str):
@@ -180,7 +247,11 @@ def _download_multi_pdf(
 		if task_id is None:
 			frappe.local.response.filename = "{doctype}.pdf".format(
 				doctype=doctype.replace(" ", "-").replace("/", "-")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 
 	else:
@@ -218,11 +289,14 @@ def _download_multi_pdf(
 	frappe.local.response.type = "pdf"
 
 
+<<<<<<< HEAD
+=======
 @deprecated
 def read_multi_pdf(output: PdfWriter) -> bytes:
 	with BytesIO() as merged_pdf:
 		output.write(merged_pdf)
 		return merged_pdf.getvalue()
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 				count += 1
 
@@ -256,8 +330,22 @@ def read_multi_pdf(output: PdfWriter) -> bytes:
 			frappe.local.response.type = "pdf"
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+@deprecated
+def read_multi_pdf(output: PdfWriter) -> bytes:
+	with BytesIO() as merged_pdf:
+		output.write(merged_pdf)
+		return merged_pdf.getvalue()
+<<<<<<< HEAD
+=======
+=======
 from frappe.deprecation_dumpster import read_multi_pdf
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist(allow_guest=True)

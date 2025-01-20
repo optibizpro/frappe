@@ -12,8 +12,16 @@ from frappe.query_builder.utils import DocType
 from frappe.utils import cint, flt
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 from frappe.utils.modules import get_modules_from_all_apps_for_user
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe.utils.modules import get_modules_from_all_apps_for_user
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class NumberCard(Document):
@@ -44,6 +52,7 @@ class NumberCard(Document):
 		show_percentage_stats: DF.Check
 		stats_time_interval: DF.Literal["Daily", "Weekly", "Monthly", "Yearly"]
 		type: DF.Literal["Document Type", "Report", "Custom"]
+
 	# end: auto-generated types
 
 	def autoname(self):

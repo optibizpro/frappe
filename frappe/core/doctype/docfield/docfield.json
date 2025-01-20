@@ -79,7 +79,11 @@
 <<<<<<< HEAD
 =======
   "placeholder",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "oldfieldname",
   "oldfieldtype"
  ],
@@ -570,7 +574,11 @@
    "fieldtype": "Data",
    "label": "Documentation URL",
    "options": "URL"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "0",
@@ -588,6 +596,8 @@
   },
   {
    "default": "0",
+<<<<<<< HEAD
+=======
    "depends_on": "eval:!in_list([\"Check\", \"Currency\", \"Float\", \"Int\", \"Percent\", \"Rating\", \"Select\", \"Table\", \"Table MultiSelect\"], doc.fieldtype)",
    "fieldname": "not_nullable",
    "fieldtype": "Check",
@@ -595,6 +605,7 @@
   },
   {
    "default": "0",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "depends_on": "eval: doc.hidden",
    "fieldname": "show_on_timeline",
    "fieldtype": "Check",
@@ -606,7 +617,11 @@
    "label": "Placeholder"
   },
   {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "default": "0",
    "depends_on": "eval:['Attach', 'Attach Image'].includes(doc.fieldtype)",
    "fieldname": "make_attachment_public",
@@ -621,8 +636,17 @@
 <<<<<<< HEAD
  "modified": "2024-10-01 07:26:16.380090",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+ "modified": "2024-10-01 07:26:16.380090",
+=======
  "modified": "2024-10-15 23:33:03.926033",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-10-15 23:33:03.926033",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "DocField",

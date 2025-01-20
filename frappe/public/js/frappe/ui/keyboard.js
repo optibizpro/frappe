@@ -158,7 +158,11 @@ frappe.ui.keys.get_key = function (e) {
 		// add ctrl+ the key
 =======
 		// add shift+ the key
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		key = "shift+" + key;
 	}
 	if (e.altKey) {
@@ -194,7 +198,11 @@ frappe.ui.keys.add_shortcut({
 <<<<<<< HEAD
 =======
 		document.activeElement?.blur();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.app.trigger_primary_action();
 		e.preventDefault();
 		return false;
@@ -262,7 +270,11 @@ frappe.ui.keys.add_shortcut({
 });
 
 frappe.ui.keys.add_shortcut({
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	shortcut: "shift+/",
 	action: function () {
 		frappe.ui.keys.show_keyboard_shortcut_dialog();
@@ -278,7 +290,11 @@ frappe.ui.keys.add_shortcut({
 		$(".dropdown-help a").eq(0).click();
 =======
 		$(".dropdown-help button").eq(0).click();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 	description: __("Open Help"),
 });
@@ -332,7 +348,11 @@ frappe.ui.keys.on("ctrl+up", function (e) {
 	} else {
 		e.preventDefault();
 	}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });
 
 frappe.ui.keys.add_shortcut({

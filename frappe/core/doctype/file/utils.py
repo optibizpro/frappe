@@ -221,10 +221,20 @@ def extract_images_from_doc(doc: "Document", fieldname: str, is_private=True):
 <<<<<<< HEAD
 	content = extract_images_from_html(doc, content, is_private=(not doc.meta.make_attachments_public))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	content = extract_images_from_html(doc, content, is_private=(not doc.meta.make_attachments_public))
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if doc.meta.make_attachments_public:
 		is_private = False
 	content = extract_images_from_html(doc, content, is_private=is_private)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if frappe.flags.has_dataurl:
 		doc.set(fieldname, content)
 
@@ -253,6 +263,22 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 			frappe.flags.has_dataurl = True
 			return f'<img src="#broken-image" alt="{get_corrupted_image_msg()}"'
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+
+		if not content:
+			# if there is no content, return the original tag
+			return match.group(0)
+
+		try:
+			content = safe_b64decode(content)
+		except BinasciiError:
+			frappe.flags.has_dataurl = True
+			return f'<img src="#broken-image" alt="{get_corrupted_image_msg()}"'
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not content:
@@ -377,7 +403,11 @@ def attach_files_to_document(doc: "Document", event) -> None:
 			)
 			continue
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		unattached_file = frappe.db.exists(
 			"File",
@@ -423,7 +453,11 @@ def relink_files(doc, fieldname, temp_doc_name):
 	from frappe.utils.data import add_to_date, now_datetime
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""
 	Relink files attached to incorrect document name to the new document name
 	by check if file with temp name exists that was created in last 60 minutes
@@ -436,7 +470,11 @@ def relink_files(doc, fieldname, temp_doc_name):
 	from frappe.utils.data import add_to_date, now_datetime
 
 	mislinked_file = frappe.db.get_value(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"File",
 		{
 			"file_url": doc.get(fieldname),
@@ -453,7 +491,11 @@ def relink_files(doc, fieldname, temp_doc_name):
 	"""If file exists, attach it to the new docname"""
 =======
 	# If file exists, attach it to the new docname
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if mislinked_file:
 		frappe.db.set_value(
 			"File",
@@ -498,7 +540,16 @@ def find_file_by_url(path: str, name: str | None = None) -> Optional["File"]:
 <<<<<<< HEAD
 		file: "File" = frappe.get_doc(doctype="File", **file_data)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		file: "File" = frappe.get_doc(doctype="File", **file_data)
+=======
 		file: File = frappe.get_doc(doctype="File", **file_data)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		file: File = frappe.get_doc(doctype="File", **file_data)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if file.is_downloadable():
 			return file

@@ -46,6 +46,10 @@ class Report(Document):
 		report_type: DF.Literal["Report Builder", "Query Report", "Script Report", "Custom Report"]
 		roles: DF.Table[HasRole]
 		timeout: DF.Int
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def validate(self):
@@ -99,7 +103,11 @@ class Report(Document):
 
 	def get_permission_log_options(self, event=None):
 		return {"fields": ["roles"]}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def get_columns(self):
 		return [d.as_dict(no_default_fields=True, no_child_table_fields=True) for d in self.columns]
@@ -139,9 +147,18 @@ class Report(Document):
 
 <<<<<<< HEAD
 		if self.is_standard == "Yes" and (frappe.local.conf.get("developer_mode") or 0) == 1:
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 		if self.is_standard == "Yes" and frappe.conf.developer_mode:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+		if self.is_standard == "Yes" and frappe.conf.developer_mode:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			export_to_files(record_list=[["Report", self.name]], record_module=self.module, create_init=True)
 
 			self.create_report_py()
@@ -404,7 +421,11 @@ def is_prepared_report_disabled(report):
 =======
 def is_prepared_report_enabled(report):
 	return cint(frappe.db.get_value("Report", report, "prepared_report"))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_report_module_dotted_path(module, report_name):
@@ -443,4 +464,8 @@ def enable_prepared_report(report: str):
 <<<<<<< HEAD
 	frappe.db.set_value("Report", report, "disable_prepared_report", 0)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

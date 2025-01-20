@@ -30,7 +30,11 @@ class UnitTestPreparedReport(UnitTestCase):
 
 
 class TestPreparedReport(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def tearDownClass(cls):
 		for r in frappe.get_all("Prepared Report", pluck="name"):
@@ -60,7 +64,11 @@ class TestPreparedReport(IntegrationTestCase):
 			{
 				"doctype": "Prepared Report",
 				"report_name": report or "Database Storage Usage By Tables",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		).insert()
 
@@ -104,7 +112,11 @@ class TestPreparedReport(IntegrationTestCase):
 		self.wait_for_status(doc, "Completed")
 
 		prepared_data = json.loads(doc.get_prepared_data().decode("utf-8"))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		generated_data = generate_report_result(get_report_doc("Database Storage Usage By Tables"))
 		self.assertEqual(len(prepared_data["columns"]), len(generated_data["columns"]))
 		self.assertEqual(len(prepared_data["result"]), len(generated_data["result"]))
@@ -139,4 +151,8 @@ def test_report(**args):
 		yield report
 	finally:
 		report.delete()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

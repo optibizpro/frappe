@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+class _dict(dict):
+	"""dict like object that exposes keys as attributes"""
+
+	__slots__ = ()
+=======
 from collections.abc import Iterable, Mapping
 from typing import (
 	TYPE_CHECKING,
@@ -19,11 +25,24 @@ class _dict(dict[_KT, _VT]):
 	# NOTE(perf): Do NOT use super() here, it's an unnecessary function call!
 	# Refer: https://github.com/frappe/frappe/pull/16449
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	__getattr__ = dict.get
 	__setattr__ = dict.__setitem__
 	__delattr__ = dict.__delitem__
 	__setstate__ = dict.update
 
+<<<<<<< HEAD
+	def __getstate__(self):
+		return self
+
+	def update(self, *args, **kwargs):
+		"""update and return self -- the missing dict feature in python"""
+
+		super().update(*args, **kwargs)
+		return self
+
+	def copy(self):
+=======
 	@override
 	def __getstate__(self) -> Self:
 		return self
@@ -50,4 +69,5 @@ class _dict(dict[_KT, _VT]):
 
 	@override
 	def copy(self) -> "_dict[_KT, _VT]":
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		return _dict(self)

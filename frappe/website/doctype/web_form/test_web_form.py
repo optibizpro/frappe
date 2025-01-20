@@ -7,7 +7,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import set_request
 from frappe.website.doctype.web_form.web_form import accept
 from frappe.website.serve import get_response_content
@@ -28,7 +32,11 @@ class UnitTestWebForm(UnitTestCase):
 
 
 class TestWebForm(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		frappe.conf.disable_website_cache = True
 
@@ -71,7 +79,11 @@ class TestWebForm(IntegrationTestCase):
 		accept(web_form="manage-events", docname=self.event_name, data=json.dumps(doc))
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.assertEqual(frappe.db.get_value("Event", self.event_name, "description"), doc.get("description"))
 
 	def test_webform_render(self):
@@ -105,4 +117,8 @@ class TestWebForm(IntegrationTestCase):
 			self.normalize_html('<meta property="og:image" content="https://frappe.io/files/frappe.png">'),
 			content,
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

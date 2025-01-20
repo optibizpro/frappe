@@ -4,6 +4,10 @@
 import datetime
 from contextlib import suppress
 
+<<<<<<< HEAD
+=======
+import pytz
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from rq import Worker
 
 import frappe
@@ -37,7 +41,11 @@ class RQWorker(Document):
 		worker_name: DF.Data | None
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def load_from_db(self):
 		all_workers = get_workers()
 		workers = [w for w in all_workers if w.name == self.name]
@@ -55,7 +63,11 @@ class RQWorker(Document):
 
 =======
 	def get_list(start=0, page_length=20):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		workers = get_workers()
 
 		valid_workers = [w for w in workers if w.pid][start : start + page_length]
@@ -66,7 +78,11 @@ class RQWorker(Document):
 	def get_count(args) -> int:
 =======
 	def get_count() -> int:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return len(get_workers())
 
 	# None of these methods apply to virtual workers, overriden for sanity.
@@ -75,7 +91,11 @@ class RQWorker(Document):
 	def get_stats(args):
 =======
 	def get_stats():
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return {}
 
 	def db_insert(self, *args, **kwargs):
@@ -100,7 +120,11 @@ def serialize_worker(worker: Worker) -> frappe._dict:
 	if current_job and not current_job.startswith(frappe.local.site):
 		current_job = None
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return frappe._dict(
 		name=worker.name,
 		queue=queue,
@@ -112,7 +136,11 @@ def serialize_worker(worker: Worker) -> frappe._dict:
 		current_job_id=worker.get_current_job_id(),
 =======
 		current_job_id=current_job,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		last_heartbeat=convert_utc_to_system_timezone(worker.last_heartbeat),
 		birth_date=convert_utc_to_system_timezone(worker.birth_date),
 		successful_job_count=worker.successful_job_count,
@@ -131,8 +159,16 @@ def compute_utilization(worker: Worker) -> float:
 		total_time = (datetime.datetime.utcnow() - worker.birth_date).total_seconds()
 =======
 		total_time = (
+<<<<<<< HEAD
+			datetime.datetime.now(pytz.UTC) - worker.birth_date.replace(tzinfo=pytz.UTC)
+=======
 			datetime.datetime.now(datetime.timezone.utc)
 			- worker.birth_date.replace(tzinfo=datetime.timezone.utc)
-		).total_seconds()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+		).total_seconds()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return worker.total_working_time / total_time * 100

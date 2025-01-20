@@ -12,7 +12,11 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.model.virtual_doctype import validate_controller
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 TEST_DOCTYPE_NAME = "VirtualDoctypeTest"
 TEST_CHILD_DOCTYPE_NAME = "VirtualDoctypeTestChild"
@@ -90,7 +94,11 @@ class VirtualDoctypeTest(Document):
 class TestVirtualDoctypes(FrappeTestCase):
 =======
 class TestVirtualDoctypes(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		frappe.flags.allow_doctype_export = True

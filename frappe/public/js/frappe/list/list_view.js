@@ -32,7 +32,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 <<<<<<< HEAD
 =======
 		this._element_factory = new ElementFactory(this.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	has_permissions() {
@@ -92,7 +96,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		this.sort_by = this.view_user_settings.sort_by || this.sort_by || "modified";
 =======
 		this.sort_by = this.view_user_settings.sort_by || this.sort_by || "creation";
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.sort_order = this.view_user_settings.sort_order || this.sort_order || "desc";
 
 		// build menu items
@@ -117,7 +125,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		if (this.view_name == "List") this.toggle_paging = true;
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.patch_refresh_and_load_lib();
 		return this.get_list_view_settings();
 	}
@@ -319,7 +331,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		super.refresh().then(() => {
 =======
 		return super.refresh().then(() => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.render_header(refresh_header);
 			this.render_count();
 			this.update_checkbox();
@@ -328,7 +344,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 <<<<<<< HEAD
 =======
 			this.apply_styles_basedon_dropdown();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 	}
 
@@ -383,7 +403,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		// 2nd column: Status indicator
 =======
 		// 3rd column: Status indicator
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (frappe.has_indicator(this.doctype)) {
 			// indicator
 			this.columns.push({
@@ -497,7 +521,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			? __(this.meta.description)
 			: __("You haven't created a {0} yet", [__(this.doctype)]);
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let new_button_label = has_filters_set
 			? __("Create a new {0}", [__(this.doctype)], "Create a new document from list view")
 			: __(
@@ -510,7 +538,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			this.settings.empty_state_image ||
 			"/assets/frappe/images/ui-states/list-empty-state.svg";
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		const new_button = this.can_create
 			? `<p><button class="btn btn-default btn-sm btn-new-doc hidden-xs">
@@ -631,7 +663,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 <<<<<<< HEAD
 		this.toggle_paging && this.$paging_area.toggle(true);
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	render() {
@@ -640,7 +676,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 <<<<<<< HEAD
 		this.render_count();
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	render_list() {
@@ -648,8 +688,16 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		this.$result.find(".list-row-container").remove();
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 		this.render_header();
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		this.render_header();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if (this.data.length > 0) {
 			// append rows
@@ -710,7 +758,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 			<span class="level-item" data-sort-by="${subject_field.fieldname}"
 				title="${__("Click to sort by {0}", [subject_field.label])}">
 				${__(subject_field.label)}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			</span>
 		`;
 		const $columns = this.columns
@@ -745,7 +797,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 				}
 
 				return `<div class="${classes}">${html}</div>
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			`;
 			})
 			.join("");
@@ -765,7 +821,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		`;
 
 		return this.get_header_html_skeleton($columns, right_html);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_header_html_skeleton(left = "", right = "") {
@@ -814,6 +874,7 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 						${right}
 					</div>
 				</div>
+				<div class="list-row-border"></div>
 			</div>
 		`;
 	}
@@ -835,7 +896,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 				? this.get_tags_html(doc._user_tags, 2)
 =======
 				? this.get_tags_html(doc._user_tags, 2, true)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				: '<div class="tags-empty">-</div>';
 			return `
 				<div class="list-row-col tag-col ${tags_display_class} hidden-xs ellipsis">
@@ -858,7 +923,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		if (in_list(translated_doctypes, df.options)) {
 =======
 		if (translated_doctypes.includes(df.options)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			value_display = __(value_display);
 		}
 
@@ -955,7 +1024,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 				Subject: this.get_subject_html(doc, value_display),
 =======
 				Subject: this.get_subject_element(doc, value_display).innerHTML,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				Field: field_html(),
 			}[col.type];
 		}
@@ -1025,7 +1098,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		if (this.list_view_settings && !this.list_view_settings.disable_comment_count) {
 			comment_count = `<span class="comment-count d-flex align-items-center">
 				${frappe.utils.icon("es-line-chat-alt")}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				${doc._comment_count > 99 ? "99+" : doc._comment_count || 0}
 			</span>`;
 		}
@@ -1173,7 +1250,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		div.appendChild(
 			this._element_factory.get_like_element(doc.name, is_liked, liked_by, title)
 		);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		return div.innerHTML;
 	}
@@ -1207,7 +1288,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 
 	get_subject_text(doc, title) {
 		const subject_field = this.columns[0].df;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let value = title || doc[subject_field.fieldname];
 		if (this.settings.formatters && this.settings.formatters[subject_field.fieldname]) {
 			let formatter = this.settings.formatters[subject_field.fieldname];
@@ -1256,7 +1341,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		} else {
 			return value;
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_indicator_html(doc, show_workflow_state) {
@@ -1508,7 +1597,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 =======
 			e.stopPropagation?.();
 			e.preventDefault?.();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.dragClick = true;
 			this.check = !e.target.checked;
 		});
@@ -1662,7 +1755,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		frappe.socketio.doctype_subscribe(this.doctype);
 =======
 		frappe.realtime.doctype_subscribe(this.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.realtime.off("list_update");
 		frappe.realtime.on("list_update", (data) => {
 			if (data?.doctype !== this.doctype) {
@@ -1689,7 +1786,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		frappe.socketio.doctype_unsubscribe(this.doctype);
 =======
 		frappe.realtime.doctype_unsubscribe(this.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.realtime_events_setup = false;
 	}
 
@@ -1949,7 +2050,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 		if (frappe.user.has_role("System Manager") && frappe.boot.developer_mode === 1) {
 =======
 		if (frappe.user.has_role("System Manager") && frappe.boot.developer_mode) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			// edit doctype
 			items.push({
 				label: __("Edit DocType", null, "Button in list view menu"),
@@ -2093,7 +2198,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 				label: __("Clear Assignment", null, "Button in list view actions menu"),
 				action: () => {
 					frappe.confirm(
+<<<<<<< HEAD
+						"Are you sure you want to clear the assignments?",
+=======
 						__("Are you sure you want to clear the assignments?"),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 						() => {
 							this.disable_list_update = true;
 							bulk_operations.clear_assignment(this.get_checked_items(true), () => {
@@ -2107,7 +2216,11 @@ frappe.views.ListView = class ListView extends frappe.views.BaseList {
 							this.refresh();
 						}
 					);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				standard: true,
 			};
@@ -2414,7 +2527,11 @@ class ElementFactory {
 	create_like_element(doctype) {
 		const like = document.createElement("span");
 		like.classList.add("like-action");
+<<<<<<< HEAD
+		like.innerHTML = frappe.utils.icon("es-solid-heart", "sm", "like-icon");
+=======
 		like.innerHTML = `<svg class="icon icon-sm like-icon"><use href="#icon-heart"></use></svg>`;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		like.dataset.doctype = doctype;
 
 		return like;

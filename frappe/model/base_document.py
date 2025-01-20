@@ -9,7 +9,11 @@ from functools import cached_property
 import weakref
 from functools import cached_property
 from typing import TYPE_CHECKING, TypeVar
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe import _, _dict
@@ -51,7 +55,11 @@ if TYPE_CHECKING:
 D = TypeVar("D", bound="Document")
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 max_positive_value = {"smallint": 2**15 - 1, "int": 2**31 - 1, "bigint": 2**63 - 1}
 
 DOCTYPE_TABLE_FIELDS = [
@@ -109,7 +117,11 @@ def get_controller(doctype):
 =======
 	if frappe.local.dev_server or frappe.flags.in_migrate:
 		return import_controller(doctype)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	site_controllers = frappe.controllers.setdefault(frappe.local.site, {})
 	if doctype not in site_controllers:
@@ -169,7 +181,11 @@ class BaseDocument:
 		{
 =======
 		(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"doctype",
 			"meta",
 			"flags",
@@ -185,7 +201,11 @@ class BaseDocument:
 		}
 =======
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	)
 
 	def __init__(self, d):
@@ -214,7 +234,11 @@ class BaseDocument:
 		return frappe.get_meta(self.doctype)
 
 	@cached_property
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def permitted_fieldnames(self):
 		return get_permitted_fields(doctype=self.doctype, parenttype=getattr(self, "parenttype", None))
 
@@ -227,7 +251,11 @@ class BaseDocument:
 		"""Return a copy of `__dict__` excluding unpicklable values like `meta`.
 
 		Called when pickling.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		More info: https://docs.python.org/3/library/pickle.html#handling-stateful-objects
 		"""
 
@@ -245,12 +273,18 @@ class BaseDocument:
 <<<<<<< HEAD
 =======
 		state.pop("_parent_doc", None)
+<<<<<<< HEAD
+=======
 		state.pop("flags", None)
 
 	def __setstate__(self, state):
 		self.__dict__ = state
 		self.flags = _dict()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def update(self, d):
 		"""Update multiple fields of a doctype using a dictionary of key-value pairs.
@@ -451,7 +485,11 @@ class BaseDocument:
 		for fieldname in self.meta.get_valid_columns():
 =======
 		for fieldname in self.meta.get_valid_fields():
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			value = field_values.get(fieldname)
 
 			# if no need for sanitization and value is None, continue
@@ -484,7 +522,11 @@ class BaseDocument:
 					frappe.throw(_("Value for {0} cannot be a list").format(_(df.label)))
 =======
 					frappe.throw(_("Value for {0} cannot be a list").format(_(df.label, context=df.parent)))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				if df.fieldtype == "Check":
 					value = 1 if cint(value) else 0
@@ -497,7 +539,11 @@ class BaseDocument:
 					value = json.dumps(value, sort_keys=True, indent=4, separators=(",", ": "))
 =======
 					value = json.dumps(value, separators=(",", ":"))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				elif df.fieldtype in float_like_fields and not isinstance(value, float):
 					value = flt(value)
@@ -527,7 +573,11 @@ class BaseDocument:
 			if hasattr(value, "__value__"):
 				value = value.__value__()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			d[fieldname] = value
 
 		return d
@@ -840,13 +890,23 @@ class BaseDocument:
 
 		def get_msg(df):
 			if df.fieldtype in table_fields:
+<<<<<<< HEAD
+				return "{}: {}: {}".format(
+					_("Error"), _("Data missing in table"), _(df.label, context=df.parent)
+				)
+=======
 				return _("Error: Data missing in table {0}").format(_(df.label, context=df.parent))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			# check if parentfield exists (only applicable for child table doctype)
 			elif self.get("parentfield"):
 				return _("Error: {0} Row #{1}: Value missing for: {2}").format(
 					frappe.bold(_(self.doctype)),
 					self.idx,
+<<<<<<< HEAD
+					_("Value missing for"),
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					_(df.label, context=df.parent),
 				)
 
@@ -1166,7 +1226,11 @@ class BaseDocument:
 				reference, frappe.bold(_(df.label)), max_length, value
 =======
 				reference, frappe.bold(_(df.label, context=df.parent)), max_length, value
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			),
 			frappe.CharacterLengthExceededError,
 			title=_("Value too big"),
@@ -1205,7 +1269,11 @@ class BaseDocument:
 							frappe.bold(_(df.label)),
 =======
 							frappe.bold(_(df.label, context=df.parent)),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							frappe.bold(db_value),
 							frappe.bold(self_value),
 						),
@@ -1293,7 +1361,11 @@ class BaseDocument:
 		"""Returns float precision for a particular field (or get global default).
 =======
 		"""Return float precision for a particular field (or get global default).
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		:param fieldname: Fieldname for which precision is required.
 		:param parentfield: If fieldname is in child table."""

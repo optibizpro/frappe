@@ -10,7 +10,11 @@ frappe.ui.form.on("RQ Job", {
 			"This is a virtual doctype and data is cleared periodically."
 =======
 			__("This is a virtual doctype and data is cleared periodically.")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		);
 
 		if (["started", "queued"].includes(frm.doc.status)) {
@@ -22,7 +26,11 @@ frappe.ui.form.on("RQ Job", {
 					__(
 						"This will terminate the job immediately and might be dangerous, are you sure? "
 					),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					() => {
 						frappe
 							.xcall("frappe.core.doctype.rq_job.rq_job.stop_job", {
@@ -33,7 +41,11 @@ frappe.ui.form.on("RQ Job", {
 								frappe.show_alert("Job Stopped Succefully");
 =======
 								frappe.show_alert(__("Job Stopped Successfully"));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								frm.reload_doc();
 							});
 					}

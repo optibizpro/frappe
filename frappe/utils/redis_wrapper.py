@@ -102,7 +102,7 @@ class RedisWrapper(redis.Redis):
 			if not expires:
 				if val is None and generator:
 					val = generator()
-					self.set_value(original_key, val, user=user)
+					self.set_value(original_key, val, user=user, shared=shared)
 
 				else:
 					local_cache[key] = val
@@ -140,7 +140,11 @@ class RedisWrapper(redis.Redis):
 		if not keys:
 			return
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if not isinstance(keys, list | tuple):
 			keys = (keys,)
 
@@ -222,7 +226,11 @@ class RedisWrapper(redis.Redis):
 			return super().exists(*names)
 		except redis.exceptions.ConnectionError:
 			return False
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def hgetall(self, name):
 		value = super().hgetall(self.make_key(name))
@@ -368,8 +376,15 @@ def setup_cache():
 		return RedisearchWrapper(client=self, index_name=self.make_key(index_name))
 
 
+<<<<<<< HEAD
+def setup_cache():
+=======
 def setup_cache() -> RedisWrapper:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if frappe.conf.redis_cache_sentinel_enabled:
 		sentinels = [tuple(node.split(":")) for node in frappe.conf.get("redis_cache_sentinels", [])]
 		sentinel = get_sentinel_connection(
@@ -411,6 +426,11 @@ def get_sentinel_connection(
 	)
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class _TrackedConnection(redis.Connection):
@@ -499,11 +519,11 @@ class ClientCache:
 		)
 		self.invalidator_thread = self.run_invalidator_thread()
 
-	def get_value(self, key):
+	def get_value(self, key, *, shared=False, generator=None):
 		if not self.healthy:
-			return self.redis.get_value(key)
+			return self.redis.get_value(key, shared=shared, generator=generator)
 
-		key = self.redis.make_key(key)
+		key = self.redis.make_key(key, shared=shared)
 		try:
 			val = self.cache[key]
 			if time.monotonic() < val.expiry and self.healthy:
@@ -524,7 +544,12 @@ class ClientCache:
 		# This cache is long lived and "misses" are not tracked by redis so they'll never get
 		# invalidated.
 		if val is None:
-			return None
+			if generator:
+				val = generator()
+				self.set_value(key, val, shared=True)
+				return val
+			else:
+				return None
 
 		self.ensure_max_size()
 		with self.lock:
@@ -535,8 +560,8 @@ class ClientCache:
 
 		return val
 
-	def set_value(self, key, val):
-		key = self.redis.make_key(key)
+	def set_value(self, key, val, *, shared=False):
+		key = self.redis.make_key(key, shared=shared)
 		self.ensure_max_size()
 		self.redis.set_value(key, val, shared=True)
 		with self.lock:
@@ -548,13 +573,24 @@ class ClientCache:
 		#   doesn't send invalidation.
 		_ = self.redis.get_value(key, shared=True, use_local_cache=not self.healthy)
 
+	def get_doc(self, doctype: str, name: str | None = None):
+		"""Utility to fetch and store documents in client cache.
+
+		Use sparingly, this should ideally be used for settings and doctypes that have few known
+		number of documents.
+		"""
+		if not name:
+			name = doctype  # singles
+		key = frappe.get_document_cache_key(doctype, name)
+		return self.get_value(key, generator=lambda: frappe.get_doc(doctype, name))
+
 	def ensure_max_size(self):
 		if len(self.cache) >= self.maxsize:
 			with self.lock, suppress(RuntimeError):
 				self.cache.pop(next(iter(self.cache)), None)
 
-	def delete_value(self, key):
-		key = self.redis.make_key(key)
+	def delete_value(self, key, *, shared=False):
+		key = self.redis.make_key(key, shared=shared)
 		self.redis.delete_value(key, shared=True)
 		with self.lock:
 			self.cache.pop(key, None)
@@ -615,3 +651,7 @@ class ClientCache:
 	def reset_statistics(self):
 		self.hits = self.misses = 0
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

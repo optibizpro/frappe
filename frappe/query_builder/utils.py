@@ -7,7 +7,11 @@ from typing import Any, get_type_hints
 from pypika.queries import Column, QueryBuilder
 =======
 from pypika.queries import Column, QueryBuilder, _SetOperation
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from pypika.terms import PseudoColumn
 
 import frappe
@@ -150,7 +154,11 @@ def patch_query_execute():
 				if len(callstack) >= 3 and SERVER_SCRIPT_FILE_PREFIX in callstack[2].filename:
 					raise frappe.PermissionError("Only SELECT SQL allowed in scripting")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return query, param_collector.get_parameters()
 
 	builder_class = frappe.qb._BuilderClasss

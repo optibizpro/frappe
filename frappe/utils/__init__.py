@@ -26,13 +26,21 @@ from redis.exceptions import ConnectionError
 =======
 from typing import TypedDict
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from werkzeug.test import Client
 
+<<<<<<< HEAD
+=======
 from frappe.deprecation_dumpster import gzip_compress, gzip_decompress, make_esc
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 # utility functions like cint, int, flt, etc.
 from frappe.utils.data import *
+from frappe.utils.deprecations import deprecated
 from frappe.utils.html_utils import sanitize_html
 
 EMAIL_NAME_PATTERN = re.compile(r"[^A-Za-z0-9\u00C0-\u024F\/\_\' ]+")
@@ -290,11 +298,14 @@ def has_gravatar(email: str) -> str:
 
 
 def get_gravatar_url(email: str, default: Literal["mm", "404"] = "mm") -> str:
+<<<<<<< HEAD
+=======
 	"""Return gravatar URL for the given email.
 
 	If `default` is set to "404", gravatar URL will return 404 if no avatar is found.
 	If `default` is set to "mm", a placeholder image will be returned.
 	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	hexdigest = hashlib.md5(frappe.as_unicode(email).encode("utf-8"), usedforsecurity=False).hexdigest()
 	return f"https://secure.gravatar.com/avatar/{hexdigest}?d={default}&s=200"
 
@@ -319,7 +330,11 @@ def get_traceback(with_context=False) -> str:
 =======
 	"""Return the traceback of the Exception."""
 	from traceback_with_variables import iter_exc_lines
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	exc = sys.exception()
 	if not exc:
@@ -333,7 +348,11 @@ def get_traceback(with_context=False) -> str:
 		trace_list = iter_exc_lines(fmt=_get_traceback_sanitizer())
 =======
 		trace_list = iter_exc_lines(exc, fmt=_get_traceback_sanitizer())
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		tb = "\n".join(trace_list)
 	else:
 		trace_list = traceback.format_exception(exc)
@@ -387,7 +406,13 @@ def log(event, details):
 
 
 def dict_to_str(args: dict[str, Any], sep: str = "&") -> str:
+<<<<<<< HEAD
+	"""
+	Converts a dictionary to URL
+	"""
+=======
 	"""Convert a dictionary to URL."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return sep.join(f"{k!s}=" + quote(str(args[k] or "")) for k in list(args))
 
 
@@ -490,7 +515,11 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 =======
 		if low_priority:
 			kwargs["preexec_fn"] = lambda: os.nice(10)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		p = Popen(cmd, **kwargs)
 		exit_code = p.wait()
@@ -503,7 +532,11 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 		stderr.seek(0)
 		err = stderr.read()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	failed = check_exit_code and exit_code
 
 	if verbose or failed:
@@ -519,7 +552,11 @@ def execute_in_shell(cmd, verbose=False, low_priority=False, check_exit_code=Fal
 		raise frappe.CommandFailedError(
 			"Command failed", out.decode(errors="replace"), err.decode(errors="replace")
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return err, out
 
@@ -728,7 +765,11 @@ def get_request_session(max_retries=5):
 	http_adapter = requests.adapters.HTTPAdapter(max_retries=Retry(total=max_retries, status_forcelist=[500]))
 =======
 	http_adapter = HTTPAdapter(max_retries=Retry(total=max_retries, status_forcelist=[500]))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	session.mount("http://", http_adapter)
 	session.mount("https://", http_adapter)
@@ -919,6 +960,9 @@ def call(fn, *args, **kwargs):
 <<<<<<< HEAD
 # Following methods are aken as-is from Python 3 codebase
 # since gzip.compress and gzip.decompress are not available in Python 2.7
+
+
+@deprecated
 def gzip_compress(data, compresslevel=9):
 	"""Compress data in one shot and return the compressed string.
 	Optional argument is the compression level, in range of 0-9.
@@ -931,6 +975,7 @@ def gzip_compress(data, compresslevel=9):
 	return buf.getvalue()
 
 
+@deprecated
 def gzip_decompress(data):
 	"""Decompress a gzip compressed string in one shot.
 	Return the decompressed string.
@@ -1023,18 +1068,15 @@ def get_assets_json():
 
 		return assets
 
-	if not hasattr(frappe.local, "assets_json"):
-		if not frappe.conf.developer_mode:
-			frappe.local.assets_json = frappe.cache.get_value(
-				"assets_json",
-				_get_assets,
-				shared=True,
-			)
+	if not frappe.conf.developer_mode:
+		return frappe.client_cache.get_value(
+			"assets_json",
+			shared=True,
+			generator=_get_assets,
+		)
 
-		else:
-			frappe.local.assets_json = _get_assets()
-
-	return frappe.local.assets_json
+	else:
+		return _get_assets()
 
 
 def get_bench_relative_path(file_path):

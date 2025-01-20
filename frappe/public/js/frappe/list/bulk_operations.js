@@ -14,7 +14,11 @@ export default class BulkOperations {
 =======
 		const MAX_PRINT_LIMIT = 500;
 		const BACKGROUND_PRINT_THRESHOLD = 25;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		const valid_docs = docs
 			.filter((doc) => {
@@ -48,7 +52,11 @@ export default class BulkOperations {
 			frappe.msgprint(
 				__("You can only print upto {0} documents at a time", [MAX_PRINT_LIMIT])
 			);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return;
 		}
 
@@ -99,7 +107,11 @@ export default class BulkOperations {
 					default: valid_docs.length > BACKGROUND_PRINT_THRESHOLD,
 					read_only: valid_docs.length > BACKGROUND_PRINT_THRESHOLD,
 				},
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			],
 		});
 
@@ -192,7 +204,11 @@ export default class BulkOperations {
 				if (!w) {
 					frappe.msgprint(__("Please enable pop-ups"));
 				}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 			dialog.hide();
 		});
@@ -398,7 +414,11 @@ export default class BulkOperations {
 						default:
 							frappe.throw(__("Cannot {0} {1}.", [action, comma_separated_records]));
 					}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 				if (failed_docnames?.length < docnames.length) {
 					frappe.utils.play_sound(action);

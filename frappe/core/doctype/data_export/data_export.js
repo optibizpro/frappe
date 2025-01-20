@@ -32,7 +32,11 @@ frappe.ui.form.on("Data Export", {
 	export_without_main_header: (frm) => {
 		frm.refresh();
 	},
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });
 
 const can_export = (frm) => {
@@ -48,7 +52,11 @@ const can_export = (frm) => {
 		frappe.msgprint(__("Atleast one field of Parent Document Type is mandatory"));
 =======
 		frappe.msgprint(__("At least one field of Parent Document Type is mandatory"));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	} else {
 		is_valid_form = true;
 	}
@@ -75,7 +83,11 @@ const export_data = (frm) => {
 			template: !frm.doc.export_without_main_header,
 			with_data: 1,
 			export_without_column_meta: frm.doc.export_without_main_header ? true : false,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		};
 	};
 
@@ -169,7 +181,11 @@ const add_doctype_field_multicheck_control = (doctype, parent_wrapper) => {
 			label: df.label,
 =======
 			label: __(df.label, null, df.parent),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			value: df.fieldname,
 			danger: df.reqd,
 			checked: 1,
@@ -183,7 +199,11 @@ const add_doctype_field_multicheck_control = (doctype, parent_wrapper) => {
 			label: doctype,
 =======
 			label: __(doctype),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			fieldname: doctype + "_fields",
 			fieldtype: "MultiCheck",
 			options: options,

@@ -52,7 +52,11 @@
   "desk_theme",
   "code_editor_type",
   "banner_image",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "navigation_settings_section",
   "search_bar",
   "notifications",
@@ -117,7 +121,11 @@
 =======
   "onboarding_status",
   "connections_tab"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  ],
  "fields": [
   {
@@ -725,7 +733,11 @@
    "label": "Desk Settings"
   },
   {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "default": "{}",
    "fieldname": "onboarding_status",
    "fieldtype": "Small Text",
@@ -735,6 +747,11 @@
   {
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "allow_in_quick_entry": 1,
    "fieldname": "role_profiles",
    "fieldtype": "Table MultiSelect",
@@ -743,6 +760,7 @@
    "permlevel": 1
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "description": "If left empty, the default workspace will be the last visited workspace",
    "fieldname": "default_workspace",
    "fieldtype": "Link",
@@ -756,6 +774,8 @@
    "label": "Workspace"
   },
   {
+<<<<<<< HEAD
+=======
    "default": "vscode",
    "fieldname": "code_editor_type",
    "fieldtype": "Select",
@@ -763,6 +783,7 @@
    "options": "vscode\nvim\nemacs"
   },
   {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
    "collapsible": 1,
    "fieldname": "app_section",
    "fieldtype": "Section Break",
@@ -772,10 +793,19 @@
    "description": "Redirect to the selected app after login",
    "fieldname": "default_app",
    "fieldtype": "Select",
+<<<<<<< HEAD
+   "label": "Default App",
+   "options": ""
+=======
    "label": "Default App"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "collapsible": 1,
    "fieldname": "navigation_settings_section",
    "fieldtype": "Section Break",

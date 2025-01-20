@@ -8,7 +8,11 @@ import requests
 =======
 from werkzeug.test import EnvironBuilder
 from werkzeug.wrappers import Request
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe.auth import LoginAttemptTracker
@@ -20,7 +24,15 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.test_api import FrappeAPITestCase
+<<<<<<< HEAD
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import get_datetime, get_site_url, now
 from frappe.utils.data import add_to_date
 from frappe.www.login import _generate_temporary_login_link
@@ -41,7 +53,11 @@ def add_user(email, password, username=None, mobile_no=None):
 class TestAuth(FrappeTestCase):
 =======
 class TestAuth(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -172,16 +188,37 @@ class TestAuth(IntegrationTestCase):
 			self.fail("Rate limting not working")
 
 	def test_correct_cookie_expiry_set(self):
+<<<<<<< HEAD
 		client = FrappeClient(self.HOST_NAME, self.test_user_email, self.test_user_password)
 
 		expiry_time = next(x for x in client.session.cookies if x.name == "sid").expires
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		current_time = datetime.datetime.utcnow().timestamp()
 		self.assertAlmostEqual(get_expiry_in_seconds(), expiry_time - current_time, delta=60 * 60)
 
 
 class TestLoginAttemptTracker(FrappeTestCase):
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		import pytz
+
+		client = FrappeClient(self.HOST_NAME, self.test_user_email, self.test_user_password)
+
+		expiry_time = next(x for x in client.session.cookies if x.name == "sid").expires
+		current_time = datetime.datetime.now(tz=pytz.UTC).timestamp()
+		self.assertAlmostEqual(get_expiry_in_seconds(), expiry_time - current_time, delta=60 * 60)
+
+=======
+		client = FrappeClient(self.HOST_NAME, self.test_user_email, self.test_user_password)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+		expiry_time = next(x for x in client.session.cookies if x.name == "sid").expires
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		current_time = datetime.datetime.now(tz=datetime.UTC).timestamp()
 		self.assertAlmostEqual(get_expiry_in_seconds(), expiry_time - current_time, delta=60 * 60)
 
@@ -220,7 +257,11 @@ class TestAllowedReferrer(UnitTestCase):
 
 
 class TestLoginAttemptTracker(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_account_lock(self):
 		"""Make sure that account locks after `n consecutive failures"""
 		tracker = LoginAttemptTracker("tester", max_consecutive_login_attempts=3, lock_interval=60)

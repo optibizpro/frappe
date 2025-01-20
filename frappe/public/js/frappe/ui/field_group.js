@@ -10,7 +10,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 =======
 		this.fetch_dict = {};
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$.each(this.fields || [], function (i, f) {
 			if (!f.fieldname && f.label) {
 				f.fieldname = f.label.replace(/ /g, "_").toLowerCase();
@@ -64,7 +68,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 			if (!in_list(["Date", "Datetime", "Time", "Check"], f.df.fieldtype) && f.set_focus) {
 =======
 			if (!["Date", "Datetime", "Time", "Check"].includes(f.df.fieldtype) && f.set_focus) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				f.set_focus();
 				return false;
 			}
@@ -141,7 +149,11 @@ frappe.ui.FieldGroup = class FieldGroup extends frappe.ui.form.Layout {
 				title: __("Inavlid Values"),
 =======
 				title: __("Invalid Values"),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				message:
 					__("Following fields have invalid values:") +
 					"<br><br><ul><li>" +

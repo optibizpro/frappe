@@ -98,7 +98,11 @@ frappe.ui.FieldSelect = class FieldSelect {
 		var doctype_obj = locals["DocType"][me.doctype];
 =======
 		var doctype_obj = frappe.get_meta(me.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (doctype_obj && cint(doctype_obj.istable)) {
 			std_filters = std_filters.concat([
 				{
@@ -180,7 +184,11 @@ frappe.ui.FieldSelect = class FieldSelect {
 			table = me.doctype;
 		} else {
 			label = __(df.label, null, df.parent) + " (" + __(df.parent) + ")";
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			table = df.parent;
 		}
 

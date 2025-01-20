@@ -42,7 +42,11 @@ frappe.ui.form.Form = class FrappeForm {
 		this.doctype_layout = frappe.get_doc("DocType Layout", doctype_layout_name);
 =======
 		this.doctype_layout = frappe.get_meta(doctype_layout_name);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.undo_manager = new UndoManager({ frm: this });
 		this.setup_meta(doctype);
 		this.debounced_reload_doc = frappe.utils.debounce(this.reload_doc.bind(this), 1000);
@@ -60,7 +64,11 @@ frappe.ui.form.Form = class FrappeForm {
 		this.meta = frappe.get_doc("DocType", this.doctype);
 =======
 		this.meta = frappe.get_meta(this.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if (this.meta.istable) {
 			this.meta.in_dialog = 1;
@@ -96,7 +104,11 @@ frappe.ui.form.Form = class FrappeForm {
 =======
 			single_column: is_single_column,
 			sidebar_position: "Right",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 		this.page = this.wrapper.page;
 		this.layout_main = this.page.main.get(0);
@@ -115,7 +127,11 @@ frappe.ui.form.Form = class FrappeForm {
 		this.viewers = new frappe.ui.form.FormViewers({
 			frm: this,
 			parent: $('<div class="form-viewers d-flex"></div>').prependTo(this.page.page_actions),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 
 		// navigate records keyboard shortcuts
@@ -181,7 +197,11 @@ frappe.ui.form.Form = class FrappeForm {
 		});
 		frappe.ui.keys.add_shortcut({
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			shortcut: "shift+ctrl+z",
 			action: () => this.undo_manager.redo(),
 			page: this.page,
@@ -201,7 +221,11 @@ frappe.ui.form.Form = class FrappeForm {
 			action: () => this.print_doc(),
 			description: __("Print document"),
 			condition: () => frappe.model.can_print(this.doctype, this) && !this.meta.issingle,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 
 		let grid_shortcut_keys = [
@@ -364,7 +388,11 @@ frappe.ui.form.Form = class FrappeForm {
 						me.fields_dict[df.fieldname].grid.set_value(fieldname, value, doc);
 						return me.script_manager.trigger(fieldname, doc.doctype, doc.name);
 					}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 			);
 		});
@@ -383,7 +411,11 @@ frappe.ui.form.Form = class FrappeForm {
 				// the current form does not exist anymore, route to the new one
 				frappe.set_route("Form", this.doctype, data.new);
 			}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 	}
 
@@ -475,7 +507,11 @@ frappe.ui.form.Form = class FrappeForm {
 				this.set_read_only(true);
 =======
 				this.set_read_only();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frappe.show_alert(__("This form is not editable due to a Workflow."));
 			}
 
@@ -519,7 +555,11 @@ frappe.ui.form.Form = class FrappeForm {
 <<<<<<< HEAD
 =======
 			this.show_submission_queue_banner();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if (frappe.boot.read_only) {
 				this.disable_form();
@@ -579,7 +619,11 @@ frappe.ui.form.Form = class FrappeForm {
 					message: __("{} Complete", [action.label]),
 =======
 					message: __("{} Complete", [__(action.label)]),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					alert: true,
 				});
 			});
@@ -617,7 +661,11 @@ frappe.ui.form.Form = class FrappeForm {
 <<<<<<< HEAD
 		this.cscript.is_onload = false;
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (!this.opendocs[this.docname]) {
 			var me = this;
 			this.cscript.is_onload = true;
@@ -726,7 +774,11 @@ frappe.ui.form.Form = class FrappeForm {
 		// user must have clicked on some element before this function trigerred
 		if (!layout_wrapper || layout_wrapper.has(":focus").length) {
 			return;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		layout_wrapper
@@ -843,7 +895,11 @@ frappe.ui.form.Form = class FrappeForm {
 				console.error(e); // eslint-disable-line
 =======
 				console.error(e);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 	}
 
@@ -985,7 +1041,11 @@ frappe.ui.form.Form = class FrappeForm {
 <<<<<<< HEAD
 =======
 					ignore_doctypes_on_cancel_all: me.ignore_doctypes_on_cancel_all,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				freeze: true,
 			})
@@ -1003,7 +1063,11 @@ frappe.ui.form.Form = class FrappeForm {
 					let doctypes_to_cancel = (r.message.docs || []).map((value) => {
 						return value.doctype;
 					});
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 					if (doctypes_to_cancel.length) {
 						return me._cancel_all(r, btn, callback, on_error);
@@ -1164,7 +1228,11 @@ frappe.ui.form.Form = class FrappeForm {
 				discard_doc,
 				me.handle_save_fail(btn, on_error)
 			);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -1655,7 +1723,11 @@ frappe.ui.form.Form = class FrappeForm {
 					/\([^\)]*\)/g,
 					""
 				); // eslint-disable-line
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (parentfield) {
 					grid_field_label_map[doctype + "-" + fname] =
 						label.trim() + " (" + __(currency) + ")";
@@ -1734,7 +1806,11 @@ frappe.ui.form.Form = class FrappeForm {
 					].refresh_field(fieldname);
 =======
 					].refresh_field(table_field);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 			} else {
 				this.refresh_field(fieldname);
@@ -1910,7 +1986,11 @@ frappe.ui.form.Form = class FrappeForm {
 								if (std_field_list.indexOf(key) === -1) {
 									opts.child[key] = r.message[key];
 								}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							}
 
 							me.fields_dict[opts.child.parentfield].refresh();
@@ -2154,7 +2234,11 @@ frappe.ui.form.Form = class FrappeForm {
 			setTimeout(() => {
 				$el.find("input, select, textarea").focus();
 			}, 500);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		// highlight control inside field
@@ -2175,7 +2259,11 @@ frappe.ui.form.Form = class FrappeForm {
 			frappe.socketio.doc_subscribe(doctype, docname);
 =======
 			frappe.realtime.doc_subscribe(doctype, docname);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		frappe.realtime.off("docinfo_update");
 		frappe.realtime.on("docinfo_update", ({ doc, key, action = "update" }) => {
@@ -2262,6 +2350,9 @@ frappe.ui.form.Form = class FrappeForm {
 		this.active_tab_map ??= {};
 		this.active_tab_map[this.docname] = tab;
 
+<<<<<<< HEAD
+		this.script_manager.trigger("on_tab_change");
+=======
 		// Update URL hash to reflect the active tab
 		const new_hash = next_tab_name.replace("__details", "");
 		const url = new URL(window.location.href);
@@ -2283,6 +2374,7 @@ frappe.ui.form.Form = class FrappeForm {
 				field.on_section_collapse(!in_tab); // hide = !in_tab
 			}
 		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	get_active_tab() {
@@ -2396,4 +2488,8 @@ Object.defineProperty(window, "validated", {
 	},
 });
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

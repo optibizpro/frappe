@@ -26,7 +26,11 @@
 			display: none;
 		}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		position: absolute;
 		width: 100%;
 		list-style: none;
@@ -48,7 +52,11 @@
 =======
 		& > li,
 		& > [role="option"] {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			cursor: pointer;
 			@include get_textstyle("sm", "regular");
 			padding: var(--padding-sm);
@@ -88,7 +96,11 @@
 				background-color: var(--awesomplete-hover-bg);
 				color: var(--text-color);
 			}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		a:hover {

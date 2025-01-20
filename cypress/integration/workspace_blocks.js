@@ -20,7 +20,14 @@ context("Workspace Blocks", () => {
 		cy.get(".codex-editor__redactor .ce-block");
 		cy.get(".btn-new-workspace").click();
 		cy.fill_field("title", "Test Block Page", "Data");
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 		cy.fill_field("type", "Workspace", "Select");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		cy.fill_field("type", "Workspace", "Select");
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get_open_dialog().find(".modal-header").click();
 		cy.get_open_dialog().find(".btn-primary").click();
 

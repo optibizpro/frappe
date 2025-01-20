@@ -159,7 +159,11 @@ frappe.ui.keys.AltShortcutGroup = class AltShortcutGroup {
 			// In this case we don't want shortcuts to rip apart the ID of the translatable text.
 			return;
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		shortcut.$text_el.attr("data-label", encodeURIComponent(shortcut.text));
 		let underline_el_found = false;
 		let text_html = shortcut.text
@@ -175,7 +179,11 @@ frappe.ui.keys.AltShortcutGroup = class AltShortcutGroup {
 <<<<<<< HEAD
 =======
 		text_html = `<span>${text_html}</span>`;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let original_text_html = shortcut.$text_el.html();
 		text_html = original_text_html.replace(shortcut.text.trim(), text_html.trim());
 		shortcut.$text_el.html(text_html);

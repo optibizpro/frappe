@@ -2,7 +2,11 @@
 """ Utils for deprecating functionality in Framework.
 =======
 """Utils for deprecating functionality in Framework.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 WARNING: This file is internal, instead of depending just copy the code or use deprecation
 libraries.
@@ -38,4 +42,8 @@ from frappe.deprecation_dumpster import (
 from frappe.deprecation_dumpster import (
 	_old_deprecation_warning as deprecation_warning,
 )
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

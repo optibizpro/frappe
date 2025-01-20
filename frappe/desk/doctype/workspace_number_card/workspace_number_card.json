@@ -32,7 +32,11 @@
  "modified": "2023-02-15 01:16:26.216201",
 =======
  "modified": "2024-03-23 16:04:06.156245",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Workspace Number Card",
@@ -42,7 +46,11 @@
  "sort_field": "modified",
 =======
  "sort_field": "creation",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_order": "DESC",
  "states": []
 }

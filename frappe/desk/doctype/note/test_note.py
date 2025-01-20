@@ -23,7 +23,11 @@ class UnitTestNote(UnitTestCase):
 
 
 class TestNote(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def insert_note(self):
 		frappe.db.delete("Version")
 		frappe.db.delete("Note")
@@ -32,8 +36,17 @@ class TestNote(IntegrationTestCase):
 <<<<<<< HEAD
 		return frappe.get_doc(dict(doctype="Note", title="test note", content="test note content")).insert()
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		return frappe.get_doc(dict(doctype="Note", title="test note", content="test note content")).insert()
+=======
 		return frappe.get_doc(doctype="Note", title="test note", content="test note content").insert()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		return frappe.get_doc(doctype="Note", title="test note", content="test note content").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_version(self):
 		note = self.insert_note()

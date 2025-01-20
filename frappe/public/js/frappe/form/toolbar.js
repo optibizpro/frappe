@@ -5,7 +5,11 @@ import "./form_viewers";
 <<<<<<< HEAD
 =======
 import { ReminderManager } from "./reminders";
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 frappe.ui.form.Toolbar = class Toolbar {
 	constructor(opts) {
@@ -47,7 +51,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 		} else if (this.frm.meta.title_field) {
 			let title_field = (this.frm.doc[this.frm.meta.title_field] || "").toString().trim();
 			title = strip_html(title_field || this.frm.docname);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (
 				this.frm.doc.__islocal ||
 				title === this.frm.docname ||
@@ -93,7 +101,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 =======
 			!doc_field.read_only &&
 			!doc_field.set_only_once
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		) {
 			return true;
 		} else {
@@ -132,7 +144,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 <<<<<<< HEAD
 =======
 			if (input_name != docname) frappe.realtime.doctype_subscribe(doctype, input_name);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return frappe
 				.xcall("frappe.model.rename_doc.update_document_title", {
 					doctype,
@@ -161,7 +177,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 =======
 					if (input_name != docname) {
 						frappe.realtime.on("list_update", (data) => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							if (data.doctype == doctype && data.name == input_name) {
 								reload_form(input_name);
 								frappe.show_alert({
@@ -338,7 +358,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 	}
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	make_menu_items() {
 		// Print
 		this.add_discard();
@@ -406,7 +430,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 					__("Print"),
 					() => {
 						this.frm.print_doc();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 					true
 				);
@@ -418,7 +446,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 =======
 					() => {
 						this.frm.print_doc();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 					"",
 					__("Print")
@@ -441,7 +473,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Email"),
 				() => {
 					this.frm.email_doc();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true,
 				{
@@ -462,7 +498,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 =======
 			() => {
 				this.show_jump_to_field_dialog();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			},
 			true,
 			"Ctrl+J"
@@ -484,7 +524,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Show Links"),
 				() => {
 					this.show_linked_with();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true
 			);
@@ -493,6 +537,7 @@ frappe.ui.form.Toolbar = class Toolbar {
 
 <<<<<<< HEAD
 		// duplicate
+<<<<<<< HEAD
 		if (in_list(frappe.boot.user.can_create, me.frm.doctype) && !me.frm.meta.allow_copy) {
 			this.page.add_menu_item(
 				__("Duplicate"),
@@ -501,8 +546,14 @@ frappe.ui.form.Toolbar = class Toolbar {
 				},
 				true
 =======
+<<<<<<< HEAD
+		if (frappe.boot.user.can_create.includes(me.frm.doctype) && !me.frm.meta.allow_copy) {
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	add_duplicate() {
 		if (frappe.boot.user.can_create.includes(this.frm.doctype) && !this.frm.meta.allow_copy) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			this.page.add_menu_item(
 				__("Duplicate"),
 				() => {
@@ -510,7 +561,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				},
 				true,
 				"Shift+D"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			);
 		}
 	}
@@ -538,7 +593,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Rename"),
 				() => {
 					this.frm.rename_doc();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true
 			);
@@ -562,7 +621,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 			true
 		);
 	}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	add_delete() {
 		// delete
@@ -586,7 +649,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Delete"),
 				() => {
 					this.frm.savetrash();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true,
 				{
@@ -674,7 +741,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 =======
 				() => {
 					frappe.utils.new_auto_repeat_prompt(this.frm);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true
 			);
@@ -694,7 +765,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("New {0}", [__(this.frm.doctype)]),
 				() => {
 					frappe.new_doc(this.frm.doctype, true);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				true,
 				{
@@ -709,7 +784,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 	}
 
 	add_audit_trail() {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (
 			this.frm.doc.amended_from &&
 			frappe.model.get_value("DocType", this.frm.doc.doctype, "track_changes")
@@ -720,7 +799,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 				function () {
 =======
 				() => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					frappe.set_route("audit-trail");
 				},
 				true
@@ -759,7 +842,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 			if (frappe.boot.developer_mode === 1 && !is_doctype_form) {
 =======
 			if (frappe.boot.developer_mode && !is_doctype_form) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				// edit doctype
 				this.page.add_menu_item(
 					__("Edit DocType"),
@@ -809,7 +896,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 			}).length;
 =======
 			this._has_workflow = frappe.model.has_workflow(this.frm.doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return this._has_workflow;
 	}
 	get_docstatus() {

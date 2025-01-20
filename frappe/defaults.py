@@ -35,8 +35,17 @@ def get_user_default(key, user=None):
 <<<<<<< HEAD
 	value = isinstance(d, list | tuple) and d[0] or d
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	value = isinstance(d, list | tuple) and d[0] or d
+=======
 	value = (isinstance(d, list | tuple) and d[0]) or d
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	value = (isinstance(d, list | tuple) and d[0]) or d
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not_in_user_permission(key, value, user):
 		return
 
@@ -76,8 +85,17 @@ def get_user_default_as_list(key, user=None):
 <<<<<<< HEAD
 	d = list(filter(None, (not isinstance(d, list | tuple)) and [d] or d))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	d = list(filter(None, (not isinstance(d, list | tuple)) and [d] or d))
+=======
 	d = list(filter(None, ((not isinstance(d, list | tuple)) and [d]) or d))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	d = list(filter(None, ((not isinstance(d, list | tuple)) and [d]) or d))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# filter default values if not found in user permission
 	return [value for value in d if not not_in_user_permission(key, value)]
@@ -147,8 +165,17 @@ def get_global_default(key):
 <<<<<<< HEAD
 	value = isinstance(d, list | tuple) and d[0] or d
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	value = isinstance(d, list | tuple) and d[0] or d
+=======
 	value = (isinstance(d, list | tuple) and d[0]) or d
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	value = (isinstance(d, list | tuple) and d[0]) or d
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not_in_user_permission(key, value):
 		return
 

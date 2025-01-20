@@ -82,6 +82,7 @@ class GoogleCalendar(Document):
 		push_to_google_calendar: DF.Check
 		refresh_token: DF.Password | None
 		user: DF.Link
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -217,7 +218,11 @@ def get_google_calendar_object(g_calendar):
 		"scopes": ["https://www.googleapis.com/auth/calendar/v3"],
 =======
 		"scopes": [SCOPES],
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	credentials = google.oauth2.credentials.Credentials(**credentials_dict)
@@ -772,7 +777,11 @@ def get_attendees(doc):
 	"""
 =======
 	"""Return a list of dicts with attendee emails, if available in event_participants table."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	attendees, email_not_found = [], []
 
 	for participant in doc.event_participants:

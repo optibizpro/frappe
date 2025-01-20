@@ -85,7 +85,11 @@ export default class Grid {
 							</div>
 							<div class="grid-scroll-bar">
 								<div class="grid-scroll-bar-rows"></div>
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							</div>
 						</div>
 					</div>
@@ -125,7 +129,11 @@ export default class Grid {
 							<button type="button" class="grid-add-multiple-rows btn btn-xs btn-secondary hidden">
 								${__("Add Multiple")}</a>
 							</button>
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</div>
 						<div class="grid-pagination">
 						</div>
@@ -140,7 +148,11 @@ export default class Grid {
 								${__("Download")}
 							</button>
 							<button type="button" class="grid-upload btn btn-xs btn-secondary hidden">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								${__("Upload")}
 							</button>
 						</div>
@@ -195,7 +207,11 @@ export default class Grid {
 			in_list(unsupported_fieldtypes, this.df.fieldtype)
 =======
 			unsupported_fieldtypes.includes(this.df.fieldtype)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 			return;
 
@@ -726,7 +742,11 @@ export default class Grid {
 					if (!this.deleted_docs || !in_list(this.deleted_docs, data.name)) {
 =======
 					if (!this.deleted_docs || !this.deleted_docs.includes(data.name)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						return data;
 					}
 			  })
@@ -997,7 +1017,11 @@ export default class Grid {
 				!in_list(frappe.model.layout_fields, df.fieldtype)
 =======
 				!frappe.model.layout_fields.includes(df.fieldtype)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			) {
 				if (df.columns) {
 					df.colsize = df.columns;
@@ -1022,7 +1046,11 @@ export default class Grid {
 <<<<<<< HEAD
 				if (total_colsize > 11) return false;
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				this.visible_columns.push([df, df.colsize]);
 			}
 		}
@@ -1262,7 +1290,11 @@ export default class Grid {
 =======
 			$btn = $(`<button type="button" class="btn btn-secondary btn-xs btn-custom">`)
 				.html(__(label))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				.prependTo($wrapper)
 				.on("click", click);
 			this.custom_buttons[label] = $btn;

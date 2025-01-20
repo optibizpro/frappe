@@ -110,7 +110,11 @@ frappe.PermissionEngine = class PermissionEngine {
 		let d = frappe.confirm(__("Reset Permissions for {0}?", [doctype]), () => {
 =======
 		let d = frappe.confirm(__("Reset Permissions for {0}?", [__(doctype)]), () => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return frappe
 				.call({
 					module: "frappe.core",
@@ -130,7 +134,11 @@ frappe.PermissionEngine = class PermissionEngine {
 			.append("<hr><h5>Standard Permissions:</h5><br>");
 =======
 			.append(`<hr><h5>${__("Standard Permissions")}:</h5><br>`);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let $wrapper = $("<p></p>").appendTo($d);
 		data.message.forEach((d) => {
 			let rights = this.rights
@@ -334,7 +342,11 @@ frappe.PermissionEngine = class PermissionEngine {
 <<<<<<< HEAD
 			"set_user_permissions",
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"share",
 		];
 	}

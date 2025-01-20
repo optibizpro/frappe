@@ -15,7 +15,11 @@ frappe.ui.Tree = class {
 		with_skeleton = 1, // eslint-disable-line
 =======
 		with_skeleton = 1,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		args,
 		method,
@@ -25,7 +29,11 @@ frappe.ui.Tree = class {
 		on_click, // eslint-disable-line
 =======
 		on_click,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}) {
 		$.extend(this, arguments[0]);
 		if (root_value == null) {
@@ -98,7 +106,11 @@ frappe.ui.Tree = class {
 			}) {
 =======
 			constructor({ parent, label, parent_label, expandable, is_root, data }) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				$.extend(this, arguments[0]);
 				this.loaded = 0;
 				this.expanded = 0;

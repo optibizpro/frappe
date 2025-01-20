@@ -43,7 +43,11 @@
 			<a class="navbar-brand navbar-home" href="/app">
 				<img
 					class="app-logo"
+<<<<<<< HEAD
+					src="{{ frappe.boot.app_logo_url }}"
+=======
 					src="{{ frappe.boot.app_data[0].app_logo_url }}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					alt="{{ __("App Logo") }}"
 				>
 			</a>
@@ -51,9 +55,17 @@
 			<div class="collapse navbar-collapse justify-content-end">
 				<form class="form-inline fill-width justify-content-end" role="search" onsubmit="return false;">
 					{% if (frappe.boot.read_only) { %}
+<<<<<<< HEAD
+						<span class="indicator-pill yellow no-indicator-dot" title="{%= __("Your site is undergoing maintenance or being updated.") %}">
+=======
 						<span class="indicator-pill yellow no-indicator-dot read-only-banner" title="{%= __("Your site is undergoing maintenance or being updated.") %}">
-							{%= __("Read Only Mode") %}
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+							{%= __("Read Only Mode") %}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</span>
 					{% } %}
 					{% if (frappe.boot.user.impersonated_by) { %}
@@ -66,7 +78,11 @@
 							id="navbar-search"
 							type="text"
 							class="form-control"
+<<<<<<< HEAD
+							placeholder="{%= __('Search or type a command ({0})', [frappe.utils.is_mac() ? '⌘ + G' : 'Ctrl + G']) %}"
+=======
 							placeholder="{%= __('Search or type a command ({0})', [frappe.utils.is_mac() ? '⌘ + K' : 'Ctrl + K']) %}"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 							aria-haspopup="true"
 						>
 						<span class="search-icon">
@@ -152,7 +168,11 @@
 									{% } %}
 								{% } %}
 							{% endfor %}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</div>
 					</li>
 					<li class="nav-item dropdown dropdown-navbar-user dropdown-mobile">

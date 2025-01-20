@@ -97,7 +97,11 @@
  "modified": "2023-05-30 14:33:31.994738",
 =======
  "modified": "2024-03-23 16:02:15.380899",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Custom HTML Block",
@@ -114,7 +118,11 @@
    "role": "All",
 =======
    "role": "Desk User",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "share": 1
   },
   {
@@ -130,7 +138,11 @@
    "role": "All",
 =======
    "role": "Desk User",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "share": 1,
    "write": 1
   },
@@ -163,7 +175,11 @@
  "sort_field": "modified",
 =======
  "sort_field": "creation",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

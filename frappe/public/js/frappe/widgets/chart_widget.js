@@ -129,7 +129,11 @@ export default class ChartWidget extends Widget {
 					label: this.chart_settings.heatmap_year || this.chart_doc.heatmap_year,
 =======
 					label: __(this.chart_settings.heatmap_year) || __(this.chart_doc.heatmap_year),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					options: frappe.dashboard_utils.get_years_since_creation(
 						frappe.boot.user.creation
 					),
@@ -242,7 +246,11 @@ export default class ChartWidget extends Widget {
 					placeholder: "Date Range",
 =======
 					placeholder: __("Date Range"),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					input_class: "input-xs",
 					default: [this.chart_settings.from_date, this.chart_settings.to_date],
 					value: [this.chart_settings.from_date, this.chart_settings.to_date],
@@ -294,7 +302,11 @@ export default class ChartWidget extends Widget {
 			return data;
 =======
 			return frappe.report_utils.make_chart_options(columns, result, chart_fields).data;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -421,7 +433,11 @@ export default class ChartWidget extends Widget {
 			primary_action_label: "Set",
 =======
 			primary_action_label: __("Set"),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 
 		dialog.show();
@@ -497,7 +513,11 @@ export default class ChartWidget extends Widget {
 							`<li><a class="dropdown-item" data-action="${action.action}">${__(
 								action.label
 							)}</a></li>`
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					)
 					.join("")}
 			</ul>

@@ -6,7 +6,11 @@ import frappe
 <<<<<<< HEAD
 from frappe.utils.redis_queue import RedisQueue
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("create-rq-users")
@@ -27,7 +31,11 @@ def create_rq_users(set_admin_password=False, use_rq_auth=False):
 <<<<<<< HEAD
 =======
 	from frappe.utils.redis_queue import RedisQueue
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	acl_file_path = os.path.abspath("../config/redis_queue.acl")
 

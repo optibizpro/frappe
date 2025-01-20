@@ -83,7 +83,11 @@ class DbManager:
 				raise Exception("`gzip` not installed")
 		else:
 			command.extend(["cat", source, "|"])
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		# Newer versions of MariaDB add in a line that'll break on older versions, so remove it
 		command.extend(["sed", r"'/\/\*M\{0,1\}!999999\\- enable the sandbox mode \*\//d'", "|"])
@@ -129,4 +133,8 @@ class DbManager:
 
 		execute_in_shell(" ".join(command), check_exit_code=True, verbose=verbose)
 		frappe.cache.delete_keys("")  # Delete all keys associated with this site.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

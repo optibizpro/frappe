@@ -25,7 +25,11 @@ from frappe.utils import cint, cstr, get_assets_json
 <<<<<<< HEAD
 =======
 from frappe.utils.change_log import has_app_update_notifications
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.data import add_to_date
 
 
@@ -55,22 +59,37 @@ def clear_sessions(user=None, keep_current=False, force=False):
 
 
 def get_sessions_to_clear(user=None, keep_current=False, device=None, force=False):
+<<<<<<< HEAD
+=======
 	"""Returns sessions of the current user. Called at login / logout
 
 	:param user: user name (default: current user)
 	:param keep_current: keep current session (default: false)
 	:param device: delete sessions of this device (default: desktop, mobile)
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	for sid in get_sessions_to_clear(user, keep_current, force):
 		delete_session(sid, reason=reason)
 
 
 def get_sessions_to_clear(user=None, keep_current=False, force=False):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+	"""Returns sessions of the current user. Called at login / logout
+=======
 	"""Return sessions of the current user. Called at login / logout.
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	:param user: user name (default: current user)
 	:param keep_current: keep current session (default: false)
+<<<<<<< HEAD
+<<<<<<< HEAD
+	:param device: delete sessions of this device (default: desktop, mobile)
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	:param force: ignore simultaneous sessions count, log the user out of all except current (default: false)
 	"""
 	if not user:
@@ -84,7 +103,11 @@ def get_sessions_to_clear(user=None, keep_current=False, force=False):
 		device = (device,)
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	offset = 0
 	if not force and user == frappe.session.user:
 		simultaneous_sessions = frappe.db.get_value("User", user, "simultaneous_sessions") or 1
@@ -95,7 +118,11 @@ def get_sessions_to_clear(user=None, keep_current=False, force=False):
 	session_id = frappe.qb.from_(session).where((session.user == user) & (session.device.isin(device)))
 =======
 	session_id = frappe.qb.from_(session).where(session.user == user)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if keep_current:
 		if not force:
 			offset = max(0, offset - 1)
@@ -120,7 +147,11 @@ def delete_session(sid=None, user=None, reason="Session Expired"):
 	frappe.cache().hdel("session", sid)
 	frappe.cache().hdel("last_db_session_update", sid)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if sid and not user:
 		table = frappe.qb.DocType("Sessions")
 		user_details = frappe.qb.from_(table).where(table.sid == sid).select(table.user).run(as_dict=True)
@@ -132,6 +163,10 @@ def delete_session(sid=None, user=None, reason="Session Expired"):
 	frappe.db.commit()
 
 	frappe.cache.hdel("session", sid)
+<<<<<<< HEAD
+	frappe.cache.hdel("last_db_session_update", sid)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def clear_all_sessions(reason=None):
@@ -165,7 +200,11 @@ def get_expired_sessions():
 	return (
 		frappe.qb.from_(sessions).select(sessions.sid).where(sessions.lastupdate < get_expired_threshold())
 	).run(pluck=True)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def clear_expired_sessions():
@@ -204,7 +243,7 @@ def get():
 		if frappe.local.request:
 			bootinfo["change_log"] = get_change_log()
 
-	bootinfo["metadata_version"] = frappe.cache.get_value("metadata_version")
+	bootinfo["metadata_version"] = frappe.client_cache.get_value("metadata_version")
 	if not bootinfo["metadata_version"]:
 		bootinfo["metadata_version"] = frappe.reset_metadata_version()
 
@@ -219,10 +258,18 @@ def get():
 	bootinfo["disable_async"] = frappe.conf.disable_async
 
 	bootinfo["setup_complete"] = cint(frappe.get_system_settings("setup_complete"))
+<<<<<<< HEAD
+	apps = get_apps() or []
+	bootinfo["apps_data"] = {
+		"apps": apps,
+		"is_desk_apps": 1 if bool(is_desk_apps(apps)) else 0,
+		"default_path": get_default_path(apps) or "",
+=======
 	bootinfo["apps_data"] = {
 		"apps": get_apps() or [],
 		"is_desk_apps": 1 if bool(is_desk_apps(get_apps())) else 0,
 		"default_path": get_default_path() or "",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	bootinfo["desk_theme"] = frappe.db.get_value("User", frappe.session.user, "desk_theme") or "Light"
@@ -252,6 +299,12 @@ def generate_csrf_token():
 
 
 class Session:
+<<<<<<< HEAD
+	__slots__ = ("user", "user_type", "full_name", "data", "time_diff", "sid", "_update_in_cache")
+
+	def __init__(self, user, resume=False, full_name=None, user_type=None):
+		self.sid = cstr(frappe.form_dict.get("sid") or unquote(frappe.request.cookies.get("sid", "Guest")))
+=======
 	__slots__ = ("_update_in_cache", "data", "full_name", "sid", "time_diff", "user", "user_type")
 
 	def __init__(self, user, resume=False, full_name=None, user_type=None):
@@ -262,6 +315,10 @@ class Session:
 			frappe.form_dict.pop("sid", None) or unquote(frappe.request.cookies.get("sid", "Guest"))
 		)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.user = user
 		self.user_type = user_type
 		self.full_name = full_name
@@ -309,7 +366,11 @@ class Session:
 <<<<<<< HEAD
 					"device": self.device,
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 			)
 
@@ -352,6 +413,9 @@ class Session:
 		frappe.cache().hset("session", self.data.sid, self.data)
 =======
 			.columns(Sessions.sessiondata, Sessions.user, Sessions.lastupdate, Sessions.sid, Sessions.status)
+<<<<<<< HEAD
+			.insert((str(self.data["data"]), self.data["user"], now, self.data["sid"], "Active"))
+=======
 			.insert(
 				(
 					frappe.as_json(self.data["data"], indent=None, separators=(",", ":")),
@@ -361,9 +425,14 @@ class Session:
 					"Active",
 				)
 			)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		).run()
 		frappe.cache.hset("session", self.data.sid, self.data)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def resume(self):
 		"""non-login request: load a session"""
@@ -459,7 +528,11 @@ class Session:
 
 		if record:
 			data = frappe.parse_json(record[0][1] or "{}")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			data.user = record[0][0]
 		else:
 			self._delete_session()
@@ -489,7 +562,11 @@ class Session:
 		self.data["data"]["last_updated"] = now
 		self.data["data"]["lang"] = str(frappe.lang)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		# update session in db
 		last_updated = self.data.data.last_updated
@@ -502,7 +579,11 @@ class Session:
 =======
 			self.data.data.last_updated = now
 			self.data.data.lang = str(frappe.lang)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			# update sessions table
 			(
 				frappe.qb.update(Sessions)
@@ -514,7 +595,11 @@ class Session:
 					Sessions.sessiondata,
 					frappe.as_json(self.data["data"], indent=None, separators=(",", ":")),
 				)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				.set(Sessions.lastupdate, now)
 			).run()
 
@@ -524,10 +609,19 @@ class Session:
 			updated_in_db = True
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 		frappe.cache().hset("session", self.sid, self.data)
+=======
+<<<<<<< HEAD
+			frappe.cache.hset("last_db_session_update", self.sid, now)
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			frappe.cache.hset("session", self.sid, self.data)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 			frappe.cache.hset("session", self.sid, self.data)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		return updated_in_db
 
@@ -572,7 +666,11 @@ def get_expiry_period(device="desktop"):
 =======
 def get_expired_threshold():
 	"""Get cutoff time before which all sessions are considered expired."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	now = frappe.utils.now()
 	expiry_in_seconds = get_expiry_in_seconds()
@@ -581,7 +679,11 @@ def get_expired_threshold():
 
 
 def get_expiry_period():
+<<<<<<< HEAD
+	exp_sec = frappe.defaults.get_global_default("session_expiry") or "240:00:00"
+=======
 	exp_sec = frappe.get_system_settings("session_expiry") or "240:00:00"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	# incase seconds is missing
 	if len(exp_sec.split(":")) == 2:

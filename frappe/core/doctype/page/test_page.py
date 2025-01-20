@@ -27,10 +27,18 @@ class UnitTestPage(UnitTestCase):
 
 
 class TestPage(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_naming(self):
 		self.assertRaises(
 			frappe.NameError,
+<<<<<<< HEAD
+			frappe.get_doc(dict(doctype="Page", page_name="DocType", module="Core")).insert,
+		)
+=======
 			frappe.get_doc(doctype="Page", page_name="DocType", module="Core").insert,
 		)
 
@@ -48,3 +56,4 @@ class TestPage(IntegrationTestCase):
 		dir_path = os.path.join(module_path, "page", frappe.scrub(page.name))
 
 		self.assertFalse(os.path.exists(dir_path))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

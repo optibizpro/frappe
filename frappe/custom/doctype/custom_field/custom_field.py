@@ -117,6 +117,7 @@ class CustomField(Document):
 		translatable: DF.Check
 		unique: DF.Check
 		width: DF.Data | None
+
 	# end: auto-generated types
 
 	def autoname(self):
@@ -227,7 +228,11 @@ class CustomField(Document):
 		frappe.db.delete("Property Setter", {"doc_type": self.dt, "field_name": self.fieldname})
 =======
 		delete_property_setter(self.dt, field_name=self.fieldname)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		# update doctype layouts
 		doctype_layouts = frappe.get_all("DocType Layout", filters={"document_type": self.dt}, pluck="name")

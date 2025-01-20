@@ -20,7 +20,11 @@ export default class GridRow {
 		this.row = $('<div class="data-row row"></div>')
 =======
 		this.row = $('<div class="data-row row m-0"></div>')
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.appendTo(this.wrapper)
 			.on("click", function (e) {
 				if (
@@ -48,7 +52,11 @@ export default class GridRow {
 		if (!this.render_row) return;
 =======
 		if (!render_row) return;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		this.set_data();
 		this.wrapper.appendTo(this.parent);
@@ -102,7 +110,11 @@ export default class GridRow {
 		this.grid.refresh_remove_rows_button();
 =======
 		this.grid.debounced_refresh_remove_rows_button();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	remove() {
 		var me = this;
@@ -142,7 +154,11 @@ export default class GridRow {
 						() => {
 							frappe.model.clear_doc(this.doc.doctype, this.doc.name);
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							this.frm.script_manager.trigger(
 								this.grid.df.fieldname + "_remove",
 								this.doc.doctype,
@@ -158,7 +174,11 @@ export default class GridRow {
 						console.trace(e); // eslint-disable-line
 =======
 						console.trace(e);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					});
 			} else {
 				let data = null;
@@ -298,7 +318,11 @@ export default class GridRow {
 				`<div class="row-index sortable-handle col">
 =======
 				`<div class="row-index sortable-handle grid-static-col col">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					<span>${txt}</span>
 				</div>`
 			)
@@ -406,7 +430,11 @@ export default class GridRow {
 				<div class="col grid-static-col d-flex justify-content-center" style="cursor: pointer;">
 =======
 				<div class="col grid-static-col pointer">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					<a>${frappe.utils.icon("setting-gear", "sm", "", "filter: opacity(0.5)")}</a>
 				</div>
 			`)
@@ -448,7 +476,11 @@ export default class GridRow {
 <<<<<<< HEAD
 			this.validate_columns_width();
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.columns = {};
 			this.update_user_settings_for_grid();
 			this.grid_settings_dialog.hide();
@@ -633,7 +665,11 @@ export default class GridRow {
 									data-fieldname='${docfield.fieldname}' style='background-color: var(--modal-bg); display: inline'>
 							</div>
 							<div class='col-1' style='padding-top: 3px;'>
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								<a class='text-muted remove-field' data-fieldname='${docfield.fieldname}'>
 									<i class='fa fa-trash-o' aria-hidden='true'></i>
 								</a>
@@ -713,7 +749,11 @@ export default class GridRow {
 			frappe.throw(__("The total column width cannot be more than 10."));
 		}
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	remove_selected_column() {
@@ -768,7 +808,11 @@ export default class GridRow {
 =======
 		let total_colsize = 0;
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.grid.visible_columns.forEach((col, ci) => {
 			// to get update df for the row
 			let df = fields.find((field) => field?.fieldname === col[0].fieldname);
@@ -786,7 +830,11 @@ export default class GridRow {
 			let txt = this.doc
 				? frappe.format(this.doc[df.fieldname], df, null, this.doc)
 				: __(df.label, null, df.parent);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if (this.doc && df.fieldtype === "Select") {
 				txt = __(txt);
@@ -995,7 +1043,11 @@ export default class GridRow {
 =======
 		let input_in_focus = false;
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// prevent random layout shifts caused by widgets and on click position elements inside view (UX).
 		function on_input_focus(el) {
 			input_in_focus = true;
@@ -1048,7 +1100,11 @@ export default class GridRow {
 			input_field.trigger("focus");
 		}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var $col = $(
 			'<div class="col grid-static-col col-xs-' + colsize + " " + add_class + '"></div>'
 		)
@@ -1111,7 +1167,11 @@ export default class GridRow {
 				horizontal = false;
 			})
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.on("click", function (event) {
 				if (frappe.ui.form.editable_row !== me) {
 					var out = me.toggle_editable_row();
@@ -1132,7 +1192,11 @@ export default class GridRow {
 				!input_in_focus && first_input_field.trigger("focus");
 =======
 				!input_in_focus && trigger_focus(first_input_field, $(col).data("df"));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				if (event.pointerType == "touch") {
 					first_input_field.length && on_input_focus(first_input_field);
@@ -1231,7 +1295,11 @@ export default class GridRow {
 						: __(df.label);
 =======
 						: __(df.label, null, df.parent);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 					this.refresh_field(df.fieldname, txt);
 				}
@@ -1304,8 +1372,16 @@ export default class GridRow {
 		if (field.$input) {
 			field.$input.on("keydown", function (e) {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+				var { TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
+				if (![TAB, UP_ARROW, DOWN_ARROW].includes(e.which)) {
+=======
 				var { TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
 				if (!in_list([TAB, UP_ARROW, DOWN_ARROW], e.which)) {
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 				var { ESCAPE, TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
 				if (![TAB, UP_ARROW, DOWN_ARROW, ESCAPE].includes(e.which)) {
@@ -1322,7 +1398,11 @@ export default class GridRow {
 				if (!in_list(ignore_fieldtypes, fieldtype) && ctrl_key && e.which !== TAB) {
 =======
 				if (!ignore_fieldtypes.includes(fieldtype) && ctrl_key && e.which !== TAB) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					me.add_new_row_using_keys(e);
 					return;
 				}
@@ -1337,7 +1417,11 @@ export default class GridRow {
 					if (in_list(ignore_fieldtypes, fieldtype) && !e.altKey) {
 =======
 					if (ignore_fieldtypes.includes(fieldtype) && !e.altKey) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						return false;
 					}
 					if (field.autocomplete_open) {
@@ -1642,7 +1726,11 @@ export default class GridRow {
 =======
 				!frappe.model.layout_fields.includes(df.fieldtype) &&
 				!blacklist.includes(df.fieldname);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			return visible ? df : null;
 		});

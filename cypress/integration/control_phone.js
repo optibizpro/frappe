@@ -61,7 +61,11 @@ context("Control Phone", () => {
 		cy.get(".phone-picker").findByRole("searchbox").click().type(search_text);
 =======
 		cy.get(".phone-picker").get(".search-phones").click().type(search_text);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".phone-section .phone-wrapper:not(.hidden)").then((i) => {
 			cy.get(`.phone-section .phone-wrapper[id*="${search_text.toLowerCase()}"]`).then(
 				(countries) => {

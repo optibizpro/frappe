@@ -18,6 +18,7 @@ from typing import Any, Literal, Optional, TypeVar
 from urllib.parse import parse_qsl, quote, urlencode, urljoin, urlparse, urlunparse
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
+import pytz
 from click import secho
 from dateutil import parser
 from dateutil.parser import ParserError
@@ -38,6 +39,8 @@ from frappe.utils.number_format import NUMBER_FORMAT_MAP, NumberFormat
 
 DateTimeLikeObject = str | datetime.date | datetime.datetime
 NumericType = int | float
+<<<<<<< HEAD
+=======
 TimespanOptions = Literal[
 	"last week",
 	"last month",
@@ -58,6 +61,10 @@ TimespanOptions = Literal[
 	"next year",
 ]
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 if typing.TYPE_CHECKING:
@@ -149,7 +156,11 @@ def getdate(
 				frappe._("{} is not a valid date string.").format(frappe.bold(string_date)),
 				title=frappe._("Invalid Date"),
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_datetime(
@@ -161,6 +172,15 @@ def get_datetime(
 
 	if isinstance(datetime_str, datetime.datetime | datetime.timedelta):
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	if datetime_str is None:
+		return now_datetime()
+
+	if isinstance(datetime_str, datetime.datetime | datetime.timedelta):
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""Return the below mentioned values based on the given `datetime_str`:
 
 	* If `datetime_str` is None, returns datetime object of current datetime
@@ -177,6 +197,10 @@ def get_datetime(
 
 	elif isinstance(datetime_str, datetime.datetime | datetime.timedelta):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return datetime_str
 
 	elif isinstance(datetime_str, list | tuple):
@@ -191,13 +215,7 @@ def get_datetime(
 	try:
 		# PERF: Our DATETIME_FORMAT is same as ISO format.
 		# fromisoformat is written in C so it's better than using strptime parser
-		dt_object = datetime.datetime.fromisoformat(datetime_str)
-
-		# fromisoformat also adds tzinfo if present in src string,
-		# so we strip it before returning
-		if dt_object.tzinfo:
-			return dt_object.replace(tzinfo=None)
-		return dt_object
+		return datetime.datetime.fromisoformat(datetime_str)
 	except ValueError:
 		return parser.parse(datetime_str)
 
@@ -241,7 +259,11 @@ def to_timedelta(time_str: str | datetime.time) -> datetime.timedelta:
 	"""Return a `datetime.timedelta` object from the given string or `datetime.time` object.
 	If the given argument is not a string or a `datetime.time` object, it is returned as is.
 	"""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if isinstance(time_str, datetime.time):
 		time_str = str(time_str)
 
@@ -358,12 +380,20 @@ def add_years(date: DateTimeLikeObject, years: NumericType) -> DateTimeLikeObjec
 
 
 def date_diff(string_ed_date: DateTimeLikeObject, string_st_date: DateTimeLikeObject) -> int:
+<<<<<<< HEAD
 	"""Return the difference between given two dates in days."""
+=======
+	"""Returns the difference between given two dates in days."""
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	return days_diff(string_ed_date, string_st_date)
 
 
 def days_diff(string_ed_date: DateTimeLikeObject, string_st_date: DateTimeLikeObject) -> int:
+<<<<<<< HEAD
 	"""Return the difference between given two dates in days."""
+=======
+	"""Returns the difference between given two dates in days."""
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	return (getdate(string_ed_date) - getdate(string_st_date)).days
 
 
@@ -391,7 +421,11 @@ def time_diff_in_hours(string_ed_date: DateTimeLikeObject, string_st_date: DateT
 
 <<<<<<< HEAD
 def now_datetime():
+<<<<<<< HEAD
 	dt = convert_utc_to_system_timezone(datetime.datetime.utcnow())
+=======
+	dt = convert_utc_to_system_timezone(datetime.datetime.now(pytz.UTC))
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	return dt.replace(tzinfo=None)
 =======
 def now_datetime() -> datetime.datetime:
@@ -429,23 +463,45 @@ def get_time_zone():
 		"`get_time_zone` is deprecated and will be removed in version 15. Use `get_system_timezone` instead."
 	)
 	return get_system_timezone()
+<<<<<<< HEAD
+=======
 
 
 def convert_utc_to_timezone(utc_timestamp, time_zone):
 	from pytz import UnknownTimeZoneError, timezone
 
 	utcnow = timezone("UTC").localize(utc_timestamp)
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 def get_system_timezone() -> str:
 	"""Return the system timezone."""
 	return frappe.get_system_settings("time_zone") or "Asia/Kolkata"  # Default to India ?!
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
+<<<<<<< HEAD
+def convert_utc_to_timezone(utc_timestamp, time_zone):
+	from pytz import UnknownTimeZoneError, timezone
+
+	if utc_timestamp.tzinfo is None:
+		utc_timestamp = timezone("UTC").localize(utc_timestamp)
+	try:
+		return utc_timestamp.astimezone(timezone(time_zone))
+	except UnknownTimeZoneError:
+		return utc_timestamp
+
+
+def get_datetime_in_timezone(time_zone):
+	utc_timestamp = datetime.datetime.now(pytz.UTC)
+=======
 def convert_utc_to_timezone(utc_timestamp: datetime.datetime, time_zone: str) -> datetime.datetime:
 	if utc_timestamp.tzinfo is None:
 		utc_timestamp = utc_timestamp.replace(tzinfo=ZoneInfo("UTC"))
 
+<<<<<<< HEAD
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	try:
 		return utc_timestamp.astimezone(ZoneInfo(time_zone))
 	except ZoneInfoNotFoundError:
@@ -455,6 +511,7 @@ def convert_utc_to_timezone(utc_timestamp: datetime.datetime, time_zone: str) ->
 def get_datetime_in_timezone(time_zone: str) -> datetime.datetime:
 	"""Return the current datetime in the given timezone (e.g. 'Asia/Kolkata')."""
 	utc_timestamp = datetime.datetime.now(datetime.timezone.utc)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	return convert_utc_to_timezone(utc_timestamp, time_zone)
 
 
@@ -463,7 +520,11 @@ def convert_utc_to_system_timezone(utc_timestamp):
 =======
 def convert_utc_to_system_timezone(utc_timestamp: datetime.datetime) -> datetime.datetime:
 	"""Return the given UTC `datetime` timestamp in system timezone."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	time_zone = get_system_timezone()
 	return convert_utc_to_timezone(utc_timestamp, time_zone)
 
@@ -532,6 +593,12 @@ def get_first_day(dt, d_years=0, d_months=0, as_str: Literal[True] = False) -> s
 # TODO: first arg
 def get_first_day(dt, d_years: int = 0, d_months: int = 0, as_str: bool = False) -> str | datetime.date:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""
 	Returns the first day of the month for the date specified by date object
 	Also adds `d_years` and `d_months` if specified
@@ -717,7 +784,11 @@ def get_time(
 
 	If the given argument is already a `datetime.time` object, it is returned as is."""
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if isinstance(time_str, datetime.datetime):
 		return time_str.time()
 	elif isinstance(time_str, datetime.time):
@@ -777,6 +848,12 @@ def get_user_time_format() -> str:
 
 def format_date(string_date=None, format_string: str | None = None, parse_day_first: bool = False) -> str:
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""Converts the given string date to :data:`user_date_format`
 =======
 	"""Convert the given string date to :data:`user_date_format`.
@@ -1032,8 +1109,15 @@ def get_timespan_date_range(timespan: str) -> tuple[datetime.datetime, datetime.
 		),
 	}
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	If `datetime` argument is not provided, the current month name is returned.
 	"""
 	if not datetime:
@@ -1045,10 +1129,14 @@ def get_timespan_date_range(timespan: str) -> tuple[datetime.datetime, datetime.
 	return calendar.month_name[datetime.month]
 
 
+<<<<<<< HEAD
+def get_timespan_date_range(timespan: str) -> tuple[datetime.datetime, datetime.datetime] | None:
+=======
 def get_timespan_date_range(
 	timespan: TimespanOptions,
 ) -> tuple[datetime.datetime, datetime.datetime] | None:
 	"""Return the date range (start_date, end_date) tuple for the given timespan."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	today = getdate()
 
 	match timespan:
@@ -1230,13 +1318,21 @@ def flt(s: NumericType | str, precision: int | None = None) -> float: ...
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 def flt(s: NumericType | str, precision: int | None = None, rounding_method: str | None = None) -> float:
 	"""Convert to float (ignoring commas in string)
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 @typing.overload
 def flt(s: None) -> Literal[0.0]: ...
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+def flt(s: NumericType | str, precision: int | None = None, rounding_method: str | None = None) -> float:
+	"""Convert to float (ignoring commas in string)
+=======
 def flt(
 	s: NumericType | str | None, precision: int | None = None, rounding_method: str | None = None
 ) -> float:
@@ -1306,6 +1402,11 @@ def cint(s: NumericType | str | None, default: int = 0) -> int:
 			return int(float(s))
 		except Exception:
 			return default
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	if s is None:
 		return default
@@ -1318,6 +1419,7 @@ def cint(s: NumericType | str | None, default: int = 0) -> int:
 			return int(float(s))
 		except Exception:
 			return default
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def floor(s: NumericType | str) -> int:
@@ -1385,7 +1487,11 @@ def rounded(num, precision=0, rounding_method=None):
 		return _bankers_rounding(num, precision)
 	elif rounding_method == "Banker's Rounding (legacy)":
 		return _bankers_rounding_legacy(num, precision)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	elif rounding_method == "Commercial Rounding":
 		return _round_away_from_zero(num, precision)
 	else:
@@ -1521,9 +1627,18 @@ def encode(obj, encoding="utf-8"):
 def parse_val(v):
 <<<<<<< HEAD
 	"""Converts to simple datatypes from SQL query results"""
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 	"""Convert to simple datatypes from SQL query results."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+	"""Convert to simple datatypes from SQL query results."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if isinstance(v, datetime.date | datetime.datetime):
 		v = str(v)
 	elif isinstance(v, datetime.timedelta):
@@ -1919,7 +2034,11 @@ def pretty_date(iso_datetime: datetime.datetime | str) -> str:
 	now_dt = now_datetime()
 	locale = frappe.local.lang.replace("-", "_") if frappe.local.lang else None
 	return format_timedelta(iso_datetime - now_dt, add_direction=True, locale=locale)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def comma_or(some_list: list | tuple, add_quotes=True) -> str:
@@ -1944,6 +2063,11 @@ def comma_and(some_list: list | tuple, add_quotes=True) -> str:
 
 <<<<<<< HEAD
 def comma_sep(some_list, pattern, add_quotes=True):
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 	"""Return the given list or tuple as a comma separated string, with the last item joined by the given string format pattern.
@@ -1953,6 +2077,10 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 	e.g. if `some_list` is ['a', 'b', 'c'] and `pattern` is '{0} or {1}', the output will be 'a, b or c'
 	"""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -1971,6 +2099,11 @@ def comma_sep(some_list: list | tuple, pattern: str, add_quotes=True) -> str:
 
 <<<<<<< HEAD
 def new_line_sep(some_list):
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 def new_line_sep(some_list: list | tuple) -> str:
 	"""Return the given list or tuple as a new line separated string.
@@ -1978,6 +2111,10 @@ def new_line_sep(some_list: list | tuple) -> str:
 	e.g. ['', 'Paid', 'Unpaid'] -> '\n Paid\n Unpaid'
 	"""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if isinstance(some_list, list | tuple):
 		# list(some_list) is done to preserve the existing list
 		some_list = [str(s) for s in list(some_list)]
@@ -2217,7 +2354,11 @@ def filter_operator_is(value: str, pattern: str) -> bool:
 		return not is_set()
 	else:
 		frappe.throw(frappe._(f"Invalid argument for operator 'IS': {pattern}"))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 operator_map = {
@@ -2302,6 +2443,12 @@ def get_filter(doctype: str, filters: FilterSignature, filters_config=None) -> "
 		ft = filters[0]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not isinstance(f, list | tuple):
 		frappe.throw(frappe._("Filter must be a tuple or list (in a list)"))
 
@@ -2401,7 +2548,11 @@ def _sanitize_column(column_name: str, db_type: str) -> None:
 	if frappe.db and frappe.db.db_type == "mariadb":
 =======
 	if db_type == "mariadb":
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		# strip mariadb specific comments which are like python single line comments
 		column_name = MARIADB_SPECIFIC_COMMENT.sub("", column_name)
 
@@ -2884,7 +3035,11 @@ def map_trackers(url_trackers: dict, create: bool = False):
 	return frappe_trackers
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 # This is used in test to count memory overhead of default imports.
 def _get_rss_memory_usage():
 	import psutil

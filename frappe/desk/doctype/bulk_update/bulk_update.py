@@ -6,6 +6,7 @@ from frappe import _
 from frappe.core.doctype.submission_queue.submission_queue import queue_submission
 from frappe.model.document import Document
 from frappe.utils import cint
+from frappe.utils.deprecations import deprecated
 from frappe.utils.scheduler import is_scheduler_inactive
 
 
@@ -25,9 +26,14 @@ class BulkUpdate(Document):
 		field: DF.Literal[None]
 		limit: DF.Int
 		update_value: DF.SmallText
+
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@frappe.whitelist()
 	def bulk_update(self):
 		self.check_permission("write")
@@ -48,7 +54,11 @@ class BulkUpdate(Document):
 		return submit_cancel_or_update_docs(
 			self.document_type, docnames, "update", {self.field: self.update_value}
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		condition = ""
 		if self.condition:
@@ -114,7 +124,11 @@ def submit_cancel_or_update_docs(doctype, docnames, action="submit", data=None, 
 
 
 def _bulk_action(doctype, docnames, action, data, task_id=None):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if data:
 		data = frappe.parse_json(data)
 
@@ -157,9 +171,22 @@ def _bulk_action(doctype, docnames, action, data, task_id=None):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+@deprecated
+def show_progress(docnames, message, i, description):
+	n = len(docnames)
+	frappe.publish_progress(float(i) * 100 / n, title=message, description=description)
+<<<<<<< HEAD
+=======
+=======
+from frappe.deprecation_dumpster import show_progress
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 def show_progress(docnames, message, i, description):
 	n = len(docnames)
 	frappe.publish_progress(float(i) * 100 / n, title=message, description=description)
 =======
 from frappe.deprecation_dumpster import show_progress
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

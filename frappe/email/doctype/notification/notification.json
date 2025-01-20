@@ -291,6 +291,11 @@
    "options": "Markdown\nHTML\nPlain Text"
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "depends_on": "eval:doc.document_type && (doc.event==\"Minutes After\" || doc.event==\"Minutes Before\")",
@@ -314,6 +319,10 @@
    "label": "Last Run",
    "read_only": 1
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "icon": "fa fa-envelope",
@@ -322,8 +331,17 @@
 <<<<<<< HEAD
  "modified": "2024-07-04 05:50:40.595130",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+ "modified": "2024-07-04 05:53:40.595130",
+=======
  "modified": "2024-09-12 10:28:35.077180",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-09-12 10:28:35.077180",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Email",
  "name": "Notification",

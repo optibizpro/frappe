@@ -263,7 +263,11 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 =======
 					read_only:
 						(this?.read_only_setters && this.read_only_setters.includes(setter)) || 0,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					default: this.setters[setter],
 				});
 			});
@@ -615,7 +619,11 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 =======
 		if (results.length) {
 			results.forEach((result) => {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				result.checked = 0;
 				this.results.push(result);
 			});
@@ -639,7 +647,11 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 		let parent_names = [];
 		if (results.length) {
 			parent_names = results.map((v) => v.name);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		return parent_names;
 	}

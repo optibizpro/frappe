@@ -25,9 +25,14 @@ class WebhookRequestLog(Document):
 		url: DF.Data | None
 		user: DF.Link | None
 		webhook: DF.Link | None
+
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@staticmethod
 	def clear_old_logs(days=30):
 		from frappe.query_builder import Interval
@@ -38,4 +43,8 @@ class WebhookRequestLog(Document):
 		frappe.db.delete(table, filters=(table.modified < (Now() - Interval(days=days))))
 =======
 		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

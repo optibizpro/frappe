@@ -47,6 +47,7 @@ class Contact(Document):
 		sync_with_google_contacts: DF.Check
 		unsubscribed: DF.Check
 		user: DF.Link | None
+
 	# end: auto-generated types
 
 	def autoname(self):
@@ -73,7 +74,11 @@ class Contact(Document):
 		if frappe.db.exists("Contact", self.name):
 			self.name = append_number_if_name_exists("Contact", self.name)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def validate(self):
 		self.full_name = self._get_full_name()
 		self.set_primary_email()
@@ -286,7 +291,11 @@ def get_default_contact(doctype, name):
 			dl.parenttype = 'Contact'""",
 =======
 			dl.parenttype = 'Contact' """,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		(doctype, name),
 		as_dict=True,
 	)
@@ -368,7 +377,11 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 			`tabContact`.name, `tabContact`.first_name, `tabContact`.last_name
 =======
 			`tabContact`.name, `tabContact`.full_name, `tabContact`.company_name
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		from
 			`tabContact`, `tabDynamic Link`
 		where
@@ -385,7 +398,11 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 =======
 			if(locate(%(_txt)s, `tabContact`.full_name), locate(%(_txt)s, `tabContact`.company_name), 99999),
 			`tabContact`.idx desc, `tabContact`.full_name
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		limit %(start)s, %(page_len)s """,
 		{
 			"txt": "%" + txt + "%",

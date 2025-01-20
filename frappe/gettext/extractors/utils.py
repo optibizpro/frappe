@@ -27,6 +27,8 @@ TRANSLATE_PATTERN = re.compile(
 	r"\s*\)"  # Closing function call ignore leading whitespace/newlines
 )
 
+<<<<<<< HEAD
+=======
 EXCLUDE_SELECT_OPTIONS = [
 	"naming_series",
 	"number_format",
@@ -36,6 +38,7 @@ EXCLUDE_SELECT_OPTIONS = [
 	"icon",
 ]
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 def extract_messages_from_code(code):
 	"""
@@ -91,6 +94,8 @@ def add_line_number(messages, code):
 			newline_i += 1
 		ret.append([line, message, context])
 	return ret
+<<<<<<< HEAD
+=======
 
 
 def extract_messages_from_docfield(doctype: str, field: dict):
@@ -137,3 +142,4 @@ def extract_messages_from_links(doctype: str, links: list[dict]):
 	for link in links:
 		if group := link.get("group"):
 			yield group, f"Group in {doctype}'s connections"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

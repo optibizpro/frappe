@@ -38,6 +38,7 @@ class AssignmentRule(Document):
 		rule: DF.Literal["Round Robin", "Load Balancing", "Based on Field"]
 		unassign_condition: DF.Code | None
 		users: DF.TableMultiSelect[AssignmentRuleUser]
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -57,7 +58,11 @@ class AssignmentRule(Document):
 			frappe.throw(
 				_("Assignment Rule is not allowed on document type {0}").format(frappe.bold(_("ToDo")))
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def validate_assignment_days(self):
 		assignment_days = self.get_assignment_days()

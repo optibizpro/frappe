@@ -117,7 +117,11 @@ def clear_meta_cache(doctype: str = "*"):
 		frappe.cache.delete_keys(key)
 	else:
 		frappe.client_cache.delete_value(key)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def load_meta(doctype):
@@ -154,7 +158,11 @@ class Meta(Document):
 		{
 =======
 		(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"DocField",
 			"DocPerm",
 			"DocType",
@@ -166,7 +174,11 @@ class Meta(Document):
 		}
 =======
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	)
 	standard_set_once_fields = (
 		frappe._dict(fieldname="creation", fieldtype="Datetime"),
@@ -203,7 +215,11 @@ class Meta(Document):
 	@__init__.register(NoneType)
 	def _(self, _args, bootstrap):
 		super().__init__(bootstrap.as_dict())
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.process()
 
 	def load_from_db(self):
@@ -338,7 +354,11 @@ class Meta(Document):
 		"""Return docfield from meta"""
 =======
 		"""Return docfield from meta."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		return self._fields.get(fieldname)
 
@@ -347,7 +367,11 @@ class Meta(Document):
 		"""Returns True if fieldname exists"""
 =======
 		"""Return True if fieldname exists."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		return fieldname in self._fields
 
@@ -357,7 +381,11 @@ class Meta(Document):
 
 =======
 		"""Return label of the given fieldname."""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if df := self.get_field(fieldname):
 			return df.get("label")
 
@@ -370,7 +398,11 @@ class Meta(Document):
 			return str(DEFAULT_FIELD_LABELS[fieldname])
 
 		return "No Label"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def get_options(self, fieldname):
 		return self.get_field(fieldname).options
@@ -606,7 +638,11 @@ class Meta(Document):
 		insert_after_map = {}
 =======
 		insertion_map = {}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		for index, field in enumerate(self.fields):
 			if existing_fields and field.fieldname in existing_fields:
@@ -639,7 +675,11 @@ class Meta(Document):
 							break
 						target_position = current_field
 				insertion_map.setdefault(target_position, []).append(field.fieldname)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			else:
 				# if custom field is at the top, insert after is None
@@ -651,7 +691,11 @@ class Meta(Document):
 =======
 		if insertion_map:
 			_update_field_order_based_on_insert_after(field_order, insertion_map)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		self._update_fields_based_on_order(field_order)
 
@@ -687,8 +731,18 @@ class Meta(Document):
 				not with_virtual_fields
 				and docfield.get("is_virtual")
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				not with_virtual_fields
+				and docfield.get("is_virtual")
+=======
 				(not with_virtual_fields and docfield.get("is_virtual"))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				(not with_virtual_fields and docfield.get("is_virtual"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				or docfield.fieldtype in no_value_fields
 			)
 
@@ -768,7 +822,11 @@ class Meta(Document):
 			)
 			if df.permlevel in permlevel_access
 		)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return permitted_fieldnames
 
 	def get_permlevel_access(self, permission_type="read", parenttype=None, *, user=None):
@@ -1070,4 +1128,8 @@ if typing.TYPE_CHECKING:
 
 	class _Meta(Meta, DocType):
 		pass
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

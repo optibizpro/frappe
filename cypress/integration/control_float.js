@@ -38,7 +38,11 @@ context("Control Float", () => {
 
 =======
 				cy.wait(100);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				cy.get_field("float_number", "Float").focus();
 				cy.wait(100);
 				cy.get_field("float_number", "Float").blur();
@@ -47,7 +51,11 @@ context("Control Float", () => {
 <<<<<<< HEAD
 =======
 				cy.wait(100);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				cy.get_field("float_number", "Float").should("have.value", d.focus_expected);
 			});
 		});
@@ -85,7 +93,11 @@ context("Control Float", () => {
 						input: "2*(2+47)+1,5+1",
 						blur_expected: "100,500",
 						focus_expected: "100,500",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 				],
 			},
@@ -138,7 +150,11 @@ context("Control Float", () => {
 						input: "12.340",
 						blur_expected: "12.340,000",
 						focus_expected: "12.340,000",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 				],
 			},

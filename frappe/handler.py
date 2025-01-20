@@ -39,7 +39,11 @@ ALLOWED_MIMETYPES = (
 <<<<<<< HEAD
 =======
 	"text/csv",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 )
 
 
@@ -114,7 +118,11 @@ def throw_permission_error():
 	frappe.throw(_("Not permitted"), frappe.PermissionError)
 =======
 		frappe.throw_permission_error()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist(allow_guest=True)
@@ -135,6 +143,9 @@ def web_logout():
 <<<<<<< HEAD
 @frappe.whitelist()
 def uploadfile():
+	deprecation_warning(
+		"uploadfile is deprecated and will be removed in v16. Use upload_file instead.",
+	)
 	ret = None
 	check_write_permission(frappe.form_dict.doctype, frappe.form_dict.docname)
 
@@ -203,7 +214,11 @@ def upload_file():
 		check_write_permission(doctype, docname)
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if library_file := frappe.form_dict.get("library_file_name"):
 		frappe.has_permission("File", doc=library_file, throw=True)
 		doc = frappe.get_value(
@@ -221,7 +236,11 @@ def upload_file():
 	if not ignore_permissions:
 		check_write_permission(doctype, docname)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if "file" in files:
 		file = files["file"]
 		content = file.stream.read()
@@ -278,7 +297,11 @@ def check_write_permission(doctype: str | None = None, name: str | None = None):
 =======
 			# If doc inserts fine then only this attachment will be linked see file/utils.py:relink_mismatched_files
 			return
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if check_doctype:
 		frappe.has_permission(doctype, "write", throw=True)
@@ -378,7 +401,11 @@ def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 runserverobj = deprecated(run_doc_method)

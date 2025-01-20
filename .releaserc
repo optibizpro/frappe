@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
 	"branches": ["version-14"],
+=======
+	"branches": ["version-15"],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"plugins": [
 		"@semantic-release/commit-analyzer", {
 			"preset": "angular",
@@ -16,7 +20,7 @@
 		[
 			"@semantic-release/git", {
 				"assets": ["frappe/__init__.py"],
-				"message": "chore(release): Bumped to Version ${nextRelease.version}"
+				"message": "chore(release): Bumped to Version ${nextRelease.version}\n\n${nextRelease.notes}"
 			}
 		],
 		"@semantic-release/github"

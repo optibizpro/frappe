@@ -19,7 +19,11 @@ from frappe.tests import IntegrationTestCase
 
 
 class TestSearch(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		if self._testMethodName == "test_link_field_order":
 			setup_test_link_field_order(self)
@@ -96,7 +100,11 @@ class TestSearch(IntegrationTestCase):
 			output = frappe.response["values"]
 =======
 			output = search_widget(doctype="DocType", txt="pay", page_length=20)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			result = [["found" for x in y if x == "Country"] for y in output]
 			self.assertTrue(["found"] in result)
@@ -109,7 +117,11 @@ class TestSearch(IntegrationTestCase):
 			search_link(
 =======
 			return search_link(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				doctype="DocType",
 				txt=txt,
 				query="frappe.core.report.permitted_documents_for_user.permitted_documents_for_user.query_doctypes",
@@ -120,7 +132,11 @@ class TestSearch(IntegrationTestCase):
 <<<<<<< HEAD
 			return frappe.response["results"]
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		try:
 			frappe.local.lang = "en"
@@ -300,6 +316,10 @@ def teardown_test_link_field_order(TestCase):
 	)
 
 	TestCase.tree_doc.delete()
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 class TestWebsiteSearch(FrappeTestCase):
@@ -318,3 +338,8 @@ class TestWebsiteSearch(FrappeTestCase):
 		response = self.get("/search?q=b")
 		self.assertEqual(response.status_code, 200)
 		self.assertIn("Search Results", response.get_data(as_text=True))
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

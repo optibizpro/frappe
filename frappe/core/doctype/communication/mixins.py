@@ -152,7 +152,11 @@ class CommunicationEmailMixin:
 =======
 		if print_format and frappe.get_system_settings("attach_view_link"):
 			return cstr(self.content) + self.get_attach_link(print_format)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return self.content
 
 	def get_attach_link(self, print_format):
@@ -203,7 +207,11 @@ class CommunicationEmailMixin:
 				"lang": frappe.local.lang,
 =======
 				"lang": print_language or frappe.local.lang,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 			final_attachments.append(d)
 
@@ -328,7 +336,11 @@ class CommunicationEmailMixin:
 <<<<<<< HEAD
 =======
 		print_language=None,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		now=False,
 	):
 		if input_dict := self.sendmail_input_dict(

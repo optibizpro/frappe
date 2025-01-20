@@ -28,7 +28,11 @@ class DeletedDocument(Document):
 		restored: DF.Check
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	no_feed_on_delete = True
 
 	@staticmethod
@@ -40,8 +44,17 @@ class DeletedDocument(Document):
 <<<<<<< HEAD
 		frappe.db.delete(table, filters=(table.modified < (Now() - Interval(days=days))))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		frappe.db.delete(table, filters=(table.modified < (Now() - Interval(days=days))))
+=======
 		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()

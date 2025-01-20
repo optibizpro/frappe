@@ -31,7 +31,11 @@ class UnitTestErrorLog(UnitTestCase):
 
 
 class TestErrorLog(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_error_log(self):
 		"""let's do an error log on error log?"""
 		doc = frappe.new_doc("Error Log")
@@ -92,4 +96,8 @@ class TestExceptionSourceGuessing(IntegrationTestCase):
 		for source, exc in TEST_EXCEPTIONS:
 			result = guess_exception_source(exc)
 			self.assertEqual(result, source)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

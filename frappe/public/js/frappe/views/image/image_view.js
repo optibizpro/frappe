@@ -195,7 +195,11 @@ frappe.views.GalleryView = class GalleryView {
 		});
 =======
 		me.prepare();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	prepare() {
 		// keep only one pswp dom element
@@ -225,7 +229,11 @@ frappe.views.GalleryView = class GalleryView {
 				.map(function (i) {
 					const query = 'img[data-name="' + i._name + '"]';
 					let el = me.wrapper.find(query).get(0);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 					let width, height;
 					if (el) {
@@ -263,7 +271,11 @@ frappe.views.GalleryView = class GalleryView {
 						height: height,
 					};
 				});
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.pswp_items = items;
 			resolve();
 		});
@@ -273,7 +285,11 @@ frappe.views.GalleryView = class GalleryView {
 		this.lib_ready.then(() => this.prepare_pswp_items()).then(() => this._show(docname));
 =======
 		this.prepare_pswp_items().then(() => this._show(docname));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	_show(docname) {
 		const items = this.pswp_items;
@@ -395,5 +411,9 @@ frappe.views.GalleryView = class GalleryView {
 		this.pswp = new frappe.PhotoSwipe(options);
 		this.pswp.init();
 	}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 };

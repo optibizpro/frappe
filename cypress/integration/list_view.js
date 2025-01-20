@@ -20,7 +20,11 @@ context("List View", () => {
 		cy.get(".list-row-container .list-row-checkbox:checked").should("be.visible");
 	});
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	it('enables "Actions" button', { scrollBehavior: false }, () => {
 		const actions = [
 			"Approve",
@@ -30,7 +34,11 @@ context("List View", () => {
 <<<<<<< HEAD
 =======
 			"Clear Assignment",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"Apply Assignment Rule",
 			"Add Tags",
 			"Print",
@@ -50,7 +58,11 @@ context("List View", () => {
 		cy.findByRole("button", { name: "Actions" }).click();
 		cy.get(".dropdown-menu li:visible .dropdown-item")
 			.should("have.length", 8)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.each((el, index) => {
 				cy.wrap(el).contains(actions[index]);
 			})
@@ -66,7 +78,11 @@ context("List View", () => {
 				cy.get_open_dialog().find(".btn-modal-close").click();
 =======
 				cy.hide_dialog();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				cy.reload();
 				cy.clear_filters();
 				cy.get(".list-row-container:visible").should("contain", "Approved");

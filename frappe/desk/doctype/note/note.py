@@ -22,6 +22,7 @@ class Note(Document):
 		public: DF.Check
 		seen_by: DF.Table[NoteSeenBy]
 		title: DF.Data
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -60,7 +61,11 @@ def mark_as_seen(note: str):
 	note: Note = frappe.get_doc("Note", note)
 	note.mark_seen_by(frappe.session.user)
 	note.save(ignore_permissions=True, ignore_version=True)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_permission_query_conditions(user):

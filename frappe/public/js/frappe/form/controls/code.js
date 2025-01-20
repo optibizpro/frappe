@@ -4,6 +4,39 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 		this.load_lib().then(() => this.make_ace_editor());
 	}
 
+<<<<<<< HEAD
+	make_wrapper() {
+		super.make_wrapper();
+		this.set_copy_button();
+	}
+
+	set_copy_button() {
+		if (!this.frm?.doc) {
+			return;
+		}
+
+		const codeField = this.df.fieldtype === "Code";
+		if ((codeField && this.df.read_only === 1) || (codeField && this.frm.doc.docstatus > 0)) {
+			this.button = $(
+				`<button
+					class="btn icon-btn"
+					style="position: absolute; top: 32px; right: 5px;"
+					onmouseover="this.classList.add('btn-default')"
+					onmouseout="this.classList.remove('btn-default')"
+				>
+					<svg class="es-icon es-line  icon-sm" style="" aria-hidden="true">
+						<use class="" href="#es-line-copy-light"></use>
+					</svg>
+				</button>`
+			);
+			this.button.on("click", () => {
+				frappe.utils.copy_to_clipboard(
+					frappe.model.get_value(this.doctype, this.docname, this.df.fieldname)
+				);
+			});
+			this.button.appendTo(this.$wrapper);
+		}
+=======
 	refresh() {
 		super.refresh();
 		if (this.df.fieldtype === "Code") {
@@ -39,6 +72,7 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			frappe.utils.copy_to_clipboard(this.get_model_value() || this.get_value());
 		});
 		this.copy_button.appendTo(this.$wrapper);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
 	make_ace_editor() {
@@ -69,7 +103,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 				`<button class="btn btn-xs btn-default">${this.get_button_label()}</button>`
 =======
 				`<button class="btn btn-xs btn-default mt-2">${this.get_button_label()}</button>`
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 				.click(() => {
 					this.expanded = !this.expanded;
@@ -86,7 +124,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			$(this.ace_editor_target).css("pointer-events", "none");
 		}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.editor.setTheme("ace/theme/tomorrow");
 		this.editor.setOption("showPrintMargin", false);
 		this.editor.setOption("wrap", this.df.wrap);
@@ -112,7 +154,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			const input_value = this.get_input_value();
 			this.parse_validate_and_set_in_model(input_value);
 		}, 300);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// setup autocompletion when it is set the first time
 		Object.defineProperty(this.df, "autocompletions", {
@@ -218,8 +264,16 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			Jinja: "ace/mode/django",
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 			SQL: "ace/mode/sql",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+			SQL: "ace/mode/sql",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		};
 		const language = this.df.options;
 
@@ -228,7 +282,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 <<<<<<< HEAD
 			// eslint-disable-next-line
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			console.warn(
 				`Invalid language option provided for field "${
 					this.df.label
@@ -244,7 +302,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 		this.editor.setKeyboardHandler(
 			`ace/keyboard/${frappe.boot.user.code_editor_type || "vscode"}`
 		);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	parse(value) {

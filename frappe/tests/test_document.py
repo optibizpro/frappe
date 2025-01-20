@@ -12,8 +12,17 @@ from frappe.model.naming import make_autoname, parse_naming_series, revert_serie
 <<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, timeout
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from frappe.tests.utils import FrappeTestCase, timeout
+=======
 from frappe.tests import IntegrationTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import cint, now_datetime, set_request
 from frappe.website.serve import get_response
 
@@ -33,7 +42,11 @@ class CustomNoteWithoutProperty(Note):
 class TestDocument(FrappeTestCase):
 =======
 class TestDocument(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_get_return_empty_list_for_table_field_if_none(self):
 		d = frappe.get_doc({"doctype": "User"})
 		self.assertEqual(d.get("roles"), [])
@@ -235,7 +248,11 @@ class TestDocument(IntegrationTestCase):
 		user = frappe.new_doc("User", first_name="wizard")
 		self.assertEqual(user.first_name, "wizard")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_update_after_submit(self):
 		d = self.test_insert()
 		d.starts_on = "2014-09-09"
@@ -538,7 +555,11 @@ class TestDocumentWebView(FrappeTestCase):
 
 
 class TestDocumentWebView(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def get(self, path, user="Guest"):
 		frappe.set_user(user)
 		set_request(method="GET", path=path)

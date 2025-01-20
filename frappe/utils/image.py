@@ -14,7 +14,11 @@ def resize_images(path, maxdim=700):
 	for basepath, _folders, files in os.walk(path):
 =======
 	for basepath, folders, files in os.walk(path):  # noqa: B007
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		for fname in files:
 			extn = fname.rsplit(".", 1)[1]
 			if extn in ("jpg", "jpeg", "png", "gif"):
@@ -54,7 +58,11 @@ def strip_exif_data(content, content_type) -> bytes:
 def optimize_image(content, content_type, max_width=1920, max_height=1080, optimize=True, quality=85):
 =======
 def optimize_image(content, content_type, max_width=1024, max_height=768, optimize=True, quality=85):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if content_type == "image/svg+xml":
 		return content
 
@@ -66,7 +74,11 @@ def optimize_image(content, content_type, max_width=1024, max_height=768, optimi
 		width, height = image.size
 		max_height = max(min(max_height, height * 0.8), 200)
 		max_width = max(min(max_width, width * 0.8), 200)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		image_format = content_type.split("/")[1]
 		size = max_width, max_height
 		image.thumbnail(size, Image.Resampling.LANCZOS)

@@ -11,7 +11,11 @@ from email.policy import SMTP
 
 from rq.timeouts import JobTimeoutException
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe import _, safe_encode, task
@@ -37,6 +41,7 @@ from frappe.utils import (
 	sbool,
 	split_emails,
 )
+from frappe.utils.deprecations import deprecated
 from frappe.utils.verified_command import get_signed_params
 
 
@@ -162,7 +167,11 @@ class EmailQueue(Document):
 	def send(self, smtp_server_instance: SMTPServer = None):
 =======
 	def send(self, smtp_server_instance: SMTPServer = None, frappe_mail_client: FrappeMail = None):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"""Send emails to recipients."""
 		if not self.can_send_now():
 			return
@@ -171,9 +180,20 @@ class EmailQueue(Document):
 		with SendMailContext(self, smtp_server_instance) as ctx:
 			ctx.fetch_smtp_server()
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		with SendMailContext(self, smtp_server_instance) as ctx:
+			ctx.fetch_smtp_server()
+=======
 		with SendMailContext(self, smtp_server_instance, frappe_mail_client) as ctx:
 			ctx.fetch_outgoing_server()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		with SendMailContext(self, smtp_server_instance, frappe_mail_client) as ctx:
+			ctx.fetch_outgoing_server()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			message = None
 			for recipient in self.recipients:
 				if recipient.is_mail_sent():
@@ -185,6 +205,11 @@ class EmailQueue(Document):
 <<<<<<< HEAD
 				else:
 					if not frappe.flags.in_test or frappe.flags.testing_email:
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 				elif not frappe.flags.in_test or frappe.flags.testing_email:
 					if ctx.email_account_doc.service == "Frappe Mail":
@@ -197,6 +222,10 @@ class EmailQueue(Document):
 						)
 					else:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						ctx.smtp_server.session.sendmail(
 							from_addr=self.sender,
 							to_addrs=recipient.recipient,
@@ -226,8 +255,17 @@ class EmailQueue(Document):
 <<<<<<< HEAD
 			frappe.qb.from_(email_queue).delete().where(email_queue.modified < (Now() - Interval(days=days)))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+			frappe.qb.from_(email_queue).delete().where(email_queue.modified < (Now() - Interval(days=days)))
+=======
 			frappe.qb.from_(email_queue).delete().where(email_queue.creation < (Now() - Interval(days=days)))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+			frappe.qb.from_(email_queue).delete().where(email_queue.creation < (Now() - Interval(days=days)))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		).run()
 
 		# delete child tables, note that this has potential to leave some orphan
@@ -247,7 +285,16 @@ class EmailQueue(Document):
 
 
 <<<<<<< HEAD
+from frappe.deprecation_dumpster import send_mail as _send_mail
+
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+<<<<<<< HEAD
 @task(queue="short")
+<<<<<<< HEAD
+=======
+@deprecated
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 def send_mail(email_queue_name, smtp_server_instance: SMTPServer = None):
 	"""This is equivalent to EmailQueue.send.
 
@@ -255,11 +302,20 @@ def send_mail(email_queue_name, smtp_server_instance: SMTPServer = None):
 	"""
 	record = EmailQueue.find(email_queue_name)
 	record.send(smtp_server_instance=smtp_server_instance)
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+send_mail = task(queue="short")(_send_mail)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 =======
 from frappe.deprecation_dumpster import send_mail as _send_mail
 
 send_mail = task(queue="short")(_send_mail)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class SendMailContext:
@@ -287,12 +343,20 @@ class SendMailContext:
 		if not self.smtp_server:
 =======
 		self.smtp_server: SMTPServer = smtp_server_instance
+<<<<<<< HEAD
+=======
 		self.frappe_mail_client: FrappeMail = frappe_mail_client
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		self.sent_to_atleast_one_recipient = any(
 			rec.recipient for rec in self.queue_doc.recipients if rec.is_mail_sent()
 		)
 		self.email_account_doc = None
 
+<<<<<<< HEAD
+	def fetch_smtp_server(self):
+		self.email_account_doc = self.queue_doc.get_email_account(raise_error=True)
+		if not self.smtp_server:
+=======
 	def fetch_outgoing_server(self):
 		self.email_account_doc = self.queue_doc.get_email_account(raise_error=True)
 
@@ -301,6 +365,10 @@ class SendMailContext:
 				self.frappe_mail_client = self.email_account_doc.get_frappe_mail_client()
 		elif not self.smtp_server:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			self.smtp_server = self.email_account_doc.get_smtp_server()
 
 	def __enter__(self):
@@ -331,7 +399,11 @@ class SendMailContext:
 =======
 		if exc_type:
 			update_fields = {"error": frappe.get_traceback()}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if self.queue_doc.retry < get_email_retry_limit():
 				update_fields.update(
 					{
@@ -369,7 +441,11 @@ class SendMailContext:
 		notification.subject = _("Failed to send email with subject:") + f" {subject}"
 		notification.insert()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def update_recipient_status_to_sent(self, recipient):
 		self.sent_to_atleast_one_recipient = True
 		recipient.update_db(status="Sent", commit=True)
@@ -421,7 +497,11 @@ class SendMailContext:
 			tracker_url = get_url(f"{email_read_tracker_url}?{get_signed_params(params)}")
 
 		elif (
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			self.email_account_doc
 			and self.email_account_doc.track_email_status
 			and self.queue_doc.communication
@@ -436,7 +516,11 @@ class SendMailContext:
 			tracker_url_html = f'<img src="{tracker_url}"/>'
 			return quopri.encodestring(tracker_url_html.encode()).decode()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return ""
 
 	def get_unsubscribe_str(self, recipient_email: str) -> str:
@@ -518,7 +602,11 @@ class SendMailContext:
 		file.update(file_data)
 =======
 		file = frappe.new_doc("File", **file_data)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		file.content = content
 		file.insert()
 
@@ -531,7 +619,11 @@ def bulk_retry(queues):
 def retry_sending(queues: str | list[str]):
 	if not frappe.has_permission("Email Queue", throw=True):
 		return
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if isinstance(queues, str):
 		queues = json.loads(queues)
@@ -548,7 +640,11 @@ def retry_sending(queues: str | list[str]):
 =======
 	# NOTE: this will probably work fine with the way current listview works (showing and selecting 20-20 records)
 	# but, ideally this should be enqueued
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	email_queue = frappe.qb.DocType("Email Queue")
 	frappe.qb.update(email_queue).set(email_queue.status, "Not Sent").set(email_queue.modified, now()).set(
 		email_queue.modified_by, frappe.session.user
@@ -875,12 +971,17 @@ class QueueBuilder:
 			if not smtp_server_instance:
 				email_account = q.get_email_account(raise_error=True)
 				smtp_server_instance = email_account.get_smtp_server()
+<<<<<<< HEAD
 
 			with suppress(Exception):
 				q.send(smtp_server_instance=smtp_server_instance)
 
 		smtp_server_instance.quit()
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if not frappe_mail_client and not smtp_server_instance:
 				email_account = q.get_email_account(raise_error=True)
 
@@ -888,13 +989,18 @@ class QueueBuilder:
 					frappe_mail_client = email_account.get_frappe_mail_client()
 				else:
 					smtp_server_instance = email_account.get_smtp_server()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 			with suppress(Exception):
 				q.send(smtp_server_instance=smtp_server_instance, frappe_mail_client=frappe_mail_client)
 
 		if smtp_server_instance:
 			smtp_server_instance.quit()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def as_dict(self, include_recipients=True):
 		email_account = self.get_outgoing_email_account()

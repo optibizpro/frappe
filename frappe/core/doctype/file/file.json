@@ -219,11 +219,21 @@
  ],
 <<<<<<< HEAD
  "sort_field": "modified",
+<<<<<<< HEAD
  "sort_order": "ASC",
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_field": "creation",
- "sort_order": "DESC",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+ "sort_order": "DESC",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "states": [],
  "title_field": "file_name",
  "track_changes": 1

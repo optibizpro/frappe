@@ -8,6 +8,7 @@ import os
 from functools import lru_cache
 
 import frappe
+from frappe.utils.deprecations import deprecated
 from frappe.utils.momentjs import get_all_timezones
 
 
@@ -38,7 +39,13 @@ def _get_country_timezone_info():
 	return {"country_info": get_all(), "all_timezones": get_all_timezones()}
 
 
+<<<<<<< HEAD
+@deprecated
+def get_translated_dict():
+	return get_translated_countries()
+=======
 from frappe.deprecation_dumpster import get_translated_dict
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
 def get_translated_countries():
@@ -50,7 +57,7 @@ def get_translated_countries():
 	# country names && currencies
 	for country, info in get_all().items():
 		country_name = locale.territories.get((info.get("code") or "").upper())
-		if country_name:
+		if country_name and country != country_name:
 			translated_dict[country] = country_name
 
 	return translated_dict

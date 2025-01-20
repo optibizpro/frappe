@@ -61,14 +61,32 @@ $.extend(frappe.model, {
 			$.each(frappe.route_options, function (fieldname, value) {
 				var df = frappe.meta.has_field(doctype, fieldname);
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (
 					df &&
+<<<<<<< HEAD
 					in_list(["Link", "Data", "Select", "Dynamic Link"], df.fieldtype) &&
+=======
+					["Link", "Data", "Select", "Dynamic Link"].includes(df.fieldtype) &&
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					!df.no_copy
 				) {
 =======
 				if (df && !df.no_copy) {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+=======
+				if (df && !df.no_copy) {
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				if (df && !df.no_copy) {
+>>>>>>> upstream/version-14
 					doc[fieldname] = value;
 				}
 			});
@@ -127,7 +145,11 @@ $.extend(frappe.model, {
 				f.no_default
 			) {
 				return;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 
 			let v = frappe.model.get_default_value(f, doc, parent_doc);
@@ -202,7 +224,11 @@ $.extend(frappe.model, {
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (
 					!user_default &&
 					df.remember_last_selected_value &&

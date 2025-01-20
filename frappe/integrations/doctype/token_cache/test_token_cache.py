@@ -5,7 +5,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["User", "Connected App", "Token Cache"]
 
@@ -23,7 +27,11 @@ class UnitTestTokenCache(UnitTestCase):
 
 
 class TestTokenCache(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		self.token_cache = frappe.get_last_doc("Token Cache")
 		self.token_cache.update({"connected_app": frappe.get_last_doc("Connected App").name})

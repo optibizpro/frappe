@@ -31,7 +31,11 @@ export default class Widget {
 				frappe.utils.icon("drag", "xs"),
 =======
 				frappe.utils.icon("es-line-drag", "xs"),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				null,
 				"drag-handle",
 				__("Drag"),
@@ -117,7 +121,11 @@ export default class Widget {
 		)}</span>`;
 		if (max_chars) {
 			this.title_field[0].setAttribute("title", this.title || this.label);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		this.subtitle && this.subtitle_field.html(this.subtitle);
 	}

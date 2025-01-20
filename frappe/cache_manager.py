@@ -72,7 +72,11 @@ doctype_cache_keys = (
 	"table_columns",
 =======
 	"doctype_form_meta",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"last_modified",
 	"linked_doctypes",
 	"notifications",
@@ -86,7 +90,11 @@ wildcard_keys = (
 	"document_cache::*",
 	"table_columns::*",
 )
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def clear_user_cache(user=None):
@@ -95,7 +103,11 @@ def clear_user_cache(user=None):
 
 	cache = frappe.cache()
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# this will automatically reload the global cache
 	# so it is important to clear this first
@@ -131,9 +143,20 @@ def clear_defaults_cache(user=None):
 		for p in [user, *common_default_keys]:
 			frappe.cache().hdel("defaults", p)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		for p in [user, *common_default_keys]:
+			frappe.cache.hdel("defaults", p)
+=======
 		for key in [user, *common_default_keys]:
 			frappe.client_cache.delete_value(f"defaults::{key}")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		for key in [user, *common_default_keys]:
+			frappe.client_cache.delete_value(f"defaults::{key}")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	elif frappe.flags.in_install != "frappe":
 		frappe.client_cache.delete_keys("defaults::*")
 
@@ -152,7 +175,11 @@ def clear_doctype_cache(doctype=None):
 	if hasattr(frappe.db, "after_commit"):
 		frappe.db.after_commit.add(lambda: _clear_doctype_cache_from_redis(doctype))
 		frappe.db.after_rollback.add(lambda: _clear_doctype_cache_from_redis(doctype))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def _clear_doctype_cache_from_redis(doctype: str | None = None):
@@ -210,7 +237,11 @@ def get_doctype_map(doctype, name, filters=None, order_by=None):
 	return frappe.cache().hget(
 =======
 	return frappe.cache.hget(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		get_doctype_map_key(doctype),
 		name,
 		lambda: frappe.get_all(doctype, filters=filters, order_by=order_by, ignore_ddl=True),

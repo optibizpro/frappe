@@ -16,7 +16,11 @@ import frappe
 from frappe.modules.patch_handler import get_all_patches
 =======
 from frappe.modules.patch_handler import get_all_patches, parse_as_configfile
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.boilerplate import (
 	PatchCreator,
 	_create_app_boilerplate,
@@ -201,7 +205,11 @@ class TestBoilerPlate(unittest.TestCase):
 			"",  # file_name: accept default
 			"Y",  # confirm patch folder
 		]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		patches_txt = pathlib.Path(pathlib.Path(frappe.get_app_path("frappe", "patches.txt")))
 		original_patches = patches_txt.read_text()

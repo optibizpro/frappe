@@ -33,7 +33,11 @@ frappe.ui.form.on("DocType", {
 		}
 	},
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	refresh: function (frm) {
 		frm.set_query("role", "permissions", function (doc) {
 			if (doc.custom && frappe.session.user != "Administrator") {
@@ -88,7 +92,11 @@ frappe.ui.form.on("DocType", {
 			frm.dashboard.clear_comment();
 			frm.dashboard.add_comment(
 				__("DocTypes cannot be modified, please use {0} instead", [customize_form_link]),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"blue",
 				true
 			);
@@ -108,7 +116,11 @@ frappe.ui.form.on("DocType", {
 				"This site is running in developer mode. Any change made here will be updated in code."
 			);
 			frm.dashboard.add_comment(msg, "yellow", true);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		if (frm.is_new()) {
@@ -130,7 +142,11 @@ frappe.ui.form.on("DocType", {
 =======
 
 		render_form_builder(frm);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	istable: (frm) => {
@@ -172,7 +188,11 @@ frappe.ui.form.on("DocType", {
 			frm.footer.wrapper.show();
 			frm.form_wrapper.find(".form-message").show();
 			frm.form_wrapper.removeClass("mb-1");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	},
 
@@ -276,7 +296,11 @@ frappe.ui.form.on("DocField", {
 		}
 =======
 		frm.trigger("setup_fetch_from_fields", doctype, docname);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	fieldtype: function (frm) {
@@ -316,5 +340,9 @@ function render_form_builder(frm) {
 	}
 }
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 extend_cscript(cur_frm.cscript, new frappe.model.DocTypeController({ frm: cur_frm }));

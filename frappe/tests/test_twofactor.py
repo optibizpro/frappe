@@ -10,7 +10,11 @@ from frappe.auth import HTTPRequest, get_login_attempt_tracker, validate_ip_addr
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.twofactor import (
 	ExpiredLoginException,
 	authenticate_for_2factor,
@@ -33,7 +37,11 @@ class TestTwoFactor(FrappeTestCase):
 		super().__init__(*args, **kwargs)
 		self.default_allowed_login_attempts = get_system_setting("allow_consecutive_login_attempts")
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 class TestTwoFactor(IntegrationTestCase):
 	def setUp(self):

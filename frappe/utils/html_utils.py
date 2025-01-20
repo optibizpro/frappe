@@ -181,7 +181,11 @@ def sanitize_html(html, linkify=False, always_sanitize=False):
 	strip_comments = False
 =======
 	css_sanitizer = CSSSanitizer(allowed_css_properties=bleach_allowlist.all_styles)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# returns html with escaped tags, escaped orphan >, <, etc.
 	escaped_html = bleach.clean(

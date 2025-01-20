@@ -23,9 +23,14 @@ class EmailTemplate(Document):
 		response_html: DF.Code | None
 		subject: DF.Data
 		use_html: DF.Check
+
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@property
 	def response_(self):
 		return self.response_html if self.use_html else self.response
@@ -56,7 +61,11 @@ def get_email_template(template_name, doc):
 	"""Returns the processed HTML of a email template with the given doc"""
 =======
 	"""Return the processed HTML of a email template with the given doc"""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	email_template = frappe.get_doc("Email Template", template_name)
 	return email_template.get_formatted_email(doc)

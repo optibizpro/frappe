@@ -18,6 +18,7 @@ class NetworkPrinterSettings(Document):
 		port: DF.Int
 		printer_name: DF.Literal[None]
 		server_ip: DF.Data
+
 	# end: auto-generated types
 
 	@frappe.whitelist()

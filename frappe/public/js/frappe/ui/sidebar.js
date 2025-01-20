@@ -2,7 +2,11 @@
 frappe.provide("frappe.ui");
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 frappe.ui.Sidebar = class Sidebar {
 	constructor() {
 		this.items = {};
@@ -363,7 +367,11 @@ frappe.ui.Sidebar = class Sidebar {
 			)
 		) {
 			$drop_icon.removeClass("hidden");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		$drop_icon.on("click", () => {
 			let opened = $drop_icon.find("use").attr("href") === "#es-line-down";
@@ -457,6 +465,10 @@ frappe.ui.Sidebar = class Sidebar {
 			frappe.boot.sidebar_pages = r;
 			this.setup_pages();
 		});
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 };

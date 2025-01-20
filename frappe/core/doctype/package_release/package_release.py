@@ -27,6 +27,7 @@ class PackageRelease(Document):
 		path: DF.SmallText | None
 		publish: DF.Check
 		release_notes: DF.MarkdownEditor | None
+
 	# end: auto-generated types
 
 	def set_version(self):

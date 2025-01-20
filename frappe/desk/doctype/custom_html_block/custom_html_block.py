@@ -25,7 +25,11 @@ class CustomHTMLBlock(Document):
 		style: DF.Code | None
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	pass
 
 
@@ -38,7 +42,11 @@ def get_custom_blocks_for_user(doctype, txt, searchfield, start, page_len, filte
 	condition_query = frappe.qb.get_query(customHTMLBlock)
 =======
 	condition_query = frappe.qb.from_(customHTMLBlock)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return (
 		condition_query.select(customHTMLBlock.name).where(

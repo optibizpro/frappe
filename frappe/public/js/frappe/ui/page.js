@@ -52,7 +52,11 @@ frappe.ui.Page = class Page {
 		$(window).scroll(
 =======
 		$(".main-section").scroll(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.utils.throttle(() => {
 				$(".page-head").toggleClass("drop-shadow", !!document.documentElement.scrollTop);
 				let current_scroll = document.documentElement.scrollTop;
@@ -97,7 +101,11 @@ frappe.ui.Page = class Page {
 =======
 				'<div class="layout-main">\
 					<div class="layout-main-section-wrapper">\
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						<div class="layout-main-section"></div>\
 						<div class="layout-footer hide"></div>\
 					</div>\
@@ -115,7 +123,11 @@ frappe.ui.Page = class Page {
 				<div class="layout-main">
 					<div class="layout-side-section"></div>
 					<div class="layout-main-section-wrapper">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						<div class="layout-main-section"></div>
 						<div class="layout-footer hide"></div>
 					</div>
@@ -131,7 +143,11 @@ frappe.ui.Page = class Page {
 					.insertBefore(this.wrapper.find(".layout-side-section"));
 				this.wrapper.find(".layout-side-section").addClass("right");
 			}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		this.setup_page();
@@ -179,7 +195,11 @@ frappe.ui.Page = class Page {
 		this.card_layout && this.main.addClass("frappe-card");
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// keyboard shortcuts
 		let menu_btn = this.menu_btn_group.find("button");
 		menu_btn.attr("title", __("Menu")).tooltip({ delay: { show: 600, hide: 100 } });
@@ -213,7 +233,11 @@ frappe.ui.Page = class Page {
 				);
 			})
 			.appendTo(this.sidebar);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	setup_sidebar_toggle() {
@@ -230,7 +254,11 @@ frappe.ui.Page = class Page {
 			}
 			sidebar_toggle.attr("aria-label", __("Toggle Sidebar"));
 			sidebar_toggle.tooltip({
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				delay: { show: 600, hide: 100 },
 				trigger: "hover",
 			});
@@ -279,7 +307,11 @@ frappe.ui.Page = class Page {
 				is_sidebar_visible ? "es-line-sidebar-collapse" : "es-line-sidebar-expand",
 				"md"
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		);
 	}
 
@@ -310,7 +342,11 @@ frappe.ui.Page = class Page {
 			.attr("title", __(tooltip_label || frappe.unscrub(icon)))
 =======
 			.attr("title", __(tooltip_label))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.tooltip({ delay: { show: 600, hide: 100 }, trigger: "hover" });
 
 		return button;
@@ -349,7 +385,11 @@ frappe.ui.Page = class Page {
 =======
 			.html(opts.iconHTML || opts.label)
 			.attr("data-label", opts.label)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.on("click", function () {
 				let response = opts.click.apply(this, [btn]);
 				me.btn_disable_enable(btn, response);
@@ -570,7 +610,11 @@ frappe.ui.Page = class Page {
 				this.divider = $(
 					'<li class="dropdown-divider user-action visible-xs"></li>'
 				).prependTo(parent);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 			$li.addClass("user-action").insertBefore(this.divider);
 		}
@@ -647,7 +691,11 @@ frappe.ui.Page = class Page {
 	get_or_add_inner_group_button(label) {
 =======
 	get_or_add_inner_group_button(label, align_right) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var $group = this.inner_toolbar.find(
 			`.inner-group-button[data-label="${encodeURIComponent(label)}"]`
 		);
@@ -708,7 +756,11 @@ frappe.ui.Page = class Page {
 	add_inner_button(label, action, group, type = "default") {
 =======
 	add_inner_button(label, action, group, type = "default", align_right = false) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var me = this;
 		let _action = function () {
 			let btn = $(this);
@@ -718,7 +770,11 @@ frappe.ui.Page = class Page {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// Add actions as menu item in Mobile View
 		let menu_item_label = group ? `${group} > ${label}` : label;
 		let menu_item = this.add_menu_item(menu_item_label, _action, false, false, false);
@@ -732,7 +788,11 @@ frappe.ui.Page = class Page {
 			var $group = this.get_or_add_inner_group_button(group);
 =======
 			var $group = this.get_or_add_inner_group_button(group, align_right);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			$(this.inner_toolbar).removeClass("hide");
 
 			if (!this.is_in_group_button_dropdown($group.find(".dropdown-menu"), "a", label)) {
@@ -831,7 +891,11 @@ frappe.ui.Page = class Page {
 	//---//
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	clear_user_actions() {
 		this.menu.find(".user-action").remove();
 	}
@@ -845,7 +909,11 @@ frappe.ui.Page = class Page {
 	set_title(title, icon = null, strip = true, tab_title = "") {
 =======
 	set_title(title, icon = null, strip = true, tab_title = "", tooltip_label = "") {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (!title) title = "";
 		if (strip) {
 			title = strip_html(title);
@@ -865,7 +933,11 @@ frappe.ui.Page = class Page {
 		if (tooltip_label) {
 			title_wrapper.tooltip({ delay: { show: 600, hide: 100 }, trigger: "hover" });
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	set_title_sub(txt) {
@@ -987,7 +1059,11 @@ frappe.ui.Page = class Page {
 			.attr("title", __(df.label))
 =======
 			.attr("title", __(df.label, null, df.parent))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.tooltip({
 				delay: { show: 600, hide: 100 },
 				trigger: "hover",

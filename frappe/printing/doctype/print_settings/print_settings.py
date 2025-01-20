@@ -63,6 +63,7 @@ class PrintSettings(Document):
 		repeat_header_footer: DF.Check
 		send_print_as_pdf: DF.Check
 		with_letterhead: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):

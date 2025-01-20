@@ -35,6 +35,7 @@ class DocumentNamingSettings(Document):
 		transaction_type: DF.Autocomplete | None
 		try_naming_series: DF.Data | None
 		user_must_always_select: DF.Check
+
 	# end: auto-generated types
 
 	@frappe.whitelist()
@@ -250,7 +251,11 @@ class DocumentNamingSettings(Document):
 				frappe.message_log.pop()
 =======
 			frappe.clear_last_message()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return _("Failed to generate names from the series") + f"\n{e!s}"
 
 	def _fetch_last_doc_if_available(self):

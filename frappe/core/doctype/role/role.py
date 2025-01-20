@@ -7,7 +7,11 @@ from frappe.website.path_resolver import validate_path
 <<<<<<< HEAD
 =======
 from frappe.website.router import clear_routing_cache
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 STANDARD_ROLES = ("Administrator", "System Manager", "Script Manager", "All", "Guest")
 
@@ -28,6 +32,10 @@ class Role(Document):
 		restrict_to_domain: DF.Link | None
 		role_name: DF.Data
 		two_factor_auth: DF.Check
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def before_rename(self, old, new, merge=False):
@@ -59,7 +67,11 @@ class Role(Document):
 		if self.has_value_changed("home_page"):
 			clear_routing_cache()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def set_desk_properties(self):
 		# set if desk_access is not allowed, unset all desk properties
 		if self.name == "Guest":

@@ -6,7 +6,15 @@ import typing
 <<<<<<< HEAD
 from shutil import which
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from shutil import which
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import click
 
@@ -15,7 +23,11 @@ import frappe
 import frappe.commands
 =======
 from frappe import _
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.commands import get_site, pass_context
 from frappe.coverage import CodeCoverage
 from frappe.exceptions import SiteNotSpecifiedError
@@ -45,7 +57,11 @@ if typing.TYPE_CHECKING:
 @click.option(
 	"--make-copy",
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	is_flag=True,
 	default=False,
 	help="Copy the files instead of symlinking",
@@ -146,7 +162,11 @@ def clear_cache(context: CliCtxObj):
 
 	for site in context.sites:
 		try:
+<<<<<<< HEAD
+			frappe.init(site=site)
+=======
 			frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frappe.connect()
 			frappe.clear_cache()
 			clear_website_cache()
@@ -311,7 +331,11 @@ def execute(context: CliCtxObj, method, args=None, kwargs=None, profile=False):
 					suffix = "(*fn_args, **fn_kwargs)"
 					code = compile(method + suffix, "<bench execute>", "eval")
 					ret = eval(code, globals(), locals())  # nosemgrep
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if profile:
 				import pstats
@@ -479,7 +503,11 @@ def import_csv(
 
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @click.command("data-import")
 @click.option(
 	"--file",
@@ -505,10 +533,20 @@ def import_csv(
 <<<<<<< HEAD
 def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def data_import(
 	context: CliCtxObj, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True
 ):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"Import documents in bulk from CSV or XLSX using data import"
 	from frappe.core.doctype.data_import.data_import import import_file
 
@@ -550,7 +588,11 @@ def database(context: CliCtxObj, extra_args):
 	Enter into the Database console for given site.
 	"""
 	site = get_site(context)
+<<<<<<< HEAD
+	frappe.init(site=site)
+=======
 	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	_enter_console(extra_args=extra_args)
 
 
@@ -565,16 +607,29 @@ def mariadb(context: CliCtxObj, extra_args):
 
 	site = get_site(context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 	if not site:
 		raise SiteNotSpecifiedError
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.init(site=site)
+<<<<<<< HEAD
 	os.environ["MYSQL_HISTFILE"] = os.path.abspath(get_site_path("logs", "mariadb_console.log"))
 	_mariadb()
 =======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.conf.db_type = "mariadb"
 	_enter_console(extra_args=extra_args)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("postgres", context_settings=EXTRA_ARGS_CTX)
@@ -585,7 +640,11 @@ def postgres(context: CliCtxObj, extra_args):
 	Enter into postgres console for a given site.
 	"""
 	site = get_site(context)
+<<<<<<< HEAD
+	frappe.init(site=site)
+=======
 	frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.conf.db_type = "postgres"
 	_enter_console(extra_args=extra_args)
 
@@ -632,7 +691,11 @@ def _psql():
 		socket=frappe.conf.db_socket,
 		host=frappe.conf.db_host,
 		port=frappe.conf.db_port,
+<<<<<<< HEAD
+		user=frappe.conf.db_name,
+=======
 		user=frappe.conf.db_user,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		password=frappe.conf.db_password,
 		db_name=frappe.conf.db_name,
 		extra=list(extra_args) if extra_args else [],
@@ -643,7 +706,11 @@ def _psql():
 			exc=frappe.ExecutableNotFound,
 		)
 	os.execv(bin, [bin, *args])
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("jupyter")
@@ -856,7 +923,6 @@ def transform_database(context: CliCtxObj, table, engine, row_format, failfast):
 	help="Path to .txt file for list of doctypes. Example erpnext/tests/server/agriculture.txt",
 )
 @click.option("--test", multiple=True, help="Specific test")
-@click.option("--ui-tests", is_flag=True, default=False, help="Run UI Tests")
 @click.option("--module", help="Run tests in a module")
 @click.option("--profile", is_flag=True, default=False)
 @click.option("--coverage", is_flag=True, default=False)
@@ -877,13 +943,17 @@ def run_tests(
 	profile=False,
 	coverage=False,
 	junit_xml_output=False,
-	ui_tests=False,
 	doctype_list_path=None,
 	skip_test_records=False,
 	skip_before_tests=False,
 	failfast=False,
 	case=None,
 ):
+<<<<<<< HEAD
+=======
+	"""Run python unit-tests"""
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	with CodeCoverage(coverage, app):
 		import frappe
 		import frappe.test_runner
@@ -899,12 +969,12 @@ def run_tests(
 			click.secho(f"bench --site {site} set-config allow_tests true", fg="green")
 			return
 
-		frappe.init(site=site)
-
+		frappe.init(site)  # init frappe.flags
 		frappe.flags.skip_before_tests = skip_before_tests
 		frappe.flags.skip_test_records = skip_test_records
 
 		ret = frappe.test_runner.main(
+			site,
 			app,
 			module,
 			doctype,
@@ -914,7 +984,6 @@ def run_tests(
 			force=context.force,
 			profile=profile,
 			junit_xml_output=junit_xml_output,
-			ui_tests=ui_tests,
 			doctype_list_path=doctype_list_path,
 			failfast=failfast,
 			case=case,
@@ -944,6 +1013,8 @@ def run_parallel_tests(
 	use_orchestrator=False,
 	dry_run=False,
 ):
+	from traceback_with_variables import activate_by_import
+
 	with CodeCoverage(with_coverage, app):
 		site = get_site(context)
 		if use_orchestrator:
@@ -973,6 +1044,7 @@ def run_parallel_tests(
 @click.option("--headless", is_flag=True, help="Run UI Test in headless mode")
 @click.option("--parallel", is_flag=True, help="Run UI Test in parallel mode")
 @click.option("--with-coverage", is_flag=True, help="Generate coverage report")
+@click.option("--browser", default="chrome", help="Browser to run tests in")
 @click.option("--ci-build-id")
 @pass_context
 def run_ui_tests(
@@ -981,12 +1053,17 @@ def run_ui_tests(
 	headless=False,
 	parallel=True,
 	with_coverage=False,
+<<<<<<< HEAD
+=======
+	browser="chrome",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	ci_build_id=None,
 	cypressargs=None,
 ):
 	"Run UI tests"
 	site = get_site(context)
-	app_base_path = os.path.abspath(os.path.join(frappe.get_app_path(app), ".."))
+	frappe.init(site)
+	app_base_path = frappe.get_app_source_path(app)
 	site_url = frappe.utils.get_site_url(site)
 	admin_password = frappe.get_conf(site).admin_password
 
@@ -997,7 +1074,11 @@ def run_ui_tests(
 
 	os.chdir(app_base_path)
 
+<<<<<<< HEAD
 	node_bin = subprocess.getoutput("yarn bin")
+=======
+	node_bin = subprocess.getoutput("(cd ../frappe && yarn bin)")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	cypress_path = f"{node_bin}/cypress"
 	drag_drop_plugin_path = f"{node_bin}/../@4tw/cypress-drag-drop"
 	real_events_plugin_path = f"{node_bin}/../cypress-real-events"
@@ -1016,6 +1097,7 @@ def run_ui_tests(
 		click.secho("Installing Cypress...", fg="yellow")
 		packages = " ".join(
 			[
+<<<<<<< HEAD
 				"cypress@13.10.0",
 				"@4tw/cypress-drag-drop@2.2.5",
 				"cypress-real-events@1.12.0",
@@ -1028,7 +1110,24 @@ def run_ui_tests(
 
 	# run for headless mode
 	run_or_open = "run --browser chrome" if headless else "open"
+=======
+				"cypress@^13",
+				"@4tw/cypress-drag-drop@^2",
+				"cypress-real-events",
+				"@testing-library/cypress@^10",
+				"@testing-library/dom@8.17.1",
+				"@cypress/code-coverage@^3",
+			]
+		)
+		frappe.commands.popen(f"(cd ../frappe && yarn add {packages} --no-lockfile)")
+
+	# run for headless mode
+	run_or_open = f"run --browser {browser}" if headless else "open"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	formatted_command = f"{site_env} {password_env} {coverage_env} {cypress_path} {run_or_open}"
+
+	if os.environ.get("CYPRESS_RECORD_KEY"):
+		formatted_command += " --record"
 
 	if parallel:
 		formatted_command += " --parallel"
@@ -1181,7 +1280,11 @@ def set_config(context: CliCtxObj, key, value, global_=False, parse=False):
 		parse = as_dict
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if parse:
 		import ast
 

@@ -11,7 +11,11 @@ from frappe.core.api.file import get_max_file_size
 from frappe.core.doctype.file import remove_file_by_url
 =======
 from frappe.core.doctype.file.utils import remove_file_by_url
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.desk.form.meta import get_code_files_via_hooks
 from frappe.modules.utils import export_module_json, get_doc_module
 from frappe.rate_limiter import rate_limit
@@ -19,7 +23,11 @@ from frappe.utils import dict_with_keys, strip_html
 <<<<<<< HEAD
 =======
 from frappe.utils.caching import redis_cache
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.website.utils import get_boot_data, get_comment_list, get_sidebar_items
 from frappe.website.website_generator import WebsiteGenerator
 
@@ -82,7 +90,11 @@ class WebForm(WebsiteGenerator):
 	# end: auto-generated types
 
 	website = frappe._dict(no_cache=1)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def validate(self):
 		super().validate()
@@ -275,7 +287,11 @@ def get_context(context):
 			"name": self.meta_title or self.title,
 =======
 			"title": self.meta_title or self.title,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"description": description,
 			"image": self.meta_image,
 		}
@@ -705,4 +721,8 @@ def get_link_options(web_form_name, doctype, allow_read_on_all_link_options=Fals
 @redis_cache(ttl=60 * 60)
 def get_published_web_forms() -> dict[str, str]:
 	return frappe.get_all("Web Form", ["name", "route", "modified"], {"published": 1})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

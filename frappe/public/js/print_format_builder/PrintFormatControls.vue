@@ -248,6 +248,8 @@ export default {
 					fieldtype: "Field Template",
 					field_template: template.name,
 				});
+<<<<<<< HEAD
+=======
 			}
 			return out;
 		},
@@ -264,6 +266,7 @@ export default {
 		},
 	},
 };
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 // variables
 let search_text = ref("");
@@ -310,6 +313,9 @@ let margins = computed(() => {
 	];
 });
 let fields = computed(() => {
+<<<<<<< HEAD
+	let fields = meta.value.fields
+=======
 	let fields = [
 		{
 			label: __("Custom HTML"),
@@ -338,6 +344,7 @@ let fields = computed(() => {
 		...print_templates.value,
 		...meta.value.fields,
 	]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		.filter((df) => {
 			if (["Section Break", "Column Break"].includes(df.fieldtype)) {
 				return false;
@@ -363,11 +370,58 @@ let fields = computed(() => {
 			};
 			if (df.fieldtype == "Table") {
 				out.table_columns = get_table_columns(df);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			}
 			return out;
 		});
 
+<<<<<<< HEAD
+	return [
+		{
+			label: __("Custom HTML"),
+			fieldname: "custom_html",
+			fieldtype: "HTML",
+			html: "",
+			custom: 1,
+		},
+<<<<<<< HEAD
+		page_number_positions() {
+			return [
+				{ label: __("Hide"), value: "Hide" },
+				{ label: __("Top Left"), value: "Top Left" },
+				{ label: __("Top Center"), value: "Top Center" },
+				{ label: __("Top Right"), value: "Top Right" },
+				{ label: __("Bottom Left"), value: "Bottom Left" },
+				{ label: __("Bottom Center"), value: "Bottom Center" },
+				{ label: __("Bottom Right"), value: "Bottom Right" },
+			];
+		},
+	},
+};
+=======
+		{
+			label: __("ID (name)"),
+			fieldname: "name",
+			fieldtype: "Data",
+		},
+		{
+			label: __("Spacer"),
+			fieldname: "spacer",
+			fieldtype: "Spacer",
+			custom: 1,
+		},
+		{
+			label: __("Divider"),
+			fieldname: "divider",
+			fieldtype: "Divider",
+			custom: 1,
+		},
+		...print_templates.value,
+		...fields,
+	];
+=======
 	return fields;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });
 let print_templates = computed(() => {
 	let templates = print_format.value.__onload.print_templates || {};
@@ -416,7 +470,11 @@ onMounted(() => {
 });
 
 watch(print_format, () => (store.dirty.value = true), { deep: true });
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 </script>
 
 <style scoped>

@@ -109,7 +109,11 @@ class SystemSettings(Document):
 =======
 		enable_password_policy = cint(self.enable_password_policy)
 		minimum_password_score = cint(getattr(self, "minimum_password_score", 0))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if enable_password_policy and minimum_password_score <= 0:
 			frappe.throw(_("Please select Minimum Password Score"))
 		elif not enable_password_policy:
@@ -152,7 +156,11 @@ class SystemSettings(Document):
 			frappe.msgprint(
 				_("{0} can not be more than {1}").format(label, 50), alert=True, indicator="yellow"
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def validate_user_pass_login(self):
 		if not self.disable_user_pass_login:
@@ -173,7 +181,11 @@ class SystemSettings(Document):
 			frappe.throw(
 				_(
 					"Please enable atleast one Social Login Key or LDAP or Login With Email Link before disabling username/password based login."
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				)
 			)
 
@@ -192,7 +204,11 @@ class SystemSettings(Document):
 			ext.strip().upper() for ext in self.allowed_file_extensions.strip().splitlines()
 		)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def on_update(self):
 		self.set_defaults()
 		clear_system_settings_cache()
@@ -246,10 +262,7 @@ def get_system_settings(key: str):
 	"""Return the value associated with the given `key` from System Settings DocType."""
 	if not (system_settings := getattr(frappe.local, "system_settings", None)):
 		try:
-			system_settings = frappe.client_cache.get_value(cache_key)
-			if not system_settings:
-				system_settings = frappe.get_cached_doc("System Settings")
-				frappe.client_cache.set_value(cache_key, system_settings)
+			system_settings = frappe.client_cache.get_doc("System Settings")
 			frappe.local.system_settings = system_settings
 		except frappe.DoesNotExistError:  # possible during new install
 			frappe.clear_last_message()

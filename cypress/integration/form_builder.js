@@ -313,6 +313,8 @@ context("Form Builder", () => {
 			.find(".msgprint")
 			.should("contain", "cannot be hidden and mandatory without any default value");
 	});
+<<<<<<< HEAD
+=======
 
 	it.skip("Undo/Redo", () => {
 		cy.visit(`/app/doctype/${doctype_name}`);
@@ -339,4 +341,5 @@ context("Form Builder", () => {
 		cy.get("body").type("{ctrl}{shift}z");
 		cy.get(first_field).find(label).should("have.text", "Check");
 	});
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 });

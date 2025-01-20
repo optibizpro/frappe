@@ -97,7 +97,11 @@ class TestBlogPost(IntegrationTestCase):
 		for _index in range(BLOG_COUNT):
 =======
 		for _ in range(BLOG_COUNT):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			blog = make_test_blog(category_title)
 			blogs.append(blog)
 
@@ -198,8 +202,17 @@ def make_test_blog(category_title="Test Blog Category"):
 <<<<<<< HEAD
 		frappe.get_doc(dict(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger")).insert()
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		frappe.get_doc(dict(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger")).insert()
+=======
 		frappe.get_doc(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger").insert()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		frappe.get_doc(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger").insert()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return frappe.get_doc(
 		doctype="Blog Post",

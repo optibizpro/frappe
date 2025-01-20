@@ -31,7 +31,11 @@
 =======
    "reqd": 1,
    "search_index": 1
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "Queued",
@@ -97,7 +101,11 @@
    "fieldtype": "Data",
    "label": "Job ID",
    "no_copy": 1,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "read_only": 1
   },
   {
@@ -121,7 +129,11 @@
    "fieldtype": "Int",
    "label": "Peak Memory Usage",
    "print_hide": 1,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "read_only": 1
   }
  ],
@@ -131,7 +143,11 @@
  "modified": "2022-05-03 21:29:39.883803",
 =======
  "modified": "2024-12-20 10:18:19.174608",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Prepared Report",

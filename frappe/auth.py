@@ -14,10 +14,21 @@ import frappe.utils
 import frappe.utils.user
 from frappe import _
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 =======
 from frappe.apps import get_default_path
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.core.doctype.activity_log.activity_log import add_authentication_log
+=======
+from frappe.apps import get_default_path
+from frappe.core.doctype.activity_log.activity_log import add_authentication_log
+<<<<<<< HEAD
+from frappe.desk.utils import slug
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.sessions import Session, clear_sessions, delete_session, get_expiry_in_seconds
 from frappe.translate import get_language
 from frappe.twofactor import (
@@ -33,12 +44,23 @@ from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+from frappe.utils.deprecations import deprecation_warning
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
 SAFE_HTTP_METHODS = frozenset(("GET", "HEAD", "OPTIONS"))
 UNSAFE_HTTP_METHODS = frozenset(("POST", "PUT", "DELETE", "PATCH"))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 MAX_PASSWORD_SIZE = 512
 
 
@@ -111,7 +133,10 @@ class HTTPRequest:
 <<<<<<< HEAD
 
 class LoginManager:
+<<<<<<< HEAD
+=======
 	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	def is_allowed_referrer(self):
 		referrer = frappe.get_request_header("Referer")
@@ -130,6 +155,10 @@ class LoginManager:
 
 
 class LoginManager:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+=======
 	__slots__ = ("full_name", "info", "resume", "user", "user_lang", "user_type")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
@@ -163,7 +192,11 @@ class LoginManager:
 =======
 		self.run_trigger("before_login")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if frappe.get_system_settings("disable_user_pass_login"):
 			frappe.throw(_("Login with username and password is not allowed."), frappe.AuthenticationError)
 
@@ -195,7 +228,10 @@ class LoginManager:
 
 	def get_user_info(self):
 		self.info = frappe.get_cached_value(
-			"User", self.user, ["user_type", "first_name", "last_name", "user_image"], as_dict=1
+			"User",
+			self.user,
+			["user_type", "first_name", "last_name", "user_image", "default_workspace"],
+			as_dict=1,
 		)
 		self.user_lang = frappe.translate.get_user_lang()
 		self.user_type = self.info.user_type
@@ -220,7 +256,15 @@ class LoginManager:
 			frappe.local.cookie_manager.set_cookie("system_user", "yes")
 			if not resume:
 				frappe.local.response["message"] = "Logged In"
+<<<<<<< HEAD
+				default_workspace = self.info.default_workspace
+				if default_workspace:
+					frappe.local.response["home_page"] = "/app/" + slug(default_workspace)
+				else:
+					frappe.local.response["home_page"] = get_default_path() or "/app"
+=======
 				frappe.local.response["home_page"] = get_default_path() or "/app"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if not resume:
 			frappe.response["full_name"] = self.full_name
@@ -404,7 +448,11 @@ class CookieManager:
 		if frappe.session.session_country:
 			self.set_cookie("country", frappe.session.session_country)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def set_cookie(
 		self,
@@ -463,10 +511,20 @@ def clear_cookies():
 <<<<<<< HEAD
 	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.local.cookie_manager.delete_cookie(
 		["full_name", "user_id", "sid", "user_image", "user_lang", "system_user"]
 	)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def validate_ip_address(user):
@@ -568,7 +626,11 @@ class LoginAttemptTracker:
 			from frappe.deprecation_dumpster import deprecation_warning
 
 			deprecation_warning("unknown", "v17", "`username` parameter is deprecated, use `key` instead.")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.key = key or user_name
 		self.lock_interval = datetime.timedelta(seconds=lock_interval)
 		self.max_failed_logins = max_consecutive_login_attempts
@@ -595,7 +657,11 @@ class LoginAttemptTracker:
 	@login_failed_count.deleter
 	def login_failed_count(self):
 		frappe.cache.hdel("login_failed_count", self.key)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@property
 	def login_failed_time(self):
@@ -623,7 +689,11 @@ class LoginAttemptTracker:
 	@login_failed_time.deleter
 	def login_failed_time(self):
 		frappe.cache.hdel("login_failed_time", self.key)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def add_failure_attempt(self):
 		"""Log user failure attempts into the system.

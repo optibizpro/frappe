@@ -95,7 +95,11 @@ function fuzzy_match_recursive(
 		if (pattern[pattern_cur_index].toLowerCase() === str[str_curr_index].toLowerCase()) {
 =======
 		if (normalized_pattern_char === normalized_str_char) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (next_match >= max_matches) {
 				return [false, out_score, matches];
 			}

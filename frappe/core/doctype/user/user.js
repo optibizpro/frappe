@@ -17,7 +17,11 @@ frappe.ui.form.on("User", {
 	before_load: function (frm) {
 		let update_tz_options = function () {
 			frm.fields_dict.time_zone.set_data(frappe.all_timezones);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		};
 
 		if (!frappe.all_timezones) {
@@ -29,7 +33,11 @@ frappe.ui.form.on("User", {
 					update_tz_select();
 =======
 					update_tz_options();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 			});
 		} else {
@@ -69,7 +77,11 @@ frappe.ui.form.on("User", {
 			frm.roles_editor.disable = 1;
 			frm.call("populate_role_profile_roles").then(() => {
 				frm.roles_editor.show();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		} else {
 			frm.roles_editor.disable = 0;
@@ -110,7 +122,11 @@ frappe.ui.form.on("User", {
 			in_list(["System User", "Website User"], frm.doc.user_type)
 =======
 			["System User", "Website User"].includes(frm.doc.user_type)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		) {
 			if (!frm.roles_editor) {
 				const role_area = $('<div class="role-editor">').appendTo(
@@ -124,7 +140,11 @@ frappe.ui.form.on("User", {
 					frm.doc.role_profile_name ? 1 : 0
 =======
 					frm.doc.role_profiles && frm.doc.role_profiles.length ? 1 : 0
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				);
 
 				if (frm.doc.user_type == "System User") {
@@ -153,7 +173,11 @@ frappe.ui.form.on("User", {
 			in_list(["System User", "Website User"], frm.doc.user_type) &&
 =======
 			["System User", "Website User"].includes(frm.doc.user_type) &&
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			!frm.is_new() &&
 			!frm.roles_editor &&
 			frm.can_edit_roles
@@ -209,7 +233,11 @@ frappe.ui.form.on("User", {
 						frappe.set_route("query-report", "Permitted Documents For User", {
 							user: frm.doc.name,
 						}),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					__("Permissions")
 				);
 
@@ -222,7 +250,11 @@ frappe.ui.form.on("User", {
 					__("View Doctype Permissions"),
 					() =>
 						frappe.set_route("query-report", "User Doctype Permissions", {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							user: frm.doc.name,
 						}),
 					__("Permissions")
@@ -346,7 +378,11 @@ frappe.ui.form.on("User", {
 						frappe.msgprint(__("Email is mandatory to create User Email"));
 						return;
 					}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					frm.events.create_user_email(frm);
 				});
 			}
@@ -358,7 +394,11 @@ frappe.ui.form.on("User", {
 			for (var i = 0; i < frm.doc.user_emails.length; i++) {
 =======
 			for (let i = 0; i < frm.doc.user_emails.length; i++) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frm.doc.user_emails[i].idx = frm.doc.user_emails[i].idx + 1;
 			}
 			frm.dirty();
@@ -392,7 +432,11 @@ frappe.ui.form.on("User", {
 				if (!Array.isArray(r.message)) {
 =======
 				if (!Array.isArray(r.message) || !r.message.length) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					frappe.route_options = {
 						email_id: frm.doc.email,
 						awaiting_password: 1,
@@ -403,7 +447,11 @@ frappe.ui.form.on("User", {
 						var doc = frappe.model.get_new_doc("Email Account");
 =======
 						doc = frappe.model.get_new_doc("Email Account");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						frappe.route_flags.linked_user = frm.doc.name;
 						frappe.route_flags.delete_user_from_locals = true;
 						frappe.set_route("Form", "Email Account", doc.name);
@@ -465,11 +513,15 @@ frappe.ui.form.on("User", {
 		}
 	},
 	setup_impersonation: function (frm) {
+<<<<<<< HEAD
+		if (frappe.session.user === "Administrator" && frm.doc.name != "Administrator") {
+=======
 		if (
 			frappe.session.user === "Administrator" &&
 			frm.doc.name != "Administrator" &&
 			!frm.is_new()
 		) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			frm.add_custom_button(__("Impersonate"), () => {
 				if (frm.doc.restrict_ip) {
 					frappe.msgprint({
@@ -503,7 +555,11 @@ frappe.ui.form.on("User", {
 			});
 		}
 	},
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });
 
 frappe.ui.form.on("User Email", {

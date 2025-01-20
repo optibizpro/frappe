@@ -45,7 +45,11 @@ context("Data Control", () => {
 			'[data-fieldname="fields"] .grid-row[data-idx="2"] [data-fieldname="fieldtype"] .static-area'
 =======
 			'[data-fieldname="fields"] .grid-row[data-idx="3"] [data-fieldname="fieldtype"] .static-area'
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		).should("have.text", "Section Break");
 	});
 

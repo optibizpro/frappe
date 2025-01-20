@@ -61,7 +61,13 @@
    "fieldtype": "Data",
    "label": "Action",
    "mandatory_depends_on": "eval:doc.item_type == 'Action'",
+<<<<<<< HEAD
+   "read_only_depends_on": "eval:doc.is_standard",
+   "show_days": 1,
+   "show_seconds": 1
+=======
    "read_only_depends_on": "eval:doc.is_standard"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   },
   {
    "fieldname": "condition",

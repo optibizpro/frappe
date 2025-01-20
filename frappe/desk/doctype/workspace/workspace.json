@@ -157,7 +157,11 @@
    "fieldtype": "Link",
    "label": "Parent Page",
    "options": "Workspace"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "[]",
@@ -205,7 +209,11 @@
 <<<<<<< HEAD
 =======
    "depends_on": "eval:doc.type===\"Workspace\"",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fieldname": "number_cards_tab",
    "fieldtype": "Tab Break",
    "label": "Number Cards"
@@ -220,7 +228,11 @@
 <<<<<<< HEAD
 =======
    "depends_on": "eval:doc.type===\"Workspace\"",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fieldname": "custom_blocks_tab",
    "fieldtype": "Tab Break",
    "label": "Custom Blocks"
@@ -276,7 +288,11 @@
    "label": "External Link",
    "mandatory_depends_on": "eval:doc.type==\"URL\"",
    "options": "URL"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "in_create": 1,
@@ -284,8 +300,17 @@
 <<<<<<< HEAD
  "modified": "2023-06-08 14:52:38.110224",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+ "modified": "2024-05-30 17:30:36.791171",
+=======
  "modified": "2024-09-26 15:47:24.710881",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-09-26 15:47:24.710881",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Workspace",
@@ -317,11 +342,19 @@
    "role": "Desk User",
    "share": 1,
    "write": 1
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

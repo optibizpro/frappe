@@ -46,7 +46,11 @@ context("Control Icon", () => {
 		cy.get(".icon-picker").findByRole("searchbox").click().type(search_text);
 =======
 		cy.get(".icon-picker").get(".search-icons > input").click().type(search_text);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".icon-section .icon-wrapper:not(.hidden)").then((i) => {
 			cy.get(`.icon-section .icon-wrapper[id*='${search_text}']`).then((icons) => {
 				expect(i.length).to.equal(icons.length);
@@ -57,7 +61,11 @@ context("Control Icon", () => {
 		cy.get(".icon-picker").findByRole("searchbox").clear().blur();
 =======
 		cy.get(".icon-picker").get(".search-icons > input").clear().blur();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".icon-section .icon-wrapper").should("not.have.class", "hidden");
 	});
 });

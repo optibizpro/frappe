@@ -4,9 +4,17 @@
 import os
 import shutil
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from pathlib import Path
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from pathlib import Path
+>>>>>>> upstream/version-14
 
 import frappe
 import frappe.model
@@ -53,7 +61,11 @@ def write_document_file(doc, record_module=None, create_init=True, folder_name=N
 	write_code_files(folder, fname, doc, doc_export)
 
 	# write the data file
+<<<<<<< HEAD
 	path = os.path.join(folder, f"{fname}.json")
+=======
+	path = os.path.join(folder, fname + ".json")
+>>>>>>> upstream/version-14
 	if is_custom_module and not Path(path).resolve().is_relative_to(Path(frappe.get_site_path()).resolve()):
 		frappe.throw("Invalid export path: " + Path(path).as_posix())
 	with open(path, "w+") as txtfile:
@@ -119,10 +131,19 @@ def delete_folder(module, dt, dn):
 		shutil.rmtree(folder)
 
 
+<<<<<<< HEAD
 def create_folder(module, dt, dn, create_init):
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if frappe.db.get_value("Module Def", module, "custom"):
+=======
+def create_folder(module, dt, dn, create_init, is_custom_module):
+	if is_custom_module:
+>>>>>>> upstream/version-14
 		module_path = get_custom_module_path(module)
 	else:
 		module_path = get_module_path(module)

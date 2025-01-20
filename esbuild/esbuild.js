@@ -10,7 +10,11 @@ const html_plugin = require("./frappe-html");
 <<<<<<< HEAD
 =======
 const vue_style_plugin = require("./frappe-vue-style");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 const rtlcss = require("rtlcss");
 const postCssPlugin = require("@frappe/esbuild-plugin-postcss2").default;
 const ignore_assets = require("./ignore-assets");
@@ -73,7 +77,11 @@ const argv = yargs
 		description:
 			"Skips build and uses cached build artifacts to update assets.json (used by Bench)",
 	})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	.example("node esbuild --apps frappe,erpnext", "Run build only for frappe and erpnext")
 	.example(
 		"node esbuild --files frappe/website.bundle.js,frappe/desk.bundle.js",
@@ -102,7 +110,11 @@ const NODE_PATHS = [].concat(
 	app_list.map((app) => path.resolve(apps_path, app, "node_modules")).filter(fs.existsSync),
 	// import js file of any app if you provide the full path
 	app_list.map((app) => path.resolve(apps_path, app)).filter(fs.existsSync)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 );
 const USING_CACHED = Boolean(argv["using-cached"]);
 
@@ -118,7 +130,11 @@ execute().catch((e) => {
 	console.error(e);
 	process.exit(1);
 });
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 if (WATCH_MODE) {
 	// listen for open files in editor event
@@ -313,7 +329,11 @@ function build_files({ files, outdir }) {
 	let build_plugins = [html_plugin, build_cleanup_plugin, vue()];
 =======
 	let build_plugins = [vue(), html_plugin, build_cleanup_plugin, vue_style_plugin];
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return esbuild.build(get_build_options(files, outdir, build_plugins));
 }
 
@@ -353,7 +373,11 @@ function get_build_options(files, outdir, plugins) {
 =======
 			__VUE_OPTIONS_API__: JSON.stringify(true),
 			__VUE_PROD_DEVTOOLS__: JSON.stringify(false),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 		plugins: plugins,
 		watch: get_watch_config(),
@@ -521,7 +545,11 @@ async function update_assets_json_in_cache() {
 async function get_assets_json_path_and_obj(is_rtl) {
 	const file_name = is_rtl ? "assets-rtl.json" : "assets.json";
 	const assets_json_path = path.resolve(assets_path, file_name);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	let assets_json;
 	try {
 		assets_json = await fs.promises.readFile(assets_json_path, "utf-8");
@@ -557,7 +585,11 @@ function update_assets_json_in_cache() {
 	});
 =======
 	return { obj: assets_json, path: assets_json_path };
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 }
 
 function run_build_command_for_apps(apps) {
@@ -609,7 +641,11 @@ async function notify_redis({ error, success, changed_files }) {
 	} catch (e) {
 		log_warn("Cannot connect to redis_queue for browser events");
 	}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	let payload = null;
 	if (error) {
@@ -660,7 +696,11 @@ async function open_in_editor() {
 		log("Opening file in editor:", file_path);
 		let launch = require("launch-editor");
 		launch(`${file_path}:${file.line}:${file.column}`);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	});
 }
 

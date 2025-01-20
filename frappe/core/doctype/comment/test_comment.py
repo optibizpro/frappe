@@ -30,7 +30,11 @@ class UnitTestComment(UnitTestCase):
 	Unit tests for Comment.
 	Use this class for testing individual functions and methods.
 	"""
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	pass
 
@@ -83,7 +87,11 @@ class TestComment(IntegrationTestCase):
 			"route": test_blog.route,
 		}
 		add_comment(**add_comment_args)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		self.assertEqual(
 			frappe.get_all(
@@ -187,4 +195,8 @@ class TestComment(IntegrationTestCase):
 				reference_name=test_blog.name,
 				route=test_blog.route,
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

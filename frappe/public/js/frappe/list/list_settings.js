@@ -124,7 +124,11 @@ export default class ListSettings {
 						<div class="col-md-10" style="padding-left:0px;">
 =======
 						<div class="col-10" style="padding-left:0px;">
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							${__(me.fields[idx].label, null, me.doctype)}
 						</div>
 						<div class="col-1 ${can_remove}">
@@ -327,7 +331,11 @@ export default class ListSettings {
 				!in_list(frappe.model.no_value_type, field.fieldtype) &&
 =======
 				!frappe.model.no_value_type.includes(field.fieldtype) &&
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				me.subject_field.fieldname != field.fieldname
 			) {
 				me.fields.push({
@@ -386,7 +394,11 @@ export default class ListSettings {
 					label: __(field.label, null, field.doctype),
 					value: field.fieldname,
 					checked: fields.includes(field.fieldname),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				});
 			}
 		});
@@ -407,7 +419,11 @@ export default class ListSettings {
 			if (!in_list(new_fields, column)) {
 =======
 			if (!new_fields.includes(column)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				removed_fields.push(column);
 			}
 		});

@@ -2,7 +2,11 @@
 """ Basic telemetry for improving apps.
 =======
 """Basic telemetry for improving apps.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 WARNING: Everything in this file should be treated "internal" and is subjected to change or get
 removed without any warning.
@@ -10,7 +14,11 @@ removed without any warning.
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from contextlib import suppress
 
 import frappe
@@ -41,7 +49,11 @@ def add_bootinfo(bootinfo):
 	bootinfo.enable_telemetry = True
 	bootinfo.posthog_host = frappe.conf.get(POSTHOG_HOST_FIELD)
 	bootinfo.posthog_project_id = frappe.conf.get(POSTHOG_PROJECT_FIELD)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @site_cache(ttl=60 * 60 * 12)
@@ -52,7 +64,11 @@ def site_age():
 		return (getdate() - getdate(est_creation)).days
 =======
 		return (getdate() - getdate(est_creation)).days + 1
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	except Exception:
 		pass
 

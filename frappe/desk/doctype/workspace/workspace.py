@@ -66,7 +66,11 @@ class Workspace(Document):
 		sequence_id: DF.Float
 		shortcuts: DF.Table[WorkspaceShortcut]
 		title: DF.Data
+<<<<<<< HEAD
+
+=======
 		type: DF.Literal["Workspace", "Link", "URL"]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	# end: auto-generated types
 
 	def validate(self):
@@ -97,18 +101,25 @@ class Workspace(Document):
 			if d.link_type == "Report" and d.is_query_report != 1:
 				d.report_ref_doctype = frappe.get_value("Report", d.link_to, "ref_doctype")
 
+<<<<<<< HEAD
+=======
 		if not self.app and self.module:
 			from frappe.modules.utils import get_module_app
 
 			self.app = get_module_app(self.module)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def clear_cache(self):
 		super().clear_cache()
 		if self.for_user:
 			frappe.cache.hdel("bootinfo", self.for_user)
 		else:
 			frappe.cache.delete_key("bootinfo")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def on_update(self):
 		if disable_saving_as_public():
@@ -133,7 +144,11 @@ class Workspace(Document):
 		if self.public and not is_workspace_manager():
 			frappe.throw(_("You need to be Workspace Manager to delete a public workspace."))
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def after_delete(self):
 		if disable_saving_as_public():
 			return
@@ -286,7 +301,11 @@ def new_page(new_page):
 			frappe.bold(frappe.session.user)
 		)
 		raise frappe.PermissionError
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	doc = frappe.new_doc("Workspace")
 	doc.title = page.get("title")
@@ -310,9 +329,14 @@ def new_page(new_page):
 
 @frappe.whitelist()
 <<<<<<< HEAD
+def save_page(name, public, new_widgets, blocks):
+=======
+<<<<<<< HEAD
 def save_page(title, public, new_widgets, blocks):
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	public = frappe.parse_json(public)
 
+<<<<<<< HEAD
 	filters = {"public": public, "label": title}
 
 	if not public:
@@ -323,6 +347,9 @@ def save_page(title, public, new_widgets, blocks):
 	else:
 		frappe.throw(_("Workspace not found"), frappe.DoesNotExistError)
 
+<<<<<<< HEAD
+=======
+=======
 	doc.content = blocks
 	doc.save(ignore_permissions=True)
 
@@ -337,11 +364,16 @@ def update_page(name, title, icon, parent, public):
 def save_page(name, public, new_widgets, blocks):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	public = frappe.parse_json(public)
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc = frappe.get_doc("Workspace", name)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	doc.content = blocks
 
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	save_new_widget(doc, name, blocks, new_widgets)
 
 	return {"name": name, "public": public, "label": doc.label}
@@ -352,7 +384,10 @@ def update_page(name, title, icon, indicator_color, parent, public):
 	public = frappe.parse_json(public)
 	doc = frappe.get_doc("Workspace", name)
 
+<<<<<<< HEAD
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not doc.get("public") and doc.get("for_user") != frappe.session.user and not is_workspace_manager():
 		frappe.throw(
 			_("Need Workspace Manager role to edit private workspace of other users"),
@@ -395,6 +430,12 @@ def update_page(name, title, icon, indicator_color, parent, public):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def hide_unhide_page(page_name: str, is_hidden: bool):
 	page = frappe.get_doc("Workspace", page_name)
 
@@ -435,6 +476,7 @@ def duplicate_page(page_name, new_page):
 	doc = frappe.copy_doc(old_doc)
 	doc.title = new_page.get("title")
 	doc.icon = new_page.get("icon")
+	doc.indicator_color = new_page.get("indicator_color")
 	doc.parent_page = new_page.get("parent") or ""
 	doc.public = new_page.get("is_public")
 	doc.for_user = ""

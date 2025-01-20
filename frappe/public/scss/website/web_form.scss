@@ -25,7 +25,11 @@
 					display: none;
 				}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				h1 {
 					font-size: 2.25rem;
 					margin-top: 0;
@@ -87,7 +91,11 @@
 									font-size: var(--text-base);
 =======
 									@include get_textstyle("base", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								}
 							}
 						}
@@ -129,7 +137,11 @@
 								font-size: var(--text-sm);
 =======
 								@include get_textstyle("sm", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							}
 						}
 
@@ -158,7 +170,11 @@
 									font-size: var(--text-sm);
 =======
 									@include get_textstyle("sm", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								}
 
 								&[data-fieldtype="Rating"] {
@@ -178,7 +194,11 @@
 								}
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								.selected-color {
 									top: 6px;
 								}
@@ -262,7 +282,11 @@
 
 								@include media-breakpoint-down(sm) {
 									@include get_textstyle("sm", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								}
 							}
 
@@ -291,7 +315,11 @@
 								font-size: var(--text-base);
 =======
 								@include get_textstyle("base", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 								.slides-progress {
 									display: flex;
@@ -396,7 +424,11 @@
 						font-size: var(--text-md);
 =======
 						@include get_textstyle("base", "regular");
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 						&:hover {
 							text-decoration: none;

@@ -21,6 +21,7 @@ class PortalSettings(Document):
 		default_role: DF.Link | None
 		hide_standard_menu: DF.Check
 		menu: DF.Table[PortalMenuItem]
+
 	# end: auto-generated types
 
 	def add_item(self, item):
@@ -76,7 +77,11 @@ class PortalSettings(Document):
 		for menu_item in list(self.get("menu")):
 =======
 		for menu_item in list(self.get("menu") + self.get("custom_menu")):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if menu_item.reference_doctype not in existing_doctypes:
 				self.remove(menu_item)
 

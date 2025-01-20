@@ -203,7 +203,11 @@ def execute_patch(patchmodule: str, method=None, methodargs=None):
 		end_time = time.time()
 =======
 		end_time = time.monotonic()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		_patch_mode(False)
 		print(f"Success: Done in {round(end_time - start_time, 3)}s")
 
@@ -245,4 +249,8 @@ def check_session_stopped():
 		frappe.msgprint(frappe.db.get_global("__session_status_message"))
 		raise frappe.SessionStopped("Session Stopped")
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

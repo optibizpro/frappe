@@ -132,7 +132,11 @@ class MariaDBConnectionUtil:
 =======
 		if self.cur_db_name:
 			conn_settings["database"] = self.cur_db_name
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if self.socket:
 			conn_settings["unix_socket"] = self.socket
@@ -313,6 +317,12 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 				fulltext(content),
 				route varchar({self.VARCHAR_LEN}),
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				published int(1) not null default 0,
 =======
 				published TINYINT not null default 0,
@@ -538,7 +548,11 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 		if est_row_size:
 			return int(est_row_size[0][0])
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@contextmanager
 	def unbuffered_cursor(self):
 		from pymysql.cursors import SSCursor

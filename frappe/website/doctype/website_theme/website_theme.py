@@ -6,8 +6,16 @@ from os.path import exists as path_exists
 from os.path import join as join_path
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 from pathlib import Path
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from typing import Optional
 
 import frappe
@@ -47,6 +55,7 @@ class WebsiteTheme(Document):
 		theme: DF.Data
 		theme_scss: DF.Code | None
 		theme_url: DF.Data | None
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -140,7 +149,11 @@ class WebsiteTheme(Document):
 		for old_file in theme_files[2:]:
 			old_file.unlink()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@frappe.whitelist()
 	def set_as_default(self):
 		self.save()
@@ -160,7 +173,11 @@ class WebsiteTheme(Document):
 def get_active_theme() -> Optional["WebsiteTheme"]:
 	if website_theme := frappe.get_website_settings("website_theme"):
 		try:
+<<<<<<< HEAD
 			return frappe.get_cached_doc("Website Theme", website_theme)
+=======
+			return frappe.client_cache.get_doc("Website Theme", website_theme)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		except frappe.DoesNotExistError:
 			frappe.clear_last_message()
 			pass

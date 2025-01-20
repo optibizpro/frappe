@@ -122,7 +122,11 @@ class Webhook(Document):
 		# get evaluated automatically.
 		pass
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@frappe.whitelist()
 	def preview_meets_condition(self, preview_document):
@@ -173,7 +177,11 @@ def enqueue_webhook(doc, webhook) -> None:
 	except Exception as e:
 		frappe.logger().debug({"enqueue_webhook_error": e})
 		log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return
 
 	for i in range(3):
@@ -191,7 +199,11 @@ def enqueue_webhook(doc, webhook) -> None:
 			log_request(webhook.name, doc.name, webhook.request_url, headers, data, r)
 =======
 			log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data, r)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			break
 
 		except requests.exceptions.ReadTimeout as e:
@@ -208,7 +220,11 @@ def enqueue_webhook(doc, webhook) -> None:
 		except Exception as e:
 			frappe.logger().debug({"webhook_error": e, "try": i + 1})
 			log_request(webhook.name, doc.doctype, doc.name, request_url, headers, data, r)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			sleep(3 * i + 1)
 			if i != 2:
 				continue
@@ -219,7 +235,11 @@ def log_request(
 <<<<<<< HEAD
 =======
 	doctype: str,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	docname: str,
 	url: str,
 	headers: dict,
@@ -233,7 +253,11 @@ def log_request(
 <<<<<<< HEAD
 =======
 			"reference_doctype": doctype,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"reference_document": docname,
 			"user": frappe.session.user if frappe.session.user else None,
 			"url": url,
@@ -243,7 +267,11 @@ def log_request(
 			"response": res and res.text,
 =======
 			"response": res.text if res is not None else None,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"error": frappe.get_traceback(),
 		}
 	)

@@ -20,7 +20,11 @@ from frappe.monitor import add_data_to_monitor
 from frappe.utils import gzip_compress, gzip_decompress
 =======
 from frappe.utils import add_to_date, now
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.background_jobs import enqueue
 
 # If prepared report runs for longer than this time it's automatically considered as failed
@@ -48,9 +52,14 @@ class PreparedReport(Document):
 		report_end_time: DF.Datetime | None
 		report_name: DF.Data
 		status: DF.Literal["Error", "Queued", "Completed", "Started"]
+
 	# end: auto-generated types
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@property
 	def queued_by(self):
 		return self.owner
@@ -67,7 +76,11 @@ class PreparedReport(Document):
 			filters={"modified": ["<", frappe.utils.add_days(frappe.utils.now(), -days)]},
 =======
 			filters={"creation": ["<", frappe.utils.add_days(frappe.utils.now(), -days)]},
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 
 		for batch in frappe.utils.create_batch(prepared_reports_to_delete, 100):
@@ -90,7 +103,11 @@ class PreparedReport(Document):
 
 	def after_insert(self):
 		timeout = frappe.get_value("Report", self.report_name, "timeout")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		enqueue(
 			generate_report,
 			queue="long",
@@ -99,7 +116,11 @@ class PreparedReport(Document):
 			timeout=1500,
 =======
 			timeout=timeout or REPORT_TIMEOUT,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			enqueue_after_commit=True,
 		)
 
@@ -127,7 +148,11 @@ def generate_report(prepared_report):
 	update_job_id(prepared_report)
 
 	instance: PreparedReport = frappe.get_doc("Prepared Report", prepared_report)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	report = frappe.get_doc("Report", instance.report_name)
 
 	add_data_to_monitor(report=instance.report_name)
@@ -149,7 +174,11 @@ def generate_report(prepared_report):
 		create_json_gz_file(result, instance.doctype, instance.name)
 =======
 		create_json_gz_file(result, instance.doctype, instance.name, instance.report_name)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		instance.status = "Completed"
 	except Exception:
@@ -161,7 +190,11 @@ def generate_report(prepared_report):
 =======
 	instance.peak_memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
 	add_data_to_monitor(peak_memory_usage=instance.peak_memory_usage)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	instance.save(ignore_permissions=True)
 
 	frappe.publish_realtime(
@@ -178,7 +211,11 @@ def update_job_id(prepared_report, job_id):
 
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @dangerously_reconnect_on_connection_abort
 def _save_error(instance, error):
 	instance.reload()
@@ -204,7 +241,11 @@ def update_job_id(prepared_report):
 	frappe.db.commit()
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @frappe.whitelist()
 def make_prepared_report(report_name, filters=None):
 	"""run reports in background"""
@@ -232,7 +273,11 @@ def process_filters_for_prepared_report(filters: dict[str, Any] | str) -> str:
 	return frappe.as_json(filters, indent=None, separators=(",", ":"))
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @frappe.whitelist()
 def get_reports_in_queued_state(report_name, filters):
 	return frappe.get_all(
@@ -244,7 +289,11 @@ def get_reports_in_queued_state(report_name, filters):
 			"status": "Queued",
 =======
 			"status": ("in", ("Queued", "Started")),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"owner": frappe.session.user,
 		},
 	)
@@ -277,7 +326,11 @@ def expire_stalled_report():
 		},
 		update_modified=False,
 	)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()
@@ -300,7 +353,11 @@ def process_filters_for_prepared_report(filters):
 	# PS: frappe.as_json sorts keys
 	return frappe.as_json(filters, indent=None, separators=(",", ":"))
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def create_json_gz_file(data, dt, dn, report_name):
@@ -316,7 +373,11 @@ def create_json_gz_file(data, dt, dn, report_name):
 	)
 	encoded_content = frappe.safe_encode(frappe.as_json(data, indent=None, separators=(",", ":")))
 	compressed_content = gzip.compress(encoded_content)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# Call save() file function to upload and attach the file
 	_file = frappe.get_doc(

@@ -12,7 +12,11 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.utils import make_test_records_for_doctype
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Custom Field", "Property Setter"]
 
@@ -30,7 +34,11 @@ class UnitTestCustomizeForm(UnitTestCase):
 
 
 class TestCustomizeForm(IntegrationTestCase):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def insert_custom_field(self):
 		frappe.delete_doc_if_exists("Custom Field", "Event-custom_test_field")
 		self.field = frappe.get_doc(

@@ -37,7 +37,11 @@ from frappe.query_builder.functions import Concat
 from frappe.utils import cint, is_a_property, random_string
 =======
 from frappe.utils import cint, flt, get_datetime, is_a_property, random_string
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.website.utils import clear_cache
 
 if TYPE_CHECKING:
@@ -138,6 +142,7 @@ class DocType(Document):
 		is_virtual: DF.Check
 		issingle: DF.Check
 		istable: DF.Check
+		link_filters: DF.JSON
 		links: DF.Table[DocTypeLink]
 		make_attachments_public: DF.Check
 		max_attachments: DF.Int
@@ -353,8 +358,17 @@ class DocType(Document):
 <<<<<<< HEAD
 		new_fields_to_fetch = [df for df in new_meta.get_fields_to_fetch()]
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		new_fields_to_fetch = [df for df in new_meta.get_fields_to_fetch()]
+=======
 		new_fields_to_fetch = new_meta.get_fields_to_fetch()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		new_fields_to_fetch = new_meta.get_fields_to_fetch()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if set(old_fields_to_fetch) != {df.fieldname for df in new_fields_to_fetch}:
 			for df in new_fields_to_fetch:
@@ -493,7 +507,11 @@ class DocType(Document):
 						d.fieldname = d.fieldtype.lower().replace(" ", "_") + "_" + str(random_string(5))
 =======
 						d.fieldname = d.fieldtype.lower().replace(" ", "_") + "_" + str(random_string(4))
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					else:
 						frappe.throw(
 							_("Row #{}: Fieldname is required").format(d.idx), title="Missing Fieldname"
@@ -1680,7 +1698,11 @@ def validate_fields(meta: Meta):
 =======
 	in_ci = os.environ.get("CI")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	not_allowed_in_list_view = get_fields_not_allowed_in_list_view(meta)
 
 	for d in fields:
@@ -1702,8 +1724,17 @@ def validate_fields(meta: Meta):
 <<<<<<< HEAD
 		if not frappe.flags.in_migrate:
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		if not frappe.flags.in_migrate:
+=======
 		if not frappe.flags.in_migrate or in_ci:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		if not frappe.flags.in_migrate or in_ci:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			check_unique_fieldname(meta.get("name"), d.fieldname)
 			check_link_table_options(meta.get("name"), d)
 			check_illegal_mandatory(meta.get("name"), d)
@@ -1720,7 +1751,11 @@ def validate_fields(meta: Meta):
 	if not frappe.flags.in_migrate:
 =======
 	if not frappe.flags.in_migrate or in_ci:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		check_fold(fields)
 		check_search_fields(meta, fields)
 		check_title_field(meta)

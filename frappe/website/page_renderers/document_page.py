@@ -50,7 +50,11 @@ class DocumentPage(BaseTemplatePage):
 			self.doctype, self.docname = document
 			doc = frappe.get_cached_doc(self.doctype, self.docname)
 			return doc.meta.allow_guest_to_view or doc.has_permission() or frappe.has_website_permission(doc)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def search_web_page_dynamic_routes(self):
 		d = get_page_info_from_web_page_with_dynamic_routes(self.path)

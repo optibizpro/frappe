@@ -101,10 +101,16 @@ def get_mapped_doc(
 	if not ignore_permissions:
 		source_doc.check_permission("read")
 
+<<<<<<< HEAD
+	target_doc.run_method("before_mapping", source_doc, table_maps)
+
+	map_doc(source_doc, target_doc, table_maps[source_doc.doctype])
+=======
 	ret_doc.run_method("before_mapping", source_doc, table_maps)
 
 	with read_only_document("doc-mapper"):
 		map_doc(source_doc, target_doc, table_maps[source_doc.doctype])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	row_exists_for_parentfield = {}
 
@@ -171,6 +177,12 @@ def get_mapped_doc(
 			postprocess(source_doc, target_doc)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	target_doc.run_method("after_mapping", source_doc)
 	target_doc.set_onload("load_after_mapping", True)
 

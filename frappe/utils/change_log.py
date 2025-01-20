@@ -10,7 +10,11 @@ from contextlib import suppress
 from semantic_version import Version
 =======
 from semantic_version import SimpleSpec, Version
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe import _, safe_decode
@@ -288,7 +292,11 @@ def check_release_on_github(
 =======
 	if not repo:
 		raise ValueError("Repo cannot be empty")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# Get latest version from GitHub
 	releases = _get_latest_releases(owner, repo)

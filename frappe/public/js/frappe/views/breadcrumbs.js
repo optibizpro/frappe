@@ -21,7 +21,11 @@ frappe.breadcrumbs = {
 <<<<<<< HEAD
 		"Event Streaming": "Tools",
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		Automation: "Tools",
 	},
 
@@ -171,7 +175,11 @@ frappe.breadcrumbs = {
 			const doctype_meta = frappe.get_meta(breadcrumbs.doctype);
 			if (doctype_meta?.__workspaces?.length) {
 				breadcrumbs.workspace = doctype_meta.__workspaces[0];
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 
 			if (breadcrumbs.module) {
@@ -197,7 +205,11 @@ frappe.breadcrumbs = {
 					breadcrumbs.workspace =
 						frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
 				}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		}
 	},
@@ -208,7 +220,11 @@ frappe.breadcrumbs = {
 		const doctype_meta = frappe.get_doc("DocType", doctype);
 =======
 		const doctype_meta = frappe.get_meta(doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (
 			(doctype === "User" && !frappe.user.has_role("System Manager")) ||
 			doctype_meta?.issingle

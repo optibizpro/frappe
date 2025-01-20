@@ -57,7 +57,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 		this.page.main = $('<div class="col-md-12 print-format-builder-main"></div>').appendTo(
 			this.page.main
 		);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// future-bindings for buttons on sections / fields
 		// bind only once
@@ -235,7 +239,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				'</div><br><small class="sub-heading">{{ doc.name }}</small>\
 =======
 				'</div><br><small class="sub-heading">{{ _(doc.name) }}</small>\
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				</h2></div>';
 		}
 
@@ -294,7 +302,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			} else if (!in_list(frappe.model.layout_fields, f.fieldtype)) {
 =======
 			} else if (!frappe.model.layout_fields.includes(f.fieldtype)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (!column) set_column();
 
 				if (f.fieldtype === "Table") {
@@ -335,7 +347,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				!in_list(["Section Break", "Column Break", "Tab Break"], _f.fieldtype) &&
 =======
 				!["Section Break", "Column Break", "Tab Break"].includes(_f.fieldtype) &&
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				!_f.print_hide &&
 				f.label
 			) {
@@ -401,7 +417,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 						field = me.get_custom_html_field();
 					} else {
 						field = frappe.meta.get_docfield(me.print_format.doc_type, fieldname);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					}
 
 					var html = frappe.render_template("print_format_builder_field", {
@@ -515,7 +535,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 						label: __("Hide Label"),
 						fieldname: "nolabel",
 						fieldtype: "Check",
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 					{
 						label: __("Remove Field"),
@@ -533,7 +557,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 <<<<<<< HEAD
 =======
 			d.set_value("nolabel", field.attr("data-nolabel"));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			d.set_primary_action(__("Update"), function () {
 				field.attr("data-align", d.get_value("align"));
@@ -541,7 +569,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 <<<<<<< HEAD
 =======
 				field.attr("data-nolabel", d.get_value("nolabel"));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				field.find(".field-label").html(d.get_value("label"));
 				d.hide();
 			});
@@ -607,7 +639,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			for (var i = no_of_columns; i < new_no_of_columns; i++) {
 =======
 			for (let i = no_of_columns; i < new_no_of_columns; i++) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				var col = $(
 					'<div class="section-column">\
 					<div class="print-format-builder-column"></div></div>'
@@ -686,7 +722,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				if (in_list(Object.keys(docfields_by_name), v)) {
 =======
 				if (Object.keys(docfields_by_name).includes(v)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					fields.push(docfields_by_name[v]);
 				}
 			});
@@ -700,7 +740,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 =======
 					!column_names.includes(f.fieldname) &&
 					!["Section Break", "Column Break", "Tab Break"].includes(f.fieldtype) &&
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					f.label
 				) {
 					fields.push(f);
@@ -850,7 +894,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 <<<<<<< HEAD
 =======
 								nolabel = $this.attr("data-nolabel"),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								df = {
 									fieldname: $this.attr("data-fieldname"),
 									print_hide: 0,
@@ -870,7 +918,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 								df.nolabel = 1;
 							}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							if (fieldtype === "Table") {
 								// append the user selected columns to visible_columns
 								var columns = $this.attr("data-columns").split(",");

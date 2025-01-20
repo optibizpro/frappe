@@ -9,7 +9,11 @@ import json
 from functools import lru_cache
 
 from sql_metadata import Parser
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 import frappe.permissions
@@ -23,7 +27,11 @@ from frappe.model.utils import is_virtual_doctype
 from frappe.utils import add_user_info, cint, cstr, format_duration
 =======
 from frappe.utils import add_user_info, cint, format_duration
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.data import sbool
 
 
@@ -65,8 +73,17 @@ def get_count() -> int:
 <<<<<<< HEAD
 		count = controller.get_count(args)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		count = controller.get_count(args)
+=======
 		count = frappe.call(controller.get_count, args=args, **args)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		count = frappe.call(controller.get_count, args=args, **args)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	else:
 		args.distinct = sbool(args.distinct)
 		distinct = "distinct " if args.distinct else ""
@@ -123,7 +140,11 @@ def validate_fields(data):
 		if not fieldname:
 			raise_invalid_field(fieldname)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if is_standard(fieldname):
 			continue
 
@@ -203,7 +224,11 @@ def is_standard(fieldname):
 	return fieldname in default_fields or fieldname in optional_fields or fieldname in child_table_fields
 
 
+<<<<<<< HEAD
+@lru_cache
+=======
 @lru_cache(maxsize=1024)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 def extract_fieldnames(field):
 	from frappe.database.schema import SPECIAL_CHAR_PATTERN
 
@@ -215,7 +240,11 @@ def extract_fieldnames(field):
 =======
 	if not SPECIAL_CHAR_PATTERN.findall(field):
 		return [field]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	columns = Parser(f"select {field} from _dummy").columns
 
@@ -247,7 +276,11 @@ def update_wildcard_field_param(data):
 =======
 		parent_type = data.parenttype or data.parent_doctype
 		data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return True
 
 	return False
@@ -265,7 +298,11 @@ def parse_json(data):
 =======
 	if (applied_filters := data.get("applied_filters")) and isinstance(applied_filters, str):
 		data["applied_filters"] = json.loads(applied_filters)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if (or_filters := data.get("or_filters")) and isinstance(or_filters, str):
 		data["or_filters"] = json.loads(or_filters)
 	if (fields := data.get("fields")) and isinstance(fields, str):
@@ -401,7 +438,11 @@ def export_query():
 <<<<<<< HEAD
 =======
 	translate_values = 1 if form_params.pop("translate_values", None) == "1" else None
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if selection := form_params.pop("selected_items", None):
 		form_params["filters"] = {"name": ("in", json.loads(selection))}
@@ -451,7 +492,11 @@ def export_query():
 			processed_data.append(processed_row)
 			data.extend(processed_data)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	data = handle_duration_fieldtype_values(doctype, data, db_query.fields)
 
 	if file_format_type == "CSV":
@@ -510,7 +555,11 @@ def get_field_info(fields, doctype):
 			parenttype = doctype
 			fieldname = key.split("(", 1)[0]
 			fieldname = fieldname[0].upper() + fieldname[1:]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		parenttype = parenttype or doctype
 
@@ -575,7 +624,11 @@ def parse_field(field: str) -> tuple[str | None, str]:
 	key = field.split(" as ")[0]
 =======
 	key = field.split(" as ", 1)[0]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if key.startswith(("count(", "sum(", "avg(")):
 		raise ValueError
@@ -586,7 +639,11 @@ def parse_field(field: str) -> tuple[str | None, str]:
 =======
 		table, column = key.split(".", 2)[:2]
 		return table[4:-1], column.strip("`")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return None, key.strip("`")
 
@@ -737,8 +794,17 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 <<<<<<< HEAD
 				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
+=======
 				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				group_by=tag["name"],
 				as_list=True,
 			)

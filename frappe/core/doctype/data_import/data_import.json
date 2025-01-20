@@ -18,9 +18,18 @@
   "column_break_5",
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
   "custom_delimiters",
   "delimiter_options",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+  "custom_delimiters",
+  "delimiter_options",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "status",
   "submit_after_import",
   "mute_emails",
@@ -174,6 +183,11 @@
    "read_only": 1
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": ",;\\t|",
@@ -189,6 +203,10 @@
    "fieldtype": "Check",
    "label": "Custom Delimiters"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "hide_toolbar": 1,
@@ -196,8 +214,17 @@
 <<<<<<< HEAD
  "modified": "2024-01-30 17:08:05.566686",
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+ "modified": "2024-01-30 17:08:05.566686",
+=======
  "modified": "2024-04-27 20:42:35.843158",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-04-27 20:42:35.843158",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Data Import",
@@ -218,15 +245,31 @@
   }
  ],
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1
+<<<<<<< HEAD
 }
 =======
+<<<<<<< HEAD
+}
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1
 }
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

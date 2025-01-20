@@ -5,11 +5,23 @@
 from collections.abc import Callable
 from datetime import datetime
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+import datetime
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import time
-from collections.abc import Callable
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+from collections.abc import Callable
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from functools import wraps
 
+import pytz
 from werkzeug.wrappers import Response
 
 import frappe
@@ -54,7 +66,12 @@ class RateLimiter:
 		self.limit = int(limit * 1000000)
 		self.window = window
 
+<<<<<<< HEAD
+		self.start = datetime.datetime.now(pytz.UTC)
+		timestamp = int(frappe.utils.now_datetime().timestamp())
+=======
 		self.start = time.time()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		self.window_number, self.spent = divmod(int(self.start), self.window)
 		self.key = frappe.cache.make_key(f"rate-limit-counter-{self.window_number}")
@@ -98,8 +115,13 @@ class RateLimiter:
 	def record_request_end(self):
 		if self.end is not None:
 			return
+<<<<<<< HEAD
+		self.end = datetime.datetime.now(pytz.UTC)
+		self.duration = int((self.end - self.start).total_seconds() * 1000000)
+=======
 		self.end = time.time()
 		self.duration = int((self.end - self.start) * 1000000)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	def respond(self):
 		if self.rejected:
@@ -160,7 +182,11 @@ def rate_limit(
 			cache_key = frappe.cache().make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
 =======
 			cache_key = frappe.cache.make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			value = frappe.cache.get(cache_key)
 			if not value:

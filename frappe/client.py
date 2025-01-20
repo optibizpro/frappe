@@ -97,7 +97,11 @@ def get(doctype, name=None, filters=None, parent=None):
 =======
 	doc.apply_fieldlevel_read_permissions()
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return doc.as_dict()
 
 
@@ -226,7 +230,11 @@ def insert_many(docs=None):
 	return out
 =======
 	return [insert_doc(doc).name for doc in docs]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist(methods=["POST", "PUT"])
@@ -325,7 +333,11 @@ def get_doc_permissions(doctype, docname):
 	"""Returns an evaluated document permissions dict like `{"read":1, "write":1}`
 =======
 	"""Return an evaluated document permissions dict like `{"read":1, "write":1}`.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	:param doctype: DocType of the document to be evaluated
 	:param docname: `name` of the document to be evaluated
@@ -367,7 +379,11 @@ from frappe.deprecation_dumpster import get_js as _get_js
 	return out
 =======
 get_js = frappe.whitelist()(_get_js)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist(allow_guest=True)

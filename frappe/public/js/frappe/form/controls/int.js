@@ -3,7 +3,11 @@ frappe.ui.form.ControlInt = class ControlInt extends frappe.ui.form.ControlData 
 <<<<<<< HEAD
 =======
 	static input_mode = "numeric";
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	make() {
 		super.make();
 	}
@@ -27,7 +31,11 @@ frappe.ui.form.ControlInt = class ControlInt extends frappe.ui.form.ControlData 
 			document.activeElement?.select?.();
 			return false;
 		});
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	validate(value) {
 		return this.parse(value);
@@ -47,7 +55,11 @@ frappe.ui.form.ControlInt = class ControlInt extends frappe.ui.form.ControlData 
 					.join("");
 			}
 			if (parsed_value.match(/^[0-9+\-/*.() ]+$/)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				// If it is a string containing operators
 				try {
 					return eval(parsed_value);

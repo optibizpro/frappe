@@ -121,10 +121,19 @@ def rename_doc(
 <<<<<<< HEAD
 	old: str | None = None,
 	new: str | None = None,
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	old: str | int | None = None,
 	new: str | int | None = None,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	force: bool = False,
 	merge: bool = False,
 	ignore_permissions: bool = False,
@@ -406,6 +415,23 @@ def validate_rename(
 		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
 			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	kwargs = {"doctype": doctype, "ptype": "write", "raise_exception": False}
+	if old_doc:
+		kwargs["doc"] = old_doc
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+
+	if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+		frappe.throw(_("You need write permission on {0} {1} to rename").format(doctype, old))
+
+	if merge:
+		kwargs["doc"] = frappe.get_doc(doctype, new)
+		if not (ignore_permissions or frappe.permissions.has_permission(**kwargs)):
+			frappe.throw(_("You need write permission on {0} {1} to merge").format(doctype, new))
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	kwargs = {"doctype": doctype, "ptype": "write", "print_logs": False}
 	if old_doc:
 		kwargs["doc"] = old_doc
@@ -779,4 +805,8 @@ def show_deprecation_warning(funct: str) -> None:
 	)
 	secho(message, fg="yellow")
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

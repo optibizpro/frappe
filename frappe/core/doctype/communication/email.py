@@ -50,7 +50,11 @@ def make(
 =======
 	send_after=None,
 	print_language=None,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	now=False,
 	**kwargs,
 ) -> dict[str, str]:
@@ -110,7 +114,11 @@ def make(
 =======
 		send_after=send_after,
 		print_language=print_language,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		now=now,
 	)
 
@@ -141,7 +149,11 @@ def _make(
 =======
 	send_after=None,
 	print_language=None,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	now=False,
 ) -> dict[str, str]:
 	"""Internal method to make a new communication that ignores Permission checks."""
@@ -199,7 +211,11 @@ def _make(
 <<<<<<< HEAD
 =======
 			print_language=print_language,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			now=now,
 		)
 
@@ -291,7 +307,11 @@ def mark_email_as_seen(name: str | None = None):
 
 
 def _mark_email_as_seen(name):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	try:
 		update_communication_as_read(name)
 	except Exception:

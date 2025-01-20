@@ -13,7 +13,11 @@
 					{% for (var val in group_by_conditions[parent_doctype]) { %}
 =======
 					{% for (var val of group_by_conditions[parent_doctype]) { %}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						<option
 							data-doctype="{{parent_doctype}}"
 							value="{{val.fieldname}}"
@@ -22,7 +26,11 @@
 							{{ __(group_by_conditions[parent_doctype][val].label || group_by_conditions[parent_doctype][val].fieldname) }}
 =======
 							{{ __(val.label || val.fieldname, null, val.parent ) }}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</option>
 					{% } %}
 				{% } %}

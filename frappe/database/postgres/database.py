@@ -121,7 +121,11 @@ class PostgresExceptionUtil:
 		return False
 
 	@staticmethod
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def is_interface_error(e):
 		return isinstance(e, InterfaceError)
 
@@ -184,8 +188,13 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 
 	def get_connection(self):
 		conn_settings = {
+<<<<<<< HEAD
+			"user": self.user,
+			"dbname": self.cur_db_name,
+=======
 			"dbname": self.cur_db_name,
 			"user": self.user,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			# libpg defaults to default socket if not specified
 			"host": self.host or self.socket,
 		}
@@ -249,9 +258,19 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 <<<<<<< HEAD
 				and table_schema='{}'""".format(frappe.conf.db_name, frappe.conf.get("db_schema", "public"))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				and table_schema='{}'""".format(self.cur_db_name, frappe.conf.get("db_schema", "public"))
+=======
 				and table_schema=%s""",
 				(self.cur_db_name, self.db_schema),
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				and table_schema=%s""",
+				(self.cur_db_name, self.db_schema),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 		]
 
@@ -396,11 +415,22 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 			f"""SELECT 1 FROM pg_indexes WHERE tablename='{table_name}'
 			and indexname='{index_name}' limit 1"""
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+			f"""SELECT 1 FROM pg_indexes WHERE tablename='{table_name}'
+			and indexname='{index_name}' limit 1"""
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"""SELECT 1 FROM pg_indexes WHERE tablename=%s
 			and schemaname = %s
 			and indexname=%s limit 1""",
 			(table_name, self.db_schema, index_name),
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 
 	def add_index(self, doctype: str, fields: list, index_name: str | None = None):
@@ -437,6 +467,13 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 				"""ALTER TABLE `tab{}`
 					ADD CONSTRAINT {} UNIQUE ({})""".format(doctype, constraint_name, ", ".join(fields))
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+				"""ALTER TABLE `tab{}`
+					ADD CONSTRAINT {} UNIQUE ({})""".format(doctype, constraint_name, ", ".join(fields))
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				sql.SQL(
 					"""ALTER TABLE {schema}.{table}
 					ADD CONSTRAINT {constraint} UNIQUE ({fields})"""
@@ -449,6 +486,10 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 				)
 				.as_string(self._conn)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 
 	def get_table_columns_description(self, table_name):
@@ -477,10 +518,19 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 			WHERE a.table_name = '{table_name}'
 <<<<<<< HEAD
 			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 				AND a.table_schema = '{self.db_schema}'
 			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length, a.is_nullable;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		""",
 			as_dict=1,
 		)

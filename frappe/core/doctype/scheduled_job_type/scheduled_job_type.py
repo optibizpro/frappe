@@ -44,8 +44,10 @@ class ScheduledJobType(Document):
 		last_execution: DF.Datetime | None
 		method: DF.Data
 		next_execution: DF.Datetime | None
+		scheduler_event: DF.Link | None
 		server_script: DF.Link | None
 		stopped: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -95,7 +97,11 @@ class ScheduledJobType(Document):
 					f"Skipped queueing {self.method} because it was found in queue for {frappe.local.site}"
 				)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return False
 
 	def is_event_due(self, current_time=None):
@@ -113,7 +119,11 @@ class ScheduledJobType(Document):
 		return f"scheduled_job::{self.method}"
 =======
 		return f"scheduled_job::{self.name}"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@property
 	def next_execution(self):
@@ -281,9 +291,13 @@ def insert_single_event(frequency: str, event: str, cron_format: str | None = No
 			doc.insert()
 
 
+<<<<<<< HEAD
 def clear_events(scheduler_events: dict):
 	def event_exists(event) -> bool:
 		if event.server_script:
+			return True
+
+		if event.scheduler_event:
 			return True
 
 		freq = frappe.scrub(event.frequency)
@@ -294,6 +308,19 @@ def clear_events(scheduler_events: dict):
 
 	for event in frappe.get_all("Scheduled Job Type", fields=["*"]):
 		if not event_exists(event):
+=======
+def clear_events(all_events: list):
+	for event in frappe.get_all(
+		"Scheduled Job Type", fields=["name", "method", "server_script", "scheduler_event"]
+	):
+		is_server_script = event.server_script
+		is_defined_in_hooks = event.method in all_events
+
+		if event.scheduler_event:
+			continue
+
+		if not (is_defined_in_hooks or is_server_script):
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 			frappe.delete_doc("Scheduled Job Type", event.name)
 
 

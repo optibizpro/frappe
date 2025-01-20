@@ -32,6 +32,7 @@ class UserType(Document):
 		user_doctypes: DF.Table[UserDocumentType]
 		user_id_field: DF.Literal[None]
 		user_type_modules: DF.Table[UserTypeModule]
+
 	# end: auto-generated types
 
 	def validate(self):
@@ -46,7 +47,11 @@ class UserType(Document):
 			frappe.cache().delete_value("non_standard_user_types")
 =======
 			frappe.cache.delete_value("non_standard_user_types")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def on_update(self):
 		if self.is_standard:
@@ -148,6 +153,12 @@ class UserType(Document):
 			values = {perm: row.get(perm, default=0) for perm in perms}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.db.set_value("Custom DocPerm", docperm, values)
 =======
 			update_custom_docperm(docperm, values)
@@ -319,7 +330,11 @@ def apply_permissions_for_non_standard_user_type(doc, method=None):
 	user_types = frappe.cache().get_value(
 =======
 	user_types = frappe.cache.get_value(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"non_standard_user_types",
 		get_non_standard_user_types,
 	)

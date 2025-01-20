@@ -55,7 +55,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 <<<<<<< HEAD
 =======
 			hide_label: true,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			css_class: "form-links",
 			hidden: 1,
 			is_dashboard_section: 1,
@@ -187,7 +191,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 		return $('<div class="progress-chart" title="' + (title || "") + '"></div>').appendTo(
 			this.progress_area.body
 		);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	refresh() {
@@ -576,7 +584,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 		let indicator = $(
 =======
 		return $(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			'<div class="col-sm-' +
 				colspan +
 				' indicator-column"><span class="indicator ' +
@@ -589,7 +601,11 @@ frappe.ui.form.Dashboard = class FormDashboard {
 
 		return indicator;
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	// graphs

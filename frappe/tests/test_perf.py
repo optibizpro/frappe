@@ -22,12 +22,23 @@ import sys
 import time
 import unittest
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+import gc
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import gc
 import itertools
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import sys
 import time
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from unittest.mock import patch
 
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
@@ -50,7 +61,13 @@ class TestPerformance(FrappeTestCase):
 		frappe.destroy()  # releases everything on frappe.local
 		frappe.init(site=self.TEST_SITE)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.tests import IntegrationTestCase
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.tests.test_api import FrappeAPITestCase
 from frappe.tests.test_query_builder import run_only_if
 from frappe.utils import cint
@@ -66,7 +83,11 @@ class TestPerformance(IntegrationTestCase):
 		# To simulate close to request level of handling
 		frappe.destroy()  # releases everything on frappe.local
 		frappe.init(self.TEST_SITE)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.connect()
 		frappe.clear_cache()
 
@@ -82,7 +103,11 @@ class TestPerformance(IntegrationTestCase):
 		frappe.clear_cache()
 		frappe.get_meta("User")
 		frappe.clear_cache(doctype="ToDo")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		with self.assertQueryCount(0):
 			frappe.get_meta("User")
@@ -128,7 +153,11 @@ class TestPerformance(IntegrationTestCase):
 =======
 		# Warm up code
 		frappe.db.get_values("User", filters=filters[0], limit=1)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		for filter in filters:
 			with self.assertRowsRead(1):
 				self.assertEqual(1, len(frappe.db.get_values("User", filters=filter, limit=1)))
@@ -167,7 +196,11 @@ class TestPerformance(IntegrationTestCase):
 		EXPECTED_RPS = 55  # measured on GHA
 =======
 		EXPECTED_RPS = 120  # measured on GHA
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		FAILURE_THREASHOLD = 0.1
 
 		req_count = 1000
@@ -190,7 +223,11 @@ class TestPerformance(IntegrationTestCase):
 <<<<<<< HEAD
 	@unittest.skip("Not implemented")
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_homepage_resolver(self):
 		paths = ["/", "/app"]
 		for path in paths:
@@ -218,7 +255,11 @@ class TestPerformance(IntegrationTestCase):
 		with self.assertQueryCount(1):
 			frappe.get_list("User")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_no_ifnull_checks(self):
 		query = frappe.get_all("DocType", {"autoname": ("is", "set")}, run=0).lower()
 		self.assertNotIn("coalesce", query)
@@ -247,6 +288,11 @@ class TestPerformance(IntegrationTestCase):
 
 	def test_get_doc_cache_calls(self):
 		frappe.get_doc("User", "Administrator")
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(1):
+			frappe.get_doc("User", "Administrator")
+
+=======
 		with self.assertRedisCallCounts(0):
 			frappe.get_doc("User", "Administrator")
 
@@ -321,6 +367,7 @@ class TestPerformance(IntegrationTestCase):
 		core = assign_core(1, 4, 4, enabled_cores, affinity)
 		self.assertEqual(core, 2)
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 @run_only_if(db_type_is.MARIADB)
 class TestOverheadCalls(FrappeAPITestCase):
@@ -335,6 +382,11 @@ class TestOverheadCalls(FrappeAPITestCase):
 
 	def test_ping_overheads(self):
 		self.get(self.method("ping"), {"sid": "Guest"})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(13), self.assertQueryCount(self.BASE_SQL_CALLS):
+			self.get(self.method("ping"), {"sid": "Guest"})
+
+=======
 		with self.assertRedisCallCounts(2), self.assertQueryCount(self.BASE_SQL_CALLS):
 			self.get(self.method("ping"), {"sid": "Guest"})
 
@@ -344,11 +396,16 @@ class TestOverheadCalls(FrappeAPITestCase):
 		with self.assertRedisCallCounts(3), self.assertQueryCount(self.BASE_SQL_CALLS):
 			self.get(self.method("ping"), {"sid": sid})
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_list_view_overheads(self):
 		sid = self.sid
 		self.get(self.resource("ToDo"), {"sid": sid})
 		self.get(self.resource("ToDo"), {"sid": sid})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(24), self.assertQueryCount(self.BASE_SQL_CALLS + 1):
+=======
 		with self.assertRedisCallCounts(6), self.assertQueryCount(self.BASE_SQL_CALLS + 1):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.get(self.resource("ToDo"), {"sid": sid})
 
 	def test_get_doc_overheads(self):
@@ -356,6 +413,10 @@ class TestOverheadCalls(FrappeAPITestCase):
 		tables = len(frappe.get_meta("User").get_table_fields())
 		self.get(self.resource("User", "Administrator"), {"sid": sid})
 		self.get(self.resource("User", "Administrator"), {"sid": sid})
+<<<<<<< HEAD
+		with self.assertRedisCallCounts(19), self.assertQueryCount(self.BASE_SQL_CALLS + 1 + tables):
+			self.get(self.resource("User", "Administrator"), {"sid": sid})
+=======
 		with self.assertRedisCallCounts(3), self.assertQueryCount(self.BASE_SQL_CALLS + 1 + tables):
 			self.get(self.resource("User", "Administrator"), {"sid": sid})
 
@@ -364,3 +425,7 @@ class TestOverheadCalls(FrappeAPITestCase):
 def redis_cached_func():
 	return 42
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

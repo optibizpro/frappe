@@ -115,13 +115,20 @@ def get_bootinfo():
 =======
 	bootinfo.marketplace_apps = get_marketplace_apps()
 	bootinfo.changelog_feed = get_changelog_feed_items()
+<<<<<<< HEAD
+=======
 	bootinfo.enable_address_autocompletion = frappe.db.get_single_value(
 		"Geolocation Settings", "enable_address_autocompletion"
 	)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	if sentry_dsn := get_sentry_dsn():
 		bootinfo.sentry_dsn = sentry_dsn
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return bootinfo
 
@@ -147,7 +154,11 @@ def load_conf_settings(bootinfo):
 	for key in ("developer_mode", "socketio_port", "file_watcher_port"):
 =======
 	for key in ("developer_mode", "socketio_port", "file_watcher_port", "fc_communication_secret"):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if key in frappe.conf:
 			bootinfo[key] = frappe.conf.get(key)
 
@@ -160,7 +171,11 @@ def load_desktop_data(bootinfo):
 =======
 	bootinfo.sidebar_pages = get_workspace_sidebar_items()
 	allowed_pages = [d.name for d in bootinfo.sidebar_pages.get("pages")]
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	bootinfo.module_wise_workspaces = get_controller("Workspace").get_module_wise_workspaces()
 	bootinfo.dashboards = frappe.get_all("Dashboard")
 	bootinfo.app_data = []
@@ -322,10 +337,18 @@ def get_user_pages_or_reports(parent, cache=False):
 			has_role[r.name] = {"modified": r.modified, "title": r.title}
 			if is_report:
 				has_role[r.name] |= {"ref_doctype": r.ref_doctype}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if is_report:
+<<<<<<< HEAD
+		if not has_permission("Report", raise_exception=False):
+=======
 		if not has_permission("Report", print_logs=False):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return {}
 
 <<<<<<< HEAD
@@ -334,7 +357,11 @@ def get_user_pages_or_reports(parent, cache=False):
 			return {}
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		reports = frappe.get_list(
 			"Report",
 			fields=["name", "report_type"],
@@ -539,7 +566,7 @@ def get_marketplace_apps():
 		return apps
 
 	def get_apps_from_fc():
-		remote_site = frappe.conf.frappecloud_url or "frappecloud.com"
+		remote_site = frappe.conf.frappecloud_url or "optibizpro.com"
 		request_url = f"https://{remote_site}/api/method/press.api.marketplace.get_marketplace_apps"
 		request = requests.get(request_url, timeout=2.0)
 		return request.json()["message"]
@@ -555,7 +582,11 @@ def get_marketplace_apps():
 	return apps
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def add_subscription_conf():
 	try:
 		return frappe.conf.subscription
@@ -570,4 +601,8 @@ def get_sentry_dsn():
 		return
 
 	return os.getenv("FRAPPE_SENTRY_DSN")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

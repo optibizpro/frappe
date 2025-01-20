@@ -94,7 +94,11 @@ function get_version_timeline_content(version_doc, frm) {
 								)
 						  );
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					out.push(get_version_comment(version_doc, message));
 				}
 			} else {
@@ -103,7 +107,11 @@ function get_version_timeline_content(version_doc, frm) {
 				if (df && !df.hidden) {
 =======
 				if (df && (!df.hidden || df.show_on_timeline)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					const field_display_status = frappe.perm.get_field_display_status(
 						df,
 						null,
@@ -123,7 +131,11 @@ function get_version_timeline_content(version_doc, frm) {
 						parts.push(
 							__("{0} from {1} to {2}", [
 								__(df.label, null, df.parent),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								format_content_for_timeline(p[1]),
 								format_content_for_timeline(p[2]),
 							])
@@ -171,7 +183,11 @@ function get_version_timeline_content(version_doc, frm) {
 						])
 				  );
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			out.push(get_version_comment(version_doc, message));
 		}
 	}
@@ -193,7 +209,11 @@ function get_version_timeline_content(version_doc, frm) {
 				if (df && !df.hidden) {
 =======
 				if (df && (!df.hidden || df.show_on_timeline)) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					var field_display_status = frappe.perm.get_field_display_status(
 						df,
 						null,
@@ -208,7 +228,11 @@ function get_version_timeline_content(version_doc, frm) {
 						field_display_status === "Write" ||
 						(df.hidden && df.show_on_timeline)
 					) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						parts.push(
 							__("{0} from {1} to {2} in row #{3}", [
 								frappe.meta.get_label(frm.fields_dict[row[0]].grid.doctype, p[0]),
@@ -261,7 +285,11 @@ function get_version_timeline_content(version_doc, frm) {
 						])
 				  );
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			out.push(get_version_comment(version_doc, message));
 		}
 	}
@@ -295,7 +323,11 @@ function get_version_timeline_content(version_doc, frm) {
 						field_display_status === "Write" ||
 						(df.hidden && df.show_on_timeline)
 					) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						return __(frappe.meta.get_label(frm.doctype, p[0]));
 					}
 				}
@@ -399,4 +431,8 @@ function get_user_message(user, message_self, message_other) {
 }
 
 export { get_version_timeline_content, get_user_link, get_user_message };
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

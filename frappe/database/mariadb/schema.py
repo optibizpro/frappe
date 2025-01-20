@@ -45,7 +45,11 @@ class MariaDBTable(DBTable):
 =======
 		if not self.meta.issingle and self.meta.autoname == "autoincrement":
 			frappe.db.create_sequence(self.doctype, check_not_exists=True)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			# NOTE: not used nextval func as default as the ability to restore
 			# database with sequences has bugs in mariadb and gives a scary error.
@@ -79,7 +83,11 @@ class MariaDBTable(DBTable):
 			col.build_for_alter_table(self.current_columns.get(col.fieldname.lower()))
 
 		add_column_query = [f"ADD COLUMN `{col.fieldname}` {col.get_definition()}" for col in self.add_column]
+<<<<<<< HEAD
+		columns_to_modify = set(self.change_type + self.set_default)
+=======
 		columns_to_modify = set(self.change_type + self.set_default + self.change_nullability)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		modify_column_query = [
 			f"MODIFY `{col.fieldname}` {col.get_definition(for_modification=True)}"
 			for col in columns_to_modify
@@ -96,10 +104,17 @@ class MariaDBTable(DBTable):
 			if not frappe.db.get_column_index(self.table_name, col.fieldname, unique=False)
 		]
 
+<<<<<<< HEAD
+		if self.meta.sort_field == "creation" and not frappe.db.get_column_index(
+			self.table_name, "creation", unique=False
+		):
+			add_index_query.append("ADD INDEX `creation`(`creation`)")
+=======
 		if self.meta.sort_field == "modified" and not frappe.db.get_column_index(
 			self.table_name, "modified", unique=False
 		):
 			add_index_query.append("ADD INDEX `modified`(`modified`)")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		drop_index_query = []
 
@@ -147,7 +162,11 @@ class MariaDBTable(DBTable):
 				if unique_index := frappe.db.get_column_index(self.table_name, col.fieldname, unique=True):
 					drop_index_query.append(f"DROP INDEX `{unique_index.Key_name}`")
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			index_constraint_changed = current_column.index != col.set_index
 			if index_constraint_changed and not col.set_index:
 				if index_record := frappe.db.get_column_index(self.table_name, col.fieldname, unique=False):
@@ -170,8 +189,16 @@ class MariaDBTable(DBTable):
 					query = f"ALTER TABLE `{self.table_name}` {query_body}"
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 					# nosemgrep
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+					# nosemgrep
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					frappe.db.sql_ddl(query)
 
 		except Exception as e:
@@ -209,4 +236,8 @@ class MariaDBTable(DBTable):
 		# Reverting from UUID to VARCHAR
 		if autoname != "UUID" and frappe.db.get_column_type(self.doctype, "name") == "uuid":
 			return f"modify name varchar({frappe.db.VARCHAR_LEN})"
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

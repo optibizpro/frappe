@@ -7,6 +7,32 @@ body {
 	}
 }
 
+<<<<<<< HEAD
+.desk-sidebar {
+	@extend .standard-sidebar;
+
+	.standard-sidebar-label {
+		font-size: var(--text-xs);
+		text-transform: uppercase;
+		cursor: pointer;
+		margin-bottom: var(--margin-xs) !important;
+
+		span {
+			pointer-events: none;
+		}
+	}
+
+	.standard-sidebar-section {
+		margin-bottom: var(--margin-xl);
+
+		&:last-of-type {
+			margin-bottom: var(--margin-sm);
+		}
+	}
+}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 .widget-group {
 	@include get_textstyle("base", "regular");
 	margin-bottom: var(--margin-2xl);
@@ -195,7 +221,11 @@ body {
 		.widget-head {
 			padding: 4px 8px;
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		.filter-chart {
 			background-color: var(--control-bg);
@@ -338,7 +368,11 @@ body {
 =======
 		border-bottom: 1px solid var(--border-color);
 		border-radius: 0;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		&.edit-mode:hover {
 			background-color: var(--bg-color);
@@ -540,6 +574,15 @@ body {
 
 	&.shortcut-widget-box {
 		cursor: pointer;
+<<<<<<< HEAD
+		padding: 2px 7px;
+		align-items: flex-start;
+
+		&:hover {
+			--icon-stroke: var(--invert-neutral);
+			.widget-title {
+				color: var(--invert-neutral) !important;
+=======
 		padding: 10px;
 		border: 1px solid var(--border-color);
 
@@ -547,6 +590,7 @@ body {
 			--icon-stroke: var(--invert-neutral);
 			.widget-label .widget-title {
 				color: var(--invert-neutral);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			}
 			border-color: var(--invert-neutral);
 		}
@@ -579,7 +623,11 @@ body {
 
 		padding: 10px;
 		border: 1px solid var(--border-color);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		.link-item {
 			display: flex;
@@ -936,6 +984,12 @@ body {
 		.layout-main {
 			height: calc(100vh - var(--navbar-height) - var(--page-head-height) - 5px);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.layout-side-section,
 			.layout-main-section-wrapper {
 				height: 100%;
@@ -944,6 +998,25 @@ body {
 				[data-theme="dark"] & {
 					scrollbar-color: var(--gray-800) transparent;
 				}
+<<<<<<< HEAD
+
+				&::-webkit-scrollbar-track {
+					background: transparent;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background: var(--gray-200);
+					[data-theme="dark"] & {
+						background: var(--gray-800);
+					}
+				}
+			}
+
+			.layout-side-section {
+				padding-right: 15px;
+			}
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 			max-width: var(--page-max-width);
 			margin: auto;
@@ -988,10 +1061,17 @@ body {
 		height: 30px;
 		display: flex;
 		flex-direction: row-reverse;
+<<<<<<< HEAD
+=======
 		margin-bottom: var(--margin-xs);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	.block-menu-item-icon svg {
 		width: 18px;
 		height: 18px;
@@ -1022,7 +1102,7 @@ body {
 			}
 
 			.drop-icon {
-				padding: 10px 12px 10px 2px;
+				padding: 0px 12px 0px 2px;
 			}
 
 			svg {
@@ -1041,13 +1121,17 @@ body {
 		.item-anchor {
 			display: flex;
 			overflow: hidden;
-			padding: 8px 0px 8px 12px;
+			padding: 3px 0px 3px 8px;
 			flex: 1;
 		}
 	}
 
 	.sidebar-item-container {
 		position: relative;
+<<<<<<< HEAD
+=======
+		margin-left: -10px;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		&[item-is-hidden="1"] {
 			display: none;
@@ -1064,6 +1148,10 @@ body {
 			.standard-sidebar-item {
 				justify-content: start;
 			}
+		}
+
+		.indicator {
+			margin-left: 5px;
 		}
 	}
 
@@ -1103,6 +1191,10 @@ body {
 				&.selected {
 					.drag-handle {
 						display: inline-block;
+<<<<<<< HEAD
+=======
+						background-color: var(--bg-color);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					}
 
 					.setting-btn,
@@ -1125,14 +1217,24 @@ body {
 		}
 	}
 
+<<<<<<< HEAD
 	// widgets
 	.widget.number-widget-box {
 		box-shadow: var(--shadow-sm);
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	// widgets
+	.widget.number-widget-box {
+		border: 1px solid var(--border-color);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 	// widgets
 	.widget.number-widget-box {
 		border: 1px solid var(--border-color);
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	.codex-editor__loader {
@@ -1280,6 +1382,11 @@ body {
 
 						.h4 {
 							font-size: var(--text-lg);
+							color: var(--text-light);
+						}
+
+						.h5 {
+							font-weight: normal;
 							color: var(--text-light);
 						}
 

@@ -53,6 +53,28 @@ class PermissionInspector(Document):
 	def load_from_db(self):
 		super(Document, self).__init__({"modified": None, "permission_type": "read"})
 
+<<<<<<< HEAD
+	def db_insert(self, *args, **kwargs):
+		...
+
+	def db_update(self):
+		...
+
+	@staticmethod
+	def get_list(args):
+		...
+
+	@staticmethod
+	def get_count(args):
+		...
+
+	@staticmethod
+	def get_stats(args):
+		...
+
+	def delete(self):
+		...
+=======
 	def db_insert(self, *args, **kwargs): ...
 
 	def db_update(self): ...
@@ -67,3 +89,4 @@ class PermissionInspector(Document):
 	def get_stats(): ...
 
 	def delete(self): ...
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

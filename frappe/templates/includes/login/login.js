@@ -171,7 +171,11 @@ login.signup = function () {
 login.call = function (args, callback) {
 =======
 login.call = function (args, callback, url="/") {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	login.set_status({{ _("Verifying...") | tojson }}, 'blue');
 
 	return frappe.call({
@@ -307,6 +311,13 @@ frappe.ready(function () {
 		$("body .web-footer").show();
 	}
 
+<<<<<<< HEAD
+=======
+	if (window.show_footer_on_login) {
+		$("body .web-footer").show();
+	}
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	$(".form-signup, .form-forgot, .form-login-with-email-link").removeClass("hide");
 	$(document).trigger('login_rendered');
 });
@@ -390,4 +401,8 @@ var continue_email = function (setup, prompt) {
 	}
 }
 
+<<<<<<< HEAD
 login.route();
+=======
+login.route();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

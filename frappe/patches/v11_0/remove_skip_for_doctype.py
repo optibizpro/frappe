@@ -86,7 +86,11 @@ def execute():
 				for doctype in applicable_for_doctypes
 				if doctype
 			)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		else:
 			# No skip_for_doctype found! Just update apply_to_all_doctypes.
 			frappe.db.set_value("User Permission", user_permission.name, "apply_to_all_doctypes", 1)

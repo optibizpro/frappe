@@ -11,7 +11,11 @@ from typing import TYPE_CHECKING, Any, Literal, NoReturn, Union
 =======
 from threading import Thread
 from typing import Any, NoReturn
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from uuid import uuid4
 
 import redis
@@ -30,7 +34,11 @@ from rq.job import Job, JobStatus
 from rq.logutils import setup_loghandlers
 from rq.worker import DequeueStrategy
 from rq.worker_pool import WorkerPool
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
 
 import frappe
@@ -40,7 +48,11 @@ from frappe import _
 from frappe.utils import cint, cstr, get_bench_id
 =======
 from frappe.utils import CallbackManager, cint, get_bench_id
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.commands import log
 from frappe.utils.deprecations import deprecation_warning
 from frappe.utils.redis_queue import RedisQueue
@@ -100,7 +112,11 @@ def enqueue(
 	deduplicate=False,
 	**kwargs,
 ) -> Job | Any:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""
 	Enqueue method to be executed using a background worker
 
@@ -124,7 +140,11 @@ def enqueue(
 	:param at_front: Enqueue the job at the front of the queue or not
 	:param kwargs: keyword arguments to be passed to the method
 	:param deduplicate: do not re-queue job if it's already queued, requires job_id.
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	:param job_id: Assigning unique job id, which can be checked using `is_job_enqueued`
 	"""
 	# To handle older implementations
@@ -177,7 +197,11 @@ def enqueue(
 			"Using enqueue with is_async=False outside of tests is not recommended, use now=True instead.",
 		)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	call_directly = now or (not is_async and not frappe.flags.in_test)
 	if call_directly:
 		return frappe.call(method, **kwargs)
@@ -259,7 +283,11 @@ def enqueue(
 		return
 
 	return enqueue_call()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def enqueue_doc(doctype, name=None, method=None, queue="default", timeout=300, now=False, **kwargs):
@@ -286,9 +314,17 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if is_async:
+<<<<<<< HEAD
+		frappe.init(site=site)
+=======
 		frappe.init(site)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		frappe.connect()
 		if os.environ.get("CI"):
 			frappe.flags.in_test = True
@@ -302,9 +338,12 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 	else:
 		method_name = f"{method.__module__}.{method.__qualname__}"
 
+<<<<<<< HEAD
+=======
 	actual_func_name = kwargs.get("job_type") if "run_scheduled_job" in method_name else method_name
 	setproctitle.setproctitle(f"rq: Started running {actual_func_name} at {time.time()}")
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.local.job = frappe._dict(
 		site=site,
 		method=method_name,
@@ -322,7 +361,11 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 		frappe.call(before_job_task, method=method_name, kwargs=kwargs, transaction_type="job")
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	try:
 		retval = method(**kwargs)
 
@@ -368,7 +411,11 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 <<<<<<< HEAD
 =======
 		frappe.local.job.after_job.run()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if is_async:
 			frappe.destroy()
@@ -391,14 +438,26 @@ def start_worker(
 		gc.freeze()
 =======
 	strategy: DequeueStrategy | None = DequeueStrategy.DEFAULT,
+<<<<<<< HEAD
+) -> None:  # pragma: no cover
+=======
 ) -> NoReturn:  # pragma: no cover
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	"""Wrapper to start rq worker. Connects to redis and monitors these queues."""
 
 	if not strategy:
 		strategy = DequeueStrategy.DEFAULT
 
 	_start_sentry()
+<<<<<<< HEAD
+<<<<<<< HEAD
+	_freeze_gc()
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	with frappe.init_site():
 		# empty init is required to get redis_queue from common_site_config.json
@@ -415,7 +474,11 @@ def start_worker(
 <<<<<<< HEAD
 	WorkerKlass = DEQUEUE_STRATEGIES.get(strategy, Worker)
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	logging_level = "INFO"
 	if quiet:
@@ -425,7 +488,11 @@ def start_worker(
 =======
 
 	worker = Worker(queues, connection=redis_connection)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	worker.work(
 		logging_level=logging_level,
 		burst=burst,
@@ -491,12 +558,23 @@ def start_worker_pool(
 	# If gc.freeze is done then importing modules before forking allows us to share the memory
 	import frappe.database.query  # sqlparse and indirect imports
 	import frappe.query_builder  # pypika
+<<<<<<< HEAD
+	import frappe.utils.data  # common utils
+	import frappe.utils.safe_exec
+	import frappe.utils.typing_validations  # any whitelisted method uses this
+	import frappe.website.path_resolver  # all the page types and resolver
+
+	# end: module pre-loading
+
+	_freeze_gc()
+=======
 	import frappe.utils  # common utils
 	import frappe.utils.safe_exec
 	import frappe.utils.scheduler
 	import frappe.utils.typing_validations  # any whitelisted method uses this
 	import frappe.website.path_resolver  # all the page types and resolver
 	# end: module pre-loading
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	with frappe.init_site():
 		redis_connection = get_redis_conn()
@@ -520,7 +598,11 @@ def start_worker_pool(
 		worker_class=FrappeWorker,  # Auto starts scheduler with workerpool
 	)
 	pool.start(logging_level=logging_level, burst=burst)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_worker_name(queue):
@@ -657,7 +739,11 @@ def get_redis_conn(username=None, password=None):
 			return _redis_queue_conn
 =======
 			return get_redis_connection_without_auth()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		else:
 			return RedisQueue.get_connection(**cred)
 	except redis.exceptions.AuthenticationError:
@@ -686,7 +772,11 @@ def get_redis_connection_without_auth():
 	return _redis_queue_conn
 
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def get_queues(connection=None) -> list[Queue]:
 	"""Get all the queues linked to the current bench."""
 	queues = Queue.all(connection=connection or get_redis_conn())
@@ -764,7 +854,11 @@ def get_job(job_id: str) -> Job | None:
 		return Job.fetch(create_job_id(job_id), connection=get_redis_conn())
 	except NoSuchJobError:
 		return None
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 BACKGROUND_PROCESS_NICENESS = 10
@@ -861,4 +955,8 @@ def _start_sentry():
 		_experiments=experiments,
 		**kwargs,
 	)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

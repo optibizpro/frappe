@@ -8,6 +8,9 @@ from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.utils import add_to_date, now_datetime
 
 
+<<<<<<< HEAD
+class TestReminder(FrappeTestCase):
+=======
 class UnitTestReminder(UnitTestCase):
 	"""
 	Unit tests for Reminder.
@@ -18,6 +21,7 @@ class UnitTestReminder(UnitTestCase):
 
 
 class TestReminder(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_reminder(self):
 		description = "TEST_REMINDER"
 

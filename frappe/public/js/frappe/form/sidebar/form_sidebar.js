@@ -8,7 +8,11 @@ import "./form_sidebar_users";
 <<<<<<< HEAD
 =======
 import { get_user_link, get_user_message } from "../footer/version_timeline_content_builder";
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 frappe.ui.form.Sidebar = class {
 	constructor(opts) {
@@ -22,7 +26,11 @@ frappe.ui.form.Sidebar = class {
 <<<<<<< HEAD
 =======
 			can_write: frappe.model.can_write(this.frm.doctype, this.frm.docname),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 
 		this.sidebar = $('<div class="form-sidebar overlay-sidebar hidden-xs hidden-sm"></div>')
@@ -63,7 +71,11 @@ frappe.ui.form.Sidebar = class {
 			});
 		});
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	setup_keyboard_shortcuts() {
@@ -126,7 +138,11 @@ frappe.ui.form.Sidebar = class {
 =======
 			this.refresh_web_view_count();
 			this.refresh_creation_modified();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.ui.form.set_user_image(this.frm);
 		}
 	}
@@ -257,7 +273,11 @@ frappe.ui.form.Sidebar = class {
 					reference_doctype: this.frm.doc.doctype,
 					reference_document: this.frm.doc.name,
 				});
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 	}
@@ -312,7 +332,11 @@ frappe.ui.form.Sidebar = class {
 				$('<div class="user-action-row"></div>').appendTo(
 					this.user_actions.removeClass("hidden")
 				)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 			.on("click", click);
 	}
@@ -382,7 +406,11 @@ frappe.ui.form.Sidebar = class {
 	}
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	refresh_image() {}
 
 	make_review() {

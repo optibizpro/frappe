@@ -53,7 +53,11 @@ function get_build_json(app) {
 	}
 }
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 function delete_file(path) {
 	if (fs.existsSync(path)) {
@@ -75,7 +79,11 @@ function run_serially(tasks) {
 const get_app_path = (app) => app_paths[app];
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 function get_apps_list() {
 	try {
 		/**
@@ -185,6 +193,11 @@ module.exports = {
 	apps_path,
 	bundle_map,
 	get_public_path,
+<<<<<<< HEAD
+	get_build_json_path,
+	get_build_json,
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	delete_file,
 	run_serially,
 	get_cli_arg,
@@ -195,5 +208,9 @@ module.exports = {
 <<<<<<< HEAD
 =======
 	get_cloned_apps,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 };

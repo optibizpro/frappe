@@ -103,7 +103,11 @@ frappe.search.utils = {
 <<<<<<< HEAD
 				// eslint-disable-next-line
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				console.log("Illegal match", match);
 			}
 			out.index = 80;
@@ -147,7 +151,11 @@ frappe.search.utils = {
 				if (frappe.boot.user.can_search.includes(item)) {
 					const search_result = me.fuzzy_search(parts[1], item, true);
 					if (search_result.score) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						out.push({
 							type: "In List",
 							label: __("Find {0} in {1}", [
@@ -164,7 +172,11 @@ frappe.search.utils = {
 							value: __("Find {0} in {1}", [__(parts[0]), __(item)]),
 							route_options: { name: ["like", "%" + parts[0] + "%"] },
 							index: 1 + search_result.score,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							route: ["List", item],
 						});
 					}
@@ -185,7 +197,11 @@ frappe.search.utils = {
 =======
 				const search_result = me.fuzzy_search(keywords.substr(4), item, true);
 				var level = search_result.score;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (level) {
 					out.push({
 						type: "New",
@@ -211,7 +227,11 @@ frappe.search.utils = {
 		var level, target;
 =======
 		var score, marked_string, target;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var option = function (type, route, order) {
 			// check to skip extra list in the text
 			// eg. Price List List should be only Price List
@@ -219,7 +239,11 @@ frappe.search.utils = {
 <<<<<<< HEAD
 			let label_without_type = me.bolden_match_part(__(target), keywords);
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (skip_list) {
 				var label = marked_string || __(target);
 			} else {
@@ -227,7 +251,11 @@ frappe.search.utils = {
 				label = __(`{0} ${skip_list ? "" : type}`, [label_without_type]);
 =======
 				label = __(`{0} ${skip_list ? "" : type}`, [marked_string || __(target)]);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 			return {
 				type: type,
@@ -246,7 +274,11 @@ frappe.search.utils = {
 			const search_result = me.fuzzy_search(keywords, item, true);
 			({ score, marked_string } = search_result);
 			if (score) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				target = item;
 				if (frappe.boot.single_types.includes(item)) {
 					out.push(option("", ["Form", item, item], 0.05));
@@ -286,7 +318,11 @@ frappe.search.utils = {
 =======
 			const search_result = me.fuzzy_search(keywords, item, true);
 			var level = search_result.score;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (level > 0) {
 				var report = frappe.boot.user.all_reports[item];
 				if (report.report_type == "Report Builder")
@@ -298,7 +334,11 @@ frappe.search.utils = {
 					label: __("Report {0}", [me.bolden_match_part(__(item), keywords)]),
 =======
 					label: __("Report {0}", [search_result.marked_string || __(item)]),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					value: __("Report {0}", [__(item)]),
 					index: level,
 					route: route,
@@ -323,7 +363,11 @@ frappe.search.utils = {
 =======
 			const search_result = me.fuzzy_search(keywords, item, true);
 			var level = search_result.score;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (level) {
 				var page = me.pages[item];
 				out.push({
@@ -377,7 +421,11 @@ frappe.search.utils = {
 =======
 			const search_result = me.fuzzy_search(keywords, item.name, true);
 			var level = search_result.score;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (level > 0) {
 				var ret = {
 					type: "Workspace",
@@ -402,7 +450,11 @@ frappe.search.utils = {
 =======
 			const search_result = me.fuzzy_search(keywords, item.name, true);
 			var level = search_result.score;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (level > 0) {
 				var ret = {
 					type: "Dashboard",
@@ -456,7 +508,11 @@ frappe.search.utils = {
 						} else {
 							colon_index = part.indexOf(" : ");
 							field_value = part.slice(colon_index + 3);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						}
 						if (field_value.length > field_length) {
 							// If field value exceeds field_length, find the keyword in it
@@ -482,7 +538,11 @@ frappe.search.utils = {
 =======
 						const search_result_name = me.fuzzy_search(keywords, field_name, true);
 						const search_result_value = me.fuzzy_search(keywords, field_value, true);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						if (result_current_length < result_max_length) {
 							// We have room, push the entire field
 							field_text =
@@ -495,7 +555,11 @@ frappe.search.utils = {
 								search_result_name.marked_string +
 								": </span> " +
 								search_result_value.marked_string;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							if (fields.indexOf(field_text) === -1 && doc_name !== field_value) {
 								fields.push(field_text);
 							}
@@ -510,7 +574,11 @@ frappe.search.utils = {
 									me.bolden_match_part(field_name, keywords) +
 =======
 									search_result_name.marked_string +
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 									": </span> ";
 								field_value = field_value.slice(0, remaining_length);
 								field_value =
@@ -519,7 +587,11 @@ frappe.search.utils = {
 								field_text += me.bolden_match_part(field_value, keywords);
 =======
 								field_text += search_result_value.marked_string;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								fields.push(field_text);
 							} else {
 								// No room for even the field name, skip
@@ -735,7 +807,11 @@ frappe.search.utils = {
 			} else {
 				marked_string += flushBuffer();
 				marked_string += item[index];
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		});
 		marked_string += flushBuffer();
@@ -765,7 +841,11 @@ frappe.search.utils = {
 =======
 					value: search_result.marked_string,
 					index: search_result.score,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					match: item.label,
 					onclick: () => item.action.apply(this, item.args),
 				});
@@ -795,7 +875,7 @@ frappe.search.utils = {
 					value: __("Install {0} from Marketplace", [__(item.title)]),
 					index: search_result.score * 0.8,
 					route: [
-						`https://frappecloud.com/${item.route}?utm_source=awesomebar`,
+						`https://optibizpro.com/${item.route}?utm_source=awesomebar`,
 						item.name,
 					],
 				};

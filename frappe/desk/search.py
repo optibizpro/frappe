@@ -15,7 +15,11 @@ from frappe.database.schema import SPECIAL_CHAR_PATTERN
 <<<<<<< HEAD
 =======
 from frappe.model.db_query import get_order_by
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.permissions import has_permission
 from frappe.utils import cint, cstr, unique
 from frappe.utils.data import make_filter_tuple
@@ -25,7 +29,11 @@ from frappe.utils.data import make_filter_tuple
 def sanitize_searchfield(searchfield):
 =======
 def sanitize_searchfield(searchfield: str):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not searchfield:
 		return
 
@@ -40,7 +48,11 @@ class LinkSearchResults(TypedDict):
 	description: str
 	label: NotRequired[str]
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 # this is called by the Link Field
 @frappe.whitelist()
@@ -109,7 +121,11 @@ def search_widget(
 		try:
 			is_whitelisted(frappe.get_attr(query))
 			return frappe.call(
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				query,
 				doctype,
 				txt,
@@ -220,7 +236,11 @@ def search_widget(
 			doctype,
 			ptype="select" if frappe.only_has_select_perm(doctype) else "read",
 			parent_doctype=reference_doctype,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 	)
 
@@ -389,7 +409,11 @@ def search_widget(
 			values = [r[:-1] for r in values]
 
 	return values
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_std_fields_list(meta, key):
@@ -414,7 +438,11 @@ def get_std_fields_list(meta, key):
 def build_for_autosuggest(res: list[tuple], doctype: str) -> list[dict]:
 =======
 def build_for_autosuggest(res: list[tuple], doctype: str) -> list[LinkSearchResults]:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def to_string(parts):
 		return ", ".join(
 			unique(_(cstr(part)) if meta.translated_doctype else cstr(part) for part in parts if part)
@@ -445,7 +473,11 @@ def build_for_autosuggest(res: list[tuple], doctype: str) -> list[LinkSearchResu
 				autosuggest_row["label"] = label
 
 			results.append(autosuggest_row)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	else:
 		results.extend({"value": item[0], "description": to_string(item[1:])} for item in res)
 
@@ -466,7 +498,11 @@ def relevance_sorter(key, query, as_dict):
 	return (cstr(value).lower().startswith(query.lower()) is not True, value)
 =======
 	return (cstr(value).casefold().startswith(query.casefold()) is not True, value)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()

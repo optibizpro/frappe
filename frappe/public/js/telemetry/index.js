@@ -10,7 +10,11 @@ class TelemetryManager {
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (cint(frappe.boot.enable_telemetry) && this.project_id && this.telemetry_host) {
 			this.enabled = true;
 		}
@@ -21,7 +25,11 @@ class TelemetryManager {
 <<<<<<< HEAD
 =======
 		let disable_decide = !this.should_record_session();
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		try {
 			posthog.init(this.project_id, {
 				api_host: this.telemetry_host,
@@ -32,7 +40,11 @@ class TelemetryManager {
 				advanced_disable_decide: true,
 =======
 				advanced_disable_decide: disable_decide,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 			posthog.identify(frappe.boot.sitename);
 			this.send_heartbeat();
@@ -62,7 +74,11 @@ class TelemetryManager {
 		let posthog_available = Boolean(this.telemetry_host && this.project_id);
 		let sentry_available = Boolean(frappe.boot.sentry_dsn);
 		return posthog_available || sentry_available;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	send_heartbeat() {
@@ -81,7 +97,11 @@ class TelemetryManager {
 		if (this.site_age && this.site_age > 5) {
 =======
 		if (this.site_age && this.site_age > 6) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return;
 		}
 
@@ -101,7 +121,11 @@ class TelemetryManager {
 		// if user allowed recording only record for first 2 hours, never again.
 		return frappe.datetime.get_minute_diff(now, start_datetime) < 120;
 	}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 }
 
 frappe.telemetry = new TelemetryManager();

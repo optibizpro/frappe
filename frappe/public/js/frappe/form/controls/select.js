@@ -3,7 +3,11 @@ frappe.ui.form.ControlSelect = class ControlSelect extends frappe.ui.form.Contro
 <<<<<<< HEAD
 =======
 	static trigger_change_on_input_event = false;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	make_input() {
 		super.make_input();
 
@@ -87,7 +91,11 @@ frappe.ui.form.ControlSelect = class ControlSelect extends frappe.ui.form.Contro
 				this.df.sort_options,
 				this.df.context || this.df.parent || this.doctype
 			);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if (value === undefined && selected) {
 				this.$input.val(selected);
@@ -119,7 +127,11 @@ frappe.ui.form.ControlSelect = class ControlSelect extends frappe.ui.form.Contro
 frappe.ui.form.add_options = function (input, options_list, sort) {
 =======
 frappe.ui.form.add_options = function (input, options_list, sort, doctype) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	let $select = $(input);
 	if (!Array.isArray(options_list)) {
 		return $select;
@@ -129,7 +141,11 @@ frappe.ui.form.add_options = function (input, options_list, sort, doctype) {
 	let options = options_list.map((raw_option) => parse_option(raw_option));
 =======
 	let options = options_list.map((raw_option) => parse_option(raw_option, doctype));
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if (sort) {
 		options = options.sort((a, b) => cstr(a.label).localeCompare(cstr(b.label)));
 	}
@@ -174,7 +190,11 @@ frappe.ui.form.add_options = function (input, options_list, sort, doctype) {
 function parse_option(v) {
 =======
 function parse_option(v, doctype) {
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	let value = null;
 	let label = null;
 	let is_disabled = false;
@@ -200,7 +220,11 @@ function parse_option(v, doctype) {
 		} else {
 			value = is_value_null ? "" : v.value;
 			label = is_label_null ? __(value, null, doctype) : __(v.label, null, doctype);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 

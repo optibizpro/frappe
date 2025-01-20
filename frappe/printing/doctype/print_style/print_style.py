@@ -19,6 +19,7 @@ class PrintStyle(Document):
 		preview: DF.AttachImage | None
 		print_style_name: DF.Data
 		standard: DF.Check
+
 	# end: auto-generated types
 
 	def validate(self):

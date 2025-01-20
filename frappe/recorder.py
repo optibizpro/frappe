@@ -4,7 +4,11 @@
 import datetime
 =======
 import cProfile
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import functools
 import inspect
 import io
@@ -17,7 +21,11 @@ from collections.abc import Callable
 <<<<<<< HEAD
 =======
 from dataclasses import dataclass
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import sqlparse
 
@@ -83,7 +91,11 @@ def record_sql(*args, **kwargs):
 
 	data = {
 		"query": str(query),
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"stack": stack,
 		"explain_result": [],
 		"time": start_time,
@@ -106,7 +118,11 @@ def get_current_stack_frames():
 =======
 		for frame, filename, lineno, function, context, index in list(reversed(frames))[:-2]:  # noqa: B007
 			if "/apps/" in filename or SERVER_SCRIPT_FILE_PREFIX in filename:
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				yield {
 					"filename": TRACEBACK_PATH_PATTERN.sub("", filename),
 					"lineno": lineno,
@@ -133,7 +149,11 @@ def post_process():
 =======
 	config = RecorderConfig.retrieve()
 	result = list(frappe.cache.hgetall(RECORDER_REQUEST_HASH).values())
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	for request in result:
 		for call in request["calls"]:
@@ -147,7 +167,11 @@ def post_process():
 			if is_query_type(formatted_query, ("select", "update", "delete")):
 =======
 			if config.explain and is_query_type(formatted_query, ("select", "update", "delete")):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				# Only SELECT/UPDATE/DELETE queries can be "EXPLAIN"ed
 				try:
 					call["explain_result"] = frappe.db.sql(f"EXPLAIN {formatted_query}", as_dict=True)
@@ -160,7 +184,11 @@ def post_process():
 		frappe.cache.hset(RECORDER_REQUEST_HASH, request["uuid"], request)
 
 	config.delete()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def mark_duplicates(request):
@@ -211,6 +239,14 @@ def record(force=False):
 		if frappe.cache().get_value(RECORDER_INTERCEPT_FLAG) or force:
 			frappe.local._recorder = Recorder()
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	if __debug__:
+		if frappe.cache.get_value(RECORDER_INTERCEPT_FLAG) or force:
+			frappe.local._recorder = Recorder(force=force)
+=======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	flag_value = frappe.client_cache.get_value(RECORDER_INTERCEPT_FLAG)
 	if flag_value or force:
 		frappe.local._recorder = Recorder(force=force)
@@ -218,6 +254,10 @@ def record(force=False):
 		# Explicitly set it once so next requests can use client-side cache
 		frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def dump():
@@ -246,7 +286,11 @@ class Recorder:
 			and frappe.request
 			and self.config.request_filter in frappe.request.path
 		):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			self.path = frappe.request.path
 			self.cmd = frappe.local.form_dict.cmd or ""
 			self.method = frappe.request.method
@@ -260,7 +304,11 @@ class Recorder:
 		elif self.config.record_jobs and frappe.job and self.config.jobs_filter in frappe.job.method:
 			self.event_type = "Background Job"
 			self.path = frappe.job.method
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			self.cmd = None
 			self.method = None
 			self.headers = None
@@ -285,7 +333,11 @@ class Recorder:
 		if self.config.profile:
 			self.profiler = cProfile.Profile()
 			self.profiler.enable()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def register(self, data):
 		self.calls.append(data)
@@ -332,7 +384,11 @@ class Recorder:
 		)
 =======
 		frappe.cache.hset(RECORDER_REQUEST_SPARSE_HASH, self.uuid, request_data)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		request_data["calls"] = self.calls
 		request_data["headers"] = self.headers
@@ -349,7 +405,11 @@ class Recorder:
 	def _patch_sql():
 		frappe.db._sql = frappe.db.sql
 		frappe.db.sql = record_sql
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@staticmethod
 	def _unpatch_sql():
@@ -417,8 +477,15 @@ def start(
 		request_filter=request_filter,
 		jobs_filter=jobs_filter,
 	).store()
+<<<<<<< HEAD
+	frappe.cache.set_value(RECORDER_INTERCEPT_FLAG, 1, expires_in_sec=RECORDER_AUTO_DISABLE)
+=======
 	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, True)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()
@@ -428,8 +495,17 @@ def stop(*args, **kwargs):
 <<<<<<< HEAD
 	frappe.cache().delete_value(RECORDER_INTERCEPT_FLAG)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+	frappe.cache.delete_value(RECORDER_INTERCEPT_FLAG)
+=======
 	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	frappe.client_cache.set_value(RECORDER_INTERCEPT_FLAG, False)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.enqueue(post_process, now=frappe.flags.in_test)
 
 
@@ -461,7 +537,11 @@ def delete(*args, **kwargs):
 =======
 	frappe.cache.delete_value(RECORDER_REQUEST_SPARSE_HASH)
 	frappe.cache.delete_value(RECORDER_REQUEST_HASH)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def record_queries(func: Callable):
@@ -477,7 +557,11 @@ def record_queries(func: Callable):
 		_unpatch()
 =======
 		Recorder._unpatch_sql()
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		post_process()
 		print("Recorded queries, open recorder to view them.")
 		return ret
@@ -497,4 +581,8 @@ def import_data(file: str) -> None:
 		frappe.cache.hset(RECORDER_REQUEST_SPARSE_HASH, request["uuid"], request)
 		frappe.cache.hset(RECORDER_REQUEST_HASH, request["uuid"], request)
 	file_doc.delete(delete_permanently=True)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

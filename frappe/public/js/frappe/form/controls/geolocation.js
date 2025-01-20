@@ -36,7 +36,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		}
 
 		// show again on idempotent invocations
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$(this.disp_area).removeClass("like-disabled-input");
 		$(this.disp_area).css("display", "block");
 
@@ -57,7 +61,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 				if (value) {
 					this.bind_leaflet_data(value);
 				}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 	}
@@ -71,7 +79,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 			this.customize_draw_controls();
 			this.bind_leaflet_map();
 		}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (this.disabled) {
 			this.map.dragging.disable();
 			this.map.touchZoom.disable();
@@ -93,7 +105,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 			if (!this.locate_control) {
 				this.bind_leaflet_locate_control();
 			}
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -104,7 +120,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 			return;
 		}
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.clear_editable_layers();
 
 		const data_layers = new L.FeatureGroup().addLayer(
@@ -216,8 +236,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 
 		this.draw_control = this.get_leaflet_controls();
 		this.map.addControl(this.draw_control);
+<<<<<<< HEAD
+=======
 	}
 
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		if (!this.draw_control) {
 			this.draw_control = this.get_leaflet_controls();
@@ -227,9 +250,19 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		} else {
 			this.draw_control.remove();
 		}
+<<<<<<< HEAD
+
+		this.draw_control = this.get_leaflet_controls();
+		this.map.addControl(this.draw_control);
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
+<<<<<<< HEAD
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	get_leaflet_controls() {
 		return new L.Control.Draw({
 			position: "topleft",
@@ -268,7 +301,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 <<<<<<< HEAD
 =======
 		this.bound_event_listeners = true;
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.map.on("draw:created", (e) => {
 			var type = e.layerType,
 				layer = e.layer;

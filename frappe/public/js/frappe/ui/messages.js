@@ -130,7 +130,11 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 			data = JSON.parse(msg);
 		} else {
 			data = { message: msg, title: title };
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -167,7 +171,11 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 				}
 			})
 			.filter((m) => m.raise_exception);
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// only show exceptions if any exceptions exist
 		if (exceptions.length) {
@@ -222,7 +230,11 @@ frappe.msgprint = function (msg, title, is_minimizable) {
 					},
 =======
 					args: data.primary_action.args,
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					callback() {
 						if (data.primary_action.hide_on_success) {
 							frappe.hide_msgprint();
@@ -501,4 +513,8 @@ Object.defineProperty(window, "show_alert", {
 	},
 });
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

@@ -9,7 +9,6 @@ pull_request_rules:
           - author!=frappe-pr-bot
           - author!=mergify[bot]
         - or:
-          - base=version-16
           - base=version-15
           - base=version-14
           - base=version-13
@@ -64,23 +63,17 @@ pull_request_rules:
 
   - name: backport to version-13-pre-release
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
     conditions:
       - label="backport version-14-hotfix"
     actions:
       backport:
         branches:
           - version-14-hotfix
-        assignees:
-          - "{{ author }}"
-
-  - name: backport to version-15-hotfix
-    conditions:
-      - label="backport version-15-hotfix"
-    actions:
-      backport:
-        branches:
-          - version-15-hotfix
         assignees:
           - "{{ author }}"
 

@@ -55,7 +55,11 @@ class TestRQJob(IntegrationTestCase):
 	def check_status(self, job: Job, status, wait=True):
 		if wait:
 			wait_for_completion(job)
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.assertEqual(frappe.get_doc("RQ Job", job.id).status, status)
 
 	def test_serialization(self):
@@ -71,7 +75,11 @@ class TestRQJob(IntegrationTestCase):
 <<<<<<< HEAD
 				"status": "queued",
 =======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"exc_info": None,
 			},
 			rq_job,
@@ -91,7 +99,11 @@ class TestRQJob(IntegrationTestCase):
 		self.assertEqual(rq_job.job_name, "test_func")
 =======
 		self.assertEqual(rq_job.job_name, "frappe.core.doctype.rq_job.test_rq_job.test_func")
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@timeout
 	def test_get_list_filtering(self):
@@ -117,7 +129,11 @@ class TestRQJob(IntegrationTestCase):
 		job = frappe.enqueue(method=self.BG_JOB, queue="short", fail=True)
 		self.check_status(job, "failed")
 		jobs = frappe.get_all("RQ Job", {"status": "failed"})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.assertEqual(len(jobs), 1)
 		self.assertTrue(jobs[0].exc_info)
 
@@ -126,7 +142,11 @@ class TestRQJob(IntegrationTestCase):
 		non_failed_jobs = RQJob.get_list({"filters": [["RQ Job", "status", "!=", "failed"]]})
 =======
 		non_failed_jobs = frappe.get_all("RQ Job", {"status": ("!=", "failed")})
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.assertGreaterEqual(len(non_failed_jobs), 1)
 
 		# Create a slow job and check if it's stuck in "Started"
@@ -147,7 +167,11 @@ class TestRQJob(IntegrationTestCase):
 	@timeout(20)
 =======
 	@timeout
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_multi_queue_burst_consumption(self):
 		for _ in range(3):
 			for q in ["default", "short"]:
@@ -171,7 +195,11 @@ class TestRQJob(IntegrationTestCase):
 		self.assertIn("quitting", cstr(stderr))
 
 	def test_job_id_manual_dedup(self):
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		job_id = "test_dedup"
 		job = frappe.enqueue(self.BG_JOB, sleep=5, job_id=job_id)
 		self.assertTrue(is_job_enqueued(job_id))
@@ -229,7 +257,11 @@ class TestRQJob(IntegrationTestCase):
 		LAST_MEASURED_USAGE = 41
 		self.assertLessEqual(rss, LAST_MEASURED_USAGE * 1.05, msg)
 
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_clear_failed_jobs(self):
 		limit = 10
 		update_site_config("rq_failed_jobs_limit", limit)
@@ -239,8 +271,17 @@ class TestRQJob(IntegrationTestCase):
 <<<<<<< HEAD
 		self.assertLessEqual(RQJob.get_count({"filters": [["RQ Job", "status", "=", "failed"]]}), limit * 1.1)
 =======
+<<<<<<< HEAD
+<<<<<<< HEAD
+		self.assertLessEqual(RQJob.get_count({"filters": [["RQ Job", "status", "=", "failed"]]}), limit * 1.1)
+=======
 		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def test_func(fail=False, sleep=0):
