@@ -7,10 +7,14 @@ import typing
 from shutil import which
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from shutil import which
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import click
 
@@ -19,7 +23,11 @@ import frappe
 import frappe.commands
 =======
 from frappe import _
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.commands import get_site, pass_context
 from frappe.coverage import CodeCoverage
 from frappe.exceptions import SiteNotSpecifiedError
@@ -49,7 +57,11 @@ if typing.TYPE_CHECKING:
 @click.option(
 	"--make-copy",
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	is_flag=True,
 	default=False,
 	help="Copy the files instead of symlinking",
@@ -319,7 +331,11 @@ def execute(context: CliCtxObj, method, args=None, kwargs=None, profile=False):
 					suffix = "(*fn_args, **fn_kwargs)"
 					code = compile(method + suffix, "<bench execute>", "eval")
 					ret = eval(code, globals(), locals())  # nosemgrep
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			if profile:
 				import pstats
@@ -487,7 +503,11 @@ def import_csv(
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @click.command("data-import")
 @click.option(
 	"--file",
@@ -514,13 +534,19 @@ def import_csv(
 def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def data_import(
 	context: CliCtxObj, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True
 ):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"Import documents in bulk from CSV or XLSX using data import"
 	from frappe.core.doctype.data_import.data_import import import_file
 
@@ -581,17 +607,29 @@ def mariadb(context: CliCtxObj, extra_args):
 
 	site = get_site(context)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+	if not site:
+		raise SiteNotSpecifiedError
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.init(site=site)
 <<<<<<< HEAD
 	os.environ["MYSQL_HISTFILE"] = os.path.abspath(get_site_path("logs", "mariadb_console.log"))
 	_mariadb()
 =======
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.init(site)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	frappe.conf.db_type = "mariadb"
 	_enter_console(extra_args=extra_args)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("postgres", context_settings=EXTRA_ARGS_CTX)
@@ -668,7 +706,11 @@ def _psql():
 			exc=frappe.ExecutableNotFound,
 		)
 	os.execv(bin, [bin, *args])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("jupyter")
@@ -1238,7 +1280,11 @@ def set_config(context: CliCtxObj, key, value, global_=False, parse=False):
 		parse = as_dict
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if parse:
 		import ast
 

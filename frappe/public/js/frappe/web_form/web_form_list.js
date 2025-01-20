@@ -61,7 +61,11 @@ export default class WebFormList {
 							label: __(field.label),
 =======
 							label: __(field.label, null, field.parent),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							onchange: (event) => {
 								this.add_filter(field.fieldname, input.value, field.fieldtype);
 								this.refresh();
@@ -78,7 +82,11 @@ export default class WebFormList {
 						.attr("title", __(field.label))
 =======
 						.attr("title", __(field.label, null, field.parent))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						.tooltip({
 							delay: { show: 600, hide: 100 },
 							trigger: "hover",
@@ -88,7 +96,11 @@ export default class WebFormList {
 					input.$input.attr("placeholder", __(field.label));
 =======
 					input.$input.attr("placeholder", __(field.label, null, field.parent));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					this.filter_input.push(input);
 				});
 				this.refresh();

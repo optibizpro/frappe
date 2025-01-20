@@ -79,12 +79,15 @@ jobs:
           python-version: |
               3.8
               3.10
+<<<<<<< HEAD
 =======
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.10"
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -141,9 +144,13 @@ jobs:
           function update_to_version() {
             version=$1
 <<<<<<< HEAD
+<<<<<<< HEAD
             py=$2
 =======
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+            py=$2
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
             branch_name="version-$version-hotfix"
             echo "Updating to v$version"
@@ -151,6 +158,7 @@ jobs:
             git checkout -q -f $branch_name
 
             pgrep honcho | xargs kill
+<<<<<<< HEAD
 <<<<<<< HEAD
             rm -rf ~/frappe-bench/env
             bench -v setup env --python $py
@@ -161,16 +169,25 @@ jobs:
             bench -v setup env
             bench start &>> ~/frappe-bench/bench_start.log &
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+            rm -rf ~/frappe-bench/env
+            bench -v setup env --python $py
+            bench start &> ~/frappe-bench/bench_start.log &
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
             bench --site test_site migrate
           }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
           update_to_version 12 python3.8
           update_to_version 13 python3.8
 
           echo "Updating to last commit"
           git checkout -q -f "$GITHUB_SHA"
+<<<<<<< HEAD
 =======
           update_to_version 14
 
@@ -178,6 +195,8 @@ jobs:
           pgrep honcho | xargs kill
           sleep 3
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
           rm -rf ~/frappe-bench/env
           git checkout -q -f "$GITHUB_SHA"
           bench -v setup env

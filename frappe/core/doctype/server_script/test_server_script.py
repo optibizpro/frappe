@@ -11,7 +11,11 @@ from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJ
 from frappe.core.doctype.server_script.server_script import ServerScript
 from frappe.frappeclient import FrappeClient, FrappeException
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import get_site_url
 
 scripts = [
@@ -126,7 +130,11 @@ class UnitTestServerScript(UnitTestCase):
 
 
 class TestServerScript(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -206,11 +214,16 @@ class TestServerScript(IntegrationTestCase):
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
 =======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		server_script.disabled = 1
 		server_script.save()
@@ -224,11 +237,16 @@ class TestServerScript(IntegrationTestCase):
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertRaises(AttributeError, frappe.get_doc(dict(doctype="ToDo", description="test me")).insert)
 =======
 		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		self.assertRaises(AttributeError, frappe.get_doc(doctype="ToDo", description="test me").insert)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		server_script.disabled = 1
 		server_script.save()
@@ -344,7 +362,11 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script2.delete()
 		frappe.db.commit()
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_server_script_scheduled(self):
 		scheduled_script = frappe.get_doc(
 			doctype="Server Script",
@@ -425,4 +447,8 @@ frappe.qb.from_(todo).select(todo.name).where(todo.name == "{todo.name}").run()
 		script.disabled = 0
 		script.save()
 		self.assertFalse(job.reload().stopped)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

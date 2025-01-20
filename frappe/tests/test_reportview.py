@@ -18,7 +18,11 @@ from frappe.tests import IntegrationTestCase
 
 
 class TestReportview(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_csv(self):
 		from csv import QUOTE_ALL, QUOTE_MINIMAL, QUOTE_NONE, QUOTE_NONNUMERIC, DictReader
 		from io import StringIO
@@ -101,4 +105,8 @@ class TestReportview(IntegrationTestCase):
 		self.assertEqual(extract_fieldnames("`tabChild DocType`.`fiedname`")[0], "tabChild DocType.fiedname")
 
 		self.assertEqual(extract_fieldnames("sum(1)"), [])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

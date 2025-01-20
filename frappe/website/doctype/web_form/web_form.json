@@ -27,7 +27,11 @@
   "access_control_section",
   "anonymous",
   "login_required",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "column_break_2",
   "apply_document_permissions",
   "allow_edit",
@@ -54,7 +58,11 @@
   "hide_footer",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   "allowed_embedding_domains",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   "condition_section",
   "condition_description",
   "condition_json",
@@ -122,11 +130,16 @@
    "label": "Is Standard",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
    "label": "Is Standard",
 =======
    "label": "Is standard",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+   "label": "Is standard",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "no_copy": 1
   },
   {
@@ -145,7 +158,11 @@
    "label": "Login Required"
 =======
    "label": "Login required"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "0",
@@ -204,7 +221,11 @@
    "label": "Allow Incomplete Forms"
 =======
    "label": "Allow incomplete forms"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "introduction_text",
@@ -233,7 +254,11 @@
 =======
    "label": "Client script",
    "options": "Javascript"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "Save",
@@ -280,7 +305,11 @@
    "label": "Apply Document Permissions"
 =======
    "label": "Apply document permissions"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "default": "0",
@@ -325,7 +354,11 @@
    "label": "Success Title"
 =======
    "label": "Success title"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "banner_image",
@@ -355,7 +388,11 @@
    "fieldname": "section_break_2",
    "fieldtype": "Section Break"
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "collapsible": 1,
@@ -408,7 +445,11 @@
    "label": "Meta Title"
 =======
    "label": "Meta title"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "meta_description",
@@ -417,7 +458,11 @@
    "label": "Meta Description"
 =======
    "label": "Meta description"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "column_break_khxs",
@@ -430,7 +475,11 @@
    "label": "Meta Image"
 =======
    "label": "Meta image"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "column_break_vdhm",
@@ -448,7 +497,11 @@
    "fieldname": "anonymous",
    "fieldtype": "Check",
    "label": "Anonymous responses"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "condition_description",
@@ -457,7 +510,11 @@
    "label": "Condition Description",
 =======
    "label": "Condition description",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "options": "<p>Multiple webforms can be created for a single doctype. Add filters specific to this webform to display correct record after submission.</p><p>For Example:</p>\n<p>If you create a separate webform every year to capture feedback from employees add a \n field named year in doctype and add a filter <b>year = 2023</b></p>\n"
   },
   {
@@ -505,7 +562,11 @@
   {
    "fieldname": "column_break_hhec",
    "fieldtype": "Column Break"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "has_web_view": 1,
@@ -516,7 +577,11 @@
  "modified": "2024-07-27 20:32:06.331745",
 =======
  "modified": "2024-12-30 17:00:05.944646",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Website",
  "name": "Web Form",

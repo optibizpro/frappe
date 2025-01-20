@@ -25,7 +25,11 @@ from frappe.utils.scheduler import (
 	is_dormant,
 	schedule_jobs_based_on_activity,
 	sleep_duration,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 )
 
 
@@ -96,7 +100,11 @@ class TestScheduler(IntegrationTestCase):
 			"creation", add_days(_get_last_creation_timestamp("Activity Log"), 5), update_modified=False
 		)
 		schedule_jobs_based_on_activity.clear_cache()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		# inactive site with recent job, don't run
 		self.assertFalse(
@@ -105,7 +113,11 @@ class TestScheduler(IntegrationTestCase):
 				check_time=add_days(_get_last_modified_timestamp("Activity Log"), 5)
 =======
 				check_time=add_days(_get_last_creation_timestamp("Activity Log"), 5)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 		)
 
@@ -116,7 +128,11 @@ class TestScheduler(IntegrationTestCase):
 				check_time=add_days(_get_last_modified_timestamp("Activity Log"), 6)
 =======
 				check_time=add_days(_get_last_creation_timestamp("Activity Log"), 6)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 		)
 
@@ -138,10 +154,15 @@ class TestScheduler(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def get_test_job(method="frappe.tests.test_scheduler.test_timeout_10", frequency="All") -> ScheduledJobType:
 	if not frappe.db.exists("Scheduled Job Type", dict(method=method)):
 		job = frappe.get_doc(

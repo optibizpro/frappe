@@ -14,6 +14,12 @@ import frappe.utils
 import frappe.utils.user
 from frappe import _
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+=======
+from frappe.apps import get_default_path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.core.doctype.activity_log.activity_log import add_authentication_log
 =======
 from frappe.apps import get_default_path
@@ -39,15 +45,22 @@ from frappe.website.utils import get_home_page
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecation_warning
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
 SAFE_HTTP_METHODS = frozenset(("GET", "HEAD", "OPTIONS"))
 UNSAFE_HTTP_METHODS = frozenset(("POST", "PUT", "DELETE", "PATCH"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 MAX_PASSWORD_SIZE = 512
 
 
@@ -120,6 +133,10 @@ class HTTPRequest:
 <<<<<<< HEAD
 
 class LoginManager:
+<<<<<<< HEAD
+=======
+	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	def is_allowed_referrer(self):
 		referrer = frappe.get_request_header("Referer")
@@ -175,7 +192,11 @@ class LoginManager:
 =======
 		self.run_trigger("before_login")
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if frappe.get_system_settings("disable_user_pass_login"):
 			frappe.throw(_("Login with username and password is not allowed."), frappe.AuthenticationError)
 
@@ -427,7 +448,11 @@ class CookieManager:
 		if frappe.session.session_country:
 			self.set_cookie("country", frappe.session.session_country)
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def set_cookie(
 		self,
@@ -487,13 +512,19 @@ def clear_cookies():
 	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.local.cookie_manager.delete_cookie(
 		["full_name", "user_id", "sid", "user_image", "user_lang", "system_user"]
 	)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def validate_ip_address(user):
@@ -595,7 +626,11 @@ class LoginAttemptTracker:
 			from frappe.deprecation_dumpster import deprecation_warning
 
 			deprecation_warning("unknown", "v17", "`username` parameter is deprecated, use `key` instead.")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.key = key or user_name
 		self.lock_interval = datetime.timedelta(seconds=lock_interval)
 		self.max_failed_logins = max_consecutive_login_attempts
@@ -622,7 +657,11 @@ class LoginAttemptTracker:
 	@login_failed_count.deleter
 	def login_failed_count(self):
 		frappe.cache.hdel("login_failed_count", self.key)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@property
 	def login_failed_time(self):
@@ -650,7 +689,11 @@ class LoginAttemptTracker:
 	@login_failed_time.deleter
 	def login_failed_time(self):
 		frappe.cache.hdel("login_failed_time", self.key)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def add_failure_attempt(self):
 		"""Log user failure attempts into the system.

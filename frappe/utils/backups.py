@@ -437,7 +437,11 @@ class BackupGenerator:
 				)
 =======
 				extra.extend(self.backup_includes)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			elif self.backup_excludes:
 				extra.extend([f"--ignore-table={self.db_name}.{table}" for table in self.backup_excludes])
 
@@ -451,7 +455,11 @@ class BackupGenerator:
 		else:
 =======
 		elif self.db_type == "postgres":
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if self.backup_includes:
 				extra.extend([f'--table=public."{table}"' for table in self.backup_includes])
 			elif self.backup_excludes:
@@ -467,7 +475,11 @@ class BackupGenerator:
 			)
 =======
 		from frappe.database import get_command
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		bin, args, bin_name = get_command(
 			socket=self.db_socket,
@@ -728,7 +740,11 @@ def get_or_generate_backup_encryption_key():
 	return key
 =======
 	return get_or_generate_backup_encryption_key()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_or_generate_backup_encryption_key():
@@ -752,7 +768,11 @@ def get_or_generate_backup_encryption_key():
 	key = frappe.conf.get(BACKUP_ENCRYPTION_CONFIG_KEY)
 	if key:
 		return key
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	key = Fernet.generate_key().decode()
 	update_site_config(BACKUP_ENCRYPTION_CONFIG_KEY, key)

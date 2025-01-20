@@ -21,7 +21,10 @@ from typing import TYPE_CHECKING, Any, Union
 =======
 from typing import TYPE_CHECKING, Any
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 from pypika.dialects import MySQLQueryBuilder, PostgreSQLQueryBuilder
 
@@ -54,10 +57,14 @@ from frappe.query_builder.functions import Count
 from frappe.utils import CallbackManager, cint, get_datetime, get_table_name, getdate, now, sbool
 from frappe.utils import cast as cast_fieldtype
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecated, deprecation_warning
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 if TYPE_CHECKING:
 	from psycopg2 import connection as PostgresConnection
@@ -68,10 +75,14 @@ if TYPE_CHECKING:
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 IFNULL_PATTERN = re.compile(r"ifnull\(", flags=re.IGNORECASE)
 INDEX_PATTERN = re.compile(r"\s*\([^)]+\)\s*")
@@ -83,14 +94,20 @@ SQL_ITERATOR_BATCH_SIZE = 100
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 TRANSACTION_DISABLED_MSG = """Commit/rollback are disabled during certain events. This command will
 be ignored. Commit/Rollback from here WILL CAUSE very hard to debug problems with atomicity and
 concurrent data update bugs."""
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 class Database:
 	"""
@@ -140,7 +157,11 @@ class Database:
 		self.user = user
 		self.password = password
 		self.cur_db_name = cur_db_name
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self._conn = None
 
 		self.transaction_writes = 0
@@ -161,7 +182,11 @@ class Database:
 		# You can still use savepoint with partial rollback.
 		self._disable_transaction_control = 0
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		# self.db_type: str
 		# self.last_query (lazy) attribute of last sql query executed
 
@@ -177,9 +202,12 @@ class Database:
 		frappe.local.rollback_observers = []
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self._conn: "MariadbConnection" | "PostgresConnection" = self.get_connection()
 		self._cursor: "MariadbCursor" | "PostgresCursor" = self._conn.cursor()
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self._conn: MariadbConnection | PostgresConnection = self.get_connection()
 		self._cursor: MariadbCursor | PostgresCursor = self._conn.cursor()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -194,7 +222,11 @@ class Database:
 		"""Set session speicifc timeout on exeuction of statements.
 		If any statement takes more time it will be killed along with entire transaction."""
 		raise NotImplementedError
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		try:
 			if execution_timeout := get_query_execution_timeout():
@@ -318,7 +350,11 @@ class Database:
 				frappe.errprint(f"Syntax error in query:\n{query} {values or ''}")
 =======
 				frappe.log(f"Syntax error in query:\n{query} {values or ''}")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			elif self.is_deadlocked(e):
 				raise frappe.QueryDeadlockError(e) from e
@@ -333,7 +369,11 @@ class Database:
 						"Site is running in read only mode, this action can not be performed right now. Please try again later."
 =======
 						"Site is running in read only mode for maintenance or site update, this action can not be performed right now. Please try again later."
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					),
 					title=_("In Read Only Mode"),
 					exc=frappe.InReadOnlyMode,
@@ -352,7 +392,11 @@ class Database:
 					frappe.errprint(f"Error in query:\n{query, values}")
 =======
 					frappe.log(f"Error in query:\n{query, values}")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				raise
 
 			if not (
@@ -409,7 +453,11 @@ class Database:
 		elif as_list:
 			last_result = self.convert_to_lists(last_result)
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self._clean_up()
 		return last_result
 
@@ -570,7 +618,11 @@ class Database:
 			raise ImplicitCommitError("This statement can cause implicit commit", query)
 
 	def fetch_as_dict(self, result) -> list[frappe._dict]:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"""Internal. Convert results to dict."""
 		if result:
 			keys = [column[0] for column in self._cursor.description]
@@ -591,7 +643,11 @@ class Database:
 		return ret
 =======
 		return [frappe._dict(zip(keys, row, strict=False)) for row in result]
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@staticmethod
 	def clear_db_table_cache(query):
@@ -612,7 +668,11 @@ class Database:
 		return False
 =======
 			frappe.cache.delete_key("db_tables")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def get_description(self):
 		"""Return result metadata."""
@@ -636,7 +696,11 @@ class Database:
 		return nres
 =======
 		return [[value for value in row] for row in res]
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def get(self, doctype, filters=None, as_dict=True, cache=False):
 		"""Return `get_value` with fieldname='*'."""
@@ -654,6 +718,15 @@ class Database:
 		order_by=DefaultOrderBy,
 		cache=False,
 		for_update=False,
+<<<<<<< HEAD
+=======
+		*,
+		run=True,
+		pluck=False,
+		distinct=False,
+		skip_locked=False,
+		wait=True,
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		doctype: str,
 		filters: FilterValue | dict | list | None = None,
@@ -681,7 +754,10 @@ class Database:
 		skip_locked: bool = False,
 		wait: bool = True,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	):
 		"""Return a document property or list of properties.
 
@@ -757,6 +833,16 @@ class Database:
 		update=None,
 		cache=False,
 		for_update=False,
+<<<<<<< HEAD
+=======
+		*,
+		run=True,
+		pluck=False,
+		distinct=False,
+		limit=None,
+		skip_locked=False,
+		wait=True,
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		doctype: str,
 		filters: FilterValue | dict | list | None = None,
@@ -787,7 +873,10 @@ class Database:
 		skip_locked: bool = False,
 		wait: bool = True,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	):
 		"""Return multiple document properties.
 
@@ -866,7 +955,11 @@ class Database:
 
 					query = frappe.qb.get_query(
 						table=doctype,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						filters=filters,
 						order_by=order_by,
 <<<<<<< HEAD
@@ -879,7 +972,10 @@ class Database:
 						skip_locked=skip_locked,
 						wait=wait,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 						for_update=for_update,
 						skip_locked=skip_locked,
@@ -889,7 +985,10 @@ class Database:
 						limit=limit,
 						validate_filters=True,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					)
 					if isinstance(fieldname, str) and fieldname == "*":
 						as_dict = True
@@ -1130,7 +1229,11 @@ class Database:
 					frappe.bold(fieldname), frappe.bold(doctype), self.InvalidColumnName
 				)
 			)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		val = cast_fieldtype(df.fieldtype, val)
 
@@ -1251,7 +1354,11 @@ class Database:
 <<<<<<< HEAD
 		:param for_update: [DEPRECATED] This function now performs updates in single query, locking is not required.
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"""
 		from frappe.model.utils import is_single_doctype
 
@@ -1270,7 +1377,11 @@ class Database:
 			if not is_single_doctype(dt):
 				return
 			from frappe.deprecation_dumpster import deprecation_warning
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			deprecation_warning(
 				"unknown",
@@ -1330,7 +1441,11 @@ class Database:
 			query = query.set(column, value)
 
 		query.run(debug=debug)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if dt in self.value_cache:
 			del self.value_cache[dt]
@@ -1405,7 +1520,11 @@ class Database:
 		for __ in range(0, total_docs, chunk_size):
 			doc_chunk = dict(itertools.islice(iterator, chunk_size))
 			self._build_and_run_bulk_update_query(doctype, doc_chunk, modified_dict, debug)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@staticmethod
 	def _build_and_run_bulk_update_query(
@@ -1554,7 +1673,11 @@ class Database:
 
 			self.sql("rollback")
 			self.begin()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			self.after_rollback.run()
 		else:
@@ -1590,7 +1713,11 @@ class Database:
 			frappe.flags.enqueue_after_commit = []
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def field_exists(self, dt, fn):
 		"""Return true of field exists."""
 		return self.exists("DocField", {"fieldname": fn, "parent": dt})
@@ -1600,7 +1727,11 @@ class Database:
 		"""Returns True if table for given doctype exists."""
 =======
 		"""Return True if table for given doctype exists."""
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return f"tab{doctype}" in self.get_tables(cached=cached)
 
 	def has_table(self, doctype):
@@ -1812,7 +1943,11 @@ class Database:
 		return self.truncate(doctype)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def get_last_created(self, doctype):
 		last_record = self.get_all(doctype, ("creation"), limit=1, order_by="creation desc")
 		if last_record:
@@ -1936,7 +2071,11 @@ def enqueue_jobs_after_commit():
 		                        continue # Do some processing.
 		"""
 		raise NotImplementedError
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def rename_column(self, doctype: str, old_column_name: str, new_column_name: str):
 		raise NotImplementedError

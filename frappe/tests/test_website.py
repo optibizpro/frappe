@@ -6,7 +6,11 @@ from frappe import get_hooks
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import set_request
 from frappe.website.page_renderers.static_page import StaticPage
 from frappe.website.serve import get_response, get_response_content
@@ -17,7 +21,11 @@ from frappe.website.utils import build_response, clear_website_cache, get_home_p
 class TestWebsite(FrappeTestCase):
 =======
 class TestWebsite(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		frappe.set_user("Guest")
 		self._clearRequest()
@@ -179,7 +187,11 @@ class TestWebsite(IntegrationTestCase):
 				target="/test",
 				redirect_http_status=307,
 			),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		]
 
 		website_settings = frappe.get_doc("Website Settings")
@@ -373,7 +385,11 @@ class TestWebsite(IntegrationTestCase):
 			path: str = suffix.relative_to(WWW).as_posix()
 			content = get_response_content(path)
 			self.assertIn("<title>Not Found</title>", content)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_metatags(self):
 		content = get_response_content("/_test/_test_metatags")

@@ -4,7 +4,11 @@
 import Vuex from "vuex";
 =======
 import { createStore } from "vuex";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 frappe.provide("frappe.views");
 
@@ -103,7 +107,11 @@ frappe.provide("frappe.views");
 							console.error(err); // eslint-disable-line
 =======
 							console.error(err);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						}
 					);
 			},
@@ -395,7 +403,11 @@ frappe.provide("frappe.views");
 			if (!self.board_perms.write || !is_custom_field) {
 				// If no write access to board, editing board (by adding column) should be blocked
 				// If standard field then users can't add options
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				self.$kanban_board.find(".add-new-column").remove();
 				return;
 			}
@@ -754,7 +766,11 @@ frappe.provide("frappe.views");
 				let label = cur_list.board.show_labels
 					? `<span>${__(field.label, null, field.parent)}: </span>`
 					: "";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				let value = frappe.format(card.doc[field_name], field);
 				fields.push(`
 					<div class="text-muted text-truncate">
@@ -784,7 +800,11 @@ frappe.provide("frappe.views");
 					${frappe.utils.icon("small-message")}
 =======
 					${frappe.utils.icon("es-line-chat-alt")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					${card.comment_count}
 				</span>`;
 

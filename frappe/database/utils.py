@@ -29,7 +29,10 @@ QueryValues = tuple | list | dict | None
 =======
 FilterValue = DocRef | str | int | bool
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EmptyQueryValues = object()
 FallBackDateTimeStr = "0001-01-01 00:00:00.000000"
@@ -42,7 +45,11 @@ NestedSetHierarchy = (
 <<<<<<< HEAD
 =======
 	"descendants of (inclusive)",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 )
 
 
@@ -71,7 +78,11 @@ def get_doctype_name(table_name: str) -> str:
 	return table_name
 =======
 	return table_name.replace('"', "")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class LazyString:

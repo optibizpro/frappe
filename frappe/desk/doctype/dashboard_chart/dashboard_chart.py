@@ -264,7 +264,11 @@ def get_heatmap_chart_config(chart, filters, heatmap_year):
 def get_group_by_chart_config(chart, filters):
 =======
 def get_group_by_chart_config(chart, filters) -> dict | None:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	aggregate_function = get_aggregate_function(chart.group_by_type)
 	value_field = chart.aggregate_function_based_on or "1"
 	group_by_field = chart.group_by_based_on
@@ -301,7 +305,11 @@ def get_group_by_chart_config(chart, filters) -> dict | None:
 	if data:
 		return {
 			"labels": [item.get("name", "Not Specified") for item in data],
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"datasets": [{"name": chart.name, "values": [item["count"] for item in data]}],
 		}
 	return None
@@ -324,7 +332,11 @@ def get_result(data, timegrain, from_date, to_date, chart_type):
 		for _i, d in enumerate(result):
 =======
 		for d in result:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			count = 0
 			while data_index < len(data) and getdate(data[data_index][0]) <= d[0]:
 				d[1] += cint(data[data_index][1])

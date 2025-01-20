@@ -465,7 +465,11 @@ def get_events(start, end, user=None, for_reminder=False, filters=None) -> list[
 					# Don't show any message to the user
 					frappe.clear_last_message()
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					date = date.split("-")
 					date = date[0] + "-" + str(cint(date[1]) - 1) + "-" + date[2]
 

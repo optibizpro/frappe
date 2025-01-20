@@ -47,7 +47,10 @@ def setup_database():
 		if cint(semver_version_num) > 150000:
 			root_conn.sql(f'ALTER DATABASE "{frappe.conf.db_name}" OWNER TO "{frappe.conf.db_user}"')
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	root_conn.close()
 
 
@@ -91,6 +94,7 @@ def import_db_from_sql(source_sql=None, verbose=False):
 =======
 	DbManager(frappe.local.db).restore_database(
 <<<<<<< HEAD
+<<<<<<< HEAD
 		verbose, db_name, source_sql, db_name, frappe.conf.db_password
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	)
@@ -99,6 +103,17 @@ def import_db_from_sql(source_sql=None, verbose=False):
 =======
 		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
 	)
+=======
+		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	)
+	if verbose:
+<<<<<<< HEAD
+		print(command)
+
+	restore_proc = run(command, env=subprocess_env, shell=True, stdout=PIPE)
+
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if verbose:
 <<<<<<< HEAD
 		print(f"\nSTDOUT by psql:\n{restore_proc.stdout.decode()}\nImported from Database File: {source_sql}")
@@ -120,7 +135,11 @@ def get_root_connection(root_login=None, root_password=None):
 
 
 def get_root_connection():
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not frappe.local.flags.root_connection:
 		import sys
 		from getpass import getpass
@@ -157,7 +176,11 @@ def get_root_connection():
 			cur_db_name=frappe.flags.root_login,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return frappe.local.flags.root_connection
 

@@ -17,7 +17,11 @@ const dns = require("dns");
 // Since node17, node resolves to ipv6 unless system is configured otherwise.
 // In Frappe context using ipv4 - 127.0.0.1 is fine.
 dns.setDefaultResultOrder("ipv4first");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 function get_conf() {
 	// defaults
@@ -27,7 +31,11 @@ function get_conf() {
 		socketio_port: 3000,
 =======
 		socketio_port: 9000,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	};
 
 	var read_config = function (file_path) {
@@ -66,7 +74,11 @@ function get_conf() {
 	}
 	if (process.env.FRAPPE_SOCKETIO_UDS) {
 		conf.socketio_uds = process.env.FRAPPE_SOCKETIO_UDS;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	return conf;
 }
@@ -75,7 +87,11 @@ function get_conf() {
 function get_redis_subscriber(kind = "redis_socketio", options = {}) {
 =======
 function get_redis_subscriber(kind = "redis_queue", options = {}) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	const conf = get_conf();
 	const connStr = conf[kind];
 	let client;

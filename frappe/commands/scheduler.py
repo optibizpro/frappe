@@ -8,7 +8,11 @@ from frappe.exceptions import SiteNotSpecifiedError
 <<<<<<< HEAD
 =======
 from frappe.utils.bench_helper import CliCtxObj
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("trigger-scheduler-event", help="Trigger a scheduler event")
@@ -90,7 +94,11 @@ def scheduler(context, state: str, format: str, verbose: bool = False, site: str
 def scheduler(context: CliCtxObj, state: str, format: str, verbose: bool = False, site: str | None = None):
 	"""Control scheduler state."""
 	import frappe
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	from frappe.utils.scheduler import is_scheduler_inactive, toggle_scheduler
 
 	site = site or get_site(context)
@@ -213,11 +221,16 @@ def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=F
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	"""Start a backgrond worker"""
 =======
 	"""Start a background worker"""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	"""Start a background worker"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	from frappe.utils.background_jobs import start_worker
 
 	start_worker(
@@ -246,7 +259,11 @@ def start_worker_pool(queue, quiet=False, num_workers=2, burst=False):
 	from frappe.utils.background_jobs import start_worker_pool
 
 	start_worker_pool(queue=queue, quiet=quiet, burst=burst, num_workers=num_workers)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @click.command("ready-for-migration")

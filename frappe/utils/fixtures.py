@@ -43,7 +43,11 @@ def import_fixtures(app):
 			import_doc(file_path)
 =======
 			import_doc(file_path, sort=True)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		except (ImportError, frappe.DoesNotExistError) as e:
 			# fixture syncing for missing doctypes
 			print(f"Skipping fixture syncing from the file {fname}. Reason: {e}")
@@ -88,7 +92,11 @@ def import_custom_scripts(app):
 			f"Importing Client Script `{fname}` from `{scripts_folder}` is not supported. Convert the client script to fixture.",
 			fg="red",
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def export_fixtures(app=None):

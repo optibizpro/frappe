@@ -4,7 +4,11 @@
 <<<<<<< HEAD
 =======
 import functools
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import gc
 import logging
 import os
@@ -36,7 +40,11 @@ from frappe.utils import CallbackManager, cint, get_site_name
 from frappe.utils.data import escape_html
 from frappe.utils.error import log_error_snapshot
 from frappe.website.page_renderers.error_page import ErrorPage
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.website.serve import get_response
 
 _site = None
@@ -140,7 +148,11 @@ def after_response_wrapper(app):
 
 
 @after_response_wrapper
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 @Request.application
 def application(request: Request):
 	response = None
@@ -154,7 +166,11 @@ def application(request: Request):
 		frappe.api.validate_auth()
 =======
 		validate_auth()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if request.method == "OPTIONS":
 			response = Response()
@@ -203,7 +219,11 @@ def application(request: Request):
 		if request.method in UNSAFE_HTTP_METHODS and frappe.db and rollback:
 =======
 		if rollback and request.method in UNSAFE_HTTP_METHODS and frappe.db:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.db.rollback()
 
 		try:
@@ -237,7 +257,11 @@ def init_request(request):
 	frappe.init(site=site, sites_path=_sites_path, force=True)
 =======
 	frappe.init(site, sites_path=_sites_path, force=True)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if not (frappe.local.conf and frappe.local.conf.db_name):
 		# site does not exist
@@ -421,7 +445,11 @@ def make_form_dict(request: Request):
 		frappe.local.form_dict["data"] = args
 	else:
 		frappe.throw(_("Invalid request arguments"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def handle_exception(e):
@@ -438,7 +466,11 @@ def handle_exception(e):
 =======
 		frappe.get_request_header("Accept") and (frappe.local.is_ajax or "application/json" in accept_header)
 	) or (frappe.local.request.path.startswith("/api/") and not accept_header.startswith("text"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if not frappe.session.user:
 		# If session creation fails then user won't be unset. This causes a lot of code that
@@ -500,7 +532,11 @@ def handle_exception(e):
 		response = ErrorPage(
 			http_status_code=http_status_code, title=_("Server Error"), message=_("Uncaught Exception")
 		).render()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if e.__class__ == frappe.AuthenticationError:
 		if hasattr(frappe.local, "login_manager"):
@@ -531,7 +567,11 @@ def sync_database(rollback: bool) -> bool:
 <<<<<<< HEAD
 			frappe.db.commit()
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			rollback = False
 
 	return rollback
@@ -596,7 +636,11 @@ def serve(
 	sites_path=".",
 	proxy=False,
 ):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	global application, _site, _sites_path
 	_site = site
 	_sites_path = sites_path
@@ -611,7 +655,11 @@ def serve(
 		application = SharedDataMiddleware(application, {"/assets": str(os.path.join(sites_path, "assets"))})
 =======
 		application = application_with_statics()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if proxy or os.environ.get("USE_PROXY"):
 		application = ProxyFix(application, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
@@ -660,4 +708,8 @@ def application_with_statics():
 	application = StaticDataMiddleware(application, {"/files": str(os.path.abspath(_sites_path))})
 
 	return application
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

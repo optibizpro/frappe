@@ -39,7 +39,11 @@ frappe.ui.form.on("Web Form", {
 				const code = `<iframe src="${url}" style="border: none; width: 100%; height: inherit;"></iframe>`;
 				frappe.utils.copy_to_clipboard(code, __("Embed code copied"));
 			});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		frappe.meta.docfield_map["Web Form Field"].fieldname.formatter = (value) => {
 			if (!value) return;
@@ -101,7 +105,11 @@ frappe.ui.form.on("Web Form", {
 
 		if (page_break_count >= 10) {
 			frappe.throw(__("There can be only 9 Page Break fields in a Web Form"));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		let page_break_count = frm.doc.web_form_fields.filter(

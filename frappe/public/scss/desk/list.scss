@@ -183,11 +183,15 @@
 =======
 	.file-select {
 		padding-left: 11px;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	.select-like {
 		padding: 10px 0 10px 11px;
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 }
 
@@ -258,6 +262,15 @@ $level-margin-right: 8px;
 		color: var(--white);
 		font-weight: var(--text-bold);
 	}
+<<<<<<< HEAD
+=======
+}
+
+.frappe-card {
+	.list-paging-area,
+	.footnote-area {
+		padding: var(--padding-md);
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	.btn-group {
 		border: 1px solid var(--border-color);
@@ -300,9 +313,12 @@ $level-margin-right: 8px;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 input.list-check-all,
 input.list-row-checkbox {
 	margin-top: 0px;
@@ -507,7 +523,11 @@ input.list-header-checkbox {
 	}
 
 	.filter-button.btn-primary-light {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		z-index: 1;
 	}
 

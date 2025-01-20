@@ -104,7 +104,11 @@ class FormTimeline extends BaseTimeline {
 				.prop("checked", !me.only_communication)
 				.on("click", function (e) {
 					me.only_communication = !this.checked;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					me.render_timeline_items();
 					$(this).tab("show");
 				});
@@ -196,7 +200,11 @@ class FormTimeline extends BaseTimeline {
 					hide_timestamp: true,
 				});
 			});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -264,7 +272,11 @@ class FormTimeline extends BaseTimeline {
 	get_view_timeline_contents() {
 		let view_timeline_contents = [];
 		(this.doc_info.views || []).forEach((view) => {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			view_timeline_contents.push({
 				creation: view.creation,
 				content: get_user_message(
@@ -430,7 +442,11 @@ class FormTimeline extends BaseTimeline {
 =======
 			icon: "es-line-chat-alt",
 			icon_size: "sm",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			creation: comment.creation,
 			is_card: true,
 			doctype: "Comment",
@@ -521,7 +537,11 @@ class FormTimeline extends BaseTimeline {
 
 			attachment_timeline_contents.push({
 				icon: is_file_upload ? "es-line-attachment" : "es-line-delete",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				icon_size: "sm",
 				creation: attachment_log.creation,
 				content: timeline_content,
@@ -559,7 +579,11 @@ class FormTimeline extends BaseTimeline {
 				icon: "milestone",
 				creation: milestone_log.creation,
 				content: timeline_content,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		});
 
@@ -589,7 +613,11 @@ class FormTimeline extends BaseTimeline {
 				icon_size: "sm",
 				creation: like_log.creation,
 				content: timeline_content,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				title: "Like",
 			});
 		});

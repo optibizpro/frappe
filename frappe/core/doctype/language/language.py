@@ -78,7 +78,11 @@ class Language(Document):
 						set_default(key, new_value, user)
 					else:
 						clear_default(key, parent=user)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def validate_with_regex(name, label):
@@ -104,7 +108,11 @@ def export_languages_json():
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def sync_languages():
 	"""Create Language records from frappe/geo/languages.csv"""
 	from csv import DictReader

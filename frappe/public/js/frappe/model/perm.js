@@ -33,7 +33,11 @@ $.extend(frappe.perm, {
 <<<<<<< HEAD
 		"set_user_permissions",
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	],
 
 	doctype_perm: {},
@@ -61,7 +65,11 @@ $.extend(frappe.perm, {
 		let meta = frappe.get_doc("DocType", doctype);
 =======
 		let meta = frappe.get_meta(doctype);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		const user = frappe.session.user;
 
 		if (user === "Administrator" || frappe.user_roles.includes("Administrator")) {
@@ -252,7 +260,11 @@ $.extend(frappe.perm, {
 				in_list(cur_frm.states.update_fields, df.fieldname) ||
 =======
 				cur_frm.states.update_fields.includes(df.fieldname) ||
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				df.fieldname == cur_frm.state_fieldname
 			) {
 				status = "Read";

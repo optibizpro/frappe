@@ -15,12 +15,18 @@ import time
 from contextlib import suppress
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 import time
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from contextlib import suppress
 from email.errors import HeaderParseError
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from contextlib import suppress
+from email.errors import HeaderParseError
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from email.header import decode_header
 from urllib.parse import unquote
 
@@ -70,7 +76,11 @@ class EmailTimeoutError(frappe.ValidationError):
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 class LoginLimitExceeded(frappe.ValidationError):
 	pass
 
@@ -103,7 +113,11 @@ class EmailServer:
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.pop_timeout,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					ssl_context=ssl.create_default_context(),
 				)
 			else:
@@ -147,7 +161,11 @@ class EmailServer:
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.pop_timeout,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					context=ssl.create_default_context(),
 				)
 			else:
@@ -201,7 +219,11 @@ class EmailServer:
 		"""Returns new email messages."""
 =======
 		"""Return new email messages."""
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		self.latest_messages = []
 		self.seen_status = {}
@@ -216,7 +238,11 @@ class EmailServer:
 			except (EmailTimeoutError, LoginLimitExceeded):
 =======
 			except (_socket.timeout, LoginLimitExceeded):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				# get whatever messages were retrieved
 				break
 
@@ -270,9 +296,12 @@ class EmailServer:
 				if folder[0] == folder[-1] == '"':
 					folder = folder[1:-1]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				# new update for the IMAP Folder DocType
 				IMAPFolder = frappe.qb.DocType("IMAP Folder")
 				frappe.qb.update(IMAPFolder).set(IMAPFolder.uidvalidity, current_uid_validity).set(
@@ -287,7 +316,10 @@ class EmailServer:
 				).where(EmailAccount.name == self.settings.email_account_name).run()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 
 				frappe.db.set_value(
@@ -305,7 +337,10 @@ class EmailServer:
 				)
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			sync_count = 100 if uid_validity else int(self.settings.initial_sync_count)
 			from_uid = 1 if uidnext < (sync_count + 1) or (uidnext - sync_count) < 1 else uidnext - sync_count
 			# sync last 100 email
@@ -333,7 +368,11 @@ class EmailServer:
 		except EmailTimeoutError:
 =======
 		except _socket.timeout:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			# propagate this error to break the loop
 			raise
 
@@ -343,7 +382,11 @@ class EmailServer:
 				raise LoginLimitExceeded(e)
 =======
 				raise LoginLimitExceeded(e) from e
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			frappe.log_error("Unable to fetch email", self.make_error_msg(uid, msg_num))
 
@@ -379,7 +422,11 @@ class EmailServer:
 =======
 			elif self.settings.email_sync_rule == "UNSEEN":
 				self.imap.uid("STORE", uid, "+FLAGS", "(\\SEEN)")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def is_temporary_system_problem(self, e):
 		messages = (
@@ -424,7 +471,11 @@ Traceback:
 {traceback}
 """
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return traceback
 
 	def update_flag(self, folder, uid_list=None):
@@ -505,7 +556,11 @@ class Email:
 			# assume that the encoding is utf-8
 			self.subject = safe_decode(self.subject)[:140]
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if charset := _subject[0][1]:
 			# Encoding is known by decode_header (might also be unknown-8bit)
@@ -555,11 +610,16 @@ class Email:
 		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
 =======
 		for part, encoding in parts:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		for part, encoding in parts:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if encoding:
 				decoded += part.decode(encoding, "replace")
 			else:

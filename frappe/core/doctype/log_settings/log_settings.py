@@ -23,7 +23,11 @@ DEFAULT_LOGTYPES_RETENTION = {
 }
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 @runtime_checkable
 class LogType(Protocol):
@@ -69,7 +73,11 @@ class LogSettings(Document):
 		self.add_default_logtypes()
 
 	def remove_unsupported_doctypes(self):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		for entry in list(self.logs_to_clear):
 			if _supports_log_clearing(entry.ref_doctype):
 				continue
@@ -101,7 +109,11 @@ class LogSettings(Document):
 				self.append("logs_to_clear", {"ref_doctype": logtype, "days": cint(retention)})
 =======
 				self.append("logs_to_clear", {"ref_doctype": logtype, "days": cint(retentions[-1])})
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				added_logtypes.add(logtype)
 
 		if added_logtypes:

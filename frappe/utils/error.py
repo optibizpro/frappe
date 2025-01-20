@@ -13,7 +13,11 @@ import traceback
 import re
 from collections import Counter
 from contextlib import suppress
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import frappe
 from frappe.monitor import add_data_to_monitor
@@ -283,7 +287,11 @@ def get_error_snapshot_path():
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def get_default_args(func):
 	"""Get default arguments of a function from its signature."""
 	signature = inspect.signature(func)

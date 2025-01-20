@@ -90,7 +90,11 @@ def export_customizations(
 	add(doctype)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if with_permissions:
 		custom["custom_perms"] = frappe.get_all(
 			"Custom DocPerm", fields="*", filters={"parent": doctype}, order_by="name"
@@ -139,7 +143,11 @@ def sync_customizations(app=None):
 def sync_customizations_for_doctype(data, folder, filename: str = ""):
 =======
 def sync_customizations_for_doctype(data: dict, folder: str, filename: str = ""):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""Sync doctype customzations for a particular data set"""
 	from frappe.core.doctype.doctype.doctype import validate_fields_for_doctype
 
@@ -197,7 +205,11 @@ def sync_customizations_for_doctype(data: dict, folder: str, filename: str = "")
 		print(_("Skipping fixture syncing for doctype {0} from file {1} ").format(doctype, filename))
 =======
 		print(_("Skipping fixture syncing for doctype {0} from file {1}").format(doctype, filename))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return
 
 	if data["custom_fields"]:
@@ -286,7 +298,11 @@ def load_doctype_module(doctype, module=None, prefix="", suffix=""):
 			msg = f"Module import failed for {doctype}, the DocType you're trying to open might be deleted."
 			msg += f"\nError: {e}"
 			raise ImportError(msg) from e
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return doctype_python_modules[key]
 

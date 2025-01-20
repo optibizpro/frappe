@@ -166,9 +166,12 @@ def update_move_node(doc: Document, parent_field: str):
 
 @frappe.whitelist()
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def rebuild_tree(doctype, parent_field=None):
 	"""Call rebuild_node for all root nodes.
 
@@ -233,7 +236,11 @@ def rebuild_node(doctype, parent, left, parent_field):
 	frappe.db.set_value(doctype, parent, {"lft": left, "rgt": right}, for_update=False, update_modified=False)
 =======
 	frappe.db.set_value(doctype, parent, {"lft": left, "rgt": right}, update_modified=False)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# return the right value of this node + 1
 	return right + 1
@@ -273,7 +280,11 @@ def remove_subtree(doctype: str, name: str, throw=True):
 	frappe.qb.update(table).set(table.rgt, table.rgt - width).where(table.rgt > rgt).run()
 
 	frappe.clear_document_cache(doctype)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def remove_subtree(doctype: str, name: str, throw=True):

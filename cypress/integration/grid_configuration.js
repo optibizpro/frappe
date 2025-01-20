@@ -5,11 +5,15 @@ context("Grid Configuration", () => {
 	});
 	it("Set user wise grid settings", () => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cy.findByRole("tab", { name: "Settings" }).click();
 		cy.get('.form-section[data-fieldname="fields_section"]').click();
 =======
 		cy.findByRole("tab", { name: "Navbar" }).click();
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		cy.findByRole("tab", { name: "Navbar" }).click();
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.wait(100);
 		cy.get('.frappe-control[data-fieldname="top_bar_items"]').as("table");
 		cy.get("@table").find(".icon-sm").click();

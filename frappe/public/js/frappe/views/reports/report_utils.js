@@ -146,7 +146,11 @@ frappe.report_utils = {
 		let filter_values = filters
 =======
 		return filters
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.map((f) => {
 				var v = f.default;
 				return {
@@ -218,7 +222,11 @@ frappe.report_utils = {
 				depends_on: "eval:doc.file_format=='CSV' && doc.csv_quoting != 2",
 			},
 			{
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				fieldtype: "Small Text",
 				label: "CSV Preview",
 				fieldname: "csv_preview",
@@ -253,7 +261,11 @@ frappe.report_utils = {
 			PREVIEW_DATA = [
 =======
 			let PREVIEW_DATA = [
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				columns.map((col) => __(is_query_report ? col.label : col.name)),
 				...report.data
 					.slice(0, 3)
@@ -272,7 +284,11 @@ frappe.report_utils = {
 =======
 					dialog.get_value("csv_delimiter"),
 					dialog.get_value("csv_decimal_sep")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				)
 			);
 		}
@@ -299,7 +315,10 @@ frappe.report_utils = {
 	get_csv_preview(data, quoting, delimiter) {
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		dialog.fields_dict["csv_decimal_sep"].df.onchange = () => {
 			if (!dialog.get_value("csv_decimal_sep")) {
 				dialog.set_value("csv_decimal_sep", ".");
@@ -312,7 +331,11 @@ frappe.report_utils = {
 	},
 
 	get_csv_preview(data, quoting, delimiter, decimal_sep) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// data: array of arrays
 		// quoting: 0 - minimal, 1 - all, 2 - non-numeric, 3 - none
 		// delimiter: any single character
@@ -334,7 +357,11 @@ frappe.report_utils = {
 			frappe.throw(__("Decimal Separator must be a single character"));
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (0 > quoting || quoting > 3) {
 			frappe.throw(__("Quoting must be between 0 and 3"));
 		}
@@ -345,7 +372,11 @@ frappe.report_utils = {
 			frappe.throw(__("Decimal Separator must be '.' when Quoting is set to Non-numeric"));
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return data
 			.map((row) => {
 				return row
@@ -364,7 +395,11 @@ frappe.report_utils = {
 							col = col.toString().replace(".", decimal_sep);
 						}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						switch (quoting) {
 							case QUOTING.Minimal:
 								return typeof col === "string" && col.includes(delimiter)

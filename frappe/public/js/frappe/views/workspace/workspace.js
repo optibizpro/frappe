@@ -33,12 +33,15 @@ frappe.views.Workspace = class Workspace {
 		this.sidebar_categories = ["My Workspaces", "Public"];
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this.sidebar_categories = [
 			{ id: "Personal", label: __("Personal", null, "Workspace Category") },
 			{ id: "Public", label: __("Public", null, "Workspace Category") },
 		];
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.indicator_colors = [
 			"green",
 			"cyan",
@@ -53,7 +56,11 @@ frappe.views.Workspace = class Workspace {
 			"purple",
 			"light-blue",
 		];
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		this.prepare_container();
 		this.sidebar = frappe.app.sidebar;
@@ -401,6 +408,25 @@ frappe.views.Workspace = class Workspace {
 			$child_item_section.toggleClass("hidden");
 		});
 =======
+<<<<<<< HEAD
+=======
+		this.body.find(".btn-new-workspace").on("click", () => {
+			this.initialize_new_page(true);
+		});
+
+		this.body.find(".btn-edit-workspace").on("click", async () => {
+			if (!this.editor || !this.editor.readOnly) return;
+			this.is_read_only = false;
+			await this.editor.readOnly.toggle();
+			this.editor.isReady.then(() => {
+				this.setup_customization_buttons(this._page);
+				this.make_blocks_sortable();
+			});
+		});
+	}
+
+	get_pages() {
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return frappe.xcall("frappe.desk.desktop.get_workspace_sidebar_items", null, "GET");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
@@ -417,7 +443,11 @@ frappe.views.Workspace = class Workspace {
 		this.page.set_title(__(page.name));
 =======
 		if (this._page?.name === page.name) return; // already shown
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if (!frappe.router.current_route[0]) {
 			frappe.route_flags.replace_route = true;
@@ -483,7 +513,11 @@ frappe.views.Workspace = class Workspace {
 					page: { name: page.name, title: page.title, public: page.public },
 				},
 				type: "GET",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			})
 			.then((data) => {
 				this.page_data = data.message;
@@ -530,26 +564,41 @@ frappe.views.Workspace = class Workspace {
 			localStorage.current_page &&
 			this.sidebar.all_pages.filter((page) => page.name == localStorage.current_page)
 				.length != 0
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		) {
 			default_page = {
 				name: localStorage.current_page,
 				public: localStorage.is_current_page_public != "false",
 <<<<<<< HEAD
 			};
+<<<<<<< HEAD
 		} else if (Object.keys(this.all_pages).length !== 0) {
 			default_page = { name: this.all_pages[0].title, public: this.all_pages[0].public };
 =======
 <<<<<<< HEAD
 =======
 			};
+=======
+<<<<<<< HEAD
+		} else if (Object.keys(this.all_pages).length !== 0) {
+			default_page = { name: this.all_pages[0].title, public: this.all_pages[0].public };
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		} else if (Object.keys(this.sidebar.all_pages).length !== 0) {
 			default_page = {
 				name: this.sidebar.all_pages[0].name,
 				public: this.sidebar.all_pages[0].public,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			};
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		} else {
 			default_page = { name: "Build", public: true };
 		}
@@ -566,7 +615,11 @@ frappe.views.Workspace = class Workspace {
 		const page = (route[1] == "private" ? route[2] : route[1]) || default_page.name;
 		const is_public = route[1] ? route[1] != "private" : default_page.public;
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return { name: page, public: is_public };
 	}
 
@@ -576,7 +629,11 @@ frappe.views.Workspace = class Workspace {
 			this.$page = $(`
 =======
 			$(`
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				<div id="editorjs" class="desk-page page-main-content"></div>
 			`).appendTo(this.body.find(".editor-js-container"));
 		}
@@ -588,6 +645,13 @@ frappe.views.Workspace = class Workspace {
 			let pages =
 				page.public && this.public_pages.length ? this.public_pages : this.private_pages;
 			let current_page = pages.filter((p) => p.title == page.name)[0];
+<<<<<<< HEAD
+=======
+			this.content = current_page && JSON.parse(current_page.content);
+
+			this.content && this.add_custom_cards_in_content();
+
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		if (this.sidebar.all_pages.length) {
 			this.create_page_skeleton();
@@ -627,7 +691,11 @@ frappe.views.Workspace = class Workspace {
 			this.content = current_page.content;
 			this.content && this.add_custom_cards_in_content();
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			$(".item-anchor").addClass("disable-click");
 
 			if (this.pages && this.pages[current_page.name]) {
@@ -693,7 +761,11 @@ frappe.views.Workspace = class Workspace {
 		let current_page = pages.filter((p) => p.title == page.name)[0];
 =======
 		let current_page = this.sidebar.all_pages.filter((p) => p.name == page.name)[0];
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if (!this.is_read_only) {
 			this.setup_customization_buttons(current_page);
@@ -701,11 +773,14 @@ frappe.views.Workspace = class Workspace {
 		}
 
 		this.clear_page_actions();
+<<<<<<< HEAD
 		if (current_page.is_editable) {
 			this.body.find(".btn-edit-workspace").removeClass("hide");
 		} else {
 			this.body.find(".btn-edit-workspace").addClass("hide");
 		}
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 <<<<<<< HEAD
 
 <<<<<<< HEAD
@@ -726,15 +801,27 @@ frappe.views.Workspace = class Workspace {
 			this.initialize_new_page();
 		});
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		if (current_page.is_editable) {
+			this.body.find(".btn-edit-workspace").removeClass("hide");
+		} else {
+			this.body.find(".btn-edit-workspace").addClass("hide");
+		}
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		// need to add option for icons in inner buttons as well
 		if (this.has_create_access) {
 			this.body.find(".btn-new-workspace").removeClass("hide");
 		} else {
 			this.body.find(".btn-new-workspace").addClass("hide");
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	initialize_editorjs_undo() {
@@ -1506,6 +1593,45 @@ frappe.views.Workspace = class Workspace {
 						frappe.show_alert({ message: __(message), indicator: "green" });
 					}
 				},
+<<<<<<< HEAD
+=======
+=======
+		// switch headers
+		this.wrapper.find(".page-head").removeClass("hidden");
+		this.wrapper.find(".workspace-header").addClass("hidden");
+
+		page.is_editable &&
+			this.page.set_primary_action(
+				__("Save"),
+				() => {
+					this.clear_page_actions();
+					this.body.removeClass("edit-mode");
+					this.save_page(page).then((saved) => {
+						if (!saved) return;
+						this.undo.readOnly = true;
+						this.editor.readOnly.toggle();
+						this.is_read_only = true;
+					});
+				},
+				null,
+				__("Saving")
+			);
+
+		this.page.set_secondary_action(__("Discard"), async () => {
+			this.body.removeClass("edit-mode");
+			this.clear_page_actions();
+			await this.editor.readOnly.toggle();
+			this.is_read_only = true;
+			frappe.boot.sidebar_pages = this.cached_pages;
+			this.reload();
+			frappe.show_alert({ message: __("Customizations Discarded"), indicator: "info" });
+		});
+
+		if (page.name && this.has_access) {
+			this.page.add_inner_button(__("Settings"), () => {
+				frappe.set_route(`workspace/${page.name}`);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 	}
@@ -1592,7 +1718,11 @@ frappe.views.Workspace = class Workspace {
 					options: this.private_parent_pages,
 				},
 				{
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					label: __("Public"),
 					fieldtype: "Check",
 					fieldname: "is_public",
@@ -1607,7 +1737,11 @@ frappe.views.Workspace = class Workspace {
 =======
 						d.set_df_property("icon", "hidden", this.get_value() ? 0 : 1);
 						d.set_df_property("indicator_color", "hidden", this.get_value() ? 1 : 0);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					},
 				},
 				{
@@ -1620,25 +1754,35 @@ frappe.views.Workspace = class Workspace {
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 					hidden: 1,
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				{
 					label: __("Indicator color"),
 					fieldtype: "Select",
 					fieldname: "indicator_color",
 					options: this.indicator_colors,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 			],
 			primary_action_label: __("Create"),
 			primary_action: (values) => {
 				values.title = strip_html(values.title);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (!this.validate_page(values)) return;
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -1647,10 +1791,18 @@ frappe.views.Workspace = class Workspace {
 				this.initialize_editorjs_undo();
 				this.setup_customization_buttons({ is_editable: true });
 =======
+<<<<<<< HEAD
 				if (values.type === "Workspace") {
 					this.setup_customization_buttons({ is_editable: true });
 				}
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+				d.hide();
+				if (values.type === "Workspace") {
+					this.setup_customization_buttons({ is_editable: true });
+				}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				let name = values.title + (values.is_public ? "" : "-" + frappe.session.user);
 				let blocks = [
@@ -1744,7 +1896,11 @@ frappe.views.Workspace = class Workspace {
 							});
 						});
 				}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			},
 		});
 		d.show();
@@ -1860,7 +2016,11 @@ frappe.views.Workspace = class Workspace {
 				},
 			});
 		});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	initialize_editorjs(blocks) {
@@ -1973,7 +2133,11 @@ frappe.views.Workspace = class Workspace {
 =======
 					frappe.show_alert({
 						message: __("No changes made"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						indicator: "warning",
 					});
 					return false;
@@ -1988,7 +2152,11 @@ frappe.views.Workspace = class Workspace {
 						title: page.title,
 =======
 						name: page.name,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						public: page.public || 0,
 						new_widgets: new_widgets,
 						blocks: JSON.stringify(blocks),
@@ -2006,7 +2174,11 @@ frappe.views.Workspace = class Workspace {
 							if (window.Cypress) return;
 							frappe.show_alert({
 								message: __("Saved"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 								indicator: "green",
 							});
 						}
@@ -2078,7 +2250,11 @@ frappe.views.Workspace = class Workspace {
 		this.sidebar.removeClass("hidden");
 		$(".workspace-sidebar-skeleton").remove();
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	register_awesomebar_shortcut() {

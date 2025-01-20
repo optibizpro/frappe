@@ -103,7 +103,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 				`<button class="btn btn-xs btn-default">${this.get_button_label()}</button>`
 =======
 				`<button class="btn btn-xs btn-default mt-2">${this.get_button_label()}</button>`
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 				.click(() => {
 					this.expanded = !this.expanded;
@@ -120,7 +124,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			$(this.ace_editor_target).css("pointer-events", "none");
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.editor.setTheme("ace/theme/tomorrow");
 		this.editor.setOption("showPrintMargin", false);
 		this.editor.setOption("wrap", this.df.wrap);
@@ -146,7 +154,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 			const input_value = this.get_input_value();
 			this.parse_validate_and_set_in_model(input_value);
 		}, 300);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// setup autocompletion when it is set the first time
 		Object.defineProperty(this.df, "autocompletions", {
@@ -253,10 +265,15 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			SQL: "ace/mode/sql",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+			SQL: "ace/mode/sql",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		};
 		const language = this.df.options;
 
@@ -265,7 +282,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 <<<<<<< HEAD
 			// eslint-disable-next-line
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			console.warn(
 				`Invalid language option provided for field "${
 					this.df.label
@@ -281,7 +302,11 @@ frappe.ui.form.ControlCode = class ControlCode extends frappe.ui.form.ControlTex
 		this.editor.setKeyboardHandler(
 			`ace/keyboard/${frappe.boot.user.code_editor_type || "vscode"}`
 		);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	parse(value) {

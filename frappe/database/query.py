@@ -7,7 +7,11 @@ from typing import TYPE_CHECKING
 from functools import lru_cache
 from types import BuiltinFunctionType
 from typing import TYPE_CHECKING, TypeAlias
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import sqlparse
 from pypika.queries import QueryBuilder, Table
@@ -20,7 +24,11 @@ from frappe.database.schema import SPECIAL_CHAR_PATTERN
 from frappe.database.utils import DefaultOrderBy, get_doctype_name
 =======
 from frappe.database.utils import DefaultOrderBy, FilterValue, convert_to_value, get_doctype_name
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.query_builder import Criterion, Field, Order, functions
 from frappe.query_builder.functions import Function, SqlFunctions
 from frappe.query_builder.utils import PseudoColumnMapper
@@ -50,7 +58,11 @@ class Engine:
 =======
 		fields: str | list | tuple | None = None,
 		filters: dict[str, FilterValue] | FilterValue | list[list | FilterValue] | None = None,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		order_by: str | None = None,
 		group_by: str | None = None,
 		limit: int | None = None,
@@ -161,7 +173,11 @@ class Engine:
 		if not self.fields:
 			self.fields = [self.table.name]
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.query._child_queries = []
 		for field in self.fields:
 			if isinstance(field, DynamicTableField):
@@ -177,15 +193,22 @@ class Engine:
 		filters: dict[str, str | int] | str | int | list[list | str | int] | None = None,
 =======
 		filters: dict[str, FilterValue] | FilterValue | list[list | FilterValue] | None = None,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	):
 		if filters is None:
 			return
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if isinstance(filters, str | int):
 			filters = {"name": str(filters)}
 =======
@@ -201,16 +224,22 @@ class Engine:
 
 		elif isinstance(filters, list | tuple):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if all(isinstance(d, str | int) for d in filters) and len(filters) > 0:
 				self.apply_dict_filters({"name": ("in", filters)})
 			else:
 				for filter in filters:
 					if isinstance(filter, str | int | Criterion | dict):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 			if all(isinstance(d, FilterValue) for d in filters) and len(filters) > 0:
 				self.apply_dict_filters({"name": ("in", tuple(convert_to_value(f) for f in filters))})
@@ -218,7 +247,10 @@ class Engine:
 				for filter in filters:
 					if isinstance(filter, FilterValue | Criterion | dict):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						self.apply_filters(filter)
 					elif isinstance(filter, list | tuple):
 						self.apply_list_filters(filter)
@@ -238,7 +270,11 @@ class Engine:
 	def apply_dict_filters(self, filters: dict[str, str | int | list]):
 =======
 	def apply_dict_filters(self, filters: dict[str, FilterValue | list]):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		for field, value in filters.items():
 			operator = "="
 			if isinstance(value, list | tuple):
@@ -255,7 +291,11 @@ class Engine:
 		value: FilterValue | list | set | None,
 		operator: str = "=",
 		doctype: str | None = None,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	):
 		_field = field
 		_value = value
@@ -296,7 +336,10 @@ class Engine:
 =======
 		if not _value and isinstance(_value, list | tuple | set):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			_value = ("",)
 
 		# Nested set
@@ -381,9 +424,12 @@ class Engine:
 
 	def sanitize_fields(self, fields: str | list | tuple):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		def _sanitize_field(field: str):
 			if not isinstance(field, str):
 				return field
@@ -414,7 +460,17 @@ class Engine:
 			return self.table[field].as_(alias)
 		return self.table[field]
 
+<<<<<<< HEAD
 =======
+=======
+	def parse_fields(self, fields: str | list | tuple | None) -> list:
+		if not fields:
+			return []
+		fields = self.sanitize_fields(fields)
+		if isinstance(fields, list | tuple | set) and None in fields and Field not in fields:
+			return []
+
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		if isinstance(fields, list | tuple):
 			return [
@@ -448,6 +504,10 @@ class Engine:
 		if isinstance(fields, list | tuple | set) and None in fields and Field not in fields:
 			return []
 
+<<<<<<< HEAD
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if not isinstance(fields, list | tuple):
 			fields = [fields]
 
@@ -665,7 +725,11 @@ def has_function(field):
 		if any([f"{func}(" in _field for func in SQL_FUNCTIONS]):
 =======
 		if any([f"{func}(" in _field for func in SQL_FUNCTIONS]):  # ) <- ignore this comment.
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return True
 
 
@@ -713,4 +777,8 @@ def _sanitize_field(field: str, is_mariadb):
 	if is_mariadb:
 		return MARIADB_SPECIFIC_COMMENT.sub("", stripped_field)
 	return stripped_field
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

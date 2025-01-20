@@ -27,7 +27,11 @@ class TestQueryReport(IntegrationTestCase):
 	def tearDown(self):
 		frappe.db.rollback()
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_xlsx_data_with_multiple_datatypes(self):
 		"""Test exporting report using rows with multiple datatypes (list, dict)"""
 
@@ -142,7 +146,11 @@ class TestQueryReport(IntegrationTestCase):
 
 		frappe.delete_doc("Report", REPORT_NAME, delete_permanently=True)
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_report_for_duplicate_column_names(self):
 		"""Test report with duplicate column names"""
 
@@ -317,4 +325,8 @@ def create_mock_data():
 		[3.0, 1.5, 333],
 	]
 	return data
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

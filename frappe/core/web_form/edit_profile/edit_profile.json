@@ -12,7 +12,11 @@
 <<<<<<< HEAD
 =======
  "condition_json": "[]",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "creation": "2016-09-19 05:16:59.242754",
  "doc_type": "User",
  "docstatus": 0,
@@ -29,7 +33,11 @@
  "modified": "2023-01-18 10:26:26.766414",
 =======
  "modified": "2024-09-11 14:30:04.233730",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "edit-profile",

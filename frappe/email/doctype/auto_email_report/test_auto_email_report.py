@@ -7,7 +7,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import add_to_date, get_link_to_form, today
 from frappe.utils.data import is_html
 
@@ -25,7 +29,11 @@ class UnitTestAutoEmailReport(UnitTestCase):
 class TestAutoEmailReport(FrappeTestCase):
 =======
 class TestAutoEmailReport(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_auto_email(self):
 		frappe.delete_doc("Auto Email Report", "Permitted Documents For User")
 

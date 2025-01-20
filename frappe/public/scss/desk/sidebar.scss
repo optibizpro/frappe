@@ -644,7 +644,11 @@ body {
 		z-index: 9998;
 =======
 		z-index: 1100;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		height: 100%;
 		width: 100%;
 	}
@@ -785,11 +789,16 @@ body {
 	margin-bottom: var(--margin-sm);
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	margin-bottom: 3px;
 =======
 	margin: var(--margin-xs) 0;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	margin: var(--margin-xs) 0;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	max-width: 100%;
 	.data-pill {
 		@include get_textstyle("sm", "regular");
@@ -880,7 +889,11 @@ body {
 .add-assignment-btn,
 .add-attachment-btn,
 .add-review-btn,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 .shares,
 .add-tags-btn,
 .share-doc-btn,

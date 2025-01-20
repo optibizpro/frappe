@@ -46,7 +46,11 @@ def get_context(context):
 <<<<<<< HEAD
 =======
 	context["show_footer_on_login"] = cint(frappe.get_website_settings("show_footer_on_login"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	context["disable_user_pass_login"] = cint(frappe.get_system_settings("disable_user_pass_login"))
 	context["logo"] = get_app_logo()
 	context["app_name"] = (
@@ -122,7 +126,11 @@ def login_via_token(login_token: str):
 	sid = frappe.cache().get_value(f"login_token:{login_token}", expires=True)
 =======
 	sid = frappe.cache.get_value(f"login_token:{login_token}", expires=True)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if not sid:
 		frappe.respond_as_web_page(_("Invalid Request"), _("Invalid Login Token"), http_status_code=417)
 		return
@@ -143,7 +151,11 @@ def send_login_link(email: str):
 	if not frappe.get_system_settings("login_with_email_link"):
 		return
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	expiry = frappe.get_system_settings("login_with_email_link_expiry") or 10
 	link = _generate_temporary_login_link(email, expiry)
 
@@ -172,7 +184,11 @@ def _generate_temporary_login_link(email: str, expiry: int):
 	frappe.cache().set_value(f"one_time_login_key:{key}", email, expires_in_sec=expiry * 60)
 =======
 	frappe.cache.set_value(f"one_time_login_key:{key}", email, expires_in_sec=expiry * 60)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return get_url(f"/api/method/frappe.www.login.login_via_key?key={key}")
 
@@ -195,7 +211,11 @@ def login_via_key(key: str):
 
 	if email:
 		frappe.cache.delete_value(cache_key)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.local.login_manager.login_as(email)
 
 		redirect_post_login(

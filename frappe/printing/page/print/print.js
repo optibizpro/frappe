@@ -79,7 +79,11 @@ frappe.ui.form.PrintView = class {
 			"file",
 =======
 			"es-line-filetype",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			() => {
 				this.go_to_form_view();
 			},
@@ -127,7 +131,11 @@ frappe.ui.form.PrintView = class {
 			fieldname: "language",
 			label: __("Language"),
 			options: "Language",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			change: () => {
 				this.set_user_lang();
 				this.preview();
@@ -170,7 +178,11 @@ frappe.ui.form.PrintView = class {
 				print_view.preview();
 			},
 		}).$input;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.sidebar_dynamic_section = $(`<div class="dynamic-settings"></div>`).appendTo(
 			this.sidebar
 		);
@@ -204,7 +216,11 @@ frappe.ui.form.PrintView = class {
 	}
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	setup_menu() {
 		this.page.clear_menu();
 
@@ -246,7 +262,11 @@ frappe.ui.form.PrintView = class {
 			this.page.add_inner_message(`
 			<a style="line-height: 2.4" href="/app/print-designer?doctype=${this.frm.doctype}">
 				${__("Try the new Print Designer")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			</a>
 			`);
 		} else {
@@ -352,7 +372,11 @@ frappe.ui.form.PrintView = class {
 				this.print_sel.val(data.print_format_name);
 =======
 				this.print_format_selector.val(data.print_format_name);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			},
 			__("New Custom Print Format"),
 			__("Start")
@@ -384,7 +408,11 @@ frappe.ui.form.PrintView = class {
 			}
 			// start a new print format
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.prompt(
 				[
 					{
@@ -453,7 +481,11 @@ frappe.ui.form.PrintView = class {
 		return frappe.db
 			.get_value("Letter Head", { disabled: 0, is_default: 1 }, "name")
 			.then(({ message }) => this.letterhead_selector.val(message.name));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	set_user_lang() {
@@ -468,7 +500,11 @@ frappe.ui.form.PrintView = class {
 		this.language_sel.val(this.lang_code);
 =======
 		this.language_selector.val(this.lang_code);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	toggle_raw_printing() {
@@ -493,7 +529,11 @@ frappe.ui.form.PrintView = class {
 		const $print_format = this.print_wrapper.find("iframe");
 		this.$print_format_body = $print_format.contents();
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.get_print_html((out) => {
 			if (!out.html) {
 				out.html = this.get_no_preview_html();
@@ -745,7 +785,11 @@ frappe.ui.form.PrintView = class {
 <<<<<<< HEAD
 =======
 			this.is_wkhtmltopdf_valid();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.render_page("/api/method/frappe.utils.print_format.download_pdf?");
 		}
 	}
@@ -852,7 +896,11 @@ frappe.ui.form.PrintView = class {
 			return print_format_printer_map;
 =======
 			return JSON.parse(localStorage.print_format_printer_map);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		} catch (e) {
 			return {};
 		}
@@ -892,7 +940,11 @@ frappe.ui.form.PrintView = class {
 
 	selected_format() {
 		return this.print_format_selector.val() || "Standard";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	is_raw_printing(format) {

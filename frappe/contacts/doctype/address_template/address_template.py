@@ -44,7 +44,11 @@ class AddressTemplate(Document):
 			self.is_default = 1
 			if frappe.get_system_settings("setup_complete"):
 				frappe.msgprint(_("Setting this Address Template as default as there is no other default"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def on_update(self):
 		if self.is_default and (previous_default := self._get_previous_default()):

@@ -66,7 +66,11 @@ def get_context(context) -> PrintContext:
 <pre>{escape_html(frappe.as_json(frappe.form_dict, indent=2))}</pre>
 """,
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if frappe.form_dict.doc:
 		doc = frappe.form_dict.doc
@@ -130,6 +134,20 @@ def get_print_format_doc(print_format_name: str, meta: "Meta") -> Optional["Prin
 
 
 def get_rendered_template(
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	doc,
+	name=None,
+	print_format=None,
+	meta=None,
+	no_letterhead=None,
+	letterhead=None,
+	trigger_print=False,
+	settings=None,
+):
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc: "Document",
 	print_format: Optional["PrintFormat"] = None,
 	meta: "Meta" = None,
@@ -145,7 +163,10 @@ def get_rendered_template(
 	settings: dict | None = None,
 ) -> str:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	print_settings = frappe.get_single("Print Settings").as_dict()
 	print_settings.update(settings or {})
 
@@ -280,7 +301,11 @@ def get_rendered_template(
 =======
 	hook_func = frappe.get_hooks("pdf_body_html")
 	html = frappe.get_attr(hook_func[-1])(jenv=jenv, template=template, print_format=print_format, args=args)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if cint(trigger_print):
 		html += trigger_print_script
@@ -305,7 +330,11 @@ def _guess_template_error_line_number(template) -> int | None:
 def set_link_titles(doc):
 =======
 def set_link_titles(doc: "Document") -> None:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	# Adds name with title of link field doctype to __link_titles
 	if not doc.get("__link_titles"):
 		setattr(doc, "__link_titles", {})
@@ -421,6 +450,12 @@ def get_rendered_raw_commands(doc: str, name: str | None = None, print_format: s
 
 <<<<<<< HEAD
 	return {"raw_commands": get_rendered_template(doc, name=name, print_format=print_format, meta=meta)}
+<<<<<<< HEAD
+=======
+
+
+def validate_print_permission(doc):
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	return {
 		"raw_commands": get_rendered_template(doc=document, print_format=print_format, meta=document.meta)
@@ -435,7 +470,10 @@ def validate_print_permission(doc):
 =======
 def validate_print_permission(doc: "Document") -> None:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if frappe.has_website_permission(doc):
 		return
 
@@ -554,7 +592,11 @@ def make_layout(doc: "Document", meta: "Meta", format_data=None) -> list:
 				if page[-1]["has_data"] is False:
 =======
 				if not page[-1]["has_data"]:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					# truncate last section if empty
 					del page[-1]
 

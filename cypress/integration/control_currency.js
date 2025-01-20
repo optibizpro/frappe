@@ -12,7 +12,11 @@ context("Control Currency", () => {
 <<<<<<< HEAD
 =======
 			animate: false,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			fields: [
 				{
 					fieldname: fieldname,
@@ -65,7 +69,11 @@ context("Control Currency", () => {
 				blur_expected: "10.000,00",
 			},
 			{
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				input: "10.101",
 				df_options: { precision: "" },
 				blur_expected: "10.1",
@@ -89,7 +97,11 @@ context("Control Currency", () => {
 
 			get_dialog_with_currency(test_case.df_options).as("dialog");
 			cy.wait(300);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			cy.get_field(fieldname, "Currency").clear();
 			cy.wait(300);
 			cy.fill_field(fieldname, test_case.input, "Currency").blur();

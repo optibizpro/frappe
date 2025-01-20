@@ -44,7 +44,11 @@ frappe.ui.form.ControlPassword = class ControlPassword extends frappe.ui.form.Co
 			frappe.utils.debounce(() => {
 				let hide_icon = me.$input.val() && !me.$input.val().includes("*");
 				me.toggle_password.toggleClass("hidden", !hide_icon);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				me.get_password_strength(me.$input.val());
 			}, 500)
 		);
@@ -85,7 +89,11 @@ frappe.ui.form.ControlPassword = class ControlPassword extends frappe.ui.form.Co
 			return;
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		var me = this;
 		frappe.call({
 			type: "POST",
@@ -100,7 +108,11 @@ frappe.ui.form.ControlPassword = class ControlPassword extends frappe.ui.form.Co
 					var indicators = ["red", "red", "orange", "yellow", "green"];
 =======
 					var indicators = ["red", "red", "orange", "blue", "green"];
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					me.set_strength_indicator(indicators[score]);
 				}
 			},
@@ -132,7 +144,11 @@ frappe.ui.form.ControlPassword = class ControlPassword extends frappe.ui.form.Co
 			.addClass("progress-bar progress-bar-" + progress_color);
 
 		let message = __("Include symbols, numbers and capital letters in the password");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.message.html(message).toggleClass("hidden", color == "green");
 	}
 };

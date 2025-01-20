@@ -37,7 +37,11 @@ frappe.ui.SortSelector = class SortSelector {
 =======
 			const order = $(this).attr("data-value") === "desc" ? "asc" : "desc";
 			me.set_value(me.sort_by, order);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			(me.onchange || me.change)(me.sort_by, me.sort_order);
 		});
 
@@ -70,7 +74,11 @@ frappe.ui.SortSelector = class SortSelector {
 			$btn.attr("title", title);
 			$icon.html(frappe.utils.icon(icon_name, "sm"));
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	prepare_args() {
 		var me = this;
@@ -88,7 +96,11 @@ frappe.ui.SortSelector = class SortSelector {
 				// scrub table name (separated by dot), like `tabTime Log`.`modified` desc`
 =======
 				// scrub table name (separated by dot), like `tabTime Log`.`creation` desc`
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				order_by = order_by.split(".")[1];
 			}
 
@@ -145,7 +157,11 @@ frappe.ui.SortSelector = class SortSelector {
 			// default
 			this.args.sort_by = "creation";
 			this.args.sort_order = "desc";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		if (!this.args.sort_by_label) {
@@ -229,7 +245,11 @@ frappe.ui.SortSelector = class SortSelector {
 		} else {
 			return {
 				meta_sort_field: meta.sort_field || "creation",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				meta_sort_order: meta.sort_order ? meta.sort_order.toLowerCase() : "",
 			};
 		}
@@ -255,6 +275,10 @@ frappe.ui.SortSelector = class SortSelector {
 		} else {
 			return `${sort_by} ${this.sort_order}`;
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 };

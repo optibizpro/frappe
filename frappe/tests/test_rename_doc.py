@@ -13,7 +13,11 @@ from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.exceptions import DoesNotExistError, ValidationError
 =======
 from frappe.exceptions import DoesNotExistError
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.model.base_document import get_controller
 from frappe.model.rename_doc import bulk_rename, update_document_title
 from frappe.modules.utils import get_doc_path
@@ -21,7 +25,11 @@ from frappe.modules.utils import get_doc_path
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import add_to_date, now
 
 
@@ -49,7 +57,11 @@ def patch_db(endpoints: list[str] | None = None):
 class TestRenameDoc(FrappeTestCase):
 =======
 class TestRenameDoc(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(self):
 		"""Setting Up data for the tests defined under TestRenameDoc"""
@@ -336,4 +348,8 @@ class TestRenameDoc(IntegrationTestCase):
 
 		self.assertTrue(frappe.db.exists("Autoincrement DocType", marilyn.name) is None)
 		self.assertEqual(linked_with_marilyn.autoincrement_doctype, frappe.utils.cstr(mary.name))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

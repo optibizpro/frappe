@@ -248,6 +248,25 @@ export default {
 					fieldtype: "Field Template",
 					field_template: template.name,
 				});
+<<<<<<< HEAD
+=======
+			}
+			return out;
+		},
+		page_number_positions() {
+			return [
+				{ label: __("Hide"), value: "Hide" },
+				{ label: __("Top Left"), value: "Top Left" },
+				{ label: __("Top Center"), value: "Top Center" },
+				{ label: __("Top Right"), value: "Top Right" },
+				{ label: __("Bottom Left"), value: "Bottom Left" },
+				{ label: __("Bottom Center"), value: "Bottom Center" },
+				{ label: __("Bottom Right"), value: "Bottom Right" },
+			];
+		},
+	},
+};
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 // variables
 let search_text = ref("");
@@ -451,7 +470,11 @@ onMounted(() => {
 });
 
 watch(print_format, () => (store.dirty.value = true), { deep: true });
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 </script>
 
 <style scoped>

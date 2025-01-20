@@ -21,7 +21,11 @@ frappe.realtime.on("build_event", (data) => {
 						frappe.assets.executed_ = frappe.assets.executed_.filter(
 =======
 						frappe.assets._executed = frappe.assets._executed.filter(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							(asset) => !asset.includes(`${filename}.bundle`)
 						);
 					}
@@ -61,7 +65,11 @@ function show_build_success(data) {
 		success = vm.$children[0];
 =======
 		success = createApp(BuildSuccess).mount(target);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	success.show(data);
 }
@@ -80,7 +88,11 @@ function show_build_error(data) {
 		error = vm.$children[0];
 =======
 		error = createApp(BuildError).mount(target);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 	error.show(data);
 }

@@ -18,7 +18,11 @@ from typing import TYPE_CHECKING, Any
 
 import RestrictedPython.Guards
 from RestrictedPython import PrintCollector, compile_restricted, safe_globals
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from RestrictedPython.transformer import RestrictingNodeTransformer
 
 import frappe
@@ -52,7 +56,11 @@ ARGUMENT_NOT_SET = object()
 SAFE_EXEC_CONFIG_KEY = "server_script_enabled"
 SERVER_SCRIPT_FILE_PREFIX = "<serverscript>"
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 class NamespaceDict(frappe._dict):
 	"""Raise AttributeError if function not found in namespace"""
@@ -85,7 +93,11 @@ def safe_exec(script, _globals=None, _locals=None, restrict_commit_rollback=Fals
 	else:
 		enabled = True
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		return super().check_name(node, name, *args, **kwargs)
 
@@ -144,7 +156,11 @@ def safe_exec(
 		# execute script compiled by RestrictedPython
 		exec(
 			compile_restricted(script, filename=filename, policy=FrappeTransformer),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			exec_globals,
 			_locals,
 		)
@@ -187,11 +203,16 @@ def safe_exec_flags():
 	if not frappe.flags.in_safe_exec:
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if not frappe.flags.in_safe_exec:
 =======
 	if frappe.flags.in_safe_exec is None:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	if frappe.flags.in_safe_exec is None:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.flags.in_safe_exec = 0
 
 	frappe.flags.in_safe_exec += 1
@@ -317,7 +338,11 @@ def get_safe_globals():
 				get_home_page=frappe.website.utils.get_home_page,
 				get_html_content_based_on_type=frappe.website.utils.get_html_content_based_on_type,
 			),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			lang=getattr(frappe.local, "lang", "en"),
 		),
 		FrappeClient=FrappeClient,
@@ -352,7 +377,11 @@ def get_safe_globals():
 
 	# Allow using `print()` calls with `safe_exec()`
 	out._print_ = FrappePrintCollector
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# allow iterators and list comprehension
 	out._getiter_ = iter
@@ -671,7 +700,11 @@ VALID_UTILS = (
 	"convert_utc_to_user_timezone",
 =======
 	"get_system_timezone",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"convert_utc_to_system_timezone",
 	"now",
 	"nowdate",

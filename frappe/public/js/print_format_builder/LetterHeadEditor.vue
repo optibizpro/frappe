@@ -53,7 +53,11 @@
 					{{ !$store.edit_letterhead ? __("Edit Letter Head") : __("Done") }}
 =======
 					{{ !store.edit_letterhead ? __("Edit Letter Head") : __("Done") }}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				</button>
 				<button
 					v-if="!letterhead"
@@ -70,7 +74,11 @@
 =======
 		<div v-if="letterhead && !store.edit_letterhead" v-html="letterhead.content"></div>
 		<!-- <div v-show="letterhead && store.edit_letterhead" ref="editor"></div> -->
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		<div
 			class="edit-letterhead"
 			v-if="letterhead && store.edit_letterhead"
@@ -437,7 +445,11 @@ watch(
 	{ deep: true },
 	{ immediate: true }
 );
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 </script>
 
 <style scoped>

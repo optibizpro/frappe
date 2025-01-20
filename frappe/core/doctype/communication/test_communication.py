@@ -229,14 +229,18 @@ class TestCommunication(IntegrationTestCase):
 		to = "Jon Doe <jon.doe@example.org>"
 		cc = """=?UTF-8?Q?Max_Mu=C3=9F?= <max.muss@examle.org>,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	erp+Customer+that%20company@example.org"""
 		bcc = ""
 
 		results = list(parse_email([to, cc, bcc]))
 		self.assertEqual([("Customer", "that company")], results)
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		results = list(parse_email([to, bcc]))
@@ -249,6 +253,8 @@ class TestCommunication(IntegrationTestCase):
 		self.assertEqual([("A", "Test"), ("Note", "Very important")], results)
 
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	erp+Customer=Plus%2BCompany@example.org,
 	erp+Customer+Space%20Company@example.org,
@@ -358,6 +364,7 @@ class TestCommunication(IntegrationTestCase):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		spam_comm: Communication = frappe.get_doc(
@@ -386,6 +393,8 @@ class TestCommunication(IntegrationTestCase):
 		self.assertNotEqual(normal_comm.email_status, "Spam")
 
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		spam_comm: Communication = frappe.get_doc(
@@ -483,7 +492,11 @@ class TestCommunicationEmailMixin(IntegrationTestCase):
 =======
 		# Disabled users have thread_notify disabled, so they'll be removed from the list
 		self.assertCountEqual(res, bcc_list[:1])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		user.delete()
 		comm.delete()
 

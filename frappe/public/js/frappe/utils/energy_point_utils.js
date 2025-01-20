@@ -24,7 +24,11 @@ Object.assign(frappe.energy_points, {
   			<a href="/app/energy-point-log/${log.name}">${this.get_form_log_message(log)}</a>
   			${log.reason ? separator + log.reason : ""}
   		</span>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 	format_history_log(log) {
 		// redundant code to honor readability and to avoid confusion
@@ -49,7 +53,11 @@ Object.assign(frappe.energy_points, {
   			${log.reason ? separator + log.reason : ""}
   			${separator + frappe.datetime.comment_when(log.creation)}
   		</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 	get_history_log_message(log) {
 		const owner_name = frappe.user.full_name(log.owner).bold();

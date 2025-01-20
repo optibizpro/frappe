@@ -26,7 +26,11 @@ class PathResolver:
 	__slots__ = ("http_status_code", "path")
 
 	def __init__(self, path, http_status_code=None):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.path = path.strip("/ ")
 		self.http_status_code = http_status_code
 
@@ -60,12 +64,15 @@ class PathResolver:
 				return frappe.flags.redirect_location, RedirectPage(e.new_url, e.code)
 <<<<<<< HEAD
 
+<<<<<<< HEAD
 		# WARN: Hardcoded for better performance
 		if endpoint == "app":
 			return endpoint, TemplatePage(endpoint, self.http_status_code)
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 <<<<<<< HEAD
 		endpoint = resolve_path(self.path)
 
@@ -74,7 +81,11 @@ class PathResolver:
 			return endpoint, TemplatePage(endpoint, 200)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		custom_renderers = self.get_custom_page_renderers()
 		renderers = [
 			*custom_renderers,
@@ -143,7 +154,11 @@ def resolve_redirect(path, query_string=None):
 	redirects += frappe.get_all(
 		"Website Route Redirect", ["source", "target", "redirect_http_status"], order_by=None
 	)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if not redirects:
 		return
@@ -224,7 +239,11 @@ def get_website_rules():
 	return frappe.cache().get_value("website_route_rules", _get)
 =======
 	return frappe.cache.get_value("website_route_rules", _get)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def validate_path(path: str):

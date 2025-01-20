@@ -75,9 +75,12 @@ def approve(*args, **kwargs):
 def authorize(**kwargs):
 	success_url = "/api/method/frappe.integrations.oauth2.approve?" + encode_params(sanitize_kwargs(kwargs))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	failure_url = frappe.form_dict["redirect_uri"] + "?error=access_denied"
 =======
 	failure_url = frappe.form_dict.get("redirect_uri", "") + "?error=access_denied"

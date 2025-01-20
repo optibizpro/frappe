@@ -10,8 +10,11 @@ from frappe.translate import clear_cache
 class TestTranslation(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.tests import IntegrationTestCase, UnitTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
@@ -26,7 +29,11 @@ class UnitTestTranslation(UnitTestCase):
 
 
 class TestTranslation(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		frappe.db.delete("Translation")
 
@@ -36,7 +43,11 @@ class TestTranslation(IntegrationTestCase):
 =======
 		from frappe.translate import clear_cache
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		clear_cache()
 
 	def test_doctype(self):
@@ -60,7 +71,11 @@ class TestTranslation(IntegrationTestCase):
 
 			frappe.delete_doc("Translation", docname)
 			self.assertEqual(_(source_string), original_translation)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_parent_language(self):
 		data = {
@@ -87,7 +102,11 @@ class TestTranslation(IntegrationTestCase):
 		self.assertEqual(_("Test Data"), data["Test Data"]["es"])
 
 		self.assertEqual(_("Test Spanish"), data["Test Spanish"]["es"])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		frappe.local.lang = "es-MX"
 
@@ -106,7 +125,11 @@ class TestTranslation(IntegrationTestCase):
 	def test_multi_language_translations(self):
 		source = "User"
 		self.assertNotEqual(_(source, lang="de"), _(source, lang="es"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_multi_language_translations(self):
 		source = "User"

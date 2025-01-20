@@ -2,7 +2,11 @@
 """ Utils for thread/process synchronization. """
 =======
 """Utils for thread/process synchronization."""
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 import os
 from contextlib import contextmanager
@@ -54,7 +58,11 @@ def filelock(lock_name: str, *, timeout=30, is_global=False):
 
 		raise LockTimeoutError(
 			_("Failed to aquire lock: {}. Lock may be held by another process.").format(lock_name)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			+ "<br>"
 			+ _("You can manually remove the lock if you think it's safe: {}").format(lock_path)
 		) from e

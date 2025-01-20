@@ -15,7 +15,11 @@ from frappe.tests import IntegrationTestCase
 
 
 class TestListView(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def setUp(self):
 		if frappe.db.exists("List View Settings", "DocType"):
 			frappe.delete_doc("List View Settings", "DocType")
@@ -103,4 +107,8 @@ class TestListView(IntegrationTestCase):
 		for with_comment_count in (0, False, "0", None):
 			frappe.form_dict.with_comment_count = with_comment_count
 			self.assertEqual(len(get()["values"][0]), 1)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

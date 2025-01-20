@@ -9,15 +9,22 @@ from frappe.utils.data import add_to_date, today
 class TestDocumentLocks(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.tests import IntegrationTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.utils.data import add_to_date, today
 
 
 class TestDocumentLocks(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_locking(self):
 		todo = frappe.get_doc(doctype="ToDo", description="test").insert()
 		todo_1 = frappe.get_doc("ToDo", todo.name)
@@ -60,7 +67,10 @@ class TestDocumentLocks(IntegrationTestCase):
 =======
 		todo = frappe.get_doc(doctype="ToDo", description=frappe.generate_hash()).insert()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		todo.lock()
 
 		self.assertRaises(frappe.DocumentLockedError, todo.lock)

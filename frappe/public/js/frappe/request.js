@@ -14,7 +14,11 @@ frappe.request.logs = {};
 frappe.xcall = function (method, params) {
 =======
 frappe.xcall = function (method, params, type) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return new Promise((resolve, reject) => {
 		frappe.call({
 			method: method,
@@ -28,7 +32,11 @@ frappe.xcall = function (method, params, type) {
 				reject(r.message);
 =======
 				reject(r?.message);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			},
 		});
 	});
@@ -105,7 +113,11 @@ frappe.call = function (opts) {
 			prefix = `/api/${opts.api_version}/method/`;
 		}
 		url = prefix + args.cmd;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (window.cordova) {
 			let host = frappe.request.url;
 			host = host.slice(0, host.length - 1);
@@ -162,7 +174,11 @@ frappe.request.call = function (opts) {
 <<<<<<< HEAD
 =======
 			opts.error_callback && opts.error_callback();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 		403: function (xhr) {
 			if (frappe.session.user === "Guest" && frappe.session.logged_in_user !== "Guest") {
@@ -195,7 +211,11 @@ frappe.request.call = function (opts) {
 <<<<<<< HEAD
 =======
 			opts.error_callback && opts.error_callback();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 		508: function (xhr) {
 			frappe.utils.play_sound("error");
@@ -209,7 +229,11 @@ frappe.request.call = function (opts) {
 <<<<<<< HEAD
 =======
 			opts.error_callback && opts.error_callback();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 		413: function (data, xhr) {
 			frappe.msgprint({
@@ -222,7 +246,11 @@ frappe.request.call = function (opts) {
 <<<<<<< HEAD
 =======
 			opts.error_callback && opts.error_callback();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 		417: function (xhr) {
 			var r = xhr.responseJSON;
@@ -258,7 +286,11 @@ frappe.request.call = function (opts) {
 <<<<<<< HEAD
 =======
 			opts.error_callback && opts.error_callback();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 	};
 
@@ -299,7 +331,11 @@ frappe.request.call = function (opts) {
 		cache: false,
 =======
 		cache: window.dev_server ? false : true,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	};
 
 	if (opts.args && opts.args.doctype) {
@@ -343,7 +379,11 @@ frappe.request.call = function (opts) {
 =======
 				console.log("Unable to handle success response", data);
 				console.error(e);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		})
 		.always(function (data, textStatus, xhr) {
@@ -356,7 +396,11 @@ frappe.request.call = function (opts) {
 					var xhr = data;
 =======
 					var xhr = data; // eslint-disable-line
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					data = JSON.parse(data.responseText);
 				}
 			} catch (e) {
@@ -406,7 +450,11 @@ frappe.request.call = function (opts) {
 =======
 				console.log("Unable to handle failed response");
 				console.error(e);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		});
 };
@@ -426,7 +474,11 @@ frappe.request.is_fresh = function (args, threshold) {
 <<<<<<< HEAD
 			// eslint-disable-next-line no-console
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			console.log("throttled");
 			return true;
 		}
@@ -510,7 +562,11 @@ frappe.request.cleanup = function (opts, r) {
 			messages = JSON.parse(r._server_messages);
 		}
 		if (messages && !opts.silent) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			// show server messages if no handlers exist
 			if (handlers.length === 0) {
 				frappe.hide_msgprint();
@@ -543,7 +599,11 @@ frappe.request.cleanup = function (opts, r) {
 =======
 			}
 			console.log("======== debug messages ========");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			$.each(JSON.parse(r._debug_messages), function (i, v) {
 				console.log(v);
 			});
@@ -604,7 +664,11 @@ frappe.request.report_error = function (xhr, request_opts) {
 
 		let request_data = Object.assign({}, request_opts);
 		request_data.request_id = xhr.getResponseHeader("X-Frappe-Request-Id");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		const traceback_info = [
 			"### App Versions",
 			code_block(JSON.stringify(frappe.boot.versions, null, "\t")),
@@ -617,7 +681,11 @@ frappe.request.report_error = function (xhr, request_opts) {
 			code_block(JSON.stringify(request_opts, null, "\t")),
 =======
 			code_block(JSON.stringify(request_data, null, "\t")),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"### Response Data",
 			code_block(JSON.stringify(data, null, "\t")),
 		].join("\n");
@@ -700,7 +768,11 @@ frappe.request.report_error = function (xhr, request_opts) {
 					frappe.error_dialog.hide();
 				});
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.error_dialog.wrapper.classList.add("msgprint-dialog");
 		}
 

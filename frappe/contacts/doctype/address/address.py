@@ -143,9 +143,12 @@ def get_preferred_address(doctype, name, preferred_key="is_primary_address"):
 @frappe.whitelist()
 def get_default_address(doctype: str, name: str | None, sort_key: str = "is_primary_address") -> str | None:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""Returns default Address name for the given doctype, name"""
 =======
 	"""Return default Address name for the given doctype, name."""
@@ -173,7 +176,11 @@ def get_default_address(doctype: str, name: str | None, sort_key: str = "is_prim
 def get_address_display(address_dict: dict | str | None = None) -> str | None:
 =======
 def get_address_display(address_dict: dict | str | None) -> str | None:
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return render_address(address_dict)
 
 
@@ -295,7 +302,11 @@ def address_query(doctype, txt, searchfield, start, page_len, filters):
 
 	if link_name := filters.pop("link_name", None):
 		_filters.append(["Dynamic Link", "link_name", "=", link_name])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	_filters.extend([key, "=", value] for key, value in filters.items())
 

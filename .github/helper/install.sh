@@ -50,6 +50,7 @@ fi
 
 echo "Starting Bench..."
 export FRAPPE_TUNE_GC=True
+<<<<<<< HEAD
 =======
 
 if [ "$TYPE" == "server" ]
@@ -73,6 +74,8 @@ then
   build_pid=$!
 fi
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 bench --site test_site reinstall --yes
 

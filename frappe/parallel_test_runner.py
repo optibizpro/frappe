@@ -18,12 +18,18 @@ from frappe.tests.utils import make_test_records
 from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
 =======
 from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
 from .testing.result import TestResult
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
+from .testing.result import TestResult
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 click_ctx = click.get_current_context(True)
 if click_ctx:
@@ -51,7 +57,11 @@ class ParallelTestRunner:
 		self.setup_test_file_list()
 
 	def setup_and_run(self):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.setup_test_site()
 		self.run_tests()
 		self.print_result()
@@ -70,10 +80,15 @@ class ParallelTestRunner:
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		_decorate_all_methods_and_functions_with_type_checker()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		_decorate_all_methods_and_functions_with_type_checker()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.before_test_setup()
 
 	def before_test_setup(self):
@@ -121,7 +136,11 @@ class ParallelTestRunner:
 				"Setting the test environment user to 'Administrator' by the test runner is deprecated. The UnitTestCase now ensures a consistent user environment on set up and tear down at the class level. ",
 			)
 			frappe.set_user("Administrator")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		path, filename = file_info
 		module = self.get_module(path, filename)
 		from frappe.deprecation_dumpster import compat_preload_test_records_upfront
@@ -166,7 +185,11 @@ class ParallelTestRunner:
 		test_counts = [self.get_test_count(test) for test in test_list]
 =======
 		test_counts = [self.get_test_weight(test) for test in test_list]
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		test_chunks = split_by_weight(test_list, test_counts, chunk_count=self.total_builds)
 
 		return test_chunks[self.build_number - 1]
@@ -210,7 +233,11 @@ def split_by_weight(work, weights, chunk_count):
 	def get_test_weight(test):
 		"""Get approximate count of tests inside a file"""
 		file_name = "/".join(test)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		test_weight = TEST_WEIGHT_OVERRIDES.get(test[-1]) or 1
 

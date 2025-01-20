@@ -12,7 +12,11 @@ from frappe import STANDARD_USERS, _, msgprint, throw
 <<<<<<< HEAD
 =======
 from frappe.apps import get_default_path
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.auth import MAX_PASSWORD_SIZE
 from frappe.core.doctype.user_type.user_type import user_linked_with_permission_on_doctype
 from frappe.desk.doctype.notification_settings.notification_settings import (
@@ -39,10 +43,14 @@ from frappe.utils.data import sha256_hash
 from frappe.utils.deprecations import deprecated
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecated
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.password import check_password, get_password_reset_limit
 from frappe.utils.password import update_password as _update_password
 from frappe.utils.user import get_system_managers
@@ -195,10 +203,15 @@ class User(Document):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		self.move_role_profile_name_to_role_profiles()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		self.move_role_profile_name_to_role_profiles()
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.populate_role_profile_roles()
 		self.check_roles_added()
 		self.set_system_user()
@@ -215,7 +228,11 @@ class User(Document):
 =======
 		if self.user_emails:
 			ask_pass_update()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		self.validate_allowed_modules()
 		self.validate_user_image()
 		self.set_time_zone()
@@ -280,7 +297,11 @@ class User(Document):
 		)
 		self.append("role_profiles", {"role_profile": self.role_profile_name})
 		self.role_profile_name = None
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@deprecated
 	def validate_roles(self):
@@ -362,12 +383,18 @@ class User(Document):
 <<<<<<< HEAD
 		toggle_notifications(self.name, enable=cint(self.enabled))
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		toggle_notifications(self.name, enable=cint(self.enabled), ignore_permissions=True)
 		self.disable_email_fields_if_user_disabled()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def email_new_password(self, new_password=None):
 		if new_password and not self.flags.in_insert:
@@ -703,12 +730,18 @@ class User(Document):
 <<<<<<< HEAD
 		for _i, d in enumerate(self.get("roles")):
 =======
+<<<<<<< HEAD
 		for d in self.get("roles"):
 =======
 		exists = set()
 		for d in list(self.roles):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		exists = set()
+		for d in list(self.roles):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (not d.role) or (d.role in exists):
 				self.roles.remove(d)
 			exists.add(d.role)
@@ -844,7 +877,11 @@ class User(Document):
 	def get_permission_log_options(self, event=None):
 		return {"fields": ("role_profile_name", "roles", "module_profile", "block_modules")}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def check_roles_added(self):
 		if self.user_type != "System User" or self.roles or not self.is_new():
 			return
@@ -920,7 +957,11 @@ def update_password(
 	    key (str, optional): Password reset key. Defaults to None.
 	    old_password (str, optional): Old password. Defaults to None.
 	"""
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if len(new_password) > MAX_PASSWORD_SIZE:
 		frappe.throw(_("Password size exceeded the maximum allowed size."))
@@ -928,7 +969,11 @@ def update_password(
 <<<<<<< HEAD
 =======
 	result = test_password_strength(new_password)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	feedback = result.get("feedback", None)
 
 	if feedback and not feedback.get("password_policy_validation_passed", False):
@@ -1229,7 +1274,11 @@ def get_system_users(exclude_users: Iterable[str] | str | None = None, limit: in
 		},
 		pluck="name",
 		limit=limit,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	)
 
 
@@ -1366,7 +1415,11 @@ def create_contact(user, ignore_links=False, ignore_mandatory=False):
 			)
 		except frappe.DuplicateEntryError:
 			pass
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	else:
 		try:
 			contact = frappe.get_doc("Contact", contact_name)
@@ -1413,7 +1466,11 @@ def get_restricted_ip_list(user):
 def generate_keys(user):
 =======
 def generate_keys(user: str):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	"""
 	generate api key and api secret
 

@@ -89,7 +89,11 @@ frappe.views.CommunicationComposer = class {
 				fieldname: "send_after",
 			},
 			{
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				fieldtype: "Section Break",
 				fieldname: "email_template_section_break",
 				hidden: 1,
@@ -169,7 +173,11 @@ frappe.views.CommunicationComposer = class {
 				fieldname: "print_language",
 				default: frappe.boot.lang,
 				depends_on: "attach_document_print",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			},
 			{ fieldtype: "Column Break" },
 			{
@@ -186,7 +194,11 @@ frappe.views.CommunicationComposer = class {
 				!in_list(["All Accounts", "Sent", "Spam", "Trash"], account.email_account) &&
 =======
 				!["All Accounts", "Sent", "Spam", "Trash"].includes(account.email_account) &&
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				account.enable_outgoing
 			);
 		});
@@ -252,7 +264,11 @@ frappe.views.CommunicationComposer = class {
 		this.dialog.set_value("print_language", lang);
 	}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	toggle_more_options(show_options) {
 		show_options = show_options || this.dialog.fields_dict.more_options.df.hidden;
 		this.dialog.set_df_property("more_options", "hidden", !show_options);
@@ -302,7 +318,11 @@ frappe.views.CommunicationComposer = class {
 				frappe.call({
 					method: "frappe.email.get_contact_list",
 					args: args,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					callback: (r) => {
 						this.dialog.fields_dict[field].set_data(r.message);
 					},
@@ -434,7 +454,11 @@ frappe.views.CommunicationComposer = class {
 <<<<<<< HEAD
 					_lang: me.dialog.get_value("language_sel"),
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				},
 				callback(r) {
 					prepend_reply(r.message);
@@ -585,7 +609,11 @@ frappe.views.CommunicationComposer = class {
 	}
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	setup_print() {
 		// print formats
 		const fields = this.dialog.fields_dict;
@@ -610,7 +638,11 @@ frappe.views.CommunicationComposer = class {
 <<<<<<< HEAD
 =======
 		this.guess_language();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	setup_attach() {
@@ -788,7 +820,11 @@ frappe.views.CommunicationComposer = class {
 					console.log(e); // eslint-disable-line
 =======
 					console.log(e);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					console.warn(
 						"[Communication] IndexedDB is full. Cannot save message as draft"
 					); // eslint-disable-line
@@ -817,7 +853,11 @@ frappe.views.CommunicationComposer = class {
 					console.warn(
 						"[Communication] IndexedDB is full. Cannot save message as draft"
 					);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 			});
 		}
@@ -863,7 +903,11 @@ frappe.views.CommunicationComposer = class {
 <<<<<<< HEAD
 				_lang: me.lang_code,
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				read_receipt: form_values.send_read_receipt,
 				print_letterhead: me.is_print_letterhead_checked(),
 				send_after: form_values.send_after ? form_values.send_after : null,

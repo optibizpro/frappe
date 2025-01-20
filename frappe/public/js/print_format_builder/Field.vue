@@ -44,7 +44,11 @@
 				<button class="btn btn-xs btn-icon" @click="$set(df, 'remove', true)">
 =======
 				<button class="btn btn-xs btn-icon" @click="df['remove'] = true">
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					<svg class="icon icon-sm">
 						<use href="#icon-close"></use>
 					</svg>
@@ -282,7 +286,11 @@ function get_all_columns() {
 		{
 			label: __("Sr No."),
 			value: "idx",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		},
 	];
 	return more_columns.concat(
@@ -365,7 +373,11 @@ watch(
 	() => validate_table_columns(),
 	{ deep: true }
 );
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 </script>
 
 <style scoped>

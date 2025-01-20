@@ -174,8 +174,13 @@ def get_website_settings(context=None):
 <<<<<<< HEAD
 	settings: "WebsiteSettings" = frappe.get_cached_doc("Website Settings")
 =======
+<<<<<<< HEAD
 	settings: WebsiteSettings = frappe.client_cache.get_doc("Website Settings")
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	settings: WebsiteSettings = frappe.get_cached_doc("Website Settings")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	context = context.update(
 		{

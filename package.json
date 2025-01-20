@@ -10,7 +10,11 @@
     "snyk-protect": "snyk-protect"
 =======
     "postinstall": "cd billing && yarn install"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   "repository": {
     "type": "git",
@@ -63,7 +67,11 @@
     "chalk": "^2.3.2",
     "cliui": "^7.0.4",
     "cookie": "^0.7.0",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
     "cropperjs": "^1.5.12",
     "cssnano": "^5.0.0",
     "driver.js": "^0.9.8",
@@ -73,7 +81,11 @@
     "esbuild-vue": "^1.2.1",
 =======
     "esbuild-plugin-vue3": "^0.3.0",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
     "fast-deep-equal": "^2.0.1",
     "fast-glob": "^3.2.5",
     "frappe-charts": "2.0.0-rc22",
@@ -91,7 +103,11 @@
     "jsbarcode": "^3.11.0",
     "launch-editor": "^2.2.1",
     "localforage": "^1.10.0",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
     "md5": "^2.3.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.35",
@@ -131,7 +147,11 @@
     "vue-router": "^4.1.5",
     "vuedraggable": "^4.1.0",
     "vuex": "4.0.2",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
     "yargs": "^17.5.1"
   },
   "nyc": {

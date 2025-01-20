@@ -133,7 +133,11 @@ def get_users(doctype: str, name: str) -> list:
 		raise TypeError("name must be of type str")
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc = frappe.get_doc(doctype, name)
 	return _get_users(doc)
 
@@ -145,7 +149,11 @@ def _get_users(doc: "Document") -> list:
 	if not has_permission(doc.doctype, "read", doc, raise_exception=False):
 =======
 	if not has_permission(doc.doctype, "read", doc, print_logs=False):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return []
 
 	return frappe.get_all(

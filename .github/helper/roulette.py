@@ -30,7 +30,11 @@ import urllib.request
 from functools import cache, lru_cache
 =======
 from functools import cache
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from urllib.error import HTTPError
 
 
@@ -100,7 +104,11 @@ def req(url):
 			raise
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def get_files_list(pr_number, repo="frappe/frappe"):
 	"""
@@ -152,7 +160,11 @@ def has_label(pr_number, label, repo="frappe/frappe"):
 	)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def has_label(pr_number, label, repo="frappe/frappe"):
 	"""
@@ -195,7 +207,11 @@ def is_docs(file):
 <<<<<<< HEAD
 =======
 	"""Check if the file is documentation or image."""
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	regex = re.compile(r"\.(md|png|jpg|jpeg|csv|svg)$|^.github|LICENSE")
 	return bool(regex.search(file))
 
@@ -237,7 +253,11 @@ if __name__ == "__main__":
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	elif ci_files_changed:
 		print("CI related files were updated, running all build processes.")
 	elif only_docs_changed:
@@ -246,7 +266,11 @@ if __name__ == "__main__":
 <<<<<<< HEAD
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	elif (
 		only_frontend_code_changed
 		and build_type == "server"

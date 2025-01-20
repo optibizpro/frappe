@@ -233,7 +233,11 @@ def get_import_logs(data_import: str):
 		raise ValueError("data_import must be a string")
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc = frappe.get_doc("Data Import", data_import)
 	doc.check_permission("read")
 
@@ -322,7 +326,10 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 							"parenttype",
 						):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 							if key in child:
 								del child[key]
 

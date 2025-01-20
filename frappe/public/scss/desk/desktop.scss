@@ -221,7 +221,11 @@ body {
 		.widget-head {
 			padding: 4px 8px;
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		.filter-chart {
 			background-color: var(--control-bg);
@@ -364,7 +368,11 @@ body {
 =======
 		border-bottom: 1px solid var(--border-color);
 		border-radius: 0;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		&.edit-mode:hover {
 			background-color: var(--bg-color);
@@ -615,7 +623,11 @@ body {
 
 		padding: 10px;
 		border: 1px solid var(--border-color);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		.link-item {
 			display: flex;
@@ -972,9 +984,12 @@ body {
 		.layout-main {
 			height: calc(100vh - var(--navbar-height) - var(--page-head-height) - 5px);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.layout-side-section,
 			.layout-main-section-wrapper {
 				height: 100%;
@@ -983,6 +998,7 @@ body {
 				[data-theme="dark"] & {
 					scrollbar-color: var(--gray-800) transparent;
 				}
+<<<<<<< HEAD
 
 				&::-webkit-scrollbar-track {
 					background: transparent;
@@ -999,6 +1015,8 @@ body {
 			.layout-side-section {
 				padding-right: 15px;
 			}
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 			max-width: var(--page-max-width);
 			margin: auto;
@@ -1049,7 +1067,11 @@ body {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	.block-menu-item-icon svg {
 		width: 18px;
 		height: 18px;
@@ -1200,12 +1222,19 @@ body {
 	.widget.number-widget-box {
 		box-shadow: var(--shadow-sm);
 =======
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	// widgets
 	.widget.number-widget-box {
 		border: 1px solid var(--border-color);
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	// widgets
+	.widget.number-widget-box {
+		border: 1px solid var(--border-color);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	.codex-editor__loader {

@@ -13,7 +13,11 @@ from frappe.utils import cint, strip
 =======
 from frappe.translate import send_translations, set_default_language
 from frappe.utils import cint, now, strip
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.password import update_password
 
 from . import install_fixtures
@@ -23,7 +27,11 @@ from . import install_fixtures
 def get_setup_stages(args):
 =======
 def get_setup_stages(args):  # nosemgrep
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	# App setup stage functions should not include frappe.db.commit
 	# That is done by frappe after successful completion of all stages
 	stages = [
@@ -47,7 +55,11 @@ def get_setup_stages(args):  # nosemgrep
 =======
 			"status": _("Wrapping up"),
 			"fail_msg": _("Failed to complete setup"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"tasks": [{"fn": run_post_setup_complete, "args": args, "fail_msg": "Failed to complete setup"}],
 		}
 	)
@@ -244,7 +256,11 @@ def create_or_update_user(args):  # nosemgrep
 		user.flags.no_welcome_mail = True
 		user.insert()
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.flags.mute_emails = _mute_emails
 
 	if args.get("password"):
@@ -301,7 +317,11 @@ def add_all_roles_to(name):
 			d.role = role[0]
 =======
 	user.append_roles(*_get_default_roles())
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	user.save()
 
 
@@ -322,7 +342,11 @@ def disable_future_access():
 	frappe.db.set_single_value("System Settings", "setup_complete", 1)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	# Enable onboarding after install
 	frappe.db.set_single_value("System Settings", "enable_onboarding", 1)
 

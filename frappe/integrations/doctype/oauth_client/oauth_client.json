@@ -84,7 +84,11 @@
    "collapsible": 0,
    "columns": 0,
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "description": "URIs for receiving authorization code once the user allows access, as well as failure responses. Typically a REST endpoint exposed by the Client App.\n<br>e.g. http://hostname/api/method/frappe.integrations.oauth2_logins.login_via_facebook",
    "fieldname": "redirect_uris",
    "fieldtype": "Text",
@@ -138,7 +142,11 @@
    "unique": 0
 =======
    "options": "Code\nToken"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "allowed_roles",
@@ -159,7 +167,11 @@
  "istable": 0,
  "max_attachments": 0,
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "links": [],
  "modified": "2024-04-29 12:07:07.946980",
  "modified_by": "Administrator",

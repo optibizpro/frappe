@@ -17,7 +17,11 @@ def get_contact_list(txt, page_length=20, extra_filters: str | None = None) -> l
 	"""Return email ids for a multiselect field."""
 	if extra_filters:
 		extra_filters = frappe.parse_json(extra_filters)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	filters = [
 		["Contact Email", "email_id", "is", "set"],
@@ -50,7 +54,11 @@ def get_contact_list(txt, page_length=20, extra_filters: str | None = None) -> l
 		or_filters=[[field, "like", f"%{txt}%"] for field in fields]
 		+ [["Contact Email", "email_id", "like", f"%{txt}%"]],
 		limit_page_length=page_length,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	)
 
 	# The multiselect field will store the `label` as the selected value.

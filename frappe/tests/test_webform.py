@@ -3,7 +3,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import set_request
 from frappe.website.serve import get_response
 from frappe.www.list import get_list_context
@@ -13,7 +17,11 @@ from frappe.www.list import get_list_context
 class TestWebform(FrappeTestCase):
 =======
 class TestWebform(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_webform_publish_functionality(self):
 		request_data = frappe.get_doc("Web Form", "request-data")
 		# publish webform

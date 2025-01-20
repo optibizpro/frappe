@@ -21,7 +21,11 @@ frappe.email_defaults = {
 		smtp_port: null,
 		no_smtp_authentication: 0,
 	},
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	GMail: {
 		email_server: "imap.gmail.com",
 		incoming_port: 993,
@@ -157,7 +161,11 @@ frappe.ui.form.on("Email Account", {
 	},
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	onload: function (frm) {
 		frm.set_df_property("append_to", "only_select", true);
 		frm.set_query(
@@ -177,7 +185,11 @@ frappe.ui.form.on("Email Account", {
 <<<<<<< HEAD
 		frm.events.show_oauth_authorization_message(frm);
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	refresh: function (frm) {
@@ -186,7 +198,11 @@ frappe.ui.form.on("Email Account", {
 		frm.events.notify_if_unreplied(frm);
 =======
 		frm.events.show_oauth_authorization_message(frm);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if (frappe.route_flags.delete_user_from_locals && frappe.route_flags.linked_user) {
 			delete frappe.route_flags.delete_user_from_locals;
@@ -208,7 +224,11 @@ frappe.ui.form.on("Email Account", {
 					}
 				});
 			});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	},
 
@@ -235,7 +255,11 @@ frappe.ui.form.on("Email Account", {
 			frm.doc.connected_app &&
 			!frm.doc.backend_app_flow
 		) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.call({
 				method: "frappe.integrations.doctype.connected_app.connected_app.has_token",
 				args: {

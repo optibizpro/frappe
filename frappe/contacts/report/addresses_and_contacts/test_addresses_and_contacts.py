@@ -5,7 +5,11 @@ from frappe.contacts.report.addresses_and_contacts.addresses_and_contacts import
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_custom_linked_doctype():
@@ -93,7 +97,11 @@ def create_linked_contact(link_list, address):
 class TestAddressesAndContacts(FrappeTestCase):
 =======
 class TestAddressesAndContacts(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_get_data(self):
 		linked_docs = [get_custom_doc_for_address_and_contacts()]
 		links_list = [item.name for item in linked_docs]

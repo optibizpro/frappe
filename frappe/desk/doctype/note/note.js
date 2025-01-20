@@ -37,7 +37,11 @@ frappe.ui.form.on("Note", {
 			});
 		}
 		// toggle "read_only" for content and "hidden" of all other fields
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// content read_only
 		frm.set_df_property("content", "read_only", frm.is_note_editable ? 0 : 1);
@@ -57,7 +61,11 @@ frappe.ui.form.on("Note", {
 						? 0
 						: 1
 				);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			}
 		}
 
@@ -71,7 +79,11 @@ frappe.ui.form.on("Note", {
 =======
 		frm.get_field("content").toggle_label(frm.is_note_editable);
 		frm.get_field("content").toggle_description(frm.is_note_editable);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 });
 

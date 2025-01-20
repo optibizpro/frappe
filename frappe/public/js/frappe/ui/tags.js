@@ -27,7 +27,11 @@ frappe.ui.Tags = class {
 				${__(placeholder)}
 			</button>`);
 		this.$placeholder.appendTo(this.$ul.find(".form-sidebar-items"));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.$inputWrapper.appendTo(this.$ul);
 
 		this.deactivate();
@@ -80,7 +84,11 @@ frappe.ui.Tags = class {
 			row.insertBefore(this.$inputWrapper);
 =======
 			row.insertAfter(this.$inputWrapper);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.tagsList.push(label);
 			this.onTagAdd && this.onTagAdd(label);
 		}
@@ -108,7 +116,11 @@ frappe.ui.Tags = class {
 		let $li = $(`<li class="${class_name}"></li>`);
 =======
 		let $li = $(`<div class="${class_name}"></div>`);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$element.appendTo($li);
 		return $li;
 	}
@@ -132,7 +144,11 @@ frappe.ui.Tags = class {
 			null,
 			colored
 		);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (this.onTagClick) {
 			$tag.on("click", ".pill-label", () => {
 				this.onTagClick(label);

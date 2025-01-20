@@ -13,7 +13,10 @@ from uuid import UUID
 
 import uuid_utils
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_full_jitter
 
 import frappe
@@ -35,6 +38,7 @@ from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, patch_hooks
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, patch_hooks
 =======
@@ -42,6 +46,11 @@ from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import run_only_if
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import now_datetime, nowdate, nowtime
 
 
@@ -348,12 +357,18 @@ class TestNaming(IntegrationTestCase):
 		exisiting_series = dns.get_transactions_and_prefixes()["prefixes"]
 		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *exisiting_series]
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 		existing_series = dns.get_transactions_and_prefixes()["prefixes"]
 		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *existing_series]
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		invalid = ["$INV-", r"WINDOWS\NAMING"]
 
 		for series in valid:
@@ -426,7 +441,11 @@ class TestNaming(IntegrationTestCase):
 		with patch_hooks(
 =======
 		with self.patch_hooks(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			{
 				"naming_series_variables": {
 					"PM": ["frappe.tests.test_naming.parse_naming_series_variable"],
@@ -440,7 +459,11 @@ class TestNaming(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 	@unittest.skip("This is not supported anymore, see #28349.")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@retry(
 		retry=retry_if_exception_type(AssertionError),
 		stop=stop_after_attempt(3),
@@ -458,7 +481,10 @@ class TestNaming(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_uuid_naming(self):
 		uuid_doctype = new_doctype(autoname="UUID").insert().name
 		self.assertEqual("uuid", frappe.db.get_column_type(uuid_doctype, "name"))
@@ -481,7 +507,10 @@ class TestNaming(IntegrationTestCase):
 		self.assertRaises(InvalidUUIDValue, frappe.new_doc(uuid_doctype, name="XYZ").insert)
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def parse_naming_series_variable(doc, variable):
 	if variable == "PM":

@@ -6,12 +6,19 @@ from collections.abc import Callable
 from datetime import datetime
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 import datetime
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import time
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from collections.abc import Callable
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from functools import wraps
 
 import pytz
@@ -175,7 +182,11 @@ def rate_limit(
 			cache_key = frappe.cache().make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
 =======
 			cache_key = frappe.cache.make_key(f"rl:{frappe.form_dict.cmd}:{identity}")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			value = frappe.cache.get(cache_key)
 			if not value:

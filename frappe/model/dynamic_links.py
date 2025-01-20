@@ -87,7 +87,11 @@ def fetch_distinct_link_doctypes(doctype: str, fieldname: str):
 	if doctypes is None:
 		doctypes = frappe.db.sql(f"""select distinct `{fieldname}` from `tab{doctype}`""", pluck=True)
 		frappe.cache.set_value(key, doctypes, expires_in_sec=12 * 60 * 60)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return doctypes
 
@@ -100,7 +104,11 @@ def invalidate_distinct_link_doctypes(doctype: str, fieldname: str, linked_docty
 	doctypes = frappe.cache().get_value(key)
 =======
 	doctypes = frappe.cache.get_value(key)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if doctypes is None or not isinstance(doctypes, list):
 		return
@@ -113,4 +121,8 @@ def invalidate_distinct_link_doctypes(doctype: str, fieldname: str, linked_docty
 =======
 		frappe.cache.delete_value(key)
 		frappe.db.after_commit.add(lambda: frappe.cache.delete_value(key))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

@@ -2,7 +2,11 @@ const { defineConfig } = require("cypress");
 <<<<<<< HEAD
 =======
 const fs = require("fs");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 module.exports = defineConfig({
 	projectId: "92odwv",
@@ -18,7 +22,11 @@ module.exports = defineConfig({
 =======
 	viewportHeight: 960,
 	viewportWidth: 1400,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	retries: {
 		runMode: 1,
 		openMode: 1,
@@ -42,7 +50,11 @@ module.exports = defineConfig({
 				}
 			});
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return require("./cypress/plugins/index.js")(on, config);
 		},
 		testIsolation: false,

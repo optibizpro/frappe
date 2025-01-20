@@ -60,7 +60,11 @@ def import_files(module, dt=None, dn=None, force=False, pre_process=None, reset_
 				force=force,
 				pre_process=pre_process,
 				reset_permissions=reset_permissions,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 			for m in module
 		]
@@ -78,7 +82,11 @@ def import_file(module, dt, dn, force=False, pre_process=None, reset_permissions
 	return ret
 =======
 	return import_file_by_path(path, force, pre_process=pre_process, reset_permissions=reset_permissions)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_file_path(module, dt, dn):

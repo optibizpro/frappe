@@ -4,7 +4,11 @@
 from contextlib import contextmanager
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import frappe
 from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.defaults import *
@@ -21,7 +25,11 @@ from frappe.tests.test_query_builder import run_only_if
 
 
 class TestDefaults(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_global(self):
 		clear_user_default("key1")
 		set_global_default("key1", "value1")
@@ -113,7 +121,11 @@ def as_restricted_user():
 			)
 =======
 			doctype="User Permission", user=frappe.session.user, allow="Language", for_value="en-GB"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		).insert(ignore_permissions=True)
 
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 1)
@@ -141,7 +153,11 @@ def as_restricted_user():
 		set_global_default("Country", "United States")
 		self.assertEqual(get_user_default("Country"), "India")
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 0)
 		clear_user_default("Country")
 		self.assertEqual(get_user_default("Country"), None)
@@ -156,7 +172,11 @@ def as_restricted_user():
 			)
 =======
 			doctype="User Permission", user=frappe.session.user, allow="Country", for_value="United States"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		).insert(ignore_permissions=True)
 
 		self.assertEqual(get_user_default("Country"), "United States")

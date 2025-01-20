@@ -324,7 +324,11 @@ class Leaderboard {
 		return `<div class="list-headers">
   				<div class="list-item" data-list-renderer="List">${filters}</div>
   			</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	render_list_result(items) {
@@ -350,7 +354,11 @@ class Leaderboard {
   					${_html}
   				</div>
   			</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	render_message() {
@@ -376,7 +384,11 @@ class Leaderboard {
   				<div class="empty-state-text">${this.message}</div>
   			</div>
   		</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_item_html(item, index) {
@@ -419,7 +431,11 @@ class Leaderboard {
   					<span class="text-muted ellipsis">${value}</span>
   				</div>
   			</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_sidebar_item(item, icon) {

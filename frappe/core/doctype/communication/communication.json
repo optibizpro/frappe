@@ -6,7 +6,11 @@
  "default_view": "Inbox",
 =======
  "default_view": "List",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "description": "Keeps track of all communications",
  "doctype": "DocType",
  "document_type": "Setup",
@@ -380,11 +384,16 @@
  "modified": "2024-03-27 12:10:01.200845",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "modified": "2024-02-09 12:10:01.200845",
 =======
  "modified": "2024-03-23 16:01:30.219380",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-03-23 16:01:30.219380",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Communication",

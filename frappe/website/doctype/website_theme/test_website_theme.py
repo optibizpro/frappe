@@ -11,7 +11,11 @@ from pathlib import Path
 
 import frappe
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.website.doctype.website_theme.website_theme import (
 	after_migrate,
 	get_active_theme,
@@ -48,7 +52,11 @@ class UnitTestWebsiteTheme(UnitTestCase):
 
 
 class TestWebsiteTheme(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_website_theme(self):
 		with website_theme_fixture(
 			google_font="Inter",
@@ -58,11 +66,16 @@ class TestWebsiteTheme(IntegrationTestCase):
 			theme_path = frappe.get_site_path("public", theme.theme_url[1:])
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 			theme_path = frappe.get_site_path("public", theme.theme_url[1:])
 =======
 			theme_path = get_theme_file(theme)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+			theme_path = get_theme_file(theme)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			with open(theme_path) as theme_file:
 				css = theme_file.read()
 
@@ -89,7 +102,11 @@ class TestWebsiteTheme(IntegrationTestCase):
 			self.assertFalse(first.exists())
 			self.assertTrue(second.exists() and third.exists() and fourth.exists())
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_after_migrate_hook(self):
 		with website_theme_fixture(google_font="Inter") as theme:
 			theme.set_as_default()

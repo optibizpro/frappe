@@ -29,7 +29,11 @@ class LegacyPassword(pbkdf2_sha256):
 
 register_crypt_handler(LegacyPassword, force=True)
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 passlibctx = CryptContext(
 	schemes=[
 		"pbkdf2_sha256",
@@ -56,8 +60,11 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		try:
 			return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
 		except frappe.ValidationError as e:
@@ -66,7 +73,10 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 
 			return None
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	elif raise_exception:
 		frappe.throw(
@@ -232,7 +242,11 @@ def decrypt(txt, encryption_key=None, key: str | None = None):
 				"If you have recently restored the site you may need to copy the site config contaning original Encryption Key."
 =======
 				"If you have recently restored the site, you may need to copy the site_config.json containing the original encryption key."
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 			+ "<br><br>"
 			+ _(

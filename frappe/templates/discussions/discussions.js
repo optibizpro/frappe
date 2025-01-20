@@ -39,7 +39,11 @@ frappe.ready(() => {
 	$(document).on("keydown", ".comment-field", (e) => {
 =======
 	$(document).on("keydown", ".discussions-comment", (e) => {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (
 			(e.ctrlKey || e.metaKey) &&
 			(e.keyCode == 13 || e.which == 13) &&
@@ -75,7 +79,11 @@ frappe.ready(() => {
 		adjust_comment_box(e);
 	});
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });
 
 const show_new_topic_modal = (e) => {
@@ -113,7 +121,11 @@ const publish_message = (data) => {
 		doctype == topic.reference_doctype && docname == topic.reference_docname;
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	post_message_cleanup();
 	data = enhance_template(data);
 	insert_message(data);
@@ -143,7 +155,11 @@ const insert_message = (data) => {
 	} else if (!first_topic && !single_thread && document_match_found) {
 =======
 	} else if (!first_topic && !this.single_thread && document_match_found) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$(data.sidebar).insertBefore($(`.discussions-sidebar .sidebar-parent`).first());
 		$(`#discussion-group`).prepend(data.new_topic_template);
 		if (topic.owner == frappe.session.user) {
@@ -157,7 +173,11 @@ const insert_message = (data) => {
 	} else if (single_thread && document_match_found) {
 =======
 	} else if (this.single_thread && document_match_found) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$(data.template).insertBefore(`.discussion-form`);
 		$(".discussion-on-page").attr("data-topic", topic.name);
 	} else if (topic.owner == frappe.session.user && document_match_found) {
@@ -328,7 +348,11 @@ const perform_action = (e) => {
 		});
 =======
 		delete_reply(e);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 };
 

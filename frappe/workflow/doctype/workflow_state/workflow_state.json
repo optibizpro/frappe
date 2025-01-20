@@ -44,11 +44,16 @@
  "modified": "2023-03-20 18:12:42.137863",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "modified": "2023-12-08 15:52:37.525003",
 =======
  "modified": "2024-03-23 16:04:05.395556",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-03-23 16:04:05.395556",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Workflow",
  "name": "Workflow State",
@@ -77,12 +82,19 @@
  "sort_order": "ASC",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "sort_field": "modified",
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "sort_field": "creation",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "sort_order": "DESC",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "states": [],
  "track_changes": 1,
  "translated_doctype": 1

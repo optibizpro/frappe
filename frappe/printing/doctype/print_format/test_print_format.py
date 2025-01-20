@@ -12,7 +12,11 @@ from typing import TYPE_CHECKING
 
 import frappe
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 if TYPE_CHECKING:
 	from frappe.printing.doctype.print_format.print_format import PrintFormat
@@ -31,7 +35,11 @@ class UnitTestPrintFormat(UnitTestCase):
 
 
 class TestPrintFormat(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_print_user(self, style=None):
 		print_html = frappe.get_print("User", "Administrator", style=style)
 		self.assertTrue("<label>First Name: </label>" in print_html)

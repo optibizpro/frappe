@@ -5,7 +5,11 @@
 =======
 from typing import TYPE_CHECKING
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from zxcvbn import zxcvbn
 from zxcvbn.scoring import ALL_UPPER, START_UPPER
 
@@ -44,7 +48,11 @@ def test_password_strength(password: str, user_inputs: "Iterable[object] | None"
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 # Default feedback value
 default_feedback: "PasswordStrengthFeedback" = {
@@ -63,11 +71,16 @@ def get_feedback(score: int, sequence: list) -> "PasswordStrengthFeedback":
 	minimum_password_score = int(frappe.db.get_single_value("System Settings", "minimum_password_score") or 2)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	minimum_password_score = int(frappe.db.get_single_value("System Settings", "minimum_password_score") or 2)
 =======
 	minimum_password_score = int(frappe.get_system_settings("minimum_password_score") or 2)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	minimum_password_score = int(frappe.get_system_settings("minimum_password_score") or 2)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# Starting feedback
 	if len(sequence) == 0:

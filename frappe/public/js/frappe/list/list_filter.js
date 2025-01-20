@@ -23,7 +23,11 @@ export default class ListFilter {
 			<div class="sidebar-action">
 				<a class="saved-filters-preview">${__("Show Saved")}</a>
 			</div>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			<div class="saved-filters"></div>
 		`);
 
@@ -78,7 +82,11 @@ export default class ListFilter {
 				this.$saved_filters_preview.hide();
 			}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			const html = this.filters.map((filter) => this.filter_template(filter));
 			this.wrapper.find(".filter-pill").remove();
 			this.$saved_filters.append(html);

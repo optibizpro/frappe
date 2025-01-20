@@ -48,18 +48,26 @@
   },
   {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fieldname": "column_break_oyyj",
    "fieldtype": "Column Break"
   },
   {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "fieldname": "sign_up_and_confirmation_section",
    "fieldtype": "Section Break",
    "label": "Sign Up and Confirmation"
@@ -91,11 +99,16 @@
  "modified": "2023-11-24 18:35:17.268492",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "modified": "2023-11-24 18:35:17.268492",
 =======
  "modified": "2024-09-25 15:24:37.576084",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-09-25 15:24:37.576084",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Email",
  "name": "Email Group",

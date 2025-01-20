@@ -5,11 +5,16 @@
  "content": "[{\"id\":\"5nnLaQeoFa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"pYALX3MwBW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customize Form\",\"col\":3}},{\"id\":\"XC78DuYB65\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Report\",\"col\":3}},{\"id\":\"XPm50Ppq3J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Client Script\",\"col\":3}},{\"id\":\"yoU6nWiT83\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Server Script\",\"col\":3}},{\"id\":\"5UgFESBY0N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Format Builder\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"tOCrOgLW1G\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Elements</b></span>\",\"col\":12}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"cJ6CVsa8qW\",\"type\":\"card\",\"data\":{\"card_name\":\"Models\",\"col\":4}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "content": "[{\"id\":\"5nnLaQeoFa\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>Get started</b><br></span>\",\"col\":12}},{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"pYALX3MwBW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customize Form\",\"col\":3}},{\"id\":\"XC78DuYB65\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Report\",\"col\":3}},{\"id\":\"XPm50Ppq3J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Client Script\",\"col\":3}},{\"id\":\"yoU6nWiT83\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Server Script\",\"col\":3}},{\"id\":\"5UgFESBY0N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Format Builder\",\"col\":3}},{\"id\":\"0gE0s-S70E\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"System Settings\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"tOCrOgLW1G\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>Components to build your app</b></span>\",\"col\":12}},{\"id\":\"cJ6CVsa8qW\",\"type\":\"card\",\"data\":{\"card_name\":\"Models\",\"col\":4}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
 =======
  "content": "[{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"NosD6wA0vD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Module Def\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "content": "[{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"NosD6wA0vD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Module Def\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "creation": "2021-01-02 10:51:16.579957",
  "custom_blocks": [],
  "docstatus": 0,
@@ -21,11 +26,18 @@
 <<<<<<< HEAD
  "idx": 0,
 =======
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "icon": "hammer",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
  "idx": 1,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "is_hidden": 0,
  "label": "Build",
  "links": [
@@ -91,6 +103,7 @@
    "onboard": 0,
    "only_for": "",
 =======
+<<<<<<< HEAD
    "label": "Modules",
    "link_count": 2,
    "link_type": "DocType",
@@ -383,6 +396,8 @@
    "description": "Group your custom doctypes under modules",
    "hidden": 0,
    "is_query_report": 0,
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "label": "Modules",
    "link_count": 2,
    "link_type": "DocType",
@@ -419,6 +434,10 @@
    "link_count": 2,
    "link_type": "DocType",
    "onboard": 0,
+<<<<<<< HEAD
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "type": "Card Break"
   },
   {
@@ -439,6 +458,15 @@
    "link_to": "Package Import",
    "link_type": "DocType",
    "onboard": 0,
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "type": "Link"
   },
   {
@@ -449,6 +477,10 @@
    "link_count": 3,
 =======
    "description": "Automate processes and extend standard functionality using scripts and background jobs",
+<<<<<<< HEAD
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "hidden": 0,
    "is_query_report": 0,
    "label": "Scripting",
@@ -781,6 +813,7 @@
    "type": "Link"
   }
  ],
+<<<<<<< HEAD
  "modified": "2023-05-24 14:47:24.395259",
 =======
   }
@@ -791,6 +824,13 @@
  "modified": "2024-09-30 17:39:36.060170",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+<<<<<<< HEAD
+ "modified": "2023-05-24 14:47:24.395259",
+=======
+ "modified": "2024-09-30 17:39:36.060170",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Build",
@@ -805,19 +845,27 @@
  "sequence_id": 16.0,
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "sequence_id": 27.0,
 =======
  "sequence_id": 1.0,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "sequence_id": 1.0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "shortcuts": [
   {
    "color": "Grey",
    "doc_view": "List",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "label": "Print Format Builder",
    "link_to": "print-format-builder",
    "type": "Page"
@@ -854,6 +902,7 @@
    "label": "Report",
    "link_to": "Report",
 =======
+<<<<<<< HEAD
    "label": "System Settings",
    "link_to": "System Settings",
    "type": "DocType",
@@ -865,6 +914,8 @@
    "label": "Client Script",
    "link_to": "Client Script",
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "label": "Module Def",
    "link_to": "Module Def",
    "stats_filter": "[]",
@@ -876,7 +927,11 @@
    "label": "DocType",
    "link_to": "DocType",
    "stats_filter": "[]",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
    "type": "DocType"
   }
  ],

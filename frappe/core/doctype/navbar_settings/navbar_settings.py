@@ -16,6 +16,7 @@ class NavbarSettings(Document):
 		from frappe.core.doctype.navbar_item.navbar_item import NavbarItem
 		from frappe.types import DF
 
+<<<<<<< HEAD
 		announcement_widget: DF.TextEditor | None
 		app_logo: DF.AttachImage | None
 		help_dropdown: DF.Table[NavbarItem]
@@ -32,6 +33,9 @@ class NavbarSettings(Document):
 		if not doc_before_save:
 			return
 
+=======
+<<<<<<< HEAD
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		before_save_items = [
 			item
 			for item in doc_before_save.help_dropdown + doc_before_save.settings_dropdown
@@ -43,6 +47,14 @@ class NavbarSettings(Document):
 		if not frappe.flags.in_patch and (len(before_save_items) > len(after_save_items)):
 			frappe.throw(_("Please hide the standard navbar items instead of deleting them"))
 =======
+<<<<<<< HEAD
+=======
+		announcement_widget: DF.TextEditor | None
+		app_logo: DF.AttachImage | None
+		help_dropdown: DF.Table[NavbarItem]
+		settings_dropdown: DF.Table[NavbarItem]
+	# end: auto-generated types
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 

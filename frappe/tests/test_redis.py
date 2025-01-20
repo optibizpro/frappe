@@ -8,7 +8,11 @@ import frappe
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import get_bench_id
 from frappe.utils.background_jobs import get_redis_conn
 from frappe.utils.redis_queue import RedisQueue
@@ -37,7 +41,11 @@ def skip_if_redis_version_lt(version):
 class TestRedisAuth(FrappeTestCase):
 =======
 class TestRedisAuth(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@skip_if_redis_version_lt("6.0")
 	@patch.dict(frappe.conf, {"bench_id": "test_bench", "use_rq_auth": False})
 	def test_rq_gen_acllist(self):

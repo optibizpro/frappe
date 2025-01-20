@@ -6,20 +6,24 @@ frappe.ui.misc.about = function () {
 
 		$(d.body).html(
 			repl(
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"<div>\
 		<p>" +
 					__("Open Source Applications for the Web") +
 					"</p>  \
 		<p><i class='fa fa-globe fa-fw'></i>\
-			Website: <a href='https://frappeframework.com' target='_blank'>https://frappeframework.com</a></p>\
+			Website: <a href='https://optibizpro.com' target='_blank'>https://optibizpro.com</a></p>\
 		<p><i class='fa fa-github fa-fw'></i>\
-			Source: <a href='https://github.com/frappe' target='_blank'>https://github.com/frappe</a></p>\
+			Source: <a href='https://github.com/optibizpro' target='_blank'>https://github.com/optibizpro</a></p>\
 		<p><i class='fa fa-linkedin fa-fw'></i>\
-			Linkedin: <a href='https://linkedin.com/company/frappe-tech' target='_blank'>https://linkedin.com/company/frappe-tech</a></p>\
+			Linkedin: <a href='https://linkedin.com/company/optibizpro' target='_blank'>https://linkedin.com/company/optibizpro</a></p>\
 		<p><i class='fa fa-facebook fa-fw'></i>\
-			Facebook: <a href='https://facebook.com/erpnext' target='_blank'>https://facebook.com/erpnext</a></p>\
+			Facebook: <a href='https://facebook.com/optibizpro' target='_blank'>https://facebook.com/optibizpro</a></p>\
 		<p><i class='fa fa-twitter fa-fw'></i>\
-			Twitter: <a href='https://twitter.com/erpnext' target='_blank'>https://twitter.com/erpnext</a></p>\
+			Twitter: <a href='https://twitter.com/optibizpro' target='_blank'>https://twitter.com/optibizpro</a></p>\
 		<hr>\
 		<h4>Installed Apps</h4>\
 		<div id='about-app-versions'>Loading versions...</div>\
@@ -27,10 +31,13 @@ frappe.ui.misc.about = function () {
 		<p class='text-muted'>&copy; Frappe Technologies Pvt. Ltd. and contributors </p> \
 		</div>",
 =======
+<<<<<<< HEAD
 		var d = new frappe.ui.Dialog({ title: __("OptiBizPro") });
 
 		$(d.body).html(
 			repl(
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				`<div>
 					<p>${__("PT. OPTIMIZED BUSINESS PROCESS (OptiBizPro)")}</p>
 					<p><i class='fa fa-globe fa-fw'></i>
@@ -62,7 +69,11 @@ frappe.ui.misc.about = function () {
 					<hr>
 					<p class='text-muted'>${__("&copy; Frappe Technologies Pvt. Ltd. and contributors")} </p>
 					</div>`,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frappe.app
 			)
 		);
@@ -93,7 +104,11 @@ frappe.ui.misc.about = function () {
 				let text;
 				if (v.branch) {
 					text = $.format("<p><b>{0}:</b> v{1} ({2})<br></p>", [
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						v.title,
 						v.branch_version || v.version,
 						v.branch,
@@ -103,7 +118,11 @@ frappe.ui.misc.about = function () {
 					var text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
 =======
 					text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				}
 				$(text).appendTo($wrap);
 			});

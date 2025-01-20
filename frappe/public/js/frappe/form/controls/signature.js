@@ -10,7 +10,11 @@ frappe.ui.form.ControlSignature = class ControlSignature extends frappe.ui.form.
 			$(this.wrapper).find("label").text(__(this.df.label));
 =======
 			$(this.wrapper).find("label").text(__(this.df.label, null, this.df.parent));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		this.set_doc_url();
 
@@ -51,7 +55,11 @@ frappe.ui.form.ControlSignature = class ControlSignature extends frappe.ui.form.
 							${frappe.utils.icon("refresh", "sm")}
 =======
 							${frappe.utils.icon("es-line-reload", "sm")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</a>
 					</div>
 				`)

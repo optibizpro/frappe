@@ -78,7 +78,11 @@ export default class OnboardingWidget extends Widget {
 						"step-icon"
 					)}</div>
 					<div class="step-text">${__(step.title)}</div>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				</div>
 			</a>`);
 
@@ -135,7 +139,11 @@ export default class OnboardingWidget extends Widget {
 				$(`<button class="btn btn-primary btn-sm">${__("Watch Tutorial")}</button>`)
 =======
 				$(`<button class="btn btn-default btn-sm">${__("Watch Tutorial")}</button>`)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					.appendTo(this.step_footer)
 					.on("click", toggle_video);
 			} else {
@@ -146,15 +154,21 @@ export default class OnboardingWidget extends Widget {
 					)}</button>`
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 					`<button class="btn btn-default btn-sm">${__(
 						step.action_label || step.action
 					)}</button>`
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					`<button class="btn btn-default btn-sm">${
 						__(step.action_label) || __(step.action)
 					}</button>`
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				)
 					.appendTo(this.step_footer)
 					.on("click", () => actions[step.action](step));
@@ -168,7 +182,11 @@ export default class OnboardingWidget extends Widget {
 =======
 			let content = __(step.description)
 				? frappe.markdown(__(step.description))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				: `<h1>${__(step.title)}</h1>`;
 
 			if (step.action === "Create Entry") {
@@ -204,7 +222,11 @@ export default class OnboardingWidget extends Widget {
 				`<button class="btn btn-primary btn-sm">${
 					__(step.action_label) || __(step.action)
 				}</button>`
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			)
 				.appendTo(this.step_footer)
 				.on("click", () => {
@@ -219,7 +241,11 @@ export default class OnboardingWidget extends Widget {
 			});
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			$(`<button class="btn btn-secondary ml-2 btn-sm">${__("Back")}</button>`)
 				.appendTo(this.step_footer)
 				.on("click", toggle_content);
@@ -615,7 +641,11 @@ export default class OnboardingWidget extends Widget {
 			`<div class="small" style="cursor:pointer;">${__(
 =======
 			`<div class="btn btn-sm btn-secondary small" style="cursor:pointer;">${__(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"Dismiss",
 				null,
 				"Stop showing the onboarding widget."

@@ -251,7 +251,11 @@ class NotificationsView extends BaseNotificationsView {
 =======
 		let read_class = notification_log.read ? "" : "unread";
 		let message = notification_log.subject;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		let title = message.match(/<b class="subject-title">(.*?)<\/b>/);
 		message = title
@@ -270,7 +274,11 @@ class NotificationsView extends BaseNotificationsView {
 		let user = field.from_user;
 =======
 		let user = notification_log.from_user;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let user_avatar = frappe.avatar(user, "avatar-medium user-avatar");
 
 		let item_html = $(`<a class="recent-item notification-item ${read_class}"
@@ -300,7 +308,11 @@ class NotificationsView extends BaseNotificationsView {
 			!field.read && this.mark_as_read(field.name, item_html);
 =======
 			!notification_log.read && this.mark_as_read(notification_log.name, item_html);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.notifications_icon.trigger("click");
 		});
 
@@ -322,7 +334,11 @@ class NotificationsView extends BaseNotificationsView {
 =======
 				this.dropdown_items.forEach((notification_log) => {
 					this.container.append(this.get_dropdown_item_html(notification_log));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				});
 				this.container.append(`<a class="list-footer"
 					href="/app/List/Notification Log">
@@ -363,7 +379,11 @@ class NotificationsView extends BaseNotificationsView {
 		if (notification_doc.link) {
 			return notification_doc.link;
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		const link_doctype = notification_doc.document_type
 			? notification_doc.document_type
 			: "Notification Log";
@@ -428,7 +448,11 @@ class EventsView extends BaseNotificationsView {
 				},
 				"GET"
 			)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			.then((event_list) => {
 				this.render_events_html(event_list);
 			});

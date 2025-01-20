@@ -126,7 +126,11 @@ context("Awesome Bar", () => {
 		cy.get("@awesome_bar").type("55 + 32");
 		cy.wait(150); // Wait a bit before hitting enter
 		cy.get("@awesome_bar").type("{downarrow}{enter}");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".modal-title").should("contain", "Result");
 		cy.get(".msgprint").should("contain", "55 + 32 = 87");
 	});

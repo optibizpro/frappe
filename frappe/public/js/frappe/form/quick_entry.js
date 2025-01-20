@@ -4,7 +4,11 @@ frappe.quick_edit = function (doctype, name) {
 <<<<<<< HEAD
 =======
 	if (!name) name = doctype; // single
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	frappe.db.get_doc(doctype, name).then((doc) => {
 		frappe.ui.form.make_quick_entry(doctype, null, null, doc);
 	});
@@ -74,8 +78,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 				(df.reqd || df.bold || df.allow_in_quick_entry) && !df.read_only && !df.is_virtual
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this.mandatory = fields.filter((df) => {
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.docfields = fields.filter((df) => {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			return (
@@ -83,7 +90,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 				!df.read_only &&
 				!df.is_virtual &&
 				df.fieldtype !== "Tab Break"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			);
 		});
 	}
@@ -113,7 +124,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		if (this.mandatory.length > 7) {
 =======
 		if (this.docfields.length > 7) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			// too many fields, show form
 			return true;
 		}
@@ -126,7 +141,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 			$.map(this.mandatory, function (d) {
 =======
 			$.map(this.docfields, function (d) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				return d.fieldtype === "Table" ? d : null;
 			}).length
 		) {
@@ -142,7 +161,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 			this.mandatory = [
 =======
 			this.docfields = [
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				{
 					fieldname: "__newname",
 					label: __("{0} Name", [__(this.meta.name)]),
@@ -153,7 +176,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 			].concat(this.mandatory);
 =======
 			].concat(this.docfields);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -185,7 +212,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 			doc: this.doc,
 		});
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		this.fields = this.docfields;
 		this.title = this.get_title();
@@ -214,7 +245,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 
 		this.onhide = () => (frappe.quick_entry = null);
 		this.show();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		this.refresh_dependency();
 		this.set_defaults();
@@ -242,7 +277,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		this.dialog.set_primary_action(__("Save"), function () {
 =======
 		this.set_primary_action(__("Save"), function () {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (me.dialog.working) {
 				return;
 			}
@@ -264,7 +303,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 							frappe.show_alert({ message: messagetxt, indicator: "green" }, 3);
 						}, 500);
 					});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				});
 			}
 		});
@@ -287,7 +330,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 						frappe.model.is_submittable(me.doctype) &&
 						!frappe.model.has_workflow(me.doctype)
 					) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						frappe.run_serially([
 							() => (me.dialog.working = true),
 							() => {
@@ -313,7 +360,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 						}
 =======
 						me.process_after_insert(r);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					}
 				},
 				error: function () {
@@ -328,7 +379,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 <<<<<<< HEAD
 				freeze: true,
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		});
 	}
@@ -392,7 +447,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 					return false;
 				}
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 	}
 
@@ -403,7 +462,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		let doc = this.dialog.doc;
 =======
 		let doc = this.doc;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (route && !(route[0] === "List" && route[1] === doc.doctype)) {
 			frappe.run_serially([() => frappe.set_route("Form", doc.doctype, doc.name)]);
 		}
@@ -415,7 +478,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		var data = this.dialog.get_values(true);
 =======
 		var data = this.get_values(true);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		$.each(data, function (key, value) {
 			if (!is_null(value)) {
 				me.dialog.doc[key] = value;
@@ -444,7 +511,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 =======
 		if (this.force || this.hide_full_form_button) return;
 		this.add_custom_action(__("Edit Full Form"), () => this.open_doc(true));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	set_defaults() {
@@ -454,7 +525,11 @@ frappe.ui.form.QuickEntryForm = class QuickEntryForm extends frappe.ui.Dialog {
 		$.each(this.dialog.fields_dict, function (fieldname, field) {
 =======
 		$.each(this.fields_dict, function (fieldname, field) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			field.doctype = me.doc.doctype;
 			field.docname = me.doc.name;
 

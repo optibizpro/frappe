@@ -84,7 +84,11 @@ frappe.ui.form.ControlComment = class ControlComment extends frappe.ui.form.Cont
 			this.button.removeClass("hidden").addClass("btn-primary");
 		} else {
 			this.button.addClass("hidden").removeClass("btn-primary");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -96,7 +100,11 @@ frappe.ui.form.ControlComment = class ControlComment extends frappe.ui.form.Cont
 <<<<<<< HEAD
 =======
 			placeholder: __("Type a reply / comment"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 	}
 

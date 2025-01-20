@@ -49,7 +49,11 @@ def get_meta(doctype, cached=True) -> "FormMeta":
 			# Cache miss - explicitly get meta from DB to avoid
 			meta = FormMeta(doctype, cached=False)
 			frappe.cache.hset("doctype_form_meta", doctype, meta)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	else:
 		meta = FormMeta(doctype)
 
@@ -279,7 +283,11 @@ class FormMeta(Meta):
 				self.get("__messages").update(messages)
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def load_dashboard(self):
 		self.set("__dashboard", self.get_dashboard_data())
 

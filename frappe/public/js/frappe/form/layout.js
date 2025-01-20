@@ -12,7 +12,11 @@ frappe.ui.form.Layout = class Layout {
 <<<<<<< HEAD
 =======
 		this.sections_dict = {};
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.fields_list = [];
 		this.fields_dict = {};
 		this.section_count = 0;
@@ -52,7 +56,11 @@ frappe.ui.form.Layout = class Layout {
 		this.tabs_list = this.page.find(".form-tabs");
 =======
 		this.tab_link_container = this.page.find(".form-tabs");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.tabs_content = $(`<div class="form-tab-content tab-content"></div>`).appendTo(
 			this.page
 		);
@@ -112,7 +120,11 @@ frappe.ui.form.Layout = class Layout {
 <<<<<<< HEAD
 =======
 		let close_message = $(`<div class="close-message">${frappe.utils.icon("close")}</div>`);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.message_color =
 			color && ["yellow", "blue", "red", "green", "orange"].includes(color) ? color : "blue";
 		if (html) {
@@ -226,7 +238,11 @@ frappe.ui.form.Layout = class Layout {
 		const parent = this.column.wrapper.get(0);
 =======
 		const parent = this.column.form.get(0);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		const fieldobj = this.init_field(df, parent, render);
 
 		// An invalid control name will return in a null fieldobj
@@ -270,7 +286,11 @@ frappe.ui.form.Layout = class Layout {
 <<<<<<< HEAD
 		// eslint-disable-line no-unused-vars
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		let me = this;
 		let head = $(`
 			<div class="form-clickable-section text-center">
@@ -314,7 +334,11 @@ frappe.ui.form.Layout = class Layout {
 			df.fieldtype = "Section Break";
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.section = new Section(
 			this.current_tab ? this.current_tab.wrapper : this.page,
 			df,
@@ -325,7 +349,11 @@ frappe.ui.form.Layout = class Layout {
 =======
 		this.sections.push(this.section);
 		this.sections_dict[df.fieldname] = this.section;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		// append to layout fields
 		if (df) {
@@ -426,7 +454,11 @@ frappe.ui.form.Layout = class Layout {
 			visible_tabs[0].parent.toggleClass("hide show");
 =======
 			visible_tabs[0].tab_link.toggleClass("hide show");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		this.set_tab_as_active();
 	}
@@ -539,7 +571,11 @@ frappe.ui.form.Layout = class Layout {
 		$(window).scroll(
 =======
 		$(".main-section").scroll(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.utils.throttle(() => {
 				let current_scroll = document.documentElement.scrollTop;
 				if (current_scroll > 0 && last_scroll <= current_scroll) {
@@ -557,7 +593,11 @@ frappe.ui.form.Layout = class Layout {
 		this.tabs_list.off("click").on("click", ".nav-link", (e) => {
 =======
 		this.tab_link_container.off("click").on("click", ".nav-link", (e) => {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			$(e.currentTarget).tab("show");
@@ -685,7 +725,11 @@ frappe.ui.form.Layout = class Layout {
 					!in_list(frappe.model.no_value_type, field.df.fieldtype)
 =======
 					!frappe.model.no_value_type.includes(field.df.fieldtype)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				) {
 					this.set_focus(field);
 					return true;

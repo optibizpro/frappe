@@ -17,7 +17,11 @@ from frappe.utils import cstr
 
 
 class TestDBUpdate(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_db_update(self):
 		doctype = "User"
 		frappe.reload_doctype("User", force=True)
@@ -112,10 +116,14 @@ class TestDBUpdate(IntegrationTestCase):
 	@run_only_if(db_type_is.MARIADB)  # postgres uses invalid type for <=15
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@run_only_if(db_type_is.MARIADB)  # postgres uses invalid type for <=15
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_bigint_conversion(self):
 		doctype = new_doctype(fields=[{"fieldname": "int_field", "fieldtype": "Int"}]).insert()
 
@@ -196,7 +204,11 @@ class TestDBUpdate(IntegrationTestCase):
 
 		self.assertEqual(frappe.db.get_column_type(referring_doctype.name, link), "uuid")
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def get_fieldtype_from_def(field_def):
 	fieldtuple = frappe.db.type_map.get(field_def.fieldtype, ("", 0))

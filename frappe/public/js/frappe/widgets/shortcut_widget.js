@@ -58,7 +58,11 @@ export default class ShortcutWidget extends Widget {
 				}
 =======
 				window.open(this.url, "_blank");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				return;
 			}
 
@@ -97,7 +101,10 @@ export default class ShortcutWidget extends Widget {
 			!frappe.boot.single_types.includes(this.link_to)
 		) {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			frappe.db
 				.count(this.link_to, {
 					filters: filters || [],
@@ -125,7 +132,11 @@ export default class ShortcutWidget extends Widget {
 		).appendTo(this.action_area);
 
 		$(frappe.utils.icon("es-line-arrow-up-right", "xs", "", "", "ml-2")).appendTo(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			this.action_area
 		);
 	}

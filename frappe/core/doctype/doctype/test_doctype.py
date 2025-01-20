@@ -42,7 +42,11 @@ class UnitTestDoctype(UnitTestCase):
 
 
 class TestDocType(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def tearDown(self):
 		frappe.db.rollback()
 
@@ -198,7 +202,11 @@ class TestDocType(IntegrationTestCase):
 	@unittest.skipUnless(
 		os.access(frappe.get_app_path("frappe"), os.W_OK), "Only run if frappe app paths is writable"
 	)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_sync_field_order(self):
 		import os
 
@@ -784,7 +792,11 @@ class TestDocType(IntegrationTestCase):
 		frappe.db.rollback()
 		self.assertFalse(frappe.db.exists("DocType", doctype.name))
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_not_in_list_view_for_not_allowed_mandatory_field(self):
 		doctype = new_doctype(
 			fields=[

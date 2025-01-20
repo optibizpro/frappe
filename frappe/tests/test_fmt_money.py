@@ -13,7 +13,11 @@ from frappe.utils import fmt_money
 
 
 class TestFmtMoney(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_standard(self):
 		frappe.db.set_default("number_format", "#,###.##")
 		self.assertEqual(fmt_money(100), "100.00")
@@ -117,4 +121,8 @@ if __name__ == "__main__":
 	frappe.connect()
 	unittest.main()
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

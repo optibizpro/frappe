@@ -42,7 +42,11 @@ frappe.ui.form.on("Workflow", {
 
 		frm.layout.show_message(message);
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (frm.doc.document_type) {
 			frm.add_custom_button(__("Go to {0} List", [frm.doc.document_type]), () => {
 				frappe.set_route("List", frm.doc.document_type);
@@ -98,7 +102,11 @@ frappe.ui.form.on("Workflow", {
 			);
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return frm.trigger("get_orphaned_states_and_count").then(() => {
 			if (frm.states && frm.states.length) {
 				frappe.validated = false;
@@ -125,7 +133,11 @@ frappe.ui.form.on("Workflow", {
 =======
 		if (!doc.document_type) {
 			return;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 		frappe.model.with_doctype(doc.document_type, () => {
 			const fieldnames = frappe
@@ -244,7 +256,11 @@ frappe.ui.form.on("Workflow Document State", {
 		delete row.workflow_builder_id;
 	},
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	states_remove: function (frm) {
 		frm.trigger("get_orphaned_states_and_count").then(() => {
 			frm.trigger("render_state_table");

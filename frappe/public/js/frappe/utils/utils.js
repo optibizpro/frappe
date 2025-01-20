@@ -304,7 +304,11 @@ Object.assign(frappe.utils, {
 	scroll_page_to_top() {
 		$(".main-section").scrollTop(0);
 	},
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	scroll_to: function (
 		element,
 		animate = true,
@@ -369,7 +373,11 @@ Object.assign(frappe.utils, {
 		return scroll_top;
 =======
 		return $(element).offset().top - header_offset - cint(additional_offset);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 	filter_dict: function (dict, filters) {
 		var ret = [];
@@ -479,7 +487,11 @@ Object.assign(frappe.utils, {
 					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i;
 =======
 					/^((([A-Za-z0-9.+-]+:(?:\/\/)?)(?:[-;:&=\+\,\w]@)?[A-Za-z0-9.-]+(:[0-9]+)?|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)$/i; // eslint-disable-line
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				break;
 			case "dateIso":
 				regExp = /^(\d{4})\D?(0[1-9]|1[0-2])\D?([12]\d|0[1-9]|3[01])$/;
@@ -797,7 +809,11 @@ Object.assign(frappe.utils, {
 	},
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	set_title: function (title) {
 		frappe._original_title = title;
 		if (frappe._title_prefix) {
@@ -941,9 +957,12 @@ Object.assign(frappe.utils, {
 
 		if (route[2] === "Report" || route[0] === "query-report") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return __("{0} Report", [__(route[3]) || __(route[1])]);
 		}
 		if (route[0] === "List") {
@@ -957,7 +976,10 @@ Object.assign(frappe.utils, {
 <<<<<<< HEAD
 		}
 =======
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return (__(route[3]) || __(route[1])).bold() + " " + __("Report");
 		}
 		if (route[0] === "List") {
@@ -973,7 +995,11 @@ Object.assign(frappe.utils, {
 			return __(route[1]).bold() + " " + __("Dashboard");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return __(frappe.utils.to_title_case(__(route[0]), true));
 	},
 	report_column_total: function (values, column, type) {
@@ -1119,7 +1145,11 @@ Object.assign(frappe.utils, {
 =======
 			console.log("Error evaluating the following expression:");
 			console.error(code);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			throw error;
 		}
 	},
@@ -1218,7 +1248,11 @@ Object.assign(frappe.utils, {
 		let duration_options = {
 =======
 		return {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			hide_days: docfield.hide_days,
 			hide_seconds: docfield.hide_seconds,
 		};
@@ -1241,7 +1275,11 @@ Object.assign(frappe.utils, {
 		tiles: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
 =======
 		tiles: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		options: {
 			attribution:
 				'&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -1350,7 +1388,11 @@ Object.assign(frappe.utils, {
 						case "Image":
 							route = `${doctype_slug}/view/image`;
 							break;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						default:
 							route = doctype_slug;
 					}
@@ -1641,7 +1683,11 @@ Object.assign(frappe.utils, {
 =======
 			console.log("Error while fetching link title.");
 			console.log(error);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return Promise.resolve(name);
 		}
 	},
@@ -1653,7 +1699,11 @@ Object.assign(frappe.utils, {
 			self.val(self.val().replace(/[^0-9.]/g, ""));
 =======
 			self.val(self.val().replace(/[^0-9.\-]/g, ""));
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (
 				(e.which != 46 || self.val().indexOf(".") != -1) &&
 				(e.which < 48 || e.which > 57)
@@ -1880,5 +1930,9 @@ Object.assign(frappe.utils, {
 
 		return false;
 	},
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });

@@ -18,7 +18,11 @@ def update_follow(doctype, doc_name, following):
 def update_follow(doctype: str, doc_name: str, following: bool):
 	if following:
 		return (follow_document(doctype, doc_name, frappe.session.user) and True) or False
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	else:
 		return unfollow_document(doctype, doc_name, frappe.session.user)
 

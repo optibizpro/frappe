@@ -15,7 +15,11 @@ from frappe.email.doctype.email_domain.email_domain import EMAIL_DOMAIN_FIELDS
 <<<<<<< HEAD
 =======
 from frappe.email.frappemail import FrappeMail
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.email.receive import EmailServer, InboundMail, SentEmailInInboxError
 from frappe.email.smtp import SMTPServer
 from frappe.email.utils import get_port
@@ -181,7 +185,11 @@ class EmailAccount(Document):
 			and not self.awaiting_password
 			and not self.service == "Frappe Mail"
 		):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if validate_oauth or self.password or self.smtp_server in ("127.0.0.1", "localhost"):
 				if self.enable_incoming:
 					self.get_incoming_server()
@@ -283,11 +291,17 @@ class EmailAccount(Document):
 <<<<<<< HEAD
 		"""Returns logged in POP3/IMAP connection object."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 		"""Return logged in POP3/IMAP connection object."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+		"""Return logged in POP3/IMAP connection object."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		oauth_token = self.get_oauth_token()
 		args = frappe._dict(
 			{
@@ -444,7 +458,11 @@ class EmailAccount(Document):
 				_("Please setup default Email Account from Setup > Email > Email Account"),
 =======
 				_("Please setup default Email Account from Settings > Email Account"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frappe.OutgoingEmailError,
 			)
 
@@ -536,7 +554,11 @@ class EmailAccount(Document):
 			"access_token": oauth_token.get_password("access_token") if oauth_token else None,
 =======
 			"access_token": self.get_access_token(),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 	def get_smtp_server(self):
@@ -553,6 +575,7 @@ class EmailAccount(Document):
 		return SMTPServer(**config)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 	def remove_unpicklable_values(self, state):
@@ -560,13 +583,18 @@ class EmailAccount(Document):
 		state.pop("_smtp_server_instance", None)
 
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def handle_incoming_connect_error(self, description):
 		if self.get_failed_attempts_count() > 5:
 			# This is done in background to avoid committing here.
 			frappe.enqueue(self._disable_broken_incoming_account, description=description)
 		else:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 	def get_frappe_mail_client(self):
 		return self._frappe_mail_client
@@ -598,7 +626,10 @@ class EmailAccount(Document):
 			frappe.enqueue(self._disable_broken_incoming_account, description=description)
 		else:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			self.set_failed_attempts_count(self.get_failed_attempts_count() + 1)
 
 	def _disable_broken_incoming_account(self, description):
@@ -632,7 +663,11 @@ class EmailAccount(Document):
 
 	def get_failed_attempts_count(self):
 		return cint(frappe.cache.get_value(f"{self.name}:email-account-failed-attempts"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def receive(self):
 		"""Called by scheduler to receive emails from this EMail account using POP3/IMAP."""
@@ -821,7 +856,11 @@ class EmailAccount(Document):
 				"Email Account",
 				{"enable_automatic_linking": 1, "name": ("!=", self.name)},
 			):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				frappe.throw(_("Automatic Linking can be activated only for one Email Account."))
 
 	def append_email_to_sent_folder(self, message):
@@ -839,7 +878,11 @@ class EmailAccount(Document):
 			email_server.imap.append(
 				sent_folder_name, "\\Seen", imaplib.Time2Internaldate(time.time()), message
 			)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		except Exception:
 			self.log_error("Unable to add to Sent folder")
 
@@ -855,7 +898,11 @@ class EmailAccount(Document):
 				token = connected_app.get_active_token(self.connected_user)
 
 			return token
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()
@@ -887,7 +934,11 @@ def get_append_to(doctype=None, txt=None, searchfield=None, start=None, page_len
 		)
 	)
 	return [[d] for d in set(email_append_to_list) if txt in d]
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def notify_unreplied():
@@ -962,7 +1013,11 @@ def pull(now=False):
 			doctype.connected_app,
 			doctype.connected_user,
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		.where(doctype.enable_incoming == 1)
 		.where(doctype.awaiting_password == 0)
 		.run(as_dict=1)
@@ -977,7 +1032,11 @@ def pull(now=False):
 			email_account.auth_method == "OAuth"
 			and not email_account.backend_app_flow
 			and not has_token(email_account.connected_app, email_account.connected_user)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		):
 			# don't try to pull from accounts which dont have access token (for Oauth)
 			continue
@@ -1027,7 +1086,11 @@ def get_max_email_uid(email_account):
 	result = frappe.get_all(
 =======
 	if result := frappe.get_all(
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		"Communication",
 		filters={
 			"communication_medium": "Email",
@@ -1077,7 +1140,11 @@ def setup_user_email_inbox(email_account, awaiting_password, email_id, enable_ou
 				{"email_account": email_account, "parent": user_name},
 				["name"],
 			)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			or None
 		)
 
@@ -1112,7 +1179,11 @@ def remove_user_email_inbox(email_account):
 		filters={"email_account": email_account},
 		fields=["parent as name"],
 	)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	for user in users:
 		doc = frappe.get_doc("User", user.get("name"))

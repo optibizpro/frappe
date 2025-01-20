@@ -81,7 +81,11 @@ frappe.model.DocTypeController = class DocTypeController extends frappe.ui.form.
 <<<<<<< HEAD
 =======
 				UUID: "UUID",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				"By script": "",
 			};
 			this.frm.set_value(
@@ -227,6 +231,10 @@ frappe.model.DocTypeController = class DocTypeController extends frappe.ui.form.
 			$doctype_select.val(curr_value.doctype);
 			update_fieldname_options();
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 };

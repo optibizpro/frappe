@@ -19,7 +19,11 @@ frappe.ui.form.FormTour = class FormTour {
 			prevBtnText: __("Previous"),
 			doneBtnText: __("Done"),
 			closeBtnText: __("Close"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			opacity: 0.25,
 			onHighlighted: (step) => {
 				// if last step is to save, then attach a listener to save button
@@ -150,7 +154,11 @@ frappe.ui.form.FormTour = class FormTour {
 				description: __(description),
 				position: frappe.router.slug(position || "Bottom"),
 			},
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			onNext: on_next,
 			onPrevious: on_prev,
 		};

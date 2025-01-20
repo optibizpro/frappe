@@ -24,8 +24,13 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 <<<<<<< HEAD
 						<label class="control-label" style="padding-right: 0px;"></label>
 =======
+<<<<<<< HEAD
 						<label class="control-label" style="padding-right: 5px;"></label>
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+						<label class="control-label" style="padding-right: 1px;"></label>
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						<span class="help"></span>
 					</div>
 					<div class="control-input-wrapper">
@@ -35,7 +40,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 						<p class="help-box small text-muted"></p>
 =======
 						<div class="help-box small text-extra-muted hide"></div>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					</div>
 				</div>
 			</div>`
@@ -46,7 +55,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 			if (this.constructor.horizontal) {
 				this.$wrapper.find(".form-group").addClass("horizontal");
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 	toggle_label(show) {
@@ -162,7 +175,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 			in_list(["Currency", "Int", "Float"], this.df.fieldtype) &&
 =======
 			["Currency", "Int", "Float"].includes(this.df.fieldtype) &&
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			(this.value === 0 || value === 0)
 		) {
 			// to set the 0 value in readonly for currency, int, float field
@@ -174,7 +191,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 		if (this.df.fieldtype === "Data") {
 =======
 		if (["Data", "Long Text", "Small Text", "Text", "Password"].includes(this.df.fieldtype)) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			value = frappe.utils.escape_html(value);
 		}
 		let doc = this.doc || (this.frm && this.frm.doc);
@@ -194,7 +215,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 			(icon ? '<i class="' + icon + '"></i> ' : "") +
 				__(this.df.label, null, this.df.parent) || "&nbsp;";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this._label = this.df.label;
 	}
 
@@ -210,7 +235,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 			in_list(unsupported_fieldtypes, this.df.fieldtype)
 =======
 			unsupported_fieldtypes.includes(this.df.fieldtype)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 			return;
 
@@ -220,7 +249,11 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 		$(`<a href="${this.df.documentation_url}" target="_blank">
 =======
 		$(`<a href="${this.df.documentation_url}" target="_blank" title="${__("Documentation")}">
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			${frappe.utils.icon("help", "sm")}
 		</a>`).appendTo($help);
 	}

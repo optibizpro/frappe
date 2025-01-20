@@ -36,7 +36,11 @@ frappe.ui.toolbar.Toolbar = class {
 		$(".navbar-brand .app-logo").on("click", () => {
 			frappe.app.sidebar.toggle_sidebar();
 		});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	bind_events() {
@@ -94,7 +98,11 @@ frappe.ui.toolbar.Toolbar = class {
 		}
 	}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	setup_help() {
 		if (!frappe.boot.desk_settings.notifications) {
 			// hide the help section
@@ -198,7 +206,11 @@ frappe.ui.toolbar.Toolbar = class {
 					frappe.set_route("List", "RQ Job");
 				}, __("Background Jobs"));
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 
@@ -308,7 +320,11 @@ frappe.ui.toolbar.setup_session_defaults = function () {
 			if (in_list(frappe.user_roles, "System Manager") || perms[0].read == 1) {
 =======
 			if (frappe.user_roles.includes("System Manager") || perms[0].read == 1) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				fields[fields.length] = {
 					fieldname: "settings",
 					fieldtype: "Button",

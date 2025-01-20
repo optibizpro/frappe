@@ -21,7 +21,11 @@ frappe.listview_settings["Communication"] = {
 		let method = "frappe.email.inbox.create_email_flag_queue";
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		list_view.page.add_menu_item(__("Mark as Read"), function () {
 			list_view.call_for_selected_items(method, { action: "Read" });
 		});

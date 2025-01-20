@@ -52,7 +52,11 @@
 									v-model="column.label"
 								/>
 							</div>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 						</div>
 					</div>
 					<div class="col-4 d-flex align-items-center">
@@ -92,7 +96,11 @@
 			</div>
 =======
 			</template>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		</draggable>
 	</div>
 </template>
@@ -143,7 +151,11 @@ let help_message = computed(() => {
 let total_width = computed(() => {
 	return props.df.table_columns.reduce((total, tf) => total + tf.width, 0);
 });
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 </script>
 
 <style scoped>

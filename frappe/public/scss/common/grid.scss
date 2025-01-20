@@ -55,7 +55,11 @@
 				content: " *";
 				color: var(--red-400);
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 	}
 }
@@ -163,7 +167,11 @@
 	margin-top: 2px;
 =======
 	margin-top: 3px;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	&::after {
 		// Extend the checkbox's clickable area
@@ -210,7 +218,11 @@
 =======
 		display: flex;
 		justify-content: center;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	.col {
@@ -503,7 +515,11 @@
 .grid-footer {
 	margin-top: var(--margin-sm);
 }
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 .grid-footer,
 .grid-custom-buttons {
 	padding: var(--padding-sm) 0px;
@@ -599,6 +615,7 @@
 		.form-grid {
 			min-width: 738px;
 		}
+<<<<<<< HEAD
 	}
 
 	.form-column.col-sm-6 .form-grid {
@@ -616,6 +633,8 @@
 			position: unset !important;
 		}
 	}
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
 .form-grid-container:has(.grid-row.grid-row-open) {
 	overflow-x: clip;
@@ -716,6 +735,10 @@
 @media (max-width: map-get($grid-breakpoints, "md")) {
 	.grid-scroll-bar {
 		display: block;
+<<<<<<< HEAD
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	.form-column.col-sm-6 .form-grid {
@@ -724,6 +747,10 @@
 		}
 	}
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 <<<<<<< HEAD
 @media (min-width: map-get($grid-breakpoints, "md")) {
@@ -735,6 +762,11 @@
 		}
 	}
 }
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b

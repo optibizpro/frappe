@@ -9,7 +9,11 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 	static horizontal = false;
 	make_input() {
 		super.make_input();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.$input_area.addClass("form-control table-multiselect");
 		this.$input.removeClass("form-control");
 
@@ -63,7 +67,11 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 					]);
 				}
 			});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 		this.$input_area.on("click", ".btn-link-to-form", (e) => {
 			const $target = $(e.currentTarget);
@@ -202,7 +210,11 @@ frappe.ui.form.ControlTableMultiSelect = class ControlTableMultiSelect extends (
 			if (in_list(me._rows_list, item.value)) {
 =======
 			if (me._rows_list.includes(item.value)) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				return false;
 			}
 

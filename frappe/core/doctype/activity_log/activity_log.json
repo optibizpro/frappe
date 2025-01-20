@@ -162,11 +162,16 @@
  "modified": "2023-07-28 13:26:32.281278",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
  "modified": "2024-02-24 16:31:16.253153",
 =======
  "modified": "2024-03-23 16:01:26.898094",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+ "modified": "2024-03-23 16:01:26.898094",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Activity Log",

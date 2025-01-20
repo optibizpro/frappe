@@ -207,9 +207,12 @@ class LDAPSettings(Document):
 
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		user: "User" = None
 =======
 		user: User = None

@@ -4,7 +4,11 @@
 <<<<<<< HEAD
 import os
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from contextlib import suppress
 
 import redis
@@ -55,7 +59,11 @@ def publish_realtime(
 
 	if event is None:
 		event = "task_progress" if task_id else "global"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	elif event == "msgprint" and not user:
 		user = frappe.session.user
 	elif event == "list_update":
@@ -68,7 +76,11 @@ def publish_realtime(
 	if not task_id and hasattr(frappe.local, "task_id"):
 		task_id = frappe.local.task_id
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if not room:
 		if task_id:
@@ -169,7 +181,11 @@ def can_subscribe_doctype(doctype: str) -> bool:
 def has_permission(doctype: str, name: str) -> bool:
 	if not frappe.has_permission(doctype=doctype, doc=name, ptype="read"):
 		raise frappe.PermissionError
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return True
 
@@ -182,7 +198,11 @@ def get_user_info():
 <<<<<<< HEAD
 =======
 		"installed_apps": frappe.get_installed_apps(),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 
@@ -231,4 +251,8 @@ def get_task_progress_room(task_id):
 
 def get_website_room():
 	return "website"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

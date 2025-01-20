@@ -12,7 +12,11 @@ def execute():
 		fields=["name", "title", "icon", "parent_page as parent", "public"],
 =======
 		fields=["name", "title", "icon", "indicator_color", "parent_page as parent", "public"],
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	)
 	for workspace in workspaces_to_update:
 		new_title = strip_html(unescape_html(workspace.title))

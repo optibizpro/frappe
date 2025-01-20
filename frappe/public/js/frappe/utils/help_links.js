@@ -7,7 +7,11 @@ frappe.help.help_links["data-import-tool"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/data/data-import-tool.html",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/data",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -40,7 +44,11 @@ frappe.help.help_links["modules/Setup"] = [
 	},
 	{ label: "Email", url: "https://docs.erpnext.com/docs/user/manual/en/email" },
 	{ label: "Printing and Branding", url: "https://docs.erpnext.com/docs/user/manual/en/print" },
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 ];
 
 frappe.help.help_links["List/User"] = [
@@ -58,7 +66,11 @@ frappe.help.help_links["List/User"] = [
 	{
 		label: "Rename User",
 		url: "https://docs.erpnext.com/docs/user/manual/en/renaming-documents",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -69,7 +81,11 @@ frappe.help.help_links["permission-manager"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/users-and-permissions/role-based-permissions",
 =======
 		url: "https://frappeframework.com/docs/user/en/basics/users-and-permissions#role-permissions-manager",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -80,7 +96,11 @@ frappe.help.help_links["user-permissions"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/users-and-permissions/user-permissions",
 =======
 		url: "https://frappeframework.com/docs/user/en/basics/users-and-permissions#user-permissions",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -91,7 +111,11 @@ frappe.help.help_links["Form/System Settings"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/settings/system-settings",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/system-settings",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -102,7 +126,11 @@ frappe.help.help_links["List/Email Account"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/email/email-account",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/email-account",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -113,7 +141,11 @@ frappe.help.help_links["List/Notification"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/email/email-alerts",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/notifications",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -124,7 +156,11 @@ frappe.help.help_links["Form/Print Settings"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/print/print-settings",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/print-settings",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];
 
@@ -135,6 +171,10 @@ frappe.help.help_links["print-format-builder"] = [
 		url: "https://frappe.github.io/erpnext/user/manual/en/setting-up/print/print-format-builder",
 =======
 		url: "https://docs.erpnext.com/docs/user/manual/en/print-format-builder",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 ];

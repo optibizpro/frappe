@@ -4,7 +4,11 @@
 =======
 from typing import TYPE_CHECKING
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import frappe
 from frappe.automation.doctype.auto_repeat.auto_repeat import (
 	create_repeated_entries,
@@ -16,7 +20,11 @@ from frappe.custom.doctype.custom_field.custom_field import create_custom_field
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import add_days, add_months, getdate, today
 
 if TYPE_CHECKING:
@@ -62,7 +70,11 @@ class TestAutoRepeat(IntegrationTestCase):
 		cls.custom_field = add_custom_fields()
 		cls.addClassCleanup(cls.custom_field.delete)
 		return super().setUpClass()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_daily_auto_repeat(self):
 		todo = frappe.get_doc(
@@ -229,11 +241,16 @@ class TestAutoRepeat(IntegrationTestCase):
 			dict(doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator")
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dict(doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator")
 =======
 			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		).insert()
 		doc = make_auto_repeat(
 			frequency="Daily", reference_document=todo.name, start_date=add_days(today(), -2)

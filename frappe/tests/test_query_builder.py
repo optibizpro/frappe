@@ -23,7 +23,11 @@ from frappe.query_builder.utils import db_type_is
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def run_only_if(dbtype: db_type_is) -> Callable:
@@ -35,7 +39,11 @@ def run_only_if(dbtype: db_type_is) -> Callable:
 class TestCustomFunctionsMariaDB(FrappeTestCase):
 =======
 class TestCustomFunctionsMariaDB(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_concat(self):
 		self.assertEqual("GROUP_CONCAT('Notes')", GroupConcat("Notes").get_sql())
 
@@ -179,7 +187,11 @@ class TestCustomFunctionsMariaDB(IntegrationTestCase):
 class TestCustomFunctionsPostgres(FrappeTestCase):
 =======
 class TestCustomFunctionsPostgres(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_concat(self):
 		self.assertEqual("STRING_AGG('Notes',',')", GroupConcat("Notes").get_sql())
 
@@ -362,7 +374,11 @@ class TestBuilderBase:
 class TestParameterization(FrappeTestCase):
 =======
 class TestParameterization(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_where_conditions(self):
 		DocType = frappe.qb.DocType("DocType")
 		query = frappe.qb.from_(DocType).select(DocType.name).where(DocType.owner == "Administrator' --")
@@ -457,7 +473,11 @@ class TestParameterization(IntegrationTestCase):
 class TestBuilderMaria(FrappeTestCase, TestBuilderBase):
 =======
 class TestBuilderMaria(IntegrationTestCase, TestBuilderBase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_adding_tabs_in_from(self):
 		self.assertEqual("SELECT * FROM `tabNotes`", frappe.qb.from_("Notes").select("*").get_sql())
 		self.assertEqual("SELECT * FROM `__Auth`", frappe.qb.from_("__Auth").select("*").get_sql())
@@ -474,7 +494,11 @@ class TestBuilderMaria(IntegrationTestCase, TestBuilderBase):
 class TestBuilderPostgres(FrappeTestCase, TestBuilderBase):
 =======
 class TestBuilderPostgres(IntegrationTestCase, TestBuilderBase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_adding_tabs_in_from(self):
 		self.assertEqual('SELECT * FROM "tabNotes"', frappe.qb.from_("Notes").select("*").get_sql())
 		self.assertEqual('SELECT * FROM "__Auth"', frappe.qb.from_("__Auth").select("*").get_sql())
@@ -500,7 +524,11 @@ class TestBuilderPostgres(IntegrationTestCase, TestBuilderBase):
 class TestMisc(FrappeTestCase):
 =======
 class TestMisc(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_custom_func(self):
 		rand_func = frappe.qb.functions("rand", "45")
 		self.assertIsInstance(rand_func, Function)
@@ -528,4 +556,8 @@ class TestMisc(IntegrationTestCase):
 		roles = frappe.qb.from_(role).select(role.name)
 
 		self.assertEqual(set(users.run() + roles.run()), set((users + roles).run()))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

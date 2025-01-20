@@ -540,7 +540,11 @@ class ImportFile:
 <<<<<<< HEAD
 			first_row.get_values(parent_column_indexes)
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			data_without_first_row = data[1:]
 			for row in data_without_first_row:
@@ -599,7 +603,11 @@ class ImportFile:
 			file_content = frappe.read_file(file_path, True)
 			return file_content, extn
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		file_name = frappe.db.get_value("File", {"file_url": file_path})
 		if file_name:
 			file = frappe.get_doc("File", file_name)

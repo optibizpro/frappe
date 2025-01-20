@@ -30,6 +30,13 @@ context("Dashboard links", () => {
 		cy.visit(`/app/user/${cy.config("testUser")}`);
 
 		//To check if initially the dashboard contains only the "Contact" link and there is no counter
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		cy.select_form_tab("Connections");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get('[data-doctype="Contact"]').should("contain", "Contact");
 
 		//Adding a new contact
@@ -42,6 +49,13 @@ context("Dashboard links", () => {
 		cy.visit(`/app/user/${cy.config("testUser")}`);
 
 		//To check if the counter for contact doc is "2" after adding additional contact
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		cy.select_form_tab("Connections");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get('[data-doctype="Contact"] > .count').should("contain", "2");
 		cy.get('[data-doctype="Contact"]').contains("Contact").click();
 
@@ -61,8 +75,18 @@ context("Dashboard links", () => {
 
 	it("Report link in dashboard", () => {
 		cy.visit(`/app/user/${cy.config("testUser")}`);
+<<<<<<< HEAD
 		cy.get('[data-doctype="Contact"]').should("contain", "Contact");
 		cy.findByText("Connections");
+=======
+<<<<<<< HEAD
+		cy.get('[data-doctype="Contact"]').should("contain", "Contact");
+		cy.findByText("Connections");
+=======
+		cy.select_form_tab("Connections");
+		cy.get('.document-link[data-doctype="Contact"]').contains("Contact");
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.window()
 			.its("cur_frm")
 			.then((cur_frm) => {
@@ -73,8 +97,19 @@ context("Dashboard links", () => {
 					},
 				];
 				cur_frm.dashboard.render_report_links();
+<<<<<<< HEAD
 				cy.get('[data-report="Website Analytics"]').contains("Website Analytics").click();
 				cy.findByText("Website Analytics");
+=======
+<<<<<<< HEAD
+				cy.get('[data-report="Website Analytics"]').contains("Website Analytics").click();
+				cy.findByText("Website Analytics");
+=======
+				cy.get('.document-link[data-report="Website Analytics"]')
+					.contains("Website Analytics")
+					.click();
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 	});
 

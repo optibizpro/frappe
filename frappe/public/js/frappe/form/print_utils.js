@@ -53,7 +53,11 @@ frappe.ui.get_print_settings = function (pdf, callback, letter_head, pick_column
 					label: __(df.label),
 =======
 					label: __(df.label, null, df.parent),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					value: df.fieldname,
 				})),
 			}

@@ -16,7 +16,11 @@ const type_value = (value) => {
 	cy.focused().clear().type(value).type("{esc}");
 };
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 context("Form", () => {
 	before(() => {
 		cy.login();
@@ -36,7 +40,11 @@ context("Form", () => {
 		cy.visit("/app/website");
 	});
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	it("create a new form", () => {
 		cy.visit("/app/todo/new");
 		cy.get_field("description", "Text Editor")
@@ -46,7 +54,11 @@ context("Form", () => {
 		cy.wait(1000);
 =======
 			.wait(1000);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get(".page-title").should("contain", "Not Saved");
 		cy.intercept({
 			method: "POST",
@@ -77,7 +89,11 @@ context("Form", () => {
 		cy.clear_filters();
 	});
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	it("validates behaviour of Data options validations in child table", () => {
 		// test email validations for set_invalid controller
 		let website_input = "website.in";
@@ -128,7 +144,11 @@ context("Form", () => {
 		cy.get("@row1").click();
 		cy.get("@email_input1").should("have.class", "invalid");
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		cy.get("@row2").click();
 		cy.get("@email_input2").should("not.have.class", "invalid");
 	});
@@ -197,7 +217,11 @@ context("Form", () => {
 							cdn
 						);
 					});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 				cy.get("@table").find('[data-idx="1"] .btn-open-row').click();
 				cy.get(".grid-row-open").as("table-form");
@@ -268,6 +292,10 @@ context("Form", () => {
 					.should("be.visible");
 				cy.get("@table-form").find(".grid-footer-toolbar").click();
 			});
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	});
 });

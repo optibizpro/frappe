@@ -8,7 +8,11 @@ from frappe.tests.utils import FrappeTestCase
 from frappe.utils import get_bench_path
 =======
 from frappe.tests import IntegrationTestCase
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 EMTPY_FILE = ""
 EMTPY_SECTION = """
@@ -57,7 +61,11 @@ app.module.patch4
 class TestPatches(FrappeTestCase):
 =======
 class TestPatches(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_patch_module_names(self):
 		frappe.flags.final_patches = []
 		frappe.flags.in_install = True
@@ -91,7 +99,11 @@ class TestPatches(IntegrationTestCase):
 class TestPatchReader(FrappeTestCase):
 =======
 class TestPatchReader(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def get_patches(self):
 		return (
 			patch_handler.get_patches_from_app("frappe"),
@@ -190,4 +202,8 @@ def _get_dotted_path(file: Path, app) -> str:
 	return ".".join([*path, base_filename])
 =======
 	return ".".join([app, *path, base_filename])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

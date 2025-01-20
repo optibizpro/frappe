@@ -5,7 +5,11 @@ import datetime
 <<<<<<< HEAD
 import inspect
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from math import ceil
 from random import choice
 from unittest.mock import patch
@@ -29,9 +33,12 @@ from frappe.utils.testutils import clear_custom_fields
 class TestDB(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, timeout
 from frappe.utils import add_days, now, random_string, set_request
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils import add_days, now, random_string, set_request
 from frappe.utils.data import now_datetime
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -39,7 +46,11 @@ from frappe.utils.testutils import clear_custom_fields
 
 
 class TestDB(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_datetime_format(self):
 		now_str = now()
 		self.assertEqual(frappe.db.format_datetime(None), FallBackDateTimeStr)
@@ -201,14 +212,20 @@ class TestDB(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_singles_get_values_variant(self):
 		[[lang, date_format]] = frappe.db.get_values("System Settings", fieldname=["language", "date_format"])
 		self.assertEqual(lang, frappe.db.get_single_value("System Settings", "language"))
 		self.assertEqual(date_format, frappe.db.get_single_value("System Settings", "date_format"))
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_log_touched_tables(self):
 		frappe.flags.in_migrate = True
 		frappe.flags.touched_tables = set()
@@ -738,7 +755,11 @@ class TestDB(IntegrationTestCase):
 class TestDDLCommandsMaria(FrappeTestCase):
 =======
 class TestDDLCommandsMaria(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	test_table_name = "TestNotes"
 
 	def setUp(self) -> None:
@@ -804,7 +825,11 @@ class TestDDLCommandsMaria(IntegrationTestCase):
 class TestDBSetValue(FrappeTestCase):
 =======
 class TestDBSetValue(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -824,7 +849,11 @@ class TestDBSetValue(IntegrationTestCase):
 		frappe.db.set_value("System Settings", None, "deny_multiple_sessions", changed_value)
 =======
 		frappe.db.set_single_value("System Settings", "deny_multiple_sessions", changed_value)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		current_value = frappe.db.get_single_value("System Settings", "deny_multiple_sessions")
 		self.assertEqual(current_value, changed_value)
 
@@ -938,7 +967,11 @@ class TestDBSetValue(IntegrationTestCase):
 		query = frappe.db.last_query
 =======
 		query = str(frappe.db.last_query)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		if frappe.conf.db_type == "postgres":
 			from frappe.database.postgres.database import modify_query
@@ -947,7 +980,11 @@ class TestDBSetValue(IntegrationTestCase):
 			self.assertTrue(modify_query("UPDATE `tabToDo` SET") in str(query))
 =======
 			self.assertTrue(modify_query("UPDATE `tabToDo` SET") in query)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if frappe.conf.db_type == "mariadb":
 			self.assertTrue("UPDATE `tabToDo` SET" in query)
 
@@ -971,7 +1008,11 @@ class TestDBSetValue(IntegrationTestCase):
 class TestDDLCommandsPost(FrappeTestCase):
 =======
 class TestDDLCommandsPost(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	test_table_name = "TestNotes"
 
 	def setUp(self) -> None:
@@ -1086,7 +1127,11 @@ class TestDDLCommandsPost(IntegrationTestCase):
 class TestTransactionManagement(FrappeTestCase):
 =======
 class TestTransactionManagement(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_create_proper_transactions(self):
 		def _get_transaction_id():
 			return frappe.db.sql("select txid_current()", pluck=True)
@@ -1109,7 +1154,11 @@ class TestReplicaConnections(FrappeTestCase):
 class TestReplicaConnections(IntegrationTestCase):
 	def test_switching_to_replica(self):
 		with patch.dict(frappe.local.conf, {"read_from_replica": 1, "replica_host": "127.0.0.1"}):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			def db_id():
 				return id(frappe.local.db)
@@ -1141,11 +1190,16 @@ class TestReplicaConnections(IntegrationTestCase):
 class TestConcurrency(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestConcurrency(FrappeTestCase):
 =======
 class TestConcurrency(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+class TestConcurrency(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@timeout(5, "There shouldn't be any lock wait")
 	def test_skip_locking(self):
 		with self.primary_connection():
@@ -1187,8 +1241,11 @@ class TestConcurrency(IntegrationTestCase):
 class TestSqlIterator(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestSqlIterator(FrappeTestCase):
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def bad_hook(*args, **kwargs):
 	frappe.db.commit()
 	frappe.db.rollback()
@@ -1202,7 +1259,10 @@ def bad_nested_hook(doc, *args, **kwargs):
 
 class TestSqlIterator(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def test_db_sql_iterator(self):
 		test_queries = [
 			"select * from `tabCountry` order by name",
@@ -1236,7 +1296,10 @@ class TestSqlIterator(IntegrationTestCase):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 class ExtIntegrationTestCase(IntegrationTestCase):
@@ -1505,4 +1568,7 @@ class TestDbConnectWithEnvCredentials(IntegrationTestCase):
 		frappe.connect()
 		frappe.db.connect()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

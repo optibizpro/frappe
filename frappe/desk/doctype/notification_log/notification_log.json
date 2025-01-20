@@ -44,7 +44,11 @@
    "options": "Mention\nEnergy Point\nAssignment\nShare\nAlert"
 =======
    "options": "\nMention\nEnergy Point\nAssignment\nShare\nAlert"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   },
   {
    "fieldname": "email_content",
@@ -104,7 +108,11 @@
    "fieldtype": "Data",
    "hidden": 1,
    "label": "Link"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
   }
  ],
  "hide_toolbar": 1,
@@ -114,7 +122,11 @@
  "modified": "2023-06-14 21:20:51.197943",
 =======
  "modified": "2024-08-03 09:38:10.497711",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Notification Log",

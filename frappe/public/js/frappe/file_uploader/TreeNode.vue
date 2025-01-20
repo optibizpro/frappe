@@ -39,7 +39,11 @@
 =======
 				@node-click="(n) => emit('node-click', n)"
 				@load-more="(n) => emit('load-more', n)"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			/>
 			<button
 				class="btn btn-xs btn-load-more"
@@ -109,7 +113,11 @@ let icon = computed(() => {
 
 let open_file = (filename) => {
 	return frappe.utils.get_form_link("File", filename);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 };
 
 const reference = ref(null);

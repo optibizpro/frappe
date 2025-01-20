@@ -2,7 +2,11 @@
 from datetime import time, timedelta
 =======
 from datetime import datetime, time, timedelta
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from typing import Any
 
 from pypika.queries import QueryBuilder
@@ -12,7 +16,11 @@ from pypika.utils import format_alias_sql
 <<<<<<< HEAD
 =======
 import frappe
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.utils.data import format_time, format_timedelta
 
 
@@ -68,7 +76,11 @@ class ParameterizedValueWrapper(ValueWrapper):
 =======
 			elif isinstance(self.value, datetime):
 				self.value = frappe.db.format_datetime(self.value)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 			sql = self.get_value_sql(
 				quote_char=quote_char,

@@ -61,7 +61,11 @@ class RQJob(Document):
 		timeout: DF.Duration | None
 	# end: auto-generated types
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def load_from_db(self):
 		try:
 			job = Job.fetch(self.name, connection=get_redis_conn())
@@ -80,9 +84,12 @@ class RQJob(Document):
 
 	@staticmethod
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def get_list(args):
 		start = cint(args.get("start")) or 0
 		page_length = cint(args.get("page_length")) or 20
@@ -109,8 +116,11 @@ class RQJob(Document):
 	def get_matching_job_ids(args):
 		filters = make_filter_dict(args.get("filters"))
 =======
+<<<<<<< HEAD
 		matched_job_ids = RQJob.get_matching_job_ids(args)[start : start + page_length]
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	def get_list(filters=None, start=0, page_length=20, order_by="creation desc"):
 		matched_job_ids = RQJob.get_matching_job_ids(filters=filters)[start : start + page_length]
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -124,7 +134,11 @@ class RQJob(Document):
 	@staticmethod
 	def get_matching_job_ids(filters) -> list[str]:
 		filters = make_filter_dict(filters or [])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		queues = _eval_filters(filters.get("queue"), QUEUES)
 		statuses = _eval_filters(filters.get("status"), JOB_STATUSES)
@@ -140,7 +154,11 @@ class RQJob(Document):
 		return matched_job_ids
 =======
 		return filter_current_site_jobs(matched_job_ids)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	@check_permissions
 	def delete(self):
@@ -169,7 +187,11 @@ class RQJob(Document):
 	# None of these methods apply to virtual job doctype, overriden for sanity.
 	@staticmethod
 	def get_stats():
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return {}
 
 	def db_insert(self, *args, **kwargs):
@@ -191,7 +213,11 @@ def serialize_job(job: Job) -> frappe._dict:
 		doc_method = job_kwargs.get("doc_method")
 		if doctype and doc_method:
 			job_name = f"{doctype}.{doc_method}"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	# function objects have this repr: '<function functionname at 0xmemory_address >'
 	# This regex just removes unnecessary things around it.
@@ -206,7 +232,11 @@ def serialize_job(job: Job) -> frappe._dict:
 	if job_result := job.latest_result():
 		exc_info = job_result.exc_string
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return frappe._dict(
 		name=job.id,
 		job_id=job.id,
@@ -220,7 +250,11 @@ def serialize_job(job: Job) -> frappe._dict:
 		exc_info=job.exc_info,
 =======
 		exc_info=exc_info,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		arguments=frappe.as_json(job.kwargs),
 		timeout=job.timeout,
 		creation=convert_utc_to_system_timezone(job.created_at),
@@ -243,7 +277,11 @@ def filter_current_site_jobs(job_ids: list[str]) -> list[str]:
 	return [j for j in job_ids if j.startswith(site)]
 
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def _eval_filters(filter, values: list[str]) -> list[str]:
 	if filter:
 		operator, operand = filter
@@ -288,7 +326,11 @@ def remove_failed_jobs():
 		for job_ids in create_batch(failed_jobs, 100):
 			for job in Job.fetch_many(job_ids=job_ids, connection=conn):
 				job and fail_registry.remove(job, delete_job=True)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_all_queued_jobs():

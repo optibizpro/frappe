@@ -66,7 +66,11 @@ frappe.ui.FilterGroup = class {
 		$(document.body).on("click", (e) => {
 =======
 		$(document.body).on("mousedown", (e) => {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (this.wrapper && this.wrapper.is(":visible")) {
 				const in_datepicker =
 					$(e.target).is(".datepicker--cell") ||
@@ -140,7 +144,11 @@ frappe.ui.FilterGroup = class {
 				: __("{0} filter", [this.filters.length])
 =======
 			? __("Filters {0}", [`<span class="filter-label">${this.filters.length}</span>`])
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			: __("Filter");
 
 		this.filter_button
@@ -156,7 +164,11 @@ frappe.ui.FilterGroup = class {
 			"title",
 			`${this.filters.length} Filter${this.filters.length > 1 ? "s" : ""} Applied`
 		);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	set_filter_events() {
@@ -337,7 +349,11 @@ frappe.ui.FilterGroup = class {
 <<<<<<< HEAD
 		/* eslint-disable indent */
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_filters_as_object() {

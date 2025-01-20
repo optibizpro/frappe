@@ -20,8 +20,11 @@ from frappe.tests.utils import FrappeTestCase
 class TestEmailAccount(FrappeTestCase):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from frappe.tests import IntegrationTestCase, UnitTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
@@ -36,7 +39,11 @@ class UnitTestEmailAccount(UnitTestCase):
 
 
 class TestEmailAccount(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -89,7 +96,11 @@ class TestEmailAccount(IntegrationTestCase):
 =======
 		comm = frappe.new_doc(
 			"Communication",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			sender="test_sender@example.com",
 			subject="test unread reminder",
 			sent_or_received="Received",
@@ -496,7 +507,11 @@ class TestEmailAccount(IntegrationTestCase):
 class TestInboundMail(FrappeTestCase):
 =======
 class TestInboundMail(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()

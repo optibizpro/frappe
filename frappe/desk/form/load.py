@@ -20,7 +20,11 @@ from frappe.utils.html_utils import clean_email_html
 
 if typing.TYPE_CHECKING:
 	from frappe.model.document import Document
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 @frappe.whitelist()
@@ -59,7 +63,21 @@ def getdoc(doctype, name):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	run_onload(doc)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+<<<<<<< HEAD
+
+	if not doc.has_permission("read"):
+		frappe.flags.error_message = _("Insufficient Permission for {0}").format(
+			frappe.bold(doctype + " " + name)
+		)
+		raise frappe.PermissionError(("read", doctype, name))
+
+	# ignores system setting (apply_perm_level_on_api_calls) unconditionally to maintain backward compatibility
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc.apply_fieldlevel_read_permissions()
 
 	# add file list
@@ -141,7 +159,11 @@ def get_docinfo(doc=None, doctype=None, name=None):
 			"views": get_view_logs(doc.doctype, doc.name),
 =======
 			"views": get_view_logs(doc),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			"energy_point_logs": get_point_logs(doc.doctype, doc.name),
 			"additional_timeline_content": get_additional_timeline_content(doc.doctype, doc.name),
 			"milestones": get_milestones(doc.doctype, doc.name),
@@ -368,7 +390,11 @@ def get_communication_data(
 			start=frappe.utils.cint(start),
 			limit=limit,
 		),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		as_dict=as_dict,
 	)
 
@@ -428,7 +454,11 @@ def get_document_email(doctype, name):
 	return f"{email[0]}+{quote(doctype)}={quote(cstr(name))}@{email[1]}"
 =======
 	return f"{email[0]}+{quote_plus(doctype)}={quote_plus(cstr(name))}@{email[1]}"
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def get_automatic_email_link():
@@ -471,6 +501,7 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		if not link_docname:
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		link_docname = getattr(doc, field.fieldname, None)
 
 		if not link_docname:
@@ -478,6 +509,10 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		if not (doc_fieldvalue := getattr(doc, field.fieldname, None)):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		if not (doc_fieldvalue := getattr(doc, field.fieldname, None)):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			continue
 
 		doctype = field.options if field.fieldtype == "Link" else doc.get(field.options)
@@ -491,6 +526,7 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		link_titles.update({doctype + "::" + link_docname: link_title})
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		link_title = frappe.db.get_value(doctype, link_docname, meta.title_field, cache=True, order_by=None)
 		link_titles.update({doctype + "::" + link_docname: link_title})
 =======
@@ -498,6 +534,11 @@ def get_title_values_for_link_and_dynamic_link_fields(doc, link_fields=None):
 		link_titles.update({doctype + "::" + doc_fieldvalue: link_title or doc_fieldvalue})
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		link_title = frappe.db.get_value(doctype, doc_fieldvalue, meta.title_field, cache=True, order_by=None)
+		link_titles.update({doctype + "::" + doc_fieldvalue: link_title or doc_fieldvalue})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return link_titles
 

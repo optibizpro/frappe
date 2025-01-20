@@ -88,7 +88,11 @@ $.extend(frappe.datetime, {
 		return moment(d1).diff(d2, "minutes");
 	},
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	get_day_diff: function (d1, d2) {
 		return moment(d1).diff(d2, "days");
 	},
@@ -176,7 +180,11 @@ $.extend(frappe.datetime, {
 		let time_format = frappe?.boot?.sysdefaults?.time_format || frappe.defaultTimeFormat;
 		let datetime_format = frappe.defaultDateFormat + " " + time_format;
 		return moment(d).format(datetime_format);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 
 	user_to_str: function (val, only_time = false) {
@@ -316,5 +324,9 @@ Object.defineProperties(window, {
 	},
 =======
 	},
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 });

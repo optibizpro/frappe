@@ -70,7 +70,11 @@ export function getStore(print_format_name) {
 					nextTick(() => (dirty.value = false));
 					edit_letterhead.value = false;
 					resolve();
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				});
 			});
 		});
@@ -113,7 +117,11 @@ export function getStore(print_format_name) {
 							if (df.table_columns) {
 								df.table_columns = df.table_columns.map((tf) => {
 									return pluck(tf, [
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 										"label",
 										"fieldname",
 										"fieldtype",
@@ -123,7 +131,11 @@ export function getStore(print_format_name) {
 										"html",
 =======
 										"width",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 										"field_template",
 									]);
 								});
@@ -250,7 +262,11 @@ export function getStore(print_format_name) {
 		get_layout,
 		get_default_layout,
 		change_letterhead,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	};
 }
 
@@ -293,4 +309,8 @@ export function useStore() {
 
 	return { print_format, layout, letterhead, meta, store };
 }
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

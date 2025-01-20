@@ -3,7 +3,11 @@
 // Copyright (c) 2022, Frappe Technologies and contributors
 // For license information, please see license.txt
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 frappe.ui.form.on("Report", {
 	refresh: function (frm) {
 		if (frm.doc.is_standard === "Yes" && !frappe.boot.developer_mode) {
@@ -96,7 +100,11 @@ frappe.ui.form.on("Report", {
 			);
 		}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frm.set_query("ref_doctype", () => {
 			return {
 				filters: {

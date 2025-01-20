@@ -116,7 +116,11 @@ export default class Block {
 				$(this.wrapper).find(".widget").addClass(`${widget_type} edit-mode`);
 =======
 				$(this.wrapper).find(".widget").addClass(`${widget_type}`);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				this.new_block_widget = this.block_widget.get_config();
 				this.add_settings_button();
 			},

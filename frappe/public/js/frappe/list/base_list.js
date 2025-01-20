@@ -48,10 +48,15 @@ frappe.views.BaseList = class BaseList {
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		this.selected_page_count = this.page_length;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+		this.selected_page_count = this.page_length;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.data = [];
 		this.method = "frappe.desk.reportview.get";
 
@@ -64,7 +69,11 @@ frappe.views.BaseList = class BaseList {
 		this.sort_by = this.meta.sort_field || "modified";
 =======
 		this.sort_by = this.meta.sort_field || "creation";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.sort_order = this.meta.sort_order || "desc";
 
 		// Setup buttons
@@ -183,7 +192,11 @@ frappe.views.BaseList = class BaseList {
 		!this.hide_card_layout && this.page.main.addClass("frappe-card");
 =======
 		this.page.main.addClass("layout-main-list");
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.page.page_form.removeClass("row").addClass("flex");
 		this.hide_page_form && this.page.page_form.hide();
 		this.hide_sidebar && this.$page.addClass("no-list-sidebar");
@@ -250,7 +263,11 @@ frappe.views.BaseList = class BaseList {
 
 			this.views_menu = this.page.add_custom_button_group(
 				label_map[this.view_name] || label_map["List"],
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				icon_map[this.view_name] || "list"
 			);
 			this.views_list = new frappe.views.ListViewSelect({
@@ -263,7 +280,11 @@ frappe.views.BaseList = class BaseList {
 <<<<<<< HEAD
 =======
 				label_map: label_map,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 	}
@@ -467,6 +488,7 @@ frappe.views.BaseList = class BaseList {
 			this.page_length = this.selected_page_count || 20;
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 			// set active button
 			this.$paging_area.find(".btn-paging").removeClass("btn-info");
 			$this.addClass("btn-info");
@@ -482,6 +504,8 @@ frappe.views.BaseList = class BaseList {
 			this.start += this.page_length;
 			this.page_length = this.selected_page_count || 20;
 =======
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			const old_page_length = this.page_length;
 			const new_page_length = $this.data().value;
 
@@ -552,7 +576,11 @@ frappe.views.BaseList = class BaseList {
 		if (filter[2] === "like") return filter[3]?.replace(/^%?|%$/g, "");
 		else if (filter[2] === "not set") return null;
 		else return filter[3];
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	get_filters_for_args() {
@@ -823,7 +851,11 @@ class FilterArea {
 					(condition === "like" && fields_dict[fieldname]?.df?.fieldtype != "Link") ||
 					(condition === "descendants of (inclusive)" &&
 						fields_dict[fieldname]?.df?.fieldtype == "Link"))
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			) {
 				// standard filter
 				out.promise = out.promise.then(() => fields_dict[fieldname].set_value(value));
@@ -880,7 +912,11 @@ class FilterArea {
 	make_standard_filters() {
 =======
 	async make_standard_filters() {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.standard_filters_wrapper = this.list_view.page.page_form.find(
 			".standard-filter-section"
 		);
@@ -894,9 +930,12 @@ class FilterArea {
 				fieldname: "name",
 				onchange: () => this.debounced_refresh_list_view(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 
@@ -904,10 +943,15 @@ class FilterArea {
 			this.list_view.custom_filter_configs.forEach((config) => {
 				config.onchange = () => this.debounced_refresh_list_view();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 
@@ -1026,7 +1070,11 @@ class FilterArea {
 =======
 					<span class="filter-icon button-icon">
 						${frappe.utils.icon("es-line-filter")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					</span>
 					<span class="button-label hidden-xs">
 					${__("Filter")}
@@ -1039,7 +1087,11 @@ class FilterArea {
 =======
 					<span class="filter-icon button-icon">
 						${frappe.utils.icon("es-small-close")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					</span>
 				</button>
 			</div>

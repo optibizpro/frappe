@@ -80,12 +80,17 @@ def get_permission_query_conditions(user):
 		or `tabWorkflow Action`.`user`={frappe.db.escape(user)})
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return f"""(`tabWorkflow Action`.`name` in ({permitted_workflow_actions})
 		or `tabWorkflow Action`.`user`={frappe.db.escape(user)})
 =======
 	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		and `tabWorkflow Action`.`status`='Open'
 	"""
 
@@ -96,7 +101,11 @@ def has_permission(doc, user):
 =======
 	if user == "Administrator":
 		return True
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	permitted_roles = {permitted_role.role for permitted_role in doc.permitted_roles}
 	return not permitted_roles.isdisjoint(frappe.get_roles(user))
@@ -135,7 +144,11 @@ def process_workflow_actions(doc, state):
 <<<<<<< HEAD
 =======
 			now=frappe.flags.in_test,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		)
 
 
@@ -364,7 +377,11 @@ def send_workflow_action_email(doc, transitions):
 	for user, data in users_data.items():  # noqa: B007
 =======
 	for data in users_data.values():
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		email_args = {
 			"recipients": [data.get("email")],
 			"args": {"actions": list(deduplicate_actions(data.get("possible_actions"))), "message": message},

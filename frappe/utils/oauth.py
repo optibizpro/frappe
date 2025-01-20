@@ -27,7 +27,11 @@ class SignupDisabledError(frappe.PermissionError):
 class SignupDisabledError(frappe.PermissionError): ...
 
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 def get_oauth2_providers() -> dict[str, dict]:
 	out = {}
 	providers = frappe.get_all("Social Login Key", fields=["*"])
@@ -185,7 +189,11 @@ def login_oauth_user(
 	*,
 	provider: str | None = None,
 	state: dict | str,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	generate_login_token: bool = False,
 ):
 	# json.loads data and state
@@ -232,7 +240,11 @@ def login_oauth_user(
 		frappe.cache().set_value(f"login_token:{login_token}", frappe.local.session.sid, expires_in_sec=120)
 =======
 		frappe.cache.set_value(f"login_token:{login_token}", frappe.local.session.sid, expires_in_sec=120)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 		frappe.response["login_token"] = login_token
 
@@ -265,7 +277,11 @@ def get_user_record(user: str, data: dict, provider: str) -> "User":
 			raise SignupDisabledError
 
 	user: User = frappe.new_doc("User")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	if gender := data.get("gender", "").title():
 		frappe.get_doc({"doctype": "Gender", "gender": gender}).insert(
@@ -298,7 +314,11 @@ def update_oauth_user(user: str, data: dict, provider: str):
 	user: "User" = get_user_record(user, data)
 =======
 	user: User = get_user_record(user, data, provider)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	update_user_record = user.is_new()
 
 	if not user.enabled:
@@ -355,7 +375,11 @@ def redirect_post_login(desk_user: bool, redirect_to: str | None = None, provide
 		desk_uri = "/app/workspace" if provider == "facebook" else "/app"
 =======
 		desk_uri = "/app/workspace" if provider == "facebook" else get_default_path()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		redirect_to = frappe.utils.get_url(desk_uri if desk_user else "/me")
 
 	frappe.local.response["location"] = redirect_to

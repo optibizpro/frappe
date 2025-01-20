@@ -15,7 +15,11 @@ frappe.provide("frappe.widget.utils");
 frappe.provide("frappe.views");
 frappe.provide("frappe.query_reports");
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 frappe.standard_pages["query-report"] = function () {
 	var wrapper = frappe.container.add_page("query-report");
 
@@ -118,7 +122,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 			<svg class="icon icon-xl mb-4" style="stroke: var(--text-light);">
 				<use href="#icon-table"></use>
 			</svg>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			<p>${__("Nothing to show")}</p>
 		</div>`;
 	}
@@ -208,7 +216,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 			},
 			__("Actions")
 		);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	add_chart_buttons_to_toolbar(show) {
@@ -238,7 +250,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 						this.add_chart_to_dashboard();
 					},
 					__("Actions")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				);
 			}
 		} else {
@@ -774,7 +790,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 <<<<<<< HEAD
 =======
 				this.report_settings.after_refresh?.(this);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 	}
 
@@ -959,7 +979,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 					method: "frappe.desk.query_report.background_enqueue_run",
 =======
 					method: "frappe.core.doctype.prepared_report.prepared_report.make_prepared_report",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					args: {
 						report_name: this.report_name,
 						filters: filters,
@@ -1057,7 +1081,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 			<svg class="icon icon-xl mb-4" style="stroke: var(--text-light);">
 				<use href="#icon-table"></use>
 			</svg>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			<p>${__("Loading")}...</p>
 		</div>`;
 
@@ -1381,7 +1409,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 				this.toggle_message(raise, message);
 				throw "Filter missing";
 			}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		}
 
 		raise && this.toggle_message(false);
@@ -1528,7 +1560,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 		} else {
 			print_settings.report_name = `${__(this.report_name)}.pdf`;
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		frappe.render_pdf(html, print_settings);
 	}
 
@@ -1556,7 +1592,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 				return `<div class="filter-row">
 					<b>${__(docfield.label, null, docfield.parent)}:</b> ${frappe.format(value, docfield)}
 				</div>`;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			})
 			.join("");
 	}
@@ -1642,7 +1682,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 					filters.prepared_report_name = this.prepared_report_name;
 				}
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				const visible_idx = this.datatable?.bodyRenderer.visibleRowIndices || [];
 				if (visible_idx.length + 1 === this.data?.length) {
 					visible_idx.push(visible_idx.length);
@@ -1655,7 +1699,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 					custom_columns: this.custom_columns.length ? this.custom_columns : [],
 =======
 					custom_columns: this.custom_columns?.length ? this.custom_columns : [],
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					file_format_type: file_format,
 					filters: filters,
 					applied_filters: applied_filters,
@@ -1665,7 +1713,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 <<<<<<< HEAD
 =======
 					csv_decimal_sep,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					include_indentation,
 					include_filters,
 				};
@@ -1910,7 +1962,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 				condition: () => frappe.model.can_set_user_permissions("Report"),
 =======
 				condition: () => frappe.user.has_role("System Manager"),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				standard: true,
 			},
 		];
@@ -2096,7 +2152,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 					<button class="btn btn-xs btn-secondary" data-action="collapse_all_rows">
 						${__("Collapse All")}</button>
 				</div>
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			</div>`);
 			$(this.$report_footer).append(this.$tree_footer);
 			this.$tree_footer.find("[data-action=collapse_all_rows]").show();
@@ -2123,7 +2183,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 		}, 0);
 		var treeLevel = maxDepth + 1;
 		this.$tree_footer.find("#tree-level").val(treeLevel);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.datatable.rowmanager.expandAllNodes();
 		this.$tree_footer.find("[data-action=collapse_all_rows]").show();
 	}
@@ -2159,7 +2223,11 @@ frappe.views.QueryReport = class QueryReport extends frappe.views.BaseList {
 		} else {
 			this.$tree_footer.find("[data-action=expand_all_rows]").hide();
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	message_div(message) {
@@ -2239,4 +2307,8 @@ Object.defineProperty(frappe, "query_report_filters_by_name", {
 	},
 });
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

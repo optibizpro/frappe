@@ -42,7 +42,11 @@ class RealTimeClient {
 	}
 
 	init(port = 9000, lazy_connect = false) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (frappe.boot.disable_async) {
 			return;
 		}
@@ -77,7 +81,11 @@ class RealTimeClient {
 				withCredentials: true,
 				reconnectionAttempts: 3,
 				autoConnect: !lazy_connect,
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			});
 		}
 
@@ -98,7 +106,11 @@ class RealTimeClient {
 		});
 
 		this.socket.on("progress", function (data) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (data.progress) {
 				data.percent = (flt(data.progress[0]) / data.progress[1]) * 100;
 			}
@@ -149,7 +161,11 @@ class RealTimeClient {
 			}
 
 			me.doc_close(frm.doctype, frm.docname);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		});
 	}
 
@@ -198,7 +214,11 @@ class RealTimeClient {
 		if (window.dev_server) {
 			let parts = host.split(":");
 			port = frappe.boot.socketio_port || port.toString() || "9000";
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			if (parts.length > 2) {
 				host = parts[0] + ":" + parts[1];
 			}
@@ -258,7 +278,11 @@ class RealTimeClient {
 			return;
 		}
 		if (this.open_docs.has(`${doctype}:${docname}`)) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 			return;
 		}
 
@@ -371,7 +395,11 @@ class RealTimeClient {
 		});
 	}
 	process_response(data, method) {
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (!data) {
 			return;
 		}
@@ -381,7 +409,11 @@ class RealTimeClient {
 		var opts = frappe.socketio.open_tasks[data.task_id];
 =======
 		let opts = this.open_tasks[data.task_id];
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if (opts[method]) {
 			opts[method](data);
 		}
@@ -433,4 +465,8 @@ frappe.realtime = new RealTimeClient();
 
 // backward compatibility
 frappe.socketio = frappe.realtime;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df

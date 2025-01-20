@@ -17,7 +17,11 @@ frappe.ui.form.on("Notification Log", {
 			frappe.set_route(frm.doc.link);
 			return;
 		}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		const dt = frm.doc.document_type;
 		const dn = frm.doc.document_name;
 		frappe.set_route("Form", dt, dn);

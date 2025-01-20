@@ -4,7 +4,11 @@
 =======
 from unittest.mock import patch
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import frappe
 from frappe.model.workflow import (
 	WorkflowTransitionError,
@@ -35,7 +39,11 @@ class UnitTestWorkflow(UnitTestCase):
 
 
 class TestWorkflow(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -49,7 +57,11 @@ class TestWorkflow(IntegrationTestCase):
 <<<<<<< HEAD
 		frappe.set_user("Administrator")
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def tearDown(self):
 		frappe.set_user("Administrator")
@@ -128,6 +140,7 @@ class TestWorkflow(IntegrationTestCase):
 		workflow_actions = frappe.get_all("Workflow Action", fields=["*"])
 		self.assertEqual(len(workflow_actions), 1)
 		self.assertEqual(workflow_actions[0].status, "Completed")
+<<<<<<< HEAD
 
 	def test_if_workflow_actions_were_processed_using_user(self):
 		user = frappe.get_doc("User", "test2@example.com")
@@ -147,6 +160,12 @@ class TestWorkflow(IntegrationTestCase):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+<<<<<<< HEAD
+		frappe.set_user("Administrator")
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	def test_if_workflow_set_on_action(self):
 		self.workflow._update_state_docstatus = True
@@ -185,7 +204,11 @@ def create_todo_workflow():
 		frappe.get_doc(dict(doctype="Role", role_name=TEST_ROLE)).insert(ignore_if_duplicate=True)
 =======
 		frappe.get_doc(doctype="Role", role_name=TEST_ROLE).insert(ignore_if_duplicate=True)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if frappe.db.exists("User", UI_TEST_USER):
 			frappe.get_doc("User", UI_TEST_USER).add_roles(TEST_ROLE)
 

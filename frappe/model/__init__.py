@@ -7,11 +7,16 @@ import frappe
 from frappe import _
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe import _
 =======
 from frappe import _, _lt
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+from frappe import _, _lt
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 data_fieldtypes = (
 	"Currency",
@@ -243,7 +248,11 @@ def get_permitted_fields(
 	meta_fields = meta.default_fields.copy()
 	optional_meta_fields = [x for x in optional_fields if x in valid_columns]
 
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	if permitted_fields := meta.get_permitted_fieldnames(
 		parenttype=parenttype,
 		user=user,
@@ -258,7 +267,11 @@ def get_permitted_fields(
 		optional_meta_fields = [x for x in optional_fields if x in valid_columns]
 
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		if meta.istable:
 			meta_fields.extend(child_table_fields)
 
@@ -268,7 +281,11 @@ def get_permitted_fields(
 	return []
 =======
 	return meta_fields + optional_meta_fields
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 
 def is_default_field(fieldname: str) -> bool:

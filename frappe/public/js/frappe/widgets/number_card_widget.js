@@ -248,7 +248,11 @@ export default class NumberCardWidget extends Widget {
 			}
 		});
 		return common_doc;
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	}
 
 	render_number() {
@@ -276,7 +280,11 @@ export default class NumberCardWidget extends Widget {
 						${frappe.utils.icon("arrow-up-right", "xs")}
 =======
 						${frappe.utils.icon("es-line-arrow-up-right", "xs")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					</span>`;
 				color_class = "green-stat";
 			} else {
@@ -285,7 +293,11 @@ export default class NumberCardWidget extends Widget {
 						${frappe.utils.icon("arrow-down-left", "xs")}
 =======
 						${frappe.utils.icon("arrow-down-right", "xs")}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 					</span>`;
 				color_class = "red-stat";
 			}
@@ -358,7 +370,11 @@ export default class NumberCardWidget extends Widget {
 <<<<<<< HEAD
 		/* eslint-disable indent */
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		this.card_actions = $(`<div class="card-actions dropdown pull-right">
 				<a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				...

@@ -50,7 +50,11 @@ frappe.workflow = {
 		return allow_edit_list;
 =======
 		return workflow_states.map((d) => d.allow_edit);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	},
 	is_self_approval_enabled: function (doctype) {
 		return frappe.workflow.workflows[doctype].allow_self_approval;

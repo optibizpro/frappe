@@ -21,7 +21,11 @@ def get_mariadb_version(version_string: str = ""):
 	version = version_string.split("-")[0]
 =======
 	version = version_string.split("-", 1)[0]
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	return version.rsplit(".", 1)
 
 
@@ -65,6 +69,10 @@ def setup_database(force, verbose, mariadb_user_host_login_scope=None):
 <<<<<<< HEAD
 	bootstrap_database(db_name, verbose, source_sql)
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def setup_help_database(help_db_name):
 	dbman = DbManager(get_root_connection(frappe.flags.root_login, frappe.flags.root_password))
@@ -108,7 +116,11 @@ def bootstrap_database(verbose, source_sql=None):
 	frappe.connect(db_name=db_name)
 =======
 	frappe.connect()
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	check_compatible_versions()
 
 	import_db_from_sql(source_sql, verbose)
@@ -173,7 +185,11 @@ def check_compatible_versions():
 		elif version_tuple > (11, 3):
 			click.secho(
 				f"Warning: MariaDB version {version} is newer than 11.3 which is not yet tested with Frappe Framework.",
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				fg="yellow",
 			)
 	except Exception:
@@ -187,7 +203,11 @@ def check_compatible_versions():
 def get_root_connection(root_login, root_password):
 	import getpass
 =======
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 def get_root_connection():
 	if not frappe.local.flags.root_connection:
@@ -224,6 +244,10 @@ def get_root_connection():
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			cur_db_name=None,
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return frappe.local.flags.root_connection
