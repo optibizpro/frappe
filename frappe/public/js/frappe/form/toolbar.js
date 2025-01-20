@@ -2,6 +2,10 @@
 // MIT License. See license.txt
 import "./linked_with";
 import "./form_viewers";
+<<<<<<< HEAD
+=======
+import { ReminderManager } from "./reminders";
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 frappe.ui.form.Toolbar = class Toolbar {
 	constructor(opts) {
@@ -12,11 +16,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 	}
 	refresh() {
 		this.make_menu();
-		this.make_viewers();
 		this.set_title();
 		this.page.clear_user_actions();
 		this.show_title_as_dirty();
 		this.set_primary_action();
+		this.refresh_follow();
 
 		if (this.frm.meta.hide_toolbar) {
 			this.page.hide_menu();
@@ -31,11 +35,19 @@ frappe.ui.form.Toolbar = class Toolbar {
 		}
 	}
 	set_title() {
+		let title;
 		if (this.frm.is_new()) {
+<<<<<<< HEAD
 			var title = __("New {0}", [__(this.frm.meta.name)]);
 		} else if (this.frm.meta.title_field) {
 			let title_field = (this.frm.doc[this.frm.meta.title_field] || "").toString().trim();
 			var title = strip_html(title_field || this.frm.docname);
+=======
+			title = __("New {0}", [__(this.frm.meta.name)]);
+		} else if (this.frm.meta.title_field) {
+			let title_field = (this.frm.doc[this.frm.meta.title_field] || "").toString().trim();
+			title = strip_html(title_field || this.frm.docname);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			if (
 				this.frm.doc.__islocal ||
 				title === this.frm.docname ||
@@ -51,7 +63,7 @@ frappe.ui.form.Toolbar = class Toolbar {
 				});
 			}
 		} else {
-			var title = this.frm.docname;
+			title = this.frm.docname;
 		}
 
 		var me = this;
@@ -76,7 +88,12 @@ frappe.ui.form.Toolbar = class Toolbar {
 			this.frm.perm[0].write &&
 			!this.frm.doc.__islocal &&
 			doc_field.fieldtype === "Data" &&
+<<<<<<< HEAD
 			!doc_field.read_only
+=======
+			!doc_field.read_only &&
+			!doc_field.set_only_once
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		) {
 			return true;
 		} else {
@@ -112,6 +129,10 @@ frappe.ui.form.Toolbar = class Toolbar {
 		}
 
 		let rename_document = () => {
+<<<<<<< HEAD
+=======
+			if (input_name != docname) frappe.realtime.doctype_subscribe(doctype, input_name);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			return frappe
 				.xcall("frappe.model.rename_doc.update_document_title", {
 					doctype,
@@ -133,9 +154,14 @@ frappe.ui.form.Toolbar = class Toolbar {
 					};
 
 					// handle document renaming queued action
+<<<<<<< HEAD
 					if (input_name && new_docname == docname) {
 						frappe.socketio.doc_subscribe(doctype, input_name);
 						frappe.realtime.on("doc_update", (data) => {
+=======
+					if (input_name != docname) {
+						frappe.realtime.on("list_update", (data) => {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							if (data.doctype == doctype && data.name == input_name) {
 								reload_form(input_name);
 								frappe.show_alert({
@@ -271,11 +297,12 @@ frappe.ui.form.Toolbar = class Toolbar {
 		this.page.clear_menu();
 
 		if (frappe.boot.desk_settings.form_sidebar) {
-			this.make_navigation();
+			// this.make_navigation();
 			this.make_menu_items();
 		}
 	}
 
+<<<<<<< HEAD
 	make_viewers() {
 		if (this.frm.viewers) {
 			return;
@@ -310,18 +337,54 @@ frappe.ui.form.Toolbar = class Toolbar {
 		}
 	}
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	make_menu_items() {
 		// Print
-		const me = this;
-		const p = this.frm.perm[0];
-		const docstatus = cint(this.frm.doc.docstatus);
-		const is_submittable = frappe.model.is_submittable(this.frm.doc.doctype);
+		this.add_discard();
+		this.add_print();
+		this.add_email();
+		this.add_rename();
+		this.add_reload();
+		this.add_delete();
+		this.add_duplicate();
+		this.add_new();
+		this.page.add_divider();
+		this.add_audit_trail();
+		this.add_jump_to_field();
+		this.add_show_links();
+		this.add_copy_to_clipboard();
+		this.add_remind_me();
+		this.add_follow();
+		this.add_undo_redo();
+		this.add_auto_repeat();
+		this.page.add_divider();
+		this.make_customize_buttons();
+	}
 
+	add_discard() {
+		if (
+			frappe.model.is_submittable(this.frm.doc.doctype) &&
+			this.frm.doc.docstatus == 0 &&
+			!this.has_workflow()
+		) {
+			this.page.add_menu_item(
+				__("Discard"),
+				function () {
+					this.frm._discard();
+				},
+				true
+			);
+		}
+	}
+
+	add_print() {
 		const print_settings = frappe.model.get_doc(":Print Settings", "Print Settings");
 		const allow_print_for_draft = cint(print_settings.allow_print_for_draft);
 		const allow_print_for_cancelled = cint(print_settings.allow_print_for_cancelled);
 
 		if (
+<<<<<<< HEAD
 			!is_submittable ||
 			docstatus == 1 ||
 			(allow_print_for_cancelled && docstatus == 2) ||
@@ -332,26 +395,53 @@ frappe.ui.form.Toolbar = class Toolbar {
 					__("Print"),
 					function () {
 						me.frm.print_doc();
+=======
+			!frappe.model.is_submittable(this.frm.doc.doctype) ||
+			this.frm.doc.docstatus == 1 ||
+			(allow_print_for_cancelled && this.frm.doc.docstatus == 2) ||
+			(allow_print_for_draft && this.frm.doc.docstatus == 0)
+		) {
+			if (frappe.model.can_print(null, this.frm) && !this.frm.meta.issingle) {
+				this.page.add_menu_item(
+					__("Print"),
+					() => {
+						this.frm.print_doc();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					},
 					true
 				);
 				this.print_icon = this.page.add_action_icon(
 					"printer",
+<<<<<<< HEAD
 					function () {
 						me.frm.print_doc();
+=======
+					() => {
+						this.frm.print_doc();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					},
 					"",
 					__("Print")
 				);
 			}
 		}
+	}
 
+	add_email() {
 		// email
+<<<<<<< HEAD
 		if (frappe.model.can_email(null, me.frm) && me.frm.doc.docstatus < 2) {
 			this.page.add_menu_item(
 				__("Email"),
 				function () {
 					me.frm.email_doc();
+=======
+		if (frappe.model.can_email(null, this.frm) && this.frm.doc.docstatus < 2) {
+			this.page.add_menu_item(
+				__("Email"),
+				() => {
+					this.frm.email_doc();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				true,
 				{
@@ -360,16 +450,24 @@ frappe.ui.form.Toolbar = class Toolbar {
 				}
 			);
 		}
+	}
 
+	add_jump_to_field() {
 		// go to field modal
 		this.page.add_menu_item(
 			__("Jump to field"),
+<<<<<<< HEAD
 			function () {
 				me.show_jump_to_field_dialog();
+=======
+			() => {
+				this.show_jump_to_field_dialog();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			},
 			true,
 			"Ctrl+J"
 		);
+<<<<<<< HEAD
 
 		// Linked With
 		if (!me.frm.meta.issingle) {
@@ -377,12 +475,25 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Links"),
 				function () {
 					me.show_linked_with();
+=======
+	}
+
+	add_show_links() {
+		if (!this.frm.meta.issingle) {
+			this.page.add_menu_item(
+				__("Show Links"),
+				() => {
+					this.show_linked_with();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				true
 			);
 		}
+	}
 
+<<<<<<< HEAD
 		// duplicate
+<<<<<<< HEAD
 		if (in_list(frappe.boot.user.can_create, me.frm.doctype) && !me.frm.meta.allow_copy) {
 			this.page.add_menu_item(
 				__("Duplicate"),
@@ -390,9 +501,25 @@ frappe.ui.form.Toolbar = class Toolbar {
 					me.frm.copy_doc();
 				},
 				true
+=======
+		if (frappe.boot.user.can_create.includes(me.frm.doctype) && !me.frm.meta.allow_copy) {
+=======
+	add_duplicate() {
+		if (frappe.boot.user.can_create.includes(this.frm.doctype) && !this.frm.meta.allow_copy) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			this.page.add_menu_item(
+				__("Duplicate"),
+				() => {
+					this.frm.copy_doc();
+				},
+				true,
+				"Shift+D"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			);
 		}
+	}
 
+<<<<<<< HEAD
 		// copy doc to clipboard
 		this.page.add_menu_item(
 			__("Copy to Clipboard"),
@@ -408,22 +535,43 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Rename"),
 				function () {
 					me.frm.rename_doc();
+=======
+	add_rename() {
+		if (this.can_rename()) {
+			this.page.add_menu_item(
+				__("Rename"),
+				() => {
+					this.frm.rename_doc();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				true
 			);
 		}
+	}
 
+	add_reload() {
 		// reload
 		this.page.add_menu_item(
 			__("Reload"),
+<<<<<<< HEAD
 			function () {
 				me.frm.reload_doc();
 			},
 			true
 		);
+=======
+			() => {
+				this.frm.reload_doc();
+			},
+			true
+		);
+	}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
+	add_delete() {
 		// delete
 		if (
+<<<<<<< HEAD
 			cint(me.frm.doc.docstatus) != 1 &&
 			!me.frm.doc.__islocal &&
 			frappe.model.can_delete(me.frm.doctype)
@@ -432,6 +580,17 @@ frappe.ui.form.Toolbar = class Toolbar {
 				__("Delete"),
 				function () {
 					me.frm.savetrash();
+=======
+			cint(this.frm.doc.docstatus) != 1 &&
+			!this.frm.doc.__islocal &&
+			!frappe.model.is_single(this.frm.doctype) &&
+			frappe.model.can_delete(this.frm.doctype)
+		) {
+			this.page.add_menu_item(
+				__("Delete"),
+				() => {
+					this.frm.savetrash();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				true,
 				{
@@ -440,26 +599,106 @@ frappe.ui.form.Toolbar = class Toolbar {
 				}
 			);
 		}
+	}
 
-		this.make_customize_buttons();
+	add_remind_me() {
+		this.page.add_menu_item(
+			__("Remind Me"),
+			() => {
+				let reminder_maanger = new ReminderManager({ frm: this.frm });
+				reminder_maanger.show();
+			},
+			true,
+			{
+				shortcut: "Shift+R",
+				condition: () => !this.frm.is_new(),
+			}
+		);
+	}
 
-		// Auto Repeat
-		if (this.can_repeat()) {
-			this.page.add_menu_item(
-				__("Repeat"),
-				function () {
-					frappe.utils.new_auto_repeat_prompt(me.frm);
+	add_follow() {
+		if (this.frm.meta.track_changes && frappe.boot.user.document_follow_notify) {
+			this.follow_menu_item = this.page.add_menu_item(
+				__(this.get_follow_text()),
+				() => {
+					this.follow();
 				},
 				true
 			);
 		}
+	}
 
+	add_copy_to_clipboard() {
+		// copy doc to clipboard
+		this.page.add_menu_item(
+			__("Copy to Clipboard"),
+			() => {
+				frappe.utils.copy_to_clipboard(JSON.stringify(this.frm.doc));
+			},
+			true
+		);
+	}
+
+	add_undo_redo() {
+		// Undo and redo
+		this.page.add_menu_item(
+			__("Undo"),
+			() => {
+				this.frm.undo_manager.undo();
+			},
+			true,
+			{
+				shortcut: "Ctrl+Z",
+				condition: () => !this.frm.is_form_builder(),
+				description: __("Undo last action"),
+			}
+		);
+		this.page.add_menu_item(
+			__("Redo"),
+			() => {
+				this.frm.undo_manager.redo();
+			},
+			true,
+			{
+				shortcut: "Ctrl+Y",
+				condition: () => !this.frm.is_form_builder(),
+				description: __("Redo last action"),
+			}
+		);
+	}
+
+	add_auto_repeat() {
+		// Auto Repeat
+		if (this.can_repeat()) {
+			this.page.add_menu_item(
+				__("Repeat"),
+<<<<<<< HEAD
+				function () {
+					frappe.utils.new_auto_repeat_prompt(me.frm);
+=======
+				() => {
+					frappe.utils.new_auto_repeat_prompt(this.frm);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+				},
+				true
+			);
+		}
+	}
+
+	add_new() {
+		let p = this.frm.perm[0];
 		// New
 		if (p[CREATE] && !this.frm.meta.issingle && !this.frm.meta.in_create) {
 			this.page.add_menu_item(
+<<<<<<< HEAD
 				__("New {0}", [__(me.frm.doctype)]),
 				function () {
 					frappe.new_doc(me.frm.doctype, true);
+=======
+				__("New {0}", [__(this.frm.doctype)]),
+				() => {
+					frappe.new_doc(this.frm.doctype, true);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				true,
 				{
@@ -468,14 +707,24 @@ frappe.ui.form.Toolbar = class Toolbar {
 				}
 			);
 		}
+<<<<<<< HEAD
 
+=======
+	}
+
+	add_audit_trail() {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (
 			this.frm.doc.amended_from &&
 			frappe.model.get_value("DocType", this.frm.doc.doctype, "track_changes")
 		) {
 			this.page.add_menu_item(
 				__("View Audit Trail"),
+<<<<<<< HEAD
 				function () {
+=======
+				() => {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					frappe.set_route("audit-trail");
 				},
 				true
@@ -510,7 +759,11 @@ frappe.ui.form.Toolbar = class Toolbar {
 		}
 
 		if (frappe.model.can_create("DocType")) {
+<<<<<<< HEAD
 			if (frappe.boot.developer_mode === 1 && !is_doctype_form) {
+=======
+			if (frappe.boot.developer_mode && !is_doctype_form) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				// edit doctype
 				this.page.add_menu_item(
 					__("Edit DocType"),
@@ -554,9 +807,13 @@ frappe.ui.form.Toolbar = class Toolbar {
 	}
 	has_workflow() {
 		if (this._has_workflow === undefined)
+<<<<<<< HEAD
 			this._has_workflow = frappe.get_list("Workflow", {
 				document_type: this.frm.doctype,
 			}).length;
+=======
+			this._has_workflow = frappe.model.has_workflow(this.frm.doctype);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		return this._has_workflow;
 	}
 	get_docstatus() {
@@ -743,5 +1000,37 @@ frappe.ui.form.Toolbar = class Toolbar {
 		});
 
 		dialog.show();
+	}
+
+	follow() {
+		let is_followed = this.frm.get_docinfo().is_document_followed;
+		frappe
+			.call("frappe.desk.form.document_follow.update_follow", {
+				doctype: this.frm.doctype,
+				doc_name: this.frm.doc.name,
+				following: !is_followed,
+			})
+			.then((r) => {
+				is_followed = r.message ? true : false;
+
+				frappe.model.set_docinfo(
+					this.frm.doctype,
+					this.frm.doc.name,
+					"is_document_followed",
+					is_followed
+				);
+				this.refresh_follow(is_followed);
+			});
+	}
+
+	get_follow_text(follow) {
+		if (follow === null) {
+			follow = this.frm.get_docinfo().is_document_followed;
+		}
+		return follow ? __("Unfollow") : __("Follow");
+	}
+
+	refresh_follow(follow) {
+		this.follow_menu_item?.text(this.get_follow_text(follow));
 	}
 };

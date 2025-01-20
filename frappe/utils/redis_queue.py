@@ -17,6 +17,10 @@ class RedisQueue:
 
 	@classmethod
 	def get_connection(cls, username=None, password=None):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if frappe.conf.redis_queue_sentinel_enabled:
 			from frappe.utils.redis_wrapper import get_sentinel_connection
 
@@ -31,11 +35,33 @@ class RedisQueue:
 			conn = sentinel.master_for(frappe.conf.get("redis_queue_master_service"))
 			conn.ping()
 			return conn
+<<<<<<< HEAD
 
 		rq_url = frappe.local.conf.redis_queue
 		domain = rq_url.split("redis://", 1)[-1]
 		url = (username and f"redis://{username}:{password or ''}@{domain}") or rq_url
 		conn = redis.from_url(url)
+=======
+		conn = redis.from_url(frappe.conf.redis_queue, username=username, password=password)
+=======
+		conf = frappe.get_site_config()
+		if conf.redis_queue_sentinel_enabled:
+			from frappe.utils.redis_wrapper import get_sentinel_connection
+
+			sentinels = [tuple(node.split(":")) for node in conf.get("redis_queue_sentinels", [])]
+			sentinel = get_sentinel_connection(
+				sentinels=sentinels,
+				sentinel_username=conf.get("redis_queue_sentinel_username"),
+				sentinel_password=conf.get("redis_queue_sentinel_password"),
+				master_username=conf.get("redis_queue_master_username", username),
+				master_password=conf.get("redis_queue_master_password", password),
+			)
+			conn = sentinel.master_for(conf.get("redis_queue_master_service"))
+			conn.ping()
+			return conn
+		conn = redis.from_url(conf.redis_queue, username=username, password=password)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		conn.ping()
 		return conn
 

@@ -3,7 +3,15 @@
 
 # model __init__.py
 import frappe
+<<<<<<< HEAD
 from frappe import _
+=======
+<<<<<<< HEAD
+from frappe import _
+=======
+from frappe import _, _lt
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 data_fieldtypes = (
 	"Currency",
@@ -190,7 +198,7 @@ def delete_fields(args_dict, delete=0):
 			)
 		else:
 			existing_fields = frappe.db.describe(dt)
-			existing_fields = existing_fields and [e[0] for e in existing_fields] or []
+			existing_fields = (existing_fields and [e[0] for e in existing_fields]) or []
 			fields_need_to_delete = set(fields) & set(existing_fields)
 			if not fields_need_to_delete:
 				continue
@@ -199,8 +207,8 @@ def delete_fields(args_dict, delete=0):
 				# mariadb implicitly commits before DDL, make it explicit
 				frappe.db.commit()
 
-			query = "ALTER TABLE `tab%s` " % dt + ", ".join(
-				"DROP COLUMN `%s`" % f for f in fields_need_to_delete
+			query = "ALTER TABLE `tab{}` ".format(dt) + ", ".join(
+				"DROP COLUMN `{}`".format(f) for f in fields_need_to_delete
 			)
 			frappe.db.sql(query)
 
@@ -230,6 +238,12 @@ def get_permitted_fields(
 	if permission_type is None:
 		permission_type = "select" if frappe.only_has_select_perm(doctype, user=user) else "read"
 
+<<<<<<< HEAD
+=======
+	meta_fields = meta.default_fields.copy()
+	optional_meta_fields = [x for x in optional_fields if x in valid_columns]
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	if permitted_fields := meta.get_permitted_fieldnames(
 		parenttype=parenttype,
 		user=user,
@@ -239,15 +253,22 @@ def get_permitted_fields(
 		if permission_type == "select":
 			return permitted_fields
 
+<<<<<<< HEAD
 		meta_fields = meta.default_fields.copy()
 		optional_meta_fields = [x for x in optional_fields if x in valid_columns]
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if meta.istable:
 			meta_fields.extend(child_table_fields)
 
 		return meta_fields + permitted_fields + optional_meta_fields
 
+<<<<<<< HEAD
 	return []
+=======
+	return meta_fields + optional_meta_fields
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def is_default_field(fieldname: str) -> bool:

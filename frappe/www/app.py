@@ -1,9 +1,10 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+import os
+
 no_cache = 1
 
 import json
-import os
 import re
 from urllib.parse import urlencode
 
@@ -21,10 +22,16 @@ def get_context(context):
 		frappe.response["status_code"] = 403
 		frappe.msgprint(_("Log in to access this page."))
 		frappe.redirect(f"/login?{urlencode({'redirect-to': frappe.request.path})}")
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	elif frappe.db.get_value("User", frappe.session.user, "user_type", order_by=None) == "Website User":
 		frappe.throw(_("You are not permitted to access this page."), frappe.PermissionError)
 
-	hooks = frappe.get_hooks()
 	try:
 		boot = frappe.sessions.get()
 	except Exception as e:
@@ -35,6 +42,7 @@ def get_context(context):
 
 	frappe.db.commit()
 
+<<<<<<< HEAD
 	boot_json = frappe.as_json(boot, indent=None, separators=(",", ":"))
 
 	# remove script tags from boot
@@ -42,7 +50,26 @@ def get_context(context):
 
 	# TODO: Find better fix
 	boot_json = CLOSING_SCRIPT_TAG_PATTERN.sub("", boot_json)
-	boot_json = json.dumps(boot_json)
+
+<<<<<<< HEAD
+	include_js = hooks.get("app_include_js", []) + frappe.conf.get("app_include_js", [])
+	include_css = hooks.get("app_include_css", []) + frappe.conf.get("app_include_css", [])
+	include_icons = hooks.get("app_include_icons", [])
+	frappe.local.preload_assets["icons"].extend(include_icons)
+
+	if frappe.get_system_settings("enable_telemetry") and os.getenv("FRAPPE_SENTRY_DSN"):
+		include_js.append("sentry.bundle.js")
+=======
+=======
+>>>>>>> c72e91f4653d639300c4d8d8a7951c2aa8a95c2c
+	hooks = frappe.get_hooks()
+	app_include_js = hooks.get("app_include_js", []) + frappe.conf.get("app_include_js", [])
+	app_include_css = hooks.get("app_include_css", []) + frappe.conf.get("app_include_css", [])
+	app_include_icons = hooks.get("app_include_icons", [])
+
+	if frappe.get_system_settings("enable_telemetry") and os.getenv("FRAPPE_SENTRY_DSN"):
+		app_include_js.append("sentry.bundle.js")
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 	include_js = hooks.get("app_include_js", []) + frappe.conf.get("app_include_js", [])
 	include_css = hooks.get("app_include_css", []) + frappe.conf.get("app_include_css", [])
@@ -51,49 +78,26 @@ def get_context(context):
 		{
 			"no_cache": 1,
 			"build_version": frappe.utils.get_build_version(),
+<<<<<<< HEAD
 			"include_js": include_js,
 			"include_css": include_css,
+=======
+			"app_include_js": app_include_js,
+			"app_include_css": app_include_css,
+			"app_include_icons": app_include_icons,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			"layout_direction": "rtl" if is_rtl() else "ltr",
 			"lang": frappe.local.lang,
 			"sounds": hooks["sounds"],
-			"boot": boot if context.get("for_mobile") else boot_json,
+			"boot": boot,
 			"desk_theme": boot.get("desk_theme") or "Light",
 			"csrf_token": csrf_token,
 			"google_analytics_id": frappe.conf.get("google_analytics_id"),
 			"google_analytics_anonymize_ip": frappe.conf.get("google_analytics_anonymize_ip"),
-			"mixpanel_id": frappe.conf.get("mixpanel_id"),
+			"app_name": (
+				frappe.get_website_settings("app_name") or frappe.get_system_settings("app_name") or "Frappe"
+			),
 		}
 	)
 
 	return context
-
-
-@frappe.whitelist()
-def get_desk_assets(build_version):
-	"""Get desk assets to be loaded for mobile app"""
-	data = get_context({"for_mobile": True})
-	assets = [{"type": "js", "data": ""}, {"type": "css", "data": ""}]
-
-	if build_version != data["build_version"]:
-		# new build, send assets
-		for path in data["include_js"]:
-			# assets path shouldn't start with /
-			# as it points to different location altogether
-			if path.startswith("/assets/"):
-				path = path.replace("/assets/", "assets/")
-			try:
-				with open(os.path.join(frappe.local.sites_path, path)) as f:
-					assets[0]["data"] = assets[0]["data"] + "\n" + frappe.safe_decode(f.read(), "utf-8")
-			except OSError:
-				pass
-
-		for path in data["include_css"]:
-			if path.startswith("/assets/"):
-				path = path.replace("/assets/", "assets/")
-			try:
-				with open(os.path.join(frappe.local.sites_path, path)) as f:
-					assets[1]["data"] = assets[1]["data"] + "\n" + frappe.safe_decode(f.read(), "utf-8")
-			except OSError:
-				pass
-
-	return {"build_version": data["build_version"], "boot": data["boot"], "assets": assets}

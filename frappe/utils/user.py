@@ -41,7 +41,6 @@ class UserPermissions:
 		self.can_export = []
 		self.can_print = []
 		self.can_email = []
-		self.can_set_user_permissions = []
 		self.allow_modules = []
 		self.in_create = []
 		self.setup_user()
@@ -61,7 +60,7 @@ class UserPermissions:
 			return user
 
 		if not frappe.flags.in_install_db and not frappe.flags.in_test:
-			user_doc = frappe.cache().hget("user_doc", self.name, get_user_doc)
+			user_doc = frappe.cache.hget("user_doc", self.name, get_user_doc)
 			if user_doc:
 				self.doc = frappe.get_doc(user_doc)
 
@@ -156,7 +155,7 @@ class UserPermissions:
 			if p.get("read") or p.get("write") or p.get("create"):
 				if p.get("report"):
 					self.can_get_report.append(dt)
-				for key in ("import", "export", "print", "email", "set_user_permissions"):
+				for key in ("import", "export", "print", "email"):
 					if p.get(key):
 						getattr(self, "can_" + key).append(dt)
 
@@ -191,7 +190,7 @@ class UserPermissions:
 				filters={"property": "allow_import", "value": "1"},
 			)
 
-		frappe.cache().hset("can_import", frappe.session.user, self.can_import)
+		frappe.cache.hset("can_import", frappe.session.user, self.can_import)
 
 	def get_defaults(self):
 		import frappe.defaults
@@ -217,6 +216,7 @@ class UserPermissions:
 			[
 				"creation",
 				"desk_theme",
+				"code_editor_type",
 				"document_follow_notify",
 				"email",
 				"email_signature",
@@ -227,12 +227,24 @@ class UserPermissions:
 				"send_me_a_copy",
 				"user_type",
 				"onboarding_status",
+<<<<<<< HEAD
+=======
+				"default_workspace",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			],
 			as_dict=True,
 		)
 
 		if not self.can_read:
 			self.build_permissions()
+
+		if d.get("default_workspace"):
+			workspace = frappe.get_cached_doc("Workspace", d.default_workspace)
+			d.default_workspace = {
+				"name": workspace.name,
+				"public": workspace.public,
+				"title": workspace.title,
+			}
 
 		d.name = self.name
 		d.onboarding_status = frappe.parse_json(d.onboarding_status)
@@ -255,7 +267,6 @@ class UserPermissions:
 			"can_import",
 			"can_print",
 			"can_email",
-			"can_set_user_permissions",
 		):
 			d[key] = list(set(getattr(self, key)))
 
@@ -292,7 +303,7 @@ def get_fullname_and_avatar(user: str) -> _dict:
 
 
 def get_system_managers(only_name: bool = False) -> list[str]:
-	"""returns all system manager's user details"""
+	"""Return all system manager's user details."""
 	HasRole = DocType("Has Role")
 	User = DocType("User")
 
@@ -399,19 +410,16 @@ def is_system_user(username: str | None = None) -> str | None:
 def get_users() -> list[dict]:
 	from frappe.core.doctype.user.user import get_system_users
 
-	users = []
 	system_managers = get_system_managers(only_name=True)
 
-	for user in get_system_users():
-		users.append(
-			{
-				"full_name": get_user_fullname(user),
-				"email": user,
-				"is_system_manager": user in system_managers,
-			}
-		)
-
-	return users
+	return [
+		{
+			"full_name": get_user_fullname(user),
+			"email": user,
+			"is_system_manager": user in system_managers,
+		}
+		for user in get_system_users()
+	]
 
 
 def get_users_with_role(role: str) -> list[str]:

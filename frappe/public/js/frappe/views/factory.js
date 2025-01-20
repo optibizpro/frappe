@@ -29,12 +29,16 @@ frappe.views.Factory = class Factory {
 		}
 	}
 
-	make_page(double_column, page_name) {
-		return frappe.make_page(double_column, page_name);
+	make_page(double_column, page_name, sidebar_postition) {
+		return frappe.make_page(double_column, page_name, sidebar_postition);
 	}
 };
 
+<<<<<<< HEAD
 frappe.make_page = function (double_column, page_name) {
+=======
+frappe.make_page = function (double_column, page_name, sidebar_position) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	if (!page_name) {
 		page_name = frappe.get_route_str();
 	}
@@ -44,6 +48,10 @@ frappe.make_page = function (double_column, page_name) {
 	frappe.ui.make_app_page({
 		parent: page,
 		single_column: !double_column,
+<<<<<<< HEAD
+=======
+		sidebar_position: sidebar_position,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	});
 
 	frappe.container.change_to(page_name);

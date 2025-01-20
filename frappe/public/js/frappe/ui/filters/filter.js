@@ -20,16 +20,27 @@ frappe.ui.Filter = class {
 			["in", __("In")],
 			["not in", __("Not In")],
 			["is", __("Is")],
+<<<<<<< HEAD
 			[">", ">"],
 			["<", "<"],
 			[">=", ">="],
 			["<=", "<="],
+=======
+			[">", __("Greater Than")],
+			["<", __("Less Than")],
+			[">=", __("Greater Than Or Equal To")],
+			["<=", __("Less Than Or Equal To")],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			["Between", __("Between")],
 			["Timespan", __("Timespan")],
 		];
 
 		this.nested_set_conditions = [
 			["descendants of", __("Descendants Of")],
+<<<<<<< HEAD
+=======
+			["descendants of (inclusive)", __("Descendants Of (inclusive)")],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			["not descendants of", __("Not Descendants Of")],
 			["ancestors of", __("Ancestors Of")],
 			["not ancestors of", __("Not Ancestors Of")],
@@ -51,6 +62,42 @@ frappe.ui.Filter = class {
 			"Markdown Editor": ["Between", "Timespan", ">", "<", ">=", "<=", "in", "not in"],
 			Password: ["Between", "Timespan", ">", "<", ">=", "<=", "in", "not in"],
 			Rating: ["like", "not like", "Between", "in", "not in", "Timespan"],
+<<<<<<< HEAD
+=======
+			Int: ["like", "not like", "Between", "in", "not in", "Timespan"],
+			Float: ["like", "not like", "Between", "in", "not in", "Timespan"],
+			Percent: ["like", "not like", "Between", "in", "not in", "Timespan"],
+		};
+
+		this.special_condition_labels = {
+			Date: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+			Datetime: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+		};
+
+		this.special_condition_labels = {
+			Date: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+			Datetime: {
+				"<": __("Before"),
+				">": __("After"),
+				"<=": __("On or Before"),
+				">=": __("On or After"),
+			},
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		};
 	}
 
@@ -270,6 +317,7 @@ frappe.ui.Filter = class {
 	make_field(df, old_fieldtype) {
 		let old_text = this.field ? this.field.get_value() : null;
 		this.hide_invalid_conditions(df.fieldtype, df.original_type);
+		this.set_special_condition_labels(df.original_type);
 		this.toggle_nested_set_conditions(df);
 		let field_area = this.filter_edit_area.find(".filter-field").empty().get(0);
 		df.input_class = "input-xs";
@@ -394,6 +442,22 @@ frappe.ui.Filter = class {
 		}
 	}
 
+	set_special_condition_labels(original_type) {
+		let special_conditions = this.special_condition_labels[original_type] || {};
+		for (let condition of this.conditions) {
+			let special_label = special_conditions[condition[0]];
+			if (special_label) {
+				this.filter_edit_area
+					.find(`.condition option[value="${condition[0]}"]`)
+					.text(special_label);
+			} else {
+				this.filter_edit_area
+					.find(`.condition option[value="${condition[0]}"]`)
+					.text(__(condition[1]));
+			}
+		}
+	}
+
 	toggle_nested_set_conditions(df) {
 		let show_condition =
 			df.fieldtype === "Link" && frappe.boot.nested_set_doctypes.includes(df.options);
@@ -458,7 +522,7 @@ frappe.ui.filter_utils = {
 	},
 
 	get_selected_label(field) {
-		if (in_list(["Link", "Dynamic Link"], field.df.fieldtype)) {
+		if (["Link", "Dynamic Link"].includes(field.df.fieldtype)) {
 			return field.get_label_value();
 		}
 	},
@@ -531,6 +595,10 @@ frappe.ui.filter_utils = {
 				"=",
 				"!=",
 				"descendants of",
+<<<<<<< HEAD
+=======
+				"descendants of (inclusive)",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				"ancestors of",
 				"not descendants of",
 				"not ancestors of",

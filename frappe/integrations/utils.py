@@ -9,7 +9,15 @@ import frappe
 from frappe.utils import get_request_session
 
 
+<<<<<<< HEAD
 def make_request(method, url, auth=None, headers=None, data=None, json=None, params=None):
+=======
+<<<<<<< HEAD
+def make_request(method, url, auth=None, headers=None, data=None, json=None, params=None):
+=======
+def make_request(method: str, url: str, auth=None, headers=None, data=None, json=None, params=None):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	auth = auth or ""
 	data = data or {}
 	headers = headers or {}
@@ -31,27 +39,92 @@ def make_request(method, url, auth=None, headers=None, data=None, json=None, par
 				return response.text
 		return
 	except Exception as exc:
-		frappe.log_error()
+		if frappe.flags.integration_request_doc:
+			frappe.flags.integration_request_doc.log_error()
+		else:
+			frappe.log_error()
 		raise exc
 
 
-def make_get_request(url, **kwargs):
+def make_get_request(url: str, **kwargs):
+	"""Make a 'GET' HTTP request to the given `url` and return processed response.
+
+	You can optionally pass the below parameters:
+
+	* `headers`: Headers to be set in the request.
+	* `params`: Query parameters to be passed in the request.
+	* `auth`: Auth credentials.
+	"""
 	return make_request("GET", url, **kwargs)
 
 
-def make_post_request(url, **kwargs):
+def make_post_request(url: str, **kwargs):
+	"""Make a 'POST' HTTP request to the given `url` and return processed response.
+
+	You can optionally pass the below parameters:
+
+	* `headers`: Headers to be set in the request.
+	* `data`: Data to be passed in body of the request.
+	* `json`: JSON to be passed in the request.
+	* `params`: Query parameters to be passed in the request.
+	* `auth`: Auth credentials.
+	"""
 	return make_request("POST", url, **kwargs)
 
 
-def make_put_request(url, **kwargs):
+def make_put_request(url: str, **kwargs):
+	"""Make a 'PUT' HTTP request to the given `url` and return processed response.
+
+	You can optionally pass the below parameters:
+
+	* `headers`: Headers to be set in the request.
+	* `data`: Data to be passed in body of the request.
+	* `json`: JSON to be passed in the request.
+	* `params`: Query parameters to be passed in the request.
+	* `auth`: Auth credentials.
+	"""
 	return make_request("PUT", url, **kwargs)
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 def make_patch_request(url, **kwargs):
 	return make_request("PATCH", url, **kwargs)
 
 
 def make_delete_request(url, **kwargs):
+<<<<<<< HEAD
+=======
+=======
+def make_patch_request(url: str, **kwargs):
+	"""Make a 'PATCH' HTTP request to the given `url` and return processed response.
+
+	You can optionally pass the below parameters:
+
+	* `headers`: Headers to be set in the request.
+	* `data`: Data to be passed in body of the request.
+	* `json`: JSON to be passed in the request.
+	* `params`: Query parameters to be passed in the request.
+	* `auth`: Auth credentials.
+	"""
+	return make_request("PATCH", url, **kwargs)
+
+
+def make_delete_request(url: str, **kwargs):
+	"""Make a 'DELETE' HTTP request to the given `url` and return processed response.
+
+	You can optionally pass the below parameters:
+
+	* `headers`: Headers to be set in the request.
+	* `data`: Data to be passed in body of the request.
+	* `json`: JSON to be passed in the request.
+	* `params`: Query parameters to be passed in the request.
+	* `auth`: Auth credentials.
+	"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	return make_request("DELETE", url, **kwargs)
 
 

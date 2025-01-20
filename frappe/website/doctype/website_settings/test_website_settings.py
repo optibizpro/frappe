@@ -2,11 +2,28 @@
 # License: MIT. See LICENSE
 
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 from frappe.website.doctype.website_settings.website_settings import get_website_settings
 
 
 class TestWebsiteSettings(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+from frappe.website.doctype.website_settings.website_settings import get_website_settings
+
+
+class UnitTestWebsiteSettings(UnitTestCase):
+	"""
+	Unit tests for WebsiteSettings.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestWebsiteSettings(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_child_items_in_top_bar(self):
 		ws = frappe.get_doc("Website Settings")
 		ws.append(

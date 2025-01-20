@@ -135,6 +135,7 @@ frappe.ui.form.on("Data Import", {
 				let failed_records = cint(r.message.failed);
 				let total_records = cint(r.message.total_records);
 
+<<<<<<< HEAD
 				if (!total_records) return;
 				let action, message;
 				if (frm.doc.import_type === "Insert New Records") {
@@ -165,6 +166,36 @@ frappe.ui.form.on("Data Import", {
 					}
 				}
 
+<<<<<<< HEAD
+=======
+=======
+				if (!total_records) {
+					return;
+				}
+
+				let message;
+				if (frm.doc.import_type === "Insert New Records") {
+					message = __("Successfully imported {0} out of {1} records.", [
+						successful_records,
+						total_records,
+					]);
+				} else {
+					message = __("Successfully updated {0} out of {1} records.", [
+						successful_records,
+						total_records,
+					]);
+				}
+
+				if (failed_records > 0) {
+					message +=
+						"<br/>" +
+						__(
+							"Please click on 'Export Errored Rows', fix the errors and import again."
+						);
+				}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				// If the job timed out, display an extra hint
 				if (r.message.status === "Timed Out") {
 					message += "<br/>" + __("Import timed out, please re-try.");
@@ -443,7 +474,10 @@ frappe.ui.form.on("Data Import", {
 							}
 						} else {
 							let messages = JSON.parse(log.messages || "[]")
+<<<<<<< HEAD
 								.map(JSON.parse)
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 								.map((m) => {
 									let title = m.title ? `<strong>${m.title}</strong>` : "";
 									let message = m.message ? `<div>${m.message}</div>` : "";

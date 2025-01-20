@@ -94,9 +94,17 @@
   }
  ],
  "quick_entry": 1,
+<<<<<<< HEAD
  "sort_field": "modified",
- "sort_order": "ASC",
+=======
+ "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+ "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
  "translated_doctype": 1
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

@@ -108,7 +108,15 @@
  "in_create": 1,
  "is_virtual": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2024-01-13 10:38:40.230972",
+=======
+<<<<<<< HEAD
+ "modified": "2024-01-13 10:38:40.230972",
+=======
+ "modified": "2024-03-23 16:03:37.325708",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "modified_by": "Administrator",
  "module": "Core",
  "name": "RQ Job",
@@ -135,7 +143,11 @@
    "share": 1
   }
  ],
+<<<<<<< HEAD
  "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "sort_order": "DESC",
  "states": [
   {

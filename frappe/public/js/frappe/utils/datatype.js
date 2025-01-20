@@ -75,7 +75,11 @@ window.has_words = function (list, item) {
 window.has_common = function (list1, list2) {
 	if (!list1 || !list2) return false;
 	for (var i = 0, j = list1.length; i < j; i++) {
+<<<<<<< HEAD
 		if (in_list(list2, list1[i])) return true;
+=======
+		if (list2.includes(list1[i])) return true;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 	return false;
 };

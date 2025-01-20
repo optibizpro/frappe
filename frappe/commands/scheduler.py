@@ -5,19 +5,23 @@ import click
 import frappe
 from frappe.commands import get_site, pass_context
 from frappe.exceptions import SiteNotSpecifiedError
+<<<<<<< HEAD
+=======
+from frappe.utils.bench_helper import CliCtxObj
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 @click.command("trigger-scheduler-event", help="Trigger a scheduler event")
 @click.argument("event")
 @pass_context
-def trigger_scheduler_event(context, event):
+def trigger_scheduler_event(context: CliCtxObj, event):
 	import frappe.utils.scheduler
 
 	exit_code = 0
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			try:
 				frappe.get_doc("Scheduled Job Type", {"method": event}).execute()
@@ -35,13 +39,13 @@ def trigger_scheduler_event(context, event):
 
 @click.command("enable-scheduler")
 @pass_context
-def enable_scheduler(context):
+def enable_scheduler(context: CliCtxObj):
 	"Enable scheduler"
 	import frappe.utils.scheduler
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			frappe.utils.scheduler.enable_scheduler()
 			frappe.db.commit()
@@ -54,13 +58,13 @@ def enable_scheduler(context):
 
 @click.command("disable-scheduler")
 @pass_context
-def disable_scheduler(context):
+def disable_scheduler(context: CliCtxObj):
 	"Disable scheduler"
 	import frappe.utils.scheduler
 
 	for site in context.sites:
 		try:
-			frappe.init(site=site)
+			frappe.init(site)
 			frappe.connect()
 			frappe.utils.scheduler.disable_scheduler()
 			frappe.db.commit()
@@ -77,10 +81,16 @@ def disable_scheduler(context):
 @click.option("--format", "-f", default="text", type=click.Choice(["json", "text"]), help="Output format")
 @click.option("--verbose", "-v", is_flag=True, help="Verbose output")
 @pass_context
+<<<<<<< HEAD
 def scheduler(context, state: str, format: str, verbose: bool = False, site: str | None = None):
 	"""Control scheduler state."""
 	import frappe
 	import frappe.utils.scheduler
+=======
+def scheduler(context: CliCtxObj, state: str, format: str, verbose: bool = False, site: str | None = None):
+	"""Control scheduler state."""
+	import frappe
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	from frappe.utils.scheduler import is_scheduler_inactive, toggle_scheduler
 
 	site = site or get_site(context)
@@ -112,14 +122,15 @@ def scheduler(context, state: str, format: str, verbose: bool = False, site: str
 @click.option("--site", help="site name")
 @click.argument("state", type=click.Choice(["on", "off"]))
 @pass_context
-def set_maintenance_mode(context, state, site=None):
+def set_maintenance_mode(context: CliCtxObj, state, site=None):
+	"""Put the site in maintenance mode for upgrades."""
 	from frappe.installer import update_site_config
 
 	if not site:
 		site = get_site(context)
 
 	try:
-		frappe.init(site=site)
+		frappe.init(site)
 		update_site_config("maintenance_mode", 1 if (state == "on") else 0)
 
 	finally:
@@ -129,7 +140,7 @@ def set_maintenance_mode(context, state, site=None):
 @click.command("doctor")  # Passing context always gets a site and if there is no use site it breaks
 @click.option("--site", help="site name")
 @pass_context
-def doctor(context, site=None):
+def doctor(context: CliCtxObj, site=None):
 	"Get diagnostic info about background workers"
 	from frappe.utils.doctor import doctor as _doctor
 
@@ -141,7 +152,7 @@ def doctor(context, site=None):
 @click.command("show-pending-jobs")
 @click.option("--site", help="site name")
 @pass_context
-def show_pending_jobs(context, site=None):
+def show_pending_jobs(context: CliCtxObj, site=None):
 	"Get diagnostic info about background jobs"
 	from frappe.utils.doctor import pending_jobs as _pending_jobs
 
@@ -173,8 +184,12 @@ def purge_jobs(site=None, queue=None, event=None):
 
 @click.command("schedule")
 def start_scheduler():
+	"""Start scheduler process which is responsible for enqueueing the scheduled job types."""
+	import time
+
 	from frappe.utils.scheduler import start_scheduler
 
+	time.sleep(0.5)  # Delayed start. TODO: find better way to handle this.
 	start_scheduler()
 
 
@@ -195,6 +210,14 @@ def start_scheduler():
 	help="Dequeuing strategy to use",
 )
 def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=False, strategy=None):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	"""Start a backgrond worker"""
+=======
+	"""Start a background worker"""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	from frappe.utils.background_jobs import start_worker
 
 	start_worker(
@@ -205,20 +228,39 @@ def start_worker(queue, quiet=False, rq_username=None, rq_password=None, burst=F
 		burst=burst,
 		strategy=strategy,
 	)
+<<<<<<< HEAD
+=======
+
+
+@click.command("worker-pool")
+@click.option(
+	"--queue",
+	type=str,
+	help="Queue to consume from. Multiple queues can be specified using comma-separated string. If not specified all queues are consumed.",
+)
+@click.option("--num-workers", type=int, default=2, help="Number of workers to spawn in pool.")
+@click.option("--quiet", is_flag=True, default=False, help="Hide Log Outputs")
+@click.option("--burst", is_flag=True, default=False, help="Run Worker in Burst mode.")
+def start_worker_pool(queue, quiet=False, num_workers=2, burst=False):
+	"""Start a pool of background workers"""
+	from frappe.utils.background_jobs import start_worker_pool
+
+	start_worker_pool(queue=queue, quiet=quiet, burst=burst, num_workers=num_workers)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 @click.command("ready-for-migration")
 @click.option("--site", help="site name")
 @pass_context
-def ready_for_migration(context, site=None):
-	from frappe.utils.doctor import get_pending_jobs
+def ready_for_migration(context: CliCtxObj, site=None):
+	from frappe.utils.doctor import any_job_pending
 
 	if not site:
 		site = get_site(context)
 
 	try:
-		frappe.init(site=site)
-		pending_jobs = get_pending_jobs(site=site)
+		frappe.init(site)
+		pending_jobs = any_job_pending(site=site)
 
 		if pending_jobs:
 			print(f"NOT READY for migration: site {site} has pending background jobs")
@@ -243,5 +285,6 @@ commands = [
 	show_pending_jobs,
 	start_scheduler,
 	start_worker,
+	start_worker_pool,
 	trigger_scheduler_event,
 ]

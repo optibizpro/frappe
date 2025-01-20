@@ -11,13 +11,21 @@ frappe.ui.Tree = class {
 		icon_set,
 		toolbar,
 		expandable,
+<<<<<<< HEAD
 		with_skeleton = 1, // eslint-disable-line
+=======
+		with_skeleton = 1,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		args,
 		method,
 		get_label,
 		on_render,
+<<<<<<< HEAD
 		on_click, // eslint-disable-line
+=======
+		on_click,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}) {
 		$.extend(this, arguments[0]);
 		if (root_value == null) {
@@ -79,6 +87,7 @@ frappe.ui.Tree = class {
 	setup_treenode_class() {
 		let tree = this;
 		this.TreeNode = class {
+<<<<<<< HEAD
 			constructor({
 				parent,
 				label,
@@ -87,6 +96,9 @@ frappe.ui.Tree = class {
 				is_root,
 				data, // eslint-disable-line
 			}) {
+=======
+			constructor({ parent, label, parent_label, expandable, is_root, data }) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				$.extend(this, arguments[0]);
 				this.loaded = 0;
 				this.expanded = 0;
@@ -280,7 +292,11 @@ frappe.ui.Tree = class {
 		}
 
 		$(icon_html).appendTo(node.$tree_link);
-		$(`<a class="tree-label"> ${this.get_node_label(node)}</a>`).appendTo(node.$tree_link);
+		$(
+			`<a class="tree-label" data-doctype="${this.args.doctype}" data-name="${
+				node.label
+			}"> ${this.get_node_label(node)}</a>`
+		).appendTo(node.$tree_link);
 
 		node.$tree_link.on("click", () => {
 			setTimeout(() => {

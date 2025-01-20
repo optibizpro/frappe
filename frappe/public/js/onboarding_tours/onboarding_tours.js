@@ -11,11 +11,19 @@ frappe.ui.OnboardingTour = class OnboardingTour {
 			allowClose: false,
 			padding: 10,
 			overlayClickNext: false,
+<<<<<<< HEAD
 			keyboardControl: true,
 			nextBtnText: __("Next"),
 			prevBtnText: __("Previous"),
 			doneBtnText: __("Done"),
 			closeBtnText: __("Close"),
+=======
+			keyboardControl: false,
+			nextBtnText: __("Next"),
+			prevBtnText: __("Previous"),
+			doneBtnText: __("Done"),
+			closeBtnText: __("Skip"),
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			opacity: 0.5,
 			onHighlighted: (step) => {
 				frappe.ui.next_form_tour = step.options.step_info?.next_form_tour;
@@ -277,7 +285,11 @@ frappe.ui.init_onboarding_tour = () => {
 		frappe.boot.onboarding_tours &&
 			frappe.boot.onboarding_tours.forEach((tour) => {
 				let tour_route = tour[1];
+<<<<<<< HEAD
 				length = Math.min(route.length, tour_route.length);
+=======
+				let length = Math.min(route.length, tour_route.length);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				if (length >= 1 && route[0] != tour_route[0]) return;
 				if (length >= 2 && tour_route[1] != "*" && route[1] != tour_route[1]) return;
 				if (

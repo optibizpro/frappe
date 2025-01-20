@@ -3,5 +3,9 @@
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
 
+<<<<<<< HEAD
 *           @frappe/frappe-review-team
 workspace   @shariquerik
+=======
+*                 @frappe/frappe-review-team
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

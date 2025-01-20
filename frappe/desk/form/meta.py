@@ -1,6 +1,5 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
-import io
 import os
 
 import frappe
@@ -30,28 +29,36 @@ ASSET_KEYS = (
 	"__templates",
 	"__custom_js",
 	"__custom_list_js",
+	"__workspaces",
 )
 
 
-def get_meta(doctype, cached=True):
+def get_meta(doctype, cached=True) -> "FormMeta":
 	# don't cache for developer mode as js files, templates may be edited
+<<<<<<< HEAD
 	if cached and not frappe.conf.developer_mode:
 		meta = frappe.cache().hget("doctype_form_meta", doctype)
 		if not meta:
 			meta = FormMeta(doctype)
 			frappe.cache().hset("doctype_form_meta", doctype, meta)
+=======
+	cached = cached and not frappe.conf.developer_mode
+	if cached:
+		meta = frappe.cache.hget("doctype_form_meta", doctype)
+		if not meta:
+			# Cache miss - explicitly get meta from DB to avoid
+			meta = FormMeta(doctype, cached=False)
+			frappe.cache.hset("doctype_form_meta", doctype, meta)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	else:
 		meta = FormMeta(doctype)
-
-	if frappe.local.lang != "en":
-		meta.set_translations(frappe.local.lang)
 
 	return meta
 
 
 class FormMeta(Meta):
-	def __init__(self, doctype):
-		super().__init__(doctype)
+	def __init__(self, doctype, *, cached=True):
+		self.__dict__.update(frappe.get_meta(doctype, cached=cached).__dict__)
 		self.load_assets()
 
 	def load_assets(self):
@@ -69,6 +76,7 @@ class FormMeta(Meta):
 			self.load_templates()
 			self.load_dashboard()
 			self.load_kanban_meta()
+			self.load_workspaces()
 
 		self.set("__assets_loaded", True)
 
@@ -243,9 +251,7 @@ class FormMeta(Meta):
 			workflow = frappe.get_doc("Workflow", workflow_name)
 			workflow_docs.append(workflow)
 
-			for d in workflow.get("states"):
-				workflow_docs.append(frappe.get_doc("Workflow State", d.state))
-
+			workflow_docs.extend(frappe.get_doc("Workflow State", d.state) for d in workflow.get("states"))
 		self.set("__workflow_docs", workflow_docs)
 
 	def load_templates(self):
@@ -259,6 +265,7 @@ class FormMeta(Meta):
 
 				self.set("__form_grid_templates", templates)
 
+<<<<<<< HEAD
 	def set_translations(self, lang):
 		from frappe.translate import extract_messages_from_code, make_dict_from_messages
 
@@ -271,8 +278,41 @@ class FormMeta(Meta):
 				messages = make_dict_from_messages(messages)
 				self.get("__messages").update(messages)
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def load_dashboard(self):
 		self.set("__dashboard", self.get_dashboard_data())
+
+	def load_workspaces(self):
+		Shortcut = frappe.qb.DocType("Workspace Shortcut")
+		Workspace = frappe.qb.DocType("Workspace")
+		shortcut = (
+			frappe.qb.from_(Shortcut)
+			.select(Shortcut.parent)
+			.inner_join(Workspace)
+			.on(Workspace.name == Shortcut.parent)
+			.where(Shortcut.link_to == self.name)
+			.where(Shortcut.type == "DocType")
+			.where(Workspace.public == 1)
+			.run()
+		)
+		if shortcut:
+			self.set("__workspaces", [shortcut[0][0]])
+		else:
+			Link = frappe.qb.DocType("Workspace Link")
+			link = (
+				frappe.qb.from_(Link)
+				.select(Link.parent)
+				.inner_join(Workspace)
+				.on(Workspace.name == Link.parent)
+				.where(Link.link_type == "DocType")
+				.where(Link.link_to == self.name)
+				.where(Workspace.public == 1)
+				.run()
+			)
+
+			if link:
+				self.set("__workspaces", [link[0][0]])
 
 	def load_kanban_meta(self):
 		self.load_kanban_column_fields()

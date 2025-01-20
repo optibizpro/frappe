@@ -9,8 +9,14 @@ frappe.ui.form.Layout = class Layout {
 		this.tabs = [];
 		this.sections = [];
 		this.page_breaks = [];
+<<<<<<< HEAD
+=======
+		this.sections_dict = {};
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.fields_list = [];
 		this.fields_dict = {};
+		this.section_count = 0;
+		this.column_count = 0;
 
 		$.extend(this, opts);
 	}
@@ -32,6 +38,7 @@ frappe.ui.form.Layout = class Layout {
 		}
 
 		this.setup_tab_events();
+		this.frm && this.setup_tooltip_events();
 		this.render();
 	}
 
@@ -41,7 +48,11 @@ frappe.ui.form.Layout = class Layout {
 				<ul class="nav form-tabs" id="form-tabs" role="tablist"></ul>
 			</div>
 		`).appendTo(this.page);
+<<<<<<< HEAD
 		this.tabs_list = this.page.find(".form-tabs");
+=======
+		this.tab_link_container = this.page.find(".form-tabs");
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.tabs_content = $(`<div class="form-tab-content tab-content"></div>`).appendTo(
 			this.page
 		);
@@ -93,11 +104,15 @@ frappe.ui.form.Layout = class Layout {
 		return fields;
 	}
 
-	show_message(html, color) {
+	show_message(html, color, permanent = false) {
 		if (this.message_color) {
 			// remove previous color
 			this.message.removeClass(this.message_color);
 		}
+<<<<<<< HEAD
+=======
+		let close_message = $(`<div class="close-message">${frappe.utils.icon("close")}</div>`);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.message_color =
 			color && ["yellow", "blue", "red", "green", "orange"].includes(color) ? color : "blue";
 		if (html) {
@@ -107,6 +122,10 @@ frappe.ui.form.Layout = class Layout {
 			}
 			this.message.removeClass("hidden").addClass(this.message_color);
 			$(html).appendTo(this.message);
+			if (!permanent) {
+				close_message.appendTo(this.message);
+				close_message.on("click", () => this.message.empty().addClass("hidden"));
+			}
 		} else {
 			this.message.empty().addClass("hidden");
 		}
@@ -203,7 +222,11 @@ frappe.ui.form.Layout = class Layout {
 		!this.section && this.make_section();
 		!this.column && this.make_column();
 
+<<<<<<< HEAD
 		const parent = this.column.wrapper.get(0);
+=======
+		const parent = this.column.form.get(0);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		const fieldobj = this.init_field(df, parent, render);
 
 		// An invalid control name will return in a null fieldobj
@@ -212,14 +235,11 @@ frappe.ui.form.Layout = class Layout {
 		this.fields_list.push(fieldobj);
 		this.fields_dict[df.fieldname] = fieldobj;
 
-		this.section.fields_list.push(fieldobj);
-		this.section.fields_dict[df.fieldname] = fieldobj;
-		fieldobj.section = this.section;
+		this.section.add_field(fieldobj);
+		this.column.add_field(fieldobj);
 
 		if (this.current_tab) {
-			fieldobj.tab = this.current_tab;
-			this.current_tab.fields_list.push(fieldobj);
-			this.current_tab.fields_dict[df.fieldname] = fieldobj;
+			this.current_tab.add_field(fieldobj);
 		}
 	}
 
@@ -247,7 +267,10 @@ frappe.ui.form.Layout = class Layout {
 	}
 
 	make_page(df) {
+<<<<<<< HEAD
 		// eslint-disable-line no-unused-vars
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		let me = this;
 		let head = $(`
 			<div class="form-clickable-section text-center">
@@ -281,13 +304,28 @@ frappe.ui.form.Layout = class Layout {
 		this.fold_btn.trigger("click");
 	}
 
+<<<<<<< HEAD
 	make_section(df) {
+=======
+	make_section(df = {}) {
+		this.section_count++;
+		if (!df.fieldname) {
+			df.fieldname = `__section_${this.section_count}`;
+			df.fieldtype = "Section Break";
+		}
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.section = new Section(
 			this.current_tab ? this.current_tab.wrapper : this.page,
 			df,
 			this.card_layout,
 			this
 		);
+<<<<<<< HEAD
+=======
+		this.sections.push(this.section);
+		this.sections_dict[df.fieldname] = this.section;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		// append to layout fields
 		if (df) {
@@ -298,7 +336,13 @@ frappe.ui.form.Layout = class Layout {
 		this.column = null;
 	}
 
-	make_column(df) {
+	make_column(df = {}) {
+		this.column_count++;
+		if (!df.fieldname) {
+			df.fieldname = `__column_${this.section_count}`;
+			df.fieldtype = "Column Break";
+		}
+
 		this.column = new Column(this.section, df);
 		if (df && df.fieldname) {
 			this.fields_list.push(this.column);
@@ -307,7 +351,7 @@ frappe.ui.form.Layout = class Layout {
 
 	make_tab(df) {
 		this.section = null;
-		let tab = new Tab(this, df, this.frm, this.tabs_list, this.tabs_content);
+		let tab = new Tab(this, df, this.frm, this.tab_link_container, this.tabs_content);
 		this.current_tab = tab;
 		this.make_section({ fieldtype: "Section Break" });
 		this.tabs.push(tab);
@@ -358,7 +402,10 @@ frappe.ui.form.Layout = class Layout {
 			const section = $(this).removeClass("empty-section visible-section");
 			if (section.find(".frappe-control:not(.hide-control)").length) {
 				section.addClass("visible-section");
-			} else {
+			} else if (
+				section.parent().hasClass("tab-pane") ||
+				section.parent().hasClass("form-page")
+			) {
 				// nothing visible, hide the section
 				section.addClass("empty-section");
 			}
@@ -375,13 +422,40 @@ frappe.ui.form.Layout = class Layout {
 
 		const visible_tabs = this.tabs.filter((tab) => !tab.hidden);
 		if (visible_tabs && visible_tabs.length == 1) {
+<<<<<<< HEAD
 			visible_tabs[0].parent.toggleClass("hide show");
+=======
+			visible_tabs[0].tab_link.toggleClass("hide show");
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 		this.set_tab_as_active();
 	}
 
+	select_tab(label_or_fieldname) {
+		for (let tab of this.tabs) {
+			if (
+				tab.label.toLowerCase() === label_or_fieldname.toLowerCase() ||
+				tab.df.fieldname?.toLowerCase() === label_or_fieldname.toLowerCase()
+			) {
+				tab.set_active();
+				return;
+			}
+		}
+	}
+
 	set_tab_as_active() {
-		let frm_active_tab = this?.frm.get_active_tab?.();
+<<<<<<< HEAD
+=======
+		// Set active tab based on hash
+		const tab_from_hash = window.location.hash.replace("#", "");
+		const tab = this.tabs.find((tab) => tab.df.fieldname === tab_from_hash);
+		if (tab) {
+			tab.set_active();
+			return;
+		}
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+		let frm_active_tab = this.frm?.get_active_tab?.();
 		if (frm_active_tab) {
 			frm_active_tab.set_active();
 		} else if (this.tabs.length) {
@@ -461,7 +535,11 @@ frappe.ui.form.Layout = class Layout {
 		let tabs_content = this.tabs_content[0];
 		if (!tabs_list.length) return;
 
+<<<<<<< HEAD
 		$(window).scroll(
+=======
+		$(".main-section").scroll(
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			frappe.utils.throttle(() => {
 				let current_scroll = document.documentElement.scrollTop;
 				if (current_scroll > 0 && last_scroll <= current_scroll) {
@@ -475,7 +553,11 @@ frappe.ui.form.Layout = class Layout {
 			}, 500)
 		);
 
+<<<<<<< HEAD
 		this.tabs_list.off("click").on("click", ".nav-link", (e) => {
+=======
+		this.tab_link_container.off("click").on("click", ".nav-link", (e) => {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			$(e.currentTarget).tab("show");
@@ -501,6 +583,25 @@ frappe.ui.form.Layout = class Layout {
 				}
 			}
 		});
+	}
+
+	setup_tooltip_events() {
+		$(document).on("keydown", (e) => {
+			if (e.altKey) {
+				this.wrapper.addClass("show-tooltip");
+			}
+		});
+		$(document).on("keyup", (e) => {
+			if (!e.altKey) {
+				this.wrapper.removeClass("show-tooltip");
+			}
+		});
+		this.frm.page &&
+			frappe.ui.keys.add_shortcut({
+				shortcut: "alt+hover",
+				page: this.frm.page,
+				description: __("Show Fieldname (click to copy on clipboard)"),
+			});
 	}
 
 	handle_tab(doctype, fieldname, shift) {
@@ -580,7 +681,11 @@ frappe.ui.form.Layout = class Layout {
 					return true;
 				} else if (
 					field.df.fieldtype === "Table MultiSelect" ||
+<<<<<<< HEAD
 					!in_list(frappe.model.no_value_type, field.df.fieldtype)
+=======
+					!frappe.model.no_value_type.includes(field.df.fieldtype)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				) {
 					this.set_focus(field);
 					return true;

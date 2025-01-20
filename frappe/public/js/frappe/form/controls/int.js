@@ -1,11 +1,14 @@
 frappe.ui.form.ControlInt = class ControlInt extends frappe.ui.form.ControlData {
 	static trigger_change_on_input_event = false;
+<<<<<<< HEAD
+=======
+	static input_mode = "numeric";
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	make() {
 		super.make();
-		// $(this.label_area).addClass('pull-right');
-		// $(this.disp_area).addClass('text-right');
 	}
 	make_input() {
+<<<<<<< HEAD
 		var me = this;
 		super.make_input();
 		this.$input
@@ -18,16 +21,36 @@ frappe.ui.form.ControlInt = class ControlInt extends frappe.ui.form.ControlData 
 				}, 100);
 				return false;
 			});
+=======
+		super.make_input();
+		this.$input.on("focus", () => {
+			document.activeElement?.select?.();
+			return false;
+		});
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 	validate(value) {
 		return this.parse(value);
 	}
 	eval_expression(value) {
 		if (typeof value === "string") {
+<<<<<<< HEAD
 			if (value.match(/^[0-9+\-/* ]+$/)) {
+=======
+			const parsed_components = value.match(/[^\d.,]+|[\d.,]+/g);
+			var parsed_value = value;
+			if (parsed_components !== null) {
+				parsed_value = parsed_components
+					.map((v) => {
+						return isNaN(parseFloat(v)) ? v : flt(v);
+					})
+					.join("");
+			}
+			if (parsed_value.match(/^[0-9+\-/*.() ]+$/)) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				// If it is a string containing operators
 				try {
-					return eval(value);
+					return eval(parsed_value);
 				} catch (e) {
 					// bad expression
 					return value;

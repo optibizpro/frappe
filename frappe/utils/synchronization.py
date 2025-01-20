@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 """ Utils for thread/process synchronization. """
+=======
+"""Utils for thread/process synchronization."""
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 import os
 from contextlib import contextmanager
@@ -40,10 +44,17 @@ def filelock(lock_name: str, *, timeout=30, is_global=False):
 		with _StrongFileLock(lock_path, timeout=timeout):
 			yield
 	except Timeout as e:
+<<<<<<< HEAD
 		frappe.log_error("Filelock: Failed to aquire {lock_path}")
 
 		raise LockTimeoutError(
 			_("Failed to aquire lock: {}").format(lock_name)
+=======
+		frappe.log_error(f"Filelock: Failed to aquire {lock_path}")
+
+		raise LockTimeoutError(
+			_("Failed to aquire lock: {}. Lock may be held by another process.").format(lock_name)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			+ "<br>"
 			+ _("You can manually remove the lock if you think it's safe: {}").format(lock_path)
 		) from e

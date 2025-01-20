@@ -52,13 +52,18 @@ export default class Shortcut extends Block {
 
 		if (this.data && this.data.shortcut_name) {
 			let has_data = this.make("shortcut", this.data.shortcut_name);
+<<<<<<< HEAD
 			if (!has_data) return;
+=======
+			if (!has_data) return this.wrapper;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 
 		if (!this.readOnly) {
 			$(this.wrapper).find(".widget").addClass("shortcut edit-mode");
 			this.add_settings_button();
 			this.add_new_block_button();
+<<<<<<< HEAD
 		} else {
 			let $shortcut_icon = frappe.utils.icon(
 				"arrow-up-right",
@@ -70,6 +75,8 @@ export default class Shortcut extends Block {
 			$(this.wrapper).find(".widget .widget-title").append($shortcut_icon);
 
 			$(this.wrapper).append($(`<div class="divider"></div>`));
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 		return this.wrapper;
 	}

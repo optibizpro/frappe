@@ -8,8 +8,12 @@
 	z-index: 9999 !important;
 	background: var(--fg-color);
 	color: var(--text-color);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius-lg);
 	border: 1px solid var(--border-color);
+<<<<<<< HEAD
+=======
+	box-shadow: var(--shadow-2xl);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	position: fixed;
 
 	&.active {
@@ -18,6 +22,10 @@
 
 	&--nav {
 		border-bottom: 1px solid var(--border-color);
+	}
+	&--nav-title:hover,
+	&--nav-action:hover {
+		background-color: var(--fg-hover-color);
 	}
 
 	&--time-current-hours,
@@ -36,21 +44,30 @@
 
 	&--cell {
 		&.-current- {
-			color: var(--brand-color);
+			color: var(--text-color);
+			&:not(.-selected-):not(.-in-range-) {
+				font-weight: var(--weight-bold);
+			}
 
 			&.-in-range- {
-				color: var(--brand-color);
+				color: var(--text-color);
 			}
 		}
 
 		&.-range-from-,
 		&.-range-to- {
+<<<<<<< HEAD
 			border: 1px solid fade(#0089ff, 30%);
 			background: fade(#0089ff, 10%);
+=======
+			border: 1px solid var(--border-color);
+			background: var(--date-range-bg);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 
 		&.-selected-,
 		&.-current-.-selected- {
+<<<<<<< HEAD
 			background: #0089ff;
 		}
 
@@ -60,6 +77,21 @@
 
 		&.-in-range-.-focus- {
 			background: fade(#0089ff, 10%);
+=======
+			color: var(--date-active-text);
+			background: var(--date-active-bg);
+			border-radius: var(--border-radius-tiny);
+		}
+
+		&.-in-range- {
+			color: var(--text-color);
+			background: var(--date-range-bg);
+		}
+
+		&.-in-range-.-focus- {
+			color: var(--date-active-text);
+			background: var(--date-active-bg);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 
 		&.-focus- {
@@ -67,7 +99,12 @@
 		}
 
 		&.-selected-.-focus- {
+<<<<<<< HEAD
 			background: fade(#0089ff, 90%);
+=======
+			color: var(--date-active-text);
+			background: var(--date-active-bg);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 	}
 
@@ -77,7 +114,11 @@
 	}
 
 	&--time-row {
+<<<<<<< HEAD
 		background-image: linear-gradient(to right, #0089ff, #0089ff);
+=======
+		background-image: linear-gradient(to right, var(--gray-600), var(--gray-600));
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		background-repeat: no-repeat;
 		background-size: 100% 1px;
 		background-position: left 50%;
@@ -95,7 +136,7 @@
 	}
 
 	&--button {
-		color: var(--brand-color);
+		color: var(--text-color);
 		&:hover {
 			color: var(--text-color);
 			background-color: var(--fg-hover-color);

@@ -11,6 +11,35 @@ frappe.ui.form.on("Web Form", {
 			}
 			return value;
 		};
+<<<<<<< HEAD
+=======
+
+		frappe.meta.docfield_map["Web Form Field"].fieldname.formatter = (value) => {
+			if (!value) return;
+			return frappe.unscrub(value);
+		};
+
+		frappe.meta.docfield_map["Web Form List Column"].fieldname.formatter = (value) => {
+			if (!value) return;
+			return frappe.unscrub(value);
+		};
+	},
+
+	refresh: function (frm) {
+		// get iframe url for web form
+		frm.sidebar
+<<<<<<< HEAD
+			.add_user_action(__("Copy Embed Code"))
+=======
+			.add_user_action(__("Copy embed code"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			.attr("href", "#")
+			.on("click", () => {
+				const url = frappe.urllib.get_full_url(frm.doc.route);
+				const code = `<iframe src="${url}" style="border: none; width: 100%; height: inherit;"></iframe>`;
+				frappe.utils.copy_to_clipboard(code, __("Embed code copied"));
+			});
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		frappe.meta.docfield_map["Web Form Field"].fieldname.formatter = (value) => {
 			if (!value) return;
@@ -60,7 +89,19 @@ frappe.ui.form.on("Web Form", {
 
 		if (!frm.doc.web_form_fields) {
 			frm.scroll_to_field("web_form_fields");
+<<<<<<< HEAD
 			frappe.throw(__("Atleast one field is required in Web Form Fields Table"));
+=======
+			frappe.throw(__("At least one field is required in Web Form Fields Table"));
+		}
+
+		let page_break_count = frm.doc.web_form_fields.filter(
+			(f) => f.fieldtype == "Page Break"
+		).length;
+
+		if (page_break_count >= 10) {
+			frappe.throw(__("There can be only 9 Page Break fields in a Web Form"));
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 
 		let page_break_count = frm.doc.web_form_fields.filter(
@@ -89,19 +130,24 @@ frappe.ui.form.on("Web Form", {
 
 			get_fields_for_doctype(frm.doc.doc_type).then((fields) => {
 				for (let df of fields) {
+					let fieldtype = df.fieldtype;
+					if (fieldtype == "Tab Break") {
+						fieldtype = "Page Break";
+					}
 					if (
-						webform_fieldtypes.includes(df.fieldtype) &&
+						webform_fieldtypes.includes(fieldtype) &&
 						!added_fields.includes(df.fieldname) &&
 						!df.hidden
 					) {
 						frm.add_child("web_form_fields", {
 							fieldname: df.fieldname,
 							label: df.label,
-							fieldtype: df.fieldtype,
+							fieldtype: fieldtype,
 							options: df.options,
 							reqd: df.reqd,
 							default: df.default,
 							read_only: df.read_only,
+							precision: df.precision,
 							depends_on: df.depends_on,
 							mandatory_depends_on: df.mandatory_depends_on,
 							read_only_depends_on: df.read_only_depends_on,
@@ -334,7 +380,8 @@ function get_fields_for_doctype(doctype) {
 			return (
 				(frappe.model.is_value_type(df.fieldtype) &&
 					!["lft", "rgt"].includes(df.fieldname)) ||
-				["Table", "Table Multiselect"].includes(df.fieldtype)
+				["Table", "Table Multiselect"].includes(df.fieldtype) ||
+				frappe.model.layout_fields.includes(df.fieldtype)
 			);
 		});
 	});

@@ -1,6 +1,7 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+import _socket
 import datetime
 import email
 import email.utils
@@ -9,17 +10,27 @@ import json
 import poplib
 import re
 import ssl
+<<<<<<< HEAD
 import time
 from contextlib import suppress
+=======
+<<<<<<< HEAD
+import time
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+from contextlib import suppress
+from email.errors import HeaderParseError
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from email.header import decode_header
+from urllib.parse import unquote
 
-import _socket
 import chardet
 from email_reply_parser import EmailReplyParser
 
 import frappe
 from frappe import _, safe_decode, safe_encode
-from frappe.core.doctype.file import MaxFileSizeReachedError, get_random_filename
+from frappe.core.doctype.file.exceptions import MaxFileSizeReachedError
+from frappe.core.doctype.file.utils import get_random_filename
 from frappe.email.oauth import Oauth
 from frappe.utils import (
 	add_days,
@@ -53,10 +64,13 @@ class EmailSizeExceededError(frappe.ValidationError):
 	pass
 
 
+<<<<<<< HEAD
 class EmailTimeoutError(frappe.ValidationError):
 	pass
 
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 class LoginLimitExceeded(frappe.ValidationError):
 	pass
 
@@ -79,15 +93,22 @@ class EmailServer:
 		"""Connect to IMAP"""
 		try:
 			if cint(self.settings.use_ssl):
+<<<<<<< HEAD
 				self.imap = Timed_IMAP4_SSL(
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.get("pop_timeout"),
+=======
+				self.imap = imaplib.IMAP4_SSL(
+					self.settings.host,
+					self.settings.incoming_port,
+					timeout=frappe.conf.pop_timeout,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					ssl_context=ssl.create_default_context(),
 				)
 			else:
-				self.imap = Timed_IMAP4(
-					self.settings.host, self.settings.incoming_port, timeout=frappe.conf.get("pop_timeout")
+				self.imap = imaplib.IMAP4(
+					self.settings.host, self.settings.incoming_port, timeout=frappe.conf.pop_timeout
 				)
 
 				if cint(self.settings.use_starttls):
@@ -116,15 +137,22 @@ class EmailServer:
 		# this method return pop connection
 		try:
 			if cint(self.settings.use_ssl):
+<<<<<<< HEAD
 				self.pop = Timed_POP3_SSL(
 					self.settings.host,
 					self.settings.incoming_port,
 					timeout=frappe.conf.get("pop_timeout"),
+=======
+				self.pop = poplib.POP3_SSL(
+					self.settings.host,
+					self.settings.incoming_port,
+					timeout=frappe.conf.pop_timeout,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					context=ssl.create_default_context(),
 				)
 			else:
-				self.pop = Timed_POP3(
-					self.settings.host, self.settings.incoming_port, timeout=frappe.conf.get("pop_timeout")
+				self.pop = poplib.POP3(
+					self.settings.host, self.settings.incoming_port, timeout=frappe.conf.pop_timeout
 				)
 
 			if self.settings.use_oauth:
@@ -159,7 +187,7 @@ class EmailServer:
 
 	def select_imap_folder(self, folder):
 		res = self.imap.select(f'"{folder}"')
-		return res[0] == "OK"  # The folder exsits TODO: handle other resoponses too
+		return res[0] == "OK"  # The folder exists TODO: handle other responses too
 
 	def logout(self):
 		if cint(self.settings.use_imap):
@@ -169,7 +197,11 @@ class EmailServer:
 		return
 
 	def get_messages(self, folder="INBOX"):
+<<<<<<< HEAD
 		"""Returns new email messages."""
+=======
+		"""Return new email messages."""
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		self.latest_messages = []
 		self.seen_status = {}
@@ -180,7 +212,11 @@ class EmailServer:
 		for i, uid in enumerate(email_list[:100]):
 			try:
 				self.retrieve_message(uid, i + 1)
+<<<<<<< HEAD
 			except (EmailTimeoutError, LoginLimitExceeded):
+=======
+			except (_socket.timeout, LoginLimitExceeded):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				# get whatever messages were retrieved
 				break
 
@@ -198,7 +234,7 @@ class EmailServer:
 		if cint(self.settings.use_imap):
 			self.check_imap_uidvalidity(folder)
 
-			readonly = False if self.settings.email_sync_rule == "UNSEEN" else True
+			readonly = self.settings.email_sync_rule != "UNSEEN"
 
 			self.imap.select(folder, readonly=readonly)
 			response, message = self.imap.uid("search", None, self.settings.email_sync_rule)
@@ -221,15 +257,22 @@ class EmailServer:
 
 		if not uid_validity or uid_validity != current_uid_validity:
 			# uidvalidity changed & all email uids are reindexed by server
-			Communication = frappe.qb.DocType("Communication")
-			frappe.qb.update(Communication).set(Communication.uid, -1).where(
-				Communication.communication_medium == "Email"
-			).where(Communication.email_account == self.settings.email_account).run()
+			frappe.db.set_value(
+				"Communication",
+				{"communication_medium": "Email", "email_account": self.settings.email_account},
+				"uid",
+				-1,
+				update_modified=False,
+			)
 
 			if self.settings.use_imap:
 				# Remove {"} quotes that are added to handle spaces in IMAP Folder names
 				if folder[0] == folder[-1] == '"':
 					folder = folder[1:-1]
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				# new update for the IMAP Folder DocType
 				IMAPFolder = frappe.qb.DocType("IMAP Folder")
 				frappe.qb.update(IMAPFolder).set(IMAPFolder.uidvalidity, current_uid_validity).set(
@@ -243,6 +286,26 @@ class EmailServer:
 					EmailAccount.uidnext, uidnext
 				).where(EmailAccount.name == self.settings.email_account_name).run()
 
+<<<<<<< HEAD
+=======
+=======
+
+				frappe.db.set_value(
+					"IMAP Folder",
+					{"parent": self.settings.email_account_name, "folder_name": folder},
+					{"uidvalidity": current_uid_validity, "uidnext": uidnext},
+					update_modified=False,
+				)
+			else:
+				frappe.db.set_value(
+					"Email Account",
+					self.settings.email_account_name,
+					{"uidvalidity": current_uid_validity, "uidnext": uidnext},
+					update_modified=False,
+				)
+
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			sync_count = 100 if uid_validity else int(self.settings.initial_sync_count)
 			from_uid = 1 if uidnext < (sync_count + 1) or (uidnext - sync_count) < 1 else uidnext - sync_count
 			# sync last 100 email
@@ -253,10 +316,7 @@ class EmailServer:
 		pattern = rf"(?<={cmd} )[0-9]*"
 		match = re.search(pattern, response.decode("utf-8"), re.U | re.I)
 
-		if match:
-			return match.group(0)
-		else:
-			return None
+		return match[0] if match else None
 
 	def retrieve_message(self, uid, msg_num):
 		try:
@@ -269,13 +329,21 @@ class EmailServer:
 			else:
 				msg = self.pop.retr(msg_num)
 				self.latest_messages.append(b"\n".join(msg[1]))
+<<<<<<< HEAD
 		except EmailTimeoutError:
+=======
+		except _socket.timeout:
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			# propagate this error to break the loop
 			raise
 
 		except Exception as e:
 			if self.has_login_limit_exceeded(e):
+<<<<<<< HEAD
 				raise LoginLimitExceeded(e)
+=======
+				raise LoginLimitExceeded(e) from e
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 			frappe.log_error("Unable to fetch email", self.make_error_msg(uid, msg_num))
 
@@ -303,20 +371,25 @@ class EmailServer:
 		with suppress(Exception):
 			if not cint(self.settings.use_imap):
 				self.pop.dele(msg_num)
+<<<<<<< HEAD
 			else:
 				# mark as seen if email sync rule is UNSEEN (syncing only unseen mails)
 				if self.settings.email_sync_rule == "UNSEEN":
 					self.imap.uid("STORE", uid, "+FLAGS", "(\\SEEN)")
+=======
+			elif self.settings.email_sync_rule == "UNSEEN":
+				self.imap.uid("STORE", uid, "+FLAGS", "(\\SEEN)")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	def is_temporary_system_problem(self, e):
 		messages = (
 			"-ERR [SYS/TEMP] Temporary system problem. Please try again later.",
 			"Connection timed out",
 		)
-		for message in messages:
-			if message in strip(cstr(e)) or message in strip(cstr(getattr(e, "strerror", ""))):
-				return True
-		return False
+		return any(
+			message in strip(cstr(e)) or message in strip(cstr(getattr(e, "strerror", "")))
+			for message in messages
+		)
 
 	def make_error_msg(self, uid, msg_num):
 		partial_mail = None
@@ -331,6 +404,7 @@ class EmailServer:
 			partial_mail = Email(headers)
 
 		if partial_mail:
+<<<<<<< HEAD
 			return (
 				"\nDate: {date}\nFrom: {from_email}\nSubject: {subject}\n\n\nTraceback: \n{traceback}".format(
 					date=partial_mail.date,
@@ -339,6 +413,18 @@ class EmailServer:
 					traceback=traceback,
 				)
 			)
+=======
+			return f"""
+Date: {partial_mail.date}
+From: {partial_mail.from_email}
+Subject: {partial_mail.subject}
+
+
+Traceback:
+{traceback}
+"""
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		return traceback
 
 	def update_flag(self, folder, uid_list=None):
@@ -412,14 +498,27 @@ class Email:
 		"""Parse and decode `Subject` header."""
 		_subject = decode_header(self.mail.get("Subject", "No Subject"))
 		self.subject = _subject[0][0] or ""
+<<<<<<< HEAD
 		if charset := _subject[0][1]:
 			self.subject = safe_decode(self.subject, charset, ALTERNATE_CHARSET_MAP)
 		else:
 			# assume that the encoding is utf-8
 			self.subject = safe_decode(self.subject)[:140]
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
-		if not self.subject:
-			self.subject = "No Subject"
+		if charset := _subject[0][1]:
+			# Encoding is known by decode_header (might also be unknown-8bit)
+			self.subject = safe_decode(self.subject, charset, ALTERNATE_CHARSET_MAP)
+
+		if isinstance(self.subject, bytes):
+			# Fall back to utf-8 if the charset is unknown or decoding fails
+			# Replace invalid characters with '<?>'
+			self.subject = self.subject.decode("utf-8", "replace")
+
+		# Convert non-string (e.g. None)
+		# Truncate to 140 chars (can be used as a document name)
+		self.subject = str(self.subject).strip()[:140] or "No Subject"
 
 	def set_from(self):
 		# gmail mailing-list compatibility
@@ -427,7 +526,9 @@ class Email:
 		_from_email = self.decode_email(self.mail.get("X-Original-From") or self.mail["From"])
 		_reply_to = self.decode_email(self.mail.get("Reply-To"))
 
-		if _reply_to and not frappe.db.get_value("Email Account", {"email_id": _reply_to}, "email_id"):
+		if _reply_to and not frappe.db.get_value(
+			"Email Account", {"email_id": _reply_to, "enable_incoming": 1}, "email_id"
+		):
 			self.from_email = extract_email_id(_reply_to)
 		else:
 			self.from_email = extract_email_id(_from_email)
@@ -437,13 +538,30 @@ class Email:
 
 		self.from_real_name = parse_addr(_from_email)[0] if "@" in _from_email else _from_email
 
-	def decode_email(self, email):
+	@staticmethod
+	def decode_email(email: bytes | str | None) -> str | None:
 		if not email:
 			return
+		email = frappe.as_unicode(email).replace('"', " ").replace("'", " ")
+		try:
+			parts = decode_header(email)
+		except HeaderParseError:
+			# Fallback: grab just the email addresses
+			emails = re.findall(r"(<.*?>)", email)
+			return ", ".join(emails)
+
 		decoded = ""
+<<<<<<< HEAD
 		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
+=======
+<<<<<<< HEAD
+		for part, encoding in decode_header(frappe.as_unicode(email).replace('"', " ").replace("'", " ")):
+=======
+		for part, encoding in parts:
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			if encoding:
-				decoded += part.decode(encoding)
+				decoded += part.decode(encoding, "replace")
 			else:
 				decoded += safe_decode(part)
 		return decoded
@@ -480,10 +598,7 @@ class Email:
 
 	def show_attached_email_headers_in_content(self, part):
 		# get the multipart/alternative message
-		try:
-			from html import escape  # python 3.x
-		except ImportError:
-			from cgi import escape  # python 2.x
+		from html import escape
 
 		message = list(part.walk())[1]
 		headers = []
@@ -502,12 +617,7 @@ class Email:
 			self.html_content += markdown(text_content)
 
 	def get_charset(self, part):
-		"""Detect charset."""
-		charset = part.get_content_charset()
-		if not charset:
-			charset = chardet.detect(safe_encode(cstr(part)))["encoding"]
-
-		return charset
+		return part.get_content_charset() or chardet.detect(safe_encode(cstr(part)))["encoding"]
 
 	def get_payload(self, part):
 		charset = self.get_charset(part)
@@ -536,6 +646,9 @@ class Email:
 					fname = get_random_filename(content_type=content_type)
 			else:
 				fname = get_random_filename(content_type=content_type)
+			# Don't clobber existing filename
+			while fname in self.cid_map:
+				fname = get_random_filename(content_type=content_type)
 
 			self.attachments.append(
 				{
@@ -558,7 +671,7 @@ class Email:
 				_file = frappe.get_doc(
 					{
 						"doctype": "File",
-						"file_name": attachment["fname"],
+						"file_name": unquote(attachment["fname"]),
 						"attached_to_doctype": doc.doctype,
 						"attached_to_name": doc.name,
 						"is_private": 1,
@@ -585,7 +698,7 @@ class Email:
 	def get_thread_id(self):
 		"""Extract thread ID from `[]`"""
 		l = THREAD_ID_PATTERN.findall(self.subject)
-		return l and l[0] or None
+		return (l and l[0]) or None
 
 	def is_reply(self):
 		return bool(self.in_reply_to)
@@ -860,7 +973,7 @@ class InboundMail(Email):
 
 	@staticmethod
 	def get_email_fields(doctype):
-		"""Returns Email related fields of a doctype."""
+		"""Return Email related fields of a doctype."""
 		fields = frappe._dict()
 
 		email_fields = ["subject_field", "sender_field", "sender_name_field"]
@@ -898,43 +1011,3 @@ class InboundMail(Email):
 			"has_attachment": 1 if self.attachments else 0,
 			"seen": self.seen_status or 0,
 		}
-
-
-class TimerMixin:
-	def __init__(self, *args, **kwargs):
-		self.timeout = kwargs.pop("timeout", 0.0)
-		self.elapsed_time = 0.0
-		self._super.__init__(self, *args, **kwargs)
-		if self.timeout:
-			# set per operation timeout to one-fifth of total pop timeout
-			self.sock.settimeout(self.timeout / 5.0)
-
-	def _getline(self, *args, **kwargs):
-		start_time = time.time()
-		ret = self._super._getline(self, *args, **kwargs)
-
-		self.elapsed_time += time.time() - start_time
-		if self.timeout and self.elapsed_time > self.timeout:
-			raise EmailTimeoutError
-
-		return ret
-
-	def quit(self, *args, **kwargs):
-		self.elapsed_time = 0.0
-		return self._super.quit(self, *args, **kwargs)
-
-
-class Timed_POP3(TimerMixin, poplib.POP3):
-	_super = poplib.POP3
-
-
-class Timed_POP3_SSL(TimerMixin, poplib.POP3_SSL):
-	_super = poplib.POP3_SSL
-
-
-class Timed_IMAP4(TimerMixin, imaplib.IMAP4):
-	_super = imaplib.IMAP4
-
-
-class Timed_IMAP4_SSL(TimerMixin, imaplib.IMAP4_SSL):
-	_super = imaplib.IMAP4_SSL

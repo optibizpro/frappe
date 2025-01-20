@@ -9,13 +9,39 @@ import frappe
 from frappe import _
 from frappe.core.doctype.data_import.exporter import Exporter
 from frappe.core.doctype.data_import.importer import Importer
+from frappe.model import core_doctypes_list
 from frappe.model.document import Document
 from frappe.modules.import_file import import_file_by_path
 from frappe.utils.background_jobs import enqueue, is_job_enqueued
 from frappe.utils.csvutils import validate_google_sheets_url
 
+BLOCKED_DOCTYPES = set(core_doctypes_list) - {"User", "Role"}
+
 
 class DataImport(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		custom_delimiters: DF.Check
+		delimiter_options: DF.Data | None
+		google_sheets_url: DF.Data | None
+		import_file: DF.Attach | None
+		import_type: DF.Literal["", "Insert New Records", "Update Existing Records"]
+		mute_emails: DF.Check
+		payload_count: DF.Int
+		reference_doctype: DF.Link
+		show_failed_logs: DF.Check
+		status: DF.Literal["Pending", "Success", "Partial Success", "Error", "Timed Out"]
+		submit_after_import: DF.Check
+		template_options: DF.Code | None
+		template_warnings: DF.Code | None
+	# end: auto-generated types
+
 	def validate(self):
 		doc_before_save = self.get_doc_before_save()
 		if (
@@ -26,9 +52,19 @@ class DataImport(Document):
 			self.template_options = ""
 			self.template_warnings = ""
 
+		self.set_delimiters_flag()
+		self.validate_doctype()
 		self.validate_import_file()
 		self.validate_google_sheets_url()
 		self.set_payload_count()
+
+	def set_delimiters_flag(self):
+		if self.import_file:
+			frappe.flags.delimiter_options = self.delimiter_options or ","
+
+	def validate_doctype(self):
+		if self.reference_doctype in BLOCKED_DOCTYPES:
+			frappe.throw(_("Importing {0} is not allowed.").format(self.reference_doctype))
 
 	def validate_import_file(self):
 		if self.import_file:
@@ -50,6 +86,7 @@ class DataImport(Document):
 	def get_preview_from_template(self, import_file=None, google_sheets_url=None):
 		if import_file:
 			self.import_file = import_file
+			self.set_delimiters_flag()
 
 		if google_sheets_url:
 			self.google_sheets_url = google_sheets_url
@@ -61,7 +98,6 @@ class DataImport(Document):
 		return i.get_data_for_import_preview()
 
 	def start_import(self):
-		from frappe.core.page.background_jobs.background_jobs import get_info
 		from frappe.utils.scheduler import is_scheduler_inactive
 
 		run_now = frappe.flags.in_test or frappe.conf.developer_mode
@@ -192,9 +228,12 @@ def get_import_status(data_import_name):
 
 @frappe.whitelist()
 def get_import_logs(data_import: str):
+<<<<<<< HEAD
 	if not isinstance(data_import, str):
 		raise ValueError("data_import must be a string")
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	doc = frappe.get_doc("Data Import", data_import)
 	doc.check_permission("read")
 
@@ -228,9 +267,11 @@ def import_file(doctype, file_path, import_type, submit_after_import=False, cons
 	i.import_data()
 
 
-def import_doc(path, pre_process=None):
+def import_doc(path, pre_process=None, sort=False):
 	if os.path.isdir(path):
 		files = [os.path.join(path, f) for f in os.listdir(path)]
+		if sort:
+			files.sort()
 	else:
 		files = [path]
 
@@ -258,10 +299,30 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 			for key in del_keys:
 				if key in doc:
 					del doc[key]
+<<<<<<< HEAD
 			for _k, v in doc.items():
 				if isinstance(v, list):
 					for child in v:
 						for key in (*del_keys, "docstatus", "doctype", "modified", "name"):
+=======
+			for v in doc.values():
+				if isinstance(v, list):
+					for child in v:
+<<<<<<< HEAD
+						for key in (*del_keys, "docstatus", "doctype", "modified", "name"):
+=======
+						for key in (
+							*del_keys,
+							"docstatus",
+							"doctype",
+							"modified",
+							"name",
+							"parent",
+							"parentfield",
+							"parenttype",
+						):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							if key in child:
 								del child[key]
 
@@ -287,7 +348,7 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 		path = os.path.join("..", path)
 
 	with open(path, "w") as outfile:
-		outfile.write(frappe.as_json(out))
+		outfile.write(frappe.as_json(out, ensure_ascii=False))
 
 
 def export_csv(doctype, path):

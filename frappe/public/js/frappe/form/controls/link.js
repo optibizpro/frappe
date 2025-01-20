@@ -15,7 +15,11 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 			<input type="text" class="input-with-feedback form-control">
 			<span class="link-btn">
 				<a class="btn-clear" style="display: inline-block;" title="${__("Clear Link")}">
+<<<<<<< HEAD
 					${frappe.utils.icon("close-alt", "xs")}
+=======
+					${frappe.utils.icon("close", "xs", "es-icon")}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				</a>
 				<a class="btn-open" style="display: inline-block;" title="${__("Open Link")}">
 					${frappe.utils.icon("arrow-right", "xs")}
@@ -112,10 +116,17 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 		return this.is_translatable() ? __(value) : value;
 	}
 	is_translatable() {
+<<<<<<< HEAD
 		return in_list(frappe.boot?.translated_doctypes || [], this.get_options());
 	}
 	is_title_link() {
 		return in_list(frappe.boot?.link_title_doctypes || [], this.get_options());
+=======
+		return (frappe.boot?.translated_doctypes || []).includes(this.get_options());
+	}
+	is_title_link() {
+		return (frappe.boot?.link_title_doctypes || []).includes(this.get_options());
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 	async set_link_title(value) {
 		const doctype = this.get_options();
@@ -209,6 +220,7 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 		this.$input.cache = {};
 
 		this.awesomplete = new Awesomplete(me.input, {
+			tabSelect: true,
 			minChars: 0,
 			maxItems: 99,
 			autoFirst: true,
@@ -243,10 +255,21 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 				) {
 					html += '<br><span class="small">' + __(d.description) + "</span>";
 				}
+<<<<<<< HEAD
 				return $("<li></li>")
 					.data("item.autocomplete", d)
 					.prop("aria-selected", "false")
 					.html(`<a><p title="${frappe.utils.escape_html(_label)}">${html}</p></a>`)
+=======
+				return $(`<div role="option">`)
+					.on("click", (event) => {
+						me.awesomplete.select(event.currentTarget, event.currentTarget);
+						me.show_link_and_clear_buttons();
+					})
+					.data("item.autocomplete", d)
+					.prop("aria-selected", "false")
+					.html(`<p title="${frappe.utils.escape_html(_label)}">${html}</p>`)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					.get(0);
 			},
 			sort: function () {
@@ -276,6 +299,10 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 					doctype: doctype,
 					ignore_user_permissions: me.df.ignore_user_permissions,
 					reference_doctype: me.get_reference_doctype() || "",
+<<<<<<< HEAD
+=======
+					page_length: cint(frappe.boot.sysdefaults?.link_field_results_limit) || 10,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				};
 
 				me.set_custom_query(args);
@@ -289,6 +316,7 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 						if (!window.Cypress && !me.$input.is(":focus")) {
 							return;
 						}
+<<<<<<< HEAD
 						r.results = me.merge_duplicates(r.results);
 
 						// show filter description in awesomplete
@@ -301,14 +329,36 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 									action: () => {},
 								});
 							}
+=======
+						r.message = me.merge_duplicates(r.message);
+
+						// show filter description in awesomplete
+						let filter_string = me.df.filter_description
+							? me.df.filter_description
+							: args.filters
+							? me.get_filter_description(args.filters)
+							: null;
+						if (filter_string) {
+							r.message.push({
+								html: `<span class="text-muted" style="line-height: 1.5">${filter_string}</span>`,
+								value: "",
+								action: () => {},
+							});
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 						}
 
 						if (!me.df.only_select) {
 							if (frappe.model.can_create(doctype)) {
 								// new item
+<<<<<<< HEAD
 								r.results.push({
 									html:
 										"<span class='text-primary link-option'>" +
+=======
+								r.message.push({
+									html:
+										"<span class='link-option'>" +
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 										"<i class='fa fa-plus' style='margin-right: 5px;'></i> " +
 										__("Create a new {0}", [__(me.get_options())]) +
 										"</span>",
@@ -324,15 +374,25 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 								frappe.ui.form.ControlLink.link_options(me);
 
 							if (custom__link_options) {
+<<<<<<< HEAD
 								r.results = r.results.concat(custom__link_options);
+=======
+								r.message = r.message.concat(custom__link_options);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							}
 
 							// advanced search
 							if (locals && locals["DocType"]) {
 								// not applicable in web forms
+<<<<<<< HEAD
 								r.results.push({
 									html:
 										"<span class='text-primary link-option'>" +
+=======
+								r.message.push({
+									html:
+										"<span class='link-option'>" +
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 										"<i class='fa fa-search' style='margin-right: 5px;'></i> " +
 										__("Advanced Search") +
 										"</span>",
@@ -342,10 +402,17 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 								});
 							}
 						}
+<<<<<<< HEAD
 						me.$input.cache[doctype][term] = r.results;
 						me.awesomplete.list = me.$input.cache[doctype][term];
 						me.toggle_href(doctype);
 						r.results.forEach((item) => {
+=======
+						me.$input.cache[doctype][term] = r.message;
+						me.awesomplete.list = me.$input.cache[doctype][term];
+						me.toggle_href(doctype);
+						r.message.forEach((item) => {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							frappe.utils.add_link_title(doctype, item.value, item.label);
 						});
 					},
@@ -422,7 +489,10 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 			if (o.text.value.indexOf("__link_option") !== -1) {
 				me.$input.val("");
 			}
+<<<<<<< HEAD
 			me.show_link_and_clear_buttons();
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		});
 	}
 
@@ -534,6 +604,15 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 			});
 			return obj;
 		};
+<<<<<<< HEAD
+=======
+
+		// apply link field filters
+		if (this.df.link_filters && !!this.df.link_filters.length) {
+			this.apply_link_field_filters();
+		}
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (this.get_query || this.df.get_query) {
 			var get_query = this.get_query || this.df.get_query;
 			if ($.isPlainObject(get_query)) {
@@ -596,6 +675,40 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 			$.extend(args.filters, this.df.filters);
 		}
 	}
+
+	apply_link_field_filters() {
+		let link_filters = JSON.parse(this.df.link_filters);
+		let filters = this.parse_filters(link_filters);
+		// take filters from the link field and add to the query
+		this.get_query = function () {
+			return {
+				filters,
+			};
+		};
+	}
+
+	parse_filters(link_filters) {
+		let filters = {};
+		link_filters.forEach((filter) => {
+			let [_, fieldname, operator, value] = filter;
+			if (value?.startsWith?.("eval:")) {
+<<<<<<< HEAD
+=======
+				// get the value to calculate
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+				value = value.split("eval:")[1];
+				let context = {
+					doc: this.doc,
+					parent: this.doc.parenttype ? this.frm.doc : null,
+					frappe,
+				};
+				value = frappe.utils.eval(value, context);
+			}
+			filters[fieldname] = [operator, value];
+		});
+		return filters;
+	}
+
 	validate(value) {
 		// validate the value just entered
 		if (this._validated || this.df.options == "[Select]" || this.df.ignore_link_validation) {
@@ -623,6 +736,7 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 				if (value) {
 					field_value = response[source_field];
 				}
+<<<<<<< HEAD
 				frappe.model.set_value(
 					this.df.parent,
 					this.docname,
@@ -630,6 +744,20 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 					field_value,
 					this.df.fieldtype
 				);
+=======
+
+				if (this.layout?.set_value) {
+					this.layout.set_value(target_field, field_value);
+				} else if (this.frm) {
+					frappe.model.set_value(
+						this.df.parent,
+						this.docname,
+						target_field,
+						field_value,
+						this.df.fieldtype
+					);
+				}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			}
 		};
 
@@ -654,8 +782,73 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 		}
 	}
 
+	fetch_map_for_quick_entry() {
+		let me = this;
+		let fetch_map = {};
+		function add_fetch(link_field, source_field, target_field, target_doctype) {
+			if (!target_doctype) target_doctype = "*";
+
+			if (!me.layout.fetch_dict) {
+				me.layout.fetch_dict = {};
+			}
+
+			// Target field kept as key because source field could be non-unique
+			me.layout.fetch_dict.setDefault(target_doctype, {}).setDefault(link_field, {})[
+				target_field
+			] = source_field;
+		}
+
+		function setup_add_fetch(df) {
+			let is_read_only_field =
+				[
+					"Data",
+					"Read Only",
+					"Text",
+					"Small Text",
+					"Currency",
+					"Check",
+					"Text Editor",
+					"Attach Image",
+					"Code",
+					"Link",
+					"Float",
+					"Int",
+					"Date",
+					"Select",
+					"Duration",
+					"Time",
+				].includes(df.fieldtype) ||
+				df.read_only == 1 ||
+				df.is_virtual == 1;
+
+			if (is_read_only_field && df.fetch_from && df.fetch_from.indexOf(".") != -1) {
+				var parts = df.fetch_from.split(".");
+				add_fetch(parts[0], parts[1], df.fieldname, df.parent);
+			}
+		}
+
+		$.each(this.layout.fields, (i, field) => setup_add_fetch(field));
+
+		for (const key of ["*", this.df.parent]) {
+			if (!this.layout.fetch_dict) {
+				this.layout.fetch_dict = {};
+			}
+			if (this.layout.fetch_dict[key] && this.layout.fetch_dict[key][this.df.fieldname]) {
+				Object.assign(fetch_map, this.layout.fetch_dict[key][this.df.fieldname]);
+			}
+		}
+
+		return fetch_map;
+	}
+
 	get fetch_map() {
 		const fetch_map = {};
+
+		// Create fetch_map from quick entry fields
+		if (!this.frm && this.layout && this.layout.fields) {
+			return this.fetch_map_for_quick_entry();
+		}
+
 		if (!this.frm) return fetch_map;
 
 		for (const key of ["*", this.df.parent]) {

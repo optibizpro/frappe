@@ -1,20 +1,61 @@
 import { io } from "socket.io-client";
+<<<<<<< HEAD
 frappe.socketio = {
 	open_tasks: {},
 	open_docs: [],
 	emit_queue: [],
 
 	init: function (port = 3000) {
+=======
+
+frappe.provide("frappe.realtime");
+
+class RealTimeClient {
+	constructor() {
+		this.open_tasks = {};
+		this.open_docs = new Set();
+	}
+
+	on(event, callback) {
+		if (this.socket) {
+			this.connect();
+			this.socket.on(event, callback);
+		}
+	}
+
+	off(event, callback) {
+		if (this.socket) {
+			this.socket.off(event, callback);
+		}
+	}
+
+	connect() {
+		if (this.lazy_connect) {
+			this.socket.connect();
+			this.lazy_connect = false;
+		}
+	}
+
+	emit(event, ...args) {
+		this.connect();
+		this.socket.emit(event, ...args);
+	}
+
+	init(port = 9000, lazy_connect = false) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (frappe.boot.disable_async) {
 			return;
 		}
 
-		if (frappe.socketio.socket) {
+		if (this.socket) {
 			return;
 		}
+		this.lazy_connect = lazy_connect;
+		let me = this;
 
 		// Enable secure option when using HTTPS
 		if (window.location.protocol == "https:") {
+<<<<<<< HEAD
 			frappe.socketio.socket = io.connect(frappe.socketio.get_host(port), {
 				secure: true,
 				withCredentials: true,
@@ -24,19 +65,40 @@ frappe.socketio = {
 			frappe.socketio.socket = io.connect(frappe.socketio.get_host(port), {
 				withCredentials: true,
 				reconnectionAttempts: 3,
+=======
+			this.socket = io(this.get_host(port), {
+				secure: true,
+				withCredentials: true,
+				reconnectionAttempts: 3,
+				autoConnect: !lazy_connect,
+			});
+		} else if (window.location.protocol == "http:") {
+			this.socket = io(this.get_host(port), {
+				withCredentials: true,
+				reconnectionAttempts: 3,
+				autoConnect: !lazy_connect,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			});
 		}
 
-		if (!frappe.socketio.socket) {
-			console.log("Unable to connect to " + frappe.socketio.get_host(port));
+		if (!this.socket) {
+			console.log("Unable to connect to " + this.get_host(port));
 			return;
 		}
 
+<<<<<<< HEAD
 		frappe.socketio.socket.on("msgprint", function (message) {
 			frappe.msgprint(message);
 		});
 
 		frappe.socketio.socket.on("progress", function (data) {
+=======
+		this.socket.on("msgprint", function (message) {
+			frappe.msgprint(message);
+		});
+
+		this.socket.on("progress", function (data) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			if (data.progress) {
 				data.percent = (flt(data.progress[0]) / data.progress[1]) * 100;
 			}
@@ -51,11 +113,11 @@ frappe.socketio = {
 			}
 		});
 
-		frappe.socketio.setup_listeners();
-		frappe.socketio.setup_reconnect();
+		this.setup_listeners();
 
 		$(document).on("form-load form-rename", function (e, frm) {
 			if (!frm.doc || frm.is_new()) {
+<<<<<<< HEAD
 				return;
 			}
 
@@ -68,8 +130,30 @@ frappe.socketio = {
 			}
 
 			frappe.socketio.doc_subscribe(frm.doctype, frm.docname);
+=======
+				return;
+			}
+			me.doc_subscribe(frm.doctype, frm.docname);
 		});
 
+		$(document).on("form-refresh", function (e, frm) {
+			if (!frm.doc || frm.is_new()) {
+				return;
+			}
+			me.doc_open(frm.doctype, frm.docname);
+		});
+
+		$(document).on("form-unload", function (e, frm) {
+			if (!frm.doc || frm.is_new()) {
+				return;
+			}
+
+			me.doc_close(frm.doctype, frm.docname);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+		});
+	}
+
+<<<<<<< HEAD
 		$(document).on("form-refresh", function (e, frm) {
 			if (!frm.doc || frm.is_new()) {
 				return;
@@ -108,11 +192,19 @@ frappe.socketio = {
 		if (window.dev_server) {
 			var parts = host.split(":");
 			port = frappe.boot.socketio_port || port.toString() || "3000";
+=======
+	get_host(port = 9000) {
+		let host = window.location.origin;
+		if (window.dev_server) {
+			let parts = host.split(":");
+			port = frappe.boot.socketio_port || port.toString() || "9000";
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			if (parts.length > 2) {
 				host = parts[0] + ":" + parts[1];
 			}
 			host = host + ":" + port;
 		}
+<<<<<<< HEAD
 		return host;
 	},
 	subscribe: function (task_id, opts) {
@@ -138,6 +230,35 @@ frappe.socketio = {
 	doc_subscribe: function (doctype, docname) {
 		if (frappe.flags.doc_subscribe) {
 			console.log("throttled");
+=======
+		return host + `/${frappe.boot.sitename}`;
+	}
+
+	subscribe(task_id, opts) {
+		this.emit("task_subscribe", task_id);
+		this.emit("progress_subscribe", task_id);
+
+		this.open_tasks[task_id] = opts;
+	}
+	task_subscribe(task_id) {
+		this.emit("task_subscribe", task_id);
+	}
+	task_unsubscribe(task_id) {
+		this.emit("task_unsubscribe", task_id);
+	}
+	doctype_subscribe(doctype) {
+		this.emit("doctype_subscribe", doctype);
+	}
+	doctype_unsubscribe(doctype) {
+		this.emit("doctype_unsubscribe", doctype);
+	}
+	doc_subscribe(doctype, docname) {
+		if (frappe.flags.doc_subscribe) {
+			console.log("throttled");
+			return;
+		}
+		if (this.open_docs.has(`${doctype}:${docname}`)) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			return;
 		}
 
@@ -148,6 +269,7 @@ frappe.socketio = {
 			frappe.flags.doc_subscribe = false;
 		}, 1000);
 
+<<<<<<< HEAD
 		frappe.socketio.socket.emit("doc_subscribe", doctype, docname);
 		frappe.socketio.open_docs.push({ doctype: doctype, docname: docname });
 	},
@@ -226,12 +348,40 @@ frappe.socketio = {
 		});
 	},
 	process_response: function (data, method) {
+=======
+		this.emit("doc_subscribe", doctype, docname);
+		this.open_docs.add(`${doctype}:${docname}`);
+	}
+	doc_unsubscribe(doctype, docname) {
+		this.emit("doc_unsubscribe", doctype, docname);
+		return this.open_docs.delete(`${doctype}:${docname}`);
+	}
+	doc_open(doctype, docname) {
+		this.emit("doc_open", doctype, docname);
+	}
+	doc_close(doctype, docname) {
+		this.emit("doc_close", doctype, docname);
+	}
+	setup_listeners() {
+		this.socket.on("task_status_change", function (data) {
+			this.process_response(data, data.status.toLowerCase());
+		});
+		this.socket.on("task_progress", function (data) {
+			this.process_response(data, "progress");
+		});
+	}
+	process_response(data, method) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (!data) {
 			return;
 		}
 
 		// success
+<<<<<<< HEAD
 		var opts = frappe.socketio.open_tasks[data.task_id];
+=======
+		let opts = this.open_tasks[data.task_id];
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (opts[method]) {
 			opts[method](data);
 		}
@@ -251,6 +401,7 @@ frappe.socketio = {
 		if (data.status_code && data.status_code > 400 && opts.error) {
 			opts.error(data);
 		}
+<<<<<<< HEAD
 	},
 };
 
@@ -268,3 +419,18 @@ frappe.realtime.publish = function (event, message) {
 		frappe.socketio.socket.emit(event, message);
 	}
 };
+=======
+	}
+
+	publish(event, message) {
+		if (this.socket) {
+			this.emit(event, message);
+		}
+	}
+}
+
+frappe.realtime = new RealTimeClient();
+
+// backward compatibility
+frappe.socketio = frappe.realtime;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

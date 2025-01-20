@@ -1,15 +1,19 @@
+<<<<<<< HEAD
 exclude: "node_modules|.git"
 default_stages: [commit]
+=======
+exclude: 'node_modules|.git'
+default_stages: [pre-commit]
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 fail_fast: false
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v5.0.0
     hooks:
       - id: trailing-whitespace
         files: "frappe.*"
         exclude: ".*json$|.*txt$|.*csv|.*md|.*svg"
-      - id: check-yaml
       - id: no-commit-to-branch
         args: ["--branch", "develop"]
       - id: check-merge-conflict
@@ -18,8 +22,13 @@ repos:
       - id: check-toml
       - id: check-yaml
       - id: debug-statements
+        exclude: ^frappe/tests/classes/context_managers\.py$
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
     rev: v0.2.0
     hooks:
       - id: ruff
@@ -28,7 +37,24 @@ repos:
 
       - id: ruff-format
         name: "Format Python code"
+<<<<<<< HEAD
 
+=======
+=======
+    rev: v0.8.1
+    hooks:
+      - id: ruff
+        name: "Run ruff import sorter"
+        args: ["--select=I", "--fix"]
+
+      - id: ruff
+        name: "Run ruff linter"
+
+      - id: ruff-format
+        name: "Run ruff formatter"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.7.1
     hooks:
@@ -36,6 +62,7 @@ repos:
         types_or: [javascript, vue, scss]
         # Ignore any files that might contain jinja / bundles
         exclude: |
+<<<<<<< HEAD
           (?x)^(
               frappe/public/dist/.*|
               .*node_modules.*|
@@ -45,6 +72,36 @@ repos:
               frappe/public/js/lib/.*|
               frappe/website/doctype/website_theme/website_theme_template.scss
           )$
+=======
+            (?x)^(
+                frappe/public/dist/.*|
+                .*node_modules.*|
+                .*boilerplate.*|
+                frappe/www/website_script.js|
+                frappe/templates/includes/.*|
+                frappe/public/js/lib/.*|
+                frappe/website/doctype/website_theme/website_theme_template.scss
+            )$
+
+
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.44.0
+    hooks:
+      - id: eslint
+        types_or: [javascript]
+        args: ['--quiet']
+        # Ignore any files that might contain jinja / bundles
+        exclude: |
+            (?x)^(
+                frappe/public/dist/.*|
+                cypress/.*|
+                .*node_modules.*|
+                .*boilerplate.*|
+                frappe/www/website_script.js|
+                frappe/templates/includes/.*|
+                frappe/public/js/lib/.*
+            )$
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 ci:
   autoupdate_schedule: weekly

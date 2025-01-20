@@ -4,6 +4,12 @@
 	{% include "templates/includes/meta_block.html" %}
 {% endblock %}
 
+<<<<<<< HEAD
+=======
+{% if hide_navbar %}{% block navbar %}{% endblock %}{% endif %}
+{% if hide_footer %}{% block footer %}{% endblock %}{% endif %}
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 {% block breadcrumbs %}{% endblock %}
 
 {% block header %}
@@ -17,7 +23,11 @@
 	{% block header_buttons %}
 	{% if allow_edit and in_view_mode %}
 		<!-- edit button -->
+<<<<<<< HEAD
 		<a href="/{{ route }}/{{ doc_name }}/edit" class="edit-button btn btn-default btn-sm">{{ _("Edit Response", context="Button in web form") }}</a>
+=======
+		<a href="/{{ route }}/{{ doc_name }}/edit" class="edit-button btn btn-default btn-sm">{{ _("Edit", context="Button in web form") }}</a>
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	{% endif %}
 
 	{% if allow_print and in_view_mode %}
@@ -160,11 +170,29 @@
 
 {% block script %}
 	<script>
-		frappe.boot = {{ boot }};
+		frappe.boot = {{ boot | json }};
 		frappe._messages = {{ translated_messages }};
 		frappe.web_form_doc = {{ web_form_doc | json }};
 		frappe.reference_doc = {{ reference_doc | json }};
+		function in_iframe() {
+			try {
+				return window.self !== window.top;
+			} catch (e) {
+				return true;
+			}
+		}
+		if (in_iframe()) {
+			// hide everything except the form and fix styles
+			$('nav').hide();
+			$('.web-form-header').hide();
+			$('.page-footer').hide();
+			$('footer').hide();
+			$('.page-breadcrumbs').hide();
+			$('.web-form').css('border', 'none').css('padding', 'unset');
+			$('.page_content').css('padding-left', 'unset').css('padding-right', 'unset');
+		}
 	</script>
+<<<<<<< HEAD
 
 	<script type="text/javascript" src="/assets/frappe/node_modules/vue/dist/vue.js"></script>
 	<script>
@@ -172,6 +200,8 @@
 		Vue.prototype.frappe = window.frappe;
 	</script>
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	{{ include_script("web_form.bundle.js") }}
 
 	<script>

@@ -18,6 +18,7 @@ frappe.ui.form.ControlRating = class ControlRating extends frappe.ui.form.Contro
 
 		$(this.input_area).html(star_template);
 
+<<<<<<< HEAD
 		let me = this;
 		$(this.input_area)
 			.find("svg")
@@ -33,6 +34,25 @@ frappe.ui.form.ControlRating = class ControlRating extends frappe.ui.form.Contro
 					});
 			});
 
+=======
+		if (this.disabled) return;
+
+		let me = this;
+		$(this.input_area)
+			.find("svg")
+			.on("mousemove", function (ev) {
+				me.update_rating(ev);
+			})
+			.on("mouseout", function (ev) {
+				const el = $(ev.currentTarget);
+				el.parent()
+					.children("svg")
+					.each(function () {
+						$(this).find(".left-half, .right-half").removeClass("star-hover");
+					});
+			});
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		$(this.input_area)
 			.find("svg")
 			.click((ev) => {

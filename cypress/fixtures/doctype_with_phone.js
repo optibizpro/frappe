@@ -40,7 +40,11 @@ export default {
 			cancel: 1,
 		},
 	],
+<<<<<<< HEAD
 	sort_field: "modified",
+=======
+	sort_field: "creation",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	sort_order: "ASC",
 	track_changes: 1,
 };

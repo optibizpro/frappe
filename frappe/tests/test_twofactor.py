@@ -6,7 +6,11 @@ import pyotp
 
 import frappe
 from frappe.auth import HTTPRequest, get_login_attempt_tracker, validate_ip_address
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.twofactor import (
 	ExpiredLoginException,
 	authenticate_for_2factor,
@@ -20,6 +24,7 @@ from frappe.twofactor import (
 )
 from frappe.utils import cint, set_request
 
+<<<<<<< HEAD
 from . import get_system_setting, update_system_settings
 
 
@@ -27,19 +32,21 @@ class TestTwoFactor(FrappeTestCase):
 	def __init__(self, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		self.default_allowed_login_attempts = get_system_setting("allow_consecutive_login_attempts")
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
+class TestTwoFactor(IntegrationTestCase):
 	def setUp(self):
 		self.http_requests = create_http_request()
 		self.login_manager = frappe.local.login_manager
 		self.user = self.login_manager.user
-		update_system_settings({"allow_consecutive_login_attempts": 2})
+		self.enterContext(self.change_settings("System Settings", {"allow_consecutive_login_attempts": 2}))
 
 	def tearDown(self):
 		frappe.local.response["verification"] = None
 		frappe.local.response["tmp_id"] = None
 		disable_2fa()
 		frappe.clear_cache(user=self.user)
-		update_system_settings({"allow_consecutive_login_attempts": self.default_allowed_login_attempts})
 
 	def test_should_run_2fa(self):
 		"""Should return true if enabled."""
@@ -61,7 +68,7 @@ class TestTwoFactor(FrappeTestCase):
 		self.assertTrue(verification_obj)
 		self.assertTrue(tmp_id)
 		for k in ["_usr", "_pwd", "_otp_secret"]:
-			self.assertTrue(frappe.cache().get(f"{tmp_id}{k}"), f"{k} not available")
+			self.assertTrue(frappe.cache.get(f"{tmp_id}{k}"), f"{k} not available")
 
 	def test_two_factor_is_enabled(self):
 		"""
@@ -205,8 +212,7 @@ def create_http_request():
 	frappe.form_dict["usr"] = "test@example.com"
 	frappe.form_dict["pwd"] = "Eastern_43A1W"
 	frappe.local.form_dict["cmd"] = "login"
-	http_requests = HTTPRequest()
-	return http_requests
+	return HTTPRequest()
 
 
 def enable_2fa(bypass_two_factor_auth=0, bypass_restrict_ip_check=0):

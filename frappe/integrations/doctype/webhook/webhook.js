@@ -14,11 +14,17 @@ frappe.webhook = {
 							!frappe.model.table_fields.includes(d.fieldtype)
 						) {
 							return null;
+<<<<<<< HEAD
 						} else if (d.fieldtype === "Currency" || d.fieldtype === "Float") {
 							return { label: d.label, value: d.fieldname };
 						} else {
 							return {
 								label: `${__(d.label)} (${d.fieldtype})`,
+=======
+						} else {
+							return {
+								label: `${__(d.label, null, d.parent)} (${__(d.fieldtype)})`,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 								value: d.fieldname,
 							};
 						}
@@ -28,10 +34,16 @@ frappe.webhook = {
 				// add meta fields
 				for (let field of frappe.model.std_fields) {
 					if (field.fieldname == "name") {
-						fields.unshift({ label: "Name (Doc Name)", value: "name" });
+						fields.unshift({ label: __("Name (Doc Name)"), value: "name" });
 					} else {
 						fields.push({
+<<<<<<< HEAD
 							label: `${__(field.label)} (${field.fieldtype})`,
+=======
+							label: `${__(field.label, null, field.parent)} (${__(
+								field.fieldtype
+							)})`,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							value: field.fieldname,
 						});
 					}
@@ -81,6 +93,36 @@ frappe.webhook = {
 frappe.ui.form.on("Webhook", {
 	refresh: (frm) => {
 		frappe.webhook.set_fieldname_select(frm);
+		frm.set_query(
+			"background_jobs_queue",
+			"frappe.integrations.doctype.webhook.webhook.get_all_queues"
+		);
+<<<<<<< HEAD
+=======
+
+		if (frm.doc.webhook_doctype) {
+			frm.add_custom_button(__("Preview"), () => {
+				const args = {
+					doc: frm.doc,
+					doctype: frm.doc.webhook_doctype,
+					preview_fields: [
+						{
+							label: __("Meets Condition?"),
+							fieldtype: "Data",
+							method: "preview_meets_condition",
+						},
+						{
+							label: __("Request Body"),
+							fieldtype: "Code",
+							method: "preview_request_body",
+						},
+					],
+				};
+				let dialog = new frappe.views.RenderPreviewer(args);
+				return dialog;
+			});
+		}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	},
 
 	request_structure: (frm) => {
@@ -94,6 +136,7 @@ frappe.ui.form.on("Webhook", {
 	enable_security: (frm) => {
 		frm.toggle_reqd("webhook_secret", frm.doc.enable_security);
 	},
+<<<<<<< HEAD
 
 	preview_document: (frm) => {
 		frappe.call({
@@ -105,6 +148,8 @@ frappe.ui.form.on("Webhook", {
 			},
 		});
 	},
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 });
 
 frappe.ui.form.on("Webhook Data", {

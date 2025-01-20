@@ -1,12 +1,8 @@
 # Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
-import string
-
 from cryptography.fernet import Fernet, InvalidToken
 from passlib.context import CryptContext
-from passlib.hash import mysql41, pbkdf2_sha256
-from passlib.registry import register_crypt_handler
 from pypika.terms import Values
 
 import frappe
@@ -16,6 +12,7 @@ from frappe.utils import cstr, encode
 
 Auth = Table("__Auth")
 
+<<<<<<< HEAD
 
 class LegacyPassword(pbkdf2_sha256):
 	name = "frappe_legacy"
@@ -31,14 +28,12 @@ class LegacyPassword(pbkdf2_sha256):
 
 
 register_crypt_handler(LegacyPassword, force=True)
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 passlibctx = CryptContext(
 	schemes=[
 		"pbkdf2_sha256",
 		"argon2",
-		"frappe_legacy",
-	],
-	deprecated=[
-		"frappe_legacy",
 	],
 )
 
@@ -57,7 +52,21 @@ def get_decrypted_password(doctype, name, fieldname="password", raise_exception=
 	).run()
 
 	if result and result[0][0]:
+<<<<<<< HEAD
 		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
+=======
+<<<<<<< HEAD
+		return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
+=======
+		try:
+			return decrypt(result[0][0], key=f"{doctype}.{name}.{fieldname}")
+		except frappe.ValidationError as e:
+			if raise_exception:
+				raise e
+
+			return None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	elif raise_exception:
 		frappe.throw(
@@ -126,9 +135,7 @@ def check_password(user, pwd, doctype="User", fieldname="password", delete_track
 
 
 def delete_login_failed_cache(user):
-	frappe.cache().hdel("last_login_tried", user)
-	frappe.cache().hdel("login_failed_count", user)
-	frappe.cache().hdel("locked_account_time", user)
+	frappe.cache.hdel("login_failed_count", user)
 
 
 def update_password(user, pwd, doctype="User", fieldname="password", logout_all_sessions=False):
@@ -205,8 +212,7 @@ def encrypt(txt, encryption_key=None):
 		# encryption_key is not in 32 url-safe base64-encoded format
 		frappe.throw(_("Encryption key is in invalid format!"))
 
-	cipher_text = cstr(cipher_suite.encrypt(encode(txt)))
-	return cipher_text
+	return cstr(cipher_suite.encrypt(encode(txt)))
 
 
 def decrypt(txt, encryption_key=None, key: str | None = None):
@@ -222,7 +228,11 @@ def decrypt(txt, encryption_key=None, key: str | None = None):
 			+ _("Encryption key is invalid! Please check site_config.json")
 			+ "<br><br>"
 			+ _(
+<<<<<<< HEAD
 				"If you have recently restored the site you may need to copy the site config contaning original Encryption Key."
+=======
+				"If you have recently restored the site, you may need to copy the site_config.json containing the original encryption key."
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			)
 			+ "<br><br>"
 			+ _(

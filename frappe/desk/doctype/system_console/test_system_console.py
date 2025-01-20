@@ -1,10 +1,31 @@
 # Copyright (c) 2020, Frappe Technologies and Contributors
 # License: MIT. See LICENSE
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestSystemConsole(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestSystemConsole(UnitTestCase):
+	"""
+	Unit tests for SystemConsole.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestSystemConsole(IntegrationTestCase):
+	@classmethod
+	def setUpClass(cls) -> None:
+		cls.enterClassContext(cls.enable_safe_exec())
+		return super().setUpClass()
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_system_console(self):
 		system_console = frappe.get_doc("System Console")
 		system_console.console = 'log("hello")'

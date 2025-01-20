@@ -86,9 +86,12 @@
 
 .report-wrapper {
 	overflow: auto;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .report-view {
+	width: calc(100% - 220px);
 	.result {
 		.dt-row:last-child:not(.dt-row-filter) {
 			.dt-cell {
@@ -102,6 +105,7 @@
 	margin: 5px;
 }
 
+<<<<<<< HEAD
 .group-by-button.btn-primary-light {
 	color: var(--text-on-blue);
 	outline: 1px solid var(--bg-dark-blue);
@@ -110,23 +114,32 @@
 .group-by-icon.active {
 	use {
 		stroke: var(--text-on-blue);
+=======
+.btn {
+	.button-label,
+	.button-icon {
+		display: inline-flex;
+		vertical-align: middle;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 }
-
+.group-by-icon.active {
+	--icon-stroke: var(--primary);
+}
 .comparison-message {
 	margin-left: var(--margin-sm);
-	font-size: var(--text-md);
+	@include get_textstyle("base", "regular");
 }
 
 .list-count {
 	margin-right: var(--margin-sm);
-	font-size: var(--text-md);
+	@include get_textstyle("base", "regular");
 }
 
 .group-by-popover {
 	min-width: 500px;
 	min-height: 50px;
-	font-size: var(--text-md);
+	@include get_textstyle("base", "regular");
 
 	.group-by-box {
 		padding: var(--margin-xs) var(--margin-md) var(--margin-xs) 0;
@@ -176,8 +189,7 @@
 	}
 
 	.summary-label {
-		font-size: var(--text-base);
-		font-weight: normal !important;
+		@include get_textstyle("base", "regular");
 		text-align: center;
 
 		overflow: hidden !important;
@@ -255,7 +267,7 @@
 
 .report-footer {
 	border-top: 1px solid var(--border-color);
-	font-size: var(--text-sm);
+	@include get_textstyle("sm", "regular");
 	padding: var(--padding-sm) 0;
 }
 
@@ -283,7 +295,7 @@
 		.group-by-box {
 			.remove-group-by {
 				color: var(--primary);
-				font-size: var(--text-sm);
+				@include get_textstyle("sm", "regular");
 			}
 		}
 	}
@@ -291,4 +303,8 @@
 	.group-by-box .row > div[class*="col-sm-"] {
 		margin-bottom: 5px;
 	}
+}
+
+.input-group > * {
+	margin-right: 10px;
 }

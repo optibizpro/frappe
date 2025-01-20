@@ -3,6 +3,7 @@ from collections.abc import Callable
 from datetime import time
 
 import frappe
+from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.query_builder import Case
 from frappe.query_builder.builder import Function
 from frappe.query_builder.custom import ConstantColumn
@@ -18,7 +19,11 @@ from frappe.query_builder.functions import (
 	UnixTimestamp,
 )
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def run_only_if(dbtype: db_type_is) -> Callable:
@@ -26,7 +31,11 @@ def run_only_if(dbtype: db_type_is) -> Callable:
 
 
 @run_only_if(db_type_is.MARIADB)
+<<<<<<< HEAD
 class TestCustomFunctionsMariaDB(FrappeTestCase):
+=======
+class TestCustomFunctionsMariaDB(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_concat(self):
 		self.assertEqual("GROUP_CONCAT('Notes')", GroupConcat("Notes").get_sql())
 
@@ -166,7 +175,11 @@ class TestCustomFunctionsMariaDB(FrappeTestCase):
 
 
 @run_only_if(db_type_is.POSTGRES)
+<<<<<<< HEAD
 class TestCustomFunctionsPostgres(FrappeTestCase):
+=======
+class TestCustomFunctionsPostgres(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_concat(self):
 		self.assertEqual("STRING_AGG('Notes',',')", GroupConcat("Notes").get_sql())
 
@@ -316,26 +329,40 @@ class TestBuilderBase:
 		self.assertIsInstance(data, list)
 
 	def test_agg_funcs(self):
-		frappe.db.truncate("Communication")
+		doc = new_doctype(
+			fields=[
+				{
+					"fieldname": "number",
+					"fieldtype": "Int",
+					"label": "Number",
+					"reqd": 1,  # mandatory
+				},
+			],
+		)
+		doc.insert()
+		self.doctype_name = doc.name
+		frappe.db.truncate(self.doctype_name)
 		sample_data = {
-			"doctype": "Communication",
-			"communication_type": "Communication",
-			"content": "testing",
-			"rating": 1,
+			"doctype": self.doctype_name,
+			"number": 1,
 		}
-		frappe.get_doc(sample_data).insert()
-		sample_data["rating"] = 3
-		frappe.get_doc(sample_data).insert()
-		sample_data["rating"] = 4
-		frappe.get_doc(sample_data).insert()
-		self.assertEqual(frappe.qb.max("Communication", "rating"), 4)
-		self.assertEqual(frappe.qb.min("Communication", "rating"), 1)
-		self.assertAlmostEqual(frappe.qb.avg("Communication", "rating"), 2.666, places=2)
-		self.assertEqual(frappe.qb.sum("Communication", "rating"), 8.0)
+		frappe.get_doc(sample_data).insert(ignore_mandatory=True)
+		sample_data["number"] = 3
+		frappe.get_doc(sample_data).insert(ignore_mandatory=True)
+		sample_data["number"] = 4
+		frappe.get_doc(sample_data).insert(ignore_mandatory=True)
+		self.assertEqual(frappe.qb.max(self.doctype_name, "number"), 4)
+		self.assertEqual(frappe.qb.min(self.doctype_name, "number"), 1)
+		self.assertAlmostEqual(frappe.qb.avg(self.doctype_name, "number"), 2.666, places=2)
+		self.assertEqual(frappe.qb.sum(self.doctype_name, "number"), 8.0)
 		frappe.db.rollback()
 
 
+<<<<<<< HEAD
 class TestParameterization(FrappeTestCase):
+=======
+class TestParameterization(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_where_conditions(self):
 		DocType = frappe.qb.DocType("DocType")
 		query = frappe.qb.from_(DocType).select(DocType.name).where(DocType.owner == "Administrator' --")
@@ -426,7 +453,11 @@ class TestParameterization(FrappeTestCase):
 
 
 @run_only_if(db_type_is.MARIADB)
+<<<<<<< HEAD
 class TestBuilderMaria(FrappeTestCase, TestBuilderBase):
+=======
+class TestBuilderMaria(IntegrationTestCase, TestBuilderBase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_adding_tabs_in_from(self):
 		self.assertEqual("SELECT * FROM `tabNotes`", frappe.qb.from_("Notes").select("*").get_sql())
 		self.assertEqual("SELECT * FROM `__Auth`", frappe.qb.from_("__Auth").select("*").get_sql())
@@ -439,7 +470,11 @@ class TestBuilderMaria(FrappeTestCase, TestBuilderBase):
 
 
 @run_only_if(db_type_is.POSTGRES)
+<<<<<<< HEAD
 class TestBuilderPostgres(FrappeTestCase, TestBuilderBase):
+=======
+class TestBuilderPostgres(IntegrationTestCase, TestBuilderBase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_adding_tabs_in_from(self):
 		self.assertEqual('SELECT * FROM "tabNotes"', frappe.qb.from_("Notes").select("*").get_sql())
 		self.assertEqual('SELECT * FROM "__Auth"', frappe.qb.from_("__Auth").select("*").get_sql())
@@ -461,7 +496,11 @@ class TestBuilderPostgres(FrappeTestCase, TestBuilderBase):
 		self.assertEqual('SELECT * FROM "tabDocType"', qb().from_("DocType").select("*").get_sql())
 
 
+<<<<<<< HEAD
 class TestMisc(FrappeTestCase):
+=======
+class TestMisc(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_custom_func(self):
 		rand_func = frappe.qb.functions("rand", "45")
 		self.assertIsInstance(rand_func, Function)
@@ -479,3 +518,14 @@ class TestMisc(FrappeTestCase):
 
 		DocType = Table("DocType")
 		self.assertEqual(DocType.get_sql(), "DocType")
+<<<<<<< HEAD
+=======
+
+	def test_union(self):
+		user = frappe.qb.DocType("User")
+		role = frappe.qb.DocType("Role")
+		users = frappe.qb.from_(user).select(user.name)
+		roles = frappe.qb.from_(role).select(role.name)
+
+		self.assertEqual(set(users.run() + roles.run()), set((users + roles).run()))
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

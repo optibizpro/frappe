@@ -4,7 +4,11 @@ from unittest.mock import patch
 import redis
 
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.utils import get_bench_id
 from frappe.utils.background_jobs import get_redis_conn
 from frappe.utils.redis_queue import RedisQueue
@@ -29,7 +33,11 @@ def skip_if_redis_version_lt(version):
 	return decorator
 
 
+<<<<<<< HEAD
 class TestRedisAuth(FrappeTestCase):
+=======
+class TestRedisAuth(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@skip_if_redis_version_lt("6.0")
 	@patch.dict(frappe.conf, {"bench_id": "test_bench", "use_rq_auth": False})
 	def test_rq_gen_acllist(self):

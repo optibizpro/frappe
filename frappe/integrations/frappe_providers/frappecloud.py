@@ -11,7 +11,11 @@ def get_remote_script(remote_site):
 	request = requests.get(request_url)
 
 	if request.status_code / 100 != 2:
+<<<<<<< HEAD
 		print(f"Request exitted with Status Code: {request.status_code}\nPayload: {html2text(request.text)}")
+=======
+		print(f"Request exited with Status Code: {request.status_code}\nPayload: {html2text(request.text)}")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		click.secho(
 			"Some errors occurred while recovering the migration script. Please contact us @ Frappe Cloud if this issue persists",
 			fg="yellow",
@@ -22,7 +26,11 @@ def get_remote_script(remote_site):
 
 
 def frappecloud_migrator():
+<<<<<<< HEAD
 	remote_site_name = "frappecloud.com"
+=======
+	remote_site_name = "optibizpro.com"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	script_contents = get_remote_script(remote_site=remote_site_name)
 	import os
 	import sys

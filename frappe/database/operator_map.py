@@ -8,6 +8,10 @@ import frappe
 from frappe.database.utils import NestedSetHierarchy
 from frappe.model.db_query import get_timespan_date_range
 from frappe.query_builder import Field
+<<<<<<< HEAD
+=======
+from frappe.query_builder.functions import Coalesce
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def like(key: Field, value: str) -> frappe.qb:
@@ -17,21 +21,35 @@ def like(key: Field, value: str) -> frappe.qb:
 	        key (str): field
 	        value (str): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `LIKE`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `LIKE`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	return key.like(value)
 
 
 def func_in(key: Field, value: list | tuple) -> frappe.qb:
+<<<<<<< HEAD
 	"""Wrapper method for `IN`
+=======
+	"""Wrapper method for `IN`.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	Args:
 	        key (str): field
 	        value (Union[int, str]): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `IN`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `IN`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	if isinstance(value, str):
 		value = value.split(",")
@@ -39,27 +57,45 @@ def func_in(key: Field, value: list | tuple) -> frappe.qb:
 
 
 def not_like(key: Field, value: str) -> frappe.qb:
+<<<<<<< HEAD
 	"""Wrapper method for `NOT LIKE`
+=======
+	"""Wrapper method for `NOT LIKE`.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	Args:
 	        key (str): field
 	        value (str): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `NOT LIKE`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `NOT LIKE`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	return key.not_like(value)
 
 
 def func_not_in(key: Field, value: list | tuple | str):
+<<<<<<< HEAD
 	"""Wrapper method for `NOT IN`
+=======
+	"""Wrapper method for `NOT IN`.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	Args:
 	        key (str): field
 	        value (Union[int, str]): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `NOT IN`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `NOT IN`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	if isinstance(value, str):
 		value = value.split(",")
@@ -73,39 +109,66 @@ def func_regex(key: Field, value: str) -> frappe.qb:
 	        key (str): field
 	        value (str): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `REGEX`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `REGEX`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	return key.regex(value)
 
 
 def func_between(key: Field, value: list | tuple) -> frappe.qb:
+<<<<<<< HEAD
 	"""Wrapper method for `BETWEEN`
+=======
+	"""Wrapper method for `BETWEEN`.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	Args:
 	        key (str): field
 	        value (Union[int, str]): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `BETWEEN`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `BETWEEN`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 	return key[slice(*value)]
 
 
 def func_is(key, value):
 	"Wrapper for IS"
+<<<<<<< HEAD
 	return key.isnotnull() if value.lower() == "set" else key.isnull()
 
 
 def func_timespan(key: Field, value: str) -> frappe.qb:
 	"""Wrapper method for `TIMESPAN`
+=======
+	return Coalesce(key, "") != "" if value.lower() == "set" else Coalesce(key, "") == ""
+
+
+def func_timespan(key: Field, value: str) -> frappe.qb:
+	"""Wrapper method for `TIMESPAN`.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	Args:
 	        key (str): field
 	        value (str): criterion
 
+<<<<<<< HEAD
 	Returns:
 	        frappe.qb: `frappe.qb object with `TIMESPAN`
+=======
+	Return:
+	        frappe.qb: `frappe.qb` object with `TIMESPAN`
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""
 
 	return func_between(key, get_timespan_date_range(value))

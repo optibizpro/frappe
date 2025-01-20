@@ -14,18 +14,18 @@ from frappe.modules import load_doctype_module
 
 
 @frappe.whitelist()
-def get_submitted_linked_docs(doctype: str, name: str) -> list[tuple]:
+def get_submitted_linked_docs(doctype: str, name: str, ignore_doctypes_on_cancel_all=None) -> list[tuple]:
 	"""Get all the nested submitted documents those are present in referencing tables (dependent tables).
 
 	:param doctype: Document type
 	:param name: Name of the document
 
-	Usecase:
+	Use-case:
 	* User should be able to cancel the linked documents along with the one user trying to cancel.
 
-	Case1: If document sd1-n1 (document name n1 from sumittable doctype sd1) is linked to sd2-n2 and sd2-n2 is linked to sd3-n3,
+	Case1: If document sd1-n1 (document name n1 from submittable doctype sd1) is linked to sd2-n2 and sd2-n2 is linked to sd3-n3,
 	        Getting submittable linked docs of `sd1-n1`should give both sd2-n2 and sd3-n3.
-	Case2: If document sd1-n1 (document name n1 from sumittable doctype sd1) is linked to d2-n2 and d2-n2 is linked to sd3-n3,
+	Case2: If document sd1-n1 (document name n1 from submittable doctype sd1) is linked to d2-n2 and d2-n2 is linked to sd3-n3,
 	        Getting submittable linked docs of `sd1-n1`should give None. (because d2-n2 is not a submittable doctype)
 	Case3: If document sd1-n1 (document name n1 from submittable doctype sd1) is linked to d2-n2 & sd2-n2. d2-n2 is linked to sd3-n3.
 	        Getting submittable linked docs of `sd1-n1`should give sd2-n2.
@@ -38,9 +38,16 @@ def get_submitted_linked_docs(doctype: str, name: str) -> list[tuple]:
 	3. Searching for links is going to be a tree like structure where at every level,
 	        you will be finding documents using parent document and parent document links.
 	"""
+<<<<<<< HEAD
+=======
+
+	if isinstance(ignore_doctypes_on_cancel_all, str):
+		ignore_doctypes_on_cancel_all = json.loads(ignore_doctypes_on_cancel_all)
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	frappe.has_permission(doctype, doc=name)
 	tree = SubmittableDocumentTree(doctype, name)
-	visited_documents = tree.get_all_children()
+	visited_documents = tree.get_all_children(ignore_doctypes_on_cancel_all)
 	docs = []
 
 	for dt, names in visited_documents.items():
@@ -69,7 +76,7 @@ class SubmittableDocumentTree:
 		self._submittable_doctypes = None  # All submittable doctypes in the system
 		self._references_across_doctypes = None  # doctype wise links/references
 
-	def get_all_children(self):
+	def get_all_children(self, ignore_doctypes_on_cancel_all):
 		"""Get all nodes of a tree except the root node (all the nested submitted
 		documents those are present in referencing tables dependent tables).
 		"""
@@ -77,7 +84,9 @@ class SubmittableDocumentTree:
 			next_level_children = defaultdict(list)
 			for parent_dt in list(self.to_be_visited_documents):
 				parent_docs = self.to_be_visited_documents.get(parent_dt)
-				if not parent_docs:
+				if not parent_docs or (
+					ignore_doctypes_on_cancel_all and parent_dt in ignore_doctypes_on_cancel_all
+				):
 					del self.to_be_visited_documents[parent_dt]
 					continue
 
@@ -133,7 +142,14 @@ class SubmittableDocumentTree:
 		return self._references_across_doctypes.get(doctype, [])
 
 	def get_document_sources(self):
+<<<<<<< HEAD
 		"""Returns list of doctypes from where we access submittable documents."""
+<<<<<<< HEAD
+=======
+=======
+		"""Return list of doctypes from where we access submittable documents."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		return list(set([*self.get_link_sources(), self.root_doctype]))
 
 	def get_link_sources(self):
@@ -141,7 +157,7 @@ class SubmittableDocumentTree:
 		return list(set(self.get_submittable_doctypes()) - set(get_exempted_doctypes() or []))
 
 	def get_submittable_doctypes(self) -> list[str]:
-		"""Returns list of submittable doctypes."""
+		"""Return list of submittable doctypes."""
 		if not self._submittable_doctypes:
 			self._submittable_doctypes = frappe.get_all(
 				"DocType", {"is_submittable": 1}, pluck="name", order_by=None
@@ -150,7 +166,14 @@ class SubmittableDocumentTree:
 
 
 def get_child_tables_of_doctypes(doctypes: list[str] | None = None):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""Returns child tables by doctype."""
+=======
+	"""Return child tables by doctype."""
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	filters = [["fieldtype", "=", "Table"]]
 	filters_for_docfield = filters
 	filters_for_customfield = filters
@@ -214,7 +237,11 @@ def get_references_across_doctypes(
 	for k, v in references_by_dlink_fields.items():
 		references.setdefault(k, []).extend(v)
 
+<<<<<<< HEAD
 	for _doctype, links in references.items():
+=======
+	for links in references.values():
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		for link in links:
 			link["is_child"] = link["doctype"] in all_child_tables
 	return references
@@ -383,7 +410,7 @@ def validate_linked_doc(docinfo, ignore_doctypes_on_cancel_all=None):
 	        docinfo (dict): The document to check for submitted and non-exempt from auto-cancel
 	        ignore_doctypes_on_cancel_all (list) - List of doctypes to ignore while cancelling.
 
-	Returns:
+	Return:
 	        bool: True if linked document passes all validations, else False
 	"""
 	# ignore doctype to cancel
@@ -408,10 +435,7 @@ def validate_linked_doc(docinfo, ignore_doctypes_on_cancel_all=None):
 
 def get_exempted_doctypes():
 	"""Get list of doctypes exempted from being auto-cancelled"""
-	auto_cancel_exempt_doctypes = []
-	for doctypes in frappe.get_hooks("auto_cancel_exempted_doctypes"):
-		auto_cancel_exempt_doctypes.append(doctypes)
-	return auto_cancel_exempt_doctypes
+	return list(frappe.get_hooks("auto_cancel_exempted_doctypes"))
 
 
 def get_linked_docs(doctype: str, name: str, linkinfo: dict | None = None) -> dict[str, list]:
@@ -523,13 +547,13 @@ def get_linked_doctypes(doctype, without_ignore_user_permissions_enabled=False):
 	        {"Address": {"fieldname": "customer"}..}
 	"""
 	if without_ignore_user_permissions_enabled:
-		return frappe.cache().hget(
+		return frappe.cache.hget(
 			"linked_doctypes_without_ignore_user_permissions_enabled",
 			doctype,
 			lambda: _get_linked_doctypes(doctype, without_ignore_user_permissions_enabled),
 		)
 	else:
-		return frappe.cache().hget("linked_doctypes", doctype, lambda: _get_linked_doctypes(doctype))
+		return frappe.cache.hget("linked_doctypes", doctype, lambda: _get_linked_doctypes(doctype))
 
 
 def _get_linked_doctypes(doctype, without_ignore_user_permissions_enabled=False):

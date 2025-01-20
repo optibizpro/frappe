@@ -2,12 +2,29 @@
 # License: MIT. See LICENSE
 
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 from .google_settings import get_file_picker_settings
 
 
+<<<<<<< HEAD
 class TestGoogleSettings(FrappeTestCase):
+=======
+class UnitTestGoogleSettings(UnitTestCase):
+	"""
+	Unit tests for GoogleSettings.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestGoogleSettings(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def setUp(self):
 		settings = frappe.get_single("Google Settings")
 		settings.client_id = "test_client_id"

@@ -6,19 +6,45 @@ import time
 import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.doctype.bulk_update.bulk_update import submit_cancel_or_update_docs
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.tests.utils import FrappeTestCase, timeout
 
 
 class TestBulkUpdate(FrappeTestCase):
+<<<<<<< HEAD
+=======
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase, timeout
+
+
+class UnitTestBulkUpdate(UnitTestCase):
+	"""
+	Unit tests for BulkUpdate.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestBulkUpdate(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@classmethod
 	def setUpClass(cls) -> None:
 		super().setUpClass()
 		cls.doctype = new_doctype(is_submittable=1, custom=1).insert().name
 		frappe.db.commit()
 		for _ in range(50):
+<<<<<<< HEAD
 			doc = frappe.new_doc(cls.doctype)
 			doc.some_fieldname = frappe.mock("name")
 			doc.insert()
+=======
+			frappe.new_doc(cls.doctype, some_fieldname=frappe.mock("name")).insert()
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	@timeout()
 	def wait_for_assertion(self, assertion):

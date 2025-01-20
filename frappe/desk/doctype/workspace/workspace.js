@@ -20,6 +20,7 @@ frappe.ui.form.on("Workspace", {
 			.attr("target", "_blank");
 
 		frm.layout.message.empty();
+<<<<<<< HEAD
 		let message = __(
 			"This document allows you to edit limited fields. For all kinds of workspace customization, use the Edit button located on the workspace page"
 		);
@@ -29,6 +30,13 @@ frappe.ui.form.on("Workspace", {
 			(frm.doc.public &&
 				!frm.has_perm("write") &&
 				!frappe.user.has_role("Workspace Manager"))
+=======
+		let message = __("Please click Edit on the Workspace for best results");
+
+		if (
+			(frm.doc.for_user && frm.doc.for_user !== frappe.session.user) ||
+			(frm.doc.public && !frappe.user.has_role("Workspace Manager"))
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		) {
 			frm.trigger("disable_form");
 

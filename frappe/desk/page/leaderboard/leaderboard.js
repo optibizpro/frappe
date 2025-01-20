@@ -315,10 +315,16 @@ class Leaderboard {
 			})
 			.join("");
 
+<<<<<<< HEAD
 		const html = `<div class="list-headers">
 				<div class="list-item" data-list-renderer="List">${filters}</div>
 			</div>`;
 		return html;
+=======
+		return `<div class="list-headers">
+  				<div class="list-item" data-list-renderer="List">${filters}</div>
+  			</div>`;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	render_list_result(items) {
@@ -330,6 +336,7 @@ class Leaderboard {
 			})
 			.join("");
 
+<<<<<<< HEAD
 		let html = `<div class="result-list">
 				<div class="list-items">
 					${_html}
@@ -337,10 +344,18 @@ class Leaderboard {
 			</div>`;
 
 		return html;
+=======
+		return `<div class="result-list">
+  				<div class="list-items">
+  					${_html}
+  				</div>
+  			</div>`;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	render_message() {
 		const display_class = this.message ? "" : "hide";
+<<<<<<< HEAD
 		let html = `<div class="leaderboard-empty-state ${display_class}">
 			<div class="no-result text-center">
 				<img src="/assets/frappe/images/ui-states/search-empty-state.svg"
@@ -351,6 +366,17 @@ class Leaderboard {
 			</div>
 		</div>`;
 		return html;
+=======
+		return `<div class="leaderboard-empty-state ${display_class}">
+  			<div class="no-result text-center">
+  				<img src="/assets/frappe/images/ui-states/search-empty-state.svg"
+  					alt="Empty State"
+  					class="null-state"
+  				>
+  				<div class="empty-state-text">${this.message}</div>
+  			</div>
+  		</div>`;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	get_item_html(item, index) {
@@ -367,6 +393,7 @@ class Leaderboard {
 		const name_html = item.formatted_name
 			? `<span class="text-muted ellipsis list-id">${item.formatted_name}</span>`
 			: `<a class="grey list-id ellipsis" href="${link}"> ${item.name} </a>`;
+<<<<<<< HEAD
 		const html = `<div class="list-item">
 				<div class="list-item_content ellipsis list-item__content--flex-2 rank text-center">
 					<span class="text-muted ellipsis">${index}</span>
@@ -380,6 +407,19 @@ class Leaderboard {
 			</div>`;
 
 		return html;
+=======
+		return `<div class="list-item">
+  				<div class="list-item_content ellipsis list-item__content--flex-2 rank text-center">
+  					<span class="text-muted ellipsis">${index}</span>
+  				</div>
+  				<div class="list-item_content ellipsis list-item__content--flex-2 name">
+  					${name_html}
+  				</div>
+  				<div class="list-item_content ellipsis list-item__content--flex-2 value text-right">
+  					<span class="text-muted ellipsis">${value}</span>
+  				</div>
+  			</div>`;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	get_sidebar_item(item, icon) {

@@ -2,8 +2,14 @@
 {{ head_html or "" }}
 {%- endif %}
 
+<<<<<<< HEAD
 {%- if theme.name != 'Standard' -%}
 <link type="text/css" rel="stylesheet" href="{{ theme.theme_url }}">
+=======
+{%- if theme and theme.name != 'Standard' -%}
+<link type="text/css" rel="stylesheet" href="{{ theme.theme_url }}">
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 {%- else -%}
 {{ include_style('website.bundle.css') }}
 {%- endif -%}

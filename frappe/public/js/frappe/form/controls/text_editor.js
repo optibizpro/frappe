@@ -198,13 +198,22 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 	get_quill_options() {
 		const options = {
 			modules: {
-				toolbar: this.get_toolbar_options(),
+				toolbar: Object.keys(this.df).includes("get_toolbar_options")
+					? this.df.get_toolbar_options()
+					: this.get_toolbar_options(),
 				table: true,
 				imageResize: {},
 				magicUrl: true,
 				mention: this.get_mention_options(),
 			},
+<<<<<<< HEAD
 			theme: "snow",
+=======
+			theme: this.df.theme || "snow",
+			readOnly: this.disabled,
+			bounds: this.quill_container[0],
+			placeholder: this.df.placeholder || "",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		};
 
 		// In a grid row where space is constrained, hide the toolbar.
@@ -308,6 +317,10 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 		let value = this.quill ? this.quill.root.innerHTML : "";
 		// hack to retain space sequence.
 		value = value.replace(/(\s)(\s)/g, " &nbsp;");
+<<<<<<< HEAD
+=======
+		value = this.patch_unordered_list(value);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		try {
 			if (!$(value).find(".ql-editor").length) {
@@ -318,6 +331,33 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 		}
 
 		return value;
+	}
+
+	patch_unordered_list(value) {
+		/*
+		Quill uses the <ol> element for ordered AND unordered lists. Unordered
+		lists are identified by the data-list attribute. This creates problems
+		when cleaning up the html and the style of the list is lost.
+
+		To fix this, we convert the unordered lists to <ul> elements.
+		*/
+		const valueElement = document.createElement("div");
+		valueElement.innerHTML = value;
+
+		const firstBulletLiElements = valueElement.querySelectorAll(
+			"ol li[data-list=bullet]:first-child"
+		);
+		firstBulletLiElements.forEach((li) => {
+			const parent = li.parentNode;
+			const children = Array.from(parent.children);
+			const ul = document.createElement("ul");
+			children.forEach((child) => {
+				ul.appendChild(child);
+			});
+			parent.parentNode.replaceChild(ul, parent);
+		});
+
+		return valueElement.innerHTML;
 	}
 
 	set_focus() {

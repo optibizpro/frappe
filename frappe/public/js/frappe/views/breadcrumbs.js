@@ -18,7 +18,10 @@ frappe.breadcrumbs = {
 		Workflow: "Settings",
 		Printing: "Settings",
 		Setup: "Settings",
+<<<<<<< HEAD
 		"Event Streaming": "Tools",
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		Automation: "Tools",
 	},
 
@@ -73,6 +76,16 @@ frappe.breadcrumbs = {
 				this.set_list_breadcrumb(breadcrumbs);
 				this.set_dashboard_breadcrumb(breadcrumbs);
 			}
+		}
+
+		if (
+			breadcrumbs.workspace &&
+			frappe.workspace_map[breadcrumbs.workspace]?.app &&
+			frappe.workspace_map[breadcrumbs.workspace]?.app != frappe.current_app
+		) {
+			frappe.app.sidebar.apps_switcher.set_current_app(
+				frappe.workspace_map[breadcrumbs.workspace].app
+			);
 		}
 
 		this.toggle(true);
@@ -143,6 +156,7 @@ frappe.breadcrumbs = {
 				frappe.boot.module_wise_workspaces[breadcrumbs.module]?.includes(last_workspace)
 			) {
 				breadcrumbs.workspace = last_workspace;
+<<<<<<< HEAD
 				return;
 			}
 		}
@@ -150,23 +164,51 @@ frappe.breadcrumbs = {
 		if (breadcrumbs.module) {
 			if (this.module_map[breadcrumbs.module]) {
 				breadcrumbs.module = this.module_map[breadcrumbs.module];
+=======
+			}
+		} else {
+			// choose from __workspaces
+			const doctype_meta = frappe.get_meta(breadcrumbs.doctype);
+			if (doctype_meta?.__workspaces?.length) {
+				breadcrumbs.workspace = doctype_meta.__workspaces[0];
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			}
 
-			breadcrumbs.module_info = frappe.get_module(breadcrumbs.module);
+			if (breadcrumbs.module) {
+				if (this.module_map[breadcrumbs.module]) {
+					breadcrumbs.module = this.module_map[breadcrumbs.module];
+				}
 
+<<<<<<< HEAD
 			// set workspace
 			if (
 				breadcrumbs.module_info &&
 				frappe.boot.module_wise_workspaces[breadcrumbs.module]
 			) {
 				breadcrumbs.workspace = frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
+=======
+				breadcrumbs.module_info = frappe.get_module(breadcrumbs.module);
+
+				// set workspace
+				if (
+					breadcrumbs.module_info &&
+					frappe.boot.module_wise_workspaces[breadcrumbs.module]
+				) {
+					breadcrumbs.workspace =
+						frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
+				}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			}
 		}
 	},
 
 	set_list_breadcrumb(breadcrumbs) {
 		const doctype = breadcrumbs.doctype;
+<<<<<<< HEAD
 		const doctype_meta = frappe.get_doc("DocType", doctype);
+=======
+		const doctype_meta = frappe.get_meta(doctype);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if (
 			(doctype === "User" && !frappe.user.has_role("System Manager")) ||
 			doctype_meta?.issingle

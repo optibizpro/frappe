@@ -13,13 +13,27 @@ from frappe.desk.form.load import get_attachments
 from frappe.email.doctype.email_account.test_email_account import TestEmailAccount
 from frappe.email.doctype.email_queue.email_queue import QueueBuilder
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, change_settings
+=======
+<<<<<<< HEAD
+from frappe.tests.test_query_builder import run_only_if
+from frappe.tests.utils import FrappeTestCase, change_settings
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
-test_dependencies = ["Email Account"]
+EXTRA_TEST_RECORD_DEPENDENCIES = ["Email Account"]
 
 
+<<<<<<< HEAD
 class TestEmail(FrappeTestCase):
+=======
+class TestEmail(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def setUp(self):
 		frappe.db.delete("Email Unsubscribe")
 		frappe.db.delete("Email Queue")
@@ -151,6 +165,10 @@ class TestEmail(FrappeTestCase):
 		)
 
 	def test_expose(self):
+<<<<<<< HEAD
+=======
+		from frappe.utils import set_request
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		from frappe.utils.verified_command import verify_request
 
 		frappe.sendmail(
@@ -191,20 +209,35 @@ class TestEmail(FrappeTestCase):
 			if content:
 				eol = "\r\n"
 
-				frappe.local.flags.signed_query_string = re.search(
+				query_string = re.search(
 					r"(?<=/api/method/frappe.email.queue.unsubscribe\?).*(?=" + eol + ")", content.decode()
 				).group(0)
+
+				set_request(method="GET", query_string=query_string)
 				self.assertTrue(verify_request())
 				break
 
-	def test_expired(self):
-		self.test_email_queue()
-		frappe.db.sql("UPDATE `tabEmail Queue` SET `modified`=(NOW() - INTERVAL '8' day)")
+	def test_sender(self):
+		def _patched_assertion(email_account, assertion):
+			with patch.object(QueueBuilder, "get_outgoing_email_account", return_value=email_account):
+				frappe.sendmail(
+					recipients=["test1@example.com"],
+					sender="admin@example.com",
+					subject="Test Email Queue",
+					message="This mail is queued!",
+					now=True,
+				)
+				email_queue_sender = frappe.db.get_value("Email Queue", {"status": "Sent"}, "sender")
+				self.assertEqual(email_queue_sender, assertion)
 
-		from frappe.email.queue import set_expiry_for_email_queue
+		email_account = frappe.get_doc("Email Account", "_Test Email Account 1")
+		email_account.default_outgoing = 1
 
-		set_expiry_for_email_queue()
+		email_account.always_use_account_name_as_sender_name = 0
+		email_account.always_use_account_email_id_as_sender = 0
+		_patched_assertion(email_account, "admin@example.com")
 
+<<<<<<< HEAD
 		email_queue = frappe.db.sql("""select name from `tabEmail Queue` where status='Expired'""", as_dict=1)
 		self.assertEqual(len(email_queue), 1)
 		queue_recipients = [
@@ -219,6 +252,17 @@ class TestEmail(FrappeTestCase):
 		self.assertTrue("test@example.com" in queue_recipients)
 		self.assertTrue("test1@example.com" in queue_recipients)
 		self.assertEqual(len(queue_recipients), 2)
+=======
+		email_account.always_use_account_name_as_sender_name = 1
+		_patched_assertion(email_account, "_Test Email Account 1 <admin@example.com>")
+
+		email_account.always_use_account_name_as_sender_name = 0
+		email_account.always_use_account_email_id_as_sender = 1
+		_patched_assertion(email_account, '"admin@example.com" <test@example.com>')
+
+		email_account.always_use_account_name_as_sender_name = 1
+		_patched_assertion(email_account, "_Test Email Account 1 <test@example.com>")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	def test_sender(self):
 		def _patched_assertion(email_account, assertion):
@@ -326,7 +370,11 @@ class TestEmail(FrappeTestCase):
 			email_account.enable_incoming = False
 
 
+<<<<<<< HEAD
 class TestVerifiedRequests(FrappeTestCase):
+=======
+class TestVerifiedRequests(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_round_trip(self):
 		from frappe.utils import set_request
 		from frappe.utils.verified_command import get_signed_params, verify_request
@@ -335,12 +383,24 @@ class TestVerifiedRequests(FrappeTestCase):
 
 		for params in test_cases:
 			signed_url = get_signed_params(params)
+<<<<<<< HEAD
 			set_request(method="GET", path="?" + signed_url)
+=======
+			set_request(method="GET", query_string=signed_url)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			self.assertTrue(verify_request())
 		frappe.local.request = None
 
 
+<<<<<<< HEAD
 class TestEmailIntegrationTest(FrappeTestCase):
+=======
+<<<<<<< HEAD
+class TestEmailIntegrationTest(FrappeTestCase):
+=======
+class TestEmailIntegrationTest(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""Sends email to local SMTP server and verifies correctness.
 
 	SMTP4Dev runs as a service in unit test CI job.
@@ -375,8 +435,15 @@ class TestEmailIntegrationTest(FrappeTestCase):
 		subject = "checking if email works"
 		content = "is email working?"
 
+<<<<<<< HEAD
 		frappe.sendmail(sender=sender, recipients=recipients, subject=subject, content=content, now=True)
 		email = frappe.get_last_doc("Email Queue")
+=======
+		email = frappe.sendmail(
+			sender=sender, recipients=recipients, subject=subject, content=content, now=True
+		)
+		email.reload()
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		self.assertEqual(email.sender, sender)
 		self.assertEqual(len(email.recipients), 2)
 		self.assertEqual(email.status, "Sent")
@@ -390,7 +457,15 @@ class TestEmailIntegrationTest(FrappeTestCase):
 		self.assertSetEqual(set(recipients.split(",")), {m["to"][0] for m in sent_mails})
 
 	@run_only_if(db_type_is.MARIADB)
+<<<<<<< HEAD
 	@change_settings("System Settings", store_attached_pdf_document=1)
+=======
+<<<<<<< HEAD
+	@change_settings("System Settings", store_attached_pdf_document=1)
+=======
+	@IntegrationTestCase.change_settings("System Settings", store_attached_pdf_document=1)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_store_attachments(self):
 		""" "attach print" feature just tells email queue which document to attach, this is not
 		actually stored unless system setting says so."""

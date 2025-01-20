@@ -160,9 +160,13 @@ frappe.dashboard_utils = {
 				fieldtype: "HTML",
 				fieldname: "description",
 				options: `<div>
+<<<<<<< HEAD
 						<p>Set dynamic filter values in JavaScript for the required fields here.
+=======
+						<p>${__("Set dynamic filter values in JavaScript for the required fields here.")}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 						</p>
-						<p>Ex:
+						<p>${__("For example:")}
 							<code>frappe.defaults.get_user_default("Company")</code>
 						</p>
 					</div>`,

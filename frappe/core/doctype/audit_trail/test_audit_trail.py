@@ -2,11 +2,28 @@
 # See license.txt
 
 import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 from frappe.utils import today
 
 
 class TestAuditTrail(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+from frappe.utils import today
+
+
+class UnitTestAuditTrail(UnitTestCase):
+	"""
+	Unit tests for AuditTrail.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestAuditTrail(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def setUp(self):
 		self.child_doctype = create_custom_child_doctype()
 		self.custom_doctype = create_custom_doctype()

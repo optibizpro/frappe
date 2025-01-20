@@ -49,7 +49,11 @@ frappe.ui.get_print_settings = function (pdf, callback, letter_head, pick_column
 				columns: 2,
 				select_all: true,
 				options: pick_columns.map((df) => ({
+<<<<<<< HEAD
 					label: __(df.label),
+=======
+					label: __(df.label, null, df.parent),
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					value: df.fieldname,
 				})),
 			}

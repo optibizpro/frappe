@@ -1,16 +1,15 @@
+# When updating this file, please also update the linter_workflow_template in frappe/utils/boilerplate.py
 name: Linters
 
 on:
   pull_request:
   workflow_dispatch:
-  push:
-    branches: [ develop ]
 
 permissions:
   contents: read
 
 concurrency:
-  group: commitcheck-frappe-${{ github.event.number }}
+  group: commitcheck-frappe-${{ github.event_name }}-${{ github.event.number }}
   cancel-in-progress: true
 
 jobs:
@@ -20,12 +19,12 @@ jobs:
     if: github.event_name == 'pull_request'
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 200
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version: 20
           check-latest: true
 
       - name: Check commit titles
@@ -33,6 +32,8 @@ jobs:
           npm install @commitlint/cli @commitlint/config-conventional
           npx commitlint --verbose --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
 
+<<<<<<< HEAD
+=======
   docs-required:
     name: 'Documentation Required'
     runs-on: ubuntu-latest
@@ -40,10 +41,10 @@ jobs:
 
     steps:
       - name: 'Setup Environment'
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-      - uses: actions/checkout@v3
+          python-version: '3.13'
+      - uses: actions/checkout@v4
 
       - name: Validate Docs
         env:
@@ -52,16 +53,21 @@ jobs:
           pip install requests --quiet
           python $GITHUB_WORKSPACE/.github/helper/documentation.py $PR_NUMBER
 
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
   linter:
     name: 'Semgrep Rules'
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
+<<<<<<< HEAD
           python-version: '3.10'
+=======
+          python-version: '3.13'
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
           cache: pip
 
       - name: Download Semgrep rules
@@ -77,14 +83,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
+<<<<<<< HEAD
           python-version: '3.10'
 
       - uses: actions/checkout@v3
 
       - name: Cache pip
         uses: actions/cache@v3
+=======
+          python-version: '3.13'
+
+      - uses: actions/checkout@v4
+
+      - name: Cache pip
+        uses: actions/cache@v4
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
         with:
           path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/*requirements.txt', '**/pyproject.toml', '**/setup.py') }}
@@ -92,7 +107,32 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
+<<<<<<< HEAD
       - run: |
           pip install pip-audit
           cd ${GITHUB_WORKSPACE}
           pip-audit --desc on --ignore-vuln GHSA-4xqq-73wg-5mjp --ignore-vuln GHSA-2g68-c3qc-8985 .
+=======
+      - name: Install and run pip-audit
+        run: |
+          pip install pip-audit
+          cd ${GITHUB_WORKSPACE}
+<<<<<<< HEAD
+          pip-audit --desc on --ignore-vuln GHSA-4xqq-73wg-5mjp .
+=======
+          pip-audit --desc on .
+
+  precommit:
+    name: 'Pre-Commit'
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+      - uses: pre-commit/action@v3.0.1
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

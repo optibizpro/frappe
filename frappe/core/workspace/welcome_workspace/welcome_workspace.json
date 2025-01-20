@@ -8,7 +8,11 @@
  "for_user": "",
  "hide_custom": 0,
  "icon": "image-view",
+<<<<<<< HEAD
  "idx": 0,
+=======
+ "idx": 1,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "is_hidden": 0,
  "label": "Welcome Workspace",
  "links": [],

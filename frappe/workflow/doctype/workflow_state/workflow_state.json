@@ -40,7 +40,15 @@
  "icon": "fa fa-flag",
  "idx": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2023-03-20 18:12:42.137863",
+=======
+<<<<<<< HEAD
+ "modified": "2023-12-08 15:52:37.525003",
+=======
+ "modified": "2024-03-23 16:04:05.395556",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "modified_by": "Administrator",
  "module": "Workflow",
  "name": "Workflow State",
@@ -58,14 +66,23 @@
    "write": 1
   },
   {
-   "role": "All",
+   "role": "Desk User",
    "select": 1
   }
  ],
  "quick_entry": 1,
  "show_name_in_global_search": 1,
+<<<<<<< HEAD
  "sort_field": "modified",
  "sort_order": "ASC",
+=======
+<<<<<<< HEAD
+ "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+ "sort_order": "DESC",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "states": [],
  "track_changes": 1,
  "translated_doctype": 1

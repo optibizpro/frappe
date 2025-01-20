@@ -107,21 +107,17 @@ class FullTextSearch:
 
 		writer.commit(optimize=True)
 
-	def search(self, text, scope=None, limit=20):
-		"""Search from the current index
+	def search(self, text: str, scope: str | None = None, limit: int = 20) -> list[frappe._dict]:
+		"""Search from the current index.
 
 		Args:
-		        text (str): String to search for
-		        scope (str, optional): Scope to limit the search. Defaults to None.
-		        limit (int, optional): Limit number of search results. Defaults to 20.
-
-		Returns:
-		        [List(_dict)]: Search results
+		        text: String to search for
+		        scope: Scope to limit the search. Defaults to None.
+		        limit: Limit number of search results. Defaults to 20.
 		"""
 		ix = self.get_index()
 
 		results = None
-		out = []
 
 		search_fields = self.get_fields_to_search()
 		fieldboosts = {}
@@ -143,10 +139,7 @@ class FullTextSearch:
 				filter_scoped = Prefix(self.id, scope)
 			results = searcher.search(query, limit=limit, filter=filter_scoped)
 
-			for r in results:
-				out.append(self.parse_result(r))
-
-		return out
+			return [self.parse_result(r) for r in results]
 
 
 class FuzzyTermExtended(FuzzyTerm):

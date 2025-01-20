@@ -21,6 +21,7 @@ from frappe.utils import (
 	format_datetime,
 	get_datetime_str,
 	getdate,
+	month_diff,
 	now_datetime,
 	nowdate,
 )
@@ -38,6 +39,47 @@ communication_mapping = {
 
 
 class Event(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.desk.doctype.event_participants.event_participants import EventParticipants
+		from frappe.types import DF
+
+		add_video_conferencing: DF.Check
+		all_day: DF.Check
+		color: DF.Color | None
+		description: DF.TextEditor | None
+		ends_on: DF.Datetime | None
+		event_category: DF.Literal["Event", "Meeting", "Call", "Sent/Received Email", "Other"]
+		event_participants: DF.Table[EventParticipants]
+		event_type: DF.Literal["Private", "Public"]
+		friday: DF.Check
+		google_calendar: DF.Link | None
+		google_calendar_event_id: DF.Data | None
+		google_calendar_id: DF.Data | None
+		google_meet_link: DF.Data | None
+		monday: DF.Check
+		pulled_from_google_calendar: DF.Check
+		repeat_on: DF.Literal["", "Daily", "Weekly", "Monthly", "Quarterly", "Half Yearly", "Yearly"]
+		repeat_this_event: DF.Check
+		repeat_till: DF.Date | None
+		saturday: DF.Check
+		send_reminder: DF.Check
+		sender: DF.Data | None
+		starts_on: DF.Datetime
+		status: DF.Literal["Open", "Completed", "Closed", "Cancelled"]
+		subject: DF.SmallText
+		sunday: DF.Check
+		sync_with_google_calendar: DF.Check
+		thursday: DF.Check
+		tuesday: DF.Check
+		wednesday: DF.Check
+
+	# end: auto-generated types
+
 	def validate(self):
 		if not self.starts_on:
 			self.starts_on = now_datetime()
@@ -69,7 +111,7 @@ class Event(Document):
 		)
 		if communications:
 			for communication in communications:
-				frappe.delete_doc_if_exists("Communication", communication.name)
+				frappe.delete_doc_if_exists("Communication", communication.name, force=True)
 
 	def sync_communication(self):
 		if self.event_participants:
@@ -222,7 +264,7 @@ def send_event_digest():
 
 
 @frappe.whitelist()
-def get_events(start, end, user=None, for_reminder=False, filters=None):
+def get_events(start, end, user=None, for_reminder=False, filters=None) -> list[frappe._dict]:
 	if not user:
 		user = frappe.session.user
 
@@ -347,6 +389,70 @@ def get_events(start, end, user=None, for_reminder=False, filters=None):
 
 				remove_events.append(e)
 
+			if e.repeat_on == "Half Yearly":
+				# creates a string with date (27) and month (07) and year (2019) eg: 2019-07-27
+				year, month = start.split("-", maxsplit=2)[:2]
+				date = f"{year}-{month}-" + event_start.split("-", maxsplit=3)[2]
+
+				# last day of month issue, start from prev month!
+				try:
+					getdate(date)
+				except Exception:
+<<<<<<< HEAD
+=======
+					# Don't show any message to the user
+					frappe.clear_last_message()
+
+					date = date.split("-")
+					date = date[0] + "-" + str(cint(date[1]) - 1) + "-" + date[2]
+
+				start_from = date
+				for i in range(int(date_diff(end, start) / 30) + 3):
+					diff = month_diff(date, event_start) - 1
+					if diff % 6 != 0:
+						continue
+					if (
+						getdate(date) >= getdate(start)
+						and getdate(date) <= getdate(end)
+						and getdate(date) <= getdate(repeat)
+						and getdate(date) >= getdate(event_start)
+					):
+						add_event(e, date)
+
+					date = add_months(start_from, i + 1)
+				remove_events.append(e)
+
+			if e.repeat_on == "Quarterly":
+				# creates a string with date (27) and month (07) and year (2019) eg: 2019-07-27
+				year, month = start.split("-", maxsplit=2)[:2]
+				date = f"{year}-{month}-" + event_start.split("-", maxsplit=3)[2]
+
+				# last day of month issue, start from prev month!
+				try:
+					getdate(date)
+				except Exception:
+					# Don't show any message to the user
+					frappe.clear_last_message()
+
+					date = date.split("-")
+					date = date[0] + "-" + str(cint(date[1]) - 1) + "-" + date[2]
+
+				start_from = date
+				for i in range(int(date_diff(end, start) / 30) + 3):
+					diff = month_diff(date, event_start) - 1
+					if diff % 3 != 0:
+						continue
+					if (
+						getdate(date) >= getdate(start)
+						and getdate(date) <= getdate(end)
+						and getdate(date) <= getdate(repeat)
+						and getdate(date) >= getdate(event_start)
+					):
+						add_event(e, date)
+
+					date = add_months(start_from, i + 1)
+				remove_events.append(e)
+
 			if e.repeat_on == "Monthly":
 				# creates a string with date (27) and month (07) and year (2019) eg: 2019-07-27
 				year, month = start.split("-", maxsplit=2)[:2]
@@ -356,6 +462,10 @@ def get_events(start, end, user=None, for_reminder=False, filters=None):
 				try:
 					getdate(date)
 				except Exception:
+					# Don't show any message to the user
+					frappe.clear_last_message()
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					date = date.split("-")
 					date = date[0] + "-" + str(cint(date[1]) - 1) + "-" + date[2]
 

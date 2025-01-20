@@ -31,7 +31,11 @@ frappe.ui.form.on("DocType Layout", {
 			await frm.events.sync_fields(frm, false);
 
 			if (frm.is_new()) {
+<<<<<<< HEAD
 				frm.doc.__newname = document_name;
+=======
+				frm.doc.__newname = document_name; // eslint-disable-line
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				frm.refresh_field("__newname");
 			}
 		}

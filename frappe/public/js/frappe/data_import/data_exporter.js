@@ -1,15 +1,15 @@
 frappe.provide("frappe.data_import");
 
 frappe.data_import.DataExporter = class DataExporter {
-	constructor(doctype, exporting_for) {
+	constructor(doctype, exporting_for, filetype = "CSV") {
 		this.doctype = doctype;
 		this.exporting_for = exporting_for;
 		frappe.model.with_doctype(doctype, () => {
-			this.make_dialog();
+			this.make_dialog(filetype);
 		});
 	}
 
-	make_dialog() {
+	make_dialog(filetype = "CSV") {
 		this.dialog = new frappe.ui.Dialog({
 			title: __("Export Data"),
 			fields: [
@@ -18,7 +18,11 @@ frappe.data_import.DataExporter = class DataExporter {
 					fieldname: "file_type",
 					label: __("File Type"),
 					options: ["Excel", "CSV"],
+<<<<<<< HEAD
 					default: "CSV",
+=======
+					default: filetype,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				{
 					fieldtype: "Select",
@@ -74,8 +78,16 @@ frappe.data_import.DataExporter = class DataExporter {
 					let child_fieldname = df.fieldname;
 					let label = df.reqd
 						? // prettier-ignore
+<<<<<<< HEAD
 						  __('{0} ({1}) (1 row mandatory)', [__(df.label || df.fieldname), __(doctype)])
 						: __("{0} ({1})", [__(df.label || df.fieldname), __(doctype)]);
+=======
+						  __('{0} ({1}) (1 row mandatory)', [__(df.label || df.fieldname, null, df.parent), __(doctype)])
+						: __("{0} ({1})", [
+								__(df.label || df.fieldname, null, df.parent),
+								__(doctype),
+						  ]);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					return {
 						label,
 						fieldname: child_fieldname,
@@ -292,7 +304,7 @@ frappe.data_import.DataExporter = class DataExporter {
 			})
 			.map((df) => {
 				return {
-					label: __(df.label),
+					label: __(df.label, null, df.parent),
 					value: df.fieldname,
 					danger: is_field_mandatory(df),
 					checked: false,

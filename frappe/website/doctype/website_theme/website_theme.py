@@ -4,15 +4,55 @@
 from os.path import abspath, splitext
 from os.path import exists as path_exists
 from os.path import join as join_path
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+from pathlib import Path
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from typing import Optional
 
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import get_path
 
 
 class WebsiteTheme(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+		from frappe.website.doctype.website_theme_ignore_app.website_theme_ignore_app import (
+			WebsiteThemeIgnoreApp,
+		)
+
+		background_color: DF.Link | None
+		button_gradients: DF.Check
+		button_rounded_corners: DF.Check
+		button_shadows: DF.Check
+		custom: DF.Check
+		custom_overrides: DF.Code | None
+		custom_scss: DF.Code | None
+		dark_color: DF.Link | None
+		font_properties: DF.Data | None
+		font_size: DF.Data | None
+		google_font: DF.Data | None
+		ignored_apps: DF.Table[WebsiteThemeIgnoreApp]
+		js: DF.Code | None
+		light_color: DF.Link | None
+		module: DF.Link
+		primary_color: DF.Link | None
+		text_color: DF.Link | None
+		theme: DF.Data
+		theme_scss: DF.Code | None
+		theme_url: DF.Data | None
+
+	# end: auto-generated types
+
 	def validate(self):
 		self.validate_if_customizable()
 		self.generate_bootstrap_theme()
@@ -21,7 +61,8 @@ class WebsiteTheme(Document):
 		if (
 			not self.custom
 			and frappe.local.conf.get("developer_mode")
-			and not (frappe.flags.in_import or frappe.flags.in_test)
+			and not frappe.flags.in_import
+			and not frappe.flags.in_test
 		):
 			self.export_doc()
 
@@ -58,10 +99,6 @@ class WebsiteTheme(Document):
 	def generate_bootstrap_theme(self):
 		from subprocess import PIPE, Popen
 
-		self.theme_scss = frappe.render_template(
-			"frappe/website/doctype/website_theme/website_theme_template.scss", self.as_dict()
-		)
-
 		# create theme file in site public files folder
 		folder_path = abspath(frappe.utils.get_files_path("website_theme", is_private=False))
 		# create folder if not exist
@@ -79,7 +116,7 @@ class WebsiteTheme(Document):
 		content = content.replace("\n", "\\n")
 		command = ["node", "generate_bootstrap_theme.js", output_path, content]
 
-		process = Popen(command, cwd=frappe.get_app_path("frappe", ".."), stdout=PIPE, stderr=PIPE)
+		process = Popen(command, cwd=frappe.get_app_source_path("frappe"), stdout=PIPE, stderr=PIPE)
 
 		stderr = process.communicate()[1]
 
@@ -95,10 +132,19 @@ class WebsiteTheme(Document):
 	def delete_old_theme_files(self, folder_path):
 		import os
 
+		theme_files: list[Path] = []
 		for fname in os.listdir(folder_path):
 			if fname.startswith(frappe.scrub(self.name) + "_") and fname.endswith(".css"):
-				os.remove(os.path.join(folder_path, fname))
+				theme_files.append(Path(folder_path) / fname)
 
+<<<<<<< HEAD
+=======
+		theme_files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
+		# Keep 3 recent files
+		for old_file in theme_files[2:]:
+			old_file.unlink()
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@frappe.whitelist()
 	def set_as_default(self):
 		self.save()
@@ -112,16 +158,17 @@ class WebsiteTheme(Document):
 		from frappe.utils.change_log import get_versions
 
 		apps = get_versions()
-		out = []
-		for app, values in apps.items():
-			out.append({"name": app, "title": values["title"]})
-		return out
+		return [{"name": app, "title": values["title"]} for app, values in apps.items()]
 
 
 def get_active_theme() -> Optional["WebsiteTheme"]:
 	if website_theme := frappe.get_website_settings("website_theme"):
 		try:
+<<<<<<< HEAD
 			return frappe.get_cached_doc("Website Theme", website_theme)
+=======
+			return frappe.client_cache.get_doc("Website Theme", website_theme)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		except frappe.DoesNotExistError:
 			frappe.clear_last_message()
 			pass
@@ -150,15 +197,13 @@ def get_scss_paths():
 	returned set will contain 'frappe/public/scss/website[.bundle]'.
 	"""
 	import_path_list = []
-	bench_path = frappe.utils.get_bench_path()
 
 	scss_files = ["public/scss/website.scss", "public/scss/website.bundle.scss"]
 	for app in frappe.get_installed_apps():
 		for scss_file in scss_files:
-			relative_path = join_path(app, scss_file)
-			full_path = get_path("apps", app, relative_path, base=bench_path)
+			full_path = frappe.get_app_path(app, scss_file)
 			if path_exists(full_path):
-				import_path = splitext(relative_path)[0]
+				import_path = splitext(join_path(app, scss_file))[0]
 				import_path_list.append(import_path)
 
 	return import_path_list

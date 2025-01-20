@@ -4,22 +4,38 @@
 import io
 import json
 import os
+<<<<<<< HEAD
 from datetime import date, datetime, time, timedelta
+=======
+import sys
+from datetime import date, datetime, time, timedelta, timezone
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from enum import Enum
+from io import StringIO
 from mimetypes import guess_type
 from unittest.mock import patch
 
+<<<<<<< HEAD
 import pytz
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from hypothesis import given
 from hypothesis import strategies as st
 from PIL import Image
 
 import frappe
 from frappe.installer import parse_app_name
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, change_settings
+=======
+from frappe.model.document import Document
+from frappe.tests import IntegrationTestCase, MockedRequestTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.utils import (
+	add_trackers_to_url,
 	ceil,
+	dict_to_str,
 	evaluate_filters,
 	execute_in_shell,
 	floor,
@@ -27,40 +43,93 @@ from frappe.utils import (
 	format_timedelta,
 	get_bench_path,
 	get_file_timestamp,
+<<<<<<< HEAD
+=======
+	get_gravatar,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	get_site_info,
 	get_sites,
 	get_url,
+	map_trackers,
 	money_in_words,
+	parse_and_map_trackers_from_url,
 	parse_timedelta,
+<<<<<<< HEAD
+=======
+	random_string,
+	remove_blanks,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	safe_json_loads,
 	scrub_urls,
 	validate_email_address,
+	validate_name,
+	validate_phone_number_with_country_code,
 	validate_url,
+)
+from frappe.utils.change_log import (
+	get_source_url,
+	parse_github_url,
 )
 from frappe.utils.data import (
 	add_to_date,
+	add_years,
 	cast,
 	cint,
 	cstr,
+<<<<<<< HEAD
 	expand_relative_urls,
+=======
+	duration_to_seconds,
+	expand_relative_urls,
+	get_datetime,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	get_first_day_of_week,
 	get_time,
 	get_timedelta,
+	get_timespan_date_range,
+	get_url_to_form,
+	get_year_ending,
 	getdate,
 	now_datetime,
 	nowtime,
+<<<<<<< HEAD
 	rounded,
 	sha256_hash,
+=======
+	pretty_date,
+	rounded,
+	sha256_hash,
+	to_timedelta,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	validate_python_code,
 )
 from frappe.utils.dateutils import get_dates_from_timegrain
 from frappe.utils.diff import _get_value_from_version, get_version_diff, version_query
+from frappe.utils.identicon import Identicon
 from frappe.utils.image import optimize_image, strip_exif_data
+from frappe.utils.make_random import can_make, get_random, how_many
 from frappe.utils.response import json_handler
 from frappe.utils.synchronization import LockTimeoutError, filelock
 
 
+<<<<<<< HEAD
 class TestFilters(FrappeTestCase):
+=======
+class Capturing(list):
+	# ref: https://stackoverflow.com/a/16571630/10309266
+	def __enter__(self):
+		self._stdout = sys.stdout
+		sys.stdout = self._stringio = StringIO()
+		return self
+
+	def __exit__(self, *args):
+		self.extend(self._stringio.getvalue().splitlines())
+		del self._stringio
+		sys.stdout = self._stdout
+
+
+class TestFilters(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_simple_dict(self):
 		self.assertTrue(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Open"}))
 		self.assertFalse(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Closed"}))
@@ -68,7 +137,8 @@ class TestFilters(FrappeTestCase):
 	def test_multiple_dict(self):
 		self.assertTrue(
 			evaluate_filters(
-				{"doctype": "User", "status": "Open", "name": "Test 1"}, {"status": "Open", "name": "Test 1"}
+				{"doctype": "User", "status": "Open", "name": "Test 1"},
+				{"status": "Open", "name": "Test 1"},
 			)
 		)
 		self.assertFalse(
@@ -109,12 +179,14 @@ class TestFilters(FrappeTestCase):
 	def test_lt_gt(self):
 		self.assertTrue(
 			evaluate_filters(
-				{"doctype": "User", "status": "Open", "age": 20}, {"status": "Open", "age": (">", 10)}
+				{"doctype": "User", "status": "Open", "age": 20},
+				{"status": "Open", "age": (">", 10)},
 			)
 		)
 		self.assertFalse(
 			evaluate_filters(
-				{"doctype": "User", "status": "Open", "age": 20}, {"status": "Open", "age": (">", 30)}
+				{"doctype": "User", "status": "Open", "age": 20},
+				{"status": "Open", "age": (">", 30)},
 			)
 		)
 
@@ -122,12 +194,22 @@ class TestFilters(FrappeTestCase):
 		# date fields
 		self.assertTrue(
 			evaluate_filters(
+<<<<<<< HEAD
 				{"doctype": "User", "birth_date": "2023-02-28"}, [("User", "birth_date", ">", "01-04-2022")]
+=======
+				{"doctype": "User", "birth_date": "2023-02-28"},
+				[("User", "birth_date", ">", "01-04-2022")],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			)
 		)
 		self.assertFalse(
 			evaluate_filters(
+<<<<<<< HEAD
 				{"doctype": "User", "birth_date": "2023-02-28"}, [("User", "birth_date", "<", "28-02-2023")]
+=======
+				{"doctype": "User", "birth_date": "2023-02-28"},
+				[("User", "birth_date", "<", "28-02-2023")],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			)
 		)
 
@@ -145,41 +227,83 @@ class TestFilters(FrappeTestCase):
 			)
 		)
 
+<<<<<<< HEAD
 
 class TestMoney(FrappeTestCase):
+=======
+	def test_filter_evaluation(self):
+		doc = {
+			"doctype": "User",
+			"username": "test_abc",
+			"prefix": "startswith",
+			"suffix": "endswith",
+			"empty": None,
+			"number": 0,
+		}
+
+		test_cases = [
+			([["username", "like", "test"]], True),
+			([["username", "like", "user1"]], False),
+			([["username", "not like", "test"]], False),
+			([["username", "not like", "user1"]], True),
+			([["prefix", "like", "start%"]], True),
+			([["prefix", "not like", "end%"]], True),
+			([["suffix", "like", "%with"]], True),
+			([["suffix", "not like", "%end"]], True),
+			([["suffix", "is", "set"]], True),
+			([["suffix", "is", "not set"]], False),
+			([["empty", "is", "set"]], False),
+			([["empty", "is", "not set"]], True),
+			([["number", "is", "set"]], True),
+		]
+
+		for filter, expected_result in test_cases:
+			self.assertEqual(evaluate_filters(doc, filter), expected_result, msg=f"{filter}")
+
+
+class TestMoney(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_money_in_words(self):
-		nums_bhd = [
-			(5000, "BHD Five Thousand only."),
-			(5000.0, "BHD Five Thousand only."),
-			(0.1, "One Hundred Fils only."),
-			(0, "BHD Zero only."),
-			("Fail", ""),
-		]
+		test_cases = {
+			"BHD": [
+				(5000, "BHD Five Thousand only."),
+				(5000.0, "BHD Five Thousand only."),
+				(0.1, "One Hundred Fils only."),
+				(0, "BHD Zero only."),
+				("Fail", ""),
+			],
+			"NGN": [
+				(5000, "NGN Five Thousand only."),
+				(5000.0, "NGN Five Thousand only."),
+				(0.1, "Ten Kobo only."),
+				(0, "NGN Zero only."),
+				("Fail", ""),
+			],
+			"MRO": [
+				(5000, "MRO Five Thousand only."),
+				(5000.0, "MRO Five Thousand only."),
+				(1.4, "MRO One and Two Khoums only."),
+				(0.2, "One Khoums only."),
+				(0, "MRO Zero only."),
+				("Fail", ""),
+			],
+		}
 
-		nums_ngn = [
-			(5000, "NGN Five Thousand only."),
-			(5000.0, "NGN Five Thousand only."),
-			(0.1, "Ten Kobo only."),
-			(0, "NGN Zero only."),
-			("Fail", ""),
-		]
-
-		for num in nums_bhd:
-			self.assertEqual(
-				money_in_words(num[0], "BHD"),
-				num[1],
-				"{} is not the same as {}".format(money_in_words(num[0], "BHD"), num[1]),
-			)
-
-		for num in nums_ngn:
-			self.assertEqual(
-				money_in_words(num[0], "NGN"),
-				num[1],
-				"{} is not the same as {}".format(money_in_words(num[0], "NGN"), num[1]),
-			)
+		for currency, cases in test_cases.items():
+			for money, expected_words in cases:
+				words = money_in_words(money, currency)
+				self.assertEqual(
+					words,
+					expected_words,
+					f"{words} is not the same as {expected_words}",
+				)
 
 
+<<<<<<< HEAD
 class TestDataManipulation(FrappeTestCase):
+=======
+class TestDataManipulation(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_scrub_urls(self):
 		html = """
 			<p>You have a new message from: <b>John</b></p>
@@ -206,7 +330,11 @@ class TestDataManipulation(FrappeTestCase):
 		self.assertTrue('<a href="mailto:test@example.com">email</a>' in html)
 
 
+<<<<<<< HEAD
 class TestFieldCasting(FrappeTestCase):
+=======
+class TestFieldCasting(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_str_types(self):
 		STR_TYPES = (
 			"Data",
@@ -253,7 +381,11 @@ class TestFieldCasting(FrappeTestCase):
 		self.assertIsInstance(cast("Time", value="12:03:34"), timedelta)
 
 
+<<<<<<< HEAD
 class TestMathUtils(FrappeTestCase):
+=======
+class TestMathUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_floor(self):
 		from decimal import Decimal
 
@@ -275,7 +407,11 @@ class TestMathUtils(FrappeTestCase):
 		self.assertEqual(ceil(Decimal(29.45)), 30)
 
 
+<<<<<<< HEAD
 class TestHTMLUtils(FrappeTestCase):
+=======
+class TestHTMLUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_clean_email_html(self):
 		from frappe.utils.html_utils import clean_email_html
 
@@ -302,7 +438,11 @@ class TestHTMLUtils(FrappeTestCase):
 		self.assertNotIn("xyz", clean)
 
 
+<<<<<<< HEAD
 class TestValidationUtils(FrappeTestCase):
+=======
+class TestValidationUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_valid_url(self):
 		# Edge cases
 		self.assertFalse(validate_url(""))
@@ -324,7 +464,11 @@ class TestValidationUtils(FrappeTestCase):
 		self.assertTrue(validate_url("ftp://frappe.cloud", valid_schemes=["https", "ftp"]))
 		self.assertFalse(validate_url("bolo://frappe.io", valid_schemes=("http", "https", "ftp", "ftps")))
 		self.assertRaises(
-			frappe.ValidationError, validate_url, "gopher://frappe.io", valid_schemes="https", throw=True
+			frappe.ValidationError,
+			validate_url,
+			"gopher://frappe.io",
+			valid_schemes="https",
+			throw=True,
 		)
 
 	def test_valid_email(self):
@@ -335,20 +479,68 @@ class TestValidationUtils(FrappeTestCase):
 		# Valid addresses
 		self.assertTrue(validate_email_address("someone@frappe.com"))
 		self.assertTrue(validate_email_address("someone@frappe.com, anyone@frappe.io"))
+		self.assertTrue(validate_email_address("test%201@frappe.com"))
 
 		# Invalid address
 		self.assertFalse(validate_email_address("someone"))
 		self.assertFalse(validate_email_address("someone@----.com"))
+		self.assertFalse(validate_email_address("test 1@frappe.com"))
+		self.assertFalse(validate_email_address("test@example.com test2@example.com,undisclosed-recipient"))
 
 		# Invalid with throw
+<<<<<<< HEAD
 		self.assertRaises(frappe.InvalidEmailAddressError, validate_email_address, "someone.com", throw=True)
+=======
+<<<<<<< HEAD
+		self.assertRaises(frappe.InvalidEmailAddressError, validate_email_address, "someone.com", throw=True)
+=======
+		self.assertRaises(
+			frappe.InvalidEmailAddressError,
+			validate_email_address,
+			"someone.com",
+			throw=True,
+		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
+		self.assertEqual(validate_email_address("Some%20One@frappe.com"), "Some%20One@frappe.com")
+		self.assertEqual(
+			validate_email_address("erp+Job%20Applicant=JA00004@frappe.com"),
+			"erp+Job%20Applicant=JA00004@frappe.com",
+		)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
+	def test_valid_phone(self):
+		valid_phones = ["+91 1234567890", ""]
+
+<<<<<<< HEAD
 class TestImage(FrappeTestCase):
+=======
+		for phone in valid_phones:
+			validate_phone_number_with_country_code(phone, "field")
+		self.assertRaises(
+			frappe.InvalidPhoneNumberError,
+			validate_phone_number_with_country_code,
+			"+420 1234567890",
+			"field",
+		)
+
+	def test_validate_name(self):
+		valid_names = ["", "abc", "asd a13", "asd-asd"]
+		for name in valid_names:
+			validate_name(name, True)
+
+		invalid_names = ["asd$wat", "asasd/ads"]
+		for name in invalid_names:
+			self.assertRaises(frappe.InvalidNameError, validate_name, name, True)
+
+
+class TestImage(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_strip_exif_data(self):
-		original_image = Image.open("../apps/frappe/frappe/tests/data/exif_sample_image.jpg")
+		original_image = Image.open(frappe.get_app_path("frappe", "tests", "data", "exif_sample_image.jpg"))
 		original_image_content = open(
-			"../apps/frappe/frappe/tests/data/exif_sample_image.jpg", mode="rb"
+			frappe.get_app_path("frappe", "tests", "data", "exif_sample_image.jpg"),
+			mode="rb",
 		).read()
 
 		new_image_content = strip_exif_data(original_image_content, "image/jpeg")
@@ -358,7 +550,7 @@ class TestImage(FrappeTestCase):
 		self.assertNotEqual(original_image._getexif(), new_image._getexif())
 
 	def test_optimize_image(self):
-		image_file_path = "../apps/frappe/frappe/tests/data/sample_image_for_optimization.jpg"
+		image_file_path = frappe.get_app_path("frappe", "tests", "data", "sample_image_for_optimization.jpg")
 		content_type = guess_type(image_file_path)[0]
 		original_content = open(image_file_path, mode="rb").read()
 
@@ -371,7 +563,11 @@ class TestImage(FrappeTestCase):
 		self.assertLess(len(optimized_content), len(original_content))
 
 
+<<<<<<< HEAD
 class TestPythonExpressions(FrappeTestCase):
+=======
+class TestPythonExpressions(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_validation_for_good_python_expression(self):
 		valid_expressions = [
 			"foo == bar",
@@ -398,7 +594,11 @@ class TestPythonExpressions(FrappeTestCase):
 			self.assertRaises(frappe.ValidationError, validate_python_code, expr)
 
 
+<<<<<<< HEAD
 class TestDiffUtils(FrappeTestCase):
+=======
+class TestDiffUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -440,24 +640,64 @@ class TestDiffUtils(FrappeTestCase):
 		self.assertIn("+42;", diff)
 
 
+<<<<<<< HEAD
 class TestDateUtils(FrappeTestCase):
+=======
+class TestDateUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_first_day_of_week(self):
 		# Monday as start of the week
 		with patch.object(frappe.utils.data, "get_first_day_of_the_week", return_value="Monday"):
 			self.assertEqual(
-				frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-21")
+				frappe.utils.get_first_day_of_week("2020-12-25"),
+				frappe.utils.getdate("2020-12-21"),
 			)
 			self.assertEqual(
-				frappe.utils.get_first_day_of_week("2020-12-20"), frappe.utils.getdate("2020-12-14")
+				frappe.utils.get_first_day_of_week("2020-12-20"),
+				frappe.utils.getdate("2020-12-14"),
 			)
 
 		# Sunday as start of the week
+<<<<<<< HEAD
 		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-20"))
 		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-21"), frappe.utils.getdate("2020-12-20"))
 
 	def test_last_day_of_week(self):
 		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-24"), frappe.utils.getdate("2020-12-26"))
 		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-28"), frappe.utils.getdate("2021-01-02"))
+=======
+<<<<<<< HEAD
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-20"))
+		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-21"), frappe.utils.getdate("2020-12-20"))
+
+	def test_last_day_of_week(self):
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-24"), frappe.utils.getdate("2020-12-26"))
+		self.assertEqual(frappe.utils.get_last_day_of_week("2020-12-28"), frappe.utils.getdate("2021-01-02"))
+=======
+		self.assertEqual(
+			frappe.utils.get_first_day_of_week("2020-12-25"),
+			frappe.utils.getdate("2020-12-20"),
+		)
+		self.assertEqual(
+			frappe.utils.get_first_day_of_week("2020-12-21"),
+			frappe.utils.getdate("2020-12-20"),
+		)
+
+	def test_last_day_of_week(self):
+		self.assertEqual(
+			frappe.utils.get_last_day_of_week("2020-12-24"),
+			frappe.utils.getdate("2020-12-26"),
+		)
+		self.assertEqual(
+			frappe.utils.get_last_day_of_week("2020-12-28"),
+			frappe.utils.getdate("2021-01-02"),
+		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+
+	def test_is_last_day_of_the_month(self):
+		self.assertEqual(frappe.utils.is_last_day_of_the_month("2020-12-24"), False)
+		self.assertEqual(frappe.utils.is_last_day_of_the_month("2020-12-31"), True)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	def test_get_time(self):
 		datetime_input = now_datetime()
@@ -485,6 +725,91 @@ class TestDateUtils(FrappeTestCase):
 		self.assertIsInstance(get_timedelta(str(timedelta_input)), timedelta)
 		self.assertIsInstance(get_timedelta(str(time_input)), timedelta)
 		self.assertIsInstance(get_timedelta(get_timedelta("100:2:12")), timedelta)
+<<<<<<< HEAD
+=======
+
+	def test_to_timedelta(self):
+		self.assertEqual(to_timedelta("00:00:01"), timedelta(seconds=1))
+		self.assertEqual(to_timedelta("10:00:01"), timedelta(seconds=1, hours=10))
+		self.assertEqual(to_timedelta(time(hour=2)), timedelta(hours=2))
+
+	def test_add_date_utils(self):
+		self.assertEqual(add_years(datetime(2020, 1, 1), 1), datetime(2021, 1, 1))
+
+	def test_duration_to_sec(self):
+		self.assertEqual(duration_to_seconds("3h 34m 45s"), 12885)
+		self.assertEqual(duration_to_seconds("1h"), 3600)
+		self.assertEqual(duration_to_seconds("110m"), 110 * 60)
+		self.assertEqual(duration_to_seconds("110m"), 110 * 60)
+
+	def test_get_timespan_date_range(self):
+		supported_timespans = [
+			"last week",
+			"last month",
+			"last quarter",
+			"last 6 months",
+			"last year",
+			"yesterday",
+			"today",
+			"tomorrow",
+			"this week",
+			"this month",
+			"this quarter",
+			"this year",
+			"next week",
+			"next month",
+			"next quarter",
+			"next 6 months",
+			"next year",
+		]
+
+		for ts in supported_timespans:
+			res = get_timespan_date_range(ts)
+			self.assertEqual(len(res), 2)
+
+			# Manual type checking eh?
+			self.assertIsInstance(res[0], date)
+			self.assertIsInstance(res[1], date)
+
+	def test_timesmap_utils(self):
+		self.assertEqual(get_year_ending(date(2021, 1, 1)), date(2021, 12, 31))
+		self.assertEqual(get_year_ending(date(2021, 1, 31)), date(2021, 12, 31))
+
+	@given(st.datetimes())
+	def test_get_datetime(self, original):
+		parsed = get_datetime(str(original))
+		self.assertEqual(parsed, original)
+
+	@given(st.datetimes(timezones=st.timezones()))
+	def test_get_datetime_tz_aware(self, original):
+		parsed = get_datetime(str(original))
+		self.assertEqual(parsed, original)
+
+	def test_pretty_date(self):
+		from frappe import _
+
+		# differnt cases
+		now = get_datetime()
+
+		test_cases = {
+			now: _("1 second ago"),
+			add_to_date(now, minutes=-1): _("1 minute ago"),
+			add_to_date(now, minutes=-3): _("3 minutes ago"),
+			add_to_date(now, hours=-1): _("1 hour ago"),
+			add_to_date(now, hours=-2): _("2 hours ago"),
+			add_to_date(now, days=-1): _("1 day ago"),
+			add_to_date(now, days=-5): _("5 days ago"),
+			add_to_date(now, days=-8): _("1 week ago"),
+			add_to_date(now, days=-14): _("2 weeks ago"),
+			add_to_date(now, days=-32): _("1 month ago"),
+			add_to_date(now, days=-32 * 2): _("2 months ago"),
+			add_to_date(now, years=-1, days=-5): _("1 year ago"),
+			add_to_date(now, years=-2, days=-10): _("2 years ago"),
+		}
+
+		for dt, exp_message in test_cases.items():
+			self.assertEqual(pretty_date(dt), exp_message)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	def test_date_from_timegrain(self):
 		start_date = getdate("2021-01-01")
@@ -512,7 +837,11 @@ class TestDateUtils(FrappeTestCase):
 			self.assertEqual(d, add_to_date(start_date, years=idx, days=-1))
 
 
+<<<<<<< HEAD
 class TestResponse(FrappeTestCase):
+=======
+class TestResponse(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_json_handler(self):
 		class TEST(Enum):
 			ABC = "!@)@)!"
@@ -522,9 +851,16 @@ class TestResponse(FrappeTestCase):
 			"time_types": [
 				date(year=2020, month=12, day=2),
 				datetime(
-					year=2020, month=12, day=2, hour=23, minute=23, second=23, microsecond=23, tzinfo=pytz.utc
+					year=2020,
+					month=12,
+					day=2,
+					hour=23,
+					minute=23,
+					second=23,
+					microsecond=23,
+					tzinfo=timezone.utc,
 				),
-				time(hour=23, minute=23, second=23, microsecond=23, tzinfo=pytz.utc),
+				time(hour=23, minute=23, second=23, microsecond=23, tzinfo=timezone.utc),
 				timedelta(days=10, hours=12, minutes=120, seconds=10),
 			],
 			"float": [
@@ -553,24 +889,44 @@ class TestResponse(FrappeTestCase):
 			json.dumps(BAD_OBJECT, default=json_handler)
 
 
+<<<<<<< HEAD
 class TestTimeDeltaUtils(FrappeTestCase):
+=======
+class TestTimeDeltaUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_format_timedelta(self):
 		self.assertEqual(format_timedelta(timedelta(seconds=0)), "0:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=10)), "10:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=100)), "100:00:00")
 		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=129)), "0:01:40.000129")
+<<<<<<< HEAD
 		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=12212199129)), "3:25:12.199129")
+=======
+<<<<<<< HEAD
+		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=12212199129)), "3:25:12.199129")
+=======
+		self.assertEqual(
+			format_timedelta(timedelta(seconds=100, microseconds=12212199129)),
+			"3:25:12.199129",
+		)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	def test_parse_timedelta(self):
 		self.assertEqual(parse_timedelta("0:0:0"), timedelta(seconds=0))
 		self.assertEqual(parse_timedelta("10:0:0"), timedelta(hours=10))
 		self.assertEqual(
-			parse_timedelta("7 days, 0:32:18.192221"), timedelta(days=7, seconds=1938, microseconds=192221)
+			parse_timedelta("7 days, 0:32:18.192221"),
+			timedelta(days=7, seconds=1938, microseconds=192221),
 		)
 		self.assertEqual(parse_timedelta("7 days, 0:32:18"), timedelta(days=7, seconds=1938))
 
 
+<<<<<<< HEAD
 class TestXlsxUtils(FrappeTestCase):
+=======
+class TestXlsxUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_unescape(self):
 		from frappe.utils.xlsxutils import handle_html
 
@@ -579,7 +935,11 @@ class TestXlsxUtils(FrappeTestCase):
 		self.assertEqual("abc", handle_html("abc"))
 
 
+<<<<<<< HEAD
 class TestLinkTitle(FrappeTestCase):
+=======
+class TestLinkTitle(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_link_title_doctypes_in_boot_info(self):
 		"""
 		Test that doctypes are added to link_title_map in boot_info
@@ -670,8 +1030,18 @@ class TestLinkTitle(FrappeTestCase):
 		prop_setter.delete()
 
 
+<<<<<<< HEAD
 class TestAppParser(FrappeTestCase):
+=======
+class TestAppParser(MockedRequestTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_app_name_parser(self):
+		self.responses.add(
+			"HEAD",
+			"https://api.github.com/repos/frappe/healthcare",
+			status=200,
+			json={},
+		)
 		bench_path = get_bench_path()
 		frappe_app = os.path.join(bench_path, "apps", "frappe")
 		self.assertEqual("frappe", parse_app_name(frappe_app))
@@ -681,7 +1051,11 @@ class TestAppParser(FrappeTestCase):
 		self.assertEqual("healthcare", parse_app_name("frappe/healthcare@develop"))
 
 
+<<<<<<< HEAD
 class TestIntrospectionMagic(FrappeTestCase):
+=======
+class TestIntrospectionMagic(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	"""Test utils that inspect live objects"""
 
 	def test_get_newargs(self):
@@ -707,7 +1081,72 @@ class TestIntrospectionMagic(FrappeTestCase):
 		self.assertEqual(frappe.get_newargs(lambda: None, args), {})
 
 
+<<<<<<< HEAD
 class TestLocks(FrappeTestCase):
+=======
+class TestMakeRandom(IntegrationTestCase):
+	def test_get_random(self):
+		self.assertIsInstance(get_random("DocType", doc=True), Document)
+		self.assertIsInstance(get_random("DocType"), str)
+
+	def test_can_make(self):
+		self.assertIsInstance(can_make("User"), bool)
+
+	def test_how_many(self):
+		self.assertIsInstance(how_many("User"), int)
+
+
+class TestLazyLoader(IntegrationTestCase):
+	def test_lazy_import_module(self):
+		from frappe.utils.lazy_loader import lazy_import
+
+		with Capturing() as output:
+			ls = lazy_import("frappe.tests.data.load_sleep")
+		self.assertEqual(output, [])
+
+		with Capturing() as output:
+			ls.time
+		self.assertEqual(["Module `frappe.tests.data.load_sleep` loaded"], output)
+
+
+class TestIdenticon(IntegrationTestCase):
+	def test_get_gravatar(self):
+		# developers@frappe.io has a gravatar linked so str URL will be returned
+		frappe.flags.in_test = False
+		gravatar_url = get_gravatar("developers@frappe.io")
+		frappe.flags.in_test = True
+		self.assertIsInstance(gravatar_url, str)
+		self.assertTrue(gravatar_url.startswith("http"))
+
+		# random email will require Identicon to be generated, which will be a base64 string
+		gravatar_url = get_gravatar(f"developers{random_string(6)}@frappe.io")
+		self.assertIsInstance(gravatar_url, str)
+		self.assertTrue(gravatar_url.startswith("data:image/png;base64,"))
+
+	def test_generate_identicon(self):
+		identicon = Identicon(random_string(6))
+		with patch.object(identicon.image, "show") as show:
+			identicon.generate()
+			show.assert_called_once()
+
+		identicon_bs64 = identicon.base64()
+		self.assertIsInstance(identicon_bs64, str)
+		self.assertTrue(identicon_bs64.startswith("data:image/png;base64,"))
+
+
+class TestContainerUtils(IntegrationTestCase):
+	def test_dict_to_str(self):
+		self.assertEqual(dict_to_str({"a": "b"}), "a=b")
+
+	def test_remove_blanks(self):
+		a = {"asd": "", "b": None, "c": "d"}
+		remove_blanks(a)
+		self.assertEqual(len(a), 1)
+		self.assertEqual(a["c"], "d")
+
+
+class TestLocks(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_locktimeout(self):
 		lock_name = "test_lock"
 		with filelock(lock_name):
@@ -723,7 +1162,11 @@ class TestLocks(FrappeTestCase):
 					self.fail("Global locks not working")
 
 
+<<<<<<< HEAD
 class TestMiscUtils(FrappeTestCase):
+=======
+class TestMiscUtils(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_get_file_timestamp(self):
 		self.assertIsInstance(get_file_timestamp(__file__), str)
 
@@ -734,6 +1177,20 @@ class TestMiscUtils(FrappeTestCase):
 	def test_get_all_sites(self):
 		self.assertIn(frappe.local.site, get_sites())
 
+<<<<<<< HEAD
+=======
+	def test_get_site_info(self):
+		info = get_site_info()
+
+		installed_apps = [app["app_name"] for app in info["installed_apps"]]
+		self.assertIn("frappe", installed_apps)
+		self.assertGreaterEqual(len(info["users"]), 1)
+
+	def test_get_url_to_form(self):
+		self.assertTrue(get_url_to_form("System Settings").endswith("/app/system-settings"))
+		self.assertTrue(get_url_to_form("User", "Test User").endswith("/app/user/Test%20User"))
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_safe_json_load(self):
 		self.assertEqual(safe_json_loads("{}"), {})
 		self.assertEqual(safe_json_loads("{ /}"), "{ /}")
@@ -755,6 +1212,7 @@ class TestMiscUtils(FrappeTestCase):
 			self.assertEqual(output, expand_relative_urls(input))
 
 
+<<<<<<< HEAD
 class TestTBSanitization(FrappeTestCase):
 	def test_traceback_sanitzation(self):
 		try:
@@ -765,13 +1223,74 @@ class TestTBSanitization(FrappeTestCase):
 		except Exception:
 			traceback = frappe.get_traceback(with_context=True)
 			self.assertNotIn("42", traceback)
+=======
+<<<<<<< HEAD
+class TestTypingValidations(FrappeTestCase):
+=======
+class TestTypingValidations(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	ERR_REGEX = "^Argument '.*' should be of type '.*' but got '.*' instead.$"
+
+	def test_validate_whitelisted_api(self):
+		@frappe.whitelist()
+		def simple(string: str, number: int):
+			return
+
+		@frappe.whitelist()
+		def varkw(string: str, **kwargs):
+			return
+
+		test_cases = [
+			(simple, (object(), object()), {}),
+			(varkw, (object(),), {"xyz": object()}),
+		]
+
+		for fn, args, kwargs in test_cases:
+			with self.assertRaisesRegex(frappe.FrappeTypeError, self.ERR_REGEX):
+				fn(*args, **kwargs)
+
+	def test_validate_whitelisted_doc_method(self):
+		report = frappe.get_last_doc("Report")
+
+		with self.assertRaisesRegex(frappe.FrappeTypeError, self.ERR_REGEX):
+			report.toggle_disable(["disable"])
+
+		current_value = report.disabled
+		changed_value = not current_value
+
+		report.toggle_disable(changed_value)
+		report.toggle_disable(current_value)
+
+
+class TestTBSanitization(IntegrationTestCase):
+	def test_traceback_sanitzation(self):
+		try:
+<<<<<<< HEAD
+			password = frappe.generate_hash()
+			args = {"password": "42", "pwd": password, "safe": "safe_value"}
+			args = frappe._dict({"password": "42", "pwd": password, "safe": "safe_value"})  # noqa: F841
+=======
+			password = "42"  # noqa: F841
+			args = {"password": "42", "pwd": "42", "safe": "safe_value"}
+			args = frappe._dict({"password": "42", "pwd": "42", "safe": "safe_value"})  # noqa: F841
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			raise Exception
+		except Exception:
+			traceback = frappe.get_traceback(with_context=True)
+			self.assertNotIn(password, traceback)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			self.assertIn("********", traceback)
 			self.assertIn("password =", traceback)
 			self.assertIn("safe_value", traceback)
 
 
+<<<<<<< HEAD
 class TestRounding(FrappeTestCase):
 	@change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+=======
+class TestRounding(IntegrationTestCase):
+	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_normal_rounding(self):
 		self.assertEqual(flt("what"), 0)
 
@@ -848,8 +1367,16 @@ class TestRounding(FrappeTestCase):
 		self.assertEqual(flt(2.25, 1, rounding_method=rounding_method), 2.3)
 		self.assertEqual(flt(3.35, 1, rounding_method=rounding_method), 3.4)
 
+<<<<<<< HEAD
 	@change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
 	@given(st.decimals(min_value=-1e8, max_value=1e8), st.integers(min_value=-2, max_value=4))
+=======
+	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
+	@given(
+		st.decimals(min_value=-1e8, max_value=1e8),
+		st.integers(min_value=-2, max_value=4),
+	)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_normal_rounding_property(self, number, precision):
 		with localcontext() as ctx:
 			ctx.rounding = ROUND_HALF_UP
@@ -913,11 +1440,25 @@ class TestRounding(FrappeTestCase):
 		self.assertEqual(flt(-2.25, 1, rounding_method=rounding_method), -2.2)
 		self.assertEqual(flt(-3.35, 1, rounding_method=rounding_method), -3.4)
 
+<<<<<<< HEAD
 	@change_settings("System Settings", {"rounding_method": "Banker's Rounding"})
 	@given(st.decimals(min_value=-1e8, max_value=1e8), st.integers(min_value=-2, max_value=4))
 	def test_bankers_rounding_property(self, number, precision):
 		self.assertEqual(Decimal(str(flt(float(number), precision))), round(number, precision))
 
+=======
+	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Banker's Rounding"})
+	@given(
+		st.decimals(min_value=-1e8, max_value=1e8),
+		st.integers(min_value=-2, max_value=4),
+	)
+	def test_bankers_rounding_property(self, number, precision):
+		self.assertEqual(Decimal(str(flt(float(number), precision))), round(number, precision))
+
+	def test_default_rounding(self):
+		self.assertEqual(frappe.get_system_settings("rounding_method"), "Banker's Rounding")
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@given(
 		st.floats(min_value=-(2**32) - 1, max_value=2**32 + 1),
 		st.integers(min_value=-(2**63) - 1, max_value=2**63 + 1),
@@ -928,10 +1469,167 @@ class TestRounding(FrappeTestCase):
 		self.assertEqual(cint(str(floating_point)), int(floating_point))
 
 
+<<<<<<< HEAD
 class TestCrypto(FrappeTestCase):
+=======
+<<<<<<< HEAD
+class TestArgumentTypingValidations(FrappeTestCase):
+=======
+class TestArgumentTypingValidations(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	def test_validate_argument_types(self):
+		from unittest.mock import AsyncMock, MagicMock, Mock
+
+		from frappe.core.doctype.doctype.doctype import DocType
+		from frappe.utils.typing_validations import (
+			FrappeTypeError,
+			validate_argument_types,
+		)
+
+		@validate_argument_types
+		def test_simple_types(a: int, b: float, c: bool):
+			return a, b, c
+
+		@validate_argument_types
+		def test_sequence(a: str, b: list[dict] | None = None, c: dict[str, int] | None = None):
+			return a, b, c
+
+		@validate_argument_types
+		def test_doctypes(a: DocType | dict):
+			return a
+
+		@validate_argument_types
+		def test_mocks(a: str):
+			return a
+
+		self.assertEqual(test_simple_types(True, 2.0, True), (1, 2.0, True))
+		self.assertEqual(test_simple_types(1, 2, 1), (1, 2.0, True))
+		self.assertEqual(test_simple_types(1.0, 2, 1), (1, 2.0, True))
+		self.assertEqual(test_simple_types(1, 2, "1"), (1, 2.0, True))
+		with self.assertRaises(FrappeTypeError):
+			test_simple_types(1, 2, "a")
+		with self.assertRaises(FrappeTypeError):
+			test_simple_types(1, 2, None)
+
+		self.assertEqual(test_sequence("a", [{"a": 1}], {"a": 1}), ("a", [{"a": 1}], {"a": 1}))
+		self.assertEqual(test_sequence("a", None, None), ("a", None, None))
+		self.assertEqual(test_sequence("a", [{"a": 1}], None), ("a", [{"a": 1}], None))
+		self.assertEqual(test_sequence("a", None, {"a": 1}), ("a", None, {"a": 1}))
+		self.assertEqual(test_sequence("a", [{"a": 1}], {"a": "1.0"}), ("a", [{"a": 1}], {"a": 1}))
+		with self.assertRaises(FrappeTypeError):
+			test_sequence("a", [{"a": 1}], True)
+
+		doctype = frappe.get_last_doc("DocType")
+		self.assertEqual(test_doctypes(doctype), doctype)
+		self.assertEqual(test_doctypes(doctype.as_dict()), doctype.as_dict())
+		with self.assertRaises(FrappeTypeError):
+			test_doctypes("a")
+
+<<<<<<< HEAD
+
+class TestChangeLog(FrappeTestCase):
+=======
+		self.assertEqual(test_mocks("Hello World"), "Hello World")
+		for obj in (AsyncMock, MagicMock, Mock):
+			obj_instance = obj()
+			self.assertEqual(test_mocks(obj_instance), obj_instance)
+		with self.assertRaises(FrappeTypeError):
+			test_mocks(1)
+
+
+class TestChangeLog(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	def test_get_remote_url(self):
+		self.assertIsInstance(get_source_url("frappe"), str)
+
+	def test_parse_github_url(self):
+		# using erpnext as repo in order to be different from the owner
+		owner, repo = parse_github_url("https://github.com/frappe/erpnext.git")
+		self.assertEqual(owner, "frappe")
+		self.assertEqual(repo, "erpnext")
+
+		owner, repo = parse_github_url("https://github.com/frappe/erpnext")
+		self.assertEqual(owner, "frappe")
+		self.assertEqual(repo, "erpnext")
+
+		owner, repo = parse_github_url("git@github.com:frappe/erpnext.git")
+		self.assertEqual(owner, "frappe")
+		self.assertEqual(repo, "erpnext")
+
+		owner, repo = parse_github_url("https://gitlab.com/gitlab-org/gitlab")
+		self.assertIsNone(owner)
+		self.assertIsNone(repo)
+
+		self.assertRaises(ValueError, parse_github_url, remote_url=None)
+
+
+<<<<<<< HEAD
+class TestCrypto(FrappeTestCase):
+=======
+class TestCrypto(IntegrationTestCase):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_hashing(self):
 		self.assertEqual(sha256_hash(""), "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
 		self.assertEqual(
 			sha256_hash(b"The quick brown fox jumps over the lazy dog"),
 			"d7a8fbb307d7809469ca9abcb0082e4f8d5651e46d3cdb762d02d0bf37c9e592",
 		)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+
+class TestURLTrackers(IntegrationTestCase):
+	def test_add_trackers_to_url(self):
+		url = "https://example.com"
+		source = "test_source"
+		campaign = "test_campaign"
+		medium = "test_medium"
+		content = "test_content"
+
+		with patch("frappe.db.get_value") as mock_get_value:
+			mock_get_value.side_effect = lambda *args: args[1]  # Return unslugged input value
+			result = add_trackers_to_url(url, source, campaign, medium, content)
+
+		expected = "https://example.com?utm_source=test_source&utm_medium=test_medium&utm_campaign=test_campaign&utm_content=test_content"
+		self.assertEqual(result, expected)
+
+	def test_parse_and_map_trackers_from_url(self):
+		url = "https://example.com?utm_source=test_source&utm_medium=test_medium&utm_campaign=test_campaign&utm_content=test_content"
+
+		with patch("frappe.db.get_value") as mock_get_value:
+			mock_get_value.return_value = None  # Simulate no existing records
+			result = parse_and_map_trackers_from_url(url)
+
+		expected = {
+			"utm_source": "test_source",
+			"utm_medium": "test_medium",
+			"utm_campaign": "test_campaign",
+			"utm_content": "test_content",
+		}
+		self.assertEqual(result, expected)
+
+	def test_map_trackers(self):
+		url_trackers = {
+			"utm_source": "test_source",
+			"utm_medium": "test_medium",
+			"utm_campaign": "test_campaign",
+			"utm_content": "test_content",
+		}
+
+		result = map_trackers(url_trackers, create=True)
+
+		expected = {
+			"utm_source": frappe.get_doc("UTM Source", "test_source"),
+			"utm_medium": frappe.get_doc("UTM Medium", "test_medium"),
+			"utm_campaign": frappe.get_doc("UTM Campaign", "test_campaign"),
+			"utm_content": "test_content",
+		}
+		self.assertDocumentEqual(result["utm_source"], expected["utm_source"])
+		self.assertDocumentEqual(result["utm_medium"], expected["utm_medium"])
+		self.assertDocumentEqual(result["utm_campaign"], expected["utm_campaign"])
+		self.assertEqual(result["utm_content"], expected["utm_content"])
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

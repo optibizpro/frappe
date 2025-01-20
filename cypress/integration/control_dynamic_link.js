@@ -85,7 +85,11 @@ context("Dynamic Link", () => {
 		//Checking if the listbox have length greater than 0
 		cy.get('[data-fieldname="doc_id"]')
 			.find(".awesomplete")
+<<<<<<< HEAD
 			.find("li")
+=======
+			.find("div")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			.its("length")
 			.should("be.gte", 0);
 		cy.get(".btn-modal-close").click({ force: true });
@@ -100,7 +104,11 @@ context("Dynamic Link", () => {
 		//Checking if the listbox have length greater than 0
 		cy.get('[data-fieldname="doc_id"]')
 			.find(".awesomplete")
+<<<<<<< HEAD
 			.find("li")
+=======
+			.find("div")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			.its("length")
 			.should("be.gte", 0);
 		cy.get(".btn-modal-close").click({ force: true, multiple: true });
@@ -119,7 +127,11 @@ context("Dynamic Link", () => {
 		//Checking if the listbox have length greater than 0
 		cy.get('[data-fieldname="doc_id"]')
 			.find(".awesomplete")
+<<<<<<< HEAD
 			.find("li")
+=======
+			.find("div")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			.its("length")
 			.should("be.gte", 0);
 
@@ -134,7 +146,11 @@ context("Dynamic Link", () => {
 		//Checking if the listbox have length greater than 0
 		cy.get('[data-fieldname="doc_id"]')
 			.find(".awesomplete")
+<<<<<<< HEAD
 			.find("li")
+=======
+			.find("div")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			.its("length")
 			.should("be.gte", 0);
 		cy.get_field("doc_type").clear();
@@ -143,7 +159,11 @@ context("Dynamic Link", () => {
 		cy.intercept("/api/method/frappe.desk.search.search_link").as("search_query");
 		cy.fill_field("doc_type", "System Settings", "Link", { delay: 500 });
 		cy.wait("@search_query");
+<<<<<<< HEAD
 		cy.get(`[data-fieldname="doc_type"] ul:visible li:first-child`).click({
+=======
+		cy.get(`[data-fieldname="doc_type"] ul:visible div:first-child`).click({
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			scrollBehavior: false,
 		});
 

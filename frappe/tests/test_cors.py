@@ -4,7 +4,11 @@ from werkzeug.wrappers import Response
 
 import frappe
 from frappe.app import process_response
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 HEADERS = (
 	"Access-Control-Allow-Origin",
@@ -15,7 +19,11 @@ HEADERS = (
 )
 
 
+<<<<<<< HEAD
 class TestCORS(FrappeTestCase):
+=======
+class TestCORS(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def make_request_and_test(self, origin="http://example.com", absent=False):
 		self.origin = origin
 

@@ -3,7 +3,11 @@
 		<form action='/search'>
 		<input name='q' class='form-control navbar-search' type='text'
 			value='{{ frappe.form_dict.q|e if frappe.form_dict.q else ''}}'
+<<<<<<< HEAD
 			{% if not frappe.form_dict.q%}placeholder="{{ _("Search...") }}"{% endif %}>
+=======
+			{% if not frappe.form_dict.q %}placeholder="{{ _("Search...") }}"{% endif %}>
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		</form>
 	</li>
 {% endif %}

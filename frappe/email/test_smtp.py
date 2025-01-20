@@ -4,10 +4,17 @@
 import frappe
 from frappe.email.doctype.email_account.email_account import EmailAccount
 from frappe.email.smtp import SMTPServer
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestSMTP(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestSMTP(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def test_smtp_ssl_session(self):
 		for port in [None, 0, 465, "465"]:
 			make_server(port, 1, 0)
@@ -73,7 +80,7 @@ def create_email_account(email_id, password, enable_outgoing, default_outgoing=0
 		"enable_incoming": 1,
 		"append_to": append_to,
 		"is_dummy_password": 1,
-		"smtp_server": "localhost",
+		"smtp_server": "127.0.0.1",
 		"use_imap": 0,
 	}
 

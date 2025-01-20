@@ -2,7 +2,11 @@ name: Generate Semantic Release
 on:
   push:
     branches:
+<<<<<<< HEAD
       - version-14
+=======
+      - version-15
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 permissions:
   contents: read
 
@@ -12,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Entire Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Setup dependencies

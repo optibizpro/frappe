@@ -1,7 +1,23 @@
 frappe.ui.form.on("User", {
+<<<<<<< HEAD
 	before_load: function (frm) {
 		var update_tz_select = function (user_language) {
 			frm.set_df_property("time_zone", "options", [""].concat(frappe.all_timezones));
+=======
+	setup: function (frm) {
+		frm.set_query("default_workspace", () => {
+			return {
+				filters: {
+					for_user: ["in", [null, frappe.session.user]],
+					title: ["!=", "Welcome Workspace"],
+				},
+			};
+		});
+	},
+	before_load: function (frm) {
+		let update_tz_options = function () {
+			frm.fields_dict.time_zone.set_data(frappe.all_timezones);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		};
 
 		if (!frappe.all_timezones) {
@@ -9,11 +25,15 @@ frappe.ui.form.on("User", {
 				method: "frappe.core.doctype.user.user.get_timezones",
 				callback: function (r) {
 					frappe.all_timezones = r.message.timezones;
+<<<<<<< HEAD
 					update_tz_select();
+=======
+					update_tz_options();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 			});
 		} else {
-			update_tz_select();
+			update_tz_options();
 		}
 	},
 
@@ -27,6 +47,7 @@ frappe.ui.form.on("User", {
 		}
 	},
 
+<<<<<<< HEAD
 	role_profile_name: function (frm) {
 		if (frm.doc.role_profile_name) {
 			frappe.call({
@@ -42,7 +63,17 @@ frappe.ui.form.on("User", {
 					});
 					frm.roles_editor.show();
 				},
+=======
+	role_profiles: function (frm) {
+		if (frm.doc.role_profiles && frm.doc.role_profiles.length) {
+			frm.roles_editor.disable = 1;
+			frm.call("populate_role_profile_roles").then(() => {
+				frm.roles_editor.show();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			});
+		} else {
+			frm.roles_editor.disable = 0;
+			frm.roles_editor.show();
 		}
 	},
 
@@ -75,7 +106,11 @@ frappe.ui.form.on("User", {
 		if (
 			frm.can_edit_roles &&
 			!frm.is_new() &&
+<<<<<<< HEAD
 			in_list(["System User", "Website User"], frm.doc.user_type)
+=======
+			["System User", "Website User"].includes(frm.doc.user_type)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		) {
 			if (!frm.roles_editor) {
 				const role_area = $('<div class="role-editor">').appendTo(
@@ -85,7 +120,11 @@ frappe.ui.form.on("User", {
 				frm.roles_editor = new frappe.RoleEditor(
 					role_area,
 					frm,
+<<<<<<< HEAD
 					frm.doc.role_profile_name ? 1 : 0
+=======
+					frm.doc.role_profiles && frm.doc.role_profiles.length ? 1 : 0
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				);
 
 				if (frm.doc.user_type == "System User") {
@@ -100,12 +139,21 @@ frappe.ui.form.on("User", {
 	refresh: function (frm) {
 		let doc = frm.doc;
 
+		frappe.xcall("frappe.apps.get_apps").then((r) => {
+			let apps = r?.map((r) => r.name) || [];
+			frm.set_df_property("default_app", "options", [" ", ...apps]);
+		});
+
 		if (frm.is_new()) {
 			frm.set_value("time_zone", frappe.sys_defaults.time_zone);
 		}
 
 		if (
+<<<<<<< HEAD
 			in_list(["System User", "Website User"], frm.doc.user_type) &&
+=======
+			["System User", "Website User"].includes(frm.doc.user_type) &&
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			!frm.is_new() &&
 			!frm.roles_editor &&
 			frm.can_edit_roles
@@ -114,6 +162,7 @@ frappe.ui.form.on("User", {
 			return;
 		}
 
+<<<<<<< HEAD
 		if (
 			doc.name === frappe.session.user &&
 			!doc.__unsaved &&
@@ -137,6 +186,20 @@ frappe.ui.form.on("User", {
 						};
 						frappe.set_route("List", "User Permission");
 					},
+=======
+		frm.toggle_display(["sb1", "sb3", "modules_access"], false);
+		frm.trigger("setup_impersonation");
+
+		if (!frm.is_new()) {
+			if (has_access_to_edit_user()) {
+				frm.add_custom_button(
+					__("Set User Permissions"),
+					function () {
+						frappe.route_options = {
+							user: doc.name,
+						};
+						frappe.set_route("List", "User Permission");
+					},
 					__("Permissions")
 				);
 
@@ -144,6 +207,22 @@ frappe.ui.form.on("User", {
 					__("View Permitted Documents"),
 					() =>
 						frappe.set_route("query-report", "Permitted Documents For User", {
+							user: frm.doc.name,
+						}),
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+					__("Permissions")
+				);
+
+				frm.add_custom_button(
+<<<<<<< HEAD
+					__("View Permitted Documents"),
+					() =>
+						frappe.set_route("query-report", "Permitted Documents For User", {
+=======
+					__("View Doctype Permissions"),
+					() =>
+						frappe.set_route("query-report", "User Doctype Permissions", {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 							user: frm.doc.name,
 						}),
 					__("Permissions")
@@ -236,7 +315,8 @@ frappe.ui.form.on("User", {
 			frm.trigger("enabled");
 
 			if (frm.roles_editor && frm.can_edit_roles) {
-				frm.roles_editor.disable = frm.doc.role_profile_name ? 1 : 0;
+				frm.roles_editor.disable =
+					frm.doc.role_profiles && frm.doc.role_profiles.length ? 1 : 0;
 				frm.roles_editor.show();
 			}
 
@@ -260,6 +340,13 @@ frappe.ui.form.on("User", {
 			}
 			if (!found) {
 				frm.add_custom_button(__("Create User Email"), function () {
+<<<<<<< HEAD
+=======
+					if (!frm.doc.email) {
+						frappe.msgprint(__("Email is mandatory to create User Email"));
+						return;
+					}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					frm.events.create_user_email(frm);
 				});
 			}
@@ -267,7 +354,11 @@ frappe.ui.form.on("User", {
 
 		if (frappe.route_flags.unsaved === 1) {
 			delete frappe.route_flags.unsaved;
+<<<<<<< HEAD
 			for (var i = 0; i < frm.doc.user_emails.length; i++) {
+=======
+			for (let i = 0; i < frm.doc.user_emails.length; i++) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				frm.doc.user_emails[i].idx = frm.doc.user_emails[i].idx + 1;
 			}
 			frm.dirty();
@@ -297,14 +388,22 @@ frappe.ui.form.on("User", {
 				email: frm.doc.email,
 			},
 			callback: function (r) {
+<<<<<<< HEAD
 				if (!Array.isArray(r.message)) {
+=======
+				if (!Array.isArray(r.message) || !r.message.length) {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					frappe.route_options = {
 						email_id: frm.doc.email,
 						awaiting_password: 1,
 						enable_incoming: 1,
 					};
 					frappe.model.with_doctype("Email Account", function (doc) {
+<<<<<<< HEAD
 						var doc = frappe.model.get_new_doc("Email Account");
+=======
+						doc = frappe.model.get_new_doc("Email Account");
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 						frappe.route_flags.linked_user = frm.doc.name;
 						frappe.route_flags.delete_user_from_locals = true;
 						frappe.set_route("Form", "Email Account", doc.name);
@@ -330,12 +429,85 @@ frappe.ui.form.on("User", {
 			},
 		});
 	},
+<<<<<<< HEAD
 	on_update: function (frm) {
 		if (frappe.boot.time_zone && frappe.boot.time_zone.user !== frm.doc.time_zone) {
 			// Clear cache after saving to refresh the values of boot.
 			frappe.ui.toolbar.clear_cache();
 		}
 	},
+=======
+	after_save: function (frm) {
+		/**
+		 * Checks whether the effective value has changed.
+		 *
+		 * @param {Array.<string>} - Tuple with new override, previous override,
+		 *   and optionally fallback.
+		 * @returns {boolean} - Whether the resulting value has effectively changed
+		 */
+		const has_effectively_changed = ([new_override, prev_override, fallback = undefined]) => {
+			const prev_effective = prev_override || fallback;
+			const new_effective = new_override || fallback;
+			return new_override !== undefined && prev_effective !== new_effective;
+		};
+
+		const doc = frm.doc;
+		const boot = frappe.boot;
+		const attr_tuples = [
+			[doc.language, boot.user.language, boot.sysdefaults.language],
+			[doc.time_zone, boot.time_zone.user, boot.time_zone.system],
+			[doc.desk_theme, boot.user.desk_theme], // No system default.
+		];
+
+		if (doc.name === frappe.session.user && attr_tuples.some(has_effectively_changed)) {
+			frappe.msgprint(__("Refreshing..."));
+			window.location.reload();
+		}
+	},
+	setup_impersonation: function (frm) {
+<<<<<<< HEAD
+		if (frappe.session.user === "Administrator" && frm.doc.name != "Administrator") {
+=======
+		if (
+			frappe.session.user === "Administrator" &&
+			frm.doc.name != "Administrator" &&
+			!frm.is_new()
+		) {
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			frm.add_custom_button(__("Impersonate"), () => {
+				if (frm.doc.restrict_ip) {
+					frappe.msgprint({
+						message:
+							"There's IP restriction for this user, you can not impersonate as this user.",
+						title: "IP restriction is enabled",
+					});
+					return;
+				}
+				frappe.prompt(
+					[
+						{
+							fieldname: "reason",
+							fieldtype: "Small Text",
+							label: "Reason for impersonating",
+							description: __("Note: This will be shared with user."),
+							reqd: 1,
+						},
+					],
+					(values) => {
+						frappe
+							.xcall("frappe.core.doctype.user.user.impersonate", {
+								user: frm.doc.name,
+								reason: values.reason,
+							})
+							.then(() => window.location.reload());
+					},
+					__("Impersonate as {0}", [frm.doc.name]),
+					__("Confirm")
+				);
+			});
+		}
+	},
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 });
 
 frappe.ui.form.on("User Email", {

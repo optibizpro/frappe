@@ -4,10 +4,17 @@ import frappe
 from frappe.core.doctype.data_import.data_import import export_json, import_doc
 from frappe.desk.form.save import savedocs
 from frappe.model.delete_doc import delete_doc
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestFixtureImport(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestFixtureImport(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def create_new_doctype(self, DocType: str) -> None:
 		file = frappe.get_app_path("frappe", "custom", "fixtures", f"{DocType}.json")
 
@@ -69,10 +76,12 @@ class TestFixtureImport(FrappeTestCase):
 
 		import_doc(path_to_exported_fixtures)
 
-		delete_doc("DocType", "temp_singles", delete_permanently=True)
-		os.remove(path_to_exported_fixtures)
-
 		data = frappe.db.get_single_value("temp_singles", "member_name")
 		truncate_query.run()
 
 		self.assertEqual(data, dummy_name_list[0])
+
+		delete_doc("DocType", "temp_singles", delete_permanently=True)
+		os.remove(path_to_exported_fixtures)
+
+		frappe.db.commit()

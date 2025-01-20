@@ -1,12 +1,13 @@
 # Copyright (c) 2020, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
+import datetime
 import json
 import os
 import traceback
 import uuid
-from datetime import datetime
 
+import pytz
 import rq
 
 import frappe
@@ -51,7 +52,11 @@ class Monitor:
 			self.data = frappe._dict(
 				{
 					"site": frappe.local.site,
-					"timestamp": datetime.utcnow(),
+<<<<<<< HEAD
+					"timestamp": datetime.datetime.now(pytz.UTC),
+=======
+					"timestamp": datetime.datetime.now(datetime.timezone.utc),
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 					"transaction_type": transaction_type,
 					"uuid": str(uuid.uuid4()),
 				}
@@ -73,16 +78,22 @@ class Monitor:
 			}
 		)
 
+		if request_id := frappe.request.headers.get("X-Frappe-Request-Id"):
+			self.data.uuid = request_id
+
 	def collect_job_meta(self, method, kwargs):
 		self.data.job = frappe._dict({"method": method, "scheduled": False, "wait": 0})
 		if "run_scheduled_job" in method:
 			self.data.job.method = kwargs["job_type"]
 			self.data.job.scheduled = True
 
-		job = rq.get_current_job()
-		if job:
+		if job := rq.get_current_job():
 			self.data.uuid = job.id
-			waitdiff = self.data.timestamp - job.enqueued_at
+<<<<<<< HEAD
+			waitdiff = self.data.timestamp - job.enqueued_at.replace(tzinfo=pytz.UTC)
+=======
+			waitdiff = self.data.timestamp - job.enqueued_at.replace(tzinfo=datetime.timezone.utc)
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			self.data.job.wait = int(waitdiff.total_seconds() * 1000000)
 
 	def add_custom_data(self, **kwargs):
@@ -91,7 +102,11 @@ class Monitor:
 
 	def dump(self, response=None):
 		try:
-			timediff = datetime.utcnow() - self.data.timestamp
+<<<<<<< HEAD
+			timediff = datetime.datetime.now(pytz.UTC) - self.data.timestamp
+=======
+			timediff = datetime.datetime.now(datetime.timezone.utc) - self.data.timestamp
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			# Obtain duration in microseconds
 			self.data.duration = int(timediff.total_seconds() * 1000000)
 
@@ -114,21 +129,27 @@ class Monitor:
 
 	def store(self):
 		serialized = json.dumps(self.data, sort_keys=True, default=str, separators=(",", ":"))
+<<<<<<< HEAD
 		length = frappe.cache().rpush(MONITOR_REDIS_KEY, serialized)
 		if cint(length) > MONITOR_MAX_ENTRIES:
 			frappe.cache().ltrim(MONITOR_REDIS_KEY, 1, -1)
+=======
+		length = frappe.cache.rpush(MONITOR_REDIS_KEY, serialized)
+		if cint(length) > MONITOR_MAX_ENTRIES:
+			frappe.cache.ltrim(MONITOR_REDIS_KEY, 1, -1)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def flush():
 	try:
 		# Fetch all the logs without removing from cache
-		logs = frappe.cache().lrange(MONITOR_REDIS_KEY, 0, -1)
+		logs = frappe.cache.lrange(MONITOR_REDIS_KEY, 0, -1)
 		if logs:
 			logs = list(map(frappe.safe_decode, logs))
 			with open(log_file(), "a") as f:
 				f.write("\n".join(logs))
 				f.write("\n")
 			# Remove fetched entries from cache
-			frappe.cache().ltrim(MONITOR_REDIS_KEY, len(logs) - 1, -1)
+			frappe.cache.ltrim(MONITOR_REDIS_KEY, len(logs) - 1, -1)
 	except Exception:
 		traceback.print_exc()

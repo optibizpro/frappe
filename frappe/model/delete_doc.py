@@ -74,6 +74,8 @@ def delete_doc(
 
 			else:
 				doc = frappe.get_doc(doctype, name)
+				if not (doc.custom or frappe.conf.developer_mode or frappe.flags.in_patch or force):
+					frappe.throw(_("Standard DocType can not be deleted."))
 
 				update_flags(doc, flags, ignore_permissions)
 				check_permission_and_not_submitted(doc)
@@ -181,13 +183,11 @@ def add_to_deleted_document(doc):
 	"""Add this document to Deleted Document table. Called after delete"""
 	if doc.doctype != "Deleted Document" and frappe.flags.in_install != "frappe":
 		frappe.get_doc(
-			dict(
-				doctype="Deleted Document",
-				deleted_doctype=doc.doctype,
-				deleted_name=doc.name,
-				data=doc.as_json(),
-				owner=frappe.session.user,
-			)
+			doctype="Deleted Document",
+			deleted_doctype=doc.doctype,
+			deleted_name=doc.name,
+			data=doc.as_json(),
+			owner=frappe.session.user,
 		).db_insert()
 
 
@@ -235,15 +235,11 @@ def update_flags(doc, flags=None, ignore_permissions=False):
 
 def check_permission_and_not_submitted(doc):
 	# permission
-	if (
-		not doc.flags.ignore_permissions
-		and frappe.session.user != "Administrator"
-		and (not doc.has_permission("delete") or (doc.doctype == "DocType" and not doc.custom))
-	):
-		frappe.msgprint(
-			_("User not allowed to delete {0}: {1}").format(doc.doctype, doc.name),
-			raise_exception=frappe.PermissionError,
-		)
+	if not doc.flags.ignore_permissions and frappe.session.user != "Administrator":
+		if doc.doctype == "DocType" and not doc.custom:
+			frappe.throw(_("Only the Administrator can delete a standard DocType."))
+		else:
+			doc.check_permission("delete")
 
 	# check if submitted
 	if doc.meta.is_submittable and doc.docstatus.is_submitted():
@@ -358,6 +354,13 @@ def check_if_doc_is_dynamically_linked(doc, method="Delete"):
 				):
 					reference_doctype = refdoc.parenttype if meta.istable else df.parent
 					reference_docname = refdoc.parent if meta.istable else refdoc.name
+
+					if reference_doctype in frappe.get_hooks("ignore_links_on_delete") or (
+						reference_doctype in ignore_linked_doctypes and method == "Cancel"
+					):
+						# don't check for communication and todo!
+						continue
+
 					at_position = f"at Row: {refdoc.idx}" if meta.istable else ""
 
 					raise_link_exists_exception(doc, reference_doctype, reference_docname, at_position)

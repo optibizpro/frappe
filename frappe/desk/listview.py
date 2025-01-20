@@ -60,7 +60,13 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 			.run(as_dict=True)
 		)
 
+<<<<<<< HEAD
 	if not frappe.get_meta(doctype).has_field(field) and not is_default_field(field):
+=======
+	meta = frappe.get_meta(doctype)
+
+	if not meta.has_field(field) and not is_default_field(field):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		raise ValueError("Field does not belong to doctype")
 
 	data = frappe.get_list(
@@ -69,6 +75,13 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 		group_by=f"`tab{doctype}`.{field}",
 		fields=["count(*) as count", f"`{field}` as name"],
 		order_by="count desc",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+		limit=1000,
+=======
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	)
 
 	if field == "owner":
@@ -86,4 +99,18 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 	else:
 		data = data[0:50]
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	# Add in title if it's a link field and `show_title_field_in_link` is set
+	if (field_meta := meta.get_field(field)) and field_meta.fieldtype == "Link":
+		link_meta = frappe.get_meta(field_meta.options)
+		if link_meta.show_title_field_in_link:
+			title_field = link_meta.get_title_field()
+			for item in data:
+				item.title = frappe.get_value(field_meta.options, item.name, title_field)
+
+=======
+>>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	return data

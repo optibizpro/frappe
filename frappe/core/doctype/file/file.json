@@ -82,6 +82,7 @@
    "in_list_view": 1,
    "label": "File Size",
    "length": 20,
+   "options": "File Size",
    "read_only": 1
   },
   {
@@ -216,8 +217,16 @@
    "write": 1
   }
  ],
+<<<<<<< HEAD
  "sort_field": "modified",
+<<<<<<< HEAD
  "sort_order": "ASC",
+=======
+=======
+ "sort_field": "creation",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+ "sort_order": "DESC",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "states": [],
  "title_field": "file_name",
  "track_changes": 1

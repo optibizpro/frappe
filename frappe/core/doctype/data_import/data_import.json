@@ -16,6 +16,14 @@
   "google_sheets_url",
   "refresh_google_sheet",
   "column_break_5",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  "custom_delimiters",
+  "delimiter_options",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
   "status",
   "submit_after_import",
   "mute_emails",
@@ -167,11 +175,39 @@
    "hidden": 1,
    "label": "Payload Count",
    "read_only": 1
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+  },
+  {
+   "default": ",;\\t|",
+   "depends_on": "custom_delimiters",
+   "description": "If your CSV uses a different delimiter, add that character here, ensuring no spaces or additional characters are included.",
+   "fieldname": "delimiter_options",
+   "fieldtype": "Data",
+   "label": "Delimiter Options"
+  },
+  {
+   "default": "0",
+   "fieldname": "custom_delimiters",
+   "fieldtype": "Check",
+   "label": "Custom Delimiters"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
   }
  ],
  "hide_toolbar": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2024-01-30 17:08:05.566686",
+=======
+<<<<<<< HEAD
+ "modified": "2024-01-30 17:08:05.566686",
+=======
+ "modified": "2024-04-27 20:42:35.843158",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Data Import",
@@ -191,8 +227,23 @@
    "write": 1
   }
  ],
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1
+<<<<<<< HEAD
 }
+=======
+}
+=======
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

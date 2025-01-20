@@ -10,11 +10,12 @@ from werkzeug.wrappers import Response
 import frappe
 import frappe.sessions
 import frappe.utils
-from frappe import _, is_whitelisted
+from frappe import _, is_whitelisted, ping
 from frappe.core.doctype.server_script.server_script_utils import get_server_script_map
 from frappe.monitor import add_data_to_monitor
 from frappe.utils import cint
 from frappe.utils.csvutils import build_csv_response
+from frappe.utils.deprecations import deprecated
 from frappe.utils.image import optimize_image
 from frappe.utils.response import build_response
 
@@ -35,6 +36,10 @@ ALLOWED_MIMETYPES = (
 	"text/plain",
 	"video/quicktime",
 	"video/mp4",
+<<<<<<< HEAD
+=======
+	"text/csv",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 )
 
 
@@ -56,13 +61,11 @@ def handle():
 		# add the response to `message` label
 		frappe.response["message"] = data
 
-	return build_response("json")
-
 
 def execute_cmd(cmd, from_async=False):
 	"""execute a request as python module"""
-	for hook in frappe.get_hooks("override_whitelisted_methods", {}).get(cmd, []):
-		# override using the first hook
+	for hook in reversed(frappe.get_hooks("override_whitelisted_methods", {}).get(cmd, [])):
+		# override using the last hook
 		cmd = hook
 		break
 
@@ -103,11 +106,15 @@ def is_valid_http_method(method):
 	http_method = frappe.local.request.method
 
 	if http_method not in frappe.allowed_http_methods_for_whitelisted_func[method]:
+<<<<<<< HEAD
 		throw_permission_error()
 
 
 def throw_permission_error():
 	frappe.throw(_("Not permitted"), frappe.PermissionError)
+=======
+		frappe.throw_permission_error()
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 @frappe.whitelist(allow_guest=True)
@@ -125,8 +132,12 @@ def web_logout():
 	)
 
 
+<<<<<<< HEAD
 @frappe.whitelist()
 def uploadfile():
+	deprecation_warning(
+		"uploadfile is deprecated and will be removed in v16. Use upload_file instead.",
+	)
 	ret = None
 	check_write_permission(frappe.form_dict.doctype, frappe.form_dict.docname)
 
@@ -164,6 +175,8 @@ def uploadfile():
 	return ret
 
 
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @frappe.whitelist(allow_guest=True)
 def upload_file():
 	user = None
@@ -173,7 +186,7 @@ def upload_file():
 		else:
 			raise frappe.PermissionError
 	else:
-		user: "User" = frappe.get_doc("User", frappe.session.user)
+		user: User = frappe.get_doc("User", frappe.session.user)
 		ignore_permissions = False
 
 	files = frappe.request.files
@@ -188,9 +201,12 @@ def upload_file():
 	optimize = frappe.form_dict.optimize
 	content = None
 
+<<<<<<< HEAD
 	if not ignore_permissions:
 		check_write_permission(doctype, docname)
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	if library_file := frappe.form_dict.get("library_file_name"):
 		frappe.has_permission("File", doc=library_file, throw=True)
 		doc = frappe.get_value(
@@ -203,6 +219,12 @@ def upload_file():
 		file_url = doc.file_url
 		filename = doc.file_name
 
+<<<<<<< HEAD
+=======
+	if not ignore_permissions:
+		check_write_permission(doctype, docname)
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	if "file" in files:
 		file = files["file"]
 		content = file.stream.read()
@@ -224,7 +246,7 @@ def upload_file():
 	if content is not None and (frappe.session.user == "Guest" or (user and not user.has_desk_access())):
 		filetype = guess_type(filename)[0]
 		if filetype not in ALLOWED_MIMETYPES:
-			frappe.throw(_("You can only upload JPG, PNG, PDF, TXT or Microsoft documents."))
+			frappe.throw(_("You can only upload JPG, PNG, PDF, TXT, CSV or Microsoft documents."))
 
 	if method:
 		method = frappe.get_attr(method)
@@ -254,7 +276,12 @@ def check_write_permission(doctype: str | None = None, name: str | None = None):
 			doc.check_permission("write")
 		except frappe.DoesNotExistError:
 			# doc has not been inserted yet, name is set to "new-some-doctype"
+<<<<<<< HEAD
 			check_doctype = True
+=======
+			# If doc inserts fine then only this attachment will be linked see file/utils.py:relink_mismatched_files
+			return
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	if check_doctype:
 		frappe.has_permission(doctype, "write", throw=True)
@@ -270,7 +297,7 @@ def download_file(file_url: str):
 	Endpoints : download_file, frappe.core.doctype.file.file.download_file
 	URL Params : file_name = /path/to/file relative to site path
 	"""
-	file: "File" = frappe.get_doc("File", {"file_url": file_url})
+	file: File = frappe.get_doc("File", {"file_url": file_url})
 	if not file.is_downloadable():
 		raise frappe.PermissionError
 
@@ -284,19 +311,20 @@ def get_attr(cmd):
 	if "." in cmd:
 		method = frappe.get_attr(cmd)
 	else:
+		from frappe.deprecation_dumpster import deprecation_warning
+
+		deprecation_warning(
+			"unknown",
+			"v17",
+			f"Calling shorthand for {cmd} is deprecated, please specify full path in RPC call.",
+		)
 		method = globals()[cmd]
-	frappe.log("method:" + cmd)
 	return method
-
-
-@frappe.whitelist(allow_guest=True)
-def ping():
-	return "pong"
 
 
 def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 	"""run a whitelisted controller method"""
-	from inspect import getfullargspec
+	from inspect import signature
 
 	if not args and arg:
 		args = arg
@@ -312,8 +340,10 @@ def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 		doc._original_modified = doc.modified
 		doc.check_if_latest()
 
-	if not doc or not doc.has_permission("read"):
-		throw_permission_error()
+	if not doc:
+		frappe.throw_permission_error()
+
+	doc.check_permission("read")
 
 	try:
 		args = frappe.parse_json(args)
@@ -325,7 +355,7 @@ def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 	is_whitelisted(fn)
 	is_valid_http_method(fn)
 
-	fnargs = getfullargspec(method_obj).args
+	fnargs = list(signature(method_obj).parameters)
 
 	if not fnargs or (len(fnargs) == 1 and fnargs[0] == "self"):
 		response = doc.run_method(method)
@@ -348,7 +378,10 @@ def run_doc_method(method, docs=None, dt=None, dn=None, arg=None, args=None):
 	frappe.response["message"] = response
 
 	add_data_to_monitor(methodname=method)
+<<<<<<< HEAD
+
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
-# for backwards compatibility
-runserverobj = run_doc_method
+runserverobj = deprecated(run_doc_method)

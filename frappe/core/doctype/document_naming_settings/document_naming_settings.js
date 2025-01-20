@@ -2,6 +2,19 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Document Naming Settings", {
+<<<<<<< HEAD
+=======
+	setup: function (frm) {
+		frm.set_query("document_type", "amend_naming_override", () => {
+			return {
+				filters: {
+					is_submittable: 1,
+				},
+			};
+		});
+	},
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	refresh: function (frm) {
 		frm.trigger("setup_transaction_autocomplete");
 		frm.disable_save();

@@ -33,7 +33,11 @@ export default class NumberCard extends Block {
 
 		if (this.data && this.data.number_card_name) {
 			let has_data = this.make("number_card", this.data.number_card_name);
+<<<<<<< HEAD
 			if (!has_data) return;
+=======
+			if (!has_data) return this.wrapper;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 
 		if (!this.readOnly) {

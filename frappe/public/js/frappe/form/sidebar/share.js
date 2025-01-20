@@ -32,8 +32,16 @@ frappe.ui.form.Share = class Share {
 		}
 
 		this.shares.show();
+		let avatar_group = frappe.avatar_group(shared_users, 5, { align: "left", overlap: true });
+		avatar_group.on("click", () => {
+			this.frm.share_doc();
+		});
 		// REDESIGN-TODO: handle "shared with everyone"
+<<<<<<< HEAD
 		this.shares.append(frappe.avatar_group(shared_users, 5, { align: "left", overlap: true }));
+=======
+		this.shares.append(avatar_group);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 	show() {
 		var me = this;

@@ -1,8 +1,12 @@
 # Copyright (c) 2018, Frappe Technologies and contributors
 # License: MIT. See LICENSE
-
-
+import gzip
 import json
+import resource
+from contextlib import suppress
+from typing import Any
+
+from rq import get_current_job
 
 from rq import get_current_job
 
@@ -12,11 +16,42 @@ from frappe.desk.form.load import get_attachments
 from frappe.desk.query_report import generate_report_result
 from frappe.model.document import Document
 from frappe.monitor import add_data_to_monitor
+<<<<<<< HEAD
 from frappe.utils import gzip_compress, gzip_decompress
+=======
+from frappe.utils import add_to_date, now
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.utils.background_jobs import enqueue
+
+# If prepared report runs for longer than this time it's automatically considered as failed
+FAILURE_THRESHOLD = 60 * 60
+REPORT_TIMEOUT = 25 * 60
 
 
 class PreparedReport(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		error_message: DF.Text | None
+		filters: DF.SmallText | None
+		job_id: DF.Data | None
+		peak_memory_usage: DF.Int
+		queued_at: DF.Datetime | None
+		queued_by: DF.Data | None
+		report_end_time: DF.Datetime | None
+		report_name: DF.Data
+		status: DF.Literal["Error", "Queued", "Completed", "Started"]
+
+	# end: auto-generated types
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	@property
 	def queued_by(self):
 		return self.owner
@@ -29,7 +64,11 @@ class PreparedReport(Document):
 	def clear_old_logs(days=30):
 		prepared_reports_to_delete = frappe.get_all(
 			"Prepared Report",
+<<<<<<< HEAD
 			filters={"modified": ["<", frappe.utils.add_days(frappe.utils.now(), -days)]},
+=======
+			filters={"creation": ["<", frappe.utils.add_days(frappe.utils.now(), -days)]},
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		)
 
 		for batch in frappe.utils.create_batch(prepared_reports_to_delete, 100):
@@ -38,12 +77,30 @@ class PreparedReport(Document):
 	def before_insert(self):
 		self.status = "Queued"
 
+<<<<<<< HEAD
 	def after_insert(self):
+=======
+	def on_trash(self):
+		"""Remove pending job from queue, if already running then kill the job."""
+		if self.status not in ("Started", "Queued"):
+			return
+
+		with suppress(Exception):
+			job = frappe.get_doc("RQ Job", self.job_id)
+			job.stop_job() if self.status == "Started" else job.delete()
+
+	def after_insert(self):
+		timeout = frappe.get_value("Report", self.report_name, "timeout")
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		enqueue(
 			generate_report,
 			queue="long",
 			prepared_report=self.name,
+<<<<<<< HEAD
 			timeout=1500,
+=======
+			timeout=timeout or REPORT_TIMEOUT,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			enqueue_after_commit=True,
 		)
 
@@ -53,6 +110,7 @@ class PreparedReport(Document):
 			attached_file = frappe.get_doc("File", attachment.name)
 
 			if with_file_name:
+<<<<<<< HEAD
 				return (gzip_decompress(attached_file.get_content()), attachment.file_name)
 			return gzip_decompress(attached_file.get_content())
 
@@ -61,6 +119,16 @@ def generate_report(prepared_report):
 	update_job_id(prepared_report, get_current_job().id)
 
 	instance = frappe.get_doc("Prepared Report", prepared_report)
+=======
+				return (gzip.decompress(attached_file.get_content()), attachment.file_name)
+			return gzip.decompress(attached_file.get_content())
+
+
+def generate_report(prepared_report):
+	update_job_id(prepared_report)
+
+	instance: PreparedReport = frappe.get_doc("Prepared Report", prepared_report)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	report = frappe.get_doc("Report", instance.report_name)
 
 	add_data_to_monitor(report=instance.report_name)
@@ -78,7 +146,11 @@ def generate_report(prepared_report):
 					report.custom_columns = data["columns"]
 
 		result = generate_report_result(report=report, filters=instance.filters, user=instance.owner)
+<<<<<<< HEAD
 		create_json_gz_file(result, instance.doctype, instance.name)
+=======
+		create_json_gz_file(result, instance.doctype, instance.name, instance.report_name)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		instance.status = "Completed"
 	except Exception:
@@ -86,6 +158,11 @@ def generate_report(prepared_report):
 		_save_error(instance, error=frappe.get_traceback(with_context=True))
 
 	instance.report_end_time = frappe.utils.now()
+<<<<<<< HEAD
+=======
+	instance.peak_memory_usage = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+	add_data_to_monitor(peak_memory_usage=instance.peak_memory_usage)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	instance.save(ignore_permissions=True)
 
 	frappe.publish_realtime(
@@ -95,11 +172,14 @@ def generate_report(prepared_report):
 	)
 
 
+<<<<<<< HEAD
 def update_job_id(prepared_report, job_id):
 	frappe.db.set_value("Prepared Report", prepared_report, "job_id", job_id, update_modified=False)
 	frappe.db.commit()
 
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 @dangerously_reconnect_on_connection_abort
 def _save_error(instance, error):
 	instance.reload()
@@ -108,6 +188,24 @@ def _save_error(instance, error):
 	instance.save(ignore_permissions=True)
 
 
+<<<<<<< HEAD
+=======
+def update_job_id(prepared_report):
+	job = get_current_job()
+
+	frappe.db.set_value(
+		"Prepared Report",
+		prepared_report,
+		{
+			"job_id": job and job.id,
+			"status": "Started",
+		},
+	)
+
+	frappe.db.commit()
+
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 @frappe.whitelist()
 def make_prepared_report(report_name, filters=None):
 	"""run reports in background"""
@@ -122,18 +220,35 @@ def make_prepared_report(report_name, filters=None):
 	return {"name": prepared_report.name}
 
 
+<<<<<<< HEAD
+=======
+def process_filters_for_prepared_report(filters: dict[str, Any] | str) -> str:
+	if isinstance(filters, str):
+		filters = json.loads(filters)
+
+	# This looks like an insanity but, without this it'd be very hard to find Prepared Reports matching given condition
+	# We're ensuring that spacing is consistent. e.g. JS seems to put no spaces after ":", Python on the other hand does.
+	# We are also ensuring that order of keys is same so generated JSON string will be identical too.
+	# PS: frappe.as_json sorts keys
+	return frappe.as_json(filters, indent=None, separators=(",", ":"))
+
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 @frappe.whitelist()
 def get_reports_in_queued_state(report_name, filters):
-	reports = frappe.get_all(
+	return frappe.get_all(
 		"Prepared Report",
 		filters={
 			"report_name": report_name,
 			"filters": process_filters_for_prepared_report(filters),
+<<<<<<< HEAD
 			"status": "Queued",
+=======
+			"status": ("in", ("Queued", "Started")),
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			"owner": frappe.session.user,
 		},
 	)
-	return reports
 
 
 def get_completed_prepared_report(filters, user, report_name):
@@ -146,6 +261,24 @@ def get_completed_prepared_report(filters, user, report_name):
 			"report_name": report_name,
 		},
 	)
+<<<<<<< HEAD
+=======
+
+
+def expire_stalled_report():
+	frappe.db.set_value(
+		"Prepared Report",
+		{
+			"status": "Started",
+			"creation": ("<", add_to_date(now(), seconds=-FAILURE_THRESHOLD, as_datetime=True)),
+		},
+		{
+			"status": "Failed",
+			"error_message": frappe._("Report timed out."),
+		},
+		update_modified=False,
+	)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 @frappe.whitelist()
@@ -155,6 +288,7 @@ def delete_prepared_reports(reports):
 		prepared_report = frappe.get_doc("Prepared Report", report["name"])
 		if prepared_report.has_permission():
 			prepared_report.delete(ignore_permissions=True, delete_permanently=True)
+<<<<<<< HEAD
 
 
 def process_filters_for_prepared_report(filters):
@@ -166,14 +300,24 @@ def process_filters_for_prepared_report(filters):
 	# We are also ensuring that order of keys is same so generated JSON string will be identical too.
 	# PS: frappe.as_json sorts keys
 	return frappe.as_json(filters, indent=None, separators=(",", ":"))
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
-def create_json_gz_file(data, dt, dn):
+def create_json_gz_file(data, dt, dn, report_name):
 	# Storing data in CSV file causes information loss
 	# Reports like P&L Statement were completely unsuable because of this
+<<<<<<< HEAD
 	json_filename = "{}.json.gz".format(frappe.utils.data.format_datetime(frappe.utils.now(), "Y-m-d-H:M"))
 	encoded_content = frappe.safe_encode(frappe.as_json(data, indent=None, separators=(",", ":")))
 	compressed_content = gzip_compress(encoded_content)
+=======
+	json_filename = "{}_{}.json.gz".format(
+		frappe.scrub(report_name), frappe.utils.data.format_datetime(frappe.utils.now(), "Y-m-d-H-M")
+	)
+	encoded_content = frappe.safe_encode(frappe.as_json(data, indent=None, separators=(",", ":")))
+	compressed_content = gzip.compress(encoded_content)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	# Call save() file function to upload and attach the file
 	_file = frappe.get_doc(

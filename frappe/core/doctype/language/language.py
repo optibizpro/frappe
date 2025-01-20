@@ -1,15 +1,54 @@
 # Copyright (c) 2015, Frappe Technologies and contributors
 # License: MIT. See LICENSE
 
-import json
 import re
 
 import frappe
 from frappe import _
+from frappe.defaults import clear_default, set_default
 from frappe.model.document import Document
 
 
 class Language(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		based_on: DF.Link | None
+		date_format: DF.Literal[
+			"", "yyyy-mm-dd", "dd-mm-yyyy", "dd/mm/yyyy", "dd.mm.yyyy", "mm/dd/yyyy", "mm-dd-yyyy"
+		]
+		enabled: DF.Check
+		first_day_of_the_week: DF.Literal[
+			"", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+		]
+		flag: DF.Data | None
+		language_code: DF.Data
+		language_name: DF.Data
+<<<<<<< HEAD
+
+=======
+		number_format: DF.Literal[
+			"",
+			"#,###.##",
+			"#.###,##",
+			"# ###.##",
+			"# ###,##",
+			"#'###.##",
+			"#, ###.##",
+			"#,##,###.##",
+			"#,###.###",
+			"#.###",
+			"#,###",
+		]
+		time_format: DF.Literal["", "HH:mm:ss", "HH:mm"]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	# end: auto-generated types
+
 	def validate(self):
 		validate_with_regex(self.language_code, "Language Code")
 
@@ -17,8 +56,29 @@ class Language(Document):
 		validate_with_regex(new, "Name")
 
 	def on_update(self):
+<<<<<<< HEAD
 		frappe.cache().delete_value("languages_with_name")
 		frappe.cache().delete_value("languages")
+=======
+		frappe.cache.delete_value("languages_with_name")
+		frappe.client_cache.delete_value("languages")
+		self.update_user_defaults()
+
+	def update_user_defaults(self):
+		"""Update user defaults for date, time, number format and first day of the week.
+
+		When we change any settings of a language, the defaults for all users with that language
+		should be updated.
+		"""
+		users = frappe.get_all("User", filters={"language": self.name}, pluck="name")
+		for key in ("date_format", "time_format", "number_format", "first_day_of_the_week"):
+			if self.has_value_changed(key):
+				for user in users:
+					if new_value := self.get(key):
+						set_default(key, new_value, user)
+					else:
+						clear_default(key, parent=user)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
 def validate_with_regex(name, label):
@@ -26,12 +86,12 @@ def validate_with_regex(name, label):
 	if not pattern.match(name):
 		frappe.throw(
 			_(
-				"""{0} must begin and end with a letter and can only contain letters,
-				hyphen or underscore."""
+				"""{0} must begin and end with a letter and can only contain letters, hyphen or underscore."""
 			).format(label)
 		)
 
 
+<<<<<<< HEAD
 def export_languages_json():
 	"""Export list of all languages"""
 	languages = frappe.get_all("Language", fields=["name", "language_name"])
@@ -43,27 +103,16 @@ def export_languages_json():
 		f.write(frappe.as_json(languages))
 
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 def sync_languages():
-	"""Sync frappe/geo/languages.json with Language"""
-	with open(frappe.get_app_path("frappe", "geo", "languages.json")) as f:
-		data = json.loads(f.read())
+	"""Create Language records from frappe/geo/languages.csv"""
+	from csv import DictReader
 
-	for l in data:
-		if not frappe.db.exists("Language", l["code"]):
-			frappe.get_doc(
-				{
-					"doctype": "Language",
-					"language_code": l["code"],
-					"language_name": l["name"],
-					"enabled": 1,
-				}
-			).insert()
-
-
-def update_language_names():
-	"""Update frappe/geo/languages.json names (for use via patch)"""
-	with open(frappe.get_app_path("frappe", "geo", "languages.json")) as f:
-		data = json.loads(f.read())
-
-	for l in data:
-		frappe.db.set_value("Language", l["code"], "language_name", l["name"])
+	with open(frappe.get_app_path("frappe", "geo", "languages.csv")) as f:
+		reader = DictReader(f)
+		for row in reader:
+			if not frappe.db.exists("Language", row["language_code"]):
+				doc = frappe.new_doc("Language")
+				doc.update(row)
+				doc.insert()

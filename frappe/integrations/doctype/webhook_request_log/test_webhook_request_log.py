@@ -2,8 +2,24 @@
 # License: MIT. See LICENSE
 
 # import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestWebhookRequestLog(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestWebhookRequestLog(UnitTestCase):
+	"""
+	Unit tests for WebhookRequestLog.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestWebhookRequestLog(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	pass

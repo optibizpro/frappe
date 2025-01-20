@@ -1,7 +1,8 @@
 .form-grid {
 	border: 1px solid var(--table-border-color);
-	border-radius: var(--border-radius);
+	border-radius: var(--border-radius-md);
 	color: var(--text-color);
+	background-color: var(--subtle-accent);
 }
 
 .form-grid.error {
@@ -10,13 +11,51 @@
 
 .grid-heading-row {
 	border-bottom: 1px solid var(--table-border-color);
-	color: var(--text-muted);
-	font-size: var(--text-md);
+	color: var(--gray-600);
+	@include get_textstyle("sm", "regular");
+	height: 32px;
+	padding: 0 !important;
+	border-top-left-radius: var(--border-radius-md);
+	border-top-right-radius: var(--border-radius-md);
 
+	.grid-row {
+		background-color: var(--subtle-fg);
+		border-top-left-radius: var(--border-radius-md);
+		border-top-right-radius: var(--border-radius-md);
+	}
+
+	&.with-filter {
+		height: 64px;
+	}
+	.filter-row {
+		background-color: var(--bg-color);
+
+		.search {
+			// TODO: Align with table grid without overwriting padding if possible
+			padding: 4px 7px 4px 7px !important;
+			border-bottom: 1px solid var(--table-border-color);
+		}
+	}
+
+	.grid-static-col,
+	.row-check,
+	.row-index {
+		height: 32px;
+		padding: 4px 8px !important;
+	}
 	.grid-static-col {
+<<<<<<< HEAD
 		.static-area.reqd:after {
 			content: " *";
 			color: var(--red-400);
+=======
+		padding: 6px 8px !important;
+		.static-area {
+			&.reqd:after {
+				content: " *";
+				color: var(--red-400);
+			}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		}
 	}
 }
@@ -28,7 +67,7 @@
 }
 
 .data-row textarea {
-	height: 40px;
+	height: 38px;
 }
 
 .form-grid .data-row {
@@ -67,7 +106,8 @@
 }
 
 .grid-body .data-row {
-	font-size: $font-size-sm;
+	@include get_textstyle("sm", "regular");
+	color: var(--text-muted);
 }
 
 .grid-empty,
@@ -81,10 +121,16 @@
 	}
 }
 
+.grid-empty {
+	height: 110px;
+	background-color: var(--subtle-accent);
+	display: flex;
+	vertical-align: middle;
+}
+
 .grid-static-col,
 .row-index {
-	height: 34px;
-	padding: 8px;
+	// height: 38px;
 	max-height: 200px;
 
 	&.search {
@@ -98,21 +144,26 @@
 }
 
 .row-check {
-	height: 34px;
-	padding: 8px 3px !important;
+	// height: 38px;
 	text-align: center;
+	flex-grow: 0;
 
 	input {
 		margin-right: 0 !important;
+		margin-bottom: -3px;
 	}
 
 	&.search {
-		padding: 0 !important;
+		padding: var(--grid-padding) !important;
 	}
 }
 
 .grid-row-check {
+<<<<<<< HEAD
 	margin-top: 2px;
+=======
+	margin-top: 3px;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 	&::after {
 		// Extend the checkbox's clickable area
@@ -155,38 +206,48 @@
 	.col:last-child {
 		border-right: none;
 		min-width: 0;
+<<<<<<< HEAD
+=======
+		display: flex;
+		justify-content: center;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	.col {
-		padding-left: var(--padding-sm);
-		padding-right: var(--padding-sm);
+		padding: var(--grid-padding);
 		border-right: 1px solid var(--table-border-color);
 		// overflow: hidden;
 	}
 }
 
 .grid-body {
-	background-color: var(--fg-color);
+	background-color: var(--subtle-accent);
 	border-bottom-left-radius: var(--border-radius);
 	border-bottom-right-radius: var(--border-radius);
+	margin-bottom: -1px; // double bottom border
 
 	.col:last-child {
 		border: none;
 	}
 
 	.btn-open-row {
-		display: flex;
-		padding-top: var(--padding-sm);
-		justify-content: center;
+		line-height: unset;
 		div {
 			margin-left: var(--margin-xs);
-			line-height: 1.7em;
 		}
 	}
 
 	.editable-row {
+		// TODO: Dark and Light Mode
+		--control-bg: var(--neutral);
+		--input-disabled-bg: var(--gray-50);
 		.grid-static-col {
 			padding: 0px !important;
+			height: 32px;
+		}
+
+		.frappe-control[data-fieldtype="Select"].form-group .select-icon {
+			top: 9px;
 		}
 
 		.checkbox {
@@ -196,20 +257,21 @@
 		}
 
 		textarea {
-			height: 37px !important;
+			height: 39px !important;
 		}
 
 		.form-control,
 		.ql-editor {
 			border-radius: 0px;
 			border: 0px;
-			padding-top: 8px;
-			padding-bottom: 9px;
-			height: 34px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			height: 38px;
 		}
 
 		.link-btn {
-			top: 2px;
+			top: 5px;
+			background-color: var(--bg-color);
 		}
 
 		.form-control:focus {
@@ -245,7 +307,8 @@
 	}
 
 	.grid-static-col[data-fieldtype="Check"] .static-area {
-		padding-top: 2px;
+		padding-top: 4px;
+		margin-bottom: -4px;
 	}
 
 	.grid-static-col[data-fieldtype="Rating"] .field-area {
@@ -295,14 +358,14 @@
 }
 
 .grid-row {
-	padding: 0px var(--padding-md);
 	border-bottom: 1px solid var(--table-border-color);
+	background-color: var(--fg-color);
+
 	@include transition(0.2s);
 	// REDESIGN TODO: Fix border bottom for last item
 	&:last-child {
 		border-bottom-left-radius: var(--border-radius);
 		border-bottom-right-radius: var(--border-radius);
-		border: none;
 	}
 
 	td {
@@ -314,7 +377,7 @@
 	}
 
 	.frappe-control {
-		margin-bottom: 0px;
+		margin-bottom: 0px !important;
 		position: relative;
 	}
 
@@ -322,6 +385,13 @@
 		.editor-toolbar-text-group,
 		.editor-toolbar-align-group {
 			display: none;
+		}
+	}
+
+	.editable-row {
+		.markdown-container {
+			position: relative;
+			z-index: 1;
 		}
 	}
 }
@@ -357,8 +427,7 @@
 
 		.section-head {
 			padding: 0;
-			font-size: var(--text-lg);
-			font-weight: 500;
+			@include get_textstyle("lg", "medium");
 		}
 
 		.form-column:first-child {
@@ -392,6 +461,7 @@
 	overflow: visible;
 	margin: 0px calc(-1 * var(--margin-md));
 	padding: var(--padding-sm) var(--padding-md);
+	max-width: 865px;
 }
 
 .grid-form-heading {
@@ -427,7 +497,13 @@
 .grid-custom-buttons:empty {
 	padding: 0;
 }
+<<<<<<< HEAD
 
+=======
+.grid-footer {
+	margin-top: var(--margin-sm);
+}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 .grid-footer,
 .grid-custom-buttons {
 	padding: var(--padding-sm) 0px;
@@ -515,6 +591,7 @@
 	margin-bottom: 4px;
 }
 
+<<<<<<< HEAD
 @media (max-width: map-get($grid-breakpoints, "md")) {
 	.form-grid-container {
 		overflow-x: clip;
@@ -539,8 +616,128 @@
 			position: unset !important;
 		}
 	}
+=======
+.form-grid-container:has(.grid-row.grid-row-open) {
+	overflow-x: clip;
+	white-space: normal;
+	overflow-y: unset;
+	.form-grid {
+		left: 0px !important;
+	}
+}
+.data-row.row {
+	flex-wrap: nowrap;
+}
+.sortable-handle span {
+	width: 31px;
+	display: block;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 }
 
+.data-row.row {
+	flex-wrap: nowrap;
+}
+.frappe-control[data-fieldtype="Table"].form-group:has(.column-limit-reached) {
+	overflow-x: clip;
+}
+.column-limit-reached {
+	background-color: var(--subtle-accent);
+	border-top-left-radius: var(--border-radius-md);
+	border-top-right-radius: var(--border-radius-md);
+	.form-grid {
+		display: grid;
+		grid-auto-rows: min-content;
+		.grid-static-col.col-xs-1 {
+			flex: 1 0 60px;
+		}
+		.grid-static-col.col-xs-2 {
+			flex: 1 0 90px;
+		}
+		.grid-static-col.col-xs-3 {
+			flex: 1 0 120px;
+		}
+		.grid-static-col.col-xs-4 {
+			flex: 1 0 150px;
+		}
+		.grid-static-col.col-xs-5 {
+			flex: 1 0 200px;
+		}
+		.grid-static-col.col-xs-6 {
+			flex: 1 0 250px;
+		}
+		.grid-static-col.col-xs-7 {
+			flex: 1 0 300px;
+		}
+		.grid-static-col.col-xs-8 {
+			flex: 1 0 350px;
+		}
+		.grid-static-col.col-xs-9 {
+			flex: 1 0 400px;
+		}
+		.grid-static-col.col-xs-10 {
+			flex: 1 0 450px;
+		}
+		.grid-static-col.col-xs-11 {
+			flex: 1 0 500px;
+		}
+		.grid-static-col.col-xs-12 {
+			flex: 1 0 550px;
+		}
+		.grid-row > .row .col:last-child,
+		.grid-row > .dialog-assignment-row .col:first-child,
+		.grid-row > .dialog-assignment-row .col:last-child {
+			max-width: 30px;
+			min-width: 30px;
+		}
+		.grid-row > .row .col:nth-child(2),
+		.grid-row > .dialog-assignment-row .col:nth-child(2) {
+			max-width: 40px;
+			min-width: 40px;
+		}
+	}
+}
+.grid-scroll-bar {
+	display: none;
+	overflow-x: auto;
+	height: 12px;
+	position: relative;
+	scrollbar-width: auto;
+	scrollbar-color: auto;
+}
+
+.grid-scroll-bar::-webkit-scrollbar {
+	height: 11px !important;
+}
+
+.grid-scroll-bar-rows {
+	height: 100%;
+}
+
+@media (max-width: map-get($grid-breakpoints, "md")) {
+	.grid-scroll-bar {
+		display: block;
+	}
+
+	.form-column.col-sm-6 .form-grid {
+		.row-index {
+			display: block;
+		}
+	}
+}
+
+<<<<<<< HEAD
+@media (min-width: map-get($grid-breakpoints, "md")) {
+	.form-grid-container {
+		overflow-x: unset !important;
+
+		.form-grid {
+			position: unset !important;
+		}
+	}
+}
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 @media (max-width: map-get($grid-breakpoints, "sm")) {
 	.form-in-grid .form-section .form-column {
 		padding-left: 0 !important;

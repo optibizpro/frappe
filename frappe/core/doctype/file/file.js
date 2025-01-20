@@ -27,6 +27,12 @@ frappe.ui.form.on("File", {
 		if (frm.doc.file_name && frm.doc.file_name.split(".").splice(-1)[0] === "zip") {
 			frm.add_custom_button(__("Unzip"), () => frm.trigger("unzip"));
 		}
+<<<<<<< HEAD
+=======
+		if (frm.doc.file_url) {
+			frm.add_web_link(frm.doc.file_url, __("View file"));
+		}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	},
 
 	preview_file: function (frm) {
@@ -37,14 +43,22 @@ frappe.ui.form.on("File", {
 			$preview = $(`<div class="img_preview">
 				<img
 					class="img-responsive"
+<<<<<<< HEAD
 					src="${frm.doc.file_url}"
+=======
+					src="${frappe.utils.escape_html(frm.doc.file_url)}"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					onerror="${frm.toggle_display("preview", false)}"
 				/>
 			</div>`);
 		} else if (frappe.utils.is_video_file(frm.doc.file_url)) {
 			$preview = $(`<div class="img_preview">
 				<video width="480" height="320" controls>
+<<<<<<< HEAD
 					<source src="${frm.doc.file_url}">
+=======
+					<source src="${frappe.utils.escape_html(frm.doc.file_url)}">
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					${__("Your browser does not support the video element.")}
 				</video>
 			</div>`);
@@ -55,14 +69,22 @@ frappe.ui.form.on("File", {
 						style="background:#323639;"
 						width="100%"
 						height="1190"
+<<<<<<< HEAD
 						src="${frm.doc.file_url}" type="application/pdf"
+=======
+						src="${frappe.utils.escape_html(frm.doc.file_url)}" type="application/pdf"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					>
 				</object>
 			</div>`);
 		} else if (file_extension === "mp3") {
 			$preview = $(`<div class="img_preview">
 				<audio width="480" height="60" controls>
+<<<<<<< HEAD
 					<source src="${frm.doc.file_url}" type="audio/mpeg">
+=======
+					<source src="${frappe.utils.escape_html(frm.doc.file_url)}" type="audio/mpeg">
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					${__("Your browser does not support the audio element.")}
 				</audio >
 			</div>`);
@@ -79,7 +101,20 @@ frappe.ui.form.on("File", {
 		if (frm.doc.file_name) {
 			file_url = file_url.replace(/#/g, "%23");
 		}
+<<<<<<< HEAD
 		window.open(file_url);
+=======
+
+		// create temporary link element to simulate a download click
+		var link = document.createElement("a");
+		link.href = file_url;
+		link.download = frm.doc.file_name;
+		link.style.display = "none";
+
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	},
 
 	optimize: function (frm) {

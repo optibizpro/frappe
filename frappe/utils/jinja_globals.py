@@ -110,6 +110,32 @@ def include_script(path, preload=True):
 	return f'<script type="text/javascript" src="{path}"></script>'
 
 
+<<<<<<< HEAD
+def include_style(path, rtl=None, preload=True):
+	"""Get path of bundled style files.
+=======
+def include_icons(path, preload=True):
+	"""Get path of bundled svg icons files.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+
+	If preload is specified the path will be added to preload headers so browsers can prefetch
+	assets."""
+	path = bundled_asset(path)
+
+	if preload:
+		import frappe
+
+<<<<<<< HEAD
+=======
+		frappe.local.preload_assets["icons"].append(path)
+
+	return (
+		'<script type="text/javascript">fetch(`'
+		+ path
+		+ '?v=${window._version_number}`, {credentials: "same-origin"}).then((r) => r.text()).then((svg) => {let c = document.getElementById("all-symbols"); c.insertAdjacentHTML("beforeend", svg);});</script>'
+	)
+
+
 def include_style(path, rtl=None, preload=True):
 	"""Get path of bundled style files.
 
@@ -120,6 +146,7 @@ def include_style(path, rtl=None, preload=True):
 	if preload:
 		import frappe
 
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		frappe.local.preload_assets["style"].append(path)
 
 	return f'<link type="text/css" rel="stylesheet" href="{path}">'

@@ -6,4 +6,21 @@ from frappe.model.document import Document
 
 
 class OAuthClientRole(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		parent: DF.Data
+		parentfield: DF.Data
+		parenttype: DF.Data
+		role: DF.Link | None
+	# end: auto-generated types
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	pass

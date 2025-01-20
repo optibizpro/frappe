@@ -1,6 +1,8 @@
 # Copyright (c) 2015, Frappe Technologies and contributors
 # License: MIT. See LICENSE
 
+import contextlib
+
 import frappe
 from frappe import _
 from frappe.model.document import Document
@@ -8,6 +10,26 @@ from frappe.utils import parse_addr, validate_email_address
 
 
 class EmailGroup(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		add_query_parameters: DF.Check
+		confirmation_email_template: DF.Link | None
+		title: DF.Data
+		total_subscribers: DF.Int
+		welcome_email_template: DF.Link | None
+		welcome_url: DF.Data | None
+<<<<<<< HEAD
+
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+	# end: auto-generated types
+
 	def onload(self):
 		singles = [d.name for d in frappe.get_all("DocType", "name", {"issingle": 1})]
 		self.get("__onload").import_types = [
@@ -28,7 +50,11 @@ class EmailGroup(Document):
 		added = 0
 
 		for user in frappe.get_all(doctype, [email_field, unsubscribed_field or "name"]):
+<<<<<<< HEAD
 			try:
+=======
+			with contextlib.suppress(frappe.UniqueValidationError, frappe.InvalidEmailAddressError):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				email = parse_addr(user.get(email_field))[1] if user.get(email_field) else None
 				if email:
 					frappe.get_doc(
@@ -39,10 +65,7 @@ class EmailGroup(Document):
 							"unsubscribed": user.get(unsubscribed_field) if unsubscribed_field else 0,
 						}
 					).insert(ignore_permissions=True)
-
 					added += 1
-			except frappe.UniqueValidationError:
-				pass
 
 		frappe.msgprint(_("{0} subscribers added").format(added))
 
@@ -78,7 +101,7 @@ class EmailGroup(Document):
 
 	def on_trash(self):
 		for d in frappe.get_all("Email Group Member", "name", {"email_group": self.name}):
-			frappe.delete_doc("Email Group Member", d.name)
+			frappe.delete_doc("Email Group Member", d.name, force=True)
 
 
 @frappe.whitelist()
@@ -126,8 +149,7 @@ def send_welcome_email(welcome_email, email, email_group):
 		return
 
 	args = dict(email=email, email_group=email_group)
-	email_message = welcome_email.response or welcome_email.response_html
-	message = frappe.render_template(email_message, args)
+	message = frappe.render_template(welcome_email.response_, args)
 	frappe.sendmail(email, subject=welcome_email.subject, message=message)
 
 

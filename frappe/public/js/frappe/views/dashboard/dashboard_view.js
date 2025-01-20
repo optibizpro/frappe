@@ -197,11 +197,16 @@ frappe.views.DashboardView = class DashboardView extends frappe.views.ListView {
 				${__("Customize")}
 			</button></p>`;
 
+<<<<<<< HEAD
 		const empty_state_image = "/assets/frappe/images/ui-states/list-empty-state.svg";
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		const empty_state_html = `<div class="msg-box no-border empty-dashboard">
 			<div>
-				<img src="${empty_state_image}" alt="Generic Empty State" class="null-state">
+				<svg class="icon icon-xl" style="stroke: var(--text-light);">
+					<use href="#icon-small-file"></use>
+				</svg>
 			</div>
 			${no_result_message_html}
 			${customize_button}

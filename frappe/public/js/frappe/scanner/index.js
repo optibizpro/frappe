@@ -37,7 +37,7 @@ frappe.ui.Scanner = class Scanner {
 						try {
 							this.options.on_scan(decodedResult);
 						} catch (error) {
-							console.error(error); // eslint-disable-line
+							console.error(error);
 						}
 					}
 					if (!this.options.multiple) {
@@ -46,14 +46,17 @@ frappe.ui.Scanner = class Scanner {
 					}
 				},
 				(errorMessage) => {
+<<<<<<< HEAD
 					// eslint-disable-line
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					// parse error, ignore it.
 				}
 			)
 			.catch((err) => {
 				this.is_alive = false;
 				this.hide_dialog();
-				console.error(err); // eslint-disable-line
+				console.error(err);
 			});
 		this.is_alive = true;
 	}
@@ -95,6 +98,10 @@ frappe.ui.Scanner = class Scanner {
 	}
 
 	load_lib() {
+<<<<<<< HEAD
 		return frappe.require("/assets/frappe/node_modules/html5-qrcode/dist/html5-qrcode.min.js");
+=======
+		return frappe.require("/assets/frappe/node_modules/html5-qrcode/html5-qrcode.min.js");
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 };

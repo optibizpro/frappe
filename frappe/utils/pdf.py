@@ -6,19 +6,34 @@ import io
 import mimetypes
 import os
 import subprocess
+<<<<<<< HEAD
 from distutils.version import LooseVersion
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from urllib.parse import parse_qs, urlparse
 
 import cssutils
 import pdfkit
+
+pdfkit.source.unicode = str  # NOTE: upstream bug; PYTHONOPTIMIZE=1 optimized this away
 from bs4 import BeautifulSoup
-from PyPDF2 import PdfReader, PdfWriter
+from packaging.version import Version
+from pypdf import PdfReader, PdfWriter
 
 import frappe
 from frappe import _
 from frappe.core.doctype.file.utils import find_file_by_url
 from frappe.utils import cstr, scrub_urls
+<<<<<<< HEAD
+=======
+from frappe.utils.caching import redis_cache
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.utils.jinja_globals import bundled_asset, is_rtl
+<<<<<<< HEAD
+=======
+
+cssutils.log.setLog(frappe.logger("cssutils"))
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 PDF_CONTENT_ERRORS = [
 	"ContentNotFoundError",
@@ -28,6 +43,52 @@ PDF_CONTENT_ERRORS = [
 ]
 
 
+def pdf_header_html(soup, head, content, styles, html_id, css):
+	return frappe.render_template(
+		"templates/print_formats/pdf_header_footer.html",
+		{
+			"head": head,
+			"content": content,
+			"styles": styles,
+			"html_id": html_id,
+			"css": css,
+			"lang": frappe.local.lang,
+			"layout_direction": "rtl" if is_rtl() else "ltr",
+		},
+	)
+
+
+def pdf_body_html(template, args, **kwargs):
+	try:
+		return template.render(args, filters={"len": len})
+	except Exception as e:
+		# Guess line number ?
+		frappe.throw(
+			_("Error in print format on line {0}: {1}").format(
+				_guess_template_error_line_number(template), e
+			),
+			exc=frappe.PrintFormatError,
+			title=_("Print Format Error"),
+		)
+
+
+def _guess_template_error_line_number(template) -> int | None:
+	"""Guess line on which exception occurred from current traceback."""
+	with contextlib.suppress(Exception):
+		import sys
+		import traceback
+
+		_, _, tb = sys.exc_info()
+
+		for frame in reversed(traceback.extract_tb(tb)):
+			if template.filename in frame.filename:
+				return frame.lineno
+
+
+def pdf_footer_html(soup, head, content, styles, html_id, css):
+	return pdf_header_html(soup=soup, head=head, content=content, styles=styles, html_id=html_id, css=css)
+
+
 def get_pdf(html, options=None, output: PdfWriter | None = None):
 	html = scrub_urls(html)
 	html, options = prepare_options(html, options)
@@ -35,7 +96,7 @@ def get_pdf(html, options=None, output: PdfWriter | None = None):
 	options.update({"disable-javascript": "", "disable-local-file-access": ""})
 
 	filedata = ""
-	if LooseVersion(get_wkhtmltopdf_version()) > LooseVersion("0.12.3"):
+	if Version(get_wkhtmltopdf_version()) > Version("0.12.3"):
 		options.update({"disable-smart-shrinking": ""})
 
 	try:
@@ -232,7 +293,15 @@ def _get_base64_image(src):
 		mime_type = mimetypes.guess_type(path)[0]
 		if mime_type is None or not mime_type.startswith("image/"):
 			return
+<<<<<<< HEAD
 		filename = query.get("fid") and query["fid"][0] or None
+=======
+<<<<<<< HEAD
+		filename = query.get("fid") and query["fid"][0] or None
+=======
+		filename = (query.get("fid") and query["fid"][0]) or None
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		file = find_file_by_url(path, name=filename)
 		if not file or not file.is_private:
 			return
@@ -263,17 +332,15 @@ def prepare_header_footer(soup: BeautifulSoup):
 				tag.extract()
 
 			toggle_visible_pdf(content)
-			html = frappe.render_template(
-				"templates/print_formats/pdf_header_footer.html",
-				{
-					"head": head,
-					"content": content,
-					"styles": styles,
-					"html_id": html_id,
-					"css": css,
-					"lang": frappe.local.lang,
-					"layout_direction": "rtl" if is_rtl() else "ltr",
-				},
+			id_map = {"header-html": "pdf_header_html", "footer-html": "pdf_footer_html"}
+			hook_func = frappe.get_hooks(id_map.get(html_id))
+			html = frappe.get_attr(hook_func[-1])(
+				soup=soup,
+				head=head,
+				content=content,
+				styles=styles,
+				html_id=html_id,
+				css=css,
 			)
 
 			# create temp file
@@ -308,14 +375,24 @@ def toggle_visible_pdf(soup):
 		tag.extract()
 
 
+@frappe.whitelist()
+@redis_cache(ttl=60 * 60)
+def is_wkhtmltopdf_valid():
+	try:
+		output = subprocess.check_output(["wkhtmltopdf", "--version"])
+		return "qt" in output.decode("utf-8").lower()
+	except Exception:
+		return False
+
+
 def get_wkhtmltopdf_version():
-	wkhtmltopdf_version = frappe.cache().hget("wkhtmltopdf_version", None)
+	wkhtmltopdf_version = frappe.cache.hget("wkhtmltopdf_version", None)
 
 	if not wkhtmltopdf_version:
 		try:
 			res = subprocess.check_output(["wkhtmltopdf", "--version"])
 			wkhtmltopdf_version = res.decode("utf-8").split(" ")[1]
-			frappe.cache().hset("wkhtmltopdf_version", None, wkhtmltopdf_version)
+			frappe.cache.hset("wkhtmltopdf_version", None, wkhtmltopdf_version)
 		except Exception:
 			pass
 

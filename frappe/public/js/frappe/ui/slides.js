@@ -432,7 +432,10 @@ frappe.ui.Slides = class Slides {
 		this.slide_dict[id] = null;
 	}
 
+<<<<<<< HEAD
 	// eslint-disable-next-line no-unused-vars
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	on_update(completed, total) {}
 
 	show_hide_prev_next(id) {

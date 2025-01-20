@@ -2,8 +2,24 @@
 # See license.txt
 
 # import frappe
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestCustomHTMLBlock(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+
+
+class UnitTestCustomHtmlBlock(UnitTestCase):
+	"""
+	Unit tests for CustomHtmlBlock.
+	Use this class for testing individual functions and methods.
+	"""
+
+	pass
+
+
+class TestCustomHTMLBlock(IntegrationTestCase):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	pass

@@ -65,6 +65,26 @@ framework_days = {
 
 
 class GoogleCalendar(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		authorization_code: DF.Password | None
+		calendar_name: DF.Data
+		enable: DF.Check
+		google_calendar_id: DF.Data | None
+		next_sync_token: DF.Password | None
+		pull_from_google_calendar: DF.Check
+		push_to_google_calendar: DF.Check
+		refresh_token: DF.Password | None
+		user: DF.Link
+
+	# end: auto-generated types
+
 	def validate(self):
 		google_settings = frappe.get_single("Google Settings")
 		if not google_settings.enable:
@@ -111,6 +131,7 @@ def authorize_access(g_calendar, reauthorize=None):
 	"""
 	google_settings = frappe.get_doc("Google Settings")
 	google_calendar = frappe.get_doc("Google Calendar", g_calendar)
+	google_calendar.check_permission("write")
 
 	redirect_uri = (
 		get_request_site_address(True)
@@ -118,7 +139,7 @@ def authorize_access(g_calendar, reauthorize=None):
 	)
 
 	if not google_calendar.authorization_code or reauthorize:
-		frappe.cache().hset("google_calendar", "google_calendar", google_calendar.name)
+		frappe.cache.hset("google_calendar", "google_calendar", google_calendar.name)
 		return get_authentication_url(client_id=google_settings.client_id, redirect_uri=redirect_uri)
 	else:
 		try:
@@ -162,7 +183,7 @@ def google_callback(code=None):
 	"""
 	Authorization code is sent to callback as per the API configuration
 	"""
-	google_calendar = frappe.cache().hget("google_calendar", "google_calendar")
+	google_calendar = frappe.cache.hget("google_calendar", "google_calendar")
 	frappe.db.set_value("Google Calendar", google_calendar, "authorization_code", code)
 	frappe.db.commit()
 
@@ -183,9 +204,7 @@ def sync(g_calendar=None):
 
 
 def get_google_calendar_object(g_calendar):
-	"""
-	Returns an object of Google Calendar along with Google Calendar doc.
-	"""
+	"""Return an object of Google Calendar along with Google Calendar doc."""
 	google_settings = frappe.get_doc("Google Settings")
 	account = frappe.get_doc("Google Calendar", g_calendar)
 
@@ -195,7 +214,11 @@ def get_google_calendar_object(g_calendar):
 		"token_uri": GoogleOAuth.OAUTH_URL,
 		"client_id": google_settings.client_id,
 		"client_secret": google_settings.get_password(fieldname="client_secret", raise_exception=False),
+<<<<<<< HEAD
 		"scopes": ["https://www.googleapis.com/auth/calendar/v3"],
+=======
+		"scopes": [SCOPES],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	credentials = google.oauth2.credentials.Credentials(**credentials_dict)
@@ -222,7 +245,7 @@ def check_google_calendar(account, google_calendar):
 			# If no Calendar ID create a new Calendar
 			calendar = {
 				"summary": account.calendar_name,
-				"timeZone": frappe.db.get_single_value("System Settings", "time_zone"),
+				"timeZone": frappe.get_system_settings("time_zone"),
 			}
 			created_calendar = google_calendar.calendars().insert(body=calendar).execute()
 			frappe.db.set_value(
@@ -238,8 +261,8 @@ def check_google_calendar(account, google_calendar):
 
 
 def sync_events_from_google_calendar(g_calendar, method=None):
-	"""
-	Syncs Events from Google Calendar in Framework Calendar.
+	"""Sync Events from Google Calendar in Framework Calendar.
+
 	Google Calendar returns nextSyncToken when all the events in Google Calendar are fetched.
 	nextSyncToken is returned at the very last page
 	https://developers.google.com/calendar/v3/sync
@@ -280,9 +303,7 @@ def sync_events_from_google_calendar(g_calendar, method=None):
 			else:
 				frappe.throw(msg)
 
-		for event in events.get("items", []):
-			results.append(event)
-
+		results.extend(event for event in events.get("items", []))
 		if not events.get("nextPageToken"):
 			if events.get("nextSyncToken"):
 				account.next_sync_token = events.get("nextSyncToken")
@@ -385,9 +406,9 @@ def insert_event_in_google_calendar(doc, method=None):
 	Insert Events in Google Calendar if sync_with_google_calendar is checked.
 	"""
 	if (
-		not frappe.db.exists("Google Calendar", {"name": doc.google_calendar})
+		not doc.sync_with_google_calendar
 		or doc.pulled_from_google_calendar
-		or not doc.sync_with_google_calendar
+		or not frappe.db.exists("Google Calendar", {"name": doc.google_calendar})
 	):
 		return
 
@@ -449,9 +470,9 @@ def update_event_in_google_calendar(doc, method=None):
 	# Workaround to avoid triggering updation when Event is being inserted since
 	# creation and modified are same when inserting doc
 	if (
-		not frappe.db.exists("Google Calendar", {"name": doc.google_calendar})
+		not doc.sync_with_google_calendar
 		or doc.modified == doc.creation
-		or not doc.sync_with_google_calendar
+		or not frappe.db.exists("Google Calendar", {"name": doc.google_calendar})
 	):
 		return
 
@@ -476,7 +497,7 @@ def update_event_in_google_calendar(doc, method=None):
 		event["description"] = doc.description
 		event["recurrence"] = repeat_on_to_google_calendar_recurrence_rule(doc)
 		event["status"] = (
-			"cancelled" if doc.event_type == "Cancelled" or doc.status == "Closed" else event.get("status")
+			"cancelled" if doc.status == "Cancelled" or doc.status == "Closed" else event.get("status")
 		)
 		event.update(
 			format_date_according_to_google_calendar(
@@ -664,12 +685,10 @@ def format_date_according_to_google_calendar(all_day, starts_on, ends_on=None):
 
 
 def parse_google_calendar_recurrence_rule(repeat_day_week_number, repeat_day_name):
-	"""
-	Returns (repeat_on) exact date for combination eg 4TH viz. 4th thursday of a month
-	"""
+	"""Return (repeat_on) exact date for combination eg 4TH viz. 4th thursday of a month."""
 	if repeat_day_week_number < 0:
 		# Consider a month with 5 weeks and event is to be repeated in last week of every month, google caledar considers
-		# a month has 4 weeks and hence itll return -1 for a month with 5 weeks.
+		# a month has 4 weeks and hence it'll return -1 for a month with 5 weeks.
 		repeat_day_week_number = 4
 
 	weekdays = get_weekdays()
@@ -693,9 +712,7 @@ def parse_google_calendar_recurrence_rule(repeat_day_week_number, repeat_day_nam
 
 
 def repeat_on_to_google_calendar_recurrence_rule(doc):
-	"""
-	Returns event (repeat_on) in Google Calendar format ie RRULE:FREQ=WEEKLY;BYDAY=MO,TU,TH
-	"""
+	"""Return event (repeat_on) in Google Calendar format ie RRULE:FREQ=WEEKLY;BYDAY=MO,TU,TH."""
 	recurrence = framework_frequencies.get(doc.repeat_on)
 	weekdays = get_weekdays()
 
@@ -711,8 +728,8 @@ def repeat_on_to_google_calendar_recurrence_rule(doc):
 
 
 def get_week_number(dt):
-	"""
-	Returns the week number of the month for the specified date.
+	"""Return the week number of the month for the specified date.
+
 	https://stackoverflow.com/questions/3806473/python-week-number-of-the-month/16804556
 	"""
 	from math import ceil
@@ -750,9 +767,13 @@ def get_conference_data(doc):
 
 
 def get_attendees(doc):
+<<<<<<< HEAD
 	"""
 	Returns a list of dicts with attendee emails, if available in event_participants table
 	"""
+=======
+	"""Return a list of dicts with attendee emails, if available in event_participants table."""
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	attendees, email_not_found = [], []
 
 	for participant in doc.event_participants:

@@ -1,33 +1,108 @@
 {
+ "app": "frappe",
  "charts": [],
+<<<<<<< HEAD
  "content": "[{\"id\":\"5nnLaQeoFa\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Your Shortcuts</b></span>\",\"col\":12}},{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"pYALX3MwBW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customize Form\",\"col\":3}},{\"id\":\"XC78DuYB65\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Report\",\"col\":3}},{\"id\":\"XPm50Ppq3J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Client Script\",\"col\":3}},{\"id\":\"yoU6nWiT83\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Server Script\",\"col\":3}},{\"id\":\"5UgFESBY0N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Format Builder\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"tOCrOgLW1G\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Elements</b></span>\",\"col\":12}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"cJ6CVsa8qW\",\"type\":\"card\",\"data\":{\"card_name\":\"Models\",\"col\":4}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
+=======
+<<<<<<< HEAD
+ "content": "[{\"id\":\"5nnLaQeoFa\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>Get started</b><br></span>\",\"col\":12}},{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"pYALX3MwBW\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Customize Form\",\"col\":3}},{\"id\":\"XC78DuYB65\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Report\",\"col\":3}},{\"id\":\"XPm50Ppq3J\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Client Script\",\"col\":3}},{\"id\":\"yoU6nWiT83\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Server Script\",\"col\":3}},{\"id\":\"5UgFESBY0N\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Print Format Builder\",\"col\":3}},{\"id\":\"0gE0s-S70E\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"System Settings\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"tOCrOgLW1G\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>Components to build your app</b></span>\",\"col\":12}},{\"id\":\"cJ6CVsa8qW\",\"type\":\"card\",\"data\":{\"card_name\":\"Models\",\"col\":4}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
+=======
+ "content": "[{\"id\":\"HXRmktXYHy\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"DocType\",\"col\":3}},{\"id\":\"NosD6wA0vD\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Module Def\",\"col\":3}},{\"id\":\"62hseENHbd\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"MmEJpjEdGR\",\"type\":\"card\",\"data\":{\"card_name\":\"Views\",\"col\":4}},{\"id\":\"2ZdtgxQZqq\",\"type\":\"card\",\"data\":{\"card_name\":\"Customization\",\"col\":4}},{\"id\":\"NPFolijIcb\",\"type\":\"card\",\"data\":{\"card_name\":\"Scripting\",\"col\":4}},{\"id\":\"BIHjudL0T_\",\"type\":\"card\",\"data\":{\"card_name\":\"Modules\",\"col\":4}},{\"id\":\"iK3JQ9RXJE\",\"type\":\"card\",\"data\":{\"card_name\":\"Packages\",\"col\":4}},{\"id\":\"TiO9FCUUeC\",\"type\":\"card\",\"data\":{\"card_name\":\"System Logs\",\"col\":4}}]",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "creation": "2021-01-02 10:51:16.579957",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
+<<<<<<< HEAD
  "icon": "tool",
+<<<<<<< HEAD
  "idx": 0,
+=======
+=======
+ "icon": "hammer",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+ "idx": 1,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "is_hidden": 0,
  "label": "Build",
  "links": [
   {
+   "description": "Customize properties, naming, fields and more for standard doctypes",
+<<<<<<< HEAD
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Models",
-   "link_count": 0,
+   "label": "Customization",
+   "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
-   "only_for": "",
    "type": "Card Break"
   },
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "DocType",
+   "label": "Customize Form",
    "link_count": 0,
-   "link_to": "DocType",
+   "link_to": "Customize Form",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom Field",
+   "link_count": 0,
+   "link_to": "Custom Field",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom Translation",
+   "link_count": 0,
+   "link_to": "Translation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Navbar Settings",
+   "link_count": 0,
+   "link_to": "Navbar Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Group your custom doctypes under modules",
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
+   "label": "Models",
+   "link_count": 0,
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+=======
+   "label": "Modules",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Module Def",
+   "link_count": 0,
+   "link_to": "Module Def",
    "link_type": "DocType",
    "onboard": 0,
    "only_for": "",
@@ -36,22 +111,116 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Workflow",
+   "label": "Module Onboarding",
    "link_count": 0,
-   "link_to": "Workflow",
+   "link_to": "Module Onboarding",
    "link_type": "DocType",
    "onboard": 0,
    "only_for": "",
    "type": "Link"
   },
   {
+   "description": "Monitor logs for errors, background jobs, communications, and user activity",
    "hidden": 0,
    "is_query_report": 0,
+   "label": "System Logs",
+   "link_count": 5,
+   "link_type": "DocType",
+   "onboard": 0,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Background Jobs",
+   "link_count": 0,
+   "link_to": "RQ Job",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Scheduled Jobs Logs",
+   "link_count": 0,
+   "link_to": "Scheduled Job Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
+=======
+   "label": "Error Logs",
+   "link_count": 0,
+   "link_to": "Error Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Communication Logs",
+   "link_count": 0,
+   "link_to": "Communication",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Activity Log",
+   "link_count": 0,
+   "link_to": "Activity Log",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Packages are lightweight apps (collection of Module Defs) that can be created, imported, or released right from the UI",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Packages",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package",
+   "link_count": 0,
+   "link_to": "Package",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package Import",
+   "link_count": 0,
+   "link_to": "Package Import",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Automate processes and extend standard functionality using scripts and background jobs",
+   "hidden": 0,
+   "is_query_report": 0,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "label": "Scripting",
-   "link_count": 0,
+   "link_count": 3,
    "link_type": "DocType",
    "onboard": 0,
-   "only_for": "",
    "type": "Card Break"
   },
   {
@@ -88,19 +257,43 @@
    "type": "Link"
   },
   {
+   "description": "Build your own reports, print formats, and dashboards. Create personalized workspaces for easier navigation",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Packages",
-   "link_count": 2,
+   "label": "Views",
+   "link_count": 5,
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
   },
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Package",
+   "label": "Report",
    "link_count": 0,
-   "link_to": "Package",
+   "link_to": "Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Print Format",
+   "link_count": 0,
+   "link_to": "Print Format",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Workspace",
+   "link_count": 0,
+   "link_to": "Workspace",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -108,18 +301,91 @@
   {
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Package Import",
+   "label": "Dashboard",
    "link_count": 0,
-   "link_to": "Package Import",
+   "link_to": "Dashboard",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Dashboard Chart",
+   "link_count": 0,
+   "link_to": "Dashboard Chart",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
   },
   {
+   "description": "Create new forms and views with doctypes. Set up multi-level workflows for approval",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Models",
+   "link_count": 2,
+=======
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Customization",
+   "link_count": 4,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "DocType",
+   "link_count": 0,
+   "link_to": "DocType",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Workflow",
+   "link_count": 0,
+<<<<<<< HEAD
+   "link_to": "Workflow",
+=======
+   "link_to": "Custom Field",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom Translation",
+   "link_count": 0,
+   "link_to": "Translation",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Navbar Settings",
+   "link_count": 0,
+   "link_to": "Navbar Settings",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Group your custom doctypes under modules",
    "hidden": 0,
    "is_query_report": 0,
    "label": "Modules",
-   "link_count": 3,
+   "link_count": 2,
+   "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
   },
@@ -146,11 +412,21 @@
    "type": "Link"
   },
   {
+   "description": "Packages are lightweight apps (collection of Module Defs) that can be created, imported, or released right from the UI",
    "hidden": 0,
    "is_query_report": 0,
-   "label": "Module Profile",
+   "label": "Packages",
+   "link_count": 2,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Package",
    "link_count": 0,
-   "link_to": "Module Profile",
+   "link_to": "Package",
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -158,8 +434,166 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+   "label": "Package Import",
+   "link_count": 0,
+   "link_to": "Package Import",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+<<<<<<< HEAD
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Modules",
+   "link_count": 3,
+=======
+   "description": "Automate processes and extend standard functionality using scripts and background jobs",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Scripting",
+   "link_count": 3,
+   "link_type": "DocType",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
+   "label": "Module Def",
+   "link_count": 0,
+   "link_to": "Module Def",
+=======
+   "label": "Server Script",
+   "link_count": 0,
+   "link_to": "Server Script",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
+   "label": "Module Onboarding",
+   "link_count": 0,
+   "link_to": "Module Onboarding",
+=======
+   "label": "Client Script",
+   "link_count": 0,
+   "link_to": "Client Script",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
+   "label": "Module Profile",
+   "link_count": 0,
+   "link_to": "Module Profile",
+=======
+   "label": "Scheduled Job Type",
+   "link_count": 0,
+   "link_to": "Scheduled Job Type",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "description": "Build your own reports, print formats, and dashboards. Create personalized workspaces for easier navigation",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Views",
+   "link_count": 6,
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Report",
+   "link_count": 0,
+   "link_to": "Report",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Dashboard",
+   "link_count": 0,
+   "link_to": "Dashboard",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Print Format",
+   "link_count": 0,
+   "link_to": "Print Format",
+   "link_type": "DocType",
+   "onboard": 0,
+   "only_for": "",
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Page",
+   "link_count": 0,
+   "link_to": "Page",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+<<<<<<< HEAD
    "label": "System Logs",
    "link_count": 6,
+=======
+   "label": "Workspace",
+   "link_count": 0,
+   "link_to": "Workspace",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Dashboard Chart",
+   "link_count": 0,
+   "link_to": "Dashboard Chart",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "description": "Monitor logs for errors, background jobs, communications, and user activity",
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "System Logs",
+   "link_count": 6,
+   "link_type": "DocType",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "onboard": 0,
    "type": "Card Break"
   },
@@ -196,9 +630,15 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+<<<<<<< HEAD
    "label": "Error Snapshot",
    "link_count": 0,
    "link_to": "Error Snapshot",
+=======
+   "label": "Activity Log",
+   "link_count": 0,
+   "link_to": "Activity Log",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "link_type": "DocType",
    "onboard": 0,
    "type": "Link"
@@ -216,6 +656,7 @@
   {
    "hidden": 0,
    "is_query_report": 0,
+<<<<<<< HEAD
    "label": "Activity Log",
    "link_count": 0,
    "link_to": "Activity Log",
@@ -237,10 +678,17 @@
    "label": "Report",
    "link_count": 0,
    "link_to": "Report",
+=======
+   "label": "Webhook Request Log",
+   "link_count": 0,
+   "link_to": "Webhook Request Log",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "link_type": "DocType",
    "onboard": 0,
    "only_for": "",
    "type": "Link"
+<<<<<<< HEAD
   },
   {
    "hidden": 0,
@@ -334,6 +782,15 @@
   }
  ],
  "modified": "2023-05-24 14:47:24.395259",
+=======
+  }
+ ],
+<<<<<<< HEAD
+ "modified": "2024-01-24 12:27:44.769958",
+=======
+ "modified": "2024-09-30 17:39:36.060170",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "modified_by": "Administrator",
  "module": "Core",
  "name": "Build",
@@ -344,11 +801,23 @@
  "quick_lists": [],
  "restrict_to_domain": "",
  "roles": [],
+<<<<<<< HEAD
  "sequence_id": 16.0,
+=======
+<<<<<<< HEAD
+ "sequence_id": 27.0,
+=======
+ "sequence_id": 1.0,
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
  "shortcuts": [
   {
    "color": "Grey",
    "doc_view": "List",
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "label": "Print Format Builder",
    "link_to": "print-format-builder",
    "type": "Page"
@@ -356,6 +825,7 @@
   {
    "color": "Grey",
    "doc_view": "List",
+<<<<<<< HEAD
    "label": "Client Script",
    "link_to": "Client Script",
    "type": "DocType"
@@ -383,8 +853,33 @@
    "doc_view": "",
    "label": "Report",
    "link_to": "Report",
+=======
+   "label": "System Settings",
+   "link_to": "System Settings",
+   "type": "DocType",
+   "url": "https://frappe.school/courses/frappe-framework-course?utm_source=in_app"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Client Script",
+   "link_to": "Client Script",
+=======
+   "label": "Module Def",
+   "link_to": "Module Def",
+   "stats_filter": "[]",
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+   "type": "DocType"
+  },
+  {
+   "doc_view": "List",
+   "label": "DocType",
+   "link_to": "DocType",
+   "stats_filter": "[]",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
    "type": "DocType"
   }
  ],
- "title": "Build"
+ "title": "Build",
+ "type": "Workspace"
 }

@@ -45,6 +45,13 @@ frappe.views.BaseList = class BaseList {
 
 		this.start = 0;
 		this.page_length = frappe.is_large_screen() ? 100 : 20;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+		this.selected_page_count = this.page_length;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.data = [];
 		this.method = "frappe.desk.reportview.get";
 
@@ -53,7 +60,11 @@ frappe.views.BaseList = class BaseList {
 
 		this.fields = [];
 		this.filters = [];
+<<<<<<< HEAD
 		this.sort_by = this.meta.sort_field || "modified";
+=======
+		this.sort_by = this.meta.sort_field || "creation";
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.sort_order = this.meta.sort_order || "desc";
 
 		// Setup buttons
@@ -168,7 +179,11 @@ frappe.views.BaseList = class BaseList {
 	setup_page() {
 		this.page = this.parent.page;
 		this.$page = $(this.parent);
+<<<<<<< HEAD
 		!this.hide_card_layout && this.page.main.addClass("frappe-card");
+=======
+		this.page.main.addClass("layout-main-list");
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.page.page_form.removeClass("row").addClass("flex");
 		this.hide_page_form && this.page.page_form.hide();
 		this.hide_sidebar && this.$page.addClass("no-list-sidebar");
@@ -182,10 +197,11 @@ frappe.views.BaseList = class BaseList {
 	}
 
 	set_title() {
-		this.page.set_title(this.page_title);
+		this.page.set_title(this.page_title, null, true, "", this.meta?.description);
 	}
 
 	setup_view_menu() {
+<<<<<<< HEAD
 		// TODO: add all icons
 		const icon_map = {
 			Image: "image-view",
@@ -206,6 +222,35 @@ frappe.views.BaseList = class BaseList {
 			__("Tree View") __("Map View") */
 			this.views_menu = this.page.add_custom_button_group(
 				__("{0} View", [this.view_name]),
+=======
+		if (frappe.boot.desk_settings.view_switcher && !this.meta.force_re_route_to_default_view) {
+			const icon_map = {
+				Image: "image-view",
+				List: "list",
+				Report: "small-file",
+				Calendar: "calendar",
+				Gantt: "gantt",
+				Kanban: "kanban",
+				Dashboard: "dashboard",
+				Map: "map",
+			};
+
+			const label_map = {
+				List: __("List View"),
+				Report: __("Report View"),
+				Dashboard: __("Dashboard View"),
+				Gantt: __("Gantt View"),
+				Kanban: __("Kanban View"),
+				Calendar: __("Calendar View"),
+				Image: __("Image View"),
+				Inbox: __("Inbox View"),
+				Tree: __("Tree View"),
+				Map: __("Map View"),
+			};
+
+			this.views_menu = this.page.add_custom_button_group(
+				label_map[this.view_name] || label_map["List"],
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				icon_map[this.view_name] || "list"
 			);
 			this.views_list = new frappe.views.ListViewSelect({
@@ -215,6 +260,10 @@ frappe.views.BaseList = class BaseList {
 				list_view: this,
 				sidebar: this.list_sidebar,
 				icon_map: icon_map,
+<<<<<<< HEAD
+=======
+				label_map: label_map,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			});
 		}
 	}
@@ -232,9 +281,14 @@ frappe.views.BaseList = class BaseList {
 				$secondary_action.addClass("visible-xs");
 			}
 		} else {
-			this.refresh_button = this.page.add_action_icon("refresh", () => {
-				this.refresh();
-			});
+			this.refresh_button = this.page.add_action_icon(
+				"es-line-reload",
+				() => {
+					this.refresh();
+				},
+				"",
+				__("Reload List")
+			);
 		}
 	}
 
@@ -310,7 +364,9 @@ frappe.views.BaseList = class BaseList {
 		this.filter_area = new FilterArea(this);
 
 		if (this.filters && this.filters.length > 0) {
-			return this.filter_area.set(this.filters);
+			return this.filter_area.set(this.filters).catch(() => {
+				this.filter_area.clear(false);
+			});
 		}
 	}
 
@@ -384,11 +440,18 @@ frappe.views.BaseList = class BaseList {
 		// set default paging btn active
 		this.$paging_area
 			.find(`.btn-paging[data-value="${this.page_length}"]`)
-			.addClass("btn-info");
+			.addClass("btn-info")
+			.prop("disabled", true);
 
 		this.$paging_area.on("click", ".btn-paging", (e) => {
 			const $this = $(e.currentTarget);
+			// Set the active button
+			// This is always necessary because the current page length might
+			// have resulted from a previous "load more".
+			this.$paging_area.find(".btn-paging").removeClass("btn-info").prop("disabled", false);
+			$this.addClass("btn-info").prop("disabled", true);
 
+<<<<<<< HEAD
 			// set active button
 			this.$paging_area.find(".btn-paging").removeClass("btn-info");
 			$this.addClass("btn-info");
@@ -402,7 +465,59 @@ frappe.views.BaseList = class BaseList {
 		this.$paging_area.on("click", ".btn-more", (e) => {
 			this.start += this.page_length;
 			this.page_length = this.selected_page_count || 20;
+=======
+<<<<<<< HEAD
+			// set active button
+			this.$paging_area.find(".btn-paging").removeClass("btn-info");
+			$this.addClass("btn-info");
+
+			this.start = 0;
+			this.page_length = this.selected_page_count = $this.data().value;
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			this.refresh();
+		});
+
+		this.$paging_area.on("click", ".btn-more", (e) => {
+			this.start += this.page_length;
+			this.page_length = this.selected_page_count || 20;
+=======
+			const old_page_length = this.page_length;
+			const new_page_length = $this.data().value;
+
+			this.selected_page_count = new_page_length;
+			if (this.page_length > new_page_length) {
+				this.start = 0;
+				this.page_length = new_page_length;
+			} else {
+				this.start = this.page_length;
+				this.page_length = new_page_length - this.page_length;
+			}
+
+			if (old_page_length !== new_page_length) {
+				this.refresh();
+			}
+		});
+
+		this.$paging_area.on("click", ".btn-more", (e) => {
+			this.start = this.data.length;
+			this.page_length = this.selected_page_count;
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+			this.refresh();
+		});
+	}
+
+	set_result_height() {
+		// place it at the footer of the page
+		this.$result.css({
+			height:
+				window.innerHeight -
+				this.$result.get(0).offsetTop -
+				this.$paging_area.get(0).offsetHeight +
+				"px",
+		});
+		this.$no_result.css({
+			height: window.innerHeight - this.$no_result.get(0).offsetTop + "px",
 		});
 	}
 
@@ -426,12 +541,18 @@ frappe.views.BaseList = class BaseList {
 	get_filter_value(fieldname) {
 		const filter = this.get_filters_for_args().filter((f) => f[1] == fieldname)[0];
 		if (!filter) return;
+<<<<<<< HEAD
 		return (
 			{
 				like: filter[3]?.replace(/^%?|%$/g, ""),
 				"not set": null,
 			}[filter[2]] || filter[3]
 		);
+=======
+		if (filter[2] === "like") return filter[3]?.replace(/^%?|%$/g, "");
+		else if (filter[2] === "not set") return null;
+		else return filter[3];
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	get_filters_for_args() {
@@ -490,6 +611,7 @@ frappe.views.BaseList = class BaseList {
 			this.before_render();
 			this.render();
 			this.after_render();
+			this.set_result_height();
 			this.freeze(false);
 			this.reset_defaults();
 			if (this.settings.refresh) {
@@ -555,8 +677,10 @@ frappe.views.BaseList = class BaseList {
 		this.$paging_area.toggle(this.data.length > 0);
 		this.$no_result.toggle(this.data.length == 0);
 
-		const show_more = this.start + this.page_length <= this.data.length;
-		this.$paging_area.find(".btn-more").toggle(show_more);
+		if (this.data.length) {
+			const show_more = this.start + this.page_length <= this.data.length;
+			this.$paging_area.find(".btn-more").toggle(show_more);
+		}
 	}
 
 	call_for_selected_items(method, args = {}) {
@@ -683,8 +807,7 @@ class FilterArea {
 
 		const fields_dict = this.list_view.page.fields_dict;
 
-		let out = filters.reduce((out, filter) => {
-			// eslint-disable-next-line
+		return filters.reduce((out, filter) => {
 			const [dt, fieldname, condition, value] = filter;
 			out.promise = out.promise || Promise.resolve();
 			out.non_standard_filters = out.non_standard_filters || [];
@@ -694,7 +817,13 @@ class FilterArea {
 			if (
 				fields_dict[fieldname] &&
 				(condition === "=" ||
+<<<<<<< HEAD
 					(condition === "like" && fields_dict[fieldname]?.df?.fieldtype != "Link"))
+=======
+					(condition === "like" && fields_dict[fieldname]?.df?.fieldtype != "Link") ||
+					(condition === "descendants of (inclusive)" &&
+						fields_dict[fieldname]?.df?.fieldtype == "Link"))
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			) {
 				// standard filter
 				out.promise = out.promise.then(() => fields_dict[fieldname].set_value(value));
@@ -704,8 +833,6 @@ class FilterArea {
 			}
 			return out;
 		}, {});
-
-		return out;
 	}
 
 	remove_filters(filters) {
@@ -749,7 +876,11 @@ class FilterArea {
 		});
 	}
 
+<<<<<<< HEAD
 	make_standard_filters() {
+=======
+	async make_standard_filters() {
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		this.standard_filters_wrapper = this.list_view.page.page_form.find(
 			".standard-filter-section"
 		);
@@ -762,15 +893,42 @@ class FilterArea {
 				condition: "like",
 				fieldname: "name",
 				onchange: () => this.debounced_refresh_list_view(),
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			});
 		}
 
 		if (this.list_view.custom_filter_configs) {
 			this.list_view.custom_filter_configs.forEach((config) => {
 				config.onchange = () => this.debounced_refresh_list_view();
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			});
+		}
 
-			fields = fields.concat(this.list_view.custom_filter_configs);
+		if (
+			this.list_view.custom_filter_configs ||
+			this.list_view.settings.custom_filter_configs
+		) {
+			const custom_filter_configs =
+				this.list_view.custom_filter_configs ||
+				this.list_view.settings.custom_filter_configs;
+			await Promise.resolve(
+				typeof custom_filter_configs === "function"
+					? custom_filter_configs()
+					: custom_filter_configs
+			).then((configs) => {
+				configs.forEach((config) => {
+					config.onchange = () => this.debounced_refresh_list_view();
+				});
+
+				fields = fields.concat(configs);
+			});
 		}
 
 		const doctype_fields = this.list_view.meta.fields;
@@ -810,10 +968,17 @@ class FilterArea {
 							options = options.join("\n");
 						}
 					}
+					if (
+						df.fieldtype == "Link" &&
+						df.options &&
+						frappe.boot.treeviews.includes(df.options)
+					) {
+						condition = "descendants of (inclusive)";
+					}
 
 					return {
 						fieldtype: fieldtype,
-						label: __(df.label),
+						label: __(df.label, null, df.parent),
 						options: options,
 						fieldname: df.fieldname,
 						condition: condition,
@@ -855,16 +1020,26 @@ class FilterArea {
 		$(`<div class="filter-selector">
 			<div class="btn-group">
 				<button class="btn btn-default btn-sm filter-button">
+<<<<<<< HEAD
 					<span class="filter-icon">
 						${frappe.utils.icon("filter")}
+=======
+					<span class="filter-icon button-icon">
+						${frappe.utils.icon("es-line-filter")}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					</span>
 					<span class="button-label hidden-xs">
 					${__("Filter")}
 					<span>
 				</button>
 				<button class="btn btn-default btn-sm filter-x-button" title="${__("Clear all filters")}">
+<<<<<<< HEAD
 					<span class="filter-icon">
 						${frappe.utils.icon("filter-x")}
+=======
+					<span class="filter-icon button-icon">
+						${frappe.utils.icon("es-small-close")}
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					</span>
 				</button>
 			</div>

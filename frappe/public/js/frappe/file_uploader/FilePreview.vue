@@ -7,18 +7,25 @@
 		<div>
 			<div>
 				<a class="flex" :href="file.doc.file_url" v-if="file.doc" target="_blank">
+<<<<<<< HEAD
 					<span class="file-name">{{ file.name | file_name }}</span>
 				</a>
 				<span class="file-name" v-else>{{ file.name | file_name }}</span>
+=======
+					<span class="file-name">{{ file.name }}</span>
+				</a>
+				<span class="file-name" v-else>{{ file.name }}</span>
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			</div>
 
 			<div>
 				<span class="file-size">
-					{{ file.file_obj.size | file_size }}
+					{{ file_size }}
 				</span>
 			</div>
 
 			<div class="flex config-area">
+<<<<<<< HEAD
 				<label v-if="is_optimizable" class="frappe-checkbox"
 					><input
 						type="checkbox"
@@ -32,6 +39,29 @@
 						:checked="file.private"
 						@change="$emit('toggle_private')"
 					/>Private</label
+=======
+<<<<<<< HEAD
+				<label v-if="is_optimizable" class="frappe-checkbox"
+=======
+				<label v-if="allow_toggle_optimize" class="frappe-checkbox"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+					><input
+						type="checkbox"
+						:checked="optimize"
+						@change="emit('toggle_optimize')"
+					/>{{ __("Optimize") }}</label
+				>
+<<<<<<< HEAD
+				<label class="frappe-checkbox"
+=======
+				<label v-if="allow_toggle_private" class="frappe-checkbox"
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+					><input
+						type="checkbox"
+						:checked="file.private"
+						@change="emit('toggle_private')"
+					/>{{ __("Private") }}</label
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				>
 			</div>
 			<div>
@@ -55,13 +85,21 @@
 				<button
 					v-if="is_cropable"
 					class="btn btn-crop muted"
+<<<<<<< HEAD
 					@click="$emit('toggle_image_cropper')"
+=======
+					@click="emit('toggle_image_cropper')"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					v-html="frappe.utils.icon('crop', 'md')"
 				></button>
 				<button
 					v-if="!uploaded && !file.uploading && !file.failed"
 					class="btn muted"
+<<<<<<< HEAD
 					@click="$emit('remove')"
+=======
+					@click="emit('remove')"
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					v-html="frappe.utils.icon('delete', 'md')"
 				></button>
 			</div>
@@ -69,6 +107,7 @@
 	</div>
 </template>
 
+<<<<<<< HEAD
 <script>
 import ProgressRing from "./ProgressRing.vue";
 export default {
@@ -133,9 +172,89 @@ export default {
 		},
 	},
 };
+=======
+<script setup>
+import { ref, onMounted, computed } from "vue";
+import ProgressRing from "./ProgressRing.vue";
+
+// emits
+let emit = defineEmits(["toggle_optimize", "toggle_private", "toggle_image_cropper", "remove"]);
+
+// props
+const props = defineProps({
+	file: Object,
+	allow_toggle_private: {
+		default: true,
+	},
+	allow_toggle_optimize: {
+		default: true,
+	},
+});
+
+// variables
+let src = ref(null);
+let optimize = ref(props.file.optimize);
+
+// computed
+let file_size = computed(() => {
+	return frappe.form.formatters.FileSize(props.file.file_obj.size);
+});
+let is_private = computed(() => {
+	return props.file.doc ? props.file.doc.is_private : props.file.private;
+});
+let uploaded = computed(() => {
+	return props.file.request_succeeded;
+});
+let is_image = computed(() => {
+	return props.file.file_obj.type.startsWith("image");
+});
+<<<<<<< HEAD
+let is_optimizable = computed(() => {
+	let is_svg = props.file.file_obj.type == "image/svg+xml";
+	return is_image.value && !is_svg && !uploaded.value && !props.file.failed;
+=======
+let allow_toggle_optimize = computed(() => {
+	let is_svg = props.file.file_obj.type == "image/svg+xml";
+	return (
+		props.allow_toggle_optimize &&
+		is_image.value &&
+		!is_svg &&
+		!uploaded.value &&
+		!props.file.failed
+	);
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+});
+let is_cropable = computed(() => {
+	let croppable_types = ["image/jpeg", "image/png"];
+	return (
+		!uploaded.value &&
+		!props.file.uploading &&
+		!props.file.failed &&
+		croppable_types.includes(props.file.file_obj.type)
+	);
+});
+let progress = computed(() => {
+	let value = Math.round((props.file.progress * 100) / props.file.total);
+	if (isNaN(value)) {
+		value = 0;
+	}
+	return value;
+});
+
+// mounted
+onMounted(() => {
+	if (is_image.value) {
+		if (window.FileReader) {
+			let fr = new FileReader();
+			fr.onload = () => (src.value = fr.result);
+			fr.readAsDataURL(props.file.file_obj);
+		}
+	}
+});
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 </script>
 
-<style>
+<style scoped>
 .file-preview {
 	display: flex;
 	align-items: center;

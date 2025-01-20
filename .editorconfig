@@ -13,3 +13,12 @@ charset = utf-8
 indent_style = tab
 indent_size = 4
 max_line_length = 99
+<<<<<<< HEAD
+=======
+
+# JSON files - mostly doctype schema files
+[{*.json}]
+insert_final_newline = false
+indent_style = space
+indent_size = 1
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

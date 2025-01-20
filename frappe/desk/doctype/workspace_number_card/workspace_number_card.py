@@ -6,4 +6,22 @@ from frappe.model.document import Document
 
 
 class WorkspaceNumberCard(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		label: DF.Data | None
+		number_card_name: DF.Link
+		parent: DF.Data
+		parentfield: DF.Data
+		parenttype: DF.Data
+	# end: auto-generated types
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	pass

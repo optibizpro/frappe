@@ -7,7 +7,13 @@ frappe.ui.form.ControlButton = class ControlButton extends frappe.ui.form.Contro
 		var me = this;
 		const btn_type = this.df.primary ? "btn-primary" : "btn-default";
 		const btn_size = this.df.btn_size ? `btn-${this.df.btn_size}` : "btn-xs";
+<<<<<<< HEAD
 		this.$input = $(`<button class="btn ${btn_size} ${btn_type}">`)
+=======
+		this.$input = $(
+			`<button class="btn ${btn_size} ${btn_type} ellipsis" title="${this.df.label}">`
+		)
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			.prependTo(me.input_area)
 			.on("click", function () {
 				me.onclick();
@@ -60,7 +66,9 @@ frappe.ui.form.ControlButton = class ControlButton extends frappe.ui.form.Contro
 		if (label) {
 			this.df.label = label;
 		}
-		label = (this.df.icon ? frappe.utils.icon(this.df.icon) : "") + __(this.df.label);
+		label =
+			(this.df.icon ? frappe.utils.icon(this.df.icon) : "") +
+			__(this.df.label, null, this.df.parent);
 		$(this.label_span).html("&nbsp;");
 		this.$input && this.$input.html(label);
 	}

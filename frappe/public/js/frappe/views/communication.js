@@ -47,6 +47,7 @@ frappe.views.CommunicationComposer = class {
 	}
 
 	get_fields() {
+		let me = this;
 		const fields = [
 			{
 				label: __("To"),
@@ -81,6 +82,14 @@ frappe.views.CommunicationComposer = class {
 				default: this.get_default_recipients("bcc"),
 			},
 			{
+<<<<<<< HEAD
+=======
+				label: __("Schedule Send At"),
+				fieldtype: "Datetime",
+				fieldname: "send_after",
+			},
+			{
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				fieldtype: "Section Break",
 				fieldname: "email_template_section_break",
 				hidden: 1,
@@ -142,11 +151,25 @@ frappe.views.CommunicationComposer = class {
 				label: __("Select Print Format"),
 				fieldtype: "Select",
 				fieldname: "select_print_format",
+<<<<<<< HEAD
 			},
 			{
 				label: __("Select Languages"),
 				fieldtype: "Select",
 				fieldname: "language_sel",
+=======
+				onchange: function () {
+					me.guess_language();
+				},
+			},
+			{
+				label: __("Print Language"),
+				fieldtype: "Link",
+				options: "Language",
+				fieldname: "print_language",
+				default: frappe.boot.lang,
+				depends_on: "attach_document_print",
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			},
 			{ fieldtype: "Column Break" },
 			{
@@ -159,7 +182,11 @@ frappe.views.CommunicationComposer = class {
 		// add from if user has access to multiple email accounts
 		const email_accounts = frappe.boot.email_accounts.filter((account) => {
 			return (
+<<<<<<< HEAD
 				!in_list(["All Accounts", "Sent", "Spam", "Trash"], account.email_account) &&
+=======
+				!["All Accounts", "Sent", "Spam", "Trash"].includes(account.email_account) &&
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				account.enable_outgoing
 			);
 		});
@@ -198,6 +225,34 @@ frappe.views.CommunicationComposer = class {
 		}
 	}
 
+<<<<<<< HEAD
+=======
+	guess_language() {
+		// when attach print for print format changes try to guess language
+		// if print format has language then set that else boot lang.
+
+		// Print language resolution:
+		// 1. Document's print_language field
+		// 2. print format's default field
+		// 3. user lang
+		// 4. system lang
+		// 3 and 4 are resolved already in boot
+		let document_lang = this.frm?.doc?.language;
+		let print_format = this.dialog.get_value("select_print_format");
+
+		let print_format_lang;
+		if (print_format != "Standard") {
+			print_format_lang = frappe.get_doc(
+				"Print Format",
+				print_format
+			)?.default_print_language;
+		}
+
+		let lang = document_lang || print_format_lang || frappe.boot.lang;
+		this.dialog.set_value("print_language", lang);
+	}
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	toggle_more_options(show_options) {
 		show_options = show_options || this.dialog.fields_dict.more_options.df.hidden;
 		this.dialog.set_df_property("more_options", "hidden", !show_options);
@@ -210,7 +265,6 @@ frappe.views.CommunicationComposer = class {
 	prepare() {
 		this.setup_multiselect_queries();
 		this.setup_subject_and_recipients();
-		this.setup_print_language();
 		this.setup_print();
 		this.setup_attach();
 		this.setup_email();
@@ -230,10 +284,25 @@ frappe.views.CommunicationComposer = class {
 			this.dialog.fields_dict[field].get_data = () => {
 				const data = this.dialog.fields_dict[field].get_value();
 				const txt = data.match(/[^,\s*]*$/)[0] || "";
+<<<<<<< HEAD
 
 				frappe.call({
 					method: "frappe.email.get_contact_list",
 					args: { txt },
+=======
+				const args = { txt };
+
+				if (this.frm?.events.get_email_recipient_filters) {
+					args.extra_filters = this.frm.events.get_email_recipient_filters(
+						this.frm,
+						field
+					);
+				}
+
+				frappe.call({
+					method: "frappe.email.get_contact_list",
+					args: args,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					callback: (r) => {
 						this.dialog.fields_dict[field].set_data(r.message);
 					},
@@ -362,7 +431,10 @@ frappe.views.CommunicationComposer = class {
 				args: {
 					template_name: email_template,
 					doc: me.doc,
+<<<<<<< HEAD
 					_lang: me.dialog.get_value("language_sel"),
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				},
 				callback(r) {
 					prepend_reply(r.message);
@@ -488,6 +560,7 @@ frappe.views.CommunicationComposer = class {
 		}
 	}
 
+<<<<<<< HEAD
 	setup_print_language() {
 		const fields = this.dialog.fields_dict;
 
@@ -511,6 +584,8 @@ frappe.views.CommunicationComposer = class {
 		}
 	}
 
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	setup_print() {
 		// print formats
 		const fields = this.dialog.fields_dict;
@@ -532,6 +607,10 @@ frappe.views.CommunicationComposer = class {
 		} else {
 			$(fields.attach_document_print.wrapper).toggle(false);
 		}
+<<<<<<< HEAD
+=======
+		this.guess_language();
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
 	setup_attach() {
@@ -705,7 +784,11 @@ frappe.views.CommunicationComposer = class {
 			localforage.setItem(this.frm.doctype + this.frm.docname, message).catch((e) => {
 				if (e) {
 					// silently fail
+<<<<<<< HEAD
 					console.log(e); // eslint-disable-line
+=======
+					console.log(e);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 					console.warn(
 						"[Communication] IndexedDB is full. Cannot save message as draft"
 					); // eslint-disable-line
@@ -724,10 +807,17 @@ frappe.views.CommunicationComposer = class {
 			localforage.removeItem(this.frm.doctype + this.frm.docname).catch((e) => {
 				if (e) {
 					// silently fail
+<<<<<<< HEAD
 					console.log(e); // eslint-disable-line
 					console.warn(
 						"[Communication] IndexedDB is full. Cannot save message as draft"
 					); // eslint-disable-line
+=======
+					console.log(e);
+					console.warn(
+						"[Communication] IndexedDB is full. Cannot save message as draft"
+					);
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				}
 			});
 		}
@@ -770,9 +860,14 @@ frappe.views.CommunicationComposer = class {
 				sender_full_name: form_values.sender ? frappe.user.full_name() : undefined,
 				email_template: form_values.email_template,
 				attachments: selected_attachments,
+<<<<<<< HEAD
 				_lang: me.lang_code,
+=======
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 				read_receipt: form_values.send_read_receipt,
 				print_letterhead: me.is_print_letterhead_checked(),
+				send_after: form_values.send_after ? form_values.send_after : null,
+				print_language: form_values.print_language,
 			},
 			btn,
 			callback(r) {
@@ -798,7 +893,7 @@ frappe.views.CommunicationComposer = class {
 						try {
 							me.success(r);
 						} catch (e) {
-							console.log(e); // eslint-disable-line
+							console.log(e);
 						}
 					}
 				} else {
@@ -811,7 +906,7 @@ frappe.views.CommunicationComposer = class {
 						try {
 							me.error(r);
 						} catch (e) {
-							console.log(e); // eslint-disable-line
+							console.log(e);
 						}
 					}
 				}

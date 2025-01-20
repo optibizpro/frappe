@@ -1,7 +1,13 @@
 import re
 from ast import literal_eval
+<<<<<<< HEAD
 from types import BuiltinFunctionType
 from typing import TYPE_CHECKING
+=======
+from functools import lru_cache
+from types import BuiltinFunctionType
+from typing import TYPE_CHECKING, TypeAlias
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 import sqlparse
 from pypika.queries import QueryBuilder, Table
@@ -10,7 +16,11 @@ import frappe
 from frappe import _
 from frappe.database.operator_map import OPERATOR_MAP
 from frappe.database.schema import SPECIAL_CHAR_PATTERN
+<<<<<<< HEAD
 from frappe.database.utils import DefaultOrderBy, get_doctype_name
+=======
+from frappe.database.utils import DefaultOrderBy, FilterValue, convert_to_value, get_doctype_name
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 from frappe.query_builder import Criterion, Field, Order, functions
 from frappe.query_builder.functions import Function, SqlFunctions
 from frappe.query_builder.utils import PseudoColumnMapper
@@ -34,8 +44,13 @@ class Engine:
 	def get_query(
 		self,
 		table: str | Table,
+<<<<<<< HEAD
 		fields: list | tuple | None = None,
 		filters: dict[str, str | int] | str | int | list[list | str | int] | None = None,
+=======
+		fields: str | list | tuple | None = None,
+		filters: dict[str, FilterValue] | FilterValue | list[list | FilterValue] | None = None,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		order_by: str | None = None,
 		group_by: str | None = None,
 		limit: int | None = None,
@@ -62,6 +77,7 @@ class Engine:
 			self.validate_doctype()
 			self.table = frappe.qb.DocType(table)
 
+<<<<<<< HEAD
 		self.validate_filters = validate_filters
 
 		if update:
@@ -104,6 +120,48 @@ class Engine:
 		if not self.fields:
 			self.fields = [self.table.name]
 
+=======
+		if update:
+			self.query = frappe.qb.update(self.table)
+		elif into:
+			self.query = frappe.qb.into(self.table)
+		elif delete:
+			self.query = frappe.qb.from_(self.table).delete()
+		else:
+			self.query = frappe.qb.from_(self.table)
+			self.apply_fields(fields)
+
+		self.apply_filters(filters)
+		self.apply_order_by(order_by)
+
+		if limit:
+			self.query = self.query.limit(limit)
+
+		if offset:
+			self.query = self.query.offset(offset)
+
+		if distinct:
+			self.query = self.query.distinct()
+
+		if for_update:
+			self.query = self.query.for_update(skip_locked=skip_locked, nowait=not wait)
+
+		if group_by:
+			self.query = self.query.groupby(group_by)
+
+		return self.query
+
+	def validate_doctype(self):
+		if not TABLE_NAME_PATTERN.match(self.doctype):
+			frappe.throw(_("Invalid DocType: {0}").format(self.doctype))
+
+	def apply_fields(self, fields):
+		# add fields
+		self.fields = self.parse_fields(fields)
+		if not self.fields:
+			self.fields = [self.table.name]
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		self.query._child_queries = []
 		for field in self.fields:
 			if isinstance(field, DynamicTableField):
@@ -115,13 +173,25 @@ class Engine:
 
 	def apply_filters(
 		self,
+<<<<<<< HEAD
 		filters: dict[str, str | int] | str | int | list[list | str | int] | None = None,
+=======
+		filters: dict[str, FilterValue] | FilterValue | list[list | FilterValue] | None = None,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	):
 		if filters is None:
 			return
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		if isinstance(filters, str | int):
 			filters = {"name": str(filters)}
+=======
+		if isinstance(filters, FilterValue):
+			filters = {"name": convert_to_value(filters)}
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 		if isinstance(filters, Criterion):
 			self.query = self.query.where(filters)
@@ -130,11 +200,25 @@ class Engine:
 			self.apply_dict_filters(filters)
 
 		elif isinstance(filters, list | tuple):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			if all(isinstance(d, str | int) for d in filters) and len(filters) > 0:
 				self.apply_dict_filters({"name": ("in", filters)})
 			else:
 				for filter in filters:
 					if isinstance(filter, str | int | Criterion | dict):
+<<<<<<< HEAD
+=======
+=======
+			if all(isinstance(d, FilterValue) for d in filters) and len(filters) > 0:
+				self.apply_dict_filters({"name": ("in", tuple(convert_to_value(f) for f in filters))})
+			else:
+				for filter in filters:
+					if isinstance(filter, FilterValue | Criterion | dict):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 						self.apply_filters(filter)
 					elif isinstance(filter, list | tuple):
 						self.apply_list_filters(filter)
@@ -150,7 +234,11 @@ class Engine:
 			doctype, field, operator, value = filter
 			self._apply_filter(field, value, operator, doctype)
 
+<<<<<<< HEAD
 	def apply_dict_filters(self, filters: dict[str, str | int | list]):
+=======
+	def apply_dict_filters(self, filters: dict[str, FilterValue | list]):
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		for field, value in filters.items():
 			operator = "="
 			if isinstance(value, list | tuple):
@@ -159,7 +247,15 @@ class Engine:
 			self._apply_filter(field, value, operator)
 
 	def _apply_filter(
+<<<<<<< HEAD
 		self, field: str, value: str | int | list | None, operator: str = "=", doctype: str | None = None
+=======
+		self,
+		field: str,
+		value: FilterValue | list | set | None,
+		operator: str = "=",
+		doctype: str | None = None,
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	):
 		_field = field
 		_value = value
@@ -187,10 +283,20 @@ class Engine:
 					(table.parent == self.table.name) & (table.parenttype == self.doctype)
 				)
 
+<<<<<<< HEAD
 		if isinstance(_value, bool):
 			_value = int(_value)
 
 		elif not _value and isinstance(_value, list | tuple):
+=======
+		_value = convert_to_value(_value)
+
+<<<<<<< HEAD
+		elif not _value and isinstance(_value, list | tuple):
+=======
+		if not _value and isinstance(_value, list | tuple | set):
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			_value = ("",)
 
 		# Nested set
@@ -220,7 +326,7 @@ class Engine:
 			self.query = self.query.where(operator_fn(_field, _value))
 
 	def get_function_object(self, field: str) -> "Function":
-		"""Expects field to look like 'SUM(*)' or 'name' or something similar. Returns PyPika Function object"""
+		"""Return PyPika Function object. Expect field to look like 'SUM(*)' or 'name' or something similar."""
 		func = field.split("(", maxsplit=1)[0].capitalize()
 		args_start, args_end = len(func) + 1, field.index(")")
 		args = field[args_start:args_end].split(",")
@@ -274,6 +380,10 @@ class Engine:
 			return Function(func, *_args, alias=alias or None)
 
 	def sanitize_fields(self, fields: str | list | tuple):
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 		def _sanitize_field(field: str):
 			if not isinstance(field, str):
 				return field
@@ -284,6 +394,7 @@ class Engine:
 
 		if isinstance(fields, list | tuple):
 			return [_sanitize_field(field) for field in fields]
+<<<<<<< HEAD
 		elif isinstance(fields, str):
 			return _sanitize_field(fields)
 
@@ -303,6 +414,33 @@ class Engine:
 			return self.table[field].as_(alias)
 		return self.table[field]
 
+=======
+=======
+		if isinstance(fields, list | tuple):
+			return [
+				_sanitize_field(field, self.is_mariadb) if isinstance(field, str) else field
+				for field in fields
+			]
+>>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+		elif isinstance(fields, str):
+			return _sanitize_field(fields, self.is_mariadb)
+		return fields
+
+	def parse_string_field(self, field: str):
+		if field == "*":
+			return self.table.star
+		alias = None
+		if " as " in field:
+			field, alias = field.split(" as ")
+		if "`" in field:
+			if alias:
+				return PseudoColumnMapper(f"{field} {alias}")
+			return PseudoColumnMapper(field)
+		if alias:
+			return self.table[field].as_(alias)
+		return self.table[field]
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	def parse_fields(self, fields: str | list | tuple | None) -> list:
 		if not fields:
 			return []
@@ -523,7 +661,11 @@ def literal_eval_(literal):
 def has_function(field):
 	_field = field.casefold() if (isinstance(field, str) and "`" not in field) else field
 	if not issubclass(type(_field), Criterion):
+<<<<<<< HEAD
 		if any([f"{func}(" in _field for func in SQL_FUNCTIONS]):
+=======
+		if any([f"{func}(" in _field for func in SQL_FUNCTIONS]):  # ) <- ignore this comment.
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 			return True
 
 
@@ -557,3 +699,18 @@ def get_nested_set_hierarchy_result(doctype: str, name: str, hierarchy: str) -> 
 			.run(pluck=True)
 		)
 	return result
+<<<<<<< HEAD
+=======
+
+
+@lru_cache(maxsize=1024)
+def _sanitize_field(field: str, is_mariadb):
+	if field == "*" or not SPECIAL_CHAR_PATTERN.match(field):
+		# Skip checking if there are no special characters
+		return field
+
+	stripped_field = sqlparse.format(field, strip_comments=True, keyword_case="lower")
+	if is_mariadb:
+		return MARIADB_SPECIFIC_COMMENT.sub("", stripped_field)
+	return stripped_field
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581

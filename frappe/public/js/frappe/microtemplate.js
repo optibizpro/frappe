@@ -2,6 +2,11 @@
 // Adapted from John Resig - http://ejohn.org/ - MIT Licensed
 
 frappe.template = { compiled: {}, debug: {} };
+<<<<<<< HEAD
+=======
+
+/* eslint-disable */
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 frappe.template.compile = function (str, name) {
 	var key = name || str;
 
@@ -96,14 +101,25 @@ frappe.template.compile = function (str, name) {
 
 	return frappe.template.compiled[key];
 };
+<<<<<<< HEAD
+=======
+/* eslint-enable */
+
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 frappe.render = function (str, data, name) {
 	return frappe.template.compile(str, name)(data);
 };
 frappe.render_template = function (name, data) {
+<<<<<<< HEAD
 	if (name.indexOf(" ") !== -1) {
 		var template = name;
+=======
+	let template;
+	if (name.indexOf(" ") !== -1) {
+		template = name;
+>>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	} else {
-		var template = frappe.templates[name];
+		template = frappe.templates[name];
 	}
 	if (data === undefined) {
 		data = {};

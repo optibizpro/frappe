@@ -6,6 +6,19 @@ from frappe.model.document import Document
 
 
 class DomainSettings(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_domain.has_domain import HasDomain
+		from frappe.types import DF
+
+		active_domains: DF.Table[HasDomain]
+
+	# end: auto-generated types
+
 	def set_active_domains(self, domains):
 		active_domains = [d.domain for d in self.active_domains]
 		added = False
@@ -40,7 +53,7 @@ class DomainSettings(Document):
 		for domain in all_domains:
 			data = frappe.get_domain_data(domain)
 			if not frappe.db.get_value("Domain", domain):
-				frappe.get_doc(dict(doctype="Domain", domain=domain)).insert()
+				frappe.get_doc(doctype="Domain", domain=domain).insert()
 			if "modules" in data:
 				for module in data.get("modules"):
 					frappe.db.set_value("Module Def", module, "restrict_to_domain", domain)
@@ -48,7 +61,7 @@ class DomainSettings(Document):
 			if "restricted_roles" in data:
 				for role in data["restricted_roles"]:
 					if not frappe.db.get_value("Role", role):
-						frappe.get_doc(dict(doctype="Role", role_name=role)).insert()
+						frappe.get_doc(doctype="Role", role_name=role).insert()
 					frappe.db.set_value("Role", role, "restrict_to_domain", domain)
 
 					if domain not in active_domains:
@@ -73,7 +86,7 @@ def get_active_domains():
 		active_domains.append("")
 		return active_domains
 
-	return frappe.cache().get_value("active_domains", _get_active_domains)
+	return frappe.cache.get_value("active_domains", _get_active_domains)
 
 
 def get_active_modules():
@@ -87,4 +100,4 @@ def get_active_modules():
 				active_modules.append(m.name)
 		return active_modules
 
-	return frappe.cache().get_value("active_modules", _get_active_modules)
+	return frappe.cache.get_value("active_modules", _get_active_modules)
