@@ -7,12 +7,12 @@ frappe.ui.misc.about = function () {
 		$(d.body).html(
 			repl(
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 				"<div>\
 		<p>" +
 					__("Open Source Applications for the Web") +
@@ -45,6 +45,8 @@ frappe.ui.misc.about = function () {
 		<hr>\
 		<p class='text-muted'>&copy; Frappe Technologies Pvt. Ltd. and contributors </p> \
 		</div>",
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -93,9 +95,7 @@ frappe.ui.misc.about = function () {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 				frappe.app
 			)
 		);
@@ -119,9 +119,10 @@ frappe.ui.misc.about = function () {
 			var $wrap = $("#about-app-versions").empty();
 			$.each(Object.keys(versions).sort(), function (i, key) {
 				var v = versions[key];
-<<<<<<< HEAD
 				if (v.branch) {
 					var text = $.format("<p><b>{0}:</b> v{1} ({2})<br></p>", [
+<<<<<<< HEAD
+=======
 =======
 				let text;
 				if (v.branch) {
@@ -132,16 +133,15 @@ frappe.ui.misc.about = function () {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 						v.title,
 						v.branch_version || v.version,
 						v.branch,
 					]);
 				} else {
-<<<<<<< HEAD
 					var text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
+<<<<<<< HEAD
+=======
 =======
 					text = $.format("<p><b>{0}:</b> v{1}<br></p>", [v.title, v.version]);
 <<<<<<< HEAD
@@ -150,9 +150,7 @@ frappe.ui.misc.about = function () {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 				}
 				$(text).appendTo($wrap);
 			});

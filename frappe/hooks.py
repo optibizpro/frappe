@@ -6,14 +6,16 @@ app_name = "frappe"
 app_title = "Framework"
 app_publisher = "Frappe Technologies"
 app_description = "Full stack web framework with Python, Javascript, MariaDB, Redis, Node"
-<<<<<<< HEAD
 source_link = "https://github.com/optibizpro/frappe"
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 source_link = "https://github.com/optibizpro/frappe"
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+>>>>>>> obp-version-14
 app_license = "MIT"
 app_logo_url = "/assets/frappe/images/frappe-framework-logo.svg"
 develop_version = "15.x.x-develop"
@@ -21,10 +23,10 @@ app_home = "/app/build"
 
 app_email = "support@optibizpro.com"
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 docs_app = "frappe_docs"
 
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 docs_app = "frappe_docs"
@@ -32,8 +34,7 @@ docs_app = "frappe_docs"
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 before_install = "frappe.utils.install.before_install"
 after_install = "frappe.utils.install.after_install"
 
@@ -49,6 +50,7 @@ app_include_js = [
 	"report.bundle.js",
 	"telemetry.bundle.js",
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -56,9 +58,7 @@ app_include_js = [
 	"billing.bundle.js",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
-	"billing.bundle.js",
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 ]
 
 app_include_css = [
@@ -123,6 +123,7 @@ on_session_creation = [
 
 on_logout = "frappe.core.doctype.session_default_settings.session_default_settings.clear_session_defaults"
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -137,8 +138,7 @@ pdf_footer_html = "frappe.utils.pdf.pdf_footer_html"
 <<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 
 # permissions
 
@@ -194,32 +194,30 @@ standard_queries = {"User": "frappe.core.doctype.user.user.user_query"}
 
 doc_events = {
 	"*": {
-<<<<<<< HEAD
-<<<<<<< HEAD
 		"after_insert": ["frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers"],
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 		"after_insert": ["frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers"],
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 		"on_update": [
 			"frappe.desk.notifications.clear_doctype_notifications",
 			"frappe.workflow.doctype.workflow_action.workflow_action.process_workflow_actions",
 			"frappe.core.doctype.file.utils.attach_files_to_document",
-<<<<<<< HEAD
-<<<<<<< HEAD
 			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 			"frappe.automation.doctype.assignment_rule.assignment_rule.apply",
 			"frappe.automation.doctype.assignment_rule.assignment_rule.update_due_date",
 			"frappe.core.doctype.user_type.user_type.apply_permissions_for_non_standard_user_type",
@@ -229,17 +227,16 @@ doc_events = {
 		"on_cancel": [
 			"frappe.desk.notifications.clear_doctype_notifications",
 			"frappe.workflow.doctype.workflow_action.workflow_action.process_workflow_actions",
-<<<<<<< HEAD
-<<<<<<< HEAD
 			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 			"frappe.event_streaming.doctype.event_update_log.event_update_log.notify_consumers",
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 			"frappe.automation.doctype.assignment_rule.assignment_rule.apply",
 		],
 		"on_trash": [
@@ -286,9 +283,9 @@ scheduler_events = {
 			"frappe.oauth.delete_oauth2_data",
 			"frappe.website.doctype.web_page.web_page.check_publish_status",
 			"frappe.twofactor.delete_all_barcodes_for_users",
-<<<<<<< HEAD
-<<<<<<< HEAD
 		],
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 		],
@@ -304,17 +301,16 @@ scheduler_events = {
 <<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 		"0/10 * * * *": [
 			"frappe.email.doctype.email_account.email_account.pull",
 		],
 		# Hourly but offset by 30 minutes
-<<<<<<< HEAD
-<<<<<<< HEAD
 		# "30 * * * *": [
 		#
 		# ],
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 		# "30 * * * *": [
@@ -326,11 +322,7 @@ scheduler_events = {
 		],
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
-		"30 * * * *": [
-			"frappe.core.doctype.prepared_report.prepared_report.expire_stalled_report",
-		],
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 		# Daily but offset by 45 minutes
 		"45 0 * * *": [
 			"frappe.core.doctype.log_settings.log_settings.run_log_clean_up",
@@ -338,10 +330,10 @@ scheduler_events = {
 	},
 	"all": [
 		"frappe.email.queue.flush",
-<<<<<<< HEAD
-<<<<<<< HEAD
 		"frappe.email.doctype.email_account.email_account.notify_unreplied",
 		"frappe.utils.global_search.sync_global_search",
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 		"frappe.email.doctype.email_account.email_account.notify_unreplied",
@@ -349,8 +341,7 @@ scheduler_events = {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 		"frappe.monitor.flush",
 	],
 	"hourly": [
@@ -373,17 +364,16 @@ scheduler_events = {
 		"frappe.integrations.doctype.google_contacts.google_contacts.sync",
 		"frappe.automation.doctype.auto_repeat.auto_repeat.make_auto_repeat_entry",
 		"frappe.automation.doctype.auto_repeat.auto_repeat.set_auto_repeat_as_completed",
-<<<<<<< HEAD
-<<<<<<< HEAD
 		"frappe.email.doctype.unhandled_email.unhandled_email.remove_old_unhandled_emails",
+<<<<<<< HEAD
+=======
 =======
 <<<<<<< HEAD
 		"frappe.email.doctype.unhandled_email.unhandled_email.remove_old_unhandled_emails",
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 	],
 	"daily_long": [
 		"frappe.integrations.doctype.dropbox_settings.dropbox_settings.take_backups_daily",
@@ -517,6 +507,7 @@ global_search_doctypes = {
 override_whitelisted_methods = {
 	# Legacy File APIs
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -524,9 +515,7 @@ override_whitelisted_methods = {
 	"frappe.utils.file_manager.download_file": "download_file",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
-	"frappe.utils.file_manager.download_file": "download_file",
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 	"frappe.core.doctype.file.file.download_file": "download_file",
 	"frappe.core.doctype.file.file.unzip_file": "frappe.core.api.file.unzip_file",
 	"frappe.core.doctype.file.file.get_attached_images": "frappe.core.api.file.get_attached_images",
@@ -568,6 +557,7 @@ ignore_links_on_delete = [
 	"Route History",
 	"Access Log",
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -575,9 +565,7 @@ ignore_links_on_delete = [
 	"Permission Log",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
-	"Permission Log",
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 ]
 
 # Request Hooks
@@ -587,10 +575,12 @@ before_request = [
 	"frappe.rate_limiter.apply",
 ]
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+>>>>>>> obp-version-14
 after_request = ["frappe.rate_limiter.update", "frappe.monitor.stop", "frappe.recorder.dump"]
 
 # Background Job Hooks
@@ -602,9 +592,9 @@ after_job = [
 	"frappe.utils.file_lock.release_document_locks",
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
 =======
 =======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 after_request = [
 	"frappe.monitor.stop",
@@ -632,8 +622,7 @@ after_job = [
 <<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
 ]
 
 extend_bootinfo = [
@@ -643,10 +632,9 @@ extend_bootinfo = [
 
 get_changelog_feed = "frappe.desk.doctype.changelog_feed.changelog_feed.get_feed"
 <<<<<<< HEAD
+=======
 <<<<<<< HEAD
 =======
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 export_python_type_annotations = True
 
@@ -770,5 +758,4 @@ persistent_cache_keys = [
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
-=======
->>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+>>>>>>> obp-version-14
