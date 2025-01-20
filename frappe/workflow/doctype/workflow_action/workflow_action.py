@@ -81,6 +81,7 @@ def get_permission_query_conditions(user):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return f"""(`tabWorkflow Action`.`name` in ({permitted_workflow_actions})
 		or `tabWorkflow Action`.`user`={frappe.db.escape(user)})
 =======
@@ -91,6 +92,10 @@ def get_permission_query_conditions(user):
 	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	return f""" `tabWorkflow Action`.`name` in ({permitted_workflow_actions})
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		and `tabWorkflow Action`.`status`='Open'
 	"""
 
@@ -102,10 +107,14 @@ def has_permission(doc, user):
 	if user == "Administrator":
 		return True
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	permitted_roles = {permitted_role.role for permitted_role in doc.permitted_roles}
 	return not permitted_roles.isdisjoint(frappe.get_roles(user))
@@ -145,10 +154,14 @@ def process_workflow_actions(doc, state):
 =======
 			now=frappe.flags.in_test,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 
 
@@ -378,10 +391,14 @@ def send_workflow_action_email(doc, transitions):
 =======
 	for data in users_data.values():
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		email_args = {
 			"recipients": [data.get("email")],
 			"args": {"actions": list(deduplicate_actions(data.get("possible_actions"))), "message": message},

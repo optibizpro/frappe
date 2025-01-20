@@ -40,6 +40,7 @@ class DataImport(Document):
 		submit_after_import: DF.Check
 		template_options: DF.Code | None
 		template_warnings: DF.Code | None
+		use_csv_sniffer: DF.Check
 	# end: auto-generated types
 
 	def validate(self):
@@ -127,7 +128,7 @@ class DataImport(Document):
 		return self.get_importer().export_import_log()
 
 	def get_importer(self):
-		return Importer(self.reference_doctype, data_import=self)
+		return Importer(self.reference_doctype, data_import=self, use_sniffer=self.use_csv_sniffer)
 
 
 @frappe.whitelist()
@@ -234,10 +235,14 @@ def get_import_logs(data_import: str):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	doc = frappe.get_doc("Data Import", data_import)
 	doc.check_permission("read")
 
@@ -325,11 +330,15 @@ def export_json(doctype, path, filters=None, or_filters=None, name=None, order_b
 							"parentfield",
 							"parenttype",
 						):
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 							if key in child:
 								del child[key]
 

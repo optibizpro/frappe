@@ -15,10 +15,14 @@ from frappe.tests import IntegrationTestCase
 
 class TestModelUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_get_fetch_values(self):
 		doctype = "ToDo"
 
@@ -56,10 +60,14 @@ class TestModelUtils(IntegrationTestCase):
 			guest_permitted_fields = get_permitted_fields("ToDo")
 			self.assertNotIn("description", guest_permitted_fields)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# everyone should have access to all fields of core doctypes
 		with set_user("Guest"):
@@ -95,10 +103,14 @@ class TestModelUtils(IntegrationTestCase):
 			self.assertNotIn(
 				"app_name", get_permitted_fields("Installed Application", parenttype="Installed Applications")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 
 	def test_is_default_field(self):

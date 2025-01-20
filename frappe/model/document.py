@@ -35,22 +35,31 @@ DOCUMENT_LOCK_SOFT_EXPIRY = 60 * 60  # Let users force-unlock after 60 minutes
 from frappe.model.utils import is_virtual_doctype, simple_singledispatch
 from frappe.model.workflow import set_workflow_state_on_action, validate_workflow
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.types import DF
 from frappe.utils import compare, cstr, date_diff, file_lock, flt, get_datetime_str, now
 =======
 from frappe.types import DF, DocRef
 from frappe.utils import compare, cstr, date_diff, file_lock, flt, get_table_name, now
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+from frappe.types import DF, DocRef
+from frappe.utils import compare, cstr, date_diff, file_lock, flt, get_table_name, now
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.data import get_absolute_url, get_datetime, get_timedelta, getdate
 from frappe.utils.global_search import update_global_search
 
 if TYPE_CHECKING:
 	from typing_extensions import Self
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	from frappe.core.doctype.docfield.docfield import DocField
 
@@ -263,6 +272,7 @@ class Document(BaseDocument, DocRef):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			get_value_kwargs = {"for_update": self.flags.for_update, "as_dict": True}
 			if not isinstance(self.name, dict | list):
 				get_value_kwargs["order_by"] = None
@@ -273,6 +283,8 @@ class Document(BaseDocument, DocRef):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if isinstance(self.name, str) and self.doctype != "DocType":
 				# Fast path - use raw SQL to avoid QB/ORM overheads.
 				d = frappe.db.sql(
@@ -295,10 +307,14 @@ class Document(BaseDocument, DocRef):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if not d:
 				frappe.throw(
 					_("{0} {1} not found").format(_(self.doctype), self.name), frappe.DoesNotExistError
@@ -332,10 +348,14 @@ class Document(BaseDocument, DocRef):
 =======
 		self.load_children_from_db()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# sometimes __setup__ can depend on child values, hence calling again at the end
 		if hasattr(self, "__setup__"):
@@ -345,9 +365,13 @@ class Document(BaseDocument, DocRef):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	def reload(self):
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	def reload(self):
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 	def load_children_from_db(self):
 		for df in self._get_table_fields():
@@ -389,6 +413,7 @@ class Document(BaseDocument, DocRef):
 		return self
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return self
 
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -396,6 +421,10 @@ class Document(BaseDocument, DocRef):
 =======
 	def reload(self) -> "Self":
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	def reload(self) -> "Self":
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""Reload document from database"""
 		return self.load_from_db()
 
@@ -415,10 +444,14 @@ class Document(BaseDocument, DocRef):
 =======
 	def has_permission(self, permtype="read", *, debug=False, user=None) -> bool:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""
 		Call `frappe.permissions.has_permission` if `ignore_permissions` flag isn't truthy
 
@@ -427,10 +460,14 @@ class Document(BaseDocument, DocRef):
 		:param verbose: DEPRECATED, will be removed in a future release.
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""
 
 		if self.flags.ignore_permissions:
@@ -457,10 +494,14 @@ class Document(BaseDocument, DocRef):
 			frappe.bold(_(self.doctype)),
 			self.name or "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		raise frappe.PermissionError
 
@@ -544,10 +585,14 @@ class Document(BaseDocument, DocRef):
 		self.flags.update_log_for_doc_creation = True
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		relink_mismatched_files(self)
 		self.run_post_save_methods()
 		self.flags.in_insert = False
@@ -601,10 +646,14 @@ class Document(BaseDocument, DocRef):
 =======
 		self.check_if_locked()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self._set_defaults()
 		self.check_permission("write", "save")
 
@@ -683,6 +732,7 @@ class Document(BaseDocument, DocRef):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		df: "DocField" = df or self.meta.get_field(fieldname)
 =======
 		df: DocField = df or self.meta.get_field(fieldname)
@@ -692,6 +742,10 @@ class Document(BaseDocument, DocRef):
 		df: DocField = df or self.meta.get_field(fieldname)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		df: DocField = df or self.meta.get_field(fieldname)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		all_rows = self.get(df.fieldname)
 
 		# delete rows that do not match the ones in the document
@@ -722,10 +776,14 @@ class Document(BaseDocument, DocRef):
 			d.db_update()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if existing_row_names:
 				qry = qry.where(tbl.name.notin(existing_row_names))
@@ -774,9 +832,12 @@ class Document(BaseDocument, DocRef):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def get_value_before_save(self, fieldname):
 		"""Returns value of a field before saving
@@ -787,11 +848,15 @@ class Document(BaseDocument, DocRef):
 		if not previous:
 			return
 		return previous.get(fieldname)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def set_new_name(self, force=False, set_name=None, set_child_names=True):
 		"""Calls `frappe.naming.set_new_name` for parent and child docs."""
@@ -1137,10 +1202,14 @@ class Document(BaseDocument, DocRef):
 		# previous is None for new document insert
 		if not previous and self._action != "discard":
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			self.check_docstatus_transition(0)
 			return
 
@@ -1151,10 +1220,14 @@ class Document(BaseDocument, DocRef):
 =======
 				_(f"Error: {self.name} ({self.doctype}) has been modified after you have opened it")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				+ (f" ({previous.modified}, {self.modified}). ")
 				+ _("Please refresh to get the latest document."),
 				raise_exception=frappe.TimestampMismatchError,
@@ -1165,10 +1238,14 @@ class Document(BaseDocument, DocRef):
 =======
 		if not self.meta.issingle and self._action != "discard":
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			self.check_docstatus_transition(previous.docstatus)
 
 	def check_docstatus_transition(self, to_docstatus):
@@ -1256,10 +1333,14 @@ class Document(BaseDocument, DocRef):
 =======
 		for idx, msg in missing:  # noqa: B007
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			msgprint(msg)
 
 		if frappe.flags.print_messages:
@@ -1350,10 +1431,14 @@ class Document(BaseDocument, DocRef):
 =======
 				"""Return enabled notifications for the current doctype."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 				return frappe.get_all(
 					"Notification",
@@ -1366,10 +1451,14 @@ class Document(BaseDocument, DocRef):
 =======
 			self.flags.notifications = frappe.cache.hget("notifications", self.doctype, _get_notifications)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if not self.flags.notifications:
 			return
@@ -1386,10 +1475,14 @@ class Document(BaseDocument, DocRef):
 			evaluate_alert(self, alert.name, alert.event)
 			self.flags.notifications_executed.append(alert.name)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		event_map = {
 			"on_update": "Save",
@@ -1423,10 +1516,14 @@ class Document(BaseDocument, DocRef):
 	@whitelist.__func__
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def _rename(self, name: str, merge: bool = False, force: bool = False, validate_rename: bool = True):
 		"""Rename the document. Triggers frappe.rename_doc, then reloads."""
 		from frappe.model.rename_doc import rename_doc
@@ -1481,10 +1578,14 @@ class Document(BaseDocument, DocRef):
 	@read_only_guard
 	def delete(self, ignore_permissions=False, force=False, *, delete_permanently=False):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""Delete document."""
 		return frappe.delete_doc(
 			self.doctype,
@@ -1672,10 +1773,14 @@ class Document(BaseDocument, DocRef):
 				update_modified=update_modified,
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.run_method("on_change")
 
@@ -1879,10 +1984,14 @@ class Document(BaseDocument, DocRef):
 =======
 		if self.meta.track_seen and not frappe.flags.read_only and not self.meta.issingle:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			_seen = self.get("_seen") or []
 			_seen = frappe.parse_json(_seen)
 
@@ -1908,10 +2017,14 @@ class Document(BaseDocument, DocRef):
 
 		if (hasattr(self.meta, "track_views") and self.meta.track_views) or force:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			view_log = frappe.get_doc(
 				{
 					"doctype": "View Log",
@@ -1930,10 +2043,14 @@ class Document(BaseDocument, DocRef):
 
 			return view_log
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def log_error(self, title=None, message=None):
 		"""Helper function to create an Error Log"""
@@ -2052,10 +2169,14 @@ class Document(BaseDocument, DocRef):
 =======
 				for _ in range(timeout):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					time.sleep(1)
 					if not file_lock.lock_exists(signature):
 						lock_exists = False
@@ -2147,10 +2268,14 @@ class Document(BaseDocument, DocRef):
 		doctype = self.__class__.__name__
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		WARN: This doesn't guarantee insertion as redis can be restarted
 		before data is flushed to database.
@@ -2197,14 +2322,20 @@ def execute_action(__doctype, __name, __action, **kwargs):
 <<<<<<< HEAD
 @frappe.whitelist()
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def unlock_document(doctype: str | None = None, name: str | None = None, args=None):
 	# Backward compatibility
 	if not doctype and not name and args:
 		args = json.loads(args)
 		doctype = str(args["doctype"])
 		name = str(args["name"])
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 def bulk_insert(
 	doctype: str,
@@ -2265,6 +2396,7 @@ def _document_values_generator(
 
 @frappe.whitelist()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 def unlock_document(doctype: str | None = None, name: str | None = None, args=None):
 	# Backward compatibility
@@ -2281,5 +2413,9 @@ def unlock_document(doctype: str, name: str):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def unlock_document(doctype: str, name: str):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	frappe.get_doc(doctype, name).unlock()
 	frappe.msgprint(frappe._("Document Unlocked"), alert=True)

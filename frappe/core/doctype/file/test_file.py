@@ -22,10 +22,14 @@ from frappe.core.doctype.file.utils import get_corrupted_image_msg
 from frappe.core.doctype.file.exceptions import FileTypeNotAllowed
 from frappe.core.doctype.file.utils import get_corrupted_image_msg, get_extension
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.desk.form.utils import add_comment
 from frappe.exceptions import ValidationError
 from frappe.tests import IntegrationTestCase, UnitTestCase
@@ -617,10 +621,14 @@ class TestAttachment(FrappeTestCase):
 =======
 class TestAttachment(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	test_doctype = "Test For Attachment"
 
 	@classmethod
@@ -709,10 +717,14 @@ class TestAttachmentsAccess(IntegrationTestCase):
 			content="User Home",
 			is_private=1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 
 		frappe.set_user("test@example.com")
@@ -752,10 +764,14 @@ class TestAttachmentsAccess(IntegrationTestCase):
 			content="System Manager Home",
 			is_private=1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 
 		system_manager_files = [file.file_name for file in get_files_in_folder("Home")["files"]]
@@ -866,10 +882,14 @@ class TestFileUtils(IntegrationTestCase):
 =======
 		self.assertIn(f'<img src="#broken-image" alt="{get_corrupted_image_msg()}">', communication.content)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_create_new_folder(self):
 		folder = create_new_folder("test_folder", "Home")
@@ -934,10 +954,14 @@ class TestGuestFileAndAttachments(FrappeTestCase):
 
 class TestGuestFileAndAttachments(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def setUp(self) -> None:
 		frappe.db.delete("File", {"is_folder": 0})
 		frappe.get_doc(
@@ -989,10 +1013,14 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 		d.attachment = f.file_url
 		d.assigned_by = frappe.session.user
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		d.save()
 
 		self.assertTrue(
@@ -1027,10 +1055,14 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 			content="Private single File",
 			is_private=1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert(ignore_permissions=True)
 
 		self.assertFalse(file.is_downloadable())
@@ -1060,10 +1092,14 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 			content="Private Attachment",
 			is_private=1,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert(ignore_permissions=True)
 
 		self.assertFalse(file.is_downloadable())
@@ -1077,6 +1113,7 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		doc_pub: "File" = frappe.new_doc("File")  # type: ignore
 =======
 		doc_pub: File = frappe.new_doc("File")  # type: ignore
@@ -1086,6 +1123,10 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 		doc_pub: File = frappe.new_doc("File")  # type: ignore
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		doc_pub: File = frappe.new_doc("File")  # type: ignore
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		doc_pub.file_url = f"/files/{file_name}.txt"
 		doc_pub.content = content
 		doc_pub.save()
@@ -1093,6 +1134,7 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 <<<<<<< HEAD
 		doc_pri: "File" = frappe.new_doc("File")  # type: ignore
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		doc_pri: "File" = frappe.new_doc("File")  # type: ignore
@@ -1104,6 +1146,10 @@ class TestGuestFileAndAttachments(IntegrationTestCase):
 		doc_pri: File = frappe.new_doc("File")  # type: ignore
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		doc_pri: File = frappe.new_doc("File")  # type: ignore
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		doc_pri.file_url = f"/private/files/{file_name}.txt"
 		doc_pri.is_private = False
 		doc_pri.content = content

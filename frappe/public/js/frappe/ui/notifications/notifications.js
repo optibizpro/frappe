@@ -252,10 +252,14 @@ class NotificationsView extends BaseNotificationsView {
 		let read_class = notification_log.read ? "" : "unread";
 		let message = notification_log.subject;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		let title = message.match(/<b class="subject-title">(.*?)<\/b>/);
 		message = title
@@ -275,10 +279,14 @@ class NotificationsView extends BaseNotificationsView {
 =======
 		let user = notification_log.from_user;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		let user_avatar = frappe.avatar(user, "avatar-medium user-avatar");
 
 		let item_html = $(`<a class="recent-item notification-item ${read_class}"
@@ -309,10 +317,14 @@ class NotificationsView extends BaseNotificationsView {
 =======
 			!notification_log.read && this.mark_as_read(notification_log.name, item_html);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.notifications_icon.trigger("click");
 		});
 
@@ -335,10 +347,14 @@ class NotificationsView extends BaseNotificationsView {
 				this.dropdown_items.forEach((notification_log) => {
 					this.container.append(this.get_dropdown_item_html(notification_log));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				});
 				this.container.append(`<a class="list-footer"
 					href="/app/List/Notification Log">
@@ -380,10 +396,14 @@ class NotificationsView extends BaseNotificationsView {
 			return notification_doc.link;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		const link_doctype = notification_doc.document_type
 			? notification_doc.document_type
 			: "Notification Log";
@@ -449,10 +469,14 @@ class EventsView extends BaseNotificationsView {
 				"GET"
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.then((event_list) => {
 				this.render_events_html(event_list);
 			});

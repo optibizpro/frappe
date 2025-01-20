@@ -4,6 +4,8 @@
 import frappe
 from frappe.model.document import Document
 
+UNSEEN_NOTES_KEY = "unseen_notes::"
+
 
 class Note(Document):
 	# begin: auto-generated types
@@ -40,6 +42,10 @@ class Note(Document):
 		self.print_heading = self.name
 		self.sub_heading = ""
 
+	def clear_cache(self):
+		frappe.cache.delete_keys(UNSEEN_NOTES_KEY)
+		return super().clear_cache()
+
 	def mark_seen_by(self, user: str) -> None:
 		if user in [d.user for d in self.seen_by]:
 			return
@@ -62,10 +68,14 @@ def mark_as_seen(note: str):
 	note.mark_seen_by(frappe.session.user)
 	note.save(ignore_permissions=True, ignore_version=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_permission_query_conditions(user):
@@ -77,3 +87,33 @@ def get_permission_query_conditions(user):
 
 def has_permission(doc, user):
 	return bool(doc.public or doc.owner == user)
+
+
+def get_unseen_notes():
+	from frappe.query_builder.terms import ParameterizedValueWrapper, SubQuery
+
+	def _get_unseen_notes():
+		note = frappe.qb.DocType("Note")
+		nsb = frappe.qb.DocType("Note Seen By").as_("nsb")
+
+		return (
+			frappe.qb.from_(note)
+			.select(note.name, note.title, note.content, note.notify_on_every_login)
+			.where(
+				(note.notify_on_login == 1)
+				& (note.expire_notification_on > frappe.utils.now())
+				& (
+					ParameterizedValueWrapper(frappe.session.user).notin(
+						SubQuery(frappe.qb.from_(nsb).select(nsb.user).where(nsb.parent == note.name))
+					)
+				)
+			)
+		).run(as_dict=1)
+
+	return (
+		frappe.cache.get_value(
+			f"{UNSEEN_NOTES_KEY}{frappe.session.user}",
+			generator=_get_unseen_notes,
+		)
+		or []
+	)

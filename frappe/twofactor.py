@@ -224,10 +224,14 @@ def process_2fa_for_otp_app(user, otp_secret, otp_issuer):
 	pyotp.TOTP(otp_secret).provisioning_uri(user, issuer_name=otp_issuer)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if get_default(user + "_otplogin"):
 		otp_setup_completed = True
 	else:
@@ -260,10 +264,14 @@ def process_2fa_for_email(user, token, otp_secret, otp_issuer, method="Email"):
 =======
 	return {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"token_delivery": status,
 		"prompt": status and prompt,
 		"method": "Email",
@@ -417,10 +425,14 @@ def qrcode_as_png(user, totp_uri):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def create_barcode_folder():
 	"""Get Barcodes folder."""
 	folder_name = "Barcodes"

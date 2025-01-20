@@ -54,10 +54,14 @@ ALL_USER_ROLE = "All"  # This includes website users too.
 SYSTEM_USER_ROLE = "Desk User"
 ADMIN_ROLE = "Administrator"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 # These roles are automatically assigned based on user type
@@ -69,30 +73,40 @@ def print_has_permission_check_logs(func):
 	def inner(*args, **kwargs):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		raise_exception = kwargs.get("raise_exception", True)
 		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
 
 		if raise_exception:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		print_logs = kwargs.get("print_logs", True)
 		self_perm_check = True if not kwargs.get("user") else kwargs.get("user") == frappe.session.user
 
 		if print_logs:
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.flags["has_permission_check_logs"] = []
 
 		result = func(*args, **kwargs)
@@ -107,6 +121,7 @@ def print_has_permission_check_logs(func):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		if raise_exception:
 =======
 		if print_logs:
@@ -116,6 +131,10 @@ def print_has_permission_check_logs(func):
 		if print_logs:
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		if print_logs:
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.flags.pop("has_permission_check_logs", None)
 		return result
 
@@ -145,10 +164,14 @@ def has_permission(
 	raise_exception=True,
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	*,
 	parent_doctype=None,
 <<<<<<< HEAD
@@ -176,10 +199,14 @@ def has_permission(
 	:param print_logs: If True, will display a message using frappe.msgprint
 	                which explains why the permission check failed.
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	:param parent_doctype:
 	        Required when checking permission for a child DocType (unless doc is specified)
 	"""
@@ -199,10 +226,14 @@ def has_permission(
 	if ptype == "share" and frappe.get_system_settings("disable_document_sharing"):
 		debug and _debug_log("User can't share because sharing is disabled globally from system settings")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return False
 
 	if not doc and hasattr(doctype, "doctype"):
@@ -216,10 +247,13 @@ def has_permission(
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return has_child_permission(doctype, ptype, doc, user, raise_exception, parent_doctype, debug=debug)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return has_child_permission(
 			doctype,
 			ptype,
@@ -229,11 +263,15 @@ def has_permission(
 			debug=debug,
 			print_logs=print_logs,
 		)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	meta = frappe.get_meta(doctype)
 
@@ -253,10 +291,14 @@ def has_permission(
 				msg += f": {_(doc.doctype)} - {doc.name}"
 			push_perm_check_log(msg, debug=debug)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	else:
 		if ptype == "submit" and not cint(meta.is_submittable):
 			push_perm_check_log(_("Document Type is not submittable"), debug=debug)
@@ -334,10 +376,14 @@ def has_permission(
 			debug and _debug_log(f"At least one document is shared with user with perm: {rights}")
 			return True
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		return False
 
@@ -365,10 +411,14 @@ def get_doc_permissions(doc, user=None, ptype=None, debug=False):
 	if not has_controller_permissions(doc, ptype, user=user, debug=debug):
 		push_perm_check_log(_("Not allowed via controller permission check"), debug=debug)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return {ptype: 0}
 
 	permissions = copy.deepcopy(get_role_permissions(meta, user=user, is_owner=is_user_owner(), debug=debug))
@@ -501,10 +551,14 @@ def has_user_permission(doc, user=None, debug=False):
 	if apply_strict_user_permissions:
 		debug and _debug_log("Strict user permissions will be applied")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	doctype = doc.get("doctype")
 	docname = doc.get("name")
@@ -752,10 +806,14 @@ def add_user_permission(
 			apply_to_all_doctypes=0 if applicable_for else 1,
 			hide_descendants=hide_descendants,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert(ignore_permissions=ignore_permissions)
 
 
@@ -823,10 +881,14 @@ def update_permission_property(
 	if custom_docperm:
 		update_custom_docperm(custom_docperm, {ptype: value})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if validate:
 		validate_permissions_for_doctype(doctype)
@@ -967,10 +1029,14 @@ def has_child_permission(
 ) -> bool:
 	debug and _debug_log("This doctype is a child table, permissions will be checked on parent.")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if isinstance(child_doc, str):
 		child_doc = frappe.db.get_value(
 			child_doctype,
@@ -990,10 +1056,14 @@ def has_child_permission(
 			_("Please specify a valid parent DocType for {0}").format(frappe.bold(child_doctype)),
 			debug=debug,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		return False
 
@@ -1013,10 +1083,14 @@ def has_child_permission(
 			),
 			debug=debug,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		return False
 
@@ -1032,10 +1106,14 @@ def has_child_permission(
 				),
 				debug=debug,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 			return False
 
@@ -1049,10 +1127,14 @@ def has_child_permission(
 				),
 				debug=debug,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 			return False
 
@@ -1070,10 +1152,14 @@ def has_child_permission(
 			debug and _debug_log(
 				f"This table is perm level {permlevel} but user only has access to {accessible_permlevels}"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 			return False
 

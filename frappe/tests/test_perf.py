@@ -24,6 +24,7 @@ import unittest
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import gc
 =======
 =======
@@ -39,6 +40,14 @@ import time
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+import gc
+import itertools
+import sys
+import time
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from unittest.mock import patch
 
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
@@ -63,9 +72,12 @@ class TestPerformance(FrappeTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.tests import IntegrationTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 from frappe.tests.test_api import FrappeAPITestCase
@@ -84,10 +96,14 @@ class TestPerformance(IntegrationTestCase):
 		frappe.destroy()  # releases everything on frappe.local
 		frappe.init(self.TEST_SITE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.connect()
 		frappe.clear_cache()
 
@@ -104,10 +120,14 @@ class TestPerformance(IntegrationTestCase):
 		frappe.get_meta("User")
 		frappe.clear_cache(doctype="ToDo")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		with self.assertQueryCount(0):
 			frappe.get_meta("User")
@@ -154,10 +174,14 @@ class TestPerformance(IntegrationTestCase):
 		# Warm up code
 		frappe.db.get_values("User", filters=filters[0], limit=1)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		for filter in filters:
 			with self.assertRowsRead(1):
 				self.assertEqual(1, len(frappe.db.get_values("User", filters=filter, limit=1)))
@@ -197,10 +221,14 @@ class TestPerformance(IntegrationTestCase):
 =======
 		EXPECTED_RPS = 120  # measured on GHA
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		FAILURE_THREASHOLD = 0.1
 
 		req_count = 1000
@@ -224,10 +252,14 @@ class TestPerformance(IntegrationTestCase):
 	@unittest.skip("Not implemented")
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_homepage_resolver(self):
 		paths = ["/", "/app"]
 		for path in paths:
@@ -256,10 +288,14 @@ class TestPerformance(IntegrationTestCase):
 			frappe.get_list("User")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_no_ifnull_checks(self):
 		query = frappe.get_all("DocType", {"autoname": ("is", "set")}, run=0).lower()
 		self.assertNotIn("coalesce", query)
@@ -424,8 +460,12 @@ class TestOverheadCalls(FrappeAPITestCase):
 @redis_cache
 def redis_cached_func():
 	return 42
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

@@ -8,10 +8,14 @@ from pypika.queries import Column, QueryBuilder
 =======
 from pypika.queries import Column, QueryBuilder, _SetOperation
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from pypika.terms import PseudoColumn
 
 import frappe
@@ -155,10 +159,14 @@ def patch_query_execute():
 					raise frappe.PermissionError("Only SELECT SQL allowed in scripting")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return query, param_collector.get_parameters()
 
 	builder_class = frappe.qb._BuilderClasss

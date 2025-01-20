@@ -44,10 +44,14 @@
 				<img
 					class="app-logo"
 <<<<<<< HEAD
+<<<<<<< HEAD
 					src="{{ frappe.boot.app_logo_url }}"
 =======
 					src="{{ frappe.boot.app_data[0].app_logo_url }}"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+					src="{{ frappe.boot.app_data[0].app_logo_url }}"
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					alt="{{ __("App Logo") }}"
 				>
 			</a>
@@ -55,6 +59,7 @@
 			<div class="collapse navbar-collapse justify-content-end">
 				<form class="form-inline fill-width justify-content-end" role="search" onsubmit="return false;">
 					{% if (frappe.boot.read_only) { %}
+<<<<<<< HEAD
 <<<<<<< HEAD
 						<span class="indicator-pill yellow no-indicator-dot" title="{%= __("Your site is undergoing maintenance or being updated.") %}">
 =======
@@ -66,6 +71,11 @@
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+						<span class="indicator-pill yellow no-indicator-dot read-only-banner" title="{%= __("Your site is undergoing maintenance or being updated.") %}">
+							{%= __("Read Only Mode") %}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						</span>
 					{% } %}
 					{% if (frappe.boot.user.impersonated_by) { %}
@@ -169,10 +179,14 @@
 								{% } %}
 							{% endfor %}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						</div>
 					</li>
 					<li class="nav-item dropdown dropdown-navbar-user dropdown-mobile">

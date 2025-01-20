@@ -35,10 +35,14 @@ def execute():
 =======
 		drop_index_if_exists(table, "parent")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# Unused composite indexes
 	for doctype, index_fields in UNUSED_INDEXES:
@@ -57,10 +61,14 @@ def _drop_index_if_exists(table: str, index: str):
 
 def drop_index_if_exists(table: str, index: str):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not frappe.db.has_index(table, index):
 		click.echo(f"- Skipped {index} index for {table} because it doesn't exist")
 		return

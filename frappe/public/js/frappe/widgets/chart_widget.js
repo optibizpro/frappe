@@ -130,10 +130,14 @@ export default class ChartWidget extends Widget {
 =======
 					label: __(this.chart_settings.heatmap_year) || __(this.chart_doc.heatmap_year),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					options: frappe.dashboard_utils.get_years_since_creation(
 						frappe.boot.user.creation
 					),
@@ -247,10 +251,14 @@ export default class ChartWidget extends Widget {
 =======
 					placeholder: __("Date Range"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					input_class: "input-xs",
 					default: [this.chart_settings.from_date, this.chart_settings.to_date],
 					value: [this.chart_settings.from_date, this.chart_settings.to_date],
@@ -303,10 +311,14 @@ export default class ChartWidget extends Widget {
 =======
 			return frappe.report_utils.make_chart_options(columns, result, chart_fields).data;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 	}
 
@@ -434,10 +446,14 @@ export default class ChartWidget extends Widget {
 =======
 			primary_action_label: __("Set"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 
 		dialog.show();
@@ -514,10 +530,14 @@ export default class ChartWidget extends Widget {
 								action.label
 							)}</a></li>`
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					)
 					.join("")}
 			</ul>

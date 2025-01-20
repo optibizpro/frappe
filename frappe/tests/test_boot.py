@@ -1,7 +1,13 @@
 import frappe
+<<<<<<< HEAD
 from frappe.boot import get_unseen_notes, get_user_pages_or_reports
 from frappe.desk.doctype.note.note import mark_as_seen
+from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.boot import get_user_pages_or_reports
+from frappe.desk.doctype.note.note import get_unseen_notes, mark_as_seen
 from frappe.tests import IntegrationTestCase
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 class TestBootData(IntegrationTestCase):
@@ -37,10 +43,14 @@ class TestPermissionQueries(IntegrationTestCase):
 		return super().setUpClass()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_get_user_pages_or_reports_with_permission_query(self):
 		# Create a ToDo custom report with admin user
 		frappe.set_user("Administrator")
@@ -73,10 +83,14 @@ class TestPermissionQueries(IntegrationTestCase):
 			script="""conditions = f"(`tabReport`.is_standard = 'Yes' or `tabReport`.owner = '{frappe.session.user}')"
 				""",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 
 		# Create a ToDo custom report with test user
@@ -97,10 +111,14 @@ class TestPermissionQueries(IntegrationTestCase):
 =======
 		allowed_reports = frappe.cache.get_value("has_role:Report", user=frappe.session.user)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# Test user must not see admin user's report
 		self.assertNotIn("Test Admin Report", allowed_reports)

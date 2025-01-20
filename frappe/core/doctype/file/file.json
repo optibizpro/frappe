@@ -190,7 +190,11 @@
  "icon": "fa fa-file",
  "idx": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2024-05-09 11:46:42.917146",
+=======
+ "modified": "2025-01-15 11:46:42.917146",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "modified_by": "Administrator",
  "module": "Core",
  "name": "File",
@@ -223,6 +227,7 @@
  "sort_order": "ASC",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
@@ -234,6 +239,11 @@
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+ "sort_field": "creation",
+ "sort_order": "DESC",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
  "states": [],
  "title_field": "file_name",
  "track_changes": 1

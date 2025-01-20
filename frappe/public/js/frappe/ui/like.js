@@ -29,10 +29,14 @@ frappe.ui.get_liked_by = function (doc) {
 frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
 	const add = $btn.hasClass("not-liked") ? "Yes" : "No";
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	// disable click
 	$btn.css("pointer-events", "none");
 
@@ -104,10 +108,14 @@ frappe.ui.toggle_like = function ($btn, doctype, name, callback) {
 				callback();
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		},
 	});
 };
@@ -138,10 +146,14 @@ frappe.ui.setup_like_popover = ($parent, selector, check_not_liked = true) => {
 
 frappe.ui.setup_like_popover = ($parent, selector) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if (frappe.dom.is_touchscreen()) {
 		return;
 	}
@@ -178,10 +190,14 @@ frappe.ui.setup_like_popover = ($parent, selector) => {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				if (!liked_by.length) {
 					return "";
 				}

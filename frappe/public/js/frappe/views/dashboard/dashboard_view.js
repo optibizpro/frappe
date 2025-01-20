@@ -5,6 +5,8 @@ frappe.views.DashboardView = class DashboardView extends frappe.views.ListView {
 		return "Dashboard";
 	}
 
+	static no_sidebar = true;
+
 	setup_defaults() {
 		return super.setup_defaults().then(() => {
 			this.page_title = __("{0} Dashboard", [__(this.doctype)]);
@@ -16,7 +18,6 @@ frappe.views.DashboardView = class DashboardView extends frappe.views.ListView {
 	render() {}
 
 	setup_page() {
-		this.hide_sidebar = true;
 		this.hide_page_form = true;
 		this.hide_filters = true;
 		this.hide_sort_selector = true;
@@ -202,10 +203,14 @@ frappe.views.DashboardView = class DashboardView extends frappe.views.ListView {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		const empty_state_html = `<div class="msg-box no-border empty-dashboard">
 			<div>
 				<svg class="icon icon-xl" style="stroke: var(--text-light);">

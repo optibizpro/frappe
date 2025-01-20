@@ -110,6 +110,7 @@ class FrappeClient:
 	def get_list(self, doctype, fields='["name"]', filters=None, limit_start=0, limit_page_length=None):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -119,6 +120,12 @@ class FrappeClient:
 =======
 		"""Return list of records of a particular type."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		"""Returns list of records of a particular type"""
+=======
+		"""Return list of records of a particular type."""
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if not isinstance(fields, str):
 			fields = json.dumps(fields)
 		params = {

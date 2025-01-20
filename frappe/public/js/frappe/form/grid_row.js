@@ -10,6 +10,7 @@ export default class GridRow {
 		this.columns_list = [];
 		this.row_check_html = '<input type="checkbox" class="grid-row-check">';
 		this.make();
+		this.setup_tab_listeners();
 	}
 	make() {
 		let me = this;
@@ -21,10 +22,14 @@ export default class GridRow {
 =======
 		this.row = $('<div class="data-row row m-0"></div>')
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.appendTo(this.wrapper)
 			.on("click", function (e) {
 				if (
@@ -53,10 +58,14 @@ export default class GridRow {
 =======
 		if (!render_row) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		this.set_data();
 		this.wrapper.appendTo(this.parent);
@@ -111,10 +120,14 @@ export default class GridRow {
 =======
 		this.grid.debounced_refresh_remove_rows_button();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	remove() {
 		var me = this;
@@ -155,10 +168,14 @@ export default class GridRow {
 							frappe.model.clear_doc(this.doc.doctype, this.doc.name);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 							this.frm.script_manager.trigger(
 								this.grid.df.fieldname + "_remove",
 								this.doc.doctype,
@@ -175,10 +192,14 @@ export default class GridRow {
 =======
 						console.trace(e);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					});
 			} else {
 				let data = null;
@@ -319,10 +340,14 @@ export default class GridRow {
 =======
 				`<div class="row-index sortable-handle grid-static-col col">
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					<span>${txt}</span>
 				</div>`
 			)
@@ -333,11 +358,19 @@ export default class GridRow {
 					}
 				});
 		} else if (this.show_search) {
+<<<<<<< HEAD
 			this.row_check = $(`<div class="row-check col search"></div>`).appendTo(this.row);
+=======
+			this.row_check = $(`
+				<div class="row-check col search">
+					<input type="text" class="form-control input-xs text-center invisible">
+				</div>`).appendTo(this.row);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 			this.row_index = $(
 				`<div class="row-index col search">
 					<input type="text" class="form-control input-xs text-center" >
+					<span style="width: 33px;" class="d-block"></span>
 				</div>`
 			).appendTo(this.row);
 
@@ -431,10 +464,14 @@ export default class GridRow {
 =======
 				<div class="col grid-static-col pointer">
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					<a>${frappe.utils.icon("setting-gear", "sm", "", "filter: opacity(0.5)")}</a>
 				</div>
 			`)
@@ -477,10 +514,14 @@ export default class GridRow {
 			this.validate_columns_width();
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.columns = {};
 			this.update_user_settings_for_grid();
 			this.grid_settings_dialog.hide();
@@ -666,10 +707,14 @@ export default class GridRow {
 							</div>
 							<div class='col-1' style='padding-top: 3px;'>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 								<a class='text-muted remove-field' data-fieldname='${docfield.fieldname}'>
 									<i class='fa fa-trash-o' aria-hidden='true'></i>
 								</a>
@@ -750,10 +795,14 @@ export default class GridRow {
 		}
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	remove_selected_column() {
@@ -809,10 +858,14 @@ export default class GridRow {
 		let total_colsize = 0;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.grid.visible_columns.forEach((col, ci) => {
 			// to get update df for the row
 			let df = fields.find((field) => field?.fieldname === col[0].fieldname);
@@ -831,10 +884,14 @@ export default class GridRow {
 				? frappe.format(this.doc[df.fieldname], df, null, this.doc)
 				: __(df.label, null, df.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if (this.doc && df.fieldtype === "Select") {
 				txt = __(txt);
@@ -1044,10 +1101,14 @@ export default class GridRow {
 		let input_in_focus = false;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		// prevent random layout shifts caused by widgets and on click position elements inside view (UX).
 		function on_input_focus(el) {
 			input_in_focus = true;
@@ -1101,10 +1162,14 @@ export default class GridRow {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		var $col = $(
 			'<div class="col grid-static-col col-xs-' + colsize + " " + add_class + '"></div>'
 		)
@@ -1168,10 +1233,14 @@ export default class GridRow {
 			})
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.on("click", function (event) {
 				if (frappe.ui.form.editable_row !== me) {
 					var out = me.toggle_editable_row();
@@ -1193,10 +1262,14 @@ export default class GridRow {
 =======
 				!input_in_focus && trigger_focus(first_input_field, $(col).data("df"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 				if (event.pointerType == "touch") {
 					first_input_field.length && on_input_focus(first_input_field);
@@ -1212,29 +1285,7 @@ export default class GridRow {
 		$col.field_area = $('<div class="field-area"></div>').appendTo($col).toggle(false);
 		$col.static_area = $('<div class="static-area ellipsis"></div>').appendTo($col).html(txt);
 
-		$(document).ready(function () {
-			let $scrollBar = $(".grid-scroll-bar");
-			let form_grid = $(".form-grid");
-			let grid_container = $(".form-grid-container");
-			let grid_scroll_bar_rows = $(".grid-scroll-bar-rows");
-			// Make sure the grid container is scrollable
-			$scrollBar.on("scroll", function (event) {
-				grid_container = $(event.currentTarget).closest(".form-grid-container");
-				form_grid = $(event.currentTarget).closest(".form-grid");
-				grid_scroll_bar_rows = $(event.currentTarget).closest(".grid-scroll-bar-rows");
-
-				var scroll_left = $(this).scrollLeft();
-
-				// Sync the form grid's left position with the scroll bar
-				form_grid.css("position", "relative");
-				form_grid.css("left", -scroll_left + "px");
-				$(this).css("margin-left", scroll_left + "px");
-			});
-
-			$scrollBar.css("width", grid_container.width());
-
-			grid_scroll_bar_rows.css("width", form_grid[0].scrollWidth);
-		});
+		this.handle_scroll_bar();
 
 		// set title attribute to see full label for columns in the heading row
 		if (!this.doc) {
@@ -1249,6 +1300,50 @@ export default class GridRow {
 		this.columns_list.push($col);
 
 		return $col;
+	}
+
+	handle_scroll_bar() {
+		$(document).ready(function () {
+			let $scrollBar = $(".grid-scroll-bar");
+			let form_grid = $(".form-grid");
+			let grid_scroll_bar_rows = $(".grid-scroll-bar-rows");
+			let parent_field_name = "";
+			let grid_width = 0;
+			let grid_body_width = 0;
+			form_grid.each((grid_index, grid) => {
+				parent_field_name = $(grid)
+					.closest("[data-fieldname][data-fieldtype]")
+					.attr("data-fieldname");
+				grid_width = $($(grid)[0]).width();
+				grid_body_width = $(
+					'div[data-fieldname="' + parent_field_name + '"] .grid-body'
+				).width();
+
+				$('div[data-fieldname="' + parent_field_name + '"] .grid-scroll-bar').width(
+					grid_width
+				);
+				$('div[data-fieldname="' + parent_field_name + '"] .grid-scroll-bar-rows').width(
+					grid_body_width
+				);
+			});
+
+			// Make sure the grid container is scrollable
+			$scrollBar.on("scroll", function (event) {
+				grid_scroll_bar_rows = $(event.currentTarget).closest(".grid-scroll-bar-rows");
+
+				var scroll_left = $(this).scrollLeft();
+
+				// Sync the form grid's left position with the scroll bar
+				form_grid.css("position", "relative");
+				form_grid.css("left", -scroll_left + "px");
+			});
+		});
+	}
+
+	setup_tab_listeners() {
+		$(".nav-link").on("shown.bs.tab", () => {
+			this.handle_scroll_bar();
+		});
 	}
 
 	activate() {
@@ -1296,10 +1391,14 @@ export default class GridRow {
 =======
 						: __(df.label, null, df.parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 					this.refresh_field(df.fieldname, txt);
 				}
@@ -1373,6 +1472,7 @@ export default class GridRow {
 			field.$input.on("keydown", function (e) {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -1386,6 +1486,14 @@ export default class GridRow {
 				var { ESCAPE, TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
 				if (![TAB, UP_ARROW, DOWN_ARROW, ESCAPE].includes(e.which)) {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+				var { TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
+				if (!in_list([TAB, UP_ARROW, DOWN_ARROW], e.which)) {
+=======
+				var { ESCAPE, TAB, UP: UP_ARROW, DOWN: DOWN_ARROW } = frappe.ui.keyCode;
+				if (![TAB, UP_ARROW, DOWN_ARROW, ESCAPE].includes(e.which)) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					return;
 				}
 
@@ -1399,10 +1507,14 @@ export default class GridRow {
 =======
 				if (!ignore_fieldtypes.includes(fieldtype) && ctrl_key && e.which !== TAB) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					me.add_new_row_using_keys(e);
 					return;
 				}
@@ -1418,10 +1530,14 @@ export default class GridRow {
 =======
 					if (ignore_fieldtypes.includes(fieldtype) && !e.altKey) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						return false;
 					}
 					if (field.autocomplete_open) {
@@ -1727,10 +1843,14 @@ export default class GridRow {
 				!frappe.model.layout_fields.includes(df.fieldtype) &&
 				!blacklist.includes(df.fieldname);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			return visible ? df : null;
 		});

@@ -45,11 +45,14 @@ class RoleProfile(Document):
 		"""Changes in role_profile reflected across all its user"""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		has_role = frappe.qb.DocType("Has Role")
 		user = frappe.qb.DocType("User")
 
@@ -73,9 +76,12 @@ class RoleProfile(Document):
 				user.add_roles(*role_profile_roles)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		users = frappe.get_all("User Role Profile", filters={"role_profile": self.name}, pluck="parent")
 		for user in users:
@@ -84,8 +90,12 @@ class RoleProfile(Document):
 
 	def get_permission_log_options(self, event=None):
 		return {"fields": ["roles"]}
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

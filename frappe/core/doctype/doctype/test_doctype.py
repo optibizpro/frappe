@@ -43,10 +43,14 @@ class UnitTestDoctype(UnitTestCase):
 
 class TestDocType(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def tearDown(self):
 		frappe.db.rollback()
 
@@ -203,10 +207,14 @@ class TestDocType(IntegrationTestCase):
 		os.access(frappe.get_app_path("frappe"), os.W_OK), "Only run if frappe app paths is writable"
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_sync_field_order(self):
 		import os
 
@@ -793,10 +801,14 @@ class TestDocType(IntegrationTestCase):
 		self.assertFalse(frappe.db.exists("DocType", doctype.name))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_not_in_list_view_for_not_allowed_mandatory_field(self):
 		doctype = new_doctype(
 			fields=[
@@ -832,6 +844,19 @@ class TestDocType(IntegrationTestCase):
 		)
 		self.assertRaises(frappe.ValidationError, recursive_dt.insert)
 
+<<<<<<< HEAD
+=======
+	def test_meta_serialization(self):
+		doctype = new_doctype(
+			fields=[{"fieldname": "some_fieldname", "fieldtype": "Data", "set_only_once": 1}],
+			is_submittable=1,
+		).insert()
+		doc = frappe.new_doc(doctype.name, some_fieldname="something").insert()
+		doc.save()
+		doc.submit()
+		frappe.get_meta(doctype.name).as_dict()
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 def new_doctype(
 	name: str | None = None,

@@ -125,10 +125,14 @@ def get_bootinfo():
 	if sentry_dsn := get_sentry_dsn():
 		bootinfo.sentry_dsn = sentry_dsn
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return bootinfo
 
@@ -155,10 +159,14 @@ def load_conf_settings(bootinfo):
 =======
 	for key in ("developer_mode", "socketio_port", "file_watcher_port", "fc_communication_secret"):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if key in frappe.conf:
 			bootinfo[key] = frappe.conf.get(key)
 
@@ -172,10 +180,14 @@ def load_desktop_data(bootinfo):
 	bootinfo.sidebar_pages = get_workspace_sidebar_items()
 	allowed_pages = [d.name for d in bootinfo.sidebar_pages.get("pages")]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	bootinfo.module_wise_workspaces = get_controller("Workspace").get_module_wise_workspaces()
 	bootinfo.dashboards = frappe.get_all("Dashboard")
 	bootinfo.app_data = []
@@ -338,10 +350,14 @@ def get_user_pages_or_reports(parent, cache=False):
 			if is_report:
 				has_role[r.name] |= {"ref_doctype": r.ref_doctype}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if is_report:
 <<<<<<< HEAD
@@ -358,10 +374,14 @@ def get_user_pages_or_reports(parent, cache=False):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		reports = frappe.get_list(
 			"Report",
 			fields=["name", "report_type"],
@@ -439,25 +459,6 @@ def load_print_css(bootinfo, print_settings):
 	bootinfo.print_css = frappe.www.printview.get_print_style(
 		print_settings.print_style or "Redesign", for_legacy=True
 	)
-
-
-def get_unseen_notes():
-	note = DocType("Note")
-	nsb = DocType("Note Seen By").as_("nsb")
-
-	return (
-		frappe.qb.from_(note)
-		.select(note.name, note.title, note.content, note.notify_on_every_login)
-		.where(
-			(note.notify_on_login == 1)
-			& (note.expire_notification_on > frappe.utils.now())
-			& (
-				ParameterizedValueWrapper(frappe.session.user).notin(
-					SubQuery(frappe.qb.from_(nsb).select(nsb.user).where(nsb.parent == note.name))
-				)
-			)
-		)
-	).run(as_dict=1)
 
 
 def get_success_action():
@@ -583,10 +584,14 @@ def get_marketplace_apps():
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def add_subscription_conf():
 	try:
 		return frappe.conf.subscription
@@ -602,7 +607,11 @@ def get_sentry_dsn():
 
 	return os.getenv("FRAPPE_SENTRY_DSN")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

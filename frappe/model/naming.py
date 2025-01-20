@@ -13,10 +13,14 @@ from uuid import UUID
 
 import uuid_utils
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 from frappe import _
@@ -220,10 +224,14 @@ def is_autoincremented(doctype: str, meta: Optional["Meta"] = None) -> bool:
 
 	return not getattr(meta, "issingle", False) and meta.autoname == "autoincrement"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @redis_cache
@@ -322,10 +330,14 @@ def make_autoname(key="", doctype="", doc="", *, ignore_validate=False):
 =======
 		return _generate_random_string(10)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	series = NamingSeries(key)
 	return series.generate_next_name(doc, ignore_validate=ignore_validate)
@@ -426,10 +438,14 @@ def has_custom_parser(e):
 =======
 	"""Return True if the naming series part has a custom parser."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return frappe.get_hooks("naming_series_variables", {}).get(e)
 
 
@@ -528,10 +544,14 @@ def validate_name(doctype: str, name: int | str, case: str | None = None):
 =======
 def validate_name(doctype: str, name: int | str):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not name:
 		frappe.throw(_("No Name Specified for {0}").format(doctype))
 
@@ -655,10 +675,14 @@ def _format_autoname(autoname: str, doc):
 
 		return get_param_value
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# Replace braced params with their parsed value
 	autoname_value = BRACED_PARAMS_WORD_PATTERN.sub(get_param_value_for_word_match, autoname_value)

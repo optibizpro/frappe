@@ -8,10 +8,14 @@ from frappe.contacts.doctype.contact.contact import get_full_name
 from frappe.email import get_contact_list
 from frappe.tests import IntegrationTestCase, UnitTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Contact", "Salutation"]
 
@@ -30,10 +34,14 @@ class UnitTestContact(UnitTestCase):
 
 class TestContact(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_check_default_email(self):
 		emails = [
 			{"email": "test1@example.com", "is_primary": 0},

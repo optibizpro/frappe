@@ -230,16 +230,20 @@ class TestCommunication(IntegrationTestCase):
 		cc = """=?UTF-8?Q?Max_Mu=C3=9F?= <max.muss@examle.org>,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	erp+Customer+that%20company@example.org"""
 		bcc = ""
 
 		results = list(parse_email([to, cc, bcc]))
 		self.assertEqual([("Customer", "that company")], results)
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -256,6 +260,8 @@ class TestCommunication(IntegrationTestCase):
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+=======
 	erp+Customer=Plus%2BCompany@example.org,
 	erp+Customer+Space%20Company@example.org,
 	erp+Customer+Space+Company+Plus+Encoded@example.org"""
@@ -270,7 +276,11 @@ class TestCommunication(IntegrationTestCase):
 			],
 			results,
 		)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		results = list(parse_email([to, bcc]))
 		self.assertEqual(results, [])
@@ -365,6 +375,7 @@ class TestCommunication(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		spam_comm: Communication = frappe.get_doc(
@@ -396,6 +407,9 @@ class TestCommunication(IntegrationTestCase):
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		spam_comm: Communication = frappe.get_doc(
 			{
@@ -493,10 +507,14 @@ class TestCommunicationEmailMixin(IntegrationTestCase):
 		# Disabled users have thread_notify disabled, so they'll be removed from the list
 		self.assertCountEqual(res, bcc_list[:1])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		user.delete()
 		comm.delete()
 

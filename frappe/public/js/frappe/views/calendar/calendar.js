@@ -33,10 +33,14 @@ frappe.views.CalendarView = class CalendarView extends frappe.views.ListView {
 =======
 			this.calendar_settings = frappe.views.Calendar[this.doctype] || {};
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.calendar_name = frappe.get_route()[3];
 		});
 	}
@@ -122,10 +126,14 @@ frappe.views.CalendarView = class CalendarView extends frappe.views.ListView {
 =======
 		return "calendar.bundle.js";
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 };
 
@@ -160,10 +168,14 @@ frappe.views.Calendar = class Calendar {
 			let defaults = {
 				initialView: initialView ? initialView : "dayGridMonth",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				weekends: weekends ? weekends : true,
 			};
 			resolve(defaults);
@@ -194,10 +206,14 @@ frappe.views.Calendar = class Calendar {
 =======
 			me.$cal.fullCalendar.refetchEvents();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 	}
 
@@ -208,10 +224,14 @@ frappe.views.Calendar = class Calendar {
 =======
 		this.$cal = $("<div id='fc-calendar-wrapper'>").appendTo(this.$wrapper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.footnote_area = frappe.utils.set_footnote(
 			this.footnote_area,
 			this.$wrapper,
@@ -224,10 +244,14 @@ frappe.views.Calendar = class Calendar {
 		this.fullCalendar = new frappe.FullCalendar(this.$cal[0], this.cal_options);
 		this.fullCalendar.render();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		this.set_css();
 	}
@@ -261,10 +285,14 @@ frappe.views.Calendar = class Calendar {
 				: "dayGridMonth";
 			me.set_localStorage_option("cal_initialView", value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 
 		me.$wrapper.on("click", ".btn-weekend", function () {
@@ -274,10 +302,14 @@ frappe.views.Calendar = class Calendar {
 =======
 			me.fullCalendar.setOption("weekends", me.cal_options.weekends);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			me.set_localStorage_option("cal_weekends", me.cal_options.weekends);
 			me.set_css();
 			me.setup_view_mode_button(me.cal_options);
@@ -299,10 +331,14 @@ frappe.views.Calendar = class Calendar {
 			.find("button.fc-button")
 			.removeClass(fcViewButtonClasses)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.addClass("btn btn-default");
 
 		// group all view buttons
@@ -337,10 +373,14 @@ frappe.views.Calendar = class Calendar {
 		if (this.$wrapper.find(".fc-today-button svg").length == 0)
 			this.$wrapper.find(".fc-today-button").prepend(frappe.utils.icon("today"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		// v6.x of fc has weird behaviour which removes all the custom classes
 		// on header buttons on click, event below re-adds all the classes
@@ -358,10 +398,14 @@ frappe.views.Calendar = class Calendar {
 			btn_group.find(".btn").removeClass("active");
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			$(this).addClass("active");
 		});
 	}
@@ -373,6 +417,7 @@ frappe.views.Calendar = class Calendar {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		date._offset = moment(date).tz(frappe.sys_defaults.time_zone)._offset;
 		return frappe.datetime.convert_to_system_tz(moment(date).locale("en"));
 =======
@@ -383,6 +428,10 @@ frappe.views.Calendar = class Calendar {
 		return frappe.datetime.convert_to_system_tz(date, true);
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		return frappe.datetime.convert_to_system_tz(date, true);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	setup_options(defaults) {
 		var me = this;
@@ -403,10 +452,14 @@ frappe.views.Calendar = class Calendar {
 				center: "",
 				right: "today,dayGridMonth,dayGridWeek,dayGridDay",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			},
 			editable: true,
 			droppable: true,
@@ -420,10 +473,14 @@ frappe.views.Calendar = class Calendar {
 =======
 			themeSystem: null,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			buttonText: {
 				today: __("Today"),
 				month: __("Month"),
@@ -451,10 +508,14 @@ frappe.views.Calendar = class Calendar {
 						events = me.prepare_events(events);
 						successCallback(events);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					},
 				});
 			},
@@ -498,10 +559,14 @@ frappe.views.Calendar = class Calendar {
 
 				if (info.view.type === "dayGridMonth" && allDay) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					// detect single day click in month view
 					return;
 				}
@@ -532,10 +597,14 @@ frappe.views.Calendar = class Calendar {
 					// incase of all day or multiple day events -1 sec
 					event[me.field_map.end] = me.get_system_datetime(info.end - 1);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				}
 				frappe.set_route("Form", me.doctype, event.name);
 			},
@@ -557,10 +626,14 @@ frappe.views.Calendar = class Calendar {
 					if ($date_cell.hasClass("date-clicked")) {
 						me.fullCalendar.changeView("timeGridDay", info.date);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						me.$wrapper.find(".date-clicked").removeClass("date-clicked");
 
 						// update "active view" btn
@@ -580,10 +653,14 @@ frappe.views.Calendar = class Calendar {
 						.removeClass("fc-button fc-button-primary fc-button-active")
 						.addClass("btn btn-default");
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				}
 				return false;
 			},
@@ -610,10 +687,14 @@ frappe.views.Calendar = class Calendar {
 =======
 		this.fullCalendar.refetchEvents();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	prepare_events(events) {
 		var me = this;
@@ -705,10 +786,14 @@ frappe.views.Calendar = class Calendar {
 =======
 			name: event.id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		};
 
 		args[this.field_map.start] = me.get_system_datetime(event.start);
@@ -721,10 +806,14 @@ frappe.views.Calendar = class Calendar {
 			args[this.field_map.allDay] = event.end - event.start === 86400000 ? 1 : 0;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if (this.field_map.end) {
 			if (!event.end) {
@@ -740,10 +829,14 @@ frappe.views.Calendar = class Calendar {
 =======
 				args[this.field_map.end] = me.get_system_datetime(new Date(event.end - 1000));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 		}
 
@@ -764,8 +857,12 @@ frappe.views.Calendar = class Calendar {
 	}
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 };

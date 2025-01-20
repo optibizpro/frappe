@@ -19,10 +19,14 @@ from frappe.utils.background_jobs import (
 	RQ_RESULTS_TTL,
 	create_job_id,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	execute_job,
 	generate_qname,
 	get_redis_conn,
@@ -34,10 +38,14 @@ class TestBackgroundJobs(FrappeTestCase):
 =======
 class TestBackgroundJobs(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_remove_failed_jobs(self):
 		frappe.enqueue(method="frappe.tests.test_background_jobs.fail_function", queue="short")
 		# wait for enqueued job to execute
@@ -84,10 +92,14 @@ class TestBackgroundJobs(IntegrationTestCase):
 			frappe.init_site(locals.site),
 			patch("frappe.get_hooks", patch_job_hooks),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		):
 			frappe.connect()
 			self.assertIsNone(_test_JOB_HOOK.get("before_job"))

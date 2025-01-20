@@ -22,19 +22,6 @@ def get_context(context):
 		if page.sitemap
 	]
 
-<<<<<<< HEAD
-	for _, page in get_pages().items():
-		if page.sitemap:
-			links.append({"loc": get_url(quote(page.name.encode("utf-8"))), "lastmod": nowdate()})
-
-	for route, data in get_public_pages_from_doctypes().items():
-		links.append(
-			{
-				"loc": get_url(quote((route or "").encode("utf-8"))),
-				"lastmod": f"{data['modified']:%Y-%m-%d}",
-			}
-		)
-=======
 	links.extend(
 		{
 			"loc": get_url(quote((route or "").encode("utf-8"))),
@@ -42,11 +29,6 @@ def get_context(context):
 		}
 		for route, data in get_public_pages_from_doctypes().items()
 	)
-<<<<<<< HEAD
->>>>>>> 53615bb31040628756ac2b31ed112197ce976581
-=======
->>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
->>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 
 	return {"links": links}
 

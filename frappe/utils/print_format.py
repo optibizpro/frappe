@@ -5,10 +5,14 @@ import os
 =======
 import uuid
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from io import BytesIO
 
 from pypdf import PdfWriter
@@ -21,10 +25,14 @@ from frappe.translate import print_language
 from frappe.utils.deprecations import deprecated
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecated
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.pdf import get_pdf
 
 no_cache = 1
@@ -48,10 +56,14 @@ def download_multi_pdf(
 	options: str | None = None,
 ):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""
 	Calls _download_multi_pdf with the given parameters and returns the response
 	"""
@@ -190,10 +202,14 @@ def _download_multi_pdf(
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	pdf_writer = PdfWriter()
 
 	if isinstance(options, str):
@@ -248,10 +264,14 @@ def _download_multi_pdf(
 			frappe.local.response.filename = "{doctype}.pdf".format(
 				doctype=doctype.replace(" ", "-").replace("/", "-")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 
 	else:
@@ -290,13 +310,19 @@ def _download_multi_pdf(
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @deprecated
 def read_multi_pdf(output: PdfWriter) -> bytes:
 	with BytesIO() as merged_pdf:
 		output.write(merged_pdf)
 		return merged_pdf.getvalue()
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 				count += 1
 
@@ -331,6 +357,7 @@ def read_multi_pdf(output: PdfWriter) -> bytes:
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 @deprecated
 def read_multi_pdf(output: PdfWriter) -> bytes:
@@ -346,6 +373,10 @@ from frappe.deprecation_dumpster import read_multi_pdf
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.deprecation_dumpster import read_multi_pdf
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @frappe.whitelist(allow_guest=True)

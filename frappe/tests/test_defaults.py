@@ -5,10 +5,14 @@ from contextlib import contextmanager
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import frappe
 from frappe.core.doctype.user_permission.test_user_permission import create_user
 from frappe.defaults import *
@@ -26,10 +30,14 @@ from frappe.tests.test_query_builder import run_only_if
 
 class TestDefaults(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_global(self):
 		clear_user_default("key1")
 		set_global_default("key1", "value1")
@@ -122,10 +130,14 @@ def as_restricted_user():
 =======
 			doctype="User Permission", user=frappe.session.user, allow="Language", for_value="en-GB"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert(ignore_permissions=True)
 
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 1)
@@ -154,10 +166,14 @@ def as_restricted_user():
 		self.assertEqual(get_user_default("Country"), "India")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.db.set_value("User Permission", perm_doc.name, "is_default", 0)
 		clear_user_default("Country")
 		self.assertEqual(get_user_default("Country"), None)
@@ -173,10 +189,14 @@ def as_restricted_user():
 =======
 			doctype="User Permission", user=frappe.session.user, allow="Country", for_value="United States"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert(ignore_permissions=True)
 
 		self.assertEqual(get_user_default("Country"), "United States")

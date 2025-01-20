@@ -125,10 +125,14 @@ frappe.views.TreeView = class TreeView {
 			this.page.main.css({
 				"min-height": "300px",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 
 			this.page.main.addClass("frappe-card");
@@ -175,10 +179,14 @@ frappe.views.TreeView = class TreeView {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (this.opts.view_template) {
 			var row = $('<div class="row"><div>').appendTo(this.page.main);
 			this.body = $('<div class="col-sm-6 col-xs-12"></div>').appendTo(row);
@@ -254,10 +262,14 @@ frappe.views.TreeView = class TreeView {
 			el.innerText = el.innerText.replace("Include", "Exclude");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	make_tree() {
 		$(this.parent).find(".tree").remove();

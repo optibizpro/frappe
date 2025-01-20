@@ -15,15 +15,19 @@ Metrics:
 - User - new users, sessions stats, failed login attempts
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -34,6 +38,10 @@ Metrics:
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 """
 
 import functools
@@ -44,10 +52,14 @@ from collections.abc import Callable
 =======
 from contextlib import contextmanager
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 from frappe.core.doctype.scheduled_job_type.scheduled_job_type import ScheduledJobType
@@ -57,10 +69,14 @@ from frappe.utils.background_jobs import get_queue, get_queue_list
 =======
 from frappe.utils.background_jobs import get_queue, get_queue_list, get_redis_conn
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.caching import redis_cache
 from frappe.utils.data import add_to_date
 from frappe.utils.scheduler import get_scheduler_status, get_scheduler_tick
@@ -82,10 +98,14 @@ def no_wait(func):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def health_check(step: str):
 	assert isinstance(step, str), "Invalid usage of decorator, Usage: @health_check('step name')"
 
@@ -105,10 +125,14 @@ def health_check(step: str):
 					f"System Health check step {frappe.bold(step)} failed: {e}", alert=True, indicator="red"
 				)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		return wrapper
 
@@ -178,10 +202,14 @@ class SystemHealthReport(Document):
 	# end: auto-generated types
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def db_insert(self, *args, **kwargs):
 		raise NotImplementedError
 
@@ -212,10 +240,14 @@ class SystemHealthReport(Document):
 		self.background_jobs_check = "failed"
 		# This just checks connection life
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.test_job_id = frappe.enqueue("frappe.ping", at_front=True).id
 		self.background_jobs_check = "queued"
 		self.scheduler_status = get_scheduler_status().get("status")
@@ -255,11 +287,14 @@ class SystemHealthReport(Document):
 		self.scheduler_status = get_scheduler_status().get("status")
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		failing_jobs = frappe.db.sql(
 			"""
 			select scheduled_job_type,
@@ -275,9 +310,12 @@ class SystemHealthReport(Document):
 			limit 5""",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 
 		mariadb_query = """
@@ -313,11 +351,15 @@ class SystemHealthReport(Document):
 				"mariadb": mariadb_query,
 				"postgres": postgres_query,
 			},
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			{"lower_threshold": lower_threshold, "upper_threshold": upper_threshold},
 			as_dict=True,
 		)
@@ -395,10 +437,14 @@ class SystemHealthReport(Document):
 		self.cache_keys = len(frappe.cache.get_keys(""))
 		self.cache_memory_usage = frappe.cache.execute_command("INFO", "MEMORY").get("used_memory_human")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@health_check("Storage")
 	def fetch_storage_details(self):
@@ -458,10 +504,14 @@ class SystemHealthReport(Document):
 =======
 @no_wait(get_redis_conn)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def get_job_status(job_id: str | None = None):
 	frappe.only_for("System Manager")
 	try:

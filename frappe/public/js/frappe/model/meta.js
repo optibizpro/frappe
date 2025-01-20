@@ -14,10 +14,14 @@ frappe.get_meta = function (doctype) {
 		return frappe.meta.__doctype_meta;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return locals["DocType"] ? locals["DocType"][doctype] : null;
 };
 
@@ -35,10 +39,14 @@ $.extend(frappe.meta, {
 		if (doc.__print_formats?.length) frappe.model.sync(doc.__print_formats);
 		if (doc.__workflow_docs?.length) frappe.model.sync(doc.__workflow_docs);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	},
 
 	// build docfield_map and docfield_list
@@ -189,10 +197,14 @@ $.extend(frappe.meta, {
 =======
 					frappe.model.child_table_field_list.includes(key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				) {
 					out = d.options;
 					return false;
@@ -205,10 +217,14 @@ $.extend(frappe.meta, {
 				// eslint-disable-next-line
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				console.log(
 					__("Warning: Unable to find {0} in any table related to {1}", [
 						key,
@@ -226,10 +242,14 @@ $.extend(frappe.meta, {
 =======
 		var df = (frappe.get_meta(parent_dt).fields || []).filter(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			(df) => frappe.model.table_fields.includes(df.fieldtype) && df.options === child_dt
 		);
 		if (!df.length) throw "parentfield not found for " + parent_dt + ", " + child_dt;
@@ -313,10 +333,14 @@ $.extend(frappe.meta, {
 =======
 				!print_format_list.includes(d.name) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				d.print_format_type !== "JS" &&
 				(cint(enable_raw_printing) || !d.raw_printing)
 			) {
@@ -350,10 +374,14 @@ $.extend(frappe.meta, {
 		if (!doc && cur_frm) doc = cur_frm.doc;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (df && df.options) {
 			if (df.options.indexOf(":") != -1) {
 				var options = df.options.split(":");

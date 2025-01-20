@@ -102,13 +102,19 @@ class Workspace(Document):
 				d.report_ref_doctype = frappe.get_value("Report", d.link_to, "ref_doctype")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if not self.app and self.module:
 			from frappe.modules.utils import get_module_app
 
 			self.app = get_module_app(self.module)
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def clear_cache(self):
 		super().clear_cache()
 		if self.for_user:
@@ -116,10 +122,14 @@ class Workspace(Document):
 		else:
 			frappe.cache.delete_key("bootinfo")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def on_update(self):
 		if disable_saving_as_public():
@@ -145,10 +155,14 @@ class Workspace(Document):
 			frappe.throw(_("You need to be Workspace Manager to delete a public workspace."))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def after_delete(self):
 		if disable_saving_as_public():
 			return
@@ -302,10 +316,14 @@ def new_page(new_page):
 		)
 		raise frappe.PermissionError
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	doc = frappe.new_doc("Workspace")
 	doc.title = page.get("title")
@@ -329,9 +347,12 @@ def new_page(new_page):
 
 @frappe.whitelist()
 <<<<<<< HEAD
+<<<<<<< HEAD
 def save_page(name, public, new_widgets, blocks):
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def save_page(title, public, new_widgets, blocks):
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	public = frappe.parse_json(public)
@@ -362,7 +383,11 @@ def save_page(title, public, new_widgets, blocks):
 def update_page(name, title, icon, parent, public):
 =======
 def save_page(name, public, new_widgets, blocks):
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	public = frappe.parse_json(public)
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 	doc = frappe.get_doc("Workspace", name)
@@ -372,8 +397,11 @@ def save_page(name, public, new_widgets, blocks):
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	save_new_widget(doc, name, blocks, new_widgets)
 
 	return {"name": name, "public": public, "label": doc.label}
@@ -385,9 +413,13 @@ def update_page(name, title, icon, indicator_color, parent, public):
 	doc = frappe.get_doc("Workspace", name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not doc.get("public") and doc.get("for_user") != frappe.session.user and not is_workspace_manager():
 		frappe.throw(
 			_("Need Workspace Manager role to edit private workspace of other users"),
@@ -431,11 +463,14 @@ def update_page(name, title, icon, indicator_color, parent, public):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def hide_unhide_page(page_name: str, is_hidden: bool):
 	page = frappe.get_doc("Workspace", page_name)
 
@@ -556,7 +591,11 @@ def sort_page(workspace_pages, pages):
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def last_sequence_id(doc):
 	doc_exists = frappe.db.exists({"doctype": "Workspace", "public": doc.public, "for_user": doc.for_user})
 

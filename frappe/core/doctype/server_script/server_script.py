@@ -103,10 +103,14 @@ class ServerScript(Document):
 		frappe.client_cache.delete_value("server_script_map")
 		return super().clear_cache()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def clear_cache(self):
 		frappe.cache().delete_value("server_script_map")
@@ -154,9 +158,12 @@ class ServerScript(Document):
 				job.save()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def sync_scheduler_events(self):
 		"""Create or update Scheduled Job Type documents for Scheduler Event Server Scripts"""
 		if not self.disabled and self.event_frequency and self.script_type == "Scheduler Event":
@@ -175,6 +182,7 @@ class ServerScript(Document):
 				frappe.delete_doc("Scheduled Job Type", scheduled_job.name, delete_permanently=1)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 		if self.script_type != "Scheduler Event" or not (
@@ -188,6 +196,9 @@ class ServerScript(Document):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		get_scheduled_job().update(
 			{
 				"method": frappe.scrub(f"{self.name}-{self.event_frequency}"),
@@ -198,11 +209,15 @@ class ServerScript(Document):
 		).save()
 
 		frappe.msgprint(_("Scheduled execution for script {0} has updated").format(self.name), alert=True)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def check_if_compilable_in_restricted_context(self):
 		"""Check compilation errors and send them back as warnings."""
@@ -280,9 +295,12 @@ class ServerScript(Document):
 		that is used while executing a Server Script.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		Returns:
 		        list: Returns list of autocompletion items.
 		        For e.g., ["frappe.utils.cint", "frappe.get_all", ...]
@@ -317,6 +335,7 @@ class ServerScript(Document):
 					out.append([key, score])
 			return out
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 		items = frappe.cache().get_value("server_script_autocompletion_items")
 		if not items:
@@ -331,11 +350,15 @@ class ServerScript(Document):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @frappe.whitelist()
 def get_autocompletion_items():
 	"""Generate a list of autocompletion strings from the context dict
 	that is used while executing a Server Script.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		return frappe.cache.get_value(
@@ -349,6 +372,11 @@ def get_autocompletion_items():
 	e.g., ["frappe.utils.cint", "frappe.get_all", ...]
 	"""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	e.g., ["frappe.utils.cint", "frappe.get_all", ...]
+	"""
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return frappe.cache.get_value(
 		"server_script_autocompletion_items",
@@ -383,7 +411,10 @@ def execute_api_server_script(script: ServerScript, *args, **kwargs):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def setup_scheduler_events(script_name: str, frequency: str, cron_format: str | None = None):
 	"""Creates or Updates Scheduled Job Type documents based on the specified script name and frequency
 
@@ -447,12 +478,19 @@ def execute_api_server_script(script: ServerScript, *args, **kwargs):
 =======
 		frappe.msgprint(_("Scheduled execution for script {0} has updated").format(script_name))
 =======
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @frappe.whitelist()
 def enabled() -> bool | None:
 	if frappe.has_permission("Server Script"):
 		return is_safe_exec_enabled()
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

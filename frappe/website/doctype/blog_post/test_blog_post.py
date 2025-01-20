@@ -98,10 +98,14 @@ class TestBlogPost(IntegrationTestCase):
 =======
 		for _ in range(BLOG_COUNT):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			blog = make_test_blog(category_title)
 			blogs.append(blog)
 
@@ -204,6 +208,7 @@ def make_test_blog(category_title="Test Blog Category"):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		frappe.get_doc(dict(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger")).insert()
 =======
 		frappe.get_doc(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger").insert()
@@ -213,6 +218,10 @@ def make_test_blog(category_title="Test Blog Category"):
 		frappe.get_doc(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger").insert()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		frappe.get_doc(doctype="Blogger", short_name="test-blogger", full_name="Test Blogger").insert()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return frappe.get_doc(
 		doctype="Blog Post",

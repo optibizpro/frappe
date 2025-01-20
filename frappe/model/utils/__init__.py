@@ -66,6 +66,7 @@ def render_include(content):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for _ignore in range(5):
 =======
 	for _ in range(5):
@@ -75,6 +76,10 @@ def render_include(content):
 	for _ in range(5):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	for _ in range(5):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if "{% include" in content:
 			paths = INCLUDE_DIRECTIVE_PATTERN.findall(content)
 			if not paths:
@@ -235,7 +240,11 @@ def simple_singledispatch(func):
 	wrapper.register = register
 	return wrapper
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

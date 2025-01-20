@@ -45,10 +45,14 @@ from frappe.utils.bench_helper import CliCtxObj
 	help="Database socket for MariaDB or folder containing database socket for PostgreSQL",
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @click.option(
 	"--no-mariadb-socket",
 	is_flag=True,
@@ -78,10 +82,14 @@ from frappe.utils.bench_helper import CliCtxObj
 )
 @click.option("--db-user", help="Database user if you already have one")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def new_site(
 	site,
 	db_root_username=None,
@@ -120,6 +128,10 @@ def new_site(
 			f"Your bench has an app called {site}, please choose another name for the site.", fg="red"
 		)
 		sys.exit(1)
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 <<<<<<< HEAD
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
@@ -158,6 +170,7 @@ def new_site(
 		mariadb_user_host_login_scope=mariadb_user_host_login_scope,
 	)
 =======
+<<<<<<< HEAD
 	if site in frappe.get_all_apps():
 		click.secho(
 			f"Your bench has an app called {site}, please choose another name for the site.", fg="red"
@@ -167,6 +180,9 @@ def new_site(
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if no_mariadb_socket:
 		click.secho(
@@ -233,10 +249,14 @@ def new_site(
 	"--with-private-files",
 	help="Restores the private files of the site, given path to its tar file",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 )
 @click.option(
 	"--force",
@@ -273,10 +293,14 @@ def restore(
 	from frappe.utils.backups import Backup, get_or_generate_backup_encryption_key
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	from frappe.utils.synchronization import filelock
 
@@ -332,10 +356,14 @@ def _restore(
 			_backup.backup_decryption(encryption_key)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		with decrypt_backup(sql_file_path, encryption_key):
 			# Rollback on unsuccessful decryption
@@ -478,6 +506,7 @@ def partial_restore(context, sql_file_path, verbose, encryption_key=None):
 	from frappe.utils.backups import Backup, get_or_generate_backup_encryption_key
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
@@ -490,6 +519,12 @@ def partial_restore(context: CliCtxObj, sql_file_path, verbose, encryption_key=N
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def partial_restore(context: CliCtxObj, sql_file_path, verbose, encryption_key=None):
+	from frappe.installer import is_partial, partial_restore
+	from frappe.utils.backups import decrypt_backup, get_or_generate_backup_encryption_key
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not os.path.exists(sql_file_path):
 		print("Invalid path", sql_file_path)
@@ -559,6 +594,7 @@ def reinstall(context, admin_password=None, db_root_username=None, db_root_passw
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def reinstall(context, admin_password=None, db_root_username=None, db_root_password=None, yes=False):
 =======
 =======
@@ -571,6 +607,12 @@ def reinstall(
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def reinstall(
+	context: CliCtxObj, admin_password=None, db_root_username=None, db_root_password=None, yes=False
+):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"Reinstall site ie. wipe all data and start over"
 	site = get_site(context)
 	_reinstall(site, admin_password, db_root_username, db_root_password, yes, verbose=context.verbose)
@@ -662,10 +704,14 @@ def install_app(context: CliCtxObj, apps, force=False):
 			if not exit_code:
 				frappe.db.commit()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if not exit_code:
 			frappe.db.commit()
@@ -729,6 +775,7 @@ def add_db_index(context, doctype, column):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def add_db_index(context, doctype, column):
 =======
 def add_db_index(context: CliCtxObj, doctype, column):
@@ -738,6 +785,10 @@ def add_db_index(context: CliCtxObj, doctype, column):
 def add_db_index(context: CliCtxObj, doctype, column):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def add_db_index(context: CliCtxObj, doctype, column):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"Adds a new DB index and creates a property setter to persist it."
 	from frappe.custom.doctype.property_setter.property_setter import make_property_setter
 
@@ -746,6 +797,7 @@ def add_db_index(context: CliCtxObj, doctype, column):
 <<<<<<< HEAD
 		frappe.connect(site=site)
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		frappe.init(site=site)
@@ -760,6 +812,11 @@ def add_db_index(context: CliCtxObj, doctype, column):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		frappe.init(site)
+		frappe.connect()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		try:
 			frappe.db.add_index(doctype, columns)
 			if len(columns) == 1:
@@ -793,10 +850,14 @@ def describe_database_table(context, doctype, column):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	This is useful to build integration like
 	This includes:
 	1. Schema
@@ -825,10 +886,14 @@ def describe_database_table(context, doctype, column):
 		try:
 			data = _fetch_table_stats(doctype, column)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			# NOTE: Do not print anything else in this to avoid clobbering the output.
 			print(json.dumps(data, indent=2))
 		finally:
@@ -903,10 +968,14 @@ def _extract_table_stats(doctype: str, columns: list[str]) -> dict:
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @click.command("add-system-manager")
 @click.argument("email")
 @click.option("--first-name")
@@ -949,10 +1018,14 @@ def add_user_for_sites(
 =======
 	context: CliCtxObj, email, first_name, last_name, user_type, send_welcome_email, password, add_role
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 ):
 	"Add user to a site"
 	import frappe.utils.user
@@ -961,6 +1034,7 @@ def add_user_for_sites(
 <<<<<<< HEAD
 		frappe.connect(site=site)
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		frappe.init(site=site)
@@ -975,6 +1049,11 @@ def add_user_for_sites(
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		frappe.init(site)
+		frappe.connect()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		try:
 			add_new_user(email, first_name, last_name, user_type, send_welcome_email, password, add_role)
 			frappe.db.commit()
@@ -1008,10 +1087,14 @@ def migrate(context: CliCtxObj, skip_failing=False, skip_search_index=False):
 	from traceback_with_variables import activate_by_import
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	from frappe.migrate import SiteMigration
 
@@ -1096,7 +1179,7 @@ def reload_doctype(context: CliCtxObj, doctype):
 def add_to_hosts(context: CliCtxObj):
 	"Add site to hosts"
 	for site in context.sites:
-		frappe.commands.popen(f"echo 127.0.0.1\t{site} | sudo tee -a /etc/hosts")
+		frappe.commands.popen(f"echo '127.0.0.1\t{site}\n::1\t{site}' | sudo tee -a /etc/hosts")
 	if not context.sites:
 		raise SiteNotSpecifiedError
 
@@ -1217,10 +1300,14 @@ def backup(
 				fg="yellow",
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		odb.print_summary()
 		click.secho(
@@ -1574,10 +1661,14 @@ def stop_recording(context: CliCtxObj):
 	help="Use the auth token present in ngrok's config.",
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @pass_context
 def start_ngrok(context: CliCtxObj, bind_tls, use_default_authtoken):
 	"""Start a ngrok tunnel to your local development server."""
@@ -1704,10 +1795,14 @@ def trim_database(context, dry_run, format, no_backup, yes=False):
 def trim_database(context: CliCtxObj, dry_run, format, no_backup, yes=False):
 	"""Remove database tables for deleted DocTypes."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not context.sites:
 		raise SiteNotSpecifiedError
 
@@ -1734,10 +1829,14 @@ def trim_database(context: CliCtxObj, dry_run, format, no_backup, yes=False):
 =======
 			.run(pluck=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		doctype_tables = frappe.get_all("DocType", pluck="name")
 
@@ -1755,10 +1854,14 @@ def trim_database(context: CliCtxObj, dry_run, format, no_backup, yes=False):
 			if table_name.replace("tab", "", 1) not in doctype_tables and table_name not in STANDARD_TABLES:
 				TABLES_TO_DROP.append(table_name)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if not TABLES_TO_DROP:
 			if format == "text":
@@ -1784,10 +1887,14 @@ def trim_database(context: CliCtxObj, dry_run, format, no_backup, yes=False):
 
 			if not no_backup:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				if format == "text":
 					print(f"Backing Up Tables: {', '.join(TABLES_TO_DROP)}")
 
@@ -1928,9 +2035,12 @@ def ensure_app_not_frappe(app: str) -> None:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @click.command("bypass-patch")
 @click.argument("patch_name")
 @click.option("--yes", "-y", is_flag=True, default=False, help="Pass --yes to skip confirmation")
@@ -1958,11 +2068,15 @@ def bypass_patch(context: CliCtxObj, patch_name: str, yes: bool):
 			frappe.destroy()
 
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 commands = [
 	add_system_manager,
 	add_user_for_sites,

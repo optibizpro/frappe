@@ -33,10 +33,14 @@ frappe.notification = {
 				return {
 					value: select_value,
 <<<<<<< HEAD
+<<<<<<< HEAD
 					label: df.fieldname + " (" + __(df.label, null, df.parent) + ")",
 =======
 					label: path + " (" + __(df.label, null, df.parent) + ")",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+					label: path + " (" + __(df.label, null, df.parent) + ")",
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				};
 			};
 
@@ -44,10 +48,14 @@ frappe.notification = {
 				let date_options = $.map(fields, function (d) {
 					return fieldtypes.includes(d.fieldtype) ? get_select_options(d) : null;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				});
 				// append creation and modified date to Date Change field
 				return date_options.concat([
@@ -95,10 +103,14 @@ frappe.notification = {
 =======
 				return frappe.model.no_value_type.includes(d.fieldtype)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					? null
 					: get_select_options(d);
 			});
@@ -153,6 +165,7 @@ frappe.notification = {
 				});
 			} else if (["WhatsApp", "SMS"].includes(frm.doc.channel)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 				receiver_fields = $.map(fields, function (d) {
 					return d.options == "Phone" ? get_select_options(d) : null;
 =======
@@ -163,6 +176,11 @@ frappe.notification = {
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				receiver_fields = get_receiver_fields(fields, function (df) {
+					df.options == "Phone" || df.options == "Mobile";
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				});
 			}
 
@@ -201,10 +219,14 @@ Last comment: {{ comments[-1].comment }} by {{ comments[-1].by }}
 =======
 		} else if (["Slack", "System Notification", "SMS"].includes(frm.doc.channel)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			template = `<h5>Message Example</h5>
 
 <pre>*Order Overdue*
@@ -305,10 +327,14 @@ frappe.ui.form.on("Notification", {
 				let dialog = new frappe.views.RenderPreviewer(args);
 				return dialog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 		});
 	},
@@ -341,10 +367,14 @@ frappe.ui.form.on("Notification", {
 		});
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	channel: function (frm) {
 		frm.toggle_reqd("recipients", frm.doc.channel == "Email");
 		frappe.notification.setup_fieldname_select(frm);

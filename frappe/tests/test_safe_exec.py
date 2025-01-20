@@ -9,6 +9,7 @@ from frappe.utils.safe_exec import get_safe_globals, safe_exec
 class TestSafeExec(FrappeTestCase):
 =======
 from frappe.tests import IntegrationTestCase
+from frappe.utils.jinja import get_jenv
 from frappe.utils.safe_exec import ServerScriptNotEnabled, get_safe_globals, safe_exec
 
 
@@ -19,10 +20,14 @@ class TestSafeExec(IntegrationTestCase):
 		return super().setUpClass()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_import_fails(self):
 		self.assertRaises(ImportError, safe_exec, "import os")
 
@@ -126,10 +131,14 @@ class TestSafeExec(IntegrationTestCase):
 		safe_exec("my_dict = _dict()")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_write_wrapper(self):
 		# Allow modifying _dict instance
 		safe_exec("_dict().x = 1")
@@ -153,7 +162,25 @@ class TestNoSafeExec(IntegrationTestCase):
 	def test_safe_exec_disabled_by_default(self):
 		self.assertRaises(ServerScriptNotEnabled, safe_exec, "pass")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+
+class TestJinjaGlobals(IntegrationTestCase):
+	def test_jenv_thread_safety(self):
+		first = get_jenv()
+		# reinit to create a new local ctx, this "simulates" two request running in two diff
+		# thread.
+		frappe.init(frappe.local.site, force=True)
+		second = get_jenv()
+		self.assertIsNot(first, second)
+		self.assertIsNot(first.globals, second.globals)
+		self.assertIsNot(first.filters, second.filters)
+		self.assertIsNot(first.globals["frappe"], second.globals["frappe"])
+		self.assertIsNot(first.globals["frappe"]["form_dict"], second.globals["frappe"]["form_dict"])
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

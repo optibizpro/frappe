@@ -55,10 +55,14 @@ export default class QuickListWidget extends Widget {
 =======
 				${frappe.utils.icon("es-line-reload", "sm")}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			</div>`
 		);
 
@@ -219,11 +223,14 @@ export default class QuickListWidget extends Widget {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				fields.push(...add_fields);
 				fields = [...new Set(fields)];
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				for (const fieldname of add_fields) {
 					// Only keep fields that exist and are permitted
 					if (frappe.meta.has_field(this.document_type, fieldname)) {
@@ -231,11 +238,15 @@ export default class QuickListWidget extends Widget {
 					}
 				}
 				fields = [...new Set(fields)]; // Remove duplicates
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 
 			let quick_list_filter = frappe.utils.process_filter_expression(this.quick_list_filter);
@@ -251,10 +262,14 @@ export default class QuickListWidget extends Widget {
 =======
 					order_by: "creation desc",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					start: 0,
 					page_length: 4,
 				},
@@ -288,10 +303,14 @@ export default class QuickListWidget extends Widget {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		let route = frappe.utils.generate_route({ type: "doctype", name: this.document_type });
 		this.see_all_button = $(`
 			<div class="see-all btn btn-xs">${__("View List")}</div>

@@ -37,10 +37,14 @@ frappe.pages["setup-wizard"].on_page_load = function (wrapper) {
 		window.location.href = frappe.boot.apps_data.default_path || "/app";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	let requires = frappe.boot.setup_wizard_requires || [];
 	frappe.require(requires, function () {
 		frappe.call({
@@ -121,10 +125,14 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 				if ($target.data().fieldtype == "Autocomplete") return;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				this.container.find(".next-btn").trigger("click");
 				e.preventDefault();
 			}
@@ -219,10 +227,14 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 =======
 			error: () => this.abort_setup(),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 	}
 
@@ -238,10 +250,14 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 =======
 			window.location.href = frappe.boot.apps_data.default_path || "/app";
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}, 2000);
 	}
 
@@ -264,10 +280,14 @@ frappe.setup.SetupWizard = class SetupWizard extends frappe.ui.Slides {
 
 		this.$working_state.find(".title").html(__("Setup failed"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		this.$abort_btn.show();
 	}
@@ -465,10 +485,14 @@ frappe.setup.slides_settings = [
 				default: cint(frappe.telemetry.can_enable()),
 				depends_on: "eval:frappe.telemetry.can_enable()",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			},
 		],
 
@@ -548,10 +572,14 @@ frappe.setup.slides_settings = [
 				slide.form.fields_dict.email.df.read_only = 1;
 				slide.form.fields_dict.email.refresh();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			} else {
 				slide.form.fields_dict.email.df.reqd = 1;
 				slide.form.fields_dict.email.refresh();
@@ -640,10 +668,14 @@ frappe.setup.utils = {
 		}
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		slide.get_field("currency").set_input(frappe.wizard.values.currency);
 		slide.get_field("timezone").set_input(frappe.wizard.values.timezone);

@@ -550,4 +550,8 @@ from frappe.deprecation_dumpster import (
 	test_xmlrunner_wrapper as xml_runner_wrapper,
 )
 from frappe.testing.result import SLOW_TEST_THRESHOLD
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

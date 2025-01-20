@@ -37,6 +37,7 @@ def get_user_default(key, user=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value = isinstance(d, list | tuple) and d[0] or d
 =======
 	value = (isinstance(d, list | tuple) and d[0]) or d
@@ -46,6 +47,10 @@ def get_user_default(key, user=None):
 	value = (isinstance(d, list | tuple) and d[0]) or d
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	value = (isinstance(d, list | tuple) and d[0]) or d
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not_in_user_permission(key, value, user):
 		return
 
@@ -87,6 +92,7 @@ def get_user_default_as_list(key, user=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	d = list(filter(None, (not isinstance(d, list | tuple)) and [d] or d))
 =======
 	d = list(filter(None, ((not isinstance(d, list | tuple)) and [d]) or d))
@@ -96,6 +102,10 @@ def get_user_default_as_list(key, user=None):
 	d = list(filter(None, ((not isinstance(d, list | tuple)) and [d]) or d))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	d = list(filter(None, ((not isinstance(d, list | tuple)) and [d]) or d))
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# filter default values if not found in user permission
 	return [value for value in d if not not_in_user_permission(key, value)]
@@ -167,6 +177,7 @@ def get_global_default(key):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	value = isinstance(d, list | tuple) and d[0] or d
 =======
 	value = (isinstance(d, list | tuple) and d[0]) or d
@@ -176,6 +187,10 @@ def get_global_default(key):
 	value = (isinstance(d, list | tuple) and d[0]) or d
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	value = (isinstance(d, list | tuple) and d[0]) or d
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not_in_user_permission(key, value):
 		return
 

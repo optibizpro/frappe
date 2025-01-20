@@ -3,10 +3,14 @@ frappe.provide("frappe.ui");
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 frappe.ui.Sidebar = class Sidebar {
 	constructor() {
 		this.items = {};
@@ -39,6 +43,7 @@ frappe.ui.Sidebar = class Sidebar {
 		];
 
 		this.setup_pages();
+		this.apps_switcher.populate_apps_menu();
 	}
 
 	make_dom() {
@@ -58,7 +63,7 @@ frappe.ui.Sidebar = class Sidebar {
 			this.toggle_sidebar();
 		});
 
-		this.apps_switcher = new frappe.ui.AppsSwitcher(this.wrapper);
+		this.apps_switcher = new frappe.ui.AppsSwitcher(this);
 		this.apps_switcher.create_app_data_map();
 	}
 
@@ -163,6 +168,7 @@ frappe.ui.Sidebar = class Sidebar {
 
 		this.setup_sorting();
 		this.set_active_workspace_item();
+		this.set_hover();
 	}
 
 	build_sidebar_section(title, root_pages) {
@@ -368,10 +374,14 @@ frappe.ui.Sidebar = class Sidebar {
 		) {
 			$drop_icon.removeClass("hidden");
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 		$drop_icon.on("click", () => {
 			let opened = $drop_icon.find("use").attr("href") === "#es-line-down";
@@ -385,6 +395,7 @@ frappe.ui.Sidebar = class Sidebar {
 			$child_item_section.toggleClass("hidden");
 		});
 	}
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 		if (item.name) {
@@ -415,13 +426,21 @@ frappe.ui.Sidebar = class Sidebar {
 		this.$sidebar.append($section);
 		return $section;
 =======
+=======
+	toggle_sorting() {
+		this.sorting_items.forEach((item) => {
+			var state = item.option("disabled");
+			item.option("disabled", !state);
+		});
+	}
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	setup_sorting() {
 		if (!this.has_access) return;
-
+		this.sorting_items = [];
 		for (let container of this.$sidebar.find(".nested-container")) {
-			Sortable.create(container, {
+			this.sorting_items[this.sorting_items.length] = Sortable.create(container, {
 				group: "sidebar-items",
-				fitler: ".divider",
+				disabled: true,
 				onEnd: () => {
 					let sidebar_items = [];
 					for (let container of this.$sidebar.find(".nested-container")) {
@@ -434,6 +453,35 @@ frappe.ui.Sidebar = class Sidebar {
 									.attr("item-name");
 							}
 
+<<<<<<< HEAD
+		if (item.name) {
+			this.items[item.name] = $li_item;
+		}
+	}
+
+	remove_item(name) {
+		if (this.items[name]) {
+			this.items[name].remove();
+		}
+	}
+
+	get_section(section_heading = "") {
+		let $section = $(this.wrapper.find(`[data-section-heading="${section_heading}"]`));
+		if ($section.length) {
+			return $section;
+		}
+
+		const $section_heading = section_heading ? `<li class="h6">${section_heading}</li>` : "";
+
+		$section = $(`
+			<ul class="list-unstyled sidebar-menu" data-section-heading="${section_heading || "default"}">
+				${$section_heading}
+			</ul>
+		`);
+
+		this.$sidebar.append($section);
+		return $section;
+=======
 							sidebar_items.push({
 								name: item.getAttribute("item-name"),
 								parent: parent,
@@ -466,9 +514,13 @@ frappe.ui.Sidebar = class Sidebar {
 			this.setup_pages();
 		});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 };

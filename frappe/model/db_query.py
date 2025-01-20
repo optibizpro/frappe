@@ -11,6 +11,7 @@ from collections import Counter
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from collections.abc import Mapping, Sequence
 from functools import cached_property
@@ -21,6 +22,11 @@ from collections.abc import Mapping, Sequence
 from functools import cached_property
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from collections.abc import Mapping, Sequence
+from functools import cached_property
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 import frappe.defaults
@@ -47,6 +53,7 @@ from frappe.utils import (
 	sanitize_column,
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -55,6 +62,10 @@ from frappe.utils import (
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 )
 from frappe.utils.data import DateTimeLikeObject, get_datetime, getdate, sbool
 
@@ -78,10 +89,14 @@ SPECIAL_FIELD_CHARS = frozenset(("(", "`", ".", "'", '"', "*"))
 SPECIAL_FIELD_CHARS = frozenset(("(", "`", ".", "'", '"', "*"))
 # XXX: These are just matching brackets to not confuse code formatters: ))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 class DatabaseQuery:
@@ -120,10 +135,14 @@ class DatabaseQuery:
 			self._metas[doctype] = frappe.get_meta(doctype)
 		return self._metas[doctype]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@property
 	def query_tables(self):
@@ -250,10 +269,14 @@ class DatabaseQuery:
 =======
 			return frappe.call(controller.get_list, args=kwargs, **kwargs)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.columns = self.get_table_columns()
 
@@ -424,10 +447,14 @@ class DatabaseQuery:
 =======
 				linked_field = self.get_meta(self.doctype).get_field(linked_fieldname)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				# this is not a link field
 				if not linked_field:
 					continue
@@ -632,10 +659,14 @@ class DatabaseQuery:
 					to_remove.append(fld)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.fields[:] = [f for f in self.fields if f not in optional_fields or f in self.columns]
 		self.filters[:] = [
@@ -659,10 +690,14 @@ class DatabaseQuery:
 =======
 	def build_filter_conditions(self, filters: Filters, conditions: list, ignore_permissions=None):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""build conditions from user filters"""
 		if ignore_permissions is not None:
 			self.flags.ignore_permissions = ignore_permissions
@@ -673,6 +708,7 @@ class DatabaseQuery:
 				conditions.append(sanitize_column(f))
 			else:
 				conditions.append(self.prepare_filter_condition(f))
+<<<<<<< HEAD
 =======
 			conditions.append(self.prepare_filter_condition(f))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -780,6 +816,9 @@ class DatabaseQuery:
 		"""Return a filter condition in the format:
 
 <<<<<<< HEAD
+=======
+
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def remove_field(self, idx: int):
 		if self.as_list:
 			self.fields[idx] = None
@@ -895,8 +934,11 @@ class DatabaseQuery:
 		"""Returns a filter condition in the format:
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			conditions.append(self.prepare_filter_condition(f))
 
 	def remove_field(self, idx: int):
@@ -1001,8 +1043,12 @@ class DatabaseQuery:
 	def prepare_filter_condition(self, ft: FilterTuple) -> str:
 		"""Return a filter condition in the format:
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		ifnull(`tabDocType`.`fieldname`, fallback) operator "value"
 		"""
 
@@ -1028,6 +1074,9 @@ class DatabaseQuery:
 		# primary key is never nullable, modified is usually indexed by default and always present
 		can_be_null = f.fieldname not in ("name", "modified", "creation")
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# prepare in condition
 		if f.operator.lower() in NestedSetHierarchy:
@@ -1035,9 +1084,12 @@ class DatabaseQuery:
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		meta = self.get_meta(f.doctype)
 		df = meta.get("fields", {"fieldname": f.fieldname})
 		df = df[0] if df else None
@@ -1051,10 +1103,14 @@ class DatabaseQuery:
 		# prepare in condition
 		if f.operator.lower() in NestedSetHierarchy:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			# TODO: handle list and tuple
 			# if not isinstance(values, (list, tuple)):
 			# 	values = values.split(",")
@@ -1120,10 +1176,14 @@ class DatabaseQuery:
 			if f.operator.lower() == "in":
 				can_be_null &= not f.value or any(v is None or v == "" for v in f.value)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if value is None:
 				values = f.value or ""
@@ -1144,10 +1204,14 @@ class DatabaseQuery:
 			df = df[0] if df else None
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if df and (
 				df.fieldtype in ("Check", "Float", "Int", "Currency", "Percent")
@@ -1208,10 +1272,14 @@ class DatabaseQuery:
 =======
 					can_be_null = not getattr(df, "not_nullable", False)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 				value = ""
 
@@ -1300,10 +1368,14 @@ class DatabaseQuery:
 			and not role_permissions.get("select")
 			and not role_permissions.get("read")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			and not self.flags.ignore_permissions
 			and not has_any_user_permission_for_doctype(self.doctype, self.user, self.reference_doctype)
 		):
@@ -1366,10 +1438,14 @@ class DatabaseQuery:
 		doctype_link_fields = []
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		doctype_link_fields = self.doctype_meta.get_link_fields()
 
 		# append current doctype with fieldname as 'name' as first link field
@@ -1449,10 +1525,14 @@ class DatabaseQuery:
 =======
 		if self.order_by and self.order_by != "KEEP_DEFAULT_ORDERING":
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			args.order_by = self.order_by
 		else:
 			args.order_by = ""
@@ -1496,6 +1576,7 @@ class DatabaseQuery:
 					if self.order_by:
 						args.order_by = (
 <<<<<<< HEAD
+<<<<<<< HEAD
 							f"`tab{self.doctype}`.`{sort_field or 'modified'}` {sort_order or 'desc'}"
 =======
 							f"`tab{self.doctype}`.`{sort_field or 'creation'}` {sort_order or 'desc'}"
@@ -1504,6 +1585,10 @@ class DatabaseQuery:
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+							f"`tab{self.doctype}`.`{sort_field or 'creation'}` {sort_order or 'desc'}"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						)
 
 	def validate_order_by_and_group_by(self, parameters: str):
@@ -1664,6 +1749,7 @@ def get_between_date_filter(value, df=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	fieldtype = df and df.fieldtype or "Datetime"
 =======
 	fieldtype = (df and df.fieldtype) or "Datetime"
@@ -1673,6 +1759,10 @@ def get_between_date_filter(value, df=None):
 	fieldtype = (df and df.fieldtype) or "Datetime"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	fieldtype = (df and df.fieldtype) or "Datetime"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	from_date = frappe.utils.nowdate()
 	to_date = frappe.utils.nowdate()

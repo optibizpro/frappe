@@ -167,11 +167,14 @@ def update_move_node(doc: Document, parent_field: str):
 @frappe.whitelist()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def rebuild_tree(doctype, parent_field=None):
 	"""Call rebuild_node for all root nodes.
 
@@ -181,7 +184,11 @@ def rebuild_tree(doctype, parent_field=None):
 =======
 def rebuild_tree(doctype: str) -> None:
 	"""Call rebuild_node for all root nodes."""
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	# Check for perm if called from client-side
 	if frappe.request and frappe.local.form_dict.cmd == "rebuild_tree":
 		frappe.only_for("System Manager")
@@ -237,10 +244,14 @@ def rebuild_node(doctype, parent, left, parent_field):
 =======
 	frappe.db.set_value(doctype, parent, {"lft": left, "rgt": right}, update_modified=False)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# return the right value of this node + 1
 	return right + 1
@@ -281,10 +292,14 @@ def remove_subtree(doctype: str, name: str, throw=True):
 
 	frappe.clear_document_cache(doctype)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def remove_subtree(doctype: str, name: str, throw=True):

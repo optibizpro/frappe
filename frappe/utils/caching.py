@@ -15,6 +15,7 @@ import time
 from collections import defaultdict
 from collections.abc import Callable
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 from datetime import datetime, timedelta
@@ -22,6 +23,12 @@ from datetime import datetime, timedelta
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 from contextlib import suppress
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+from datetime import datetime, timedelta
+=======
+from contextlib import suppress
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from functools import wraps
 
 import pytz
@@ -207,10 +214,14 @@ def redis_cache(ttl: int | None = 3600, user: str | bool | None = None, shared: 
 =======
 			frappe.cache.delete_keys(func_key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		func.clear_cache = clear_cache
 		func.ttl = ttl if not callable(ttl) else 3600
@@ -227,11 +238,14 @@ def redis_cache(ttl: int | None = 3600, user: str | bool | None = None, shared: 
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			if frappe.cache.exists(func_call_key, user=user, shared=shared):
 				return frappe.cache.get_value(func_call_key, user=user, shared=shared)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			cached_val = frappe.cache.get_value(func_call_key, user=user, shared=shared)
 			if cached_val is not None:
 				return cached_val
@@ -246,10 +260,14 @@ def redis_cache(ttl: int | None = 3600, user: str | bool | None = None, shared: 
 			ttl = getattr(func, "ttl", 3600)
 			frappe.cache.set_value(func_call_key, val, expires_in_sec=ttl, user=user, shared=shared)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			return val
 
 		return redis_cache_wrapper

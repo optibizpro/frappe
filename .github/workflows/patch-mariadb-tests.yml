@@ -80,6 +80,7 @@ jobs:
               3.8
               3.10
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -88,6 +89,8 @@ jobs:
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -145,12 +148,16 @@ jobs:
             version=$1
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             py=$2
 =======
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
             py=$2
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+            py=$2
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
             branch_name="version-$version-hotfix"
             echo "Updating to v$version"
@@ -158,6 +165,7 @@ jobs:
             git checkout -q -f $branch_name
 
             pgrep honcho | xargs kill
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             rm -rf ~/frappe-bench/env
@@ -174,19 +182,28 @@ jobs:
             bench -v setup env --python $py
             bench start &> ~/frappe-bench/bench_start.log &
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+            rm -rf ~/frappe-bench/env
+            bench -v setup env --python $py
+            bench start &> ~/frappe-bench/bench_start.log &
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
             bench --site test_site migrate
           }
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
           update_to_version 12 python3.8
           update_to_version 13 python3.8
 
           echo "Updating to last commit"
           git checkout -q -f "$GITHUB_SHA"
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
           update_to_version 14
@@ -197,6 +214,8 @@ jobs:
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
           rm -rf ~/frappe-bench/env
           git checkout -q -f "$GITHUB_SHA"
           bench -v setup env

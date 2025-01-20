@@ -5,10 +5,14 @@
 =======
 import time
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import sqlparse
 
@@ -20,6 +24,7 @@ from frappe.tests.utils import FrappeTestCase
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, timeout
 =======
 from frappe.tests import IntegrationTestCase, timeout
@@ -29,6 +34,10 @@ from frappe.tests import IntegrationTestCase, timeout
 from frappe.tests import IntegrationTestCase, timeout
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase, timeout
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import set_request
 from frappe.utils.doctor import any_job_pending
 from frappe.website.serve import get_response_content
@@ -39,10 +48,14 @@ class TestRecorder(FrappeTestCase):
 =======
 class TestRecorder(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def setUp(self):
 		self.wait_for_background_jobs()
 		frappe.recorder.stop()
@@ -59,10 +72,14 @@ class TestRecorder(IntegrationTestCase):
 			time.sleep(1)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def stop_recording(self):
 		frappe.recorder.dump()
 		frappe.recorder.stop()
@@ -122,10 +139,14 @@ class TestRecorder(IntegrationTestCase):
 =======
 		frappe.db.sql("select 1", run=0)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.stop_recording()
 
 		requests = frappe.recorder.get()
@@ -190,10 +211,14 @@ class TestRecorderDeco(FrappeTestCase):
 =======
 class TestRecorderDeco(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_recorder_flag(self):
 		frappe.recorder.delete()
 
@@ -210,10 +235,14 @@ class TestQueryNormalization(FrappeTestCase):
 =======
 class TestQueryNormalization(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_query_normalization(self):
 		test_cases = {
 			"select * from user where name = 'x'": "select * from user where name = ?",

@@ -13,10 +13,14 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import random_string
 from frappe.utils.nestedset import (
 	NestedSetChildExistsError,
@@ -73,10 +77,14 @@ class NestedSetTestUtil:
 =======
 		self.tree_doctype = new_doctype(TEST_DOCTYPE, is_tree=True, autoname="field:some_fieldname")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.tree_doctype.insert()
 
 		for record in records:
@@ -195,10 +203,14 @@ class TestNestedSet(IntegrationTestCase):
 =======
 		parent_lft_old, parent_rgt_old = frappe.db.get_value(TEST_DOCTYPE, "Parent 2", ["lft", "rgt"])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertTrue((parent_lft_old > child_2.lft) and (parent_rgt_old > child_2.rgt))
 
 		child_2.parent_test_tree_doctype = "Parent 2"
@@ -211,10 +223,14 @@ class TestNestedSet(IntegrationTestCase):
 =======
 		parent_lft_new, parent_rgt_new = frappe.db.get_value(TEST_DOCTYPE, "Parent 2", ["lft", "rgt"])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertFalse((parent_lft_new > child_2.lft) and (parent_rgt_new > child_2.rgt))
 
 	def test_delete_leaf(self):

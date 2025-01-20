@@ -73,10 +73,14 @@ doctype_cache_keys = (
 =======
 	"doctype_form_meta",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"last_modified",
 	"linked_doctypes",
 	"notifications",
@@ -91,10 +95,14 @@ wildcard_keys = (
 	"table_columns::*",
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def clear_user_cache(user=None):
@@ -104,10 +112,14 @@ def clear_user_cache(user=None):
 	cache = frappe.cache()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# this will automatically reload the global cache
 	# so it is important to clear this first
@@ -145,6 +157,7 @@ def clear_defaults_cache(user=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for p in [user, *common_default_keys]:
 			frappe.cache.hdel("defaults", p)
 =======
@@ -157,6 +170,11 @@ def clear_defaults_cache(user=None):
 			frappe.client_cache.delete_value(f"defaults::{key}")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		for key in [user, *common_default_keys]:
+			frappe.client_cache.delete_value(f"defaults::{key}")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	elif frappe.flags.in_install != "frappe":
 		frappe.client_cache.delete_keys("defaults::*")
 
@@ -176,10 +194,14 @@ def clear_doctype_cache(doctype=None):
 		frappe.db.after_commit.add(lambda: _clear_doctype_cache_from_redis(doctype))
 		frappe.db.after_rollback.add(lambda: _clear_doctype_cache_from_redis(doctype))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def _clear_doctype_cache_from_redis(doctype: str | None = None):
@@ -238,10 +260,14 @@ def get_doctype_map(doctype, name, filters=None, order_by=None):
 =======
 	return frappe.cache.hget(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		get_doctype_map_key(doctype),
 		name,
 		lambda: frappe.get_all(doctype, filters=filters, order_by=order_by, ignore_ddl=True),
@@ -305,3 +331,53 @@ def build_domain_restricted_page_cache(*args, **kwargs):
 	frappe.cache.set_value("domain_restricted_pages", pages)
 
 	return pages
+
+
+def clear_cache(user: str | None = None, doctype: str | None = None):
+	"""Clear **User**, **DocType** or global cache.
+
+	:param user: If user is given, only user cache is cleared.
+	:param doctype: If doctype is given, only DocType cache is cleared."""
+	import frappe.cache_manager
+	import frappe.utils.caching
+	from frappe.website.router import clear_routing_cache
+
+	if doctype:
+		frappe.cache_manager.clear_doctype_cache(doctype)
+		reset_metadata_version()
+	elif user:
+		frappe.cache_manager.clear_user_cache(user)
+	else:  # everything
+		# Delete ALL keys associated with this site.
+		keys_to_delete = set(frappe.cache.get_keys(""))
+		for key in frappe.get_hooks("persistent_cache_keys"):
+			keys_to_delete.difference_update(frappe.cache.get_keys(key))
+		frappe.cache.delete_value(list(keys_to_delete), make_keys=False)
+
+		reset_metadata_version()
+		frappe.local.cache = {}
+		frappe.local.new_doc_templates = {}
+
+		for fn in frappe.get_hooks("clear_cache"):
+			frappe.get_attr(fn)()
+
+	if (not doctype and not user) or doctype == "DocType":
+		frappe.utils.caching._SITE_CACHE.clear()
+		frappe.client_cache.clear_cache()
+
+	frappe.local.role_permissions = {}
+	if hasattr(frappe.local, "request_cache"):
+		frappe.local.request_cache.clear()
+	if hasattr(frappe.local, "system_settings"):
+		del frappe.local.system_settings
+	if hasattr(frappe.local, "website_settings"):
+		del frappe.local.website_settings
+
+	clear_routing_cache()
+
+
+def reset_metadata_version():
+	"""Reset `metadata_version` (Client (Javascript) build ID) hash."""
+	v = frappe.generate_hash()
+	frappe.client_cache.set_value("metadata_version", v)
+	return v

@@ -16,6 +16,7 @@ from typing import NoReturn
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -26,13 +27,20 @@ from croniter import CroniterBadCronError
 from croniter import CroniterBadCronError
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
+from croniter import CroniterBadCronError
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+=======
 import setproctitle
 from croniter import CroniterBadCronError
 from filelock import FileLock, Timeout
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 import frappe
@@ -44,10 +52,14 @@ from frappe.utils import cint, get_bench_path, get_datetime, get_sites, now_date
 from frappe.utils.background_jobs import set_niceness
 from frappe.utils.caching import redis_cache
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 DEFAULT_SCHEDULER_TICK = 4 * 60
@@ -71,10 +83,14 @@ def _proctitle(message):
 
 def start_scheduler() -> NoReturn:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""Run enqueue_events_for_all_sites based on scheduler tick.
 	Specify scheduler_interval in seconds in common_site_config.json"""
 
@@ -99,10 +115,14 @@ def start_scheduler() -> NoReturn:
 		_proctitle("idle")
 		time.sleep(sleep_duration(tick))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		enqueue_events_for_all_sites()
 
 
@@ -148,10 +168,14 @@ def enqueue_events_for_site(site: str) -> None:
 	def log_exc():
 		frappe.logger("scheduler").error(f"Exception in Enqueue Events for Site {site}", exc_info=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	try:
 		_proctitle(f"scheduling events for {site}")
@@ -202,10 +226,14 @@ def enqueue_events() -> list[str] | None:
 
 		return enqueued_jobs
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def is_scheduler_inactive(verbose=True) -> bool:
@@ -263,10 +291,14 @@ def schedule_jobs_based_on_activity(check_time=None):
 =======
 		last_job_timestamp = _get_last_creation_timestamp("Scheduled Job Log")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if not last_job_timestamp:
 			return True
 		else:
@@ -290,6 +322,7 @@ def is_dormant(check_time=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_activity_log_timestamp = _get_last_modified_timestamp("Activity Log")
 =======
 	last_activity_log_timestamp = _get_last_creation_timestamp("Activity Log")
@@ -299,6 +332,10 @@ def is_dormant(check_time=None):
 	last_activity_log_timestamp = _get_last_creation_timestamp("Activity Log")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	last_activity_log_timestamp = _get_last_creation_timestamp("Activity Log")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	since = (frappe.get_system_settings("dormant_days") or 4) * 86400
 	if not last_activity_log_timestamp:
 		return True
@@ -313,6 +350,7 @@ def _get_last_modified_timestamp(doctype):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def _get_last_modified_timestamp(doctype):
 	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="modified", order_by="modified desc")
 =======
@@ -325,6 +363,11 @@ def _get_last_creation_timestamp(doctype):
 	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="creation", order_by="creation desc")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def _get_last_creation_timestamp(doctype):
+	timestamp = frappe.db.get_value(doctype, filters={}, fieldname="creation", order_by="creation desc")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if timestamp:
 		return get_datetime(timestamp)
 
@@ -357,6 +400,7 @@ def get_scheduler_tick() -> int:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	return cint(frappe.get_conf().scheduler_tick_interval) or 60
 =======
 	conf = frappe.get_conf()
@@ -368,3 +412,8 @@ def get_scheduler_tick() -> int:
 	return cint(conf.scheduler_tick_interval) or DEFAULT_SCHEDULER_TICK
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	conf = frappe.get_conf()
+	return cint(conf.scheduler_tick_interval) or DEFAULT_SCHEDULER_TICK
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

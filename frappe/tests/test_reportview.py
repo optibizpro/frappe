@@ -11,6 +11,7 @@ class TestReportview(FrappeTestCase):
 =======
 from frappe.desk.reportview import export_query, extract_fieldnames
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
@@ -23,6 +24,13 @@ class TestReportview(IntegrationTestCase):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestReportview(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_csv(self):
 		from csv import QUOTE_ALL, QUOTE_MINIMAL, QUOTE_NONE, QUOTE_NONNUMERIC, DictReader
 		from io import StringIO
@@ -106,7 +114,11 @@ class TestReportview(IntegrationTestCase):
 
 		self.assertEqual(extract_fieldnames("sum(1)"), [])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

@@ -266,7 +266,10 @@ export default {
 		},
 	},
 };
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 // variables
 let search_text = ref("");
@@ -314,8 +317,11 @@ let margins = computed(() => {
 });
 let fields = computed(() => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 	let fields = meta.value.fields
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	let fields = [
 		{
 			label: __("Custom HTML"),
@@ -344,7 +350,10 @@ let fields = computed(() => {
 		...print_templates.value,
 		...meta.value.fields,
 	]
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		.filter((df) => {
 			if (["Section Break", "Column Break"].includes(df.fieldtype)) {
 				return false;
@@ -370,11 +379,15 @@ let fields = computed(() => {
 			};
 			if (df.fieldtype == "Table") {
 				out.table_columns = get_table_columns(df);
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 			return out;
 		});
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	return [
 		{
@@ -422,6 +435,9 @@ let fields = computed(() => {
 =======
 	return fields;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	return fields;
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 let print_templates = computed(() => {
 	let templates = print_format.value.__onload.print_templates || {};
@@ -471,10 +487,14 @@ onMounted(() => {
 
 watch(print_format, () => (store.dirty.value = true), { deep: true });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 </script>
 
 <style scoped>

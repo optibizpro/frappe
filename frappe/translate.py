@@ -25,10 +25,14 @@ from pypika.terms import PseudoColumn
 from contextlib import contextmanager, suppress
 from csv import reader, writer
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 from frappe.query_builder import DocType, Field
@@ -61,10 +65,14 @@ TRANSLATE_PATTERN = re.compile(
 )
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 REPORT_TRANSLATE_PATTERN = re.compile('"([^:,^"]*):')
 CSV_STRIP_WHITESPACE_PATTERN = re.compile(r"{\s?([0-9]+)\s?}")
 
@@ -126,10 +134,14 @@ def get_language(lang_list: list | None = None) -> str:
 =======
 	return frappe.get_system_settings("language") or "en"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @functools.lru_cache
@@ -272,10 +284,14 @@ def get_app_translations():
 
 	return get_all_translations(language)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_all_translations(lang: str) -> dict[str, str]:
@@ -329,10 +345,14 @@ def get_all_translations(lang: str) -> dict[str, str]:
 =======
 	:param lang: Language Code, e.g. `hi` or `es-CO`
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""
 	if not lang:
 		return {}
@@ -383,10 +403,14 @@ def get_all_translations(lang: str) -> dict[str, str]:
 		# where locals are not initialized, translations don't make much sense there
 		frappe.logger().error("Unable to load translations", exc_info=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return {}
 
 
@@ -426,10 +450,14 @@ def get_translations_from_csv(lang, app):
 		os.path.join(frappe.get_app_path(app, "translations"), lang + ".csv"), lang, app
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_translation_dict_from_file(path, lang, app, throw=False) -> dict[str, str]:
@@ -460,10 +488,14 @@ def get_user_translations(lang):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def _read_from_db():
 		user_translations = {}
 		translations = frappe.get_all(
@@ -483,10 +515,14 @@ def get_user_translations(lang):
 =======
 	return frappe.cache.hget(USER_TRANSLATION_KEY, lang, generator=_read_from_db)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def clear_cache():
@@ -505,10 +541,14 @@ def clear_cache():
 		keys=["bootinfo", USER_TRANSLATION_KEY, MERGED_TRANSLATION_KEY],
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_messages_for_app(app, deduplicate=True):
@@ -829,10 +869,14 @@ def get_all_messages_from_js_files(app_name=None):
 =======
 			for basepath, folders, files in os.walk(frappe.get_app_path(app, "public")):  # noqa: B007
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				if "frappe/public/js/lib" in basepath:
 					continue
 
@@ -858,10 +902,14 @@ def get_messages_from_file(path: str) -> list[tuple[str, str, str | None, int]]:
 	from frappe.gettext.extractors.utils import extract_messages_from_code
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	frappe.flags.setdefault("scanned_files", set())
 	# TODO: Find better alternative
 	# To avoid duplicate scan
@@ -1099,10 +1147,14 @@ def extract_messages_from_code(code):
 
 		messages = []
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if path.lower().endswith(".py"):
 			messages += extract_messages_from_python_code(file_contents)
@@ -1314,10 +1366,14 @@ def migrate_translations(source_app, target_app):
 	clear_cache()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	strings_in_source_app = [m[1] for m in frappe.translate.get_messages_for_app(source_app)]
 	strings_in_target_app = [m[1] for m in frappe.translate.get_messages_for_app(target_app)]
 
@@ -1334,10 +1390,14 @@ def migrate_translations(source_app, target_app):
 	source_app_translations_dir = frappe.get_app_path(source_app, "translations")
 	target_app_translations_dir = frappe.get_app_path(target_app, "translations")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not os.path.exists(target_app_translations_dir):
 		os.makedirs(target_app_translations_dir)
@@ -1426,10 +1486,14 @@ def rename_language(old_name, new_name):
 =======
 	return [next(g) for k, g in itertools.groupby(messages, op)]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @frappe.whitelist()
@@ -1467,6 +1531,7 @@ def update_translations_for_source(source=None, translation_dict=None):
 	return translation_records
 
 
+<<<<<<< HEAD
 @frappe.whitelist()
 def get_translations(source_text):
 	if is_html(source_text):
@@ -1480,6 +1545,9 @@ def get_translations(source_text):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @frappe.whitelist()
 def get_contributions(language):
 	return frappe.get_all(
@@ -1508,6 +1576,7 @@ def get_all_languages(with_language_name=False):
 def get_all_languages(with_language_name: bool = False) -> list:
 	"""Return all enabled language codes ar, ch etc."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	def get_language_codes():
 		return frappe.get_all("Language", filters={"enabled": 1}, pluck="name")
@@ -1521,6 +1590,12 @@ def get_all_languages(with_language_name: bool = False) -> list:
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+	def get_all_language_with_name():
+		return frappe.get_all("Language", ["language_code", "language_name"], {"enabled": 1})
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if with_language_name:
 		return frappe.cache.get_value("languages_with_name", get_all_language_with_name)
@@ -1534,10 +1609,14 @@ def get_all_languages(with_language_name: bool = False) -> list:
 			frappe.client_cache.set_value("languages", languages)
 		return languages
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_preferred_language_cookie():

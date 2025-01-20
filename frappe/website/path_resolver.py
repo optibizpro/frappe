@@ -27,10 +27,14 @@ class PathResolver:
 
 	def __init__(self, path, http_status_code=None):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.path = path.strip("/ ")
 		self.http_status_code = http_status_code
 
@@ -65,6 +69,7 @@ class PathResolver:
 <<<<<<< HEAD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		# WARN: Hardcoded for better performance
 		if endpoint == "app":
 			return endpoint, TemplatePage(endpoint, self.http_status_code)
@@ -74,6 +79,8 @@ class PathResolver:
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		endpoint = resolve_path(self.path)
 
 		# WARN: Hardcoded for better performance
@@ -82,10 +89,14 @@ class PathResolver:
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		custom_renderers = self.get_custom_page_renderers()
 		renderers = [
 			*custom_renderers,
@@ -147,6 +158,7 @@ def resolve_redirect(path, query_string=None):
 	                                # use r as a string prefix if you use regex groups or want to escape any string literal
 	                ]
 	"""
+<<<<<<< HEAD
 	redirects = frappe.get_hooks("website_redirects")
 <<<<<<< HEAD
 	redirects += frappe.get_all("Website Route Redirect", ["source", "target"], order_by=None)
@@ -164,13 +176,31 @@ def resolve_redirect(path, query_string=None):
 		return
 
 	redirect_to = frappe.cache.hget("website_redirects", path)
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
+	redirect_to = frappe.cache.hget("website_redirects", path or "/")
 	if redirect_to:
 		if isinstance(redirect_to, dict):
 			frappe.flags.redirect_location = redirect_to["path"]
 			raise frappe.Redirect(redirect_to["status_code"])
 		frappe.flags.redirect_location = redirect_to
 		raise frappe.Redirect
+
+	if redirect_to is False:
+		return
+
+	redirects = frappe.get_hooks("website_redirects")
+<<<<<<< HEAD
+	redirects += frappe.get_all("Website Route Redirect", ["source", "target"], order_by=None)
+=======
+	redirects += frappe.get_all(
+		"Website Route Redirect", ["source", "target", "redirect_http_status"], order_by=None
+	)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+
+	if not redirects:
+		return
 
 	for rule in redirects:
 		pattern = rule["source"].strip("/ ") + "$"
@@ -188,9 +218,11 @@ def resolve_redirect(path, query_string=None):
 			frappe.flags.redirect_location = redirect_to
 			status_code = rule.get("redirect_http_status") or 301
 			frappe.cache.hset(
-				"website_redirects", path_to_match, {"path": redirect_to, "status_code": status_code}
+				"website_redirects", path_to_match or "/", {"path": redirect_to, "status_code": status_code}
 			)
 			raise frappe.Redirect(status_code)
+
+	frappe.cache.hset("website_redirects", path_to_match or "/", False)
 
 
 def resolve_path(path):
@@ -240,10 +272,14 @@ def get_website_rules():
 =======
 	return frappe.cache.get_value("website_route_rules", _get)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def validate_path(path: str):

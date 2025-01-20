@@ -79,10 +79,14 @@ export default class OnboardingWidget extends Widget {
 					)}</div>
 					<div class="step-text">${__(step.title)}</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				</div>
 			</a>`);
 
@@ -140,10 +144,14 @@ export default class OnboardingWidget extends Widget {
 =======
 				$(`<button class="btn btn-default btn-sm">${__("Watch Tutorial")}</button>`)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					.appendTo(this.step_footer)
 					.on("click", toggle_video);
 			} else {
@@ -153,6 +161,7 @@ export default class OnboardingWidget extends Widget {
 						step.action_label || step.action
 					)}</button>`
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 					`<button class="btn btn-default btn-sm">${__(
@@ -169,6 +178,12 @@ export default class OnboardingWidget extends Widget {
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+					`<button class="btn btn-default btn-sm">${
+						__(step.action_label) || __(step.action)
+					}</button>`
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				)
 					.appendTo(this.step_footer)
 					.on("click", () => actions[step.action](step));
@@ -183,10 +198,14 @@ export default class OnboardingWidget extends Widget {
 			let content = __(step.description)
 				? frappe.markdown(__(step.description))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				: `<h1>${__(step.title)}</h1>`;
 
 			if (step.action === "Create Entry") {
@@ -223,10 +242,14 @@ export default class OnboardingWidget extends Widget {
 					__(step.action_label) || __(step.action)
 				}</button>`
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 				.appendTo(this.step_footer)
 				.on("click", () => {
@@ -242,10 +265,14 @@ export default class OnboardingWidget extends Widget {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			$(`<button class="btn btn-secondary ml-2 btn-sm">${__("Back")}</button>`)
 				.appendTo(this.step_footer)
 				.on("click", toggle_content);
@@ -642,10 +669,14 @@ export default class OnboardingWidget extends Widget {
 =======
 			`<div class="btn btn-sm btn-secondary small" style="cursor:pointer;">${__(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"Dismiss",
 				null,
 				"Stop showing the onboarding widget."

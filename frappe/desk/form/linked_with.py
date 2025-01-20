@@ -45,10 +45,14 @@ def get_submitted_linked_docs(doctype: str, name: str, ignore_doctypes_on_cancel
 		ignore_doctypes_on_cancel_all = json.loads(ignore_doctypes_on_cancel_all)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	frappe.has_permission(doctype, doc=name)
 	tree = SubmittableDocumentTree(doctype, name)
 	visited_documents = tree.get_all_children(ignore_doctypes_on_cancel_all)
@@ -150,6 +154,7 @@ class SubmittableDocumentTree:
 		"""Returns list of doctypes from where we access submittable documents."""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 		"""Return list of doctypes from where we access submittable documents."""
@@ -160,6 +165,11 @@ class SubmittableDocumentTree:
 		"""Return list of doctypes from where we access submittable documents."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+		"""Return list of doctypes from where we access submittable documents."""
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return list(set([*self.get_link_sources(), self.root_doctype]))
 
 	def get_link_sources(self):
@@ -178,6 +188,7 @@ class SubmittableDocumentTree:
 def get_child_tables_of_doctypes(doctypes: list[str] | None = None):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -187,6 +198,12 @@ def get_child_tables_of_doctypes(doctypes: list[str] | None = None):
 =======
 	"""Return child tables by doctype."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	"""Returns child tables by doctype."""
+=======
+	"""Return child tables by doctype."""
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	filters = [["fieldtype", "=", "Table"]]
 	filters_for_docfield = filters
 	filters_for_customfield = filters
@@ -255,10 +272,14 @@ def get_references_across_doctypes(
 =======
 	for links in references.values():
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		for link in links:
 			link["is_child"] = link["doctype"] in all_child_tables
 	return references

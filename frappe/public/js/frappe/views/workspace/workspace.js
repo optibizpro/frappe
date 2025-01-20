@@ -34,6 +34,7 @@ frappe.views.Workspace = class Workspace {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		this.sidebar_categories = [
 			{ id: "Personal", label: __("Personal", null, "Workspace Category") },
 			{ id: "Public", label: __("Public", null, "Workspace Category") },
@@ -42,6 +43,8 @@ frappe.views.Workspace = class Workspace {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.indicator_colors = [
 			"green",
 			"cyan",
@@ -57,16 +60,19 @@ frappe.views.Workspace = class Workspace {
 			"light-blue",
 		];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		this.prepare_container();
 		this.sidebar = frappe.app.sidebar;
 		this.app_switcher_menu = frappe.app.app_switcher_menu;
 		this.sidebar.setup_pages();
-		this.sidebar.apps_switcher.populate_apps_menu();
 		this.cached_pages = $.extend(true, {}, frappe.boot.sidebar_pages);
 		this.has_access = frappe.boot.sidebar_pages.has_access;
 		this.has_create_access = frappe.boot.sidebar_pages.has_create_access;
@@ -409,7 +415,10 @@ frappe.views.Workspace = class Workspace {
 		});
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.body.find(".btn-new-workspace").on("click", () => {
 			this.initialize_new_page(true);
 		});
@@ -421,14 +430,23 @@ frappe.views.Workspace = class Workspace {
 			this.editor.isReady.then(() => {
 				this.setup_customization_buttons(this._page);
 				this.make_blocks_sortable();
+<<<<<<< HEAD
+=======
+				frappe.app.sidebar.toggle_sorting();
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 		});
 	}
 
 	get_pages() {
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		return frappe.xcall("frappe.desk.desktop.get_workspace_sidebar_items", null, "GET");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		return frappe.xcall("frappe.desk.desktop.get_workspace_sidebar_items", null, "GET");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	show() {
@@ -444,10 +462,14 @@ frappe.views.Workspace = class Workspace {
 =======
 		if (this._page?.name === page.name) return; // already shown
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if (!frappe.router.current_route[0]) {
 			frappe.route_flags.replace_route = true;
@@ -514,10 +536,14 @@ frappe.views.Workspace = class Workspace {
 				},
 				type: "GET",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			})
 			.then((data) => {
 				this.page_data = data.message;
@@ -565,10 +591,14 @@ frappe.views.Workspace = class Workspace {
 			this.sidebar.all_pages.filter((page) => page.name == localStorage.current_page)
 				.length != 0
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		) {
 			default_page = {
 				name: localStorage.current_page,
@@ -580,6 +610,7 @@ frappe.views.Workspace = class Workspace {
 			default_page = { name: this.all_pages[0].title, public: this.all_pages[0].public };
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			};
 =======
@@ -588,6 +619,8 @@ frappe.views.Workspace = class Workspace {
 			default_page = { name: this.all_pages[0].title, public: this.all_pages[0].public };
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		} else if (Object.keys(this.sidebar.all_pages).length !== 0) {
 			default_page = {
 				name: this.sidebar.all_pages[0].name,
@@ -595,10 +628,14 @@ frappe.views.Workspace = class Workspace {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 			};
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		} else {
 			default_page = { name: "Build", public: true };
 		}
@@ -616,10 +653,14 @@ frappe.views.Workspace = class Workspace {
 		const is_public = route[1] ? route[1] != "private" : default_page.public;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return { name: page, public: is_public };
 	}
 
@@ -630,10 +671,14 @@ frappe.views.Workspace = class Workspace {
 =======
 			$(`
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				<div id="editorjs" class="desk-page page-main-content"></div>
 			`).appendTo(this.body.find(".editor-js-container"));
 		}
@@ -646,12 +691,18 @@ frappe.views.Workspace = class Workspace {
 				page.public && this.public_pages.length ? this.public_pages : this.private_pages;
 			let current_page = pages.filter((p) => p.title == page.name)[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.content = current_page && JSON.parse(current_page.content);
 
 			this.content && this.add_custom_cards_in_content();
 
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		if (this.sidebar.all_pages.length) {
 			this.create_page_skeleton();
@@ -692,10 +743,14 @@ frappe.views.Workspace = class Workspace {
 			this.content && this.add_custom_cards_in_content();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			$(".item-anchor").addClass("disable-click");
 
 			if (this.pages && this.pages[current_page.name]) {
@@ -762,10 +817,14 @@ frappe.views.Workspace = class Workspace {
 =======
 		let current_page = this.sidebar.all_pages.filter((p) => p.name == page.name)[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if (!this.is_read_only) {
 			this.setup_customization_buttons(current_page);
@@ -773,6 +832,7 @@ frappe.views.Workspace = class Workspace {
 		}
 
 		this.clear_page_actions();
+<<<<<<< HEAD
 <<<<<<< HEAD
 		if (current_page.is_editable) {
 			this.body.find(".btn-edit-workspace").removeClass("hide");
@@ -782,6 +842,8 @@ frappe.views.Workspace = class Workspace {
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 <<<<<<< HEAD
 		this.page.set_secondary_action(__("Edit"), async () => {
@@ -802,15 +864,21 @@ frappe.views.Workspace = class Workspace {
 		});
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (current_page.is_editable) {
 			this.body.find(".btn-edit-workspace").removeClass("hide");
 		} else {
 			this.body.find(".btn-edit-workspace").addClass("hide");
 		}
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		// need to add option for icons in inner buttons as well
 		if (this.has_create_access) {
 			this.body.find(".btn-new-workspace").removeClass("hide");
@@ -818,10 +886,14 @@ frappe.views.Workspace = class Workspace {
 			this.body.find(".btn-new-workspace").addClass("hide");
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	initialize_editorjs_undo() {
@@ -871,6 +943,7 @@ frappe.views.Workspace = class Workspace {
 			await this.editor.readOnly.toggle();
 			this.is_read_only = true;
 			this.sidebar_pages = this.cached_pages;
+<<<<<<< HEAD
 =======
 		// switch headers
 		this.wrapper.find(".page-head").removeClass("hidden");
@@ -900,6 +973,8 @@ frappe.views.Workspace = class Workspace {
 			this.is_read_only = true;
 			frappe.boot.sidebar_pages = this.cached_pages;
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.reload();
 			frappe.show_alert({ message: __("Customizations Discarded"), indicator: "info" });
 		});
@@ -1594,7 +1669,10 @@ frappe.views.Workspace = class Workspace {
 					}
 				},
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		// switch headers
 		this.wrapper.find(".page-head").removeClass("hidden");
@@ -1612,6 +1690,10 @@ frappe.views.Workspace = class Workspace {
 						this.editor.readOnly.toggle();
 						this.is_read_only = true;
 					});
+<<<<<<< HEAD
+=======
+					frappe.app.sidebar.toggle_sorting();
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				},
 				null,
 				__("Saving")
@@ -1630,8 +1712,12 @@ frappe.views.Workspace = class Workspace {
 		if (page.name && this.has_access) {
 			this.page.add_inner_button(__("Settings"), () => {
 				frappe.set_route(`workspace/${page.name}`);
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 		}
 	}
@@ -1719,10 +1805,14 @@ frappe.views.Workspace = class Workspace {
 				},
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					label: __("Public"),
 					fieldtype: "Check",
 					fieldname: "is_public",
@@ -1738,10 +1828,14 @@ frappe.views.Workspace = class Workspace {
 						d.set_df_property("icon", "hidden", this.get_value() ? 0 : 1);
 						d.set_df_property("indicator_color", "hidden", this.get_value() ? 1 : 0);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					},
 				},
 				{
@@ -1755,11 +1849,14 @@ frappe.views.Workspace = class Workspace {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 					hidden: 1,
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				},
 				{
 					label: __("Indicator color"),
@@ -1767,15 +1864,20 @@ frappe.views.Workspace = class Workspace {
 					fieldname: "indicator_color",
 					options: this.indicator_colors,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				},
 			],
 			primary_action_label: __("Create"),
 			primary_action: (values) => {
 				values.title = strip_html(values.title);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -1797,12 +1899,23 @@ frappe.views.Workspace = class Workspace {
 				}
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
+=======
+				if (!this.validate_page(values)) return;
+				d.hide();
+				this.initialize_editorjs_undo();
+				this.setup_customization_buttons({ is_editable: true });
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				d.hide();
 				if (values.type === "Workspace") {
 					this.setup_customization_buttons({ is_editable: true });
 				}
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 				let name = values.title + (values.is_public ? "" : "-" + frappe.session.user);
 				let blocks = [
@@ -1897,10 +2010,14 @@ frappe.views.Workspace = class Workspace {
 						});
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			},
 		});
 		d.show();
@@ -2008,8 +2125,12 @@ frappe.views.Workspace = class Workspace {
 						this.sidebar.setup_pages();
 
 						if (!frappe.boot.app_data_map["private"] && new_page.public === 0) {
+<<<<<<< HEAD
 							let app_switcher_menu = $(".app-switcher-menu");
 							this.sidebar.apps_switcher.add_private_app(app_switcher_menu);
+=======
+							this.sidebar.apps_switcher.add_private_app();
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						}
 						resolve();
 					}
@@ -2017,10 +2138,14 @@ frappe.views.Workspace = class Workspace {
 			});
 		});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	initialize_editorjs(blocks) {
@@ -2134,10 +2259,14 @@ frappe.views.Workspace = class Workspace {
 					frappe.show_alert({
 						message: __("No changes made"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						indicator: "warning",
 					});
 					return false;
@@ -2153,10 +2282,14 @@ frappe.views.Workspace = class Workspace {
 =======
 						name: page.name,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						public: page.public || 0,
 						new_widgets: new_widgets,
 						blocks: JSON.stringify(blocks),
@@ -2175,10 +2308,14 @@ frappe.views.Workspace = class Workspace {
 							frappe.show_alert({
 								message: __("Saved"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 								indicator: "green",
 							});
 						}
@@ -2251,10 +2388,14 @@ frappe.views.Workspace = class Workspace {
 		$(".workspace-sidebar-skeleton").remove();
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	register_awesomebar_shortcut() {

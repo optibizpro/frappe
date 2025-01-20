@@ -14,10 +14,14 @@ from frappe.exceptions import DoesNotExistError, ValidationError
 =======
 from frappe.exceptions import DoesNotExistError
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.model.base_document import get_controller
 from frappe.model.rename_doc import bulk_rename, update_document_title
 from frappe.modules.utils import get_doc_path
@@ -26,10 +30,14 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import add_to_date, now
 
 
@@ -58,10 +66,14 @@ class TestRenameDoc(FrappeTestCase):
 =======
 class TestRenameDoc(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(self):
 		"""Setting Up data for the tests defined under TestRenameDoc"""
@@ -349,7 +361,11 @@ class TestRenameDoc(IntegrationTestCase):
 		self.assertTrue(frappe.db.exists("Autoincrement DocType", marilyn.name) is None)
 		self.assertEqual(linked_with_marilyn.autoincrement_doctype, frappe.utils.cstr(mary.name))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

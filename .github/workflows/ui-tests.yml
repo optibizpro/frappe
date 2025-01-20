@@ -23,10 +23,13 @@ jobs:
     runs-on: ubuntu-latest
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     outputs:
       build: ${{ steps.check-build.outputs.build }}
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
     strategy:
       fail-fast: false
 
@@ -43,8 +46,12 @@ jobs:
 =======
     outputs:
       build: ${{ steps.check-build.outputs.build }}
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
     steps:
       - name: Clone
@@ -249,8 +256,11 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
           node-version: 16
           check-latest: true
 
@@ -349,7 +359,10 @@ jobs:
         if: ${{ failure() }}
         run: cat ~/frappe-bench/bench_start.log
 =======
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
           name: UIBackend
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
@@ -365,8 +378,12 @@ jobs:
           exclude: coverage-py*
           verbose: true
           flags: ui-tests
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

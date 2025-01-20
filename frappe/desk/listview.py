@@ -67,10 +67,14 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 
 	if not meta.has_field(field) and not is_default_field(field):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		raise ValueError("Field does not belong to doctype")
 
 	data = frappe.get_list(
@@ -83,6 +87,7 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		limit=1000,
 =======
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
@@ -91,6 +96,10 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 		limit=1000,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		limit=1000,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	)
 
 	if field == "owner":
@@ -112,8 +121,11 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	# Add in title if it's a link field and `show_title_field_in_link` is set
 	if (field_meta := meta.get_field(field)) and field_meta.fieldtype == "Link":
 		link_meta = frappe.get_meta(field_meta.options)
@@ -123,10 +135,14 @@ def get_group_by_count(doctype: str, current_filters: str, field: str) -> list[d
 				item.title = frappe.get_value(field_meta.options, item.name, title_field)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return data

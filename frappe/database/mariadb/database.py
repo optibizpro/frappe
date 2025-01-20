@@ -133,10 +133,14 @@ class MariaDBConnectionUtil:
 		if self.cur_db_name:
 			conn_settings["database"] = self.cur_db_name
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if self.socket:
 			conn_settings["unix_socket"] = self.socket
@@ -318,6 +322,7 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 				route varchar({self.VARCHAR_LEN}),
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -327,6 +332,12 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 =======
 				published TINYINT not null default 0,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+				published int(1) not null default 0,
+=======
+				published TINYINT not null default 0,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				unique `doctype_name` (doctype, name))
 				COLLATE=utf8mb4_unicode_ci
 				ENGINE=MyISAM
@@ -549,10 +560,14 @@ class MariaDBDatabase(MariaDBConnectionUtil, MariaDBExceptionUtil, Database):
 			return int(est_row_size[0][0])
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@contextmanager
 	def unbuffered_cursor(self):
 		from pymysql.cursors import SSCursor

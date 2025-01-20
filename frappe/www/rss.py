@@ -22,10 +22,14 @@ def get_context(context):
 =======
 		fields=["name", "published_on", "modified", "title", "blog_intro", "route"],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		filters={"published": 1},
 		order_by="published_on desc",
 		limit=20,
@@ -40,10 +44,14 @@ def get_context(context):
 		blog.link = urljoin(host, blog.route)
 		blog.blog_intro = escape_html(blog.blog_intro or "")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		blog.title = escape_html(blog.title or "")
 
 	if blog_list:

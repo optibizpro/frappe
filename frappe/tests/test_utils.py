@@ -10,10 +10,14 @@ from datetime import date, datetime, time, timedelta
 import sys
 from datetime import date, datetime, time, timedelta, timezone
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from decimal import ROUND_HALF_UP, Decimal, localcontext
 from enum import Enum
 from io import StringIO
@@ -24,10 +28,14 @@ from unittest.mock import patch
 import pytz
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from hypothesis import given
 from hypothesis import strategies as st
 from PIL import Image
@@ -40,10 +48,14 @@ from frappe.tests.utils import FrappeTestCase, change_settings
 from frappe.model.document import Document
 from frappe.tests import IntegrationTestCase, MockedRequestTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import (
 	add_trackers_to_url,
 	ceil,
@@ -59,10 +71,14 @@ from frappe.utils import (
 =======
 	get_gravatar,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	get_site_info,
 	get_sites,
 	get_url,
@@ -75,10 +91,14 @@ from frappe.utils import (
 	random_string,
 	remove_blanks,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	safe_json_loads,
 	scrub_urls,
 	validate_email_address,
@@ -103,10 +123,14 @@ from frappe.utils.data import (
 	expand_relative_urls,
 	get_datetime,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	get_first_day_of_week,
 	get_time,
 	get_timedelta,
@@ -114,6 +138,7 @@ from frappe.utils.data import (
 	get_url_to_form,
 	get_year_ending,
 	getdate,
+	is_invalid_date_string,
 	now_datetime,
 	nowtime,
 <<<<<<< HEAD
@@ -125,10 +150,14 @@ from frappe.utils.data import (
 	sha256_hash,
 	to_timedelta,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	validate_python_code,
 )
 from frappe.utils.dateutils import get_dates_from_timegrain
@@ -158,10 +187,14 @@ class Capturing(list):
 
 class TestFilters(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_simple_dict(self):
 		self.assertTrue(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Open"}))
 		self.assertFalse(evaluate_filters({"doctype": "User", "status": "Open"}, {"status": "Closed"}))
@@ -232,10 +265,14 @@ class TestFilters(IntegrationTestCase):
 				{"doctype": "User", "birth_date": "2023-02-28"},
 				[("User", "birth_date", ">", "01-04-2022")],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 		)
 		self.assertFalse(
@@ -246,10 +283,14 @@ class TestFilters(IntegrationTestCase):
 				{"doctype": "User", "birth_date": "2023-02-28"},
 				[("User", "birth_date", "<", "28-02-2023")],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 		)
 
@@ -303,10 +344,14 @@ class TestMoney(FrappeTestCase):
 
 class TestMoney(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_money_in_words(self):
 		test_cases = {
 			"BHD": [
@@ -348,10 +393,14 @@ class TestDataManipulation(FrappeTestCase):
 =======
 class TestDataManipulation(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_scrub_urls(self):
 		html = """
 			<p>You have a new message from: <b>John</b></p>
@@ -383,10 +432,14 @@ class TestFieldCasting(FrappeTestCase):
 =======
 class TestFieldCasting(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_str_types(self):
 		STR_TYPES = (
 			"Data",
@@ -438,10 +491,14 @@ class TestMathUtils(FrappeTestCase):
 =======
 class TestMathUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_floor(self):
 		from decimal import Decimal
 
@@ -468,10 +525,14 @@ class TestHTMLUtils(FrappeTestCase):
 =======
 class TestHTMLUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_clean_email_html(self):
 		from frappe.utils.html_utils import clean_email_html
 
@@ -503,10 +564,14 @@ class TestValidationUtils(FrappeTestCase):
 =======
 class TestValidationUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_valid_url(self):
 		# Edge cases
 		self.assertFalse(validate_url(""))
@@ -557,17 +622,24 @@ class TestValidationUtils(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertRaises(frappe.InvalidEmailAddressError, validate_email_address, "someone.com", throw=True)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertRaises(
 			frappe.InvalidEmailAddressError,
 			validate_email_address,
 			"someone.com",
 			throw=True,
 		)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.assertEqual(validate_email_address("Some%20One@frappe.com"), "Some%20One@frappe.com")
 		self.assertEqual(
@@ -577,11 +649,16 @@ class TestValidationUtils(IntegrationTestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 class TestImage(FrappeTestCase):
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+class TestImage(FrappeTestCase):
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_valid_phone(self):
 		valid_phones = ["+91 1234567890", ""]
 
@@ -609,10 +686,14 @@ class TestImage(FrappeTestCase):
 
 class TestImage(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_strip_exif_data(self):
 		original_image = Image.open(frappe.get_app_path("frappe", "tests", "data", "exif_sample_image.jpg"))
 		original_image_content = open(
@@ -645,10 +726,14 @@ class TestPythonExpressions(FrappeTestCase):
 =======
 class TestPythonExpressions(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_validation_for_good_python_expression(self):
 		valid_expressions = [
 			"foo == bar",
@@ -680,10 +765,14 @@ class TestDiffUtils(FrappeTestCase):
 =======
 class TestDiffUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -730,10 +819,14 @@ class TestDateUtils(FrappeTestCase):
 =======
 class TestDateUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_first_day_of_week(self):
 		# Monday as start of the week
 		with patch.object(frappe.utils.data, "get_first_day_of_the_week", return_value="Monday"):
@@ -757,6 +850,7 @@ class TestDateUtils(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-25"), frappe.utils.getdate("2020-12-20"))
 		self.assertEqual(frappe.utils.get_first_day_of_week("2020-12-21"), frappe.utils.getdate("2020-12-20"))
 
@@ -766,6 +860,8 @@ class TestDateUtils(IntegrationTestCase):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(
 			frappe.utils.get_first_day_of_week("2020-12-25"),
 			frappe.utils.getdate("2020-12-20"),
@@ -784,7 +880,11 @@ class TestDateUtils(IntegrationTestCase):
 			frappe.utils.get_last_day_of_week("2020-12-28"),
 			frappe.utils.getdate("2021-01-02"),
 		)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_is_last_day_of_the_month(self):
 		self.assertEqual(frappe.utils.is_last_day_of_the_month("2020-12-24"), False)
@@ -869,11 +969,15 @@ class TestDateUtils(IntegrationTestCase):
 
 	@given(st.datetimes())
 	def test_get_datetime(self, original):
+		if is_invalid_date_string(str(original)):
+			return
 		parsed = get_datetime(str(original))
 		self.assertEqual(parsed, original)
 
 	@given(st.datetimes(timezones=st.timezones()))
 	def test_get_datetime_tz_aware(self, original):
+		if is_invalid_date_string(str(original)):
+			return
 		parsed = get_datetime(str(original))
 		self.assertEqual(parsed, original)
 
@@ -902,10 +1006,14 @@ class TestDateUtils(IntegrationTestCase):
 		for dt, exp_message in test_cases.items():
 			self.assertEqual(pretty_date(dt), exp_message)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_date_from_timegrain(self):
 		start_date = getdate("2021-01-01")
@@ -938,10 +1046,14 @@ class TestResponse(FrappeTestCase):
 =======
 class TestResponse(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_json_handler(self):
 		class TEST(Enum):
 			ABC = "!@)@)!"
@@ -994,10 +1106,14 @@ class TestTimeDeltaUtils(FrappeTestCase):
 =======
 class TestTimeDeltaUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_format_timedelta(self):
 		self.assertEqual(format_timedelta(timedelta(seconds=0)), "0:00:00")
 		self.assertEqual(format_timedelta(timedelta(hours=10)), "10:00:00")
@@ -1008,19 +1124,26 @@ class TestTimeDeltaUtils(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertEqual(format_timedelta(timedelta(seconds=100, microseconds=12212199129)), "3:25:12.199129")
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(
 			format_timedelta(timedelta(seconds=100, microseconds=12212199129)),
 			"3:25:12.199129",
 		)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_parse_timedelta(self):
 		self.assertEqual(parse_timedelta("0:0:0"), timedelta(seconds=0))
@@ -1037,10 +1160,14 @@ class TestXlsxUtils(FrappeTestCase):
 =======
 class TestXlsxUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_unescape(self):
 		from frappe.utils.xlsxutils import handle_html
 
@@ -1054,10 +1181,14 @@ class TestLinkTitle(FrappeTestCase):
 =======
 class TestLinkTitle(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_link_title_doctypes_in_boot_info(self):
 		"""
 		Test that doctypes are added to link_title_map in boot_info
@@ -1153,10 +1284,14 @@ class TestAppParser(FrappeTestCase):
 =======
 class TestAppParser(MockedRequestTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_app_name_parser(self):
 		self.responses.add(
 			"HEAD",
@@ -1178,10 +1313,14 @@ class TestIntrospectionMagic(FrappeTestCase):
 =======
 class TestIntrospectionMagic(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""Test utils that inspect live objects"""
 
 	def test_get_newargs(self):
@@ -1273,10 +1412,14 @@ class TestContainerUtils(IntegrationTestCase):
 
 class TestLocks(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_locktimeout(self):
 		lock_name = "test_lock"
 		with filelock(lock_name):
@@ -1297,10 +1440,14 @@ class TestMiscUtils(FrappeTestCase):
 =======
 class TestMiscUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_get_file_timestamp(self):
 		self.assertIsInstance(get_file_timestamp(__file__), str)
 
@@ -1325,10 +1472,14 @@ class TestMiscUtils(IntegrationTestCase):
 		self.assertTrue(get_url_to_form("User", "Test User").endswith("/app/user/Test%20User"))
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_safe_json_load(self):
 		self.assertEqual(safe_json_loads("{}"), {})
 		self.assertEqual(safe_json_loads("{ /}"), "{ /}")
@@ -1353,6 +1504,7 @@ class TestMiscUtils(IntegrationTestCase):
 <<<<<<< HEAD
 class TestTBSanitization(FrappeTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 	def test_traceback_sanitzation(self):
 		try:
 			password = "42"  # noqa: F841
@@ -1367,6 +1519,8 @@ class TestTBSanitization(FrappeTestCase):
 class TestTypingValidations(FrappeTestCase):
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 class TestTypingValidations(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -1405,9 +1559,13 @@ class TestTypingValidations(IntegrationTestCase):
 
 class TestTBSanitization(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_traceback_sanitzation(self):
 		try:
 <<<<<<< HEAD
@@ -1436,10 +1594,14 @@ class TestRounding(FrappeTestCase):
 class TestRounding(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", {"rounding_method": "Commercial Rounding"})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_normal_rounding(self):
 		self.assertEqual(flt("what"), 0)
 
@@ -1526,10 +1688,14 @@ class TestRounding(IntegrationTestCase):
 		st.integers(min_value=-2, max_value=4),
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_normal_rounding_property(self, number, precision):
 		with localcontext() as ctx:
 			ctx.rounding = ROUND_HALF_UP
@@ -1612,10 +1778,14 @@ class TestRounding(IntegrationTestCase):
 		self.assertEqual(frappe.get_system_settings("rounding_method"), "Banker's Rounding")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@given(
 		st.floats(min_value=-(2**32) - 1, max_value=2**32 + 1),
 		st.integers(min_value=-(2**63) - 1, max_value=2**63 + 1),
@@ -1631,10 +1801,13 @@ class TestCrypto(FrappeTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestArgumentTypingValidations(FrappeTestCase):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 class TestArgumentTypingValidations(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	def test_validate_argument_types(self):
@@ -1724,6 +1897,7 @@ class TestChangeLog(IntegrationTestCase):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestCrypto(FrappeTestCase):
 =======
 class TestCrypto(IntegrationTestCase):
@@ -1732,6 +1906,10 @@ class TestCrypto(IntegrationTestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+class TestCrypto(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_hashing(self):
 		self.assertEqual(sha256_hash(""), "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855")
 		self.assertEqual(
@@ -1742,9 +1920,12 @@ class TestCrypto(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 class TestURLTrackers(IntegrationTestCase):
@@ -1797,8 +1978,12 @@ class TestURLTrackers(IntegrationTestCase):
 		self.assertDocumentEqual(result["utm_medium"], expected["utm_medium"])
 		self.assertDocumentEqual(result["utm_campaign"], expected["utm_campaign"])
 		self.assertEqual(result["utm_content"], expected["utm_content"])
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

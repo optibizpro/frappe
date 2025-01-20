@@ -53,10 +53,14 @@ frappe.ui.Page = class Page {
 =======
 		$(".main-section").scroll(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.utils.throttle(() => {
 				$(".page-head").toggleClass("drop-shadow", !!document.documentElement.scrollTop);
 				let current_scroll = document.documentElement.scrollTop;
@@ -102,10 +106,14 @@ frappe.ui.Page = class Page {
 				'<div class="layout-main">\
 					<div class="layout-main-section-wrapper">\
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						<div class="layout-main-section"></div>\
 						<div class="layout-footer hide"></div>\
 					</div>\
@@ -124,10 +132,14 @@ frappe.ui.Page = class Page {
 					<div class="layout-side-section"></div>
 					<div class="layout-main-section-wrapper">
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						<div class="layout-main-section"></div>
 						<div class="layout-footer hide"></div>
 					</div>
@@ -144,10 +156,14 @@ frappe.ui.Page = class Page {
 				this.wrapper.find(".layout-side-section").addClass("right");
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 
 		this.setup_page();
@@ -196,10 +212,14 @@ frappe.ui.Page = class Page {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		// keyboard shortcuts
 		let menu_btn = this.menu_btn_group.find("button");
 		menu_btn.attr("title", __("Menu")).tooltip({ delay: { show: 600, hide: 100 } });
@@ -234,10 +254,14 @@ frappe.ui.Page = class Page {
 			})
 			.appendTo(this.sidebar);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	setup_sidebar_toggle() {
@@ -245,20 +269,32 @@ frappe.ui.Page = class Page {
 		let sidebar_wrapper = this.wrapper.find(".layout-side-section");
 		if (this.disable_sidebar_toggle || !sidebar_wrapper.length) {
 			sidebar_toggle.last().remove();
+<<<<<<< HEAD
 		} else {
+			sidebar_toggle.attr("title", __("Toggle Sidebar")).tooltip({
+=======
+			this.wrapper.addClass("no-list-sidebar");
+		} else {
+<<<<<<< HEAD
 <<<<<<< HEAD
 			sidebar_toggle.attr("title", __("Toggle Sidebar")).tooltip({
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if (!frappe.is_mobile()) {
 				sidebar_toggle.attr("title", __("Toggle Sidebar"));
 			}
 			sidebar_toggle.attr("aria-label", __("Toggle Sidebar"));
 			sidebar_toggle.tooltip({
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				delay: { show: 600, hide: 100 },
 				trigger: "hover",
 			});
@@ -308,10 +344,14 @@ frappe.ui.Page = class Page {
 				"md"
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		);
 	}
 
@@ -343,10 +383,14 @@ frappe.ui.Page = class Page {
 =======
 			.attr("title", __(tooltip_label))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.tooltip({ delay: { show: 600, hide: 100 }, trigger: "hover" });
 
 		return button;
@@ -386,10 +430,14 @@ frappe.ui.Page = class Page {
 			.html(opts.iconHTML || opts.label)
 			.attr("data-label", opts.label)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.on("click", function () {
 				let response = opts.click.apply(this, [btn]);
 				me.btn_disable_enable(btn, response);
@@ -611,10 +659,14 @@ frappe.ui.Page = class Page {
 					'<li class="dropdown-divider user-action visible-xs"></li>'
 				).prependTo(parent);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 			$li.addClass("user-action").insertBefore(this.divider);
 		}
@@ -692,10 +744,14 @@ frappe.ui.Page = class Page {
 =======
 	get_or_add_inner_group_button(label, align_right) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		var $group = this.inner_toolbar.find(
 			`.inner-group-button[data-label="${encodeURIComponent(label)}"]`
 		);
@@ -757,10 +813,14 @@ frappe.ui.Page = class Page {
 =======
 	add_inner_button(label, action, group, type = "default", align_right = false) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		var me = this;
 		let _action = function () {
 			let btn = $(this);
@@ -771,10 +831,14 @@ frappe.ui.Page = class Page {
 =======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		// Add actions as menu item in Mobile View
 		let menu_item_label = group ? `${group} > ${label}` : label;
 		let menu_item = this.add_menu_item(menu_item_label, _action, false, false, false);
@@ -789,10 +853,14 @@ frappe.ui.Page = class Page {
 =======
 			var $group = this.get_or_add_inner_group_button(group, align_right);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			$(this.inner_toolbar).removeClass("hide");
 
 			if (!this.is_in_group_button_dropdown($group.find(".dropdown-menu"), "a", label)) {
@@ -892,10 +960,14 @@ frappe.ui.Page = class Page {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	clear_user_actions() {
 		this.menu.find(".user-action").remove();
 	}
@@ -910,10 +982,14 @@ frappe.ui.Page = class Page {
 =======
 	set_title(title, icon = null, strip = true, tab_title = "", tooltip_label = "") {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (!title) title = "";
 		if (strip) {
 			title = strip_html(title);
@@ -934,10 +1010,14 @@ frappe.ui.Page = class Page {
 			title_wrapper.tooltip({ delay: { show: 600, hide: 100 }, trigger: "hover" });
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	set_title_sub(txt) {
@@ -1060,10 +1140,14 @@ frappe.ui.Page = class Page {
 =======
 			.attr("title", __(df.label, null, df.parent))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.tooltip({
 				delay: { show: 600, hide: 100 },
 				trigger: "hover",

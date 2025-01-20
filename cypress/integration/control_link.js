@@ -155,10 +155,14 @@ context("Control Link", () => {
 				}
 			});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		cy.intercept("POST", "/api/method/frappe.desk.search.search_link").as("search_link");
 
@@ -186,10 +190,14 @@ context("Control Link", () => {
 		cy.wait("@search_link");
 		cy.get("@input").type("todo for link", { delay: 200 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.wait("@search_link");
 		cy.get(".frappe-control[data-fieldname=link] ul").should("be.visible");
 		cy.get(".frappe-control[data-fieldname=link] input").type("{enter}", { delay: 100 });
@@ -218,10 +226,14 @@ context("Control Link", () => {
 =======
 			cy.get("@input").clear().type(cy.config("testUser"), { delay: 300 }).blur();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			cy.wait("@validate_link");
 			cy.get(".frappe-control[data-fieldname=assigned_by_full_name] .control-value").should(
 				"contain",
@@ -310,10 +322,14 @@ context("Control Link", () => {
 =======
 			cy.get("@input").type("Sonstiges", { delay: 200 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			cy.wait("@search_link");
 			cy.wait(500);
 			cy.get(".frappe-control[data-fieldname=link] ul").should("be.visible");
@@ -350,10 +366,14 @@ context("Control Link", () => {
 =======
 		cy.get("@input").type("Non-Conforming", { delay: 200 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.wait("@search_link");
 		cy.wait(500);
 		cy.get(".frappe-control[data-fieldname=link] ul").should("be.visible");

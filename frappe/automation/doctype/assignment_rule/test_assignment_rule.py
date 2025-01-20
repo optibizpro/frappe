@@ -27,10 +27,14 @@ class UnitTestAssignmentRule(UnitTestCase):
 
 class TestAutoAssign(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -125,10 +129,14 @@ class TestAutoAssign(IntegrationTestCase):
 				len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type=TEST_DOCTYPE))), 10
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# clear 5 assignments for first user
 		# can't do a limit in "delete" since postgres does not support it
@@ -169,10 +177,14 @@ class TestAutoAssign(IntegrationTestCase):
 				len(frappe.get_all("ToDo", dict(allocated_to=user, reference_type=TEST_DOCTYPE))), 10
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_assingment_on_guest_submissions(self):
 		"""Sometimes documents are inserted as guest, check if assignment rules run on them. Use case: Web Forms"""
@@ -455,10 +467,14 @@ def _make_test_record(
 ):
 	doc = frappe.new_doc(TEST_DOCTYPE)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if kwargs:
 		doc.update(kwargs)
@@ -472,10 +488,14 @@ def _make_test_record(
 	return doc.insert(ignore_permissions=ignore_permissions)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 def create_test_doctype(doctype: str):
 	"""Create custom doctype."""

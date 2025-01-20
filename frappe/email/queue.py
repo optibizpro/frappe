@@ -8,10 +8,14 @@ from frappe.utils import cint, cstr, get_url, now_datetime
 =======
 from frappe.utils.data import getdate
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.verified_command import get_signed_params, verify_request
 
 # After this percent of failures in every batch, entire batch is aborted.
@@ -144,10 +148,14 @@ def flush():
 	"""
 	from frappe.email.doctype.email_queue.email_queue import EmailQueue
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# To avoid running jobs inside unit tests
 	if frappe.are_emails_muted():
@@ -176,10 +184,14 @@ def flush():
 			failed_email_queues.append(row.name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if (
 				len(failed_email_queues) / len(email_queue_batch)
 				> EMAIL_QUEUE_BATCH_FAILURE_THRESHOLD_PERCENT

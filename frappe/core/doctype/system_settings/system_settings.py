@@ -110,10 +110,14 @@ class SystemSettings(Document):
 		enable_password_policy = cint(self.enable_password_policy)
 		minimum_password_score = cint(getattr(self, "minimum_password_score", 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if enable_password_policy and minimum_password_score <= 0:
 			frappe.throw(_("Please select Minimum Password Score"))
 		elif not enable_password_policy:
@@ -157,10 +161,14 @@ class SystemSettings(Document):
 				_("{0} can not be more than {1}").format(label, 50), alert=True, indicator="yellow"
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def validate_user_pass_login(self):
 		if not self.disable_user_pass_login:
@@ -182,10 +190,14 @@ class SystemSettings(Document):
 				_(
 					"Please enable atleast one Social Login Key or LDAP or Login With Email Link before disabling username/password based login."
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				)
 			)
 
@@ -205,10 +217,14 @@ class SystemSettings(Document):
 		)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def on_update(self):
 		self.set_defaults()
 		clear_system_settings_cache()

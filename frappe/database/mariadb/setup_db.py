@@ -22,10 +22,14 @@ def get_mariadb_version(version_string: str = ""):
 =======
 	version = version_string.split("-", 1)[0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return version.rsplit(".", 1)
 
 
@@ -70,9 +74,12 @@ def setup_database(force, verbose, mariadb_user_host_login_scope=None):
 	bootstrap_database(db_name, verbose, source_sql)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 def setup_help_database(help_db_name):
 	dbman = DbManager(get_root_connection(frappe.flags.root_login, frappe.flags.root_password))
@@ -102,7 +109,11 @@ def drop_user_and_database(
 	db_user,
 ):
 	frappe.local.db = get_root_connection()
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	dbman = DbManager(frappe.local.db)
 	dbman.drop_database(db_name)
 	dbman.delete_user(db_user, host="%")
@@ -117,10 +128,14 @@ def bootstrap_database(verbose, source_sql=None):
 =======
 	frappe.connect()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	check_compatible_versions()
 
 	import_db_from_sql(source_sql, verbose)
@@ -186,10 +201,14 @@ def check_compatible_versions():
 			click.secho(
 				f"Warning: MariaDB version {version} is newer than 11.3 which is not yet tested with Frappe Framework.",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				fg="yellow",
 			)
 	except Exception:
@@ -204,10 +223,14 @@ def get_root_connection(root_login, root_password):
 	import getpass
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 def get_root_connection():
 	if not frappe.local.flags.root_connection:
@@ -245,9 +268,13 @@ def get_root_connection():
 			cur_db_name=None,
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return frappe.local.flags.root_connection

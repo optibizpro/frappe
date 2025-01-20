@@ -184,6 +184,7 @@
 	.file-select {
 		padding-left: 11px;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	}
 
@@ -192,6 +193,9 @@
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 }
 
@@ -263,14 +267,20 @@ $level-margin-right: 8px;
 		font-weight: var(--text-bold);
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 }
 
 .frappe-card {
 	.list-paging-area,
 	.footnote-area {
 		padding: var(--padding-md);
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 	.btn-group {
 		border: 1px solid var(--border-color);
@@ -291,16 +301,23 @@ $level-margin-right: 8px;
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .frappe-card {
 	.list-paging-area,
 	.footnote-area {
 		padding: var(--padding-md);
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 .layout-main-list {
 	.list-paging-area,
 	.footnote-area {
 		padding: var(--padding-sm) var(--padding-md);
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 }
 
@@ -314,6 +331,7 @@ $level-margin-right: 8px;
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -325,6 +343,12 @@ input.list-row-checkbox {
 	margin-bottom: 0px;
 	--checkbox-right-margin: calc(var(--checkbox-size) / 2 + #{$level-margin-right});
 	background-color: var(--card-bg);
+=======
+input.list-check-all,
+input.list-row-checkbox {
+	margin-top: 0px;
+	--checkbox-right-margin: calc(var(--checkbox-size) / 2 + #{$level-margin-right});
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 }
 =======
 input.list-row-checkbox,
@@ -334,7 +358,11 @@ input.list-header-checkbox {
 	--checkbox-right-margin: 0;
 	background-color: var(--card-bg);
 	z-index: 1;
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	&::after {
 		// Extend the checkbox's clickable area
@@ -524,10 +552,14 @@ input.list-header-checkbox {
 
 	.filter-button.btn-primary-light {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		z-index: 1;
 	}
 

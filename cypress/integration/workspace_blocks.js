@@ -22,12 +22,16 @@ context("Workspace Blocks", () => {
 		cy.fill_field("title", "Test Block Page", "Data");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		cy.fill_field("type", "Workspace", "Select");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 		cy.fill_field("type", "Workspace", "Select");
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.fill_field("type", "Workspace", "Select");
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.get_open_dialog().find(".modal-header").click();
 		cy.get_open_dialog().find(".btn-primary").click();
 

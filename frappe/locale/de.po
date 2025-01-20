@@ -3,12 +3,17 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
 <<<<<<< HEAD
+<<<<<<< HEAD
 "POT-Creation-Date: 2024-12-29 17:34+0000\n"
 "PO-Revision-Date: 2024-12-29 21:29\n"
 =======
 "POT-Creation-Date: 2025-01-05 09:33+0000\n"
 "PO-Revision-Date: 2025-01-05 22:28\n"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+"POT-Creation-Date: 2025-01-12 09:33+0000\n"
+"PO-Revision-Date: 2025-01-14 01:11\n"
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 "Last-Translator: developers@frappe.io\n"
 "Language-Team: German\n"
 "MIME-Version: 1.0\n"
@@ -55,6 +60,7 @@ msgid "\"Team Members\" or \"Management\""
 msgstr "„Teammitglieder“ oder „Management“"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1021
 msgid "\"amended_from\" field must be present to do an amendment."
 msgstr "Das Feld \"amended_from\" muss vorhanden sein, um eine Änderung vorzunehmen."
@@ -67,6 +73,9 @@ msgstr "\"{0}\" ist keine gültige Google Sheets-URL"
 #: frappe/public/js/frappe/ui/toolbar/tag_utils.js:23
 =======
 #: frappe/public/js/frappe/form/form.js:1098
+=======
+#: frappe/public/js/frappe/form/form.js:1095
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "\"amended_from\" field must be present to do an amendment."
 msgstr "Das Feld \"amended_from\" muss vorhanden sein, um eine Änderung vorzunehmen."
 
@@ -1327,7 +1336,7 @@ msgstr "Aktion fehlgeschlagen"
 msgid "Action Complete"
 msgstr "Aktion abgeschlossen"
 
-#: frappe/model/document.py:1852
+#: frappe/model/document.py:1853
 msgid "Action Failed"
 msgstr "Aktion fehlgeschlagen"
 
@@ -1390,7 +1399,7 @@ msgstr "Aktion {0} fehlgeschlagen auf {1} {2}. {3} ansehen."
 #: frappe/custom/doctype/customize_form/customize_form.js:148
 #: frappe/custom/doctype/customize_form/customize_form.js:283
 #: frappe/custom/doctype/customize_form/customize_form.json
-#: frappe/public/js/frappe/ui/page.html:56
+#: frappe/public/js/frappe/ui/page.html:57
 #: frappe/public/js/frappe/views/reports/query_report.js:191
 #: frappe/public/js/frappe/views/reports/query_report.js:204
 #: frappe/public/js/frappe/views/reports/query_report.js:214
@@ -1563,10 +1572,14 @@ msgid "Add Chart to Dashboard"
 msgstr "Diagramm zum Dashboard hinzufügen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:267
 =======
 #: frappe/public/js/frappe/views/treeview.js:281
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:301
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Add Child"
 msgstr "Unterpunkt hinzufügen"
 
@@ -2303,10 +2316,14 @@ msgid "All Records"
 msgstr "Alle Datensätze"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:2123
 =======
 #: frappe/public/js/frappe/form/form.js:2243
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:2240
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "All Submissions"
 msgstr "Alle Einsendungen"
 
@@ -2849,6 +2866,7 @@ msgid "Allowed embedding domains"
 msgstr ""
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1187
 msgid "Allowing DocType, DocType. Be careful!"
 msgstr "DocType, DocType zulassen. Achtung!"
@@ -2856,6 +2874,9 @@ msgstr "DocType, DocType zulassen. Achtung!"
 #: frappe/core/doctype/user/user.py:960
 =======
 #: frappe/public/js/frappe/form/form.js:1264
+=======
+#: frappe/public/js/frappe/form/form.js:1261
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Allowing DocType, DocType. Be careful!"
 msgstr "DocType, DocType zulassen. Achtung!"
 
@@ -3215,6 +3236,7 @@ msgid "App not found for module: {0}"
 msgstr "App nicht gefunden für Modul: {0}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/__init__.py:1712
 msgid "App {0} is not installed"
 msgstr "App {0} ist nicht installiert"
@@ -3223,6 +3245,9 @@ msgstr "App {0} ist nicht installiert"
 #. Label of a Check field in DocType 'Email Domain'
 =======
 #: frappe/__init__.py:1707
+=======
+#: frappe/__init__.py:1713
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "App {0} is not installed"
 msgstr "App {0} ist nicht installiert"
 
@@ -5786,8 +5811,12 @@ msgstr "Kamera"
 #. Label of the campaign (Link) field in DocType 'Newsletter'
 #. Label of the campaign (Data) field in DocType 'Web Page View'
 #: frappe/email/doctype/newsletter/newsletter.json
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1729
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1728
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/website/doctype/web_page_view/web_page_view.json
 #: frappe/website/report/website_analytics/website_analytics.js:39
 msgid "Campaign"
@@ -5899,6 +5928,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:956
 msgid "Cancel All"
 msgstr "Alle stornieren"
@@ -5911,6 +5941,13 @@ msgstr "Alle stornieren"
 
 #: frappe/public/js/frappe/form/form.js:974
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:984
+msgid "Cancel All"
+msgstr "Alle stornieren"
+
+#: frappe/public/js/frappe/form/form.js:971
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Cancel All Documents"
 msgstr "Alle Dokumente abbrechen"
 
@@ -5962,7 +5999,7 @@ msgctxt "Freeze message while cancelling a document"
 msgid "Cancelling"
 msgstr "Stornierung"
 
-#: frappe/desk/form/linked_with.py:375
+#: frappe/desk/form/linked_with.py:381
 msgid "Cancelling documents"
 msgstr "Dokumente stornieren"
 
@@ -6278,6 +6315,7 @@ msgid "Cannot update {0}"
 msgstr "Kann {0} nicht aktualisieren"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/db_query.py:1115
 msgid "Cannot use sub-query in order by"
 msgstr "Kann in \"sortieren nach\" keine Unterabfrage verwenden."
@@ -6290,6 +6328,13 @@ msgstr "Kann in \"sortieren nach\" keine Unterabfrage verwenden."
 
 #: frappe/model/db_query.py:1118
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/db_query.py:1106
+msgid "Cannot use sub-query in order by"
+msgstr "Kann in \"sortieren nach\" keine Unterabfrage verwenden."
+
+#: frappe/model/db_query.py:1124
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Cannot use {0} in order/group by"
 msgstr "{0} kann für die Sortierung oder Gruppierung verwendet werden"
 
@@ -6380,10 +6425,14 @@ msgid "Category Name"
 msgstr "Kategoriename"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1335
 =======
 #: frappe/utils/data.py:1491
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:1497
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Cent"
 msgstr "Cent"
 
@@ -7172,7 +7221,7 @@ msgstr "Alles schließen"
 #. Label of a Check field in DocType 'Customize Form Field'
 =======
 #: frappe/public/js/frappe/views/reports/query_report.js:1978
-#: frappe/public/js/frappe/views/treeview.js:122
+#: frappe/public/js/frappe/views/treeview.js:123
 msgid "Collapse All"
 msgstr "Alles schließen"
 
@@ -8089,7 +8138,7 @@ msgstr "Inhalt"
 #: frappe/core/doctype/comment/comment.json frappe/desk/doctype/note/note.json
 #: frappe/desk/doctype/workspace/workspace.json
 #: frappe/email/doctype/newsletter/newsletter.json
-#: frappe/public/js/frappe/utils/utils.js:1745
+#: frappe/public/js/frappe/utils/utils.js:1744
 #: frappe/website/doctype/blog_post/blog_post.json
 #: frappe/website/doctype/help_article/help_article.json
 #: frappe/website/doctype/web_page/web_page.json
@@ -8525,10 +8574,14 @@ msgstr "Protokoll erstellen"
 
 #: frappe/printing/page/print_format_builder_beta/print_format_builder_beta.js:41
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:344
 =======
 #: frappe/public/js/frappe/views/treeview.js:358
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:378
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/workflow/page/workflow_builder/workflow_builder.js:41
 msgid "Create New"
 msgstr "Neuen Eintrag erstellen"
@@ -8694,7 +8747,7 @@ msgstr "Erstellen von {0}"
 
 =======
 #: frappe/public/js/frappe/desk.js:517
-#: frappe/public/js/frappe/views/treeview.js:373
+#: frappe/public/js/frappe/views/treeview.js:393
 msgid "Creating {0}"
 msgstr "Erstellen von {0}"
 
@@ -10170,8 +10223,12 @@ msgstr "Verzögert"
 =======
 #: frappe/public/js/frappe/form/toolbar.js:438
 #: frappe/public/js/frappe/views/reports/report_view.js:1692
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:309
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:329
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/templates/discussions/reply_card.html:35
 #: frappe/templates/discussions/reply_section.html:29
 msgid "Delete"
@@ -10660,8 +10717,12 @@ msgstr "Verknüpfung ist bereits auf dem Schreibtisch platziert"
 #: frappe/public/js/frappe/views/treeview.js:258
 =======
 #: frappe/public/js/frappe/form/layout.js:137
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:272
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:292
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Details"
 msgstr "Details"
 
@@ -10773,7 +10834,7 @@ msgstr "Dokumentenfreigabe deaktivieren"
 msgid "Disable Likes"
 msgstr "Likes deaktivieren"
 
-#: frappe/core/doctype/report/report.js:36
+#: frappe/core/doctype/report/report.js:39
 msgid "Disable Report"
 msgstr "Bericht deaktivieren"
 
@@ -11039,6 +11100,7 @@ msgid "Do you still want to proceed?"
 msgstr "Wollen Sie trotzdem fortfahren?"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:935
 msgid "Do you want to cancel all linked documents?"
 msgstr "Möchten Sie alle verknüpften Dokumente stornieren?"
@@ -11046,6 +11108,9 @@ msgstr "Möchten Sie alle verknüpften Dokumente stornieren?"
 #. Label of a Select field in DocType 'Webhook'
 =======
 #: frappe/public/js/frappe/form/form.js:966
+=======
+#: frappe/public/js/frappe/form/form.js:963
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Do you want to cancel all linked documents?"
 msgstr "Möchten Sie alle verknüpften Dokumente stornieren?"
 
@@ -11523,10 +11588,14 @@ msgid "Document Naming Settings"
 msgstr "Dokumentenbenennungseinstellungen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/document.py:1553
 =======
 #: frappe/model/document.py:1710
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/document.py:1711
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Document Queued"
 msgstr "anstehendes Dokument"
 
@@ -11769,6 +11838,7 @@ msgstr "Dokumenttypen und Berechtigungen"
 
 #: frappe/core/doctype/submission_queue/submission_queue.py:163
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/document.py:1768
 msgid "Document Unlocked"
 msgstr "Dokument entsperrt"
@@ -11784,6 +11854,9 @@ msgstr "Dokument wurde gebucht"
 #: frappe/public/js/frappe/list/list_view.js:1071
 =======
 #: frappe/model/document.py:1916
+=======
+#: frappe/model/document.py:1917
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Document Unlocked"
 msgstr "Dokument entsperrt"
 
@@ -13324,7 +13397,7 @@ msgstr "Anzahl der Anfragen pro Zeit beschränken"
 msgid "Enable Raw Printing"
 msgstr "Aktivieren Sie den RAW-Druck"
 
-#: frappe/core/doctype/report/report.js:36
+#: frappe/core/doctype/report/report.js:39
 msgid "Enable Report"
 msgstr "Bericht aktivieren"
 
@@ -14179,7 +14252,13 @@ msgstr "Exekutive"
 msgid "Existing Role"
 msgstr "Bestehende Rolle"
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:115
+#: frappe/public/js/frappe/views/treeview.js:127
+#: frappe/public/js/frappe/views/treeview.js:137
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/widgets/base_widget.js:159
 msgid "Expand"
 msgstr "Erweitern"
@@ -14198,8 +14277,12 @@ msgstr "Erweitern"
 #: frappe/public/js/frappe/views/treeview.js:114
 =======
 #: frappe/public/js/frappe/views/reports/query_report.js:1978
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:126
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:133
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Expand All"
 msgstr "Alle ausklappen"
 
@@ -14955,7 +15038,7 @@ msgstr "Das Feld {0} existiert nicht auf {1}"
 msgid "Field {0} is referring to non-existing doctype {1}."
 msgstr "Das Feld {0} bezieht sich auf einen nicht existierenden Doctype {1}."
 
-#: frappe/public/js/frappe/form/form.js:1766
+#: frappe/public/js/frappe/form/form.js:1763
 msgid "Field {0} not found."
 msgstr "Feld {0} nicht gefunden"
 
@@ -15110,7 +15193,7 @@ msgstr "Felder `file_name` oder `file_url` müssen für die Datei gesetzt sein"
 msgid "Fields `file_name` or `file_url` must be set for File"
 msgstr "Felder `file_name` oder `file_url` müssen für die Datei gesetzt sein"
 
-#: frappe/model/db_query.py:138
+#: frappe/model/db_query.py:144
 msgid "Fields must be a list or tuple when as_list is enabled"
 msgstr "Felder müssen eine Liste oder ein Tupel sein, wenn as_list aktiviert ist"
 
@@ -16560,12 +16643,16 @@ msgstr "Funktion"
 msgid "Function Based On"
 msgstr "Funktion basiert auf"
 
-#: frappe/__init__.py:841
+#: frappe/__init__.py:844
 msgid "Function {0} is not whitelisted."
 msgstr "Funktion {0} ist nicht freigegeben."
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:399
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:419
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Further nodes can be only created under 'Group' type nodes"
 msgstr "Weitere Knoten können nur unter Knoten vom Typ \"Gruppe\" erstellt werden"
 
@@ -16670,7 +16757,7 @@ msgid "Generate Random Password"
 msgstr "Zufälliges Passwort generieren"
 
 #: frappe/public/js/frappe/ui/toolbar/toolbar.js:172
-#: frappe/public/js/frappe/utils/utils.js:1790
+#: frappe/public/js/frappe/utils/utils.js:1789
 msgid "Generate Tracking URL"
 msgstr "Tracking-URL generieren"
 
@@ -16723,7 +16810,7 @@ msgstr "Felder erhalten"
 msgid "Get Header and Footer wkhtmltopdf variables"
 msgstr "Variablen für Kopf- und Fußzeilen abrufen"
 
-#: frappe/public/js/frappe/form/multi_select_dialog.js:87
+#: frappe/public/js/frappe/form/multi_select_dialog.js:86
 msgid "Get Items"
 msgstr "Artikel aufrufen"
 
@@ -17295,7 +17382,7 @@ msgstr "Gruppen-Knoten"
 msgid "Group By field is required to create a dashboard chart"
 msgstr "Das Feld Gruppieren nach ist erforderlich, um ein Dashboard-Diagramm zu erstellen"
 
-#: frappe/public/js/frappe/views/treeview.js:398
+#: frappe/public/js/frappe/views/treeview.js:418
 msgid "Group Node"
 msgstr "Gruppen-Knoten"
 
@@ -17691,10 +17778,14 @@ msgid "Helvetica Neue"
 msgstr "Helvetica Neue"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1769
 =======
 #: frappe/public/js/frappe/utils/utils.js:1787
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1786
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Here's your tracking URL"
 msgstr "Hier ist Ihre Tracking-URL"
 
@@ -18584,6 +18675,7 @@ msgid "Illegal Document Status for {0}"
 msgstr "Illegaler Dokumentstatus für {0}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/db_query.py:442 frappe/model/db_query.py:445
 #: frappe/model/db_query.py:1118
 msgid "Illegal SQL Query"
@@ -18597,6 +18689,10 @@ msgstr "Ungültige Vorlage"
 =======
 #: frappe/model/db_query.py:443 frappe/model/db_query.py:446
 #: frappe/model/db_query.py:1103
+=======
+#: frappe/model/db_query.py:449 frappe/model/db_query.py:452
+#: frappe/model/db_query.py:1109
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Illegal SQL Query"
 msgstr "Ungültige SQL-Abfrage"
 
@@ -19099,6 +19195,10 @@ msgstr "Posteingang-Ansicht"
 msgid "Inbox View"
 msgstr "Posteingang-Ansicht"
 
+#: frappe/public/js/frappe/views/treeview.js:110
+msgid "Include Disabled"
+msgstr "Deaktivierte einbeziehen"
+
 #. Label of the include_name_field (Check) field in DocType 'Form Tour'
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/desk/doctype/form_tour/form_tour.json
@@ -19262,11 +19362,11 @@ msgstr "Falscher Benutzer oder Passwort"
 msgid "Incorrect Verification code"
 msgstr "Falscher Bestätigungscode"
 
-#: frappe/model/document.py:1507
+#: frappe/model/document.py:1508
 msgid "Incorrect value in row {0}:"
 msgstr "Falscher Wert in Zeile {0}:"
 
-#: frappe/model/document.py:1509
+#: frappe/model/document.py:1510
 msgid "Incorrect value:"
 msgstr "Falscher Wert:"
 
@@ -19730,6 +19830,7 @@ msgid "Invalid Credentials"
 msgstr "Ungültige Anmeldeinformationen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:104 frappe/utils/data.py:254
 msgid "Invalid Date"
 msgstr "Ungültiges Datum"
@@ -19749,6 +19850,9 @@ msgstr "Ungültiger Feldname"
 #: frappe/core/doctype/file/file.py:205
 =======
 #: frappe/utils/data.py:129 frappe/utils/data.py:298
+=======
+#: frappe/utils/data.py:135 frappe/utils/data.py:304
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Invalid Date"
 msgstr "Ungültiges Datum"
 
@@ -19976,6 +20080,7 @@ msgid "Invalid expression set in filter {0} ({1})"
 msgstr "Ungültiger Ausdruck im Filter {0} ({1}) gesetzt"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1902
 msgid "Invalid field name {0}"
 msgstr "Ungültiger Feldname {0}"
@@ -19991,6 +20096,9 @@ msgstr "Ungültiger Dateipfad: {0}"
 #: frappe/database/query.py:173
 =======
 #: frappe/utils/data.py:2138
+=======
+#: frappe/utils/data.py:2144
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Invalid field name {0}"
 msgstr "Ungültiger Feldname {0}"
 
@@ -21842,7 +21950,7 @@ msgstr "Like Limit pro Stunde"
 msgid "Like on {0}: {1}"
 msgstr "„Gefällt mir“ für {0}: {1}"
 
-#: frappe/desk/like.py:91
+#: frappe/desk/like.py:92
 msgid "Liked"
 msgstr "Geliked"
 
@@ -22848,7 +22956,7 @@ msgstr "Stellen Sie sicher, dass Sie vor der Deaktivierung einen Social Login Ke
 msgid "Make use of longer keyboard patterns"
 msgstr "Nutzen Sie mehr Tastaturmuster"
 
-#: frappe/public/js/frappe/form/multi_select_dialog.js:88
+#: frappe/public/js/frappe/form/multi_select_dialog.js:87
 msgid "Make {0}"
 msgstr "{0} machen"
 
@@ -23263,8 +23371,12 @@ msgstr "Bedeutung von Buchen, Stornieren, Berichtigen"
 #. Label of the medium (Data) field in DocType 'Web Page View'
 #: frappe/desk/doctype/todo/todo.json
 #: frappe/public/js/frappe/form/sidebar/assign_to.js:220
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1737
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1736
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/website/doctype/web_page_view/web_page_view.json
 #: frappe/website/report/website_analytics/website_analytics.js:40
 msgid "Medium"
@@ -23317,6 +23429,7 @@ msgstr "Erwähnen"
 msgid "Mentions"
 msgstr "Erwähnungen"
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/ui/page.html:40
 <<<<<<< HEAD
 #: frappe/public/js/frappe/ui/page.js:155
@@ -23350,6 +23463,10 @@ msgstr "Zusammenführung ist nur möglich zwischen Gruppen oder Knoten"
 #: frappe/core/doctype/data_import/data_import.js:488
 =======
 #: frappe/public/js/frappe/ui/page.js:161
+=======
+#: frappe/public/js/frappe/ui/page.html:41
+#: frappe/public/js/frappe/ui/page.js:162
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Menu"
 msgstr "Menü"
 
@@ -23406,8 +23523,12 @@ msgstr "Nachricht"
 msgid "Message"
 msgstr "Nachricht"
 
+<<<<<<< HEAD
 #: frappe/__init__.py:517 frappe/public/js/frappe/ui/messages.js:267
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/__init__.py:520 frappe/public/js/frappe/ui/messages.js:267
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgctxt "Default title of the message dialog"
 msgid "Message"
 msgstr "Nachricht"
@@ -23621,10 +23742,14 @@ msgid "Method"
 msgstr "Methode"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/__init__.py:858
 =======
 #: frappe/__init__.py:843
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/__init__.py:846
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Method Not Allowed"
 msgstr "Methode nicht erlaubt"
 
@@ -24377,10 +24502,14 @@ msgstr "HINWEIS: Dieses Feld ist veraltet. Bitte richten Sie LDAP neu ein, um mi
 #: frappe/desk/doctype/workspace/workspace.json
 #: frappe/integrations/doctype/slack_webhook_url/slack_webhook_url.json
 #: frappe/public/js/frappe/form/layout.js:75
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/multi_select_dialog.js:241
 <<<<<<< HEAD
 #: frappe/public/js/frappe/form/save.js:154
 =======
+=======
+#: frappe/public/js/frappe/form/multi_select_dialog.js:240
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/form/save.js:107
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/public/js/frappe/views/file/file_view.js:97
@@ -24570,6 +24699,7 @@ msgid "Navigate list up"
 msgstr "Liste nach oben navigieren"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/ui/page.js:168
 msgid "Navigate to main content"
 msgstr "Zum Hauptinhalt navigieren"
@@ -24577,6 +24707,9 @@ msgstr "Zum Hauptinhalt navigieren"
 #. Label of a Section Break field in DocType 'User'
 =======
 #: frappe/public/js/frappe/ui/page.js:174
+=======
+#: frappe/public/js/frappe/ui/page.js:175
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Navigate to main content"
 msgstr "Zum Hauptinhalt navigieren"
 
@@ -24627,10 +24760,14 @@ msgstr "Netzwerkdrucker-Einstellungen"
 #: frappe/email/doctype/notification/notification.json
 #: frappe/public/js/frappe/form/success_action.js:77
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:437
 #: frappe/public/js/frappe/views/workspace/workspace.js:98
 =======
 #: frappe/public/js/frappe/views/treeview.js:451
+=======
+#: frappe/public/js/frappe/views/treeview.js:471
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/views/workspace/workspace.js:65
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/social/doctype/energy_point_rule/energy_point_rule.json
@@ -24888,7 +25025,7 @@ msgstr "Neuer Wert muss gesetzt werden"
 #: frappe/website/doctype/web_form/web_form.py:309
 =======
 #: frappe/public/js/frappe/views/breadcrumbs.js:208
-#: frappe/public/js/frappe/views/treeview.js:346
+#: frappe/public/js/frappe/views/treeview.js:366
 #: frappe/public/js/frappe/widgets/widget_dialog.js:72
 #: frappe/website/doctype/web_form/web_form.py:312
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -25179,8 +25316,12 @@ msgstr "Keine Kopie"
 =======
 #: frappe/public/js/form_builder/components/controls/TableControl.vue:64
 #: frappe/public/js/frappe/data_import/import_preview.js:142
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/public/js/frappe/form/multi_select_dialog.js:225
+=======
+#: frappe/public/js/frappe/form/multi_select_dialog.js:224
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/utils/datatable.js:10
 #: frappe/public/js/frappe/widgets/chart_widget.js:57
 msgid "No Data"
@@ -25556,21 +25697,29 @@ msgstr "Keine Berechtigung für {0}"
 msgid "No of Sent SMS"
 msgstr "Anzahl der gesendeten SMS"
 
-#: frappe/__init__.py:1035 frappe/client.py:108 frappe/client.py:150
+#: frappe/__init__.py:1039 frappe/client.py:108 frappe/client.py:150
 msgid "No permission for {0}"
 msgstr "Keine Berechtigung für {0}"
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1150
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:1147
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgctxt "{0} = verb, {1} = object"
 msgid "No permission to '{0}' {1}"
 msgstr "Keine Berechtigung um '{0}' {1}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/db_query.py:938
 =======
 #: frappe/model/db_query.py:924
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/db_query.py:930
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "No permission to read {0}"
 msgstr "Keine Berechtigung zum Lesen {0}"
 
@@ -25776,7 +25925,7 @@ msgstr "Nicht mit jedem Datensatz verknüpft"
 msgid "Not Nullable"
 msgstr "Nicht nullbar"
 
-#: frappe/__init__.py:925 frappe/app.py:370 frappe/desk/calendar.py:26
+#: frappe/__init__.py:928 frappe/app.py:370 frappe/desk/calendar.py:26
 #: frappe/geo/utils.py:97 frappe/public/js/frappe/web_form/webform_script.js:15
 #: frappe/website/doctype/web_form/web_form.py:605
 #: frappe/website/page_renderers/not_permitted_page.py:20
@@ -25950,8 +26099,8 @@ msgstr "Nicht im Entwicklungsmodus! In site_config.json erstellen oder \"Benutze
 msgid "Not in Developer Mode! Set in site_config.json or make 'Custom' DocType."
 msgstr "Nicht im Entwicklungsmodus! In site_config.json erstellen oder \"Benutzerdefiniertes\" DocType erstellen."
 
-#: frappe/__init__.py:597
-#: frappe/core/doctype/system_settings/system_settings.py:213
+#: frappe/__init__.py:600
+#: frappe/core/doctype/system_settings/system_settings.py:211
 #: frappe/public/js/frappe/request.js:158
 #: frappe/public/js/frappe/request.js:168
 #: frappe/public/js/frappe/request.js:173
@@ -26755,6 +26904,7 @@ msgid "Only Administrator can save a standard report. Please rename and save."
 msgstr "Nur der Administrator kann einen Standardbericht speichern. Bitte umbenennen und speichern."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/recorder.py:309
 msgid "Only Administrator is allowed to use Recorder"
 msgstr "Nur der Administrator darf den Recorder verwenden"
@@ -26762,6 +26912,9 @@ msgstr "Nur der Administrator darf den Recorder verwenden"
 #. Label of a Link field in DocType 'Workflow Document State'
 =======
 #: frappe/recorder.py:307
+=======
+#: frappe/recorder.py:311
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Only Administrator is allowed to use Recorder"
 msgstr "Nur der Administrator darf den Recorder verwenden"
 
@@ -26814,11 +26967,15 @@ msgid "Only change this if you want to use other S3 compatible object storage ba
 msgstr "Ändern Sie dies nur, wenn Sie andere S3-kompatible Objektspeicher-Backends verwenden möchten."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #. Label of a Link field in DocType 'Workspace Link'
 #: frappe/desk/doctype/workspace_link/workspace_link.json
 #: frappe/public/js/frappe/widgets/widget_dialog.js:290
 =======
 #: frappe/model/document.py:1200
+=======
+#: frappe/model/document.py:1201
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Only draft documents can be discarded"
 msgstr "Nur Dokumente im Entwurfsstatus können verworfen werden"
 
@@ -27063,10 +27220,14 @@ msgid "Operation"
 msgstr "Arbeitsgang"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1838
 =======
 #: frappe/utils/data.py:2069
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:2075
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Operator must be one of {0}"
 msgstr "Betreiber muss einer von {0}"
 
@@ -28190,6 +28351,7 @@ msgid "Permanent"
 msgstr "Dauerhaft"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1005
 msgid "Permanently Cancel {0}?"
 msgstr "{0} endgültig abbrechen?"
@@ -28205,10 +28367,13 @@ msgstr "{0} endgültig löschen?"
 #: frappe/core/doctype/user_type/user_type.py:83
 =======
 #: frappe/public/js/frappe/form/form.js:1036
+=======
+#: frappe/public/js/frappe/form/form.js:1033
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Permanently Cancel {0}?"
 msgstr "{0} endgültig abbrechen?"
 
-#: frappe/public/js/frappe/form/form.js:1082
+#: frappe/public/js/frappe/form/form.js:1079
 msgid "Permanently Discard {0}?"
 msgstr "{0} dauerhaft verwerfen?"
 
@@ -28683,10 +28848,14 @@ msgstr "Bitte aktivieren Sie mindestens eines der Anmeldeverfahren Social Login 
 #: frappe/printing/page/print/print.js:668
 #: frappe/public/js/frappe/list/bulk_operations.js:161
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1438
 =======
 #: frappe/public/js/frappe/utils/utils.js:1431
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1430
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Please enable pop-ups"
 msgstr "Bitte Pop-ups aktivieren"
 
@@ -28914,8 +29083,12 @@ msgstr "Bitte eine Datei oder URL auswählen"
 msgid "Please select a valid csv file with data"
 msgstr "Bitte eine gültige CSV-Datei mit Daten auswählen"
 
+<<<<<<< HEAD
 #: frappe/utils/data.py:298
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:304
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Please select a valid date filter"
 msgstr "Bitte wählen Sie einen gültigen Datumsfilter"
 
@@ -28924,10 +29097,14 @@ msgid "Please select applicable Doctypes"
 msgstr "Bitte zutreffende Doctypes auswählen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/db_query.py:1130
 =======
 #: frappe/model/db_query.py:1115
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/db_query.py:1121
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Please select atleast 1 column from {0} to sort/group"
 msgstr "Bitte wählen Sie atleast 1 Spalte von {0} sortieren / Gruppe"
 
@@ -29494,10 +29671,14 @@ msgid "Previous Hash"
 msgstr "Vorheriger Hash"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:2115
 =======
 #: frappe/public/js/frappe/form/form.js:2235
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:2232
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Previous Submission"
 msgstr "Vorherige Buchungen"
 
@@ -29572,7 +29753,7 @@ msgstr "Drucken"
 #: frappe/public/js/frappe/list/bulk_operations.js:95
 #: frappe/public/js/frappe/views/reports/query_report.js:1654
 #: frappe/public/js/frappe/views/reports/report_view.js:1489
-#: frappe/public/js/frappe/views/treeview.js:470 frappe/www/printview.html:18
+#: frappe/public/js/frappe/views/treeview.js:490 frappe/www/printview.html:18
 msgid "Print"
 msgstr "Drucken"
 
@@ -30880,7 +31061,7 @@ msgstr "Baum neu aufbauen"
 msgid "Rebuild"
 msgstr "Wiederaufbau"
 
-#: frappe/public/js/frappe/views/treeview.js:489
+#: frappe/public/js/frappe/views/treeview.js:509
 msgid "Rebuild Tree"
 msgstr "Baum neu aufbauen"
 
@@ -31454,11 +31635,11 @@ msgstr "Referrer"
 =======
 #: frappe/printing/page/print/print.js:73 frappe/public/js/frappe/desk.js:169
 #: frappe/public/js/frappe/desk.js:550
-#: frappe/public/js/frappe/form/form.js:1209
+#: frappe/public/js/frappe/form/form.js:1206
 #: frappe/public/js/frappe/form/templates/print_layout.html:6
 #: frappe/public/js/frappe/list/base_list.js:66
 #: frappe/public/js/frappe/views/reports/query_report.js:1643
-#: frappe/public/js/frappe/views/treeview.js:476
+#: frappe/public/js/frappe/views/treeview.js:496
 #: frappe/public/js/frappe/widgets/chart_widget.js:291
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/public/js/frappe/widgets/number_card_widget.js:324
@@ -31745,8 +31926,12 @@ msgstr "{0} entfernt"
 #: frappe/public/js/frappe/form/toolbar.js:240
 #: frappe/public/js/frappe/form/toolbar.js:409
 #: frappe/public/js/frappe/model/model.js:757
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:291
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:311
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Rename"
 msgstr "Umbenennen"
 
@@ -34205,8 +34390,12 @@ msgstr "Alle früheren Berichte anzeigen."
 msgid "See all past reports."
 msgstr "Alle früheren Berichte anzeigen."
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1243
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:1240
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/website/doctype/contact_us_settings/contact_us_settings.js:4
 msgid "See on Website"
 msgstr "Auf der Webseite ansehen"
@@ -34588,6 +34777,7 @@ msgid "Select a field to edit its properties."
 msgstr "Wählen Sie ein Feld aus, um seine Eigenschaften zu bearbeiten."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:324
 msgid "Select a group node first."
 msgstr "Zuerst einen Gruppenknoten wählen."
@@ -34603,6 +34793,9 @@ msgstr "Wählen Sie ein gültiges Betrefffeld zum Erstellen von Dokumenten aus E
 #: frappe/public/js/frappe/form/form_tour.js:315
 =======
 #: frappe/public/js/frappe/views/treeview.js:338
+=======
+#: frappe/public/js/frappe/views/treeview.js:358
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Select a group node first."
 msgstr "Zuerst einen Gruppenknoten wählen."
 
@@ -34687,8 +34880,8 @@ msgid "Select two versions to view the diff."
 msgstr "Wählen Sie zwei Versionen aus, um den Unterschied anzuzeigen."
 
 #: frappe/public/js/frappe/form/link_selector.js:24
-#: frappe/public/js/frappe/form/multi_select_dialog.js:81
-#: frappe/public/js/frappe/form/multi_select_dialog.js:283
+#: frappe/public/js/frappe/form/multi_select_dialog.js:80
+#: frappe/public/js/frappe/form/multi_select_dialog.js:282
 #: frappe/public/js/frappe/list/list_view_select.js:153
 #: frappe/public/js/print_format_builder/Preview.vue:90
 msgid "Select {0}"
@@ -36095,7 +36288,7 @@ msgstr "Zugehörige Fehler anzeigen"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 #: frappe/core/doctype/access_log/access_log.json
 #: frappe/core/doctype/prepared_report/prepared_report.js:43
-#: frappe/core/doctype/report/report.js:13
+#: frappe/core/doctype/report/report.js:16
 msgid "Show Report"
 msgstr "Bericht zeigen"
 
@@ -36842,8 +37035,12 @@ msgstr "Sortierfeld {0} muss ein gültiger Feldname sein"
 #. Label of the source (Data) field in DocType 'Web Page View'
 #. Label of the source (Small Text) field in DocType 'Website Route Redirect'
 #: frappe/public/js/frappe/ui/toolbar/about.js:8
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1720
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1719
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/website/doctype/web_page_view/web_page_view.json
 #: frappe/website/doctype/website_route_redirect/website_route_redirect.json
 #: frappe/website/report/website_analytics/website_analytics.js:38
@@ -37734,7 +37931,7 @@ msgstr "Buchen Sie dieses Dokument, um zu bestätigen"
 msgid "Submit this document to complete this step."
 msgstr "Senden Sie dieses Dokument, um diesen Schritt abzuschließen."
 
-#: frappe/public/js/frappe/form/form.js:1229
+#: frappe/public/js/frappe/form/form.js:1226
 msgid "Submit this document to confirm"
 msgstr "Buchen Sie dieses Dokument, um zu bestätigen"
 
@@ -38154,10 +38351,14 @@ msgid "Syncing {0} of {1}"
 msgstr "{0} von {1} synchronisieren"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:2175
 =======
 #: frappe/utils/data.py:2444
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:2450
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Syntax Error"
 msgstr "Syntaxfehler"
 
@@ -38546,8 +38747,12 @@ msgstr "Tabelle aktualisiert"
 msgid "Table updated"
 msgstr "Tabelle aktualisiert"
 
+<<<<<<< HEAD
 #: frappe/model/document.py:1530
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/document.py:1531
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Table {0} cannot be empty"
 msgstr "Tabelle {0} darf nicht leer sein"
 
@@ -39404,6 +39609,7 @@ msgid "This action is irreversible. Do you wish to continue?"
 msgstr "Diese Aktion ist unumkehrbar. Möchten Sie fortfahren?"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/__init__.py:936
 msgid "This action is only allowed for {}"
 msgstr "Diese Aktion ist nur für {} zulässig"
@@ -39412,6 +39618,9 @@ msgstr "Diese Aktion ist nur für {} zulässig"
 #: frappe/public/js/frappe/model/model.js:735
 =======
 #: frappe/__init__.py:921
+=======
+#: frappe/__init__.py:924
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "This action is only allowed for {}"
 msgstr "Diese Aktion ist nur für {} zulässig"
 
@@ -39467,6 +39676,7 @@ msgid "This document has been reverted"
 msgstr "Dieses Dokument wurde zurückgesetzt"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1240
 msgid "This document has unsaved changes which might not appear in final PDF. <br> Consider saving the document before printing."
 msgstr "Dieses Dokument enthält ungespeicherte Änderungen, die möglicherweise nicht in der PDF-Datei erscheinen. <br> Bitte speichern Sie das Dokument vor dem Drucken."
@@ -39478,15 +39688,22 @@ msgstr "Dieses Dokument wurde bereits geändert. Sie können es nicht erneut än
 #: frappe/model/document.py:1550
 =======
 #: frappe/public/js/frappe/form/form.js:1317
+=======
+#: frappe/public/js/frappe/form/form.js:1314
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "This document has unsaved changes which might not appear in final PDF. <br> Consider saving the document before printing."
 msgstr "Dieses Dokument enthält ungespeicherte Änderungen, die möglicherweise nicht in der PDF-Datei erscheinen. <br> Bitte speichern Sie das Dokument vor dem Drucken."
 
-#: frappe/public/js/frappe/form/form.js:1110
+#: frappe/public/js/frappe/form/form.js:1107
 msgid "This document is already amended, you cannot ammend it again"
 msgstr "Dieses Dokument wurde bereits geändert. Sie können es nicht erneut ändern"
 
+<<<<<<< HEAD
 #: frappe/model/document.py:1707
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/document.py:1708
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "This document is currently locked and queued for execution. Please try again after some time."
 msgstr "Dieses Dokument ist derzeit gesperrt und befindet sich in der Warteschlange für die Ausführung. Bitte versuchen Sie es nach einiger Zeit erneut."
 
@@ -39521,6 +39738,7 @@ msgid "This file is public. It can be accessed without authentication."
 msgstr "Diese Datei ist öffentlich. Sie kann ohne Authentifizierung aufgerufen werden."
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:1130
 msgid "This form has been modified after you have loaded it"
 msgstr "Dieses Formular wurde geändert, nachdem Sie es geladen haben"
@@ -39528,6 +39746,9 @@ msgstr "Dieses Formular wurde geändert, nachdem Sie es geladen haben"
 #: frappe/public/js/frappe/form/form.js:415
 =======
 #: frappe/public/js/frappe/form/form.js:1207
+=======
+#: frappe/public/js/frappe/form/form.js:1204
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "This form has been modified after you have loaded it"
 msgstr "Dieses Formular wurde geändert, nachdem Sie es geladen haben"
 
@@ -40379,6 +40600,7 @@ msgid "Toggle Grid View"
 msgstr "Rasteransicht wechseln"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/workspace/workspace.js:212
 msgid "Toggle Section: {0}"
 msgstr ""
@@ -40393,6 +40615,10 @@ msgstr "Seitenleiste umschalten"
 =======
 #: frappe/public/js/frappe/ui/page.js:199
 #: frappe/public/js/frappe/ui/page.js:201
+=======
+#: frappe/public/js/frappe/ui/page.js:200
+#: frappe/public/js/frappe/ui/page.js:202
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/views/reports/report_view.js:1526
 msgid "Toggle Sidebar"
 msgstr "Seitenleiste umschalten"
@@ -40791,7 +41017,7 @@ msgstr "Tracking URL generiert und in die Zwischenablage kopiert"
 msgid "Tracking"
 msgstr ""
 
-#: frappe/public/js/frappe/utils/utils.js:1784
+#: frappe/public/js/frappe/utils/utils.js:1783
 msgid "Tracking URL generated and copied to clipboard"
 msgstr "Tracking URL generiert und in die Zwischenablage kopiert"
 
@@ -40924,7 +41150,7 @@ msgstr "Baumansicht"
 msgid "Tree structures are implemented using Nested Set"
 msgstr "Baumstrukturen werden mittels Nested Set implementiert"
 
-#: frappe/public/js/frappe/views/treeview.js:20
+#: frappe/public/js/frappe/views/treeview.js:19
 msgid "Tree view is not available for {0}"
 msgstr "Die Baumansicht ist für {0} nicht verfügbar"
 
@@ -41431,6 +41657,7 @@ msgid "Unknown Column: {0}"
 msgstr "Unbekannte Spalte: {0}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1062
 msgid "Unknown Rounding Method: {}"
 msgstr "Unbekannte Rundungsmethode: {}"
@@ -41444,6 +41671,9 @@ msgid "Unknown file encoding. Tried utf-8, windows-1250, windows-1252."
 msgstr "Unbekannte Datei-Codierung. Folgende Verfahren wurden ausprobiert: UTF-8 , windows-1250, windows-1252."
 =======
 #: frappe/utils/data.py:1217
+=======
+#: frappe/utils/data.py:1223
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Unknown Rounding Method: {}"
 msgstr "Unbekannte Rundungsmethode: {}"
 
@@ -41991,6 +42221,7 @@ msgid "Use different Email ID"
 msgstr "Andere E-Mail-Adresse verwenden"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/db_query.py:425
 msgid "Use of function {0} in field is restricted"
 msgstr "Die Verwendung der Funktion {0} im Feld ist eingeschränkt"
@@ -42003,6 +42234,13 @@ msgstr "Die Verwendung der Funktion {0} im Feld ist eingeschränkt"
 
 #: frappe/model/db_query.py:405
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/db_query.py:432
+msgid "Use of function {0} in field is restricted"
+msgstr "Die Verwendung der Funktion {0} im Feld ist eingeschränkt"
+
+#: frappe/model/db_query.py:411
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Use of sub-query or function is restricted"
 msgstr "Die Verwendung von Teilabfragen oder Funktionen ist eingeschränkt."
 
@@ -42610,8 +42848,12 @@ msgstr "Benutzer {0} hat sich als {1} ausgegeben"
 msgid "User {0} is disabled"
 msgstr "Benutzer {0} ist deaktiviert"
 
+<<<<<<< HEAD
 #: frappe/sessions.py:230
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/sessions.py:232
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "User {0} is disabled. Please contact your System Manager."
 msgstr "Benutzer {0} ist deaktiviert. Bitte wenden Sie sich an Ihren Systemmanager."
 
@@ -42932,10 +43174,14 @@ msgid "Value {0} missing for {1}"
 msgstr "Wert {0} fehlt für {1}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/core/doctype/data_import/importer.py:751 frappe/utils/data.py:704
 =======
 #: frappe/core/doctype/data_import/importer.py:751 frappe/utils/data.py:853
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/core/doctype/data_import/importer.py:751 frappe/utils/data.py:859
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Value {0} must be in the valid duration format: d h m s"
 msgstr "Der Wert {0} muss das gültige Dauerformat haben: dhms"
 
@@ -43077,10 +43323,14 @@ msgid "View Full Log"
 msgstr "Vollständiges Protokoll anzeigen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:450
 #: frappe/public/js/frappe/widgets/quick_list_widget.js:251
 =======
 #: frappe/public/js/frappe/views/treeview.js:464
+=======
+#: frappe/public/js/frappe/views/treeview.js:484
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 #: frappe/public/js/frappe/widgets/quick_list_widget.js:256
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 msgid "View List"
@@ -43372,10 +43622,14 @@ msgid "Web Page Block"
 msgstr "Webseitenblock"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:1719
 =======
 #: frappe/public/js/frappe/utils/utils.js:1712
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/utils/utils.js:1711
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Web Page URL"
 msgstr "URL der Webseite"
 
@@ -44516,8 +44770,12 @@ msgstr "Sie dürfen keinen {} Doctype exportieren"
 msgid "You are not allowed to export {} doctype"
 msgstr "Sie dürfen keinen {} Doctype exportieren"
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:428
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:448
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "You are not allowed to print this report"
 msgstr "Sie sind nicht berechtigt diesen Bericht zu drucken"
 
@@ -44556,8 +44814,12 @@ msgstr "Sie sind nicht berechtigt auf diese Seite zuzugreifen."
 msgid "You are not permitted to access this page."
 msgstr "Sie sind nicht berechtigt auf diese Seite zuzugreifen."
 
+<<<<<<< HEAD
 #: frappe/__init__.py:840
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/__init__.py:843
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "You are not permitted to access this resource."
 msgstr "Sie sind nicht berechtigt, auf diese Ressource zuzugreifen."
 
@@ -44808,8 +45070,12 @@ msgstr ""
 msgid "You do not have permission to access {0}: {1}."
 msgstr ""
 
+<<<<<<< HEAD
 #: frappe/public/js/frappe/form/form.js:968
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/form/form.js:965
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "You do not have permissions to cancel all linked documents."
 msgstr "Sie haben keine Berechtigung, alle verknüpften Dokumente zu stornieren."
 
@@ -44889,7 +45155,7 @@ msgstr "Sie haben ein ❤️ like für Ihren Blogbeitrag erhalten"
 msgid "You have to enable Two Factor Auth from System Settings."
 msgstr "Sie müssen die Zwei-Faktor-Authentifizierung in den Systemeinstellungen aktivieren."
 
-#: frappe/public/js/frappe/model/create_new.js:332
+#: frappe/public/js/frappe/model/create_new.js:328
 msgid "You have unsaved changes in this form. Please save before you continue."
 msgstr "Sie haben noch nicht gespeicherte Änderungen in diesem Formular. Bitte speichern Sie diese, bevor Sie fortfahren."
 
@@ -45234,6 +45500,7 @@ msgid "Your verification code is {0}"
 msgstr "Ihr Bestätigungscode ist {0}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #. Success message of the Module Onboarding 'Website'
 #: frappe/website/module_onboarding/website/website.json
 msgid "Your website is all set up!"
@@ -45243,6 +45510,9 @@ msgstr "Ihre Website ist fertig eingerichtet!"
 =======
 #: frappe/utils/data.py:1518
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:1524
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "Zero"
 msgstr "Null"
 
@@ -45333,6 +45603,7 @@ msgid "amend"
 msgstr "berichtigen"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/utils/utils.js:410 frappe/utils/data.py:1370
 msgid "and"
 msgstr "und"
@@ -45359,6 +45630,9 @@ msgstr "Pfeil-nach-oben"
 
 =======
 #: frappe/public/js/frappe/utils/utils.js:399 frappe/utils/data.py:1524
+=======
+#: frappe/public/js/frappe/utils/utils.js:399 frappe/utils/data.py:1530
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "and"
 msgstr "und"
 
@@ -47097,10 +47371,14 @@ msgstr "{0} Einstellungen"
 #: frappe/public/js/frappe/ui/toolbar/search_utils.js:87
 #: frappe/public/js/frappe/ui/toolbar/search_utils.js:88
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/public/js/frappe/views/treeview.js:128
 =======
 #: frappe/public/js/frappe/views/treeview.js:140
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/public/js/frappe/views/treeview.js:152
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} Tree"
 msgstr "{0} Baumstruktur"
 
@@ -47139,10 +47417,14 @@ msgid "{0} already unsubscribed for {1} {2}"
 msgstr "{0} bereits abgemeldet für {1} {2}"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1524
 =======
 #: frappe/utils/data.py:1706
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:1712
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} and {1}"
 msgstr "{0} und {1}"
 
@@ -47380,10 +47662,14 @@ msgid "{0} has left the conversation in {1} {2}"
 msgstr "{0} wurde von E-Mail-Benachrichtigungen zu {1} {2} abgemeldet"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/__init__.py:2411
 =======
 #: frappe/__init__.py:2408
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/__init__.py:2402
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} has no versions tracked."
 msgstr "Für {0} wurden keine Versionen verfolgt."
 
@@ -47714,6 +48000,7 @@ msgid "{0} months ago"
 msgstr "vor {0} Monaten"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/model/document.py:1615
 msgid "{0} must be after {1}"
 msgstr "{0} muss nach {1} liegen"
@@ -47753,22 +48040,25 @@ msgstr "{0} muss mit einem Buchstaben beginnen und enden und darf nur Buchstaben
 "\t\t\t\tBindestriche oder Unterstriche enthalten."
 =======
 #: frappe/model/document.py:1772
+=======
+#: frappe/model/document.py:1773
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} must be after {1}"
 msgstr "{0} muss nach {1} liegen"
 
-#: frappe/model/document.py:1516
+#: frappe/model/document.py:1517
 msgid "{0} must be beginning with '{1}'"
 msgstr "{0} muss mit '{1}' beginnen"
 
-#: frappe/model/document.py:1518
+#: frappe/model/document.py:1519
 msgid "{0} must be equal to '{1}'"
 msgstr "{0} muss gleich '{1}' sein"
 
-#: frappe/model/document.py:1514
+#: frappe/model/document.py:1515
 msgid "{0} must be none of {1}"
 msgstr "{0} darf nichts von {1} sein"
 
-#: frappe/model/document.py:1512 frappe/utils/csvutils.py:158
+#: frappe/model/document.py:1513 frappe/utils/csvutils.py:158
 msgid "{0} must be one of {1}"
 msgstr "{0} muss aus {1} sein"
 
@@ -47780,7 +48070,7 @@ msgstr "{0} muss als erstes gesetzt sein"
 msgid "{0} must be unique"
 msgstr "{0} muss einmalig sein"
 
-#: frappe/model/document.py:1520
+#: frappe/model/document.py:1521
 msgid "{0} must be {1} {2}"
 msgstr "{0} muss {1} {2} sein"
 
@@ -47828,15 +48118,23 @@ msgid "{0} of {1} sent"
 msgstr "{0} von {1} gesendet"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #: frappe/utils/data.py:1520
 =======
 #: frappe/utils/data.py:1526
+=======
+#: frappe/utils/data.py:1532
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgctxt "Money in words"
 msgid "{0} only."
 msgstr "{0}."
 
+<<<<<<< HEAD
 #: frappe/utils/data.py:1696
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:1702
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} or {1}"
 msgstr "{0} oder {1}"
 
@@ -47899,8 +48197,12 @@ msgstr "{0} Die Rolle hat keine Berechtigung für einen Doctype"
 msgid "{0} role does not have permission on any doctype"
 msgstr "{0} Die Rolle hat keine Berechtigung für einen Doctype"
 
+<<<<<<< HEAD
 #: frappe/model/document.py:1765
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/model/document.py:1766
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{0} row #{1}: "
 msgstr ""
 
@@ -48108,7 +48410,7 @@ msgstr "{0} {1} kann kein Knotenpunkt sein, da Unterpunkte vorhanden sind"
 msgid "{0} {1} does not exist, select a new target to merge"
 msgstr "{0} {1} existiert nicht. Bitte ein neues Ziel zum Zusammenführen wählen"
 
-#: frappe/public/js/frappe/form/form.js:959
+#: frappe/public/js/frappe/form/form.js:956
 msgid "{0} {1} is linked with the following submitted documents: {2}"
 msgstr "{0} {1} ist mit den folgenden eingereichten Dokumenten verknüpft: {2}"
 
@@ -48350,12 +48652,16 @@ msgstr "{{{0}}} ist kein gültiges Format für Feldnamen. Es sollte sein {{field
 msgid "{} Complete"
 msgstr "{} Komplett"
 
-#: frappe/utils/data.py:2438
+#: frappe/utils/data.py:2444
 msgid "{} Invalid python code on line {}"
 msgstr "{} Ungültiger Python-Code in Zeile {}"
 
+<<<<<<< HEAD
 #: frappe/utils/data.py:2447
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+#: frappe/utils/data.py:2453
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 msgid "{} Possibly invalid python code. <br>{}"
 msgstr "{} Possibly invalid python code. <br>{}"
 
@@ -48398,7 +48704,7 @@ msgstr "{}-Feld darf nicht leer sein."
 msgid "{} has been disabled. It can only be enabled if {} is checked."
 msgstr "{} wurde deaktiviert. Es kann nur aktiviert werden, wenn {} aktiviert ist."
 
-#: frappe/utils/data.py:128
+#: frappe/utils/data.py:134
 msgid "{} is not a valid date string."
 msgstr "{} ist keine gültige Datumszeichenfolge."
 

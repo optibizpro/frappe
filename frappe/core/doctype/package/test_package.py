@@ -25,10 +25,14 @@ class UnitTestPackage(UnitTestCase):
 
 class TestPackage(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_package_release(self):
 		make_test_package()
 		make_test_module()
@@ -78,6 +82,7 @@ def make_test_package():
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dict(doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package")
 =======
 			doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package"
@@ -87,6 +92,10 @@ def make_test_package():
 			doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+			doctype="Package", name="Test Package", package_name="test-package", readme="# Test Package"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 
 

@@ -11,10 +11,14 @@ const html_plugin = require("./frappe-html");
 =======
 const vue_style_plugin = require("./frappe-vue-style");
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 const rtlcss = require("rtlcss");
 const postCssPlugin = require("@frappe/esbuild-plugin-postcss2").default;
 const ignore_assets = require("./ignore-assets");
@@ -78,10 +82,14 @@ const argv = yargs
 			"Skips build and uses cached build artifacts to update assets.json (used by Bench)",
 	})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	.example("node esbuild --apps frappe,erpnext", "Run build only for frappe and erpnext")
 	.example(
 		"node esbuild --files frappe/website.bundle.js,frappe/desk.bundle.js",
@@ -111,10 +119,14 @@ const NODE_PATHS = [].concat(
 	// import js file of any app if you provide the full path
 	app_list.map((app) => path.resolve(apps_path, app)).filter(fs.existsSync)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 );
 const USING_CACHED = Boolean(argv["using-cached"]);
 
@@ -131,10 +143,14 @@ execute().catch((e) => {
 	process.exit(1);
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 if (WATCH_MODE) {
 	// listen for open files in editor event
@@ -330,10 +346,14 @@ function build_files({ files, outdir }) {
 =======
 	let build_plugins = [vue(), html_plugin, build_cleanup_plugin, vue_style_plugin];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return esbuild.build(get_build_options(files, outdir, build_plugins));
 }
 
@@ -374,10 +394,14 @@ function get_build_options(files, outdir, plugins) {
 			__VUE_OPTIONS_API__: JSON.stringify(true),
 			__VUE_PROD_DEVTOOLS__: JSON.stringify(false),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		},
 		plugins: plugins,
 		watch: get_watch_config(),
@@ -546,10 +570,14 @@ async function get_assets_json_path_and_obj(is_rtl) {
 	const file_name = is_rtl ? "assets-rtl.json" : "assets.json";
 	const assets_json_path = path.resolve(assets_path, file_name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	let assets_json;
 	try {
 		assets_json = await fs.promises.readFile(assets_json_path, "utf-8");
@@ -586,10 +614,14 @@ function update_assets_json_in_cache() {
 =======
 	return { obj: assets_json, path: assets_json_path };
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 }
 
 function run_build_command_for_apps(apps) {
@@ -642,10 +674,14 @@ async function notify_redis({ error, success, changed_files }) {
 		log_warn("Cannot connect to redis_queue for browser events");
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	let payload = null;
 	if (error) {
@@ -697,10 +733,14 @@ async function open_in_editor() {
 		let launch = require("launch-editor");
 		launch(`${file_path}:${file.line}:${file.column}`);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	});
 }
 

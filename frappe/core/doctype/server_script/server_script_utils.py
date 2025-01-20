@@ -26,6 +26,7 @@ EVENT_MAP = {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	"on_payment_paid": "On Payment Paid",
 	"on_payment_failed": "On Payment Failed",
@@ -36,6 +37,11 @@ EVENT_MAP = {
 	"on_payment_failed": "On Payment Failed",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	"on_payment_paid": "On Payment Paid",
+	"on_payment_failed": "On Payment Failed",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"on_payment_authorized": "On Payment Authorization",
 	"on_payment_charge_processed": "On Payment Charge Processed",
 	"on_payment_mandated_charge_processed": "On Payment Mandate Charge Processed",

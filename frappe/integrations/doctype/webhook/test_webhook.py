@@ -23,10 +23,14 @@ from frappe.tests.utils import FrappeTestCase
 from frappe.tests import IntegrationTestCase, UnitTestCase
 from frappe.tests.classes.context_managers import timeout
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @contextmanager
@@ -56,10 +60,14 @@ class UnitTestWebhook(UnitTestCase):
 
 class TestWebhook(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls):
 		# delete any existing webhooks
@@ -150,10 +158,14 @@ class TestWebhook(IntegrationTestCase):
 		self.responses.start()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def tearDown(self) -> None:
 		self.user.delete()
@@ -172,10 +184,14 @@ class TestWebhook(IntegrationTestCase):
 =======
 		frappe.cache.delete_value("webhooks")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# Insert the user to db
 		self.test_user.insert()
@@ -196,6 +212,7 @@ class TestWebhook(IntegrationTestCase):
 		self.assertEqual(len(webhooks.get("User")), 1)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		# only 1 hook (enabled) must be queued
@@ -207,6 +224,9 @@ class TestWebhook(IntegrationTestCase):
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# only 1 hook (enabled) must be queued
 		self.assertEqual(len(frappe.local._webhook_queue), 1)
@@ -407,7 +427,11 @@ class TestWebhook(IntegrationTestCase):
 			doc.title = "Test Webhook Note"
 			enqueue_webhook(doc, wh)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

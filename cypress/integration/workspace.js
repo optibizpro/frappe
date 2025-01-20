@@ -9,6 +9,7 @@ context("Workspace 2.0", () => {
 		cy.get(".codex-editor__redactor .ce-block");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cy.get('.sidebar-item-container[item-name="Website"]').first().click();
 =======
 		cy.get('.sidebar-item-container[item-title="Website"]').first().click();
@@ -16,6 +17,9 @@ context("Workspace 2.0", () => {
 =======
 		cy.get('.sidebar-item-container[item-title="Website"]').first().click();
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.get('.sidebar-item-container[item-title="Website"]').first().click();
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.location("pathname").should("eq", "/app/website");
 	});
 
@@ -30,6 +34,7 @@ context("Workspace 2.0", () => {
 		cy.fill_field("title", "Test Private Page", "Data");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		cy.fill_field("type", "Workspace", "Select");
 		cy.wait(300);
@@ -40,6 +45,11 @@ context("Workspace 2.0", () => {
 		cy.wait(300);
 
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.fill_field("type", "Workspace", "Select");
+		cy.wait(300);
+
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.get_open_dialog().find(".modal-header").click();
 		cy.get_open_dialog().find(".btn-primary").click();
 
@@ -73,12 +83,16 @@ context("Workspace 2.0", () => {
 		cy.fill_field("parent", "Test Private Page", "Select");
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		cy.fill_field("type", "Workspace", "Select");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 		cy.fill_field("type", "Workspace", "Select");
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.fill_field("type", "Workspace", "Select");
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.get_open_dialog().find(".modal-header").click();
 		cy.wait(300);
 		cy.get_open_dialog().find(".btn-primary").click();
@@ -101,6 +115,7 @@ context("Workspace 2.0", () => {
 		cy.wait("@new_page");
 	});
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	it("Duplicate Page", () => {
@@ -217,6 +232,26 @@ context("Workspace 2.0", () => {
 	});
 
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	it("Add New Block", () => {
+		cy.get('.sidebar-item-container[item-title="Test Private Page"]').as("sidebar-item");
+
+		cy.get("@sidebar-item").find(".standard-sidebar-item").first().click({ force: true });
+
+		cy.get(".btn-edit-workspace").click({ force: true });
+
+		cy.get(".ce-block").click().type("{enter}");
+		cy.get(".block-list-container .block-list-item").contains("Heading").click();
+		cy.get(":focus").type("Header");
+		cy.get(".ce-block:last").find(".ce-header").should("exist");
+
+		cy.get(".ce-block:last").click().type("{enter}");
+		cy.get(".block-list-container .block-list-item").contains("Text").click();
+		cy.get(":focus").type("Paragraph text");
+		cy.get(".ce-block:last").find(".ce-paragraph").should("exist");
+	});
+
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	it("Delete A Block", () => {
 		cy.get(":focus").click();
 		cy.get(".paragraph-control .setting-btn").click();
@@ -242,6 +277,7 @@ context("Workspace 2.0", () => {
 		cy.wait(300);
 		cy.get('.standard-actions .btn-primary[data-label="Save"]').click();
 	});
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -312,4 +348,6 @@ context("Workspace 2.0", () => {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });

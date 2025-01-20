@@ -27,10 +27,14 @@ $(window).on("hashchange", function (e) {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 window.addEventListener("popstate", (e) => {
 	// forward-back button, just re-render based on current route
 	frappe.router.route();
@@ -51,10 +55,14 @@ $("body").on("click", "a", function (e) {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	const override = (route) => {
 		e.preventDefault();
 		frappe.set_route(route);
@@ -80,10 +88,14 @@ $("body").on("click", "a", function (e) {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if (frappe.router.is_app_route(target_element.pathname)) {
 		// target has "/app, this is a v2 style route.
 		if (target_element.search) {
@@ -208,6 +220,7 @@ frappe.router = {
 			route = ["Workspaces", frappe.workspaces[route[0]].title];
 		} else if (route[0] == "private") {
 			// private workspace
+<<<<<<< HEAD
 =======
 			route = ["Workspaces", frappe.workspaces[route[0]].name];
 		} else if (route[0] == "private") {
@@ -215,6 +228,8 @@ frappe.router = {
 			let private_workspace = route[1] && `${route[1]}-${frappe.user.name.toLowerCase()}`;
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if (!frappe.workspaces[private_workspace] && localStorage.new_workspace) {
 				let new_workspace = JSON.parse(localStorage.new_workspace);
 				if (frappe.router.slug(new_workspace.title) === route[1]) {
@@ -223,18 +238,25 @@ frappe.router = {
 			}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 =======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+=======
 			route = ["Workspaces", frappe.workspaces[route[0]].name];
 		} else if (route[0] == "private") {
 			// private workspace
 			let private_workspace = route[1] && `${route[1]}-${frappe.user.name.toLowerCase()}`;
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if (!frappe.workspaces[private_workspace]) {
 				frappe.msgprint(__("Workspace <b>{0}</b> does not exist", [route[1]]));
 				return ["Workspaces"];
@@ -244,10 +266,14 @@ frappe.router = {
 =======
 			route = ["Workspaces", "private", frappe.workspaces[private_workspace].name];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		} else if (this.routes[route[0]]) {
 			// route
 			route = await this.set_doctype_route(route);
@@ -449,10 +475,14 @@ frappe.router = {
 					this.push_state(sub_path);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 			setTimeout(() => {
 				frappe.after_ajax &&
@@ -568,11 +598,16 @@ frappe.router = {
 		// 2. Private home
 		// 3. Public home
 <<<<<<< HEAD
+<<<<<<< HEAD
 		// 4. First workspace in list
 =======
 		// 4. First workspace in list of current app
 		// 5. First workspace in list
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		// 4. First workspace in list of current app
+		// 5. First workspace in list
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		let private_home = `home-${frappe.user.name.toLowerCase()}`;
 		let default_workspace = frappe.router.slug(frappe.boot.user.default_workspace?.name || "");
 
@@ -581,13 +616,18 @@ frappe.router = {
 			frappe.workspaces[private_home] ||
 			frappe.workspaces["home"] ||
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 			Object.values(frappe.workspace_map).find((w) => w.app === frappe.current_app) ||
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+			Object.values(frappe.workspace_map).find((w) => w.app === frappe.current_app) ||
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			Object.values(frappe.workspaces)[0];
 
 		if (workspace) {
 			return (
+<<<<<<< HEAD
 <<<<<<< HEAD
 				"/app/" +
 				(workspace.public ? "" : "private/") +
@@ -595,6 +635,9 @@ frappe.router = {
 =======
 				"/app/" + (workspace.public ? "" : "private/") + frappe.router.slug(workspace.name)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+				"/app/" + (workspace.public ? "" : "private/") + frappe.router.slug(workspace.name)
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			);
 		}
 
@@ -612,10 +655,14 @@ frappe.router = {
 	push_state(path, query_params = "") {
 		if (window.location.pathname !== path || window.location.search !== query_params) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			// push/replace state so the browser looks fine
 			const method = frappe.route_flags.replace_route ? "replaceState" : "pushState";
 			history[method](null, null, path);
@@ -636,10 +683,14 @@ frappe.router = {
 			}
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 
 		return this.strip_prefix(route);
@@ -654,10 +705,14 @@ frappe.router = {
 		if (route == "app") route = route.substr(4); // for app
 		if (route.startsWith("app/")) route = route.substr(4); // for desk/sub
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (route.substr(0, 1) == "/") route = route.substr(1);
 		if (route.substr(0, 1) == "#") route = route.substr(1);
 		if (route.substr(0, 1) == "!") route = route.substr(1);

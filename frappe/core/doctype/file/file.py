@@ -20,10 +20,14 @@ from frappe.permissions import get_doctypes_with_read
 =======
 from frappe.permissions import SYSTEM_USER_ROLE, get_doctypes_with_read
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import call_hook_method, cint, get_files_path, get_hook_method, get_url
 from frappe.utils.file_manager import is_safe_path
 from frappe.utils.image import optimize_image, strip_exif_data
@@ -110,10 +114,14 @@ class File(Document):
 =======
 		self.validate_file_extension()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if self.is_folder:
 			return
@@ -143,10 +151,14 @@ class File(Document):
 =======
 		self.validate_attachment_references()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.validate_attachment_references()
 
@@ -554,10 +566,14 @@ class File(Document):
 =======
 	def get_content(self, encodings=None) -> bytes | str:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if self.is_folder:
 			frappe.throw(_("Cannot get file contents of a Folder"))
 
@@ -833,6 +849,7 @@ class File(Document):
 
 def on_doctype_update():
 	frappe.db.add_index("File", ["attached_to_doctype", "attached_to_name"])
+	frappe.db.add_index("File", ["file_url(100)"])
 
 
 <<<<<<< HEAD
@@ -840,10 +857,14 @@ def has_permission(doc, ptype=None, user=None):
 =======
 def has_permission(doc, ptype=None, user=None, debug=False):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	user = user or frappe.session.user
 
 	if user == "Administrator":
@@ -856,6 +877,7 @@ def has_permission(doc, ptype=None, user=None, debug=False):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if ptype == "create":
 		return frappe.has_permission("File", "create", user=user, debug=debug)
 
@@ -865,6 +887,9 @@ def has_permission(doc, ptype=None, user=None, debug=False):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not doc.is_private and ptype in ("read", "select"):
 		return True
 
@@ -891,10 +916,14 @@ def has_permission(doc, ptype=None, user=None, debug=False):
 		else:
 			return ref_doc.has_permission("read", debug=debug, user=user)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return False
 
@@ -909,10 +938,14 @@ def get_permission_query_conditions(user: str | None = None) -> str:
 =======
 	if SYSTEM_USER_ROLE not in frappe.get_roles(user):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return f""" `tabFile`.`owner` = {frappe.db.escape(user)} """
 
 	readable_doctypes = ", ".join(repr(dt) for dt in get_doctypes_with_read())

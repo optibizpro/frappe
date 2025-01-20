@@ -37,10 +37,14 @@ Cypress.Commands.add("login", (email, password) => {
 =======
 		password = Cypress.env("adminPassword");
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	// cy.session clears all localStorage on new login, so we need to retain the last route
 	const session_last_route = window.localStorage.getItem("session_last_route");
@@ -74,10 +78,14 @@ Cypress.Commands.add("login", (email, password) => {
 			});
 		})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		.then(() => {
 			if (session_last_route) {
 				window.localStorage.setItem("session_last_route", session_last_route);
@@ -293,10 +301,14 @@ Cypress.Commands.add("select_form_tab", (label) => {
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 Cypress.Commands.add("go_to_list", (doctype) => {
 	let dt_in_route = doctype.toLowerCase().replace(/ /g, "-");
 	cy.visit(`/app/${dt_in_route}`);
@@ -434,10 +446,14 @@ Cypress.Commands.add("switch_to_user", (user) => {
 	cy.login(user);
 	cy.reload();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 
 Cypress.Commands.add("add_role", (user, role) => {
@@ -521,10 +537,14 @@ Cypress.Commands.add("clear_filters", () => {
 	cy.get(".filter-x-button").click({ force: true });
 	cy.wait(1000);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 
 Cypress.Commands.add("click_modal_primary_button", (btn_name) => {

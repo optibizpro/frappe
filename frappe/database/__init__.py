@@ -39,6 +39,7 @@ def bootstrap_database(verbose=None, source_sql=None):
 def get_db(host=None, user=None, password=None, port=None):
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return frappe.database.postgres.setup_db.bootstrap_database(verbose, source_sql)
 	else:
 		import frappe.database.mariadb.setup_db
@@ -66,6 +67,8 @@ def get_db(host=None, user=None, password=None, port=None, cur_db_name=None, soc
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return frappe.database.postgres.setup_db.bootstrap_database(verbose, source_sql)
 	else:
 		import frappe.database.mariadb.setup_db
@@ -87,11 +90,15 @@ def drop_user_and_database(db_name, db_user):
 
 
 def get_db(socket=None, host=None, user=None, password=None, port=None, cur_db_name=None):
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	import frappe
 
 	if frappe.conf.db_type == "postgres":
@@ -106,15 +113,20 @@ def get_db(socket=None, host=None, user=None, password=None, port=None, cur_db_n
 =======
 		return frappe.database.postgres.database.PostgresDatabase(
 <<<<<<< HEAD
+<<<<<<< HEAD
 			host, user, password, port, cur_db_name, socket
 =======
 			socket, host, user, password, port, cur_db_name
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+			socket, host, user, password, port, cur_db_name
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 	else:
 		import frappe.database.mariadb.database
 
 		return frappe.database.mariadb.database.MariaDBDatabase(
+<<<<<<< HEAD
 <<<<<<< HEAD
 			host, user, password, port, cur_db_name, socket
 =======
@@ -126,6 +138,11 @@ def get_db(socket=None, host=None, user=None, password=None, port=None, cur_db_n
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+			socket, host, user, password, port, cur_db_name
+		)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_command(

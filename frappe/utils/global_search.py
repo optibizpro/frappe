@@ -516,10 +516,14 @@ def search(text, start=0, limit=20, doctype=""):
 =======
 		for r in results:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			if r.doctype == doctype and r.rank > 0.0:
 				try:
 					meta = frappe.get_meta(r.doctype)

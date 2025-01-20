@@ -122,10 +122,14 @@ class PostgresExceptionUtil:
 
 	@staticmethod
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def is_interface_error(e):
 		return isinstance(e, InterfaceError)
 
@@ -260,6 +264,7 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				and table_schema='{}'""".format(self.cur_db_name, frappe.conf.get("db_schema", "public"))
 =======
 				and table_schema=%s""",
@@ -271,6 +276,11 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 				(self.cur_db_name, self.db_schema),
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				and table_schema=%s""",
+				(self.cur_db_name, self.db_schema),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 		]
 
@@ -417,20 +427,27 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			f"""SELECT 1 FROM pg_indexes WHERE tablename='{table_name}'
 			and indexname='{index_name}' limit 1"""
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			"""SELECT 1 FROM pg_indexes WHERE tablename=%s
 			and schemaname = %s
 			and indexname=%s limit 1""",
 			(table_name, self.db_schema, index_name),
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 
 	def add_index(self, doctype: str, fields: list, index_name: str | None = None):
@@ -469,11 +486,14 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				"""ALTER TABLE `tab{}`
 					ADD CONSTRAINT {} UNIQUE ({})""".format(doctype, constraint_name, ", ".join(fields))
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				sql.SQL(
 					"""ALTER TABLE {schema}.{table}
 					ADD CONSTRAINT {constraint} UNIQUE ({fields})"""
@@ -485,11 +505,15 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 					fields=sql.SQL(", ").join(sql.Identifier(field) for field in fields),
 				)
 				.as_string(self._conn)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			)
 
 	def get_table_columns_description(self, table_name):
@@ -520,6 +544,7 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
@@ -531,6 +556,12 @@ class PostgresDatabase(PostgresExceptionUtil, Database):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+				AND a.table_schema = '{self.db_schema}'
+			GROUP BY a.column_name, a.data_type, a.column_default, a.character_maximum_length, a.is_nullable;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		""",
 			as_dict=1,
 		)

@@ -44,10 +44,14 @@ def get_page_info_from_web_form(path):
 
 		rules = []
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		rules.append(Rule(f"/{d.route}", endpoint=d.name))
 		rules.append(Rule(f"/{d.route}/list", endpoint=d.name))
 		rules.append(Rule(f"/{d.route}/new", endpoint=d.name))
@@ -99,7 +103,7 @@ def get_pages(app=None):
 		if app:
 			apps = [app]
 		else:
-			apps = frappe.local.flags.web_pages_apps or frappe.get_installed_apps()
+			apps = frappe.get_installed_apps()
 
 		for app in apps:
 			app_path = frappe.get_app_path(app)

@@ -15,10 +15,14 @@ from filetype import guess_mime
 from semantic_version import Version
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from werkzeug.test import TestResponse
 
 import frappe
@@ -29,6 +33,7 @@ from frappe.utils import cint, get_site_url, get_test_client, get_url
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, patch_hooks
 from frappe.utils import cint, get_site_url, get_test_client, get_url
 =======
@@ -41,6 +46,11 @@ from frappe.tests import IntegrationTestCase
 from frappe.utils import cint, get_test_client, get_url
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.utils import cint, get_test_client, get_url
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 try:
 	_site = frappe.local.site
@@ -73,10 +83,14 @@ def make_request(
 ) -> TestResponse:
 	t = ThreadWithReturnValue(target=target, args=args, kwargs=kwargs, site=site)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	t.start()
 	t.join()
 	return t._return
@@ -93,10 +107,14 @@ class ThreadWithReturnValue(Thread):
 =======
 	def __init__(self, group=None, target=None, name=None, args=(), kwargs=None, *, site=None):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if kwargs is None:
 			kwargs = {}
 		Thread.__init__(self, group, target, name, args, kwargs)
@@ -134,10 +152,14 @@ resource_key = {
 class FrappeAPITestCase(IntegrationTestCase):
 	version = ""  # Empty implies v1
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	TEST_CLIENT = get_test_client()
 
 	@property
@@ -203,10 +225,14 @@ class TestResourceAPI(FrappeAPITestCase):
 =======
 		for _ in range(20):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			doc = frappe.get_doc({"doctype": "ToDo", "description": frappe.mock("paragraph")}).insert()
 			cls.GENERATED_DOCUMENTS = []
 			cls.GENERATED_DOCUMENTS.append(doc.name)
@@ -266,10 +292,14 @@ class TestResourceAPI(FrappeAPITestCase):
 =======
 		response = self.get(self.resource(self.DOCTYPE), {"sid": self.sid, "fields": '["description"]'})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(response.status_code, 200)
 		json = frappe._dict(response.json)
 		self.assertIn("description", json.data[0])
@@ -339,10 +369,14 @@ class TestMethodAPI(FrappeAPITestCase):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_ping(self):
 		# test 2: test for /api/method/ping
 		response = self.get(self.method("ping"))
@@ -369,10 +403,14 @@ class TestMethodAPI(FrappeAPITestCase):
 =======
 		response = self.get(self.method("frappe.auth.get_logged_user"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self.assertEqual(response.status_code, 200)
 		self.assertEqual(response.json["message"], "Administrator")
@@ -391,10 +429,14 @@ class TestMethodAPI(FrappeAPITestCase):
 		authorization_token = "NonExistentKey:INCORRECT"
 		response = self.get(self.method("frappe.auth.get_logged_user"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(response.status_code, 401)
 
 		authorization_token = None
@@ -445,10 +487,14 @@ class TestMethodAPI(FrappeAPITestCase):
 		self.assertEqual(response.json["message"], test_data)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 class TestReadOnlyMode(FrappeAPITestCase):
 	"""During migration if read only mode can be enabled.
@@ -459,10 +505,14 @@ class TestReadOnlyMode(FrappeAPITestCase):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -477,10 +527,14 @@ class TestReadOnlyMode(FrappeAPITestCase):
 =======
 		response = self.get(self.resource("ToDo"), {"sid": self.sid})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(response.status_code, 200)
 		self.assertIsInstance(response.json, dict)
 		self.assertIsInstance(response.json["data"], list)
@@ -494,10 +548,14 @@ class TestReadOnlyMode(FrappeAPITestCase):
 				self.resource("ToDo"), {"description": frappe.mock("paragraph"), "sid": self.sid}
 			)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(response.status_code, 503)
 		self.assertEqual(response.json["exc_type"], "InReadOnlyMode")
 
@@ -511,10 +569,14 @@ class TestWSGIApp(FrappeAPITestCase):
 =======
 		with self.patch_hooks(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			{
 				"before_request": ["frappe.tests.test_api.before_request"],
 				"after_request": ["frappe.tests.test_api.after_request"],
@@ -582,10 +644,14 @@ class TestResponse(FrappeAPITestCase):
 =======
 		from frappe.desk.utils import provide_binary_file
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		from frappe.utils.response import build_response
 
 		filename = "دفتر الأستاذ العام"
@@ -597,10 +663,14 @@ class TestResponse(FrappeAPITestCase):
 =======
 		provide_binary_file(filename, "xlsx", "content")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		response = build_response("binary")
 		self.assertEqual(response.status_code, 200)
@@ -661,7 +731,11 @@ def test(*, fail=False, handled=True, message="Failed"):
 def test_array(data):
 	return data
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

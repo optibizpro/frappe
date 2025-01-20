@@ -49,6 +49,7 @@ def new_language(context: CliCtxObj, lang_code, app):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	print("You will need to add the language in frappe/geo/languages.json, if you haven't done it already.")
 =======
 	print("You will need to add the language in frappe/geo/languages.csv, if you haven't done it already.")
@@ -58,6 +59,10 @@ def new_language(context: CliCtxObj, lang_code, app):
 	print("You will need to add the language in frappe/geo/languages.csv, if you haven't done it already.")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	print("You will need to add the language in frappe/geo/languages.csv, if you haven't done it already.")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @click.command("get-untranslated")
@@ -124,10 +129,14 @@ def migrate_translations(context, source_app, target_app):
 =======
 def migrate_translations(context: CliCtxObj, source_app, target_app):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"Migrate target-app-specific translations from source-app to target-app"
 	import frappe.translate
 
@@ -138,10 +147,14 @@ def migrate_translations(context: CliCtxObj, source_app, target_app):
 =======
 		frappe.init(site)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.connect()
 		frappe.translate.migrate_translations(source_app, target_app)
 	finally:

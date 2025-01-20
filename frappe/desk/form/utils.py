@@ -73,6 +73,7 @@ def update_comment(name, content):
 def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="modified"):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="creation"):
@@ -83,6 +84,11 @@ def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="
 def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="creation"):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+def get_next(doctype, value, prev, filters=None, sort_order="desc", sort_field="creation"):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	prev = int(prev)
 	if not filters:
 		filters = []

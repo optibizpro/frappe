@@ -33,10 +33,15 @@ context("Dashboard links", () => {
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		cy.select_form_tab("Connections");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.select_form_tab("Connections");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.get('[data-doctype="Contact"]').should("contain", "Contact");
 
 		//Adding a new contact
@@ -52,10 +57,15 @@ context("Dashboard links", () => {
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		cy.select_form_tab("Connections");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.select_form_tab("Connections");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.get('[data-doctype="Contact"] > .count').should("contain", "2");
 		cy.get('[data-doctype="Contact"]').contains("Contact").click();
 
@@ -80,6 +90,7 @@ context("Dashboard links", () => {
 		cy.findByText("Connections");
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cy.get('[data-doctype="Contact"]').should("contain", "Contact");
 		cy.findByText("Connections");
 =======
@@ -87,6 +98,11 @@ context("Dashboard links", () => {
 		cy.get('.document-link[data-doctype="Contact"]').contains("Contact");
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.select_form_tab("Connections");
+		cy.get('.document-link[data-doctype="Contact"]').contains("Contact");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.window()
 			.its("cur_frm")
 			.then((cur_frm) => {
@@ -102,6 +118,7 @@ context("Dashboard links", () => {
 				cy.findByText("Website Analytics");
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 				cy.get('[data-report="Website Analytics"]').contains("Website Analytics").click();
 				cy.findByText("Website Analytics");
 =======
@@ -110,6 +127,12 @@ context("Dashboard links", () => {
 					.click();
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				cy.get('.document-link[data-report="Website Analytics"]')
+					.contains("Website Analytics")
+					.click();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 	});
 

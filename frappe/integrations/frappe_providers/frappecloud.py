@@ -16,10 +16,14 @@ def get_remote_script(remote_site):
 =======
 		print(f"Request exited with Status Code: {request.status_code}\nPayload: {html2text(request.text)}")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		click.secho(
 			"Some errors occurred while recovering the migration script. Please contact us @ Frappe Cloud if this issue persists",
 			fg="yellow",

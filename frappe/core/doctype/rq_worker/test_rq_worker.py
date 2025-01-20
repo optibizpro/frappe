@@ -27,10 +27,14 @@ class TestRQWorker(IntegrationTestCase):
 	def test_get_worker_list(self):
 		workers = RQWorker.get_list()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertGreaterEqual(len(workers), 1)
 		self.assertTrue(any("short" in w.queue_type for w in workers))
 
@@ -40,6 +44,7 @@ class TestRQWorker(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		workers = RQWorker.get_list({})
 =======
 		workers = RQWorker.get_list()
@@ -49,4 +54,8 @@ class TestRQWorker(IntegrationTestCase):
 		workers = RQWorker.get_list()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		workers = RQWorker.get_list()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.get_doc("RQ Worker", workers[0].name)

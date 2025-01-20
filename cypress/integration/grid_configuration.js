@@ -6,6 +6,7 @@ context("Grid Configuration", () => {
 	it("Set user wise grid settings", () => {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		cy.findByRole("tab", { name: "Settings" }).click();
 		cy.get('.form-section[data-fieldname="fields_section"]').click();
 =======
@@ -14,6 +15,9 @@ context("Grid Configuration", () => {
 =======
 		cy.findByRole("tab", { name: "Navbar" }).click();
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		cy.findByRole("tab", { name: "Navbar" }).click();
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		cy.wait(100);
 		cy.get('.frappe-control[data-fieldname="top_bar_items"]').as("table");
 		cy.get("@table").find(".icon-sm").click();

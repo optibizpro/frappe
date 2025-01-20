@@ -2,7 +2,7 @@
 # MIT License. See LICENSE
 import base64
 import binascii
-from urllib.parse import quote, urlencode, urlparse
+from urllib.parse import quote, unquote, urlencode, urlparse
 
 from werkzeug.wrappers import Response
 
@@ -15,11 +15,17 @@ import frappe.utils.user
 from frappe import _
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 from frappe.apps import get_default_path
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+from frappe.apps import get_default_path
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.core.doctype.activity_log.activity_log import add_authentication_log
 =======
 from frappe.apps import get_default_path
@@ -46,21 +52,28 @@ from frappe.website.utils import get_home_page
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.deprecations import deprecation_warning
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.password import check_password, get_decrypted_password
 from frappe.website.utils import get_home_page
 
 SAFE_HTTP_METHODS = frozenset(("GET", "HEAD", "OPTIONS"))
 UNSAFE_HTTP_METHODS = frozenset(("POST", "PUT", "DELETE", "PATCH"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 MAX_PASSWORD_SIZE = 512
 
 
@@ -134,9 +147,13 @@ class HTTPRequest:
 
 class LoginManager:
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	__slots__ = ("user", "info", "full_name", "user_type", "resume")
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	__slots__ = ("user", "info", "full_name", "user_type", "resume")
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 	def is_allowed_referrer(self):
 		referrer = frappe.get_request_header("Referer")
@@ -156,11 +173,16 @@ class LoginManager:
 
 class LoginManager:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	__slots__ = ("user", "info", "full_name", "user_type", "resume")
 =======
 	__slots__ = ("full_name", "info", "resume", "user", "user_lang", "user_type")
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	__slots__ = ("full_name", "info", "resume", "user", "user_lang", "user_type")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def __init__(self):
 		self.user = None
@@ -193,10 +215,14 @@ class LoginManager:
 		self.run_trigger("before_login")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if frappe.get_system_settings("disable_user_pass_login"):
 			frappe.throw(_("Login with username and password is not allowed."), frappe.AuthenticationError)
 
@@ -233,7 +259,6 @@ class LoginManager:
 			["user_type", "first_name", "last_name", "user_image", "default_workspace"],
 			as_dict=1,
 		)
-		self.user_lang = frappe.translate.get_user_lang()
 		self.user_type = self.info.user_type
 
 	def setup_boot_cache(self):
@@ -248,12 +273,12 @@ class LoginManager:
 		self.full_name = " ".join(filter(None, [self.info.first_name, self.info.last_name]))
 
 		if self.info.user_type == "Website User":
-			frappe.local.cookie_manager.set_cookie("system_user", "no")
+			frappe.local.cookie_manager.set_cookie("system_user", "no", deduplicate=True)
 			if not resume:
 				frappe.local.response["message"] = "No App"
 				frappe.local.response["home_page"] = get_default_path() or "/" + get_home_page()
 		else:
-			frappe.local.cookie_manager.set_cookie("system_user", "yes")
+			frappe.local.cookie_manager.set_cookie("system_user", "yes", deduplicate=True)
 			if not resume:
 				frappe.local.response["message"] = "Logged In"
 <<<<<<< HEAD
@@ -274,11 +299,10 @@ class LoginManager:
 			frappe.local.response["redirect_to"] = redirect_to
 			frappe.cache.hdel("redirect_after_login", self.user)
 
-		frappe.local.cookie_manager.set_cookie("full_name", self.full_name)
-		frappe.local.cookie_manager.set_cookie("user_id", self.user)
-		frappe.local.cookie_manager.set_cookie("user_image", self.info.user_image or "")
-		# cache control: round trip the effectively delivered language
-		frappe.local.cookie_manager.set_cookie("user_lang", self.user_lang)
+		frappe.local.cookie_manager.set_cookie("full_name", self.full_name, deduplicate=True)
+		frappe.local.cookie_manager.set_cookie("user_id", self.user, deduplicate=True)
+		frappe.local.cookie_manager.set_cookie("user_image", self.info.user_image or "", deduplicate=True)
+		frappe.local.cookie_manager.set_cookie("user_lang", frappe.local.lang, deduplicate=True)
 
 	def clear_preferred_language(self):
 		frappe.local.cookie_manager.delete_cookie("preferred_language")
@@ -449,10 +473,14 @@ class CookieManager:
 			self.set_cookie("country", frappe.session.session_country)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def set_cookie(
 		self,
@@ -463,9 +491,20 @@ class CookieManager:
 		httponly=False,
 		samesite="Lax",
 		max_age=None,
+<<<<<<< HEAD
+=======
+		deduplicate=False,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	):
 		if not secure and hasattr(frappe.local, "request"):
 			secure = frappe.local.request.scheme == "https"
+		if (
+			deduplicate
+			and not (expires or max_age)
+			and (request := getattr(frappe.local, "request", None))
+			and unquote(request.cookies.get(key, "")) == value
+		):
+			return
 
 		self.cookies[key] = {
 			"value": value,
@@ -513,6 +552,7 @@ def clear_cookies():
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frappe.local.cookie_manager.delete_cookie(["full_name", "user_id", "sid", "user_image", "system_user"])
 =======
 =======
@@ -525,12 +565,19 @@ def clear_cookies():
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	frappe.local.cookie_manager.delete_cookie(
+		["full_name", "user_id", "sid", "user_image", "user_lang", "system_user"]
+	)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def validate_ip_address(user):
 	"""
 	Method to check if the user has IP restrictions enabled, and if so is the IP address they are
 	connecting from allowlisted.
+<<<<<<< HEAD
 
 	Certain methods called from our socketio backend need direct access, and so the IP is not
 	checked for those
@@ -541,34 +588,36 @@ def validate_ip_address(user):
 		return True
 
 	from frappe.core.doctype.user.user import get_restricted_ip_list
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
-	# Only fetch required fields - for perf
-	user_fields = ["restrict_ip", "bypass_restrict_ip_check_if_2fa_enabled"]
-	user_info = (
-		frappe.get_cached_value("User", user, user_fields, as_dict=True)
-		if not frappe.flags.in_test
-		else frappe.db.get_value("User", user, user_fields, as_dict=True)
-	)
-	ip_list = get_restricted_ip_list(user_info)
+	Certain methods called from our socketio backend need direct access, and so the IP is not
+	checked for those
+	"""
+	if hasattr(frappe.local, "request") and frappe.local.request.path.startswith(
+		"/api/method/frappe.realtime."
+	):
+		return True
+
+	user_info = frappe.get_cached_doc("User", user)
+	ip_list = user_info.get_restricted_ip_list()
 	if not ip_list:
 		return
 
-	system_settings = (
-		frappe.get_cached_doc("System Settings")
-		if not frappe.flags.in_test
-		else frappe.get_single("System Settings")
-	)
+	for ip in ip_list:
+		if frappe.local.request_ip.startswith(ip):
+			return
+
 	# check if bypass restrict ip is enabled for all users
-	bypass_restrict_ip_check = system_settings.bypass_restrict_ip_check_if_2fa_enabled
+	bypass_restrict_ip_check = frappe.get_system_settings("bypass_restrict_ip_check_if_2fa_enabled")
 
 	# check if two factor auth is enabled
-	if system_settings.enable_two_factor_auth and not bypass_restrict_ip_check:
+	if frappe.get_system_settings("enable_two_factor_auth") and not bypass_restrict_ip_check:
 		# check if bypass restrict ip is enabled for login user
 		bypass_restrict_ip_check = user_info.bypass_restrict_ip_check_if_2fa_enabled
 
-	for ip in ip_list:
-		if frappe.local.request_ip.startswith(ip) or bypass_restrict_ip_check:
-			return
+	if bypass_restrict_ip_check:
+		return
 
 	frappe.throw(_("Access not allowed from this IP Address"), frappe.AuthenticationError)
 
@@ -627,10 +676,14 @@ class LoginAttemptTracker:
 
 			deprecation_warning("unknown", "v17", "`username` parameter is deprecated, use `key` instead.")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.key = key or user_name
 		self.lock_interval = datetime.timedelta(seconds=lock_interval)
 		self.max_failed_logins = max_consecutive_login_attempts
@@ -658,10 +711,14 @@ class LoginAttemptTracker:
 	def login_failed_count(self):
 		frappe.cache.hdel("login_failed_count", self.key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@property
 	def login_failed_time(self):
@@ -690,10 +747,14 @@ class LoginAttemptTracker:
 	def login_failed_time(self):
 		frappe.cache.hdel("login_failed_time", self.key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def add_failure_attempt(self):
 		"""Log user failure attempts into the system.

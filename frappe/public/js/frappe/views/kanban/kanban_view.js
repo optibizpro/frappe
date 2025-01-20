@@ -4,6 +4,7 @@ frappe.provide("frappe.views");
 
 frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 	static full_page = true;
+	static no_sidebar = true;
 
 	static load_last_view() {
 		const route = frappe.get_route();
@@ -133,20 +134,17 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 	}
 
 	setup_page() {
-		this.hide_sidebar = true;
 		this.hide_page_form = true;
 		this.hide_card_layout = true;
 		this.hide_sort_selector = true;
 		super.setup_page();
-
-		this.page.disable_sidebar_toggle = true;
-		this.page.setup_sidebar_toggle();
 	}
 
 	setup_view() {
 <<<<<<< HEAD
 		if (this.board.columns.length > 5) {
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		if (this.board.columns.filter((col) => col.status !== "Archived").length > 5) {
@@ -158,6 +156,10 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		if (this.board.columns.filter((col) => col.status !== "Archived").length > 4) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			this.page.container.addClass("full-width");
 		}
 		this.setup_realtime_updates();
@@ -252,10 +254,14 @@ frappe.views.KanbanView = class KanbanView extends frappe.views.ListView {
 =======
 				["Data", "Text", "Small Text", "Text Editor"].includes(df.fieldtype) && !df.hidden;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if (is_valid_field && !title_field) {
 				// can be mapped to textarea

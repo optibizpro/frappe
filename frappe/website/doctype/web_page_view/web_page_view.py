@@ -6,6 +6,7 @@ from urllib.parse import urlparse
 import frappe
 import frappe.utils
 from frappe.model.document import Document
+from frappe.utils.caching import redis_cache
 
 
 class WebPageView(Document):
@@ -76,10 +77,14 @@ def make_view_log(
 		is_unique = False
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if path != "/" and path.startswith("/"):
 		path = path[1:]
@@ -113,9 +118,10 @@ def make_view_log(
 
 
 @frappe.whitelist()
+@redis_cache(ttl=5 * 60)
 def get_page_view_count(path):
 	return frappe.db.count("Web Page View", filters={"path": path})
 
 
 def is_tracking_enabled():
-	return frappe.db.get_single_value("Website Settings", "enable_view_tracking")
+	return frappe.get_website_settings("enable_view_tracking")

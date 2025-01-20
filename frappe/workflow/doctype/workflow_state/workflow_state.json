@@ -45,6 +45,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  "modified": "2023-12-08 15:52:37.525003",
 =======
  "modified": "2024-03-23 16:04:05.395556",
@@ -54,6 +55,10 @@
  "modified": "2024-03-23 16:04:05.395556",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+ "modified": "2024-03-23 16:04:05.395556",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
  "modified_by": "Administrator",
  "module": "Workflow",
  "name": "Workflow State",
@@ -83,6 +88,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  "sort_field": "modified",
 =======
 =======
@@ -95,6 +101,11 @@
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+ "sort_field": "creation",
+ "sort_order": "DESC",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
  "states": [],
  "track_changes": 1,
  "translated_doctype": 1

@@ -16,10 +16,14 @@
 				</a>
 				<span class="file-name" v-else>{{ file.name }}</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			</div>
 
 			<div>
@@ -46,12 +50,16 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<label v-if="is_optimizable" class="frappe-checkbox"
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				<label v-if="allow_toggle_optimize" class="frappe-checkbox"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+				<label v-if="allow_toggle_optimize" class="frappe-checkbox"
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					><input
 						type="checkbox"
 						:checked="optimize"
@@ -59,20 +67,28 @@
 					/>{{ __("Optimize") }}</label
 				>
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<label class="frappe-checkbox"
 =======
 				<label v-if="allow_toggle_private" class="frappe-checkbox"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+				<label v-if="allow_toggle_private" class="frappe-checkbox"
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					><input
 						type="checkbox"
 						:checked="file.private"
 						@change="emit('toggle_private')"
 					/>{{ __("Private") }}</label
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				>
 			</div>
 			<div>
@@ -101,10 +117,14 @@
 =======
 					@click="emit('toggle_image_cropper')"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					v-html="frappe.utils.icon('crop', 'md')"
 				></button>
 				<button
@@ -115,10 +135,14 @@
 =======
 					@click="emit('remove')"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					v-html="frappe.utils.icon('delete', 'md')"
 				></button>
 			</div>
@@ -228,10 +252,13 @@ let is_image = computed(() => {
 	return props.file.file_obj.type.startsWith("image");
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 let is_optimizable = computed(() => {
 	let is_svg = props.file.file_obj.type == "image/svg+xml";
 	return is_image.value && !is_svg && !uploaded.value && !props.file.failed;
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 let allow_toggle_optimize = computed(() => {
 	let is_svg = props.file.file_obj.type == "image/svg+xml";
 	return (
@@ -241,7 +268,10 @@ let allow_toggle_optimize = computed(() => {
 		!uploaded.value &&
 		!props.file.failed
 	);
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 let is_cropable = computed(() => {
 	let croppable_types = ["image/jpeg", "image/png"];
@@ -271,10 +301,14 @@ onMounted(() => {
 	}
 });
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 </script>
 
 <style scoped>

@@ -65,7 +65,11 @@ def create_email_flag_queue(names, action):
 			uid = -1
 		if not seen_status:
 			seen_status = 0
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		# can not mark email SEEN or UNSEEN without uid
 		if not uid or uid == -1:

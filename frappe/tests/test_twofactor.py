@@ -1,5 +1,6 @@
 # Copyright (c) 2017, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
+import datetime
 import time
 
 import pyotp
@@ -11,10 +12,14 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.twofactor import (
 	ExpiredLoginException,
 	authenticate_for_2factor,
@@ -38,10 +43,14 @@ class TestTwoFactor(FrappeTestCase):
 		self.default_allowed_login_attempts = get_system_setting("allow_consecutive_login_attempts")
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 class TestTwoFactor(IntegrationTestCase):
 	def setUp(self):
@@ -137,11 +146,14 @@ class TestTwoFactor(IntegrationTestCase):
 		otp = "wrongotp"
 		with self.assertRaises(frappe.AuthenticationError):
 			confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id)
-		otp = get_otp(self.user)
-		self.assertTrue(confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id))
+
+		# Freeze the time to avoid expiry during test
+		with self.freeze_time(datetime.datetime.now()):
+			otp = get_otp(self.user)
+			self.assertTrue(confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id))
+
 		frappe.flags.otp_expiry = None
-		if frappe.flags.tests_verbose:
-			print("Sleeping for 2 secs to confirm token expires..")
+		print("Sleeping for 2 secs to confirm token expires..")
 		time.sleep(2)
 		with self.assertRaises(ExpiredLoginException):
 			confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id)
@@ -209,8 +221,10 @@ class TestTwoFactor(IntegrationTestCase):
 		tracker = get_login_attempt_tracker(self.user, raise_locked_exception=False)
 		tracker.add_success_attempt()
 
-		otp = get_otp(self.user)
-		self.assertTrue(confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id))
+		# Freeze the time to avoid expiry during test
+		with self.freeze_time(datetime.datetime.now()):
+			otp = get_otp(self.user)
+			self.assertTrue(confirm_otp_token(self.login_manager, otp=otp, tmp_id=tmp_id))
 
 
 def create_http_request():

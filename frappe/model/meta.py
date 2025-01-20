@@ -19,7 +19,7 @@ import json
 import os
 import typing
 from datetime import datetime
-from functools import singledispatchmethod
+from functools import cached_property, singledispatchmethod
 from types import NoneType
 
 import click
@@ -118,10 +118,14 @@ def clear_meta_cache(doctype: str = "*"):
 	else:
 		frappe.client_cache.delete_value(key)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def load_meta(doctype):
@@ -159,10 +163,14 @@ class Meta(Document):
 =======
 		(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			"DocField",
 			"DocPerm",
 			"DocType",
@@ -175,10 +183,14 @@ class Meta(Document):
 =======
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	)
 	standard_set_once_fields = (
 		frappe._dict(fieldname="creation", fieldtype="Datetime"),
@@ -216,10 +228,14 @@ class Meta(Document):
 	def _(self, _args, bootstrap):
 		super().__init__(bootstrap.as_dict())
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.process()
 
 	def load_from_db(self):
@@ -248,6 +264,8 @@ class Meta(Document):
 
 	def as_dict(self, no_nulls=False):
 		def serialize(doc):
+			if isinstance(doc, dict):
+				return doc.copy()
 			out = {}
 			for key, value in doc.__dict__.items():
 				if isinstance(value, list | tuple):
@@ -281,9 +299,11 @@ class Meta(Document):
 		return self.get("fields", {"fieldtype": "Phone"})
 
 	def get_dynamic_link_fields(self):
-		if not hasattr(self, "_dynamic_link_fields"):
-			self._dynamic_link_fields = self.get("fields", {"fieldtype": "Dynamic Link"})
 		return self._dynamic_link_fields
+
+	@cached_property
+	def _dynamic_link_fields(self):
+		return self.get("fields", {"fieldtype": "Dynamic Link"})
 
 	def get_select_fields(self):
 		return self.get("fields", {"fieldtype": "Select", "options": ["not in", ["[Select]", "Loading..."]]})
@@ -296,16 +316,22 @@ class Meta(Document):
 
 	def get_set_only_once_fields(self):
 		"""Return fields with `set_only_once` set"""
-		if not hasattr(self, "_set_only_once_fields"):
-			self._set_only_once_fields = self.get("fields", {"set_only_once": 1})
-			fieldnames = [d.fieldname for d in self._set_only_once_fields]
-
-			for df in self.standard_set_once_fields:
-				if df.fieldname not in fieldnames:
-					self._set_only_once_fields.append(df)
-
 		return self._set_only_once_fields
 
+<<<<<<< HEAD
+=======
+	@cached_property
+	def _set_only_once_fields(self):
+		set_only_once_fields = self.get("fields", {"set_only_once": 1})
+		fieldnames = [d.fieldname for d in set_only_once_fields]
+
+		for df in self.standard_set_once_fields:
+			if df.fieldname not in fieldnames:
+				set_only_once_fields.append(df)
+
+		return set_only_once_fields
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def get_table_fields(self):
 		return self._table_fields
 
@@ -318,33 +344,39 @@ class Meta(Document):
 		return fields
 
 	def get_valid_columns(self) -> list[str]:
-		if not hasattr(self, "_valid_columns"):
-			table_exists = frappe.db.table_exists(self.name)
-			if self.name in self.special_doctypes and table_exists:
-				self._valid_columns = get_table_columns(self.name)
-			else:
-				self._valid_columns = self.default_fields + [
-					df.fieldname
-					for df in self.get("fields")
-					if not df.get("is_virtual") and df.fieldtype in data_fieldtypes
-				]
-				if self.istable:
-					self._valid_columns += list(child_table_fields)
-
 		return self._valid_columns
 
-	def get_valid_fields(self) -> list[str]:
-		if not hasattr(self, "_valid_fields"):
-			if (frappe.flags.in_install or frappe.flags.in_migrate) and self.name in self.special_doctypes:
-				self._valid_fields = get_table_columns(self.name)
-			else:
-				self._valid_fields = self.default_fields + [
-					df.fieldname for df in self.get("fields") if df.fieldtype in data_fieldtypes
-				]
-				if self.istable:
-					self._valid_fields += list(child_table_fields)
+	@cached_property
+	def _valid_columns(self):
+		table_exists = frappe.db.table_exists(self.name)
+		if self.name in self.special_doctypes and table_exists:
+			valid_columns = get_table_columns(self.name)
+		else:
+			valid_columns = self.default_fields + [
+				df.fieldname
+				for df in self.get("fields")
+				if not df.get("is_virtual") and df.fieldtype in data_fieldtypes
+			]
+			if self.istable:
+				valid_columns += list(child_table_fields)
 
+		return valid_columns
+
+	def get_valid_fields(self) -> list[str]:
 		return self._valid_fields
+
+	@cached_property
+	def _valid_fields(self):
+		if (frappe.flags.in_install or frappe.flags.in_migrate) and self.name in self.special_doctypes:
+			valid_fields = get_table_columns(self.name)
+		else:
+			valid_fields = self.default_fields + [
+				df.fieldname for df in self.get("fields") if df.fieldtype in data_fieldtypes
+			]
+			if self.istable:
+				valid_fields += list(child_table_fields)
+
+		return valid_fields
 
 	def get_table_field_doctype(self, fieldname):
 		return TABLE_DOCTYPES_FOR_DOCTYPE.get(fieldname)
@@ -355,10 +387,14 @@ class Meta(Document):
 =======
 		"""Return docfield from meta."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		return self._fields.get(fieldname)
 
@@ -368,10 +404,14 @@ class Meta(Document):
 =======
 		"""Return True if fieldname exists."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		return fieldname in self._fields
 
@@ -382,10 +422,14 @@ class Meta(Document):
 =======
 		"""Return label of the given fieldname."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if df := self.get_field(fieldname):
 			return df.get("label")
 
@@ -399,10 +443,14 @@ class Meta(Document):
 
 		return "No Label"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def get_options(self, fieldname):
 		return self.get_field(fieldname).options
@@ -639,10 +687,14 @@ class Meta(Document):
 =======
 		insertion_map = {}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		for index, field in enumerate(self.fields):
 			if existing_fields and field.fieldname in existing_fields:
@@ -676,10 +728,14 @@ class Meta(Document):
 						target_position = current_field
 				insertion_map.setdefault(target_position, []).append(field.fieldname)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			else:
 				# if custom field is at the top, insert after is None
@@ -692,10 +748,14 @@ class Meta(Document):
 		if insertion_map:
 			_update_field_order_based_on_insert_after(field_order, insertion_map)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		self._update_fields_based_on_order(field_order)
 
@@ -733,6 +793,7 @@ class Meta(Document):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				not with_virtual_fields
 				and docfield.get("is_virtual")
 =======
@@ -743,6 +804,10 @@ class Meta(Document):
 				(not with_virtual_fields and docfield.get("is_virtual"))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				(not with_virtual_fields and docfield.get("is_virtual"))
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				or docfield.fieldtype in no_value_fields
 			)
 
@@ -769,10 +834,15 @@ class Meta(Document):
 
 	def get_high_permlevel_fields(self):
 		"""Build list of fields with high perm level and all the higher perm levels defined."""
-		if not hasattr(self, "high_permlevel_fields"):
-			self.high_permlevel_fields = [df for df in self.fields if df.permlevel > 0]
 		return self.high_permlevel_fields
 
+<<<<<<< HEAD
+=======
+	@cached_property
+	def high_permlevel_fields(self):
+		return [df for df in self.fields if df.permlevel > 0]
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def get_permitted_fieldnames(
 		self,
 		parenttype=None,
@@ -823,10 +893,14 @@ class Meta(Document):
 			if df.permlevel in permlevel_access
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return permitted_fieldnames
 
 	def get_permlevel_access(self, permission_type="read", parenttype=None, *, user=None):
@@ -1129,7 +1203,11 @@ if typing.TYPE_CHECKING:
 	class _Meta(Meta, DocType):
 		pass
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

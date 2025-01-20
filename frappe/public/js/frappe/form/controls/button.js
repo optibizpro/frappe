@@ -13,7 +13,11 @@ frappe.ui.form.ControlButton = class ControlButton extends frappe.ui.form.Contro
 		this.$input = $(
 			`<button class="btn ${btn_size} ${btn_type} ellipsis" title="${this.df.label}">`
 		)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.prependTo(me.input_area)
 			.on("click", function () {
 				me.onclick();

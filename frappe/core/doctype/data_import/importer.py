@@ -27,9 +27,12 @@ DURATION_PATTERN = re.compile(r"^(?:(\d+d)?((^|\s)\d+h)?((^|\s)\d+m)?((^|\s)\d+s
 
 
 class Importer:
-	def __init__(self, doctype, data_import=None, file_path=None, import_type=None, console=False):
+	def __init__(
+		self, doctype, data_import=None, file_path=None, import_type=None, console=False, use_sniffer=False
+	):
 		self.doctype = doctype
 		self.console = console
+		self.use_sniffer = use_sniffer
 
 		self.data_import = data_import
 		if not self.data_import:
@@ -46,6 +49,7 @@ class Importer:
 			self.template_options,
 			self.import_type,
 			console=self.console,
+			use_sniffer=self.use_sniffer,
 		)
 
 	def get_data_for_import_preview(self):
@@ -403,13 +407,16 @@ class Importer:
 
 
 class ImportFile:
-	def __init__(self, doctype, file, template_options=None, import_type=None, *, console=False):
+	def __init__(
+		self, doctype, file, template_options=None, import_type=None, *, console=False, use_sniffer=False
+	):
 		self.doctype = doctype
 		self.template_options = template_options or frappe._dict(column_to_field_map=frappe._dict())
 		self.column_to_field_map = self.template_options.column_to_field_map
 		self.import_type = import_type
 		self.warnings = []
 		self.console = console
+		self.use_sniffer = use_sniffer
 
 		self.file_doc = self.file_path = self.google_sheets_url = None
 		if isinstance(file, str):
@@ -541,10 +548,14 @@ class ImportFile:
 			first_row.get_values(parent_column_indexes)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			data_without_first_row = data[1:]
 			for row in data_without_first_row:
@@ -604,10 +615,14 @@ class ImportFile:
 			return file_content, extn
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		file_name = frappe.db.get_value("File", {"file_url": file_path})
 		if file_name:
 			file = frappe.get_doc("File", file_name)
@@ -621,7 +636,7 @@ class ImportFile:
 			frappe.throw(_("Import template should be of type .csv, .xlsx or .xls"), title=error_title)
 
 		if extension == "csv":
-			data = read_csv_content(content)
+			data = read_csv_content(content, use_sniffer=self.use_sniffer)
 		elif extension == "xlsx":
 			data = read_xlsx_file_from_attached_file(fcontent=content)
 		elif extension == "xls":

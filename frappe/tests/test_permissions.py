@@ -30,10 +30,14 @@ from frappe.tests.utils import FrappeTestCase
 from frappe.tests import IntegrationTestCase
 from frappe.tests.utils import make_test_records_for_doctype
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.data import now_datetime
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Blogger", "Blog Post", "User", "Contact", "Salutation"]
@@ -116,10 +120,14 @@ class TestPermissions(IntegrationTestCase):
 		self.assertNotEqual(permitted_record, full_record)
 		self.assertSequenceSubset(post.meta.get_search_fields(), permitted_record)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_user_permissions_in_doc(self):
 		add_user_permission("Blog Category", "-test-blog-category-1", "test2@example.com")
@@ -789,7 +797,11 @@ class TestPermissions(IntegrationTestCase):
 			# No one has this role, so user shouldn't have permission.
 			self.assertNotIn(doctype, get_doctypes_with_read())
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

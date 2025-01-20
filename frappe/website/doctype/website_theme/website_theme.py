@@ -8,6 +8,7 @@ from os.path import join as join_path
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from pathlib import Path
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -16,6 +17,10 @@ from pathlib import Path
 from pathlib import Path
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from pathlib import Path
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from typing import Optional
 
 import frappe
@@ -150,10 +155,14 @@ class WebsiteTheme(Document):
 			old_file.unlink()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@frappe.whitelist()
 	def set_as_default(self):
 		self.save()
@@ -177,7 +186,11 @@ def get_active_theme() -> Optional["WebsiteTheme"]:
 			return frappe.get_cached_doc("Website Theme", website_theme)
 =======
 			return frappe.client_cache.get_doc("Website Theme", website_theme)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		except frappe.DoesNotExistError:
 			frappe.clear_last_message()
 			pass

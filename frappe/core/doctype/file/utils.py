@@ -223,6 +223,7 @@ def extract_images_from_doc(doc: "Document", fieldname: str, is_private=True):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	content = extract_images_from_html(doc, content, is_private=(not doc.meta.make_attachments_public))
 =======
 =======
@@ -235,6 +236,12 @@ def extract_images_from_doc(doc: "Document", fieldname: str, is_private=True):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	if doc.meta.make_attachments_public:
+		is_private = False
+	content = extract_images_from_html(doc, content, is_private=is_private)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if frappe.flags.has_dataurl:
 		doc.set(fieldname, content)
 
@@ -265,6 +272,7 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 		if not content:
@@ -280,6 +288,9 @@ def extract_images_from_html(doc: "Document", content: str, is_private: bool = F
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if not content:
 			# if there is no content, return the original tag
@@ -404,10 +415,14 @@ def attach_files_to_document(doc: "Document", event) -> None:
 			continue
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		unattached_file = frappe.db.exists(
 			"File",
@@ -454,10 +469,14 @@ def relink_files(doc, fieldname, temp_doc_name):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""
 	Relink files attached to incorrect document name to the new document name
 	by check if file with temp name exists that was created in last 60 minutes
@@ -471,10 +490,14 @@ def relink_files(doc, fieldname, temp_doc_name):
 
 	mislinked_file = frappe.db.get_value(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"File",
 		{
 			"file_url": doc.get(fieldname),
@@ -492,10 +515,14 @@ def relink_files(doc, fieldname, temp_doc_name):
 =======
 	# If file exists, attach it to the new docname
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if mislinked_file:
 		frappe.db.set_value(
 			"File",
@@ -542,6 +569,7 @@ def find_file_by_url(path: str, name: str | None = None) -> Optional["File"]:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		file: "File" = frappe.get_doc(doctype="File", **file_data)
 =======
 		file: File = frappe.get_doc(doctype="File", **file_data)
@@ -551,5 +579,9 @@ def find_file_by_url(path: str, name: str | None = None) -> Optional["File"]:
 		file: File = frappe.get_doc(doctype="File", **file_data)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		file: File = frappe.get_doc(doctype="File", **file_data)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if file.is_downloadable():
 			return file

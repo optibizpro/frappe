@@ -15,10 +15,14 @@ def resize_images(path, maxdim=700):
 =======
 	for basepath, folders, files in os.walk(path):  # noqa: B007
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		for fname in files:
 			extn = fname.rsplit(".", 1)[1]
 			if extn in ("jpg", "jpeg", "png", "gif"):
@@ -59,10 +63,14 @@ def optimize_image(content, content_type, max_width=1920, max_height=1080, optim
 =======
 def optimize_image(content, content_type, max_width=1024, max_height=768, optimize=True, quality=85):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if content_type == "image/svg+xml":
 		return content
 
@@ -75,10 +83,14 @@ def optimize_image(content, content_type, max_width=1024, max_height=768, optimi
 		max_height = max(min(max_height, height * 0.8), 200)
 		max_width = max(min(max_width, width * 0.8), 200)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		image_format = content_type.split("/")[1]
 		size = max_width, max_height
 		image.thumbnail(size, Image.Resampling.LANCZOS)

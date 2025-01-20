@@ -199,9 +199,12 @@ cypress/videos
 .helix/
 # Aider AI Chat
 .aider*
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 # frappecloud billing
 billing/node_modules
 frappe/public/billing
 frappe/www/billing.html
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

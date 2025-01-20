@@ -208,6 +208,7 @@ class LDAPSettings(Document):
 	def create_or_update_user(self, user_data: dict, groups: list | None = None):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -217,6 +218,12 @@ class LDAPSettings(Document):
 =======
 		user: User = None
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		user: "User" = None
+=======
+		user: User = None
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		role: str = None
 
 		if frappe.db.exists("User", user_data["email"]):

@@ -25,12 +25,17 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 						<label class="control-label" style="padding-right: 0px;"></label>
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 						<label class="control-label" style="padding-right: 5px;"></label>
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 						<label class="control-label" style="padding-right: 1px;"></label>
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+						<label class="control-label" style="padding-right: 5px;"></label>
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						<span class="help"></span>
 					</div>
 					<div class="control-input-wrapper">
@@ -41,10 +46,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 						<div class="help-box small text-extra-muted hide"></div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					</div>
 				</div>
 			</div>`
@@ -56,10 +65,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 				this.$wrapper.find(".form-group").addClass("horizontal");
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 	}
 	toggle_label(show) {
@@ -176,10 +189,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 			["Currency", "Int", "Float"].includes(this.df.fieldtype) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			(this.value === 0 || value === 0)
 		) {
 			// to set the 0 value in readonly for currency, int, float field
@@ -192,10 +209,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 		if (["Data", "Long Text", "Small Text", "Text", "Password"].includes(this.df.fieldtype)) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			value = frappe.utils.escape_html(value);
 		}
 		let doc = this.doc || (this.frm && this.frm.doc);
@@ -216,10 +237,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 			(icon ? '<i class="' + icon + '"></i> ' : "") +
 				__(this.df.label, null, this.df.parent) || "&nbsp;";
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this._label = this.df.label;
 	}
 
@@ -236,10 +261,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 			unsupported_fieldtypes.includes(this.df.fieldtype)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 			return;
 
@@ -250,10 +279,14 @@ frappe.ui.form.ControlInput = class ControlInput extends frappe.ui.form.Control 
 =======
 		$(`<a href="${this.df.documentation_url}" target="_blank" title="${__("Documentation")}">
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			${frappe.utils.icon("help", "sm")}
 		</a>`).appendTo($help);
 	}

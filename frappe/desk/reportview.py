@@ -10,10 +10,14 @@ from functools import lru_cache
 
 from sql_metadata import Parser
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 import frappe.permissions
@@ -28,10 +32,14 @@ from frappe.utils import add_user_info, cint, cstr, format_duration
 =======
 from frappe.utils import add_user_info, cint, format_duration
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.data import sbool
 
 
@@ -75,6 +83,7 @@ def get_count() -> int:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		count = controller.get_count(args)
 =======
 		count = frappe.call(controller.get_count, args=args, **args)
@@ -84,6 +93,10 @@ def get_count() -> int:
 		count = frappe.call(controller.get_count, args=args, **args)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		count = frappe.call(controller.get_count, args=args, **args)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	else:
 		args.distinct = sbool(args.distinct)
 		distinct = "distinct " if args.distinct else ""
@@ -141,10 +154,14 @@ def validate_fields(data):
 			raise_invalid_field(fieldname)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if is_standard(fieldname):
 			continue
 
@@ -241,10 +258,14 @@ def extract_fieldnames(field):
 	if not SPECIAL_CHAR_PATTERN.findall(field):
 		return [field]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	columns = Parser(f"select {field} from _dummy").columns
 
@@ -277,10 +298,14 @@ def update_wildcard_field_param(data):
 		parent_type = data.parenttype or data.parent_doctype
 		data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return True
 
 	return False
@@ -299,10 +324,14 @@ def parse_json(data):
 	if (applied_filters := data.get("applied_filters")) and isinstance(applied_filters, str):
 		data["applied_filters"] = json.loads(applied_filters)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if (or_filters := data.get("or_filters")) and isinstance(or_filters, str):
 		data["or_filters"] = json.loads(or_filters)
 	if (fields := data.get("fields")) and isinstance(fields, str):
@@ -439,10 +468,14 @@ def export_query():
 =======
 	translate_values = 1 if form_params.pop("translate_values", None) == "1" else None
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if selection := form_params.pop("selected_items", None):
 		form_params["filters"] = {"name": ("in", json.loads(selection))}
@@ -493,10 +526,14 @@ def export_query():
 			data.extend(processed_data)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	data = handle_duration_fieldtype_values(doctype, data, db_query.fields)
 
 	if file_format_type == "CSV":
@@ -556,10 +593,14 @@ def get_field_info(fields, doctype):
 			fieldname = key.split("(", 1)[0]
 			fieldname = fieldname[0].upper() + fieldname[1:]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		parenttype = parenttype or doctype
 
@@ -625,10 +666,14 @@ def parse_field(field: str) -> tuple[str | None, str]:
 =======
 	key = field.split(" as ", 1)[0]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if key.startswith(("count(", "sum(", "avg(")):
 		raise ValueError
@@ -640,10 +685,14 @@ def parse_field(field: str) -> tuple[str | None, str]:
 		table, column = key.split(".", 2)[:2]
 		return table[4:-1], column.strip("`")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return None, key.strip("`")
 
@@ -796,6 +845,7 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
 =======
 				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
@@ -805,6 +855,10 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				group_by=tag["name"],
 				as_list=True,
 			)

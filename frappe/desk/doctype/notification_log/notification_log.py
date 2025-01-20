@@ -55,10 +55,14 @@ class NotificationLog(Document):
 =======
 		frappe.db.delete(table, filters=(table.creation < (Now() - Interval(days=days))))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_permission_query_conditions(for_user):
@@ -143,10 +147,14 @@ def send_notification_email(doc: NotificationLog):
 	doc_link = get_url_to_form(doc.document_type, doc.document_name)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	header = get_email_header(doc, user.language)
 	email_subject = strip_html(doc.subject)
 	args = {

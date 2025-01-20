@@ -26,9 +26,11 @@ frappe.views.ListFactory = class ListFactory extends frappe.views.Factory {
 		}
 
 		frappe.provide("frappe.views.list_view." + doctype);
+<<<<<<< HEAD
 
 		frappe.views.list_view[me.page_name] = new view_class({
 			doctype: doctype,
+<<<<<<< HEAD
 <<<<<<< HEAD
 			parent: me.make_page(true, me.page_name),
 =======
@@ -38,6 +40,17 @@ frappe.views.ListFactory = class ListFactory extends frappe.views.Factory {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+			parent: me.make_page(true, me.page_name),
+=======
+
+		const hide_sidebar = view_class.no_sidebar || !frappe.boot.desk_settings.list_sidebar;
+
+		frappe.views.list_view[me.page_name] = new view_class({
+			doctype: doctype,
+			parent: me.make_page(true, me.page_name, hide_sidebar ? null : "Right"),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 
 		me.set_cur_list();

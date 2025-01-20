@@ -111,10 +111,14 @@ $.extend(frappe.model, {
 	child_table_field_list: ["parent", "parenttype", "parentfield"],
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	core_doctypes_list: [
 		"DocType",
 		"DocField",
@@ -158,10 +162,14 @@ $.extend(frappe.model, {
 		"Code",
 	],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	std_fields: [
 		{ fieldname: "name", fieldtype: "Link", label: __("ID") },
@@ -302,10 +310,14 @@ $.extend(frappe.model, {
 				if (meta) {
 					cached_timestamp = meta.modified;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				}
 			}
 
@@ -334,10 +346,14 @@ $.extend(frappe.model, {
 						frappe.model.set_in_localstorage(doctype, r.docs);
 						meta = r.docs[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					}
 					frappe.model.init_doctype(meta);
 
@@ -390,10 +406,14 @@ $.extend(frappe.model, {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (meta.__templates) {
 			$.extend(frappe.templates, meta.__templates);
 		}
@@ -463,10 +483,14 @@ $.extend(frappe.model, {
 			return keywords.charAt(0).toUpperCase() + keywords.substr(1).toLowerCase();
 		});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	},
 
 	can_create: function (doctype) {
@@ -589,10 +613,14 @@ $.extend(frappe.model, {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	has_value: function (dt, dn, fn) {
 		// return true if property has value
 		var val = locals[dt] && locals[dt][dn] && locals[dt][dn][fn];
@@ -606,10 +634,14 @@ $.extend(frappe.model, {
 		if (frappe.model.table_fields.includes(df.fieldtype)) {
 			ret = false;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			$.each(locals[df.options] || {}, function (k, d) {
 				if (d.parent == dn && d.parenttype == dt && d.parentfield == df.fieldname) {
 					ret = true;
@@ -700,10 +732,14 @@ $.extend(frappe.model, {
 =======
 				if (["Link", "Dynamic Link"].includes(fieldtype) && doc) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					tasks.push(() => frappe.model.trigger(key, value, doc, skip_dirty_trigger));
 				}
 			}
@@ -782,10 +818,14 @@ $.extend(frappe.model, {
 			filters = parentfield;
 			parentfield = parent;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		} else {
 			doc = frappe.get_doc(doctype, parent);
 		}
@@ -805,10 +845,14 @@ $.extend(frappe.model, {
 =======
 		for (const d of doc[parentfield] || []) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			delete locals[d.doctype][d.name];
 		}
 		doc[parentfield] = [];
@@ -834,10 +878,14 @@ $.extend(frappe.model, {
 			parent = doc.parent;
 			var parenttype = doc.parenttype,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				parentfield = doc.parentfield;
 		}
 		delete locals[doctype][name];
@@ -864,10 +912,14 @@ $.extend(frappe.model, {
 =======
 		var docfields = frappe.get_meta(doctype).fields || [];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		for (var i = 0, j = docfields.length; i < j; i++) {
 			var df = docfields[i];
 			if (cint(df.no_copy)) no_copy_list.push(df.fieldname);
@@ -1040,10 +1092,14 @@ $.extend(frappe.model, {
 					frm.doc.fields?.find((i) => i.fieldname === "longitude")) ||
 				frm.doc.fields?.find(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					(i) => i.fieldname === "location" && i.fieldtype == "Geolocation"
 				)
 			) {

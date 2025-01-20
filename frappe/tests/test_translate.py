@@ -16,19 +16,27 @@ from frappe.translate import (
 from frappe import _, _lt
 from frappe.gettext.extractors.javascript import extract_javascript
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+from frappe.tests import IntegrationTestCase
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.translate import (
 	MERGED_TRANSLATION_KEY,
 	USER_TRANSLATION_KEY,
 	clear_cache,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	extract_messages_from_javascript_code,
 	extract_messages_from_python_code,
 	get_language,
@@ -41,10 +49,14 @@ from frappe.utils import set_request
 =======
 from frappe.utils import get_bench_path, set_request
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 dirname = os.path.dirname(__file__)
 translation_string_file = os.path.abspath(os.path.join(dirname, "translation_test_file.txt"))
@@ -62,6 +74,7 @@ _lazy_translations = _lt("Communication")
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestTranslate(FrappeTestCase):
 =======
 class TestTranslate(IntegrationTestCase):
@@ -70,6 +83,10 @@ class TestTranslate(IntegrationTestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+class TestTranslate(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	guest_sessions_required = (
 		"test_guest_request_language_resolution_with_cookie",
 		"test_guest_request_language_resolution_with_request_header",
@@ -98,10 +115,14 @@ class TestTranslate(IntegrationTestCase):
 		self.assertIsNone(frappe.cache.hget(USER_TRANSLATION_KEY, frappe.local.lang))
 		self.assertIsNone(frappe.cache.hget(MERGED_TRANSLATION_KEY, frappe.local.lang))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_extract_message_from_file(self):
 		data = frappe.translate.get_messages_from_file(translation_string_file)
@@ -224,10 +245,14 @@ class TestTranslate(IntegrationTestCase):
 =======
 		frappe.init(site)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.connect()
 
 	def test_guest_request_language_resolution_with_request_header(self):
@@ -274,10 +299,14 @@ class TestTranslate(IntegrationTestCase):
 =======
 			_lt("Communication")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"""
 		)
 		expected_output = [
@@ -291,10 +320,14 @@ class TestTranslate(IntegrationTestCase):
 =======
 			(15, "Communication", None),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		]
 
 		output = extract_messages_from_python_code(code)
@@ -390,10 +423,14 @@ class TestTranslate(IntegrationTestCase):
 		)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 def verify_translation_files(app):
 	"""Function to verify translation file syntax in app."""

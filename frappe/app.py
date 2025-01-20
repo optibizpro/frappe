@@ -5,10 +5,14 @@
 =======
 import functools
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import gc
 import logging
 import os
@@ -38,6 +42,7 @@ from frappe.utils.error import make_error_snapshot
 =======
 from frappe.utils import CallbackManager, cint, get_site_name
 from frappe.utils.data import escape_html
+<<<<<<< HEAD
 from frappe.utils.error import log_error_snapshot
 from frappe.website.page_renderers.error_page import ErrorPage
 <<<<<<< HEAD
@@ -45,6 +50,11 @@ from frappe.website.page_renderers.error_page import ErrorPage
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.utils.error import log_error, log_error_snapshot
+from frappe.website.page_renderers.error_page import ErrorPage
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.website.serve import get_response
 
 _site = None
@@ -149,10 +159,14 @@ def after_response_wrapper(app):
 
 @after_response_wrapper
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @Request.application
 def application(request: Request):
 	response = None
@@ -167,10 +181,14 @@ def application(request: Request):
 =======
 		validate_auth()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if request.method == "OPTIONS":
 			response = Response()
@@ -220,10 +238,14 @@ def application(request: Request):
 =======
 		if rollback and request.method in UNSAFE_HTTP_METHODS and frappe.db:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.db.rollback()
 
 		try:
@@ -258,10 +280,14 @@ def init_request(request):
 =======
 	frappe.init(site, sites_path=_sites_path, force=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not (frappe.local.conf and frappe.local.conf.db_name):
 		# site does not exist
@@ -346,25 +372,17 @@ def log_request(request, response):
 		)
 
 
-def process_response(response):
+def process_response(response: Response):
 	if not response:
 		return
 
 	# cache control
 	# read: https://simonhearne.com/2022/caching-header-best-practices/
 	if frappe.local.response.can_cache:
-		response.headers.extend(
-			{
-				# default: 5m (client), 3h (allow stale resources for this long if upstream is down)
-				"Cache-Control": "private,max-age=300,stale-while-revalidate=10800",
-			}
-		)
+		# default: 5m (client), 3h (allow stale resources for this long if upstream is down)
+		response.headers.setdefault("Cache-Control", "private,max-age=300,stale-while-revalidate=10800")
 	else:
-		response.headers.extend(
-			{
-				"Cache-Control": "no-store,no-cache,must-revalidate,max-age=0",
-			}
-		)
+		response.headers.setdefault("Cache-Control", "no-store,no-cache,must-revalidate,max-age=0")
 
 	# Set cookies, only if response is non-cacheable to avoid proxy cache invalidation
 	if hasattr(frappe.local, "cookie_manager") and not frappe.local.response.can_cache:
@@ -446,10 +464,14 @@ def make_form_dict(request: Request):
 	else:
 		frappe.throw(_("Invalid request arguments"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def handle_exception(e):
@@ -467,10 +489,14 @@ def handle_exception(e):
 		frappe.get_request_header("Accept") and (frappe.local.is_ajax or "application/json" in accept_header)
 	) or (frappe.local.request.path.startswith("/api/") and not accept_header.startswith("text"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not frappe.session.user:
 		# If session creation fails then user won't be unset. This causes a lot of code that
@@ -533,16 +559,20 @@ def handle_exception(e):
 			http_status_code=http_status_code, title=_("Server Error"), message=_("Uncaught Exception")
 		).render()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if e.__class__ == frappe.AuthenticationError:
 		if hasattr(frappe.local, "login_manager"):
 			frappe.local.login_manager.clear_cookies()
 
-	if http_status_code >= 500:
+	if http_status_code >= 500 or frappe.conf.developer_mode:
 		log_error_snapshot(e)
 
 	if frappe.conf.get("developer_mode") and not respond_as_json:
@@ -568,10 +598,14 @@ def sync_database(rollback: bool) -> bool:
 			frappe.db.commit()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			rollback = False
 
 	return rollback
@@ -637,10 +671,14 @@ def serve(
 	proxy=False,
 ):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	global application, _site, _sites_path
 	_site = site
 	_sites_path = sites_path
@@ -656,10 +694,14 @@ def serve(
 =======
 		application = application_with_statics()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if proxy or os.environ.get("USE_PROXY"):
 		application = ProxyFix(application, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
@@ -709,7 +751,11 @@ def application_with_statics():
 
 	return application
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

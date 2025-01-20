@@ -22,10 +22,14 @@ frappe.email_defaults = {
 		no_smtp_authentication: 0,
 	},
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	GMail: {
 		email_server: "imap.gmail.com",
 		incoming_port: 993,
@@ -122,7 +126,25 @@ function set_default_max_attachment_size(frm) {
 		});
 	}
 }
-
+function add_helpful_links(frm) {
+	// For better UX
+	switch (frm.doc.service) {
+		case "GMail":
+			frm.set_df_property(
+				"password",
+				"description",
+				'To generate password visit <a href="https://knowledge.workspace.google.com/kb/how-to-create-app-passwords-000009237"> here'
+			);
+			break;
+		case "Frappe Mail":
+			frm.set_df_property(
+				"api_secret",
+				"description",
+				'To know more visit <a href="https://github.com/frappe/mail"> here'
+			);
+			break;
+	}
+}
 frappe.ui.form.on("Email Account", {
 	service: function (frm) {
 		$.each(frappe.email_defaults[frm.doc.service], function (key, value) {
@@ -133,6 +155,10 @@ frappe.ui.form.on("Email Account", {
 				frm.set_value(key, value);
 			});
 		}
+<<<<<<< HEAD
+=======
+		add_helpful_links(frm);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	},
 
 	use_imap: function (frm) {
@@ -162,10 +188,14 @@ frappe.ui.form.on("Email Account", {
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	onload: function (frm) {
 		frm.set_df_property("append_to", "only_select", true);
 		frm.set_query(
@@ -186,10 +216,14 @@ frappe.ui.form.on("Email Account", {
 		frm.events.show_oauth_authorization_message(frm);
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	},
 
 	refresh: function (frm) {
@@ -199,10 +233,14 @@ frappe.ui.form.on("Email Account", {
 =======
 		frm.events.show_oauth_authorization_message(frm);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if (frappe.route_flags.delete_user_from_locals && frappe.route_flags.linked_user) {
 			delete frappe.route_flags.delete_user_from_locals;
@@ -225,10 +263,14 @@ frappe.ui.form.on("Email Account", {
 				});
 			});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 	},
 
@@ -256,10 +298,14 @@ frappe.ui.form.on("Email Account", {
 			!frm.doc.backend_app_flow
 		) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.call({
 				method: "frappe.integrations.doctype.connected_app.connected_app.has_token",
 				args: {

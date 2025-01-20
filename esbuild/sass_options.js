@@ -8,10 +8,14 @@ let app_paths = app_list.map(get_app_path).map((app_path) => path.resolve(app_pa
 let app_paths = app_list.map((app) => path.resolve(apps_path, app));
 let node_modules_path = app_paths.map((app_path) => path.resolve(app_path, "node_modules"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 module.exports = {
 	includePaths: [...node_modules_path, ...app_paths],

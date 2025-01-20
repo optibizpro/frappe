@@ -19,6 +19,7 @@ from frappe.tests.utils import FrappeTestCase, change_settings
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, change_settings
 =======
@@ -31,6 +32,11 @@ from frappe.tests import IntegrationTestCase
 from frappe.tests.test_query_builder import run_only_if
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 EXTRA_TEST_RECORD_DEPENDENCIES = ["Email Account"]
 
@@ -40,10 +46,14 @@ class TestEmail(FrappeTestCase):
 =======
 class TestEmail(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def setUp(self):
 		frappe.db.delete("Email Unsubscribe")
 		frappe.db.delete("Email Queue")
@@ -179,10 +189,14 @@ class TestEmail(IntegrationTestCase):
 =======
 		from frappe.utils import set_request
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		from frappe.utils.verified_command import verify_request
 
 		frappe.sendmail(
@@ -277,10 +291,14 @@ class TestEmail(IntegrationTestCase):
 		email_account.always_use_account_name_as_sender_name = 1
 		_patched_assertion(email_account, "_Test Email Account 1 <test@example.com>")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_sender(self):
 		def _patched_assertion(email_account, assertion):
@@ -393,10 +411,14 @@ class TestVerifiedRequests(FrappeTestCase):
 =======
 class TestVerifiedRequests(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_round_trip(self):
 		from frappe.utils import set_request
 		from frappe.utils.verified_command import get_signed_params, verify_request
@@ -410,10 +432,14 @@ class TestVerifiedRequests(IntegrationTestCase):
 =======
 			set_request(method="GET", query_string=signed_url)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			self.assertTrue(verify_request())
 		frappe.local.request = None
 
@@ -423,6 +449,7 @@ class TestEmailIntegrationTest(FrappeTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 class TestEmailIntegrationTest(FrappeTestCase):
 =======
 class TestEmailIntegrationTest(IntegrationTestCase):
@@ -432,6 +459,10 @@ class TestEmailIntegrationTest(IntegrationTestCase):
 class TestEmailIntegrationTest(IntegrationTestCase):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+class TestEmailIntegrationTest(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""Sends email to local SMTP server and verifies correctness.
 
 	SMTP4Dev runs as a service in unit test CI job.
@@ -475,10 +506,14 @@ class TestEmailIntegrationTest(IntegrationTestCase):
 		)
 		email.reload()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(email.sender, sender)
 		self.assertEqual(len(email.recipients), 2)
 		self.assertEqual(email.status, "Sent")
@@ -497,6 +532,7 @@ class TestEmailIntegrationTest(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@change_settings("System Settings", store_attached_pdf_document=1)
 =======
 	@IntegrationTestCase.change_settings("System Settings", store_attached_pdf_document=1)
@@ -506,6 +542,10 @@ class TestEmailIntegrationTest(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", store_attached_pdf_document=1)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	@IntegrationTestCase.change_settings("System Settings", store_attached_pdf_document=1)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_store_attachments(self):
 		""" "attach print" feature just tells email queue which document to attach, this is not
 		actually stored unless system setting says so."""

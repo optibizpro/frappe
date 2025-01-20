@@ -8,6 +8,7 @@ from shutil import which
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from shutil import which
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -15,6 +16,9 @@ from shutil import which
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import click
 
@@ -24,10 +28,14 @@ import frappe.commands
 =======
 from frappe import _
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.commands import get_site, pass_context
 from frappe.coverage import CodeCoverage
 from frappe.exceptions import SiteNotSpecifiedError
@@ -58,10 +66,14 @@ if typing.TYPE_CHECKING:
 	"--make-copy",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	is_flag=True,
 	default=False,
 	help="Copy the files instead of symlinking",
@@ -332,10 +344,14 @@ def execute(context: CliCtxObj, method, args=None, kwargs=None, profile=False):
 					code = compile(method + suffix, "<bench execute>", "eval")
 					ret = eval(code, globals(), locals())  # nosemgrep
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			if profile:
 				import pstats
@@ -504,10 +520,14 @@ def import_csv(
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @click.command("data-import")
 @click.option(
 	"--file",
@@ -535,6 +555,7 @@ def data_import(context, file_path, doctype, import_type=None, submit_after_impo
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def data_import(context, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True):
 =======
 =======
@@ -547,6 +568,12 @@ def data_import(
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def data_import(
+	context: CliCtxObj, file_path, doctype, import_type=None, submit_after_import=False, mute_emails=True
+):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"Import documents in bulk from CSV or XLSX using data import"
 	from frappe.core.doctype.data_import.data_import import import_file
 
@@ -608,7 +635,10 @@ def mariadb(context: CliCtxObj, extra_args):
 	site = get_site(context)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not site:
 		raise SiteNotSpecifiedError
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
@@ -617,6 +647,7 @@ def mariadb(context: CliCtxObj, extra_args):
 	os.environ["MYSQL_HISTFILE"] = os.path.abspath(get_site_path("logs", "mariadb_console.log"))
 	_mariadb()
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
@@ -630,6 +661,12 @@ def mariadb(context: CliCtxObj, extra_args):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	frappe.init(site)
+	frappe.conf.db_type = "mariadb"
+	_enter_console(extra_args=extra_args)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @click.command("postgres", context_settings=EXTRA_ARGS_CTX)
@@ -692,10 +729,14 @@ def _psql():
 		host=frappe.conf.db_host,
 		port=frappe.conf.db_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 		user=frappe.conf.db_name,
 =======
 		user=frappe.conf.db_user,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		user=frappe.conf.db_user,
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		password=frappe.conf.db_password,
 		db_name=frappe.conf.db_name,
 		extra=list(extra_args) if extra_args else [],
@@ -707,10 +748,14 @@ def _psql():
 		)
 	os.execv(bin, [bin, *args])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @click.command("jupyter")
@@ -1147,7 +1192,11 @@ def run_ui_tests(
 
 
 =======
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @click.command("serve")
 @click.option("--port", default=8000)
 @click.option("--profile", is_flag=True, default=False)
@@ -1281,10 +1330,14 @@ def set_config(context: CliCtxObj, key, value, global_=False, parse=False):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if parse:
 		import ast
 

@@ -24,10 +24,14 @@ class UnitTestDataImport(UnitTestCase):
 
 class TestImporter(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls):
 		super().setUpClass()
@@ -70,7 +74,7 @@ class TestImporter(IntegrationTestCase):
 
 	def test_data_validation_semicolon_success(self):
 		import_file = get_import_file("sample_import_file_semicolon")
-		data_import = self.get_importer(doctype_name, import_file, update=True)
+		data_import = self.get_importer(doctype_name, import_file, update=True, use_sniffer=True)
 
 		doc = data_import.get_preview_from_template().get("data", [{}])
 
@@ -81,7 +85,7 @@ class TestImporter(IntegrationTestCase):
 	def test_data_validation_semicolon_failure(self):
 		import_file = get_import_file("sample_import_file_semicolon")
 
-		data_import = self.get_importer_semicolon(doctype_name, import_file)
+		data_import = self.get_importer_semicolon(doctype_name, import_file, use_sniffer=True)
 		doc = data_import.get_preview_from_template().get("data", [{}])
 		# if semicolon delimiter detection fails, and falls back to comma,
 		# column number will be less than 15 -> 2 (+1 id)
@@ -164,22 +168,24 @@ class TestImporter(IntegrationTestCase):
 		self.assertEqual(updated_doc.table_field_1[0].child_description, "child description")
 		self.assertEqual(updated_doc.table_field_1_again[0].child_title, "child title again")
 
-	def get_importer(self, doctype, import_file, update=False):
+	def get_importer(self, doctype, import_file, update=False, use_sniffer=False):
 		data_import = frappe.new_doc("Data Import")
 		data_import.import_type = "Insert New Records" if not update else "Update Existing Records"
 		data_import.reference_doctype = doctype
 		data_import.import_file = import_file.file_url
+		data_import.use_csv_sniffer = use_sniffer
 		data_import.insert()
 		# Commit so that the first import failure does not rollback the Data Import insert.
 		frappe.db.commit()
 
 		return data_import
 
-	def get_importer_semicolon(self, doctype, import_file, update=False):
+	def get_importer_semicolon(self, doctype, import_file, update=False, use_sniffer=False):
 		data_import = frappe.new_doc("Data Import")
 		data_import.import_type = "Insert New Records" if not update else "Update Existing Records"
 		data_import.reference_doctype = doctype
 		data_import.import_file = import_file.file_url
+		data_import.use_csv_sniffer = use_sniffer
 		# deliberately overwrite default delimiter options here, causing to fail when parsing `;`
 		data_import.delimiter_options = ","
 		data_import.insert()

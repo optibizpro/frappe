@@ -75,10 +75,14 @@ class Contact(Document):
 			self.name = append_number_if_name_exists("Contact", self.name)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def validate(self):
 		self.full_name = self._get_full_name()
 		self.set_primary_email()
@@ -215,6 +219,16 @@ class Contact(Document):
 		if self.designation:
 			vcard.add("title").value = self.designation
 
+		org_list = []
+		if self.company_name:
+			org_list.append(self.company_name)
+
+		if self.department:
+			org_list.append(self.department)
+
+		if org_list:
+			vcard.add("org").value = org_list
+
 		for row in self.email_ids:
 			email = vcard.add("email")
 			email.value = row.email_id
@@ -292,10 +306,14 @@ def get_default_contact(doctype, name):
 =======
 			dl.parenttype = 'Contact' """,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		(doctype, name),
 		as_dict=True,
 	)
@@ -378,10 +396,14 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 =======
 			`tabContact`.name, `tabContact`.full_name, `tabContact`.company_name
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		from
 			`tabContact`, `tabDynamic Link`
 		where
@@ -399,10 +421,14 @@ def contact_query(doctype, txt, searchfield, start, page_len, filters):
 			if(locate(%(_txt)s, `tabContact`.full_name), locate(%(_txt)s, `tabContact`.company_name), 99999),
 			`tabContact`.idx desc, `tabContact`.full_name
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		limit %(start)s, %(page_len)s """,
 		{
 			"txt": "%" + txt + "%",

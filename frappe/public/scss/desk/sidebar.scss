@@ -1,4 +1,18 @@
 // clean-this-file
+:root {
+	--sidebar-hover-color: #f3f3f3;
+	--sidebar-active-color: rgba(255, 255, 255, 1);
+	--sidebar-border-color: #ededed;
+	--surface-modal: rgba(255, 255, 255, 1);
+	--divider-color: rgba(237, 237, 237, 1);
+}
+[data-theme="dark"] {
+	--sidebar-hover-color: rgba(43, 43, 43, 1);
+	--sidebar-active-color: rgba(66, 66, 66, 1);
+	--sidebar-border-color: #232323;
+	--surface-modal: rgb(0, 0, 0);
+	--divider-color: rgba(52, 52, 52, 1);
+}
 .underline-hover {
 	display: initial;
 }
@@ -82,7 +96,7 @@ body {
 .body-sidebar {
 	width: 50px;
 	background: var(--subtle-accent);
-	border-right: 1px solid var(--dark-border-color);
+	border-right: 1px solid var(--sidebar-border-color);
 
 	display: flex;
 	flex-direction: column;
@@ -132,7 +146,7 @@ body {
 
 	.divider {
 		margin: var(--margin-xs) 0;
-		border-top: 1px solid var(--border-color);
+		border-top: 1px solid var(--divider-color);
 	}
 
 	.standard-sidebar-section {
@@ -157,7 +171,6 @@ body {
 	.standard-sidebar-item {
 		display: flex;
 		line-height: 0px;
-		justify-content: space-between;
 		padding: 0px;
 		.sidebar-item-control {
 			display: none;
@@ -310,10 +323,26 @@ body {
 
 	// expands when navbar-brand is clicked
 	.body-sidebar-container.expanded {
+		position: relative;
 		.body-sidebar {
 			padding: 8px 8px 10px 8px;
 			width: 220px;
+			height: 100%;
+			position: absolute;
+			bottom: 0;
+			top: 0;
 		}
+		.overlay {
+			display: block;
+			position: absolute;
+			width: 100vw;
+			height: 100%;
+			z-index: 1021;
+			left: 220px;
+			overflow: auto;
+			background-color: rgba(128, 128, 128, 0.5);
+		}
+
 		// acts a overlay when in mobile view
 		.body-sidebar-placeholder {
 			display: flex;
@@ -342,7 +371,7 @@ body {
 		.d-flex {
 			width: 161px;
 		}
-		gap: 12px;
+		gap: 8px;
 	}
 	.sidebar-item-control {
 		margin: 2px;
@@ -354,10 +383,10 @@ body {
 	position: absolute;
 	top: 44px;
 	left: 7px;
-	width: 220px; /* 200 - 7px */
+	width: 205px;
 	padding: 6px;
 	border-radius: var(--border-radius-lg);
-	background: var(--surface-modal, rgba(255, 255, 255, 1));
+	background: var(--surface-modal);
 	box-shadow: 0px 10px 24px -3px rgba(0, 0, 0, 0.1);
 	// box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.05);
 	// box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.2);
@@ -369,7 +398,7 @@ body {
 	border-radius: var(--border-radius-tiny);
 	opacity: 0px;
 	&:hover {
-		background-color: var(--subtle-accent);
+		background-color: var(--sidebar-hover-color);
 	}
 
 	a {
@@ -398,7 +427,7 @@ body {
 }
 // sidebar-item states
 @mixin hover-mixin {
-	background-color: #f3f3f3;
+	background-color: var(--sidebar-hover-color);
 	border-radius: 8px;
 }
 
@@ -407,9 +436,12 @@ body {
 }
 
 .active-sidebar {
-	background: var(--surface-selected, rgba(255, 255, 255, 1));
+	background: var(--sidebar-active-color);
 	box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 	border-radius: 8px;
+}
+.overlay {
+	display: none;
 }
 // form sidebar
 .form-sidebar {
@@ -645,10 +677,14 @@ body {
 =======
 		z-index: 1100;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		height: 100%;
 		width: 100%;
 	}
@@ -790,6 +826,7 @@ body {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	margin-bottom: 3px;
 =======
 	margin: var(--margin-xs) 0;
@@ -799,6 +836,10 @@ body {
 	margin: var(--margin-xs) 0;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	margin: var(--margin-xs) 0;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	max-width: 100%;
 	.data-pill {
 		@include get_textstyle("sm", "regular");
@@ -890,10 +931,14 @@ body {
 .add-attachment-btn,
 .add-review-btn,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 .shares,
 .add-tags-btn,
 .share-doc-btn,

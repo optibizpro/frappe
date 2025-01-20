@@ -5,10 +5,14 @@
 from typing import TYPE_CHECKING
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import frappe
 from frappe.automation.doctype.auto_repeat.auto_repeat import (
 	create_repeated_entries,
@@ -21,10 +25,14 @@ from frappe.tests.utils import FrappeTestCase
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import add_days, add_months, getdate, today
 
 if TYPE_CHECKING:
@@ -71,10 +79,14 @@ class TestAutoRepeat(IntegrationTestCase):
 		cls.addClassCleanup(cls.custom_field.delete)
 		return super().setUpClass()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_daily_auto_repeat(self):
 		todo = frappe.get_doc(
@@ -168,7 +180,11 @@ class TestAutoRepeat(IntegrationTestCase):
 			)
 =======
 			doctype="ToDo", description="test recurring todo without end_date", assigned_by="Administrator"
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 		self.monthly_auto_repeat("ToDo", todo.name, start_date)
 
@@ -242,6 +258,7 @@ class TestAutoRepeat(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			dict(doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator")
 =======
 			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
@@ -251,6 +268,10 @@ class TestAutoRepeat(IntegrationTestCase):
 			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+			doctype="ToDo", description="test next schedule date for daily", assigned_by="Administrator"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 		doc = make_auto_repeat(
 			frequency="Daily", reference_document=todo.name, start_date=add_days(today(), -2)

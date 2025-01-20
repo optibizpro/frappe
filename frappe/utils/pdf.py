@@ -10,10 +10,14 @@ import subprocess
 from distutils.version import LooseVersion
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from urllib.parse import parse_qs, urlparse
 
 import cssutils
@@ -32,10 +36,14 @@ from frappe.utils import cstr, scrub_urls
 =======
 from frappe.utils.caching import redis_cache
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.jinja_globals import bundled_asset, is_rtl
 <<<<<<< HEAD
 =======
@@ -306,6 +314,7 @@ def _get_base64_image(src):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		filename = query.get("fid") and query["fid"][0] or None
 =======
 		filename = (query.get("fid") and query["fid"][0]) or None
@@ -315,6 +324,10 @@ def _get_base64_image(src):
 		filename = (query.get("fid") and query["fid"][0]) or None
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		filename = (query.get("fid") and query["fid"][0]) or None
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		file = find_file_by_url(path, name=filename)
 		if not file or not file.is_private:
 			return

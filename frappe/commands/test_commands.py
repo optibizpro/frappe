@@ -17,7 +17,11 @@ import subprocess
 =======
 import sys
 import time
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import types
 import unittest
 from contextlib import contextmanager
@@ -146,10 +150,14 @@ class BaseTestCommands(FrappeTestCase):
 =======
 class BaseTestCommands(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls) -> None:
 		super().setUpClass()
@@ -475,10 +483,14 @@ class TestCommands(BaseTestCommands):
 =======
 		self.execute("bench --site {{site}} set-admin-password {}".format(original_password))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(self.returncode, 0)
 		self.assertEqual(check_password("Administrator", original_password), "Administrator")
 
@@ -549,10 +561,14 @@ class TestCommands(BaseTestCommands):
 		value = frappe.generate_hash()
 		_ = frappe.get_site_config()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.execute(f"bench set-config {key} {value} -g")
 		conf = frappe.get_site_config()
 
@@ -645,10 +661,14 @@ class TestCommands(BaseTestCommands):
 		self.assertEqual(self.returncode, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 class TestBackups(BaseTestCommands):
 	backup_map = types.MappingProxyType(
@@ -727,10 +747,14 @@ class TestBackups(BaseTestCommands):
 		self.assertEqual(self.returncode, 0)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_backup_fails_with_exit_code(self):
 		"""Provide incorrect options to check if exit code is 1"""
 		odb = BackupGenerator(
@@ -745,10 +769,14 @@ class TestBackups(BaseTestCommands):
 			db_host=frappe.conf.db_host,
 			db_port=frappe.conf.db_port,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			db_type=frappe.conf.db_type,
 		)
 		with self.assertRaises(Exception):
@@ -887,10 +915,14 @@ class TestRemoveApp(FrappeTestCase):
 =======
 class TestRemoveApp(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_delete_modules(self):
 		from frappe.installer import (
 			_delete_doctypes,
@@ -958,10 +990,14 @@ class TestAddNewUser(BaseTestCommands):
 		frappe.db.rollback()
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(self.returncode, 0)
 		user = frappe.get_doc("User", "test@gmail.com")
 		roles = {r.role for r in user.roles}
@@ -976,10 +1012,14 @@ class TestBenchBuild(BaseTestCommands):
 			self.assertEqual(result.exception, None)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 class TestBenchBuild(IntegrationTestCase):
@@ -1042,10 +1082,14 @@ class TestSchedulerUtils(BaseTestCommands):
 
 class TestCommandUtils(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_bench_helper(self):
 		from frappe.utils.bench_helper import get_app_groups
 
@@ -1069,10 +1113,14 @@ class TestDBCli(BaseTestCommands):
 		self.assertIn("1", self.stdout)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 class TestSchedulerCLI(BaseTestCommands):
 	@classmethod
@@ -1167,7 +1215,11 @@ class TestGunicornWorker(FrappeTestCase):
 		self.spawn_gunicorn(["--threads=2"])
 		path = f"http://{self.TEST_SITE}:{self.port}/api/method/ping"
 		self.assertEqual(requests.get(path).status_code, 200)
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581:frappe/commands/test_commands.py
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b:frappe/commands/test_commands.py
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87:frappe/commands/test_commands.py
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

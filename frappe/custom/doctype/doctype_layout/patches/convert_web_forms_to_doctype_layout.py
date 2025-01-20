@@ -25,6 +25,10 @@ def execute():
 			fields=[
 				dict(fieldname=d.fieldname, label=d.label) for d in web_form.web_form_fields if d.fieldname
 			],
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		).insert()
 		print(doctype_layout.name)

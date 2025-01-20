@@ -9,10 +9,14 @@ import re
 =======
 import shutil
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import subprocess
 import sys
 from collections import OrderedDict
@@ -30,10 +34,14 @@ from frappe.utils.dashboard import sync_dashboards
 =======
 from frappe.utils.synchronization import filelock
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def _is_scheduler_enabled(site) -> bool:
@@ -163,6 +171,7 @@ def _new_site(
 	apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps) or [])
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps) or [])
 =======
 			db_user=db_user,
@@ -176,6 +185,10 @@ def _new_site(
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps or []))
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		apps_to_install = ["frappe"] + (frappe.conf.get("install_apps") or []) + (list(install_apps or []))
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		for app in apps_to_install:
 			# NOTE: not using force here for 2 reasons:
@@ -669,10 +682,14 @@ def make_conf(
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	sites_path = frappe.local.sites_path
 	frappe.destroy()
 	frappe.init(site, sites_path=sites_path)
@@ -722,10 +739,14 @@ def update_site_config(key, value, validate=True, site_config_path=None):
 =======
 	from frappe.config import clear_site_config_cache
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	from frappe.utils.synchronization import filelock
 
 	if not site_config_path:
@@ -740,10 +761,14 @@ def update_site_config(key, value, validate=True, site_config_path=None):
 =======
 		clear_site_config_cache()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def _update_config_file(key: str, value, config_file: str):
@@ -858,10 +883,14 @@ def extract_sql_from_archive(sql_file_path):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def convert_archive_content(sql_file_path):
 	if frappe.conf.db_type == "mariadb":
 		# ever since mariaDB 10.6, row_format COMPRESSED has been deprecated and removed
@@ -995,10 +1024,14 @@ def is_downgrade(sql_file_path, verbose=False):
 
 	return is_downgrade
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_old_backup_version(sql_file_path: str) -> Version | None:
@@ -1057,20 +1090,27 @@ def partial_restore(sql_file_path, verbose=False):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		warnings.warn(warn, stacklevel=1)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		warnings.warn(warn, stacklevel=2)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	else:
 		click.secho("Unsupported database type", fg="red")
 		return
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	import_db_from_sql(source_sql=sql_file_path, verbose=verbose)
 

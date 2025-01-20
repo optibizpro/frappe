@@ -23,6 +23,7 @@ def get_context(context):
 		frappe.msgprint(_("Log in to access this page."))
 		frappe.redirect(f"/login?{urlencode({'redirect-to': frappe.request.path})}")
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -34,7 +35,13 @@ def get_context(context):
 
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	elif frappe.db.get_value("User", frappe.session.user, "user_type", order_by=None) == "Website User":
+=======
+
+	elif frappe.session.data.user_type == "Website User":
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		frappe.throw(_("You are not permitted to access this page."), frappe.PermissionError)
 
 	try:
@@ -91,10 +98,14 @@ def get_context(context):
 			"app_include_css": app_include_css,
 			"app_include_icons": app_include_icons,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			"layout_direction": "rtl" if is_rtl() else "ltr",
 			"lang": frappe.local.lang,
 			"sounds": hooks["sounds"],

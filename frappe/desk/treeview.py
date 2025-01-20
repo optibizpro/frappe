@@ -46,6 +46,7 @@ def get_children(doctype, parent="", include_disabled=False, **filters):
 def _get_children(doctype, parent="", ignore_permissions=False):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 def _get_children(doctype, parent="", ignore_permissions=False, include_disabled=False):
@@ -56,6 +57,11 @@ def _get_children(doctype, parent="", ignore_permissions=False, include_disabled
 def _get_children(doctype, parent="", ignore_permissions=False, include_disabled=False):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+def _get_children(doctype, parent="", ignore_permissions=False, include_disabled=False):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	parent_field = "parent_" + frappe.scrub(doctype)
 	filters = [[f"ifnull(`{parent_field}`,'')", "=", parent], ["docstatus", "<", 2]]
 	if frappe.db.has_column(doctype, "disabled") and not include_disabled:

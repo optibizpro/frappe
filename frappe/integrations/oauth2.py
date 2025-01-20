@@ -76,6 +76,7 @@ def authorize(**kwargs):
 	success_url = "/api/method/frappe.integrations.oauth2.approve?" + encode_params(sanitize_kwargs(kwargs))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -85,6 +86,12 @@ def authorize(**kwargs):
 =======
 	failure_url = frappe.form_dict.get("redirect_uri", "") + "?error=access_denied"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	failure_url = frappe.form_dict["redirect_uri"] + "?error=access_denied"
+=======
+	failure_url = frappe.form_dict.get("redirect_uri", "") + "?error=access_denied"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if frappe.session.user == "Guest":
 		# Force login, redirect to preauth again.
@@ -103,7 +110,9 @@ def authorize(**kwargs):
 				frappe.flags.oauth_credentials["client_id"],
 				"skip_authorization",
 			)
-			unrevoked_tokens = frappe.get_all("OAuth Bearer Token", filters={"status": "Active"})
+			unrevoked_tokens = frappe.db.exists(
+				"OAuth Bearer Token", {"status": "Active", "user": frappe.session.user}
+			)
 
 			if skip_auth or (get_oauth_settings().skip_authorization == "Auto" and unrevoked_tokens):
 				frappe.local.response["type"] = "redirect"

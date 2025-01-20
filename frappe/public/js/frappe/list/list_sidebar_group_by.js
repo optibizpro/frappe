@@ -99,10 +99,14 @@ frappe.views.ListGroupBy = class ListGroupBy {
 							<span>${frappe.utils.icon("select", "xs")}</span>
 						</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					<ul class="dropdown-menu group-by-dropdown" role="menu">
 					</ul>
 			</div>`;
@@ -261,10 +265,14 @@ frappe.views.ListGroupBy = class ListGroupBy {
 			: "";
 		return `<div class="group-by-item ${applied ? "selected" : ""}" data-value="${value}">
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			<a class="dropdown-item" href="#" onclick="return false;">
 				${applied_html}
 				<span class="group-by-value ellipsis" data-name="${field.name}">${label}</span>

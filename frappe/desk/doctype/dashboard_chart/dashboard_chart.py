@@ -265,10 +265,14 @@ def get_group_by_chart_config(chart, filters):
 =======
 def get_group_by_chart_config(chart, filters) -> dict | None:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	aggregate_function = get_aggregate_function(chart.group_by_type)
 	value_field = chart.aggregate_function_based_on or "1"
 	group_by_field = chart.group_by_based_on
@@ -306,10 +310,14 @@ def get_group_by_chart_config(chart, filters) -> dict | None:
 		return {
 			"labels": [item.get("name", "Not Specified") for item in data],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			"datasets": [{"name": chart.name, "values": [item["count"] for item in data]}],
 		}
 	return None
@@ -333,10 +341,14 @@ def get_result(data, timegrain, from_date, to_date, chart_type):
 =======
 		for d in result:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			count = 0
 			while data_index < len(data) and getdate(data[data_index][0]) <= d[0]:
 				d[1] += cint(data[data_index][1])

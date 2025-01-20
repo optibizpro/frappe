@@ -264,10 +264,14 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 					read_only:
 						(this?.read_only_setters && this.read_only_setters.includes(setter)) || 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					default: this.setters[setter],
 				});
 			});
@@ -620,10 +624,14 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 		if (results.length) {
 			results.forEach((result) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				result.checked = 0;
 				this.results.push(result);
 			});
@@ -648,10 +656,14 @@ frappe.ui.form.MultiSelectDialog = class MultiSelectDialog {
 		if (results.length) {
 			parent_names = results.map((v) => v.name);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 		return parent_names;
 	}

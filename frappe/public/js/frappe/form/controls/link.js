@@ -20,10 +20,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 =======
 					${frappe.utils.icon("close", "xs", "es-icon")}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				</a>
 				<a class="btn-open" style="display: inline-block;" title="${__("Open Link")}">
 					${frappe.utils.icon("arrow-right", "xs")}
@@ -131,10 +135,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 	is_title_link() {
 		return (frappe.boot?.link_title_doctypes || []).includes(this.get_options());
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 	async set_link_title(value) {
 		const doctype = this.get_options();
@@ -278,10 +286,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 					.prop("aria-selected", "false")
 					.html(`<p title="${frappe.utils.escape_html(_label)}">${html}</p>`)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					.get(0);
 			},
 			sort: function () {
@@ -315,10 +327,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 =======
 					page_length: cint(frappe.boot.sysdefaults?.link_field_results_limit) || 10,
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				};
 
 				me.set_custom_query(args);
@@ -361,10 +377,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 								action: () => {},
 							});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						}
 
 						if (!me.df.only_select) {
@@ -379,10 +399,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 									html:
 										"<span class='link-option'>" +
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 										"<i class='fa fa-plus' style='margin-right: 5px;'></i> " +
 										__("Create a new {0}", [__(me.get_options())]) +
 										"</span>",
@@ -403,10 +427,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 =======
 								r.message = r.message.concat(custom__link_options);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 							}
 
 							// advanced search
@@ -421,10 +449,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 									html:
 										"<span class='link-option'>" +
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 										"<i class='fa fa-search' style='margin-right: 5px;'></i> " +
 										__("Advanced Search") +
 										"</span>",
@@ -445,10 +477,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 						me.toggle_href(doctype);
 						r.message.forEach((item) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 							frappe.utils.add_link_title(doctype, item.value, item.label);
 						});
 					},
@@ -529,10 +565,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 			me.show_link_and_clear_buttons();
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 	}
 
@@ -653,10 +693,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (this.get_query || this.df.get_query) {
 			var get_query = this.get_query || this.df.get_query;
 			if ($.isPlainObject(get_query)) {
@@ -802,10 +846,14 @@ frappe.ui.form.ControlLink = class ControlLink extends frappe.ui.form.ControlDat
 					);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 		};
 

@@ -14,10 +14,14 @@ from frappe.utils import cint, strip
 from frappe.translate import send_translations, set_default_language
 from frappe.utils import cint, now, strip
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.password import update_password
 
 from . import install_fixtures
@@ -28,10 +32,14 @@ def get_setup_stages(args):
 =======
 def get_setup_stages(args):  # nosemgrep
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	# App setup stage functions should not include frappe.db.commit
 	# That is done by frappe after successful completion of all stages
 	stages = [
@@ -56,10 +64,14 @@ def get_setup_stages(args):  # nosemgrep
 			"status": _("Wrapping up"),
 			"fail_msg": _("Failed to complete setup"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			"tasks": [{"fn": run_post_setup_complete, "args": args, "fail_msg": "Failed to complete setup"}],
 		}
 	)
@@ -257,10 +269,14 @@ def create_or_update_user(args):  # nosemgrep
 		user.insert()
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.flags.mute_emails = _mute_emails
 
 	if args.get("password"):
@@ -318,10 +334,14 @@ def add_all_roles_to(name):
 =======
 	user.append_roles(*_get_default_roles())
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	user.save()
 
 
@@ -343,10 +363,14 @@ def disable_future_access():
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	# Enable onboarding after install
 	frappe.db.set_single_value("System Settings", "enable_onboarding", 1)
 
@@ -380,13 +404,6 @@ def load_languages():
 		"languages": sorted(frappe.db.sql_list("select language_name from tabLanguage order by name")),
 		"codes_to_names": codes_to_names,
 	}
-
-
-@frappe.whitelist(allow_guest=True)
-def load_country():
-	from frappe.sessions import get_geo_ip_country
-
-	return get_geo_ip_country(frappe.local.request_ip) if frappe.local.request_ip else None
 
 
 @frappe.whitelist()

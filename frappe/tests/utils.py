@@ -94,6 +94,7 @@ class FrappeTestCase(unittest.TestCase):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		return (sqlparse.format(query.strip(), keyword_case="upper", reindent=True, strip_comments=True),)
 =======
 		return sqlparse.format(query.strip(), keyword_case="upper", reindent=True, strip_comments=True)
@@ -101,6 +102,9 @@ class FrappeTestCase(unittest.TestCase):
 =======
 		return (sqlparse.format(query.strip(), keyword_case="upper", reindent=True, strip_comments=True),)
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		return (sqlparse.format(query.strip(), keyword_case="upper", reindent=True, strip_comments=True),)
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@contextmanager
 	def primary_connection(self):
@@ -144,8 +148,11 @@ class FrappeTestCase(unittest.TestCase):
 			ret = orig_sql(*args, **kwargs)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			queries.append(frappe.db.last_query)
 			return ret
 
@@ -156,6 +163,7 @@ class FrappeTestCase(unittest.TestCase):
 			self.assertLessEqual(len(queries), count, msg="Queries executed: " + "\n\n".join(queries))
 		finally:
 			frappe.db.sql = orig_sql
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 			queries.append(args[0].last_query)
@@ -193,6 +201,8 @@ class FrappeTestCase(unittest.TestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@contextmanager
 	def assertRowsRead(self, count):
@@ -216,6 +226,7 @@ class FrappeTestCase(unittest.TestCase):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 	@classmethod
 	def enable_safe_exec(cls) -> None:
@@ -235,6 +246,8 @@ class FrappeTestCase(unittest.TestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@contextmanager
 	def set_user(self, user: str):
 		try:
@@ -271,6 +284,7 @@ class FrappeTestCase(unittest.TestCase):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 class MockedRequestTestCase(FrappeTestCase):
@@ -288,6 +302,8 @@ class MockedRequestTestCase(FrappeTestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 def _commit_watcher():
 	import traceback
@@ -311,6 +327,7 @@ def _restore_thread_locals(flags):
 	frappe.local.lang = "en"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	frappe.local.preload_assets = {"style": [], "script": []}
 =======
 	frappe.local.preload_assets = {"style": [], "script": [], "icons": []}
@@ -321,6 +338,9 @@ def _restore_thread_locals(flags):
 =======
 	frappe.local.preload_assets = {"style": [], "script": []}
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	frappe.local.preload_assets = {"style": [], "script": []}
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @contextmanager
@@ -417,6 +437,7 @@ def patch_hooks(overridden_hoooks):
 		yield
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
@@ -439,3 +460,5 @@ def check_orpahned_doctypes():
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

@@ -31,10 +31,14 @@ frappe.ui.Filter = class {
 			[">=", __("Greater Than Or Equal To")],
 			["<=", __("Less Than Or Equal To")],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			["Between", __("Between")],
 			["Timespan", __("Timespan")],
 		];
@@ -45,10 +49,14 @@ frappe.ui.Filter = class {
 =======
 			["descendants of (inclusive)", __("Descendants Of (inclusive)")],
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			["not descendants of", __("Not Descendants Of")],
 			["ancestors of", __("Ancestors Of")],
 			["not ancestors of", __("Not Ancestors Of")],
@@ -91,6 +99,7 @@ frappe.ui.Filter = class {
 				">=": __("On or After"),
 			},
 <<<<<<< HEAD
+<<<<<<< HEAD
 		};
 
 		this.special_condition_labels = {
@@ -110,6 +119,9 @@ frappe.ui.Filter = class {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		};
 	}
 
@@ -611,10 +623,14 @@ frappe.ui.filter_utils = {
 =======
 				"descendants of (inclusive)",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"ancestors of",
 				"not descendants of",
 				"not ancestors of",

@@ -15,6 +15,7 @@ import faulthandler
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import copy
 import faulthandler
 =======
@@ -27,6 +28,11 @@ import copy
 import copy
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+import copy
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import functools
 import gc
 import importlib
@@ -37,17 +43,23 @@ import os
 import re
 import signal
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import unicodedata
 import warnings
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Any, Literal, Optional, overload
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 import traceback
 import unicodedata
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 import sys
 import threading
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -66,14 +78,19 @@ from typing import (
 	overload,
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import click
 from werkzeug.local import Local, LocalProxy, release_local
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -92,13 +109,24 @@ from frappe.query_builder.utils import (
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.query_builder import (
+=======
+import frappe
+from frappe.query_builder.utils import (
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	get_query,
 	get_query_builder,
 	patch_query_aggregation,
 	patch_query_execute,
 )
 from frappe.utils.caching import request_cache
+<<<<<<< HEAD
 from frappe.utils.data import cint, cstr, sbool
+=======
+from frappe.utils.data import bold, cint, cstr, safe_decode, safe_encode, sbool
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 # Local application imports
 from .exceptions import *
@@ -115,6 +143,7 @@ from .utils.jinja import (
 	render_template,
 )
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 __version__ = "14.90.0"
@@ -141,6 +170,12 @@ __version__ = "16.0.0-dev"
 __version__ = "16.0.0-dev"
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+__version__ = "14.91.0"
+=======
+__version__ = "16.0.0-dev"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 __title__ = "Frappe Framework"
 
 if TYPE_CHECKING:  # pragma: no cover
@@ -200,14 +235,39 @@ re._MAXCACHE = 50  # reduced from default 512 given we are already maintaining t
 _tune_gc = bool(sbool(os.environ.get("FRAPPE_TUNE_GC", True)))
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 if _dev_server:
 	warnings.simplefilter("always", DeprecationWarning)
 	warnings.simplefilter("always", PendingDeprecationWarning)
+
+
+def _get_local_proxy(self: Local, name: str) -> LocalProxy:
+	"""Get local proxy object by name."""
+
+	_local_contextvar = self._Local__storage
+
+	def _get_current_object() -> Any:
+		obj = _local_contextvar.get(None)
+
+		if obj is not None and name in obj:
+			return obj[name]
+
+		raise RuntimeError("object is not bound") from None
+
+	lp = LocalProxy(_get_current_object)
+	object.__setattr__(lp, "_get_current_object", _get_current_object)
+	return lp
+
+
+Local.__call__ = _get_local_proxy
 
 
 def _(msg: str, lang: str | None = None, context: str | None = None) -> str:
@@ -362,11 +422,15 @@ if TYPE_CHECKING:  # pragma: no cover
 def init(site: str, sites_path: str = ".", new_site: bool = False, force=False) -> None:
 =======
 def init(site: str, sites_path: str = ".", new_site: bool = False, force: bool = False) -> None:
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""Initialize frappe for the current site. Reset thread locals `frappe.local`"""
 	if getattr(local, "initialised", None) and not force:
 		return
@@ -439,6 +503,7 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force: bool =
 	local.qb = get_query_builder(local.conf.db_type)
 	local.qb.get_query = get_query
 <<<<<<< HEAD
+<<<<<<< HEAD
 	setup_redis_cache_connection()
 =======
 	if not cache or not client_cache:
@@ -448,6 +513,11 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force: bool =
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	if not cache or not client_cache:
+		setup_redis_cache_connection()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not _one_time_setup.get(local.conf.db_type):
 		patch_query_execute()
@@ -457,20 +527,27 @@ def init(site: str, sites_path: str = ".", new_site: bool = False, force: bool =
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		_register_fault_handler()
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe._optimizations.register_fault_handler()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		_one_time_setup[local.conf.db_type] = True
 
 	setup_module_map(include_all_apps=not (frappe.request or frappe.job or frappe.flags.in_migrate))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	local.initialised = True
 
@@ -541,10 +618,14 @@ def connect_replica() -> bool:
 
 	user = local.conf.db_user
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	password = local.conf.db_password
 	port = local.conf.replica_db_port
 
@@ -564,10 +645,14 @@ def connect_replica() -> bool:
 		cur_db_name=local.conf.db_name,
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# swap db connections
 	local.primary_db = local.db
@@ -576,11 +661,14 @@ def connect_replica() -> bool:
 	return True
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 <<<<<<< HEAD
@@ -645,8 +733,12 @@ def get_site_config(sites_path: str | None = None, site_path: str | None = None)
 =======
 	return _dict(config)
 =======
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_common_site_config(sites_path: str | None = None) -> dict[str, Any]:
@@ -722,21 +814,28 @@ def setup_redis_cache_connection():
 	global client_cache
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if not cache:
 		from frappe.utils.redis_wrapper import setup_cache
 
 		cache = setup_cache()
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	with _redis_init_lock:
 		# We need to check again since someone else might have setup connection before us.
 		if not cache:
 			cache = setup_cache()
 			client_cache = ClientCache()
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_traceback(with_context: bool = False) -> str:
@@ -789,19 +888,26 @@ def _strip_html_tags(message):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 ServerAction: TypeAlias = dict
 ClientAction: TypeAlias = dict
 Action: TypeAlias = ServerAction | ClientAction
 
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def msgprint(
 	msg: str,
 	title: str | None = None,
@@ -815,6 +921,7 @@ def msgprint(
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	primary_action: str | None = None,
 =======
 	primary_action: Action | None = None,
@@ -824,6 +931,10 @@ def msgprint(
 	primary_action: Action | None = None,
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	primary_action: Action | None = None,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	is_minimizable: bool = False,
 	wide: bool = False,
 	*,
@@ -848,6 +959,7 @@ def msgprint(
 	import sys
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -856,6 +968,10 @@ def msgprint(
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	msg = safe_decode(msg)
 	out = _dict(message=msg)
@@ -925,10 +1041,14 @@ def msgprint(
 =======
 		message_log.append(out)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	_raise_exception()
 
 
@@ -1027,10 +1147,14 @@ def get_roles(username=None) -> list[str]:
 =======
 	"""Return roles of current user."""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not local.session or not local.session.user:
 		return ["Guest"]
 	import frappe.permissions
@@ -1236,10 +1360,14 @@ def is_whitelisted(method):
 =======
 	if method not in whitelisted or (is_guest and method not in guest_methods):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		summary = _("You are not permitted to access this resource.")
 		detail = _("Function {0} is not whitelisted.").format(bold(f"{method.__module__}.{method.__name__}"))
 		msg = f"<details><summary>{summary}</summary>{detail}</details>"
@@ -1271,10 +1399,14 @@ def read_only():
 =======
 				if switched_connection and hasattr(local, "primary_db"):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					local.db.close()
 					local.db = local.primary_db
 
@@ -1329,10 +1461,14 @@ def only_for(roles: list[str] | tuple[str] | str, message=False):
 =======
 	if set(roles).isdisjoint(get_roles()):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if not message:
 			raise PermissionError
 
@@ -1357,49 +1493,6 @@ def get_domain_data(module):
 			return _dict()
 		else:
 			raise
-
-
-def clear_cache(user: str | None = None, doctype: str | None = None):
-	"""Clear **User**, **DocType** or global cache.
-
-	:param user: If user is given, only user cache is cleared.
-	:param doctype: If doctype is given, only DocType cache is cleared."""
-	import frappe.cache_manager
-	import frappe.utils.caching
-	from frappe.website.router import clear_routing_cache
-
-	if doctype:
-		frappe.cache_manager.clear_doctype_cache(doctype)
-		reset_metadata_version()
-	elif user:
-		frappe.cache_manager.clear_user_cache(user)
-	else:  # everything
-		# Delete ALL keys associated with this site.
-		keys_to_delete = set(frappe.cache.get_keys(""))
-		for key in frappe.get_hooks("persistent_cache_keys"):
-			keys_to_delete.difference_update(frappe.cache.get_keys(key))
-		frappe.cache.delete_value(list(keys_to_delete), make_keys=False)
-
-		reset_metadata_version()
-		local.cache = {}
-		local.new_doc_templates = {}
-
-		for fn in get_hooks("clear_cache"):
-			get_attr(fn)()
-
-	if (not doctype and not user) or doctype == "DocType":
-		frappe.utils.caching._SITE_CACHE.clear()
-		frappe.client_cache.clear_cache()
-
-	local.role_permissions = {}
-	if hasattr(local, "request_cache"):
-		local.request_cache.clear()
-	if hasattr(local, "system_settings"):
-		del local.system_settings
-	if hasattr(local, "website_settings"):
-		del local.website_settings
-
-	clear_routing_cache()
 
 
 def only_has_select_perm(doctype, user=None, ignore_permissions=False):
@@ -1439,10 +1532,14 @@ def has_permission(
 
 	Raise `frappe.PermissionError` if user isn't permitted and `throw` is truthy
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	:param doctype: DocType for which permission is to be check.
 	:param ptype: Permission type (`read`, `write`, `create`, `submit`, `cancel`, `amend`). Default: `read`.
@@ -1452,10 +1549,14 @@ def has_permission(
 	:param verbose: DEPRECATED, will be removed in a future release.
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	:param parent_doctype: Required when checking permission for a child DocType (unless doc is specified).
 	"""
 	import frappe.permissions
@@ -1548,6 +1649,10 @@ def generate_hash(txt: str | None = None, length: int = 56) -> str:
 	if not length:
 		length = 56
 
+<<<<<<< HEAD
+=======
+	return secrets.token_hex(math.ceil(length / 2))[:length]
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 	if txt:
 		from frappe.deprecation_dumpster import deprecation_warning
@@ -1555,20 +1660,17 @@ def generate_hash(txt: str | None = None, length: int = 56) -> str:
 		deprecation_warning(
 			"unknown", "v17", "The `txt` parameter is deprecated and will be removed in a future release."
 		)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return secrets.token_hex(math.ceil(length / 2))[:length]
-
-
-def reset_metadata_version():
-	"""Reset `metadata_version` (Client (Javascript) build ID) hash."""
-	v = generate_hash()
-	client_cache.set_value("metadata_version", v)
-	return v
 
 
 def new_doc(
@@ -1616,10 +1718,14 @@ def get_cached_doc(*args: Any, **kwargs: Any) -> "Document":
 	"""Identical to `frappe.get_doc`, but return from cache if available."""
 	if (key := can_cache_doc(args)) and (doc := cache.get_value(key)):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return doc
 
 	# Not found in cache, fetch from DB
@@ -1646,10 +1752,14 @@ def _set_document_in_cache(key: str, doc: "Document") -> None:
 		cache().hset("document_cache", key, doc.as_dict(), cache_locally=False)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def _set_document_in_cache(key: str, doc: "Document") -> None:
@@ -1701,6 +1811,7 @@ def get_cached_value(doctype: str, name: str, fieldname: str = "name", as_dict: 
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def get_cached_value(doctype: str, name: str, fieldname: str = "name", as_dict: bool = False) -> Any:
 =======
 =======
@@ -1713,6 +1824,12 @@ def get_cached_value(
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def get_cached_value(
+	doctype: str, name: str | dict, fieldname: str | Iterable[str] = "name", as_dict: bool = False
+) -> Any:
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	try:
 		doc = get_cached_doc(doctype, name)
 	except DoesNotExistError:
@@ -1794,10 +1911,14 @@ def get_doc(*args: Any, **kwargs: Any) -> "Document":
 =======
 	return frappe.model.document.get_doc(*args, **kwargs)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_last_doc(
@@ -1999,10 +2120,14 @@ def get_pymodule_path(modulename, *joins):
 	from os.path import abspath, dirname, join
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if "public" not in joins:
 		joins = [scrub(part) for part in joins]
 
@@ -2053,10 +2178,14 @@ def get_installed_apps(*, _ensure_on_bench: bool = False) -> list[str]:
 	:param _ensure_on_bench: Only return apps that are present on bench.
 	"""
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if getattr(flags, "in_install_db", True):
 		return []
 
@@ -2087,10 +2216,14 @@ def get_installed_apps(*, _ensure_on_bench: bool = False) -> list[str]:
 		all_apps = cache.get_value("all_apps", get_all_apps)
 		installed = [app for app in installed if app in all_apps]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return installed
 
@@ -2434,6 +2567,7 @@ def copy_doc(doc: "Document", ignore_no_copy: bool = True) -> "Document":
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	for _i, d in enumerate(newdoc.get_all_children()):
 =======
 	for d in newdoc.get_all_children():
@@ -2443,6 +2577,10 @@ def copy_doc(doc: "Document", ignore_no_copy: bool = True) -> "Document":
 	for d in newdoc.get_all_children():
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	for d in newdoc.get_all_children():
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		d.set("__islocal", 1)
 
 		for fieldname in fields_to_clear:
@@ -2641,10 +2779,14 @@ def as_json(obj: dict | list, indent=1, separators=None, ensure_ascii=True) -> s
 			ensure_ascii=ensure_ascii,
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	except TypeError:
 		# this would break in case the keys are not all os "str" type - as defined in the JSON
 		# adding this to ensure keys are sorted (expected behaviour)
@@ -2664,10 +2806,14 @@ def are_emails_muted():
 =======
 	return flags.mute_emails or cint(conf.get("mute_emails", 0))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 from frappe.deprecation_dumpster import frappe_get_test_records as get_test_records
@@ -2736,10 +2882,14 @@ def get_print(
 		local.form_dict.no_letterhead = no_letterhead
 		local.form_dict.letterhead = letterhead
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		pdf_options = pdf_options or {}
 		if password:
@@ -2916,20 +3066,27 @@ def logger(module=None, with_more_info=False, allow_site=True, filter=None, max_
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def logger(module=None, with_more_info=False, allow_site=True, filter=None, max_size=100_000, file_count=20):
 	"""Returns a python logger that uses StreamHandler"""
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def logger(
 	module=None, with_more_info=False, allow_site=True, filter=None, max_size=100_000, file_count=20
 ) -> "Logger":
 	"""Return a python logger that uses StreamHandler."""
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	from frappe.utils.logger import get_logger
 
 	return get_logger(
@@ -2974,23 +3131,29 @@ def log_error(title=None, message=None, reference_doctype=None, reference_name=N
 		return error_log.insert(ignore_permissions=True)
 
 
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def get_desk_link(doctype, name):
 	meta = get_meta(doctype)
 	title = get_value(doctype, name, meta.get_title_field())
 
 	html = '<a href="/app/Form/{doctype}/{name}" style="font-weight: bold;">{doctype_local} {title_local}</a>'
 	return html.format(doctype=doctype, name=name, doctype_local=_(doctype), title_local=_(title))
+=======
+def get_desk_link(doctype, name):
+	meta = get_meta(doctype)
+	title = get_value(doctype, name, meta.get_title_field())
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
-
-def bold(text: str | int | float) -> str:
-	"""Return `text` wrapped in `<strong>` tags."""
-	return f"<strong>{text}</strong>"
+	html = '<a href="/app/Form/{doctype}/{name}" style="font-weight: bold;">{doctype_local} {title_local}</a>'
+	return html.format(doctype=doctype, name=name, doctype_local=_(doctype), title_local=_(title))
 
 
 def safe_eval(code, eval_globals=None, eval_locals=None):
@@ -3008,7 +3171,11 @@ def get_website_settings(key):
 			local.website_settings = get_cached_doc("Website Settings")
 =======
 			local.website_settings = client_cache.get_doc("Website Settings")
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		except DoesNotExistError:
 			clear_last_message()
 			return
@@ -3030,19 +3197,24 @@ def get_system_settings(key):
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def get_active_domains():
 	from frappe.core.doctype.domain_settings.domain_settings import get_active_domains
 
 	return get_active_domains()
 
 
+<<<<<<< HEAD
 def get_version(doctype, name, limit=None, head=False, raise_err=True):
 	"""
-	Return a list of version information for the given DocType.
+	Returns a list of version information of a given DocType.
 
 	Note: Applicable only if DocType has changes tracked.
 
@@ -3090,11 +3262,14 @@ def get_version(doctype, name, limit=None, head=False, raise_err=True):
 			raise ValueError(_("{0} has no versions tracked.").format(doctype))
 
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 @whitelist(allow_guest=True)
 def ping():
 	return "pong"
 
 
+<<<<<<< HEAD
 def safe_encode(param, encoding="utf-8"):
 	try:
 		param = param.encode(encoding)
@@ -3130,6 +3305,8 @@ def parse_json(val):
 	return parse_json(val)
 
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 def mock(type, size=1, locale="en"):
 	import faker
 
@@ -3143,6 +3320,7 @@ def mock(type, size=1, locale="en"):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		for _i in range(size):
 =======
 		for _ in range(size):
@@ -3152,6 +3330,10 @@ def mock(type, size=1, locale="en"):
 		for _ in range(size):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		for _ in range(size):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			data = getattr(fake, type)()
 			results.append(data)
 
@@ -3180,11 +3362,14 @@ def validate_and_sanitize_search_inputs(fn):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def _register_fault_handler():
 	import io
 	import sys
@@ -3205,16 +3390,22 @@ if _tune_gc:
 	gc.set_threshold(g0 * 10, g1 * 2, g2 * 2)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.utils.error import log_error
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 import frappe._optimizations
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+import frappe._optimizations
+from frappe.cache_manager import clear_cache, reset_metadata_version
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 # Backward compatibility
 from frappe.config import get_common_site_config, get_site_config
 from frappe.core.doctype.system_settings.system_settings import get_system_settings
+<<<<<<< HEAD
 from frappe.utils.error import log_error
 
 frappe._optimizations.optimize_all()
@@ -3223,3 +3414,10 @@ frappe._optimizations.optimize_all()
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.utils import parse_json
+from frappe.utils.error import log_error
+
+frappe._optimizations.optimize_all()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

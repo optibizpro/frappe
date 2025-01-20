@@ -28,10 +28,14 @@ from frappe.utils import (
 	md_to_html,
 )
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 FRONTMATTER_PATTERN = re.compile(r"^\s*(?:---|\+\+\+)(.*?)(?:---|\+\+\+)\s*(.+)$", re.S | re.M)
 H1_TAG_PATTERN = re.compile("<h1>([^<]*)")
@@ -41,14 +45,11 @@ CLEANUP_PATTERN_2 = re.compile("[:/]")
 CLEANUP_PATTERN_3 = re.compile(r"(-)\1+")
 
 
-def delete_page_cache(path):
-	groups = ["website_page", "page_context"]
+def delete_page_cache(path=None):
 	if path:
-		frappe.cache.hdel_names(groups, path)
-		frappe.cache.delete_value("full_index")
+		frappe.cache.delete_value(f"{WEBSITE_PAGE_CACHE_PREFIX}{path}")
 	else:
-		groups.append("full_index")
-		frappe.cache.delete_value(groups)
+		frappe.cache.delete_keys(WEBSITE_PAGE_CACHE_PREFIX)
 
 
 def find_first_image(html):
@@ -217,7 +218,11 @@ def get_boot_data():
 =======
 			"user": frappe.get_cached_value("User", frappe.session.user, "time_zone")
 			or get_system_timezone(),
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		},
 		"assets_json": get_assets_json(),
 		"sitename": frappe.local.site,
@@ -426,10 +431,14 @@ def clear_cache(path=None):
 		"website_404",
 	]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if path:
 		frappe.cache.hdel("website_redirects", path)
@@ -437,14 +446,13 @@ def clear_cache(path=None):
 	else:
 		clear_sitemap()
 		frappe.clear_cache("Guest")
+		delete_page_cache()
 		keys += [
 			"portal_menu_items",
 			"home_page",
 			"website_route_rules",
 			"doctypes_with_web_view",
 			"website_redirects",
-			"page_context",
-			"website_page",
 		]
 
 	frappe.cache.delete_value(keys)
@@ -472,7 +480,7 @@ def get_frontmatter(string):
 		body = result.group(2)
 
 	return {
-		"attributes": yaml.safe_load(frontmatter),
+		"attributes": yaml.safe_load(frontmatter) if frontmatter else "",
 		"body": body,
 	}
 
@@ -566,12 +574,17 @@ def get_sidebar_json_path(path, look_for=False):
 			return ""
 
 
+WEBSITE_PAGE_CACHE_PREFIX = "website_page::"
+
+
 def cache_html(func):
 	@wraps(func)
 	def cache_html_decorator(*args, **kwargs):
+		cache_key = f"{WEBSITE_PAGE_CACHE_PREFIX}{args[0].path}"
+
 		if can_cache():
 			html = None
-			page_cache = frappe.cache.hget("website_page", args[0].path)
+			page_cache = frappe.cache.get_value(cache_key)
 			if page_cache and frappe.local.lang in page_cache:
 				html = page_cache[frappe.local.lang]
 			if html:
@@ -581,9 +594,9 @@ def cache_html(func):
 		html = func(*args, **kwargs)
 		context = args[0].context
 		if can_cache(context.no_cache):
-			page_cache = frappe.cache.hget("website_page", args[0].path) or {}
+			page_cache = frappe.cache.get_value(cache_key) or {}
 			page_cache[frappe.local.lang] = html
-			frappe.cache.hset("website_page", args[0].path, page_cache)
+			frappe.cache.set_value(cache_key, page_cache, expires_in_sec=30 * 60)
 			frappe.local.response.can_cache = True
 
 		return html
@@ -644,6 +657,7 @@ def add_preload_for_bundled_assets(response):
 
 	version = get_build_version()
 <<<<<<< HEAD
+<<<<<<< HEAD
 	# include_icons = frappe.get_hooks().get("app_include_icons", [])
 	links.extend(
 		f"</assets/{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
@@ -659,6 +673,14 @@ def add_preload_for_bundled_assets(response):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	links.extend(
+		f"<{svg}?v={version}>; rel=preload; as=fetch; crossorigin"
+		for svg in frappe.local.preload_assets["icons"]
+	)
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if links:
 		response.headers["Link"] = ",".join(links)
 

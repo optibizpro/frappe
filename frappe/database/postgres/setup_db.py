@@ -46,11 +46,15 @@ def setup_database():
 		semver_version_num = psql_version[0].get("server_version_num") or "140000"
 		if cint(semver_version_num) > 150000:
 			root_conn.sql(f'ALTER DATABASE "{frappe.conf.db_name}" OWNER TO "{frappe.conf.db_user}"')
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	root_conn.close()
 
 
@@ -95,6 +99,7 @@ def import_db_from_sql(source_sql=None, verbose=False):
 	DbManager(frappe.local.db).restore_database(
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		verbose, db_name, source_sql, db_name, frappe.conf.db_password
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 	)
@@ -108,6 +113,12 @@ def import_db_from_sql(source_sql=None, verbose=False):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	)
 	if verbose:
+=======
+		verbose, db_name, source_sql, frappe.conf.db_user, frappe.conf.db_password
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+	)
+	if verbose:
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 <<<<<<< HEAD
 		print(command)
 
@@ -131,6 +142,7 @@ def setup_help_database(help_db_name):
 def get_root_connection(root_login=None, root_password=None):
 =======
 		print("Imported from database {}".format(source_sql))
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 
 
@@ -140,6 +152,12 @@ def get_root_connection():
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+
+def get_root_connection():
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if not frappe.local.flags.root_connection:
 		import sys
 		from getpass import getpass
@@ -177,10 +195,14 @@ def get_root_connection():
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return frappe.local.flags.root_connection
 

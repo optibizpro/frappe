@@ -40,10 +40,13 @@ class DashboardChartSource(Document):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		export_to_files(record_list=[[self.doctype, self.name]], record_module=self.module, create_init=True)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if not frappe.request:
 			return
 
@@ -72,8 +75,12 @@ class DashboardChartSource(Document):
 	def get_folder_path(self) -> Path:
 		"""Return the path of the folder for this dashboard chart source."""
 		return Path(get_module_path(self.module)) / FOLDER_NAME / frappe.scrub(self.name)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

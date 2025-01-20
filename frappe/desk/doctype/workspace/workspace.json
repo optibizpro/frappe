@@ -158,10 +158,14 @@
    "label": "Parent Page",
    "options": "Workspace"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
   },
   {
    "default": "[]",
@@ -210,10 +214,14 @@
 =======
    "depends_on": "eval:doc.type===\"Workspace\"",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
    "fieldname": "number_cards_tab",
    "fieldtype": "Tab Break",
    "label": "Number Cards"
@@ -229,10 +237,14 @@
 =======
    "depends_on": "eval:doc.type===\"Workspace\"",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
    "fieldname": "custom_blocks_tab",
    "fieldtype": "Tab Break",
    "label": "Custom Blocks"
@@ -289,10 +301,14 @@
    "mandatory_depends_on": "eval:doc.type==\"URL\"",
    "options": "URL"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
   }
  ],
  "in_create": 1,
@@ -300,6 +316,7 @@
 <<<<<<< HEAD
  "modified": "2023-06-08 14:52:38.110224",
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
  "modified": "2024-05-30 17:30:36.791171",
@@ -311,6 +328,10 @@
  "modified": "2024-09-26 15:47:24.710881",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+ "modified": "2024-09-26 15:47:24.710881",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Workspace",
@@ -343,10 +364,14 @@
    "share": 1,
    "write": 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
   }
  ],
  "sort_field": "creation",

@@ -19,10 +19,14 @@ from frappe.utils import cint, cstr, get_system_timezone
 =======
 from frappe.utils import cint, cstr, get_datetime, get_system_timezone
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 class TokenCache(Document):
@@ -97,6 +101,7 @@ class TokenCache(Document):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		system_timezone = pytz.timezone(get_system_timezone())
 		modified = frappe.utils.get_datetime(self.modified)
 		modified = system_timezone.localize(modified)
@@ -105,15 +110,21 @@ class TokenCache(Document):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		system_timezone = ZoneInfo(get_system_timezone())
 		modified: datetime.datetime = get_datetime(self.modified).replace(tzinfo=system_timezone)
 		expiry_utc = modified.astimezone(datetime.timezone.utc) + datetime.timedelta(seconds=self.expires_in)
 		now_utc = datetime.datetime.now(datetime.timezone.utc)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return cint((expiry_utc - now_utc).total_seconds())
 
 	def is_expired(self):

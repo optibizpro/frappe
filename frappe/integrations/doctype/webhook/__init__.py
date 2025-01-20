@@ -66,17 +66,21 @@ def run_webhooks(doc, method):
 	"""Run webhooks for this method"""
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	frappe_flags = frappe.local.flags
 
 	if frappe_flags.in_import or frappe_flags.in_patch or frappe_flags.in_install or frappe_flags.in_migrate:
 		return
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 	# load all webhooks from cache / DB
 	webhooks = frappe.cache().get_value("webhooks", get_all_webhooks)
@@ -85,6 +89,11 @@ def run_webhooks(doc, method):
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	# load all webhooks from cache / DB
+	webhooks = frappe.cache().get_value("webhooks", get_all_webhooks)
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if method not in supported_events:
 		return
 
@@ -97,10 +106,14 @@ def run_webhooks(doc, method):
 	# load all webhooks from cache / DB
 	webhooks = frappe.cache.get_value("webhooks", get_all_webhooks)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	# get webhooks for this doctype
 	webhooks_for_doc = webhooks.get(doc.doctype, None)
@@ -139,10 +152,14 @@ def _add_webhook_to_queue(webhook, doc):
 =======
 		frappe.db.after_commit.add(flush_webhook_execution_queue)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	frappe.local._webhook_queue.append(frappe._dict(doc=doc, webhook=webhook))
 
@@ -189,8 +206,12 @@ def flush_webhook_execution_queue():
 			now=frappe.flags.in_test,
 			queue=instance.webhook.background_jobs_queue or "default",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)

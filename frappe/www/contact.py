@@ -70,5 +70,9 @@ Your query:
 		sent_or_received="Received",
 		content=message,
 		status="Open",
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	).insert(ignore_permissions=True)

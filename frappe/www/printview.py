@@ -67,10 +67,14 @@ def get_context(context) -> PrintContext:
 """,
 		)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if frappe.form_dict.doc:
 		doc = frappe.form_dict.doc
@@ -135,8 +139,11 @@ def get_print_format_doc(print_format_name: str, meta: "Meta") -> Optional["Prin
 
 def get_rendered_template(
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	doc,
 	name=None,
 	print_format=None,
@@ -147,13 +154,17 @@ def get_rendered_template(
 	settings=None,
 ):
 =======
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	doc: "Document",
 	print_format: Optional["PrintFormat"] = None,
 	meta: "Meta" = None,
 	no_letterhead: bool | None = None,
 	letterhead: str | None = None,
 	trigger_print: bool = False,
+<<<<<<< HEAD
 <<<<<<< HEAD
 	settings=None,
 ):
@@ -167,6 +178,11 @@ def get_rendered_template(
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	settings: dict | None = None,
+) -> str:
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	print_settings = frappe.get_single("Print Settings").as_dict()
 	print_settings.update(settings or {})
 
@@ -302,10 +318,14 @@ def get_rendered_template(
 	hook_func = frappe.get_hooks("pdf_body_html")
 	html = frappe.get_attr(hook_func[-1])(jenv=jenv, template=template, print_format=print_format, args=args)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if cint(trigger_print):
 		html += trigger_print_script
@@ -331,10 +351,14 @@ def set_link_titles(doc):
 =======
 def set_link_titles(doc: "Document") -> None:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	# Adds name with title of link field doctype to __link_titles
 	if not doc.get("__link_titles"):
 		setattr(doc, "__link_titles", {})
@@ -451,15 +475,22 @@ def get_rendered_raw_commands(doc: str, name: str | None = None, print_format: s
 <<<<<<< HEAD
 	return {"raw_commands": get_rendered_template(doc, name=name, print_format=print_format, meta=meta)}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 
 def validate_print_permission(doc):
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 =======
+
+
+def validate_print_permission(doc):
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+=======
 	return {
 		"raw_commands": get_rendered_template(doc=document, print_format=print_format, meta=document.meta)
 	}
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 
@@ -474,6 +505,12 @@ def validate_print_permission(doc: "Document") -> None:
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+
+
+def validate_print_permission(doc: "Document") -> None:
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if frappe.has_website_permission(doc):
 		return
 
@@ -593,10 +630,14 @@ def make_layout(doc: "Document", meta: "Meta", format_data=None) -> list:
 =======
 				if not page[-1]["has_data"]:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					# truncate last section if empty
 					del page[-1]
 

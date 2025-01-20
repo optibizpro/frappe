@@ -56,10 +56,14 @@ class TestRQJob(IntegrationTestCase):
 		if wait:
 			wait_for_completion(job)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(frappe.get_doc("RQ Job", job.id).status, status)
 
 	def test_serialization(self):
@@ -76,10 +80,14 @@ class TestRQJob(IntegrationTestCase):
 				"status": "queued",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"exc_info": None,
 			},
 			rq_job,
@@ -100,10 +108,14 @@ class TestRQJob(IntegrationTestCase):
 =======
 		self.assertEqual(rq_job.job_name, "frappe.core.doctype.rq_job.test_rq_job.test_func")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@timeout
 	def test_get_list_filtering(self):
@@ -130,10 +142,14 @@ class TestRQJob(IntegrationTestCase):
 		self.check_status(job, "failed")
 		jobs = frappe.get_all("RQ Job", {"status": "failed"})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertEqual(len(jobs), 1)
 		self.assertTrue(jobs[0].exc_info)
 
@@ -143,10 +159,14 @@ class TestRQJob(IntegrationTestCase):
 =======
 		non_failed_jobs = frappe.get_all("RQ Job", {"status": ("!=", "failed")})
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertGreaterEqual(len(non_failed_jobs), 1)
 
 		# Create a slow job and check if it's stuck in "Started"
@@ -168,10 +188,14 @@ class TestRQJob(IntegrationTestCase):
 =======
 	@timeout
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_multi_queue_burst_consumption(self):
 		for _ in range(3):
 			for q in ["default", "short"]:
@@ -196,10 +220,14 @@ class TestRQJob(IntegrationTestCase):
 
 	def test_job_id_manual_dedup(self):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		job_id = "test_dedup"
 		job = frappe.enqueue(self.BG_JOB, sleep=5, job_id=job_id)
 		self.assertTrue(is_job_enqueued(job_id))
@@ -258,10 +286,14 @@ class TestRQJob(IntegrationTestCase):
 		self.assertLessEqual(rss, LAST_MEASURED_USAGE * 1.05, msg)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_clear_failed_jobs(self):
 		limit = 10
 		update_site_config("rq_failed_jobs_limit", limit)
@@ -273,6 +305,7 @@ class TestRQJob(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		self.assertLessEqual(RQJob.get_count({"filters": [["RQ Job", "status", "=", "failed"]]}), limit * 1.1)
 =======
 		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
@@ -282,6 +315,10 @@ class TestRQJob(IntegrationTestCase):
 		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		self.assertLessEqual(RQJob.get_count(filters=[["RQ Job", "status", "=", "failed"]]), limit * 1.1)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def test_func(fail=False, sleep=0):

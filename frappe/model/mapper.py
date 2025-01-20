@@ -178,11 +178,14 @@ def get_mapped_doc(
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	target_doc.run_method("after_mapping", source_doc)
 	target_doc.set_onload("load_after_mapping", True)
 
@@ -194,7 +197,11 @@ def get_mapped_doc(
 
 	if apply_strict_user_permissions and not ignore_permissions:
 		ret_doc.check_permission("create")
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	return ret_doc
 

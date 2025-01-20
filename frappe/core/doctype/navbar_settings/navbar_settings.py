@@ -17,6 +17,7 @@ class NavbarSettings(Document):
 		from frappe.types import DF
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		announcement_widget: DF.TextEditor | None
 		app_logo: DF.AttachImage | None
 		help_dropdown: DF.Table[NavbarItem]
@@ -36,6 +37,8 @@ class NavbarSettings(Document):
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		before_save_items = [
 			item
 			for item in doc_before_save.help_dropdown + doc_before_save.settings_dropdown
@@ -48,19 +51,28 @@ class NavbarSettings(Document):
 			frappe.throw(_("Please hide the standard navbar items instead of deleting them"))
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		announcement_widget: DF.TextEditor | None
 		app_logo: DF.AttachImage | None
 		help_dropdown: DF.Table[NavbarItem]
 		settings_dropdown: DF.Table[NavbarItem]
 	# end: auto-generated types
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_app_logo():
-	app_logo = frappe.get_website_settings("app_logo") or frappe.db.get_single_value(
-		"Navbar Settings", "app_logo", cache=True
+	app_logo = frappe.get_website_settings("app_logo") or frappe.get_cached_value(
+		"Navbar Settings",
+		"Navbar Settings",
+		"app_logo",
 	)
 
 	if not app_logo:

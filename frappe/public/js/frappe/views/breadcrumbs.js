@@ -22,10 +22,14 @@ frappe.breadcrumbs = {
 		"Event Streaming": "Tools",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		Automation: "Tools",
 	},
 
@@ -87,9 +91,8 @@ frappe.breadcrumbs = {
 			frappe.workspace_map[breadcrumbs.workspace]?.app &&
 			frappe.workspace_map[breadcrumbs.workspace]?.app != frappe.current_app
 		) {
-			frappe.app.sidebar.apps_switcher.set_current_app(
-				frappe.workspace_map[breadcrumbs.workspace].app
-			);
+			let app = frappe.workspace_map[breadcrumbs.workspace].app;
+			frappe.app.sidebar.apps_switcher.set_current_app(app);
 		}
 
 		this.toggle(true);
@@ -176,10 +179,14 @@ frappe.breadcrumbs = {
 			if (doctype_meta?.__workspaces?.length) {
 				breadcrumbs.workspace = doctype_meta.__workspaces[0];
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 
 			if (breadcrumbs.module) {
@@ -206,10 +213,14 @@ frappe.breadcrumbs = {
 						frappe.boot.module_wise_workspaces[breadcrumbs.module][0];
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 		}
 	},
@@ -221,10 +232,14 @@ frappe.breadcrumbs = {
 =======
 		const doctype_meta = frappe.get_meta(doctype);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (
 			(doctype === "User" && !frappe.user.has_role("System Manager")) ||
 			doctype_meta?.issingle

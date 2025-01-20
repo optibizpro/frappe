@@ -62,10 +62,17 @@ def write_document_file(doc, record_module=None, create_init=True, folder_name=N
 
 	# write the data file
 <<<<<<< HEAD
+<<<<<<< HEAD
 	path = os.path.join(folder, f"{fname}.json")
 =======
 	path = os.path.join(folder, fname + ".json")
 >>>>>>> upstream/version-14
+=======
+	path = os.path.join(folder, fname + ".json")
+=======
+	path = os.path.join(folder, f"{fname}.json")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if is_custom_module and not Path(path).resolve().is_relative_to(Path(frappe.get_site_path()).resolve()):
 		frappe.throw("Invalid export path: " + Path(path).as_posix())
 	with open(path, "w+") as txtfile:

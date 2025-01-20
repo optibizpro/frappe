@@ -15,10 +15,14 @@ from frappe.utils import get_site_url
 
 class TestClient(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_set_value(self):
 		todo = frappe.get_doc(doctype="ToDo", description="test").insert()
 		frappe.set_value("ToDo", todo.name, "description", "test 1")
@@ -150,10 +154,14 @@ class TestClient(IntegrationTestCase):
 		url += "/api/method/frappe.client.get_list"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		res = requests.post(url, json=params, headers=headers)
 		self.assertEqual(res.status_code, 200)
 		data = res.json()
@@ -260,10 +268,14 @@ class TestClient(IntegrationTestCase):
 		self.assertEqual(frappe.db.get_value("Note", docs[3], "title"), "not-a-random-title")
 		self.assertEqual(frappe.db.get_value("Note", docs[6], "title"), "another-note-title")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.assertIn(note1.name, docs)
 
 		# cleanup

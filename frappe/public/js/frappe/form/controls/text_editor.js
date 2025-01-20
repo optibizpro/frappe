@@ -214,10 +214,14 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 			bounds: this.quill_container[0],
 			placeholder: this.df.placeholder || "",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		};
 
 		// In a grid row where space is constrained, hide the toolbar.
@@ -325,10 +329,14 @@ frappe.ui.form.ControlTextEditor = class ControlTextEditor extends frappe.ui.for
 =======
 		value = this.patch_unordered_list(value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		try {
 			if (!$(value).find(".ql-editor").length) {

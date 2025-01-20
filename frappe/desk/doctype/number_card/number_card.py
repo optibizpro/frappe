@@ -14,6 +14,7 @@ from frappe.utils import cint, flt
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 from frappe.utils.modules import get_modules_from_all_apps_for_user
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -22,6 +23,10 @@ from frappe.utils.modules import get_modules_from_all_apps_for_user
 from frappe.utils.modules import get_modules_from_all_apps_for_user
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.utils.modules import get_modules_from_all_apps_for_user
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 class NumberCard(Document):

@@ -46,10 +46,14 @@ def report_error(status_code):
 	allow_traceback = (
 		(frappe.get_system_settings("allow_error_traceback") if frappe.db else False)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		and not frappe.local.flags.disable_traceback
 		and (status_code != 404 or frappe.conf.logging)
 	)
@@ -208,10 +212,14 @@ def _make_logs_v1():
 	if frappe.local.message_log:
 		response["_server_messages"] = json.dumps([json.dumps(d) for d in frappe.local.message_log])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if frappe.debug_log:
 		response["_debug_messages"] = json.dumps(frappe.local.debug_log)
@@ -261,10 +269,14 @@ def json_handler(obj):
 =======
 	elif type(obj) is type or isinstance(obj, Exception):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		return repr(obj)
 
 	elif callable(obj):
@@ -283,11 +295,15 @@ def json_handler(obj):
 	elif hasattr(obj, "__value__"):  # order imporant: defer to __json__ if implemented
 		return obj.__value__()
 
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	else:
 		raise TypeError(f"""Object of type {type(obj)} with value of {obj!r} is not JSON serializable""")
 
@@ -338,6 +354,7 @@ def send_private_file(path: str) -> Response:
 		path = "/protected/" + path
 		response = Response()
 		response.headers["X-Accel-Redirect"] = quote(frappe.utils.encode(path))
+		response.headers["Cache-Control"] = "private,max-age=3600,stale-while-revalidate=86400"
 
 	else:
 		filepath = frappe.utils.get_site_path(path)

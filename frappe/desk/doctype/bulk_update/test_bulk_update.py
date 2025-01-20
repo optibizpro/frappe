@@ -8,20 +8,26 @@ from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.desk.doctype.bulk_update.bulk_update import submit_cancel_or_update_docs
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.tests.utils import FrappeTestCase, timeout
 
 
 class TestBulkUpdate(FrappeTestCase):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 from frappe.tests import IntegrationTestCase, UnitTestCase, timeout
 
@@ -36,11 +42,15 @@ class UnitTestBulkUpdate(UnitTestCase):
 
 
 class TestBulkUpdate(IntegrationTestCase):
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def setUpClass(cls) -> None:
 		super().setUpClass()
@@ -54,10 +64,14 @@ class TestBulkUpdate(IntegrationTestCase):
 =======
 			frappe.new_doc(cls.doctype, some_fieldname=frappe.mock("name")).insert()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	@timeout()
 	def wait_for_assertion(self, assertion):

@@ -36,10 +36,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 		this._selected_values = [];
 		this.highlighted = -1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.$list_wrapper.on("click", ".dropdown-menu", (e) => {
 			e.stopPropagation();
 		});
@@ -108,10 +112,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 					.concat(this._options)
 					.uniqBy((opt) => opt.value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				this.set_selectable_items(this._options);
 			});
 		});
@@ -190,10 +198,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 				.toggleClass("selected");
 		});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.parse_validate_and_set_in_model("");
 		this.update_status();
 		return Promise.resolve();
@@ -209,10 +221,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 			.uniqBy((opt) => opt.value)
 			.find((opt) => opt.value === value);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (option) {
 			if (this.values.includes(value)) {
 				this._selected_values.push(option);
@@ -261,10 +277,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 			return option;
 		});
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	set_options() {
@@ -288,10 +308,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (this.df.get_data) {
 			let txt = this.$filter_input.val();
 			let value = this.df.get_data(txt);
@@ -304,10 +328,14 @@ frappe.ui.form.ControlMultiSelectList = class ControlMultiSelectList extends (
 =======
 					this._options = this.process_options(options);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				});
 			} else {
 				this._options = this.process_options(value);

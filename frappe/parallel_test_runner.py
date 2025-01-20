@@ -19,6 +19,7 @@ from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from .test_runner import SLOW_TEST_THRESHOLD, make_test_records
 =======
 from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
@@ -30,6 +31,11 @@ from .testing.environment import _decorate_all_methods_and_functions_with_type_c
 from .testing.result import TestResult
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from .testing.environment import _decorate_all_methods_and_functions_with_type_checker
+from .testing.result import TestResult
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 click_ctx = click.get_current_context(True)
 if click_ctx:
@@ -58,10 +64,14 @@ class ParallelTestRunner:
 
 	def setup_and_run(self):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.setup_test_site()
 		self.run_tests()
 		self.print_result()
@@ -81,6 +91,7 @@ class ParallelTestRunner:
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		_decorate_all_methods_and_functions_with_type_checker()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -89,6 +100,10 @@ class ParallelTestRunner:
 		_decorate_all_methods_and_functions_with_type_checker()
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		_decorate_all_methods_and_functions_with_type_checker()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		self.before_test_setup()
 
 	def before_test_setup(self):
@@ -137,10 +152,14 @@ class ParallelTestRunner:
 			)
 			frappe.set_user("Administrator")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		path, filename = file_info
 		module = self.get_module(path, filename)
 		from frappe.deprecation_dumpster import compat_preload_test_records_upfront
@@ -186,10 +205,14 @@ class ParallelTestRunner:
 =======
 		test_counts = [self.get_test_weight(test) for test in test_list]
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		test_chunks = split_by_weight(test_list, test_counts, chunk_count=self.total_builds)
 
 		return test_chunks[self.build_number - 1]
@@ -234,10 +257,14 @@ def split_by_weight(work, weights, chunk_count):
 		"""Get approximate count of tests inside a file"""
 		file_name = "/".join(test)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		test_weight = TEST_WEIGHT_OVERRIDES.get(test[-1]) or 1
 

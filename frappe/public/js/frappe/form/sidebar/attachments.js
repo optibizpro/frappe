@@ -21,10 +21,14 @@ frappe.ui.form.Attachments = class Attachments {
 		this.parent.find(".explore-link").click(() => {
 			if (!this.frm.attachments.get_attachments()?.length) return;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			frappe.open_in_new_tab = true;
 			frappe.set_route("List", "File", {
 				attached_to_doctype: this.frm.doctype,
@@ -66,10 +70,14 @@ frappe.ui.form.Attachments = class Attachments {
 =======
 		this.add_attachment_wrapper.find(".add-attachment-btn").toggle(!max_reached);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		// add attachment objects
 		var attachments = this.get_attachments();
@@ -133,10 +141,14 @@ frappe.ui.form.Attachments = class Attachments {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	get_attachments() {
 		return this.frm.get_docinfo().attachments || [];
 	}
@@ -171,10 +183,14 @@ frappe.ui.form.Attachments = class Attachments {
 			this.parent.find(".explore-btn").toggle(false); // hide explore icon button
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 	}
 
@@ -195,10 +211,14 @@ frappe.ui.form.Attachments = class Attachments {
 =======
 				class="ellipsis attachment-file-label"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			>
 				<span>${file_name}</span>
 			</a>`;
@@ -240,10 +260,14 @@ frappe.ui.form.Attachments = class Attachments {
 			.append(frappe.get_data_pill(file_label, fileid, remove_action, icon))
 			.insertAfter(this.add_attachment_wrapper);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	get_file_url(attachment) {

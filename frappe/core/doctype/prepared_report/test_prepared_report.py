@@ -31,10 +31,14 @@ class UnitTestPreparedReport(UnitTestCase):
 
 class TestPreparedReport(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@classmethod
 	def tearDownClass(cls):
 		for r in frappe.get_all("Prepared Report", pluck="name"):
@@ -65,10 +69,14 @@ class TestPreparedReport(IntegrationTestCase):
 				"doctype": "Prepared Report",
 				"report_name": report or "Database Storage Usage By Tables",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 		).insert()
 
@@ -113,10 +121,14 @@ class TestPreparedReport(IntegrationTestCase):
 
 		prepared_data = json.loads(doc.get_prepared_data().decode("utf-8"))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		generated_data = generate_report_result(get_report_doc("Database Storage Usage By Tables"))
 		self.assertEqual(len(prepared_data["columns"]), len(generated_data["columns"]))
 		self.assertEqual(len(prepared_data["result"]), len(generated_data["result"]))
@@ -152,7 +164,11 @@ def test_report(**args):
 	finally:
 		report.delete()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

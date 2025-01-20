@@ -51,10 +51,14 @@ def fetch_changelog_feed():
 				changelog_feed = frappe.call(fn, since=since)[:20] or []
 				frappe.cache.set_value(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					cache_key, changelog_feed, expires_in_sec=7 * 24 * 60 * 60, shared=True
 				)
 
@@ -75,10 +79,14 @@ def fetch_changelog_feed():
 =======
 			frappe.cache.set_value(cache_key, [], expires_in_sec=7 * 24 * 60 * 60, shared=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 @redis_cache

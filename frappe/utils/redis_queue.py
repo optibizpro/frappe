@@ -19,11 +19,14 @@ class RedisQueue:
 	def get_connection(cls, username=None, password=None):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if frappe.conf.redis_queue_sentinel_enabled:
 			from frappe.utils.redis_wrapper import get_sentinel_connection
 
@@ -39,6 +42,9 @@ class RedisQueue:
 			conn.ping()
 			return conn
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		rq_url = frappe.local.conf.redis_queue
 		domain = rq_url.split("redis://", 1)[-1]
@@ -46,10 +52,13 @@ class RedisQueue:
 		conn = redis.from_url(url)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 		conn = redis.from_url(frappe.conf.redis_queue, username=username, password=password)
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		conf = frappe.get_site_config()
 		if conf.redis_queue_sentinel_enabled:
 			from frappe.utils.redis_wrapper import get_sentinel_connection
@@ -66,11 +75,15 @@ class RedisQueue:
 			conn.ping()
 			return conn
 		conn = redis.from_url(conf.redis_queue, username=username, password=password)
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		conn.ping()
 		return conn
 

@@ -222,10 +222,14 @@ body {
 			padding: 4px 8px;
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		.filter-chart {
 			background-color: var(--control-bg);
@@ -369,10 +373,14 @@ body {
 		border-bottom: 1px solid var(--border-color);
 		border-radius: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		&.edit-mode:hover {
 			background-color: var(--bg-color);
@@ -624,10 +632,14 @@ body {
 		padding: 10px;
 		border: 1px solid var(--border-color);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		.link-item {
 			display: flex;
@@ -985,11 +997,14 @@ body {
 			height: calc(100vh - var(--navbar-height) - var(--page-head-height) - 5px);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			.layout-side-section,
 			.layout-main-section-wrapper {
 				height: 100%;
@@ -998,6 +1013,7 @@ body {
 				[data-theme="dark"] & {
 					scrollbar-color: var(--gray-800) transparent;
 				}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 				&::-webkit-scrollbar-track {
@@ -1021,6 +1037,12 @@ body {
 			max-width: var(--page-max-width);
 			margin: auto;
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+=======
+			max-width: var(--page-max-width);
+			margin: auto;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			.layout-main-section {
 				border: 0px;
@@ -1068,10 +1090,14 @@ body {
 	}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	.block-menu-item-icon svg {
 		width: 18px;
 		height: 18px;
@@ -1223,6 +1249,7 @@ body {
 		box-shadow: var(--shadow-sm);
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 	// widgets
@@ -1235,6 +1262,12 @@ body {
 		border: 1px solid var(--border-color);
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	// widgets
+	.widget.number-widget-box {
+		border: 1px solid var(--border-color);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	.codex-editor__loader {

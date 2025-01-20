@@ -48,10 +48,14 @@ class UserType(Document):
 =======
 			frappe.cache.delete_value("non_standard_user_types")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def on_update(self):
 		if self.is_standard:
@@ -154,6 +158,7 @@ class UserType(Document):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -163,6 +168,12 @@ class UserType(Document):
 =======
 			update_custom_docperm(docperm, values)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+			frappe.db.set_value("Custom DocPerm", docperm, values)
+=======
+			update_custom_docperm(docperm, values)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def add_select_perm_doctypes(self):
 		if frappe.flags.ignore_select_perm:
@@ -331,10 +342,14 @@ def apply_permissions_for_non_standard_user_type(doc, method=None):
 =======
 	user_types = frappe.cache.get_value(
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"non_standard_user_types",
 		get_non_standard_user_types,
 	)

@@ -14,6 +14,7 @@ def make_request(method, url, auth=None, headers=None, data=None, json=None, par
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 def make_request(method, url, auth=None, headers=None, data=None, json=None, params=None):
 =======
 def make_request(method: str, url: str, auth=None, headers=None, data=None, json=None, params=None):
@@ -23,6 +24,10 @@ def make_request(method: str, url: str, auth=None, headers=None, data=None, json
 def make_request(method: str, url: str, auth=None, headers=None, data=None, json=None, params=None):
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+def make_request(method: str, url: str, auth=None, headers=None, data=None, json=None, params=None):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	auth = auth or ""
 	data = data or {}
 	headers = headers or {}
@@ -93,11 +98,14 @@ def make_put_request(url: str, **kwargs):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def make_patch_request(url, **kwargs):
 	return make_request("PATCH", url, **kwargs)
 
@@ -105,9 +113,12 @@ def make_patch_request(url, **kwargs):
 def make_delete_request(url, **kwargs):
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 def make_patch_request(url: str, **kwargs):
 	"""Make a 'PATCH' HTTP request to the given `url` and return processed response.
@@ -134,11 +145,15 @@ def make_delete_request(url: str, **kwargs):
 	* `params`: Query parameters to be passed in the request.
 	* `auth`: Auth credentials.
 	"""
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return make_request("DELETE", url, **kwargs)
 
 

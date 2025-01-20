@@ -12,10 +12,14 @@ from typing import TYPE_CHECKING, Any, Literal, NoReturn, Union
 from threading import Thread
 from typing import Any, NoReturn
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from uuid import uuid4
 
 import redis
@@ -35,10 +39,14 @@ from rq.logutils import setup_loghandlers
 from rq.worker import DequeueStrategy
 from rq.worker_pool import WorkerPool
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_fixed
 
 import frappe
@@ -49,10 +57,14 @@ from frappe.utils import cint, cstr, get_bench_id
 =======
 from frappe.utils import CallbackManager, cint, get_bench_id
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils.commands import log
 from frappe.utils.deprecations import deprecation_warning
 from frappe.utils.redis_queue import RedisQueue
@@ -113,10 +125,14 @@ def enqueue(
 	**kwargs,
 ) -> Job | Any:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""
 	Enqueue method to be executed using a background worker
 
@@ -141,10 +157,14 @@ def enqueue(
 	:param kwargs: keyword arguments to be passed to the method
 	:param deduplicate: do not re-queue job if it's already queued, requires job_id.
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	:param job_id: Assigning unique job id, which can be checked using `is_job_enqueued`
 	"""
 	# To handle older implementations
@@ -198,10 +218,14 @@ def enqueue(
 		)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	call_directly = now or (not is_async and not frappe.flags.in_test)
 	if call_directly:
 		return frappe.call(method, **kwargs)
@@ -284,10 +308,14 @@ def enqueue(
 
 	return enqueue_call()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def enqueue_doc(doctype, name=None, method=None, queue="default", timeout=300, now=False, **kwargs):
@@ -315,10 +343,14 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 =======
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if is_async:
 <<<<<<< HEAD
 		frappe.init(site=site)
@@ -362,10 +394,14 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	try:
 		retval = method(**kwargs)
 
@@ -412,10 +448,14 @@ def execute_job(site, method, event, job_name, kwargs, user=None, is_async=True,
 =======
 		frappe.local.job.after_job.run()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		if is_async:
 			frappe.destroy()
@@ -439,16 +479,21 @@ def start_worker(
 =======
 	strategy: DequeueStrategy | None = DequeueStrategy.DEFAULT,
 <<<<<<< HEAD
+<<<<<<< HEAD
 ) -> None:  # pragma: no cover
 =======
 ) -> NoReturn:  # pragma: no cover
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+) -> NoReturn:  # pragma: no cover
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	"""Wrapper to start rq worker. Connects to redis and monitors these queues."""
 
 	if not strategy:
 		strategy = DequeueStrategy.DEFAULT
 
 	_start_sentry()
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	_freeze_gc()
@@ -458,6 +503,9 @@ def start_worker(
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	with frappe.init_site():
 		# empty init is required to get redis_queue from common_site_config.json
@@ -475,10 +523,14 @@ def start_worker(
 	WorkerKlass = DEQUEUE_STRATEGIES.get(strategy, Worker)
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	logging_level = "INFO"
 	if quiet:
@@ -489,10 +541,14 @@ def start_worker(
 
 	worker = Worker(queues, connection=redis_connection)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	worker.work(
 		logging_level=logging_level,
 		burst=burst,
@@ -599,10 +655,14 @@ def start_worker_pool(
 	)
 	pool.start(logging_level=logging_level, burst=burst)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_worker_name(queue):
@@ -740,10 +800,14 @@ def get_redis_conn(username=None, password=None):
 =======
 			return get_redis_connection_without_auth()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		else:
 			return RedisQueue.get_connection(**cred)
 	except redis.exceptions.AuthenticationError:
@@ -773,10 +837,14 @@ def get_redis_connection_without_auth():
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 def get_queues(connection=None) -> list[Queue]:
 	"""Get all the queues linked to the current bench."""
 	queues = Queue.all(connection=connection or get_redis_conn())
@@ -855,10 +923,14 @@ def get_job(job_id: str) -> Job | None:
 	except NoSuchJobError:
 		return None
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 BACKGROUND_PROCESS_NICENESS = 10
@@ -956,7 +1028,11 @@ def _start_sentry():
 		**kwargs,
 	)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02

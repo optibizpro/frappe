@@ -144,6 +144,7 @@ def get_preferred_address(doctype, name, preferred_key="is_primary_address"):
 def get_default_address(doctype: str, name: str | None, sort_key: str = "is_primary_address") -> str | None:
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
@@ -153,6 +154,12 @@ def get_default_address(doctype: str, name: str | None, sort_key: str = "is_prim
 =======
 	"""Return default Address name for the given doctype, name."""
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+	"""Returns default Address name for the given doctype, name"""
+=======
+	"""Return default Address name for the given doctype, name."""
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	if sort_key not in ["is_shipping_address", "is_primary_address"]:
 		return None
 
@@ -177,10 +184,14 @@ def get_address_display(address_dict: dict | str | None = None) -> str | None:
 =======
 def get_address_display(address_dict: dict | str | None) -> str | None:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return render_address(address_dict)
 
 
@@ -303,10 +314,14 @@ def address_query(doctype, txt, searchfield, start, page_len, filters):
 	if link_name := filters.pop("link_name", None):
 		_filters.append(["Dynamic Link", "link_name", "=", link_name])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	_filters.extend([key, "=", value] for key, value in filters.items())
 
@@ -371,7 +386,11 @@ def address_query(doctype, txt, searchfield, start, page_len, filters):
 =======
 	return search_widget(
 		"Address", txt, filters=_filters, searchfield=searchfield, start=start, page_length=page_len
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	)
 
 

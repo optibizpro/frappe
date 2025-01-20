@@ -37,10 +37,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 
 		// show again on idempotent invocations
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		$(this.disp_area).removeClass("like-disabled-input");
 		$(this.disp_area).css("display", "block");
 
@@ -62,10 +66,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 					this.bind_leaflet_data(value);
 				}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			});
 		}
 	}
@@ -80,10 +88,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 			this.bind_leaflet_map();
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		if (this.disabled) {
 			this.map.dragging.disable();
 			this.map.touchZoom.disable();
@@ -106,10 +118,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 				this.bind_leaflet_locate_control();
 			}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		}
 	}
 
@@ -121,10 +137,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		}
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.clear_editable_layers();
 
 		const data_layers = new L.FeatureGroup().addLayer(
@@ -240,7 +260,10 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 =======
 	}
 
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		if (!this.draw_control) {
 			this.draw_control = this.get_leaflet_controls();
@@ -250,6 +273,7 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 		} else {
 			this.draw_control.remove();
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 		this.draw_control = this.get_leaflet_controls();
@@ -263,6 +287,11 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	get_leaflet_controls() {
 		return new L.Control.Draw({
 			position: "topleft",
@@ -302,10 +331,14 @@ frappe.ui.form.ControlGeolocation = class ControlGeolocation extends frappe.ui.f
 =======
 		this.bound_event_listeners = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.map.on("draw:created", (e) => {
 			var type = e.layerType,
 				layer = e.layer;

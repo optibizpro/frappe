@@ -77,10 +77,14 @@ class WidgetDialog {
 				return __("New {0}", [__(frappe.model.unscrub(this.type))]);
 		}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	get_fields() {
@@ -193,10 +197,14 @@ class QuickListDialog extends WidgetDialog {
 				fieldname: "column_break_4",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			},
 			{
 				fieldtype: "Data",
@@ -284,10 +292,14 @@ class CardDialog extends WidgetDialog {
 			},
 			{
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				fieldname: "links",
 				fieldtype: "Table",
 				label: __("Card Links"),
@@ -312,10 +324,14 @@ class CardDialog extends WidgetDialog {
 					{
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						fieldname: "link_type",
 						fieldtype: "Select",
 						in_list_view: 1,
@@ -349,6 +365,7 @@ class CardDialog extends WidgetDialog {
 						fieldtype: "Column Break",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 					},
 					{
 =======
@@ -357,6 +374,8 @@ class CardDialog extends WidgetDialog {
 						fieldtype: "Column Break",
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						fieldname: "label",
 						fieldtype: "Data",
 						in_list_view: 1,
@@ -366,6 +385,7 @@ class CardDialog extends WidgetDialog {
 						fieldname: "icon",
 						fieldtype: "Icon",
 						label: "Icon",
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
@@ -384,6 +404,9 @@ class CardDialog extends WidgetDialog {
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					},
 					{
 						fieldname: "dependencies",
@@ -476,10 +499,14 @@ class ShortcutDialog extends WidgetDialog {
 =======
 				initial_value: "DocType",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				onchange: () => {
 					if (this.dialog.get_value("type") == "DocType") {
 						this.dialog.fields_dict.link_to.get_query = () => {
@@ -508,7 +535,11 @@ class ShortcutDialog extends WidgetDialog {
 			},
 			{
 =======
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				fieldtype: "Dynamic Link",
 				fieldname: "link_to",
 				label: __("Link To"),
@@ -532,10 +563,14 @@ class ShortcutDialog extends WidgetDialog {
 =======
 							if (meta.image_field) views.push("Image");
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 							if (frappe.boot.calendars.includes(doctype)) views.push("Calendar");
 
 							const response = await frappe.db.get_value(
@@ -569,10 +604,14 @@ class ShortcutDialog extends WidgetDialog {
 				fieldname: "url",
 				label: __("URL"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				default: "",
 				depends_on: (s) => s.type == "URL",
 				mandatory_depends_on: (s) => s.type == "URL",
@@ -586,6 +625,7 @@ class ShortcutDialog extends WidgetDialog {
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban",
 =======
 				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban\nImage",
@@ -595,6 +635,10 @@ class ShortcutDialog extends WidgetDialog {
 				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban\nImage",
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				options: "List\nReport Builder\nDashboard\nTree\nNew\nCalendar\nKanban\nImage",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				description: __(
 					"Which view of the associated DocType should this shortcut take you to?"
 				),
@@ -682,10 +726,14 @@ class ShortcutDialog extends WidgetDialog {
 				fieldname: "column_break_3",
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			},
 			{
 				fieldtype: "Data",
@@ -729,10 +777,14 @@ class ShortcutDialog extends WidgetDialog {
 			}
 			!validate_url(_url) &&
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				frappe.throw({
 					message: __("<b>{0}</b> is not a valid URL", [data.url]),
 					title: __("Invalid URL"),
@@ -766,10 +818,14 @@ class NumberCardDialog extends WidgetDialog {
 =======
 					label: __("Number Card"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					options: "Number Card",
 					reqd: 1,
 					get_query: () => {
@@ -857,10 +913,14 @@ class NumberCardDialog extends WidgetDialog {
 			{
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				label: __("Function Based On"),
 				fieldname: "aggregate_function_based_on",
 				fieldtype: "Select",

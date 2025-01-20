@@ -12,6 +12,7 @@ class TestHooks(FrappeTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.test_api import FrappeAPITestCase
 from frappe.tests.utils import FrappeTestCase, patch_hooks
 =======
@@ -28,6 +29,14 @@ class TestHooks(IntegrationTestCase):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_api import FrappeAPITestCase
+
+
+class TestHooks(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_hooks(self):
 		hooks = frappe.get_hooks()
 		self.assertTrue(isinstance(hooks.get("app_name"), list))
@@ -133,12 +142,18 @@ class TestHooks(IntegrationTestCase):
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 class TestAPIHooks(FrappeAPITestCase):
 	def test_auth_hook(self):
 		with patch_hooks({"auth_hooks": ["frappe.tests.test_hooks.custom_auth"]}):
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 	def test_fixture_prefix(self):
 		import os
@@ -219,6 +234,7 @@ class TestAPIHooks(FrappeAPITestCase):
 	def test_auth_hook(self):
 		with self.patch_hooks({"auth_hooks": ["frappe.tests.test_hooks.custom_auth"]}):
 <<<<<<< HEAD
+<<<<<<< HEAD
 			site_url = frappe.utils.get_site_url(frappe.local.site)
 			response = self.get(
 				site_url + "/api/method/frappe.auth.get_logged_user",
@@ -235,6 +251,9 @@ class TestAPIHooks(FrappeAPITestCase):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			site_url = frappe.utils.get_site_url(frappe.local.site)
 			response = self.get(
 				site_url + "/api/method/frappe.auth.get_logged_user",

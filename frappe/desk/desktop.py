@@ -459,10 +459,14 @@ def get_workspace_sidebar_items():
 		"link_to",
 		"external_link",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	]
 	all_pages = frappe.get_all(
 		"Workspace", fields=fields, filters=filters, order_by=order_by, ignore_permissions=True
@@ -521,20 +525,30 @@ def get_workspace_sidebar_items():
 
 	return {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 		"workspace_setup_completed": frappe.db.get_single_value(
 			"Workspace Settings", "workspace_setup_completed"
 		),
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+		"workspace_setup_completed": frappe.db.get_single_value(
+			"Workspace Settings", "workspace_setup_completed"
+		),
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"pages": pages,
 		"has_access": has_access,
 		"has_create_access": frappe.has_permission(doctype="Workspace", ptype="create"),
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 
 def get_table_with_counts():

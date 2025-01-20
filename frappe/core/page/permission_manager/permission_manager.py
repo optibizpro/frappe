@@ -116,10 +116,14 @@ def update(doctype, role, permlevel, ptype, value=None, if_owner=0):
 def update(doctype: str, role: str, permlevel: int, ptype: str, value=None, if_owner=0) -> str | None:
 	"""Update role permission params.
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	Args:
 	        doctype (str): Name of the DocType to update params for
@@ -150,10 +154,14 @@ def update(doctype: str, role: str, permlevel: int, ptype: str, value=None, if_o
 	frappe.db.after_commit.add(clear_cache)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	return "refresh" if out else None
 
 
@@ -174,10 +182,14 @@ def remove(doctype, role, permlevel, if_owner=0):
 	for name in custom_docperms:
 		frappe.delete_doc("Custom DocPerm", name, ignore_permissions=True, force=True)
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	if not frappe.get_all("Custom DocPerm", {"parent": doctype}):
 		frappe.throw(_("There must be atleast one permission rule."), title=_("Cannot Remove"))

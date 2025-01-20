@@ -4,10 +4,14 @@
 =======
 import os
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from unittest.mock import patch
 
 import frappe
@@ -21,6 +25,7 @@ from frappe.tests.utils import FrappeTestCase, patch_hooks
 
 class TestDashboardConnections(FrappeTestCase):
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase, patch_hooks
@@ -37,6 +42,13 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestDashboardConnections(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	@patch.dict(frappe.conf, {"developer_mode": 1})
 	def setUp(self):
 		delete_test_data()
@@ -54,10 +66,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 				"doctype": "Test Doctype B With Child Table With Link To Doctype A",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"title": "Earth",
 			}
 		)
@@ -76,10 +92,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 				"doctype": "Test Doctype A With Child Table With Link To Doctype B",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"title": "Mars",
 			}
 		)
@@ -90,10 +110,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 			{"title": "Mars", "test_doctype_b_with_test_child_table_with_link_to_doctype_a": "Earth"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		mars.insert()
 
@@ -108,10 +132,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 						"doctype": "Test Doctype B With Child Table With Link To Doctype A",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						"names": ["Earth"],
 						"open_count": 0,
 					}
@@ -133,10 +161,14 @@ class TestDashboardConnections(IntegrationTestCase):
 			self.assertEqual(
 				get_open_count("Test Doctype A With Child Table With Link To Doctype B", "Mars"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				expected_open_count,
 			)
 
@@ -148,10 +180,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 				"doctype": "Test Doctype A With Child Table With Link To Doctype B",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"title": "Saturn",
 			}
 		)
@@ -170,10 +206,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 				"doctype": "Test Doctype B With Child Table With Link To Doctype A",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				"title": "Pluto",
 			}
 		)
@@ -184,10 +224,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 			{"title": "Pluto", "test_doctype_a_with_test_child_table_with_link_to_doctype_b": "Saturn"},
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		)
 		pluto.insert()
 
@@ -200,10 +244,14 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 						"doctype": "Test Doctype B With Child Table With Link To Doctype A",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 						"open_count": 0,
 						"count": 1,
 					}
@@ -226,10 +274,14 @@ class TestDashboardConnections(IntegrationTestCase):
 			self.assertEqual(
 				get_open_count("Test Doctype A With Child Table With Link To Doctype B", "Saturn"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				expected_open_count,
 			)
 
@@ -248,6 +300,7 @@ class TestDashboardConnections(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		todo_doc = frappe.get_doc(dict(doctype="ToDo", description="test")).insert()
 		frappe.get_doc(dict(doctype="Test Doctype D", title="d-001", doclink=todo_doc.name)).insert()
 		frappe.get_doc(dict(doctype="Test Doctype E", title="e-001", todo=todo_doc.name)).insert()
@@ -262,6 +315,12 @@ class TestDashboardConnections(IntegrationTestCase):
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		todo_doc = frappe.get_doc(doctype="ToDo", description="test").insert()
+		frappe.get_doc(doctype="Test Doctype D", title="d-001", doclink=todo_doc.name).insert()
+		frappe.get_doc(doctype="Test Doctype E", title="e-001", todo=todo_doc.name).insert()
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 		connections = get_open_count("ToDo", todo_doc.name)["count"]
 		self.assertEqual(len(connections["external_links_found"]), 2)
@@ -270,6 +329,7 @@ class TestDashboardConnections(IntegrationTestCase):
 <<<<<<< HEAD
 		with patch_hooks(
 =======
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		with patch_hooks(
@@ -281,6 +341,10 @@ class TestDashboardConnections(IntegrationTestCase):
 		with self.patch_hooks(
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+		with self.patch_hooks(
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			{
 				"override_doctype_dashboards": {
 					"ToDo": ["frappe.tests.test_dashboard_connections.get_dashboard_for_todo"]
@@ -308,10 +372,14 @@ def create_test_data():
 	create_test_doctype_a_with_test_child_table_with_link_to_doctype_b()
 	create_test_doctype_b_with_test_child_table_with_link_to_doctype_a()
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	create_linked_doctypes()
 	add_links_in_child_tables()
 
@@ -329,10 +397,14 @@ def delete_test_data():
 		"Test Doctype A With Child Table With Link To Doctype B",
 		"Test Doctype B With Child Table With Link To Doctype A",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		"Test Doctype D",
 		"Test Doctype E",
 	]
@@ -391,10 +463,14 @@ def create_test_child_table_with_link_to_doctype_b():
 		autoname="field:title",
 		naming_rule="By fieldname",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	).insert(ignore_if_duplicate=True)
 
 
@@ -594,10 +670,14 @@ def get_dashboard_for_test_doctype_a_with_test_child_table_with_link_to_doctype_
 		"transactions": [
 			{"label": "Reference", "items": ["Test Doctype B With Child Table With Link To Doctype A"]},
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		],
 	}
 

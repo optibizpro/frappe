@@ -10,10 +10,14 @@ from urllib.parse import parse_qs, urlparse
 
 from werkzeug.http import parse_cookie
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 import frappe
 import frappe.exceptions
@@ -34,6 +38,7 @@ from frappe.tests.utils import FrappeTestCase, change_settings
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 from frappe.tests.test_api import FrappeAPITestCase
 from frappe.tests.utils import FrappeTestCase, change_settings
 =======
@@ -47,6 +52,12 @@ from frappe.tests.test_api import FrappeAPITestCase
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+from frappe.tests import IntegrationTestCase, UnitTestCase
+from frappe.tests.classes.context_managers import change_settings
+from frappe.tests.test_api import FrappeAPITestCase
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 from frappe.utils import get_url
 
 user_module = frappe.core.doctype.user.user
@@ -66,10 +77,14 @@ class UnitTestUser(UnitTestCase):
 
 class TestUser(IntegrationTestCase):
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def tearDown(self):
 		# disable password strength test
 		frappe.db.set_single_value("System Settings", "enable_password_policy", 0)
@@ -258,7 +273,10 @@ class TestUser(IntegrationTestCase):
 		user.new_password = "Eastern_43A1W"
 		user.save()
 		frappe.flags.in_test = True
+<<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 =======
 		with change_settings("System Settings", enable_password_policy=0):
 			# password policy is disabled, test_password_strength should be ignored
@@ -276,6 +294,7 @@ class TestUser(IntegrationTestCase):
 			self.assertRaises(
 				frappe.exceptions.ValidationError, handle_password_test_fail, result
 			)  # test backwards compatibility
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 
 <<<<<<< HEAD
@@ -307,6 +326,12 @@ class TestUser(IntegrationTestCase):
 			result = test_password_strength("Eastern_43A1W")
 			self.assertEqual(result["feedback"]["password_policy_validation_passed"], True)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
+=======
+
+			# Score 4; should pass
+			result = test_password_strength("Eastern_43A1W")
+			self.assertEqual(result["feedback"]["password_policy_validation_passed"], True)
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 			# test password strength while saving user with new password
 			user = frappe.get_doc("User", "test@example.com")
@@ -318,10 +343,14 @@ class TestUser(IntegrationTestCase):
 			user.save()
 			frappe.flags.in_test = True
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 
 	def test_comment_mentions(self):
 		comment = """
@@ -388,6 +417,7 @@ class TestUser(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@change_settings("System Settings", commit=True, password_reset_limit=1)
 =======
 	@IntegrationTestCase.change_settings("System Settings", commit=True, password_reset_limit=1)
@@ -397,6 +427,10 @@ class TestUser(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", commit=True, password_reset_limit=1)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	@IntegrationTestCase.change_settings("System Settings", commit=True, password_reset_limit=1)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_rate_limiting_for_reset_password(self):
 		url = get_url()
 		data = {"cmd": "frappe.core.doctype.user.user.reset_password", "user": "test@test.com"}
@@ -480,6 +514,7 @@ class TestUser(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@change_settings("System Settings", password_reset_limit=6)
 =======
 	@IntegrationTestCase.change_settings("System Settings", password_reset_limit=6)
@@ -489,6 +524,10 @@ class TestUser(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", password_reset_limit=6)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	@IntegrationTestCase.change_settings("System Settings", password_reset_limit=6)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_reset_password(self):
 		from frappe.auth import CookieManager, LoginManager
 		from frappe.utils import set_request
@@ -553,10 +592,14 @@ class TestUser(IntegrationTestCase):
 =======
 			self.assertEqual(update_password(new_password, key=key), "me")
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			update_password(old_password, old_password=new_password)
 			self.assertEqual(
 				frappe.message_log[0].get("message"),
@@ -587,6 +630,7 @@ class TestUser(IntegrationTestCase):
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	@change_settings("System Settings", reset_password_link_expiry_duration=1)
 =======
 	@IntegrationTestCase.change_settings("System Settings", reset_password_link_expiry_duration=1)
@@ -596,6 +640,10 @@ class TestUser(IntegrationTestCase):
 	@IntegrationTestCase.change_settings("System Settings", reset_password_link_expiry_duration=1)
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+	@IntegrationTestCase.change_settings("System Settings", reset_password_link_expiry_duration=1)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	def test_reset_password_link_expiry(self):
 		new_password = "new_password"
 		frappe.set_user("testpassword@example.com")
@@ -623,10 +671,14 @@ class TestImpersonation(FrappeAPITestCase):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 @contextmanager
 def test_user(
 	*, first_name: str | None = None, email: str | None = None, roles: list[str], commit=False, **kwargs
@@ -641,10 +693,14 @@ def test_user(
 		user: User = frappe.new_doc(
 			"User",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			send_welcome_email=0,
 			email=email,
 			first_name=first_name,

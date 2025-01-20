@@ -236,10 +236,14 @@ frappe.ui.GroupBy = class {
 					<span class="group-by-icon button-icon">
 						${frappe.utils.icon("es-line-folder-alt")}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 					</span>
 					<span class="button-label hidden-xs">
 						${__("Add Group")}
@@ -339,10 +343,14 @@ frappe.ui.GroupBy = class {
 =======
 				docfield.label = __("Sum of {0}", [__(docfield.label, null, docfield.parent)]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			} else {
 				if (docfield.fieldtype == "Int") {
 					docfield.fieldtype = "Float"; // average of ints can be a float
@@ -352,10 +360,14 @@ frappe.ui.GroupBy = class {
 =======
 				docfield.label = __("Average of {0}", [__(docfield.label, null, docfield.parent)]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			}
 		}
 
@@ -433,10 +445,14 @@ frappe.ui.GroupBy = class {
 			__(cstr(a.label)).localeCompare(cstr(__(b.label)))
 		);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		this.all_fields[this.doctype] = this.report_view.meta.fields;
 
 		const standard_fields_filter = (df) =>
@@ -467,10 +483,14 @@ frappe.ui.GroupBy = class {
 					this.get_group_by_field_label(),
 			  ])
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			: __("Add Group");
 
 		this.group_by_button
@@ -502,9 +522,13 @@ frappe.ui.GroupBy = class {
 		);
 		return field?.label ? __(field.label, null, field.parent) : field?.fieldname;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 };

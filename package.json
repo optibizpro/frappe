@@ -4,7 +4,9 @@
     "build": "node esbuild",
     "production": "node esbuild --production",
     "watch": "node esbuild --watch",
+<<<<<<< HEAD
     "coverage:report": "npx nyc report --reporter=clover",
+<<<<<<< HEAD
 <<<<<<< HEAD
     "prepare": "npm run snyk-protect",
     "snyk-protect": "snyk-protect"
@@ -15,6 +17,13 @@
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
+=======
+    "coverage:report": "npx nyc report --reporter=clover"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
   },
   "repository": {
     "type": "git",
@@ -68,10 +77,14 @@
     "cliui": "^7.0.4",
     "cookie": "^0.7.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
     "cropperjs": "^1.5.12",
     "cssnano": "^5.0.0",
     "driver.js": "^0.9.8",
@@ -82,10 +95,14 @@
 =======
     "esbuild-plugin-vue3": "^0.3.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
     "fast-deep-equal": "^2.0.1",
     "fast-glob": "^3.2.5",
     "frappe-charts": "2.0.0-rc22",
@@ -104,10 +121,14 @@
     "launch-editor": "^2.2.1",
     "localforage": "^1.10.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
     "md5": "^2.3.0",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.35",
@@ -148,10 +169,14 @@
     "vuedraggable": "^4.1.0",
     "vuex": "4.0.2",
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
     "yargs": "^17.5.1"
   },
   "nyc": {

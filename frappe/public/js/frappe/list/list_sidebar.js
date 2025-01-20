@@ -169,10 +169,14 @@ frappe.views.ListSidebar = class ListSidebar {
 =======
 			section_title: this.page.sidebar.find(".save-filter-section .sidebar-label"),
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		});
 	}
 
@@ -258,10 +262,14 @@ frappe.views.ListSidebar = class ListSidebar {
 			</div>
 		</div>`);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	}
 
 	render_stat(stats) {
@@ -315,9 +323,12 @@ frappe.views.ListSidebar = class ListSidebar {
 			const message = __("Get more insights with");
 			const link = "https://frappe.io/s/insights";
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			const cta = __("Frappe Insights");
 
 			this.insights_banner = $(`
@@ -334,17 +345,24 @@ frappe.views.ListSidebar = class ListSidebar {
 					</div>
 =======
 <<<<<<< HEAD
+<<<<<<< HEAD
 				<div class="sidebar-section">
 					${message} <a href="${link}" target="_blank" style="color: var(--text-color)">${cta} &rarr; </a>
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 			const cta = "Frappe Insights";
 
 			this.insights_banner = $(`
 				<div class="sidebar-section">
 					${message} <a href="${link}" target="_blank" style="color: var(--text-color)">${cta} &rarr; </a>
+<<<<<<< HEAD
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 				</div>
 			`).appendTo(this.sidebar);
 		} catch (error) {

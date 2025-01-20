@@ -159,10 +159,14 @@ frappe.ui.keys.get_key = function (e) {
 =======
 		// add shift+ the key
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		key = "shift+" + key;
 	}
 	if (e.altKey) {
@@ -199,10 +203,14 @@ frappe.ui.keys.add_shortcut({
 =======
 		document.activeElement?.blur();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 		frappe.app.trigger_primary_action();
 		e.preventDefault();
 		return false;
@@ -229,6 +237,7 @@ frappe.ui.keys.add_shortcut({
 		$(".navbar-home img").click();
 	},
 	description: __("Navigate Home"),
+<<<<<<< HEAD
 });
 
 frappe.ui.keys.add_shortcut({
@@ -242,6 +251,8 @@ frappe.ui.keys.add_shortcut({
 
 frappe.ui.keys.add_shortcut({
 =======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
+=======
 	shortcut: "ctrl+k",
 	action: function (e) {
 		$("#navbar-search").focus();
@@ -249,6 +260,7 @@ frappe.ui.keys.add_shortcut({
 		return false;
 	},
 	description: __("Open Awesomebar"),
+<<<<<<< HEAD
 });
 
 frappe.ui.keys.add_shortcut({
@@ -258,23 +270,37 @@ frappe.ui.keys.add_shortcut({
 		$(".navbar-home img").click();
 	},
 	description: __("Navigate Home"),
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 
 frappe.ui.keys.add_shortcut({
 	shortcut: "alt+s",
 	action: function (e) {
 		e.preventDefault();
+<<<<<<< HEAD
 		$(".dropdown-navbar-user button").eq(0).click();
+=======
+<<<<<<< HEAD
+		$(".dropdown-navbar-user a").eq(0).click();
+=======
+		$(".dropdown-navbar-user button").eq(0).click();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	},
 	description: __("Open Settings"),
 });
 
 frappe.ui.keys.add_shortcut({
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	shortcut: "shift+/",
 	action: function () {
 		frappe.ui.keys.show_keyboard_shortcut_dialog();
@@ -291,10 +317,14 @@ frappe.ui.keys.add_shortcut({
 =======
 		$(".dropdown-help button").eq(0).click();
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 	},
 	description: __("Open Help"),
 });
@@ -349,10 +379,14 @@ frappe.ui.keys.on("ctrl+up", function (e) {
 		e.preventDefault();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
 =======
 >>>>>>> fc1c3f895a2bbd99dd7a0574de180a4095b6e41b
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+>>>>>>> 61099500f6f137a058d07823f121b41b3ad85b02
 });
 
 frappe.ui.keys.add_shortcut({
