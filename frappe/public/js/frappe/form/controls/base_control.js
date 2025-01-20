@@ -2,12 +2,15 @@ frappe.ui.form.Control = class BaseControl {
 	constructor(opts) {
 		$.extend(this, opts);
 		this.make();
+<<<<<<< HEAD
 
 		// if developer_mode=1, show fieldname as tooltip
 		if (frappe.boot.user && frappe.boot.developer_mode === 1 && this.$wrapper) {
 			this.$wrapper.attr("title", __(this.df.fieldname));
 		}
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		if (this.render_input) {
 			this.refresh();
 		}
@@ -19,6 +22,14 @@ frappe.ui.form.Control = class BaseControl {
 			.attr("data-fieldname", this.df.fieldname);
 		this.wrapper = this.$wrapper.get(0);
 		this.wrapper.fieldobj = this; // reference for event handlers
+
+		this.tooltip = $(`<span class="tooltip-content">${__(this.df.fieldname)}</span>`);
+		this.$wrapper.append(this.tooltip);
+
+		this.tooltip.on("click", (e) => {
+			let text = $(e.target).text();
+			frappe.utils.copy_to_clipboard(text);
+		});
 	}
 
 	make_wrapper() {
@@ -57,25 +68,32 @@ frappe.ui.form.Control = class BaseControl {
 
 			// like in case of a dialog box
 			if (cint(this.df.hidden)) {
-				// eslint-disable-next-line
-				if (explain) console.log("By Hidden: None"); // eslint-disable-line no-console
+				if (explain) console.log("By Hidden: None");
 				return "None";
 			} else if (cint(this.df.hidden_due_to_dependency)) {
+<<<<<<< HEAD
 				// eslint-disable-next-line
 				if (explain) console.log("By Hidden Dependency: None"); // eslint-disable-line no-console
+=======
+				if (explain) console.log("By Hidden Dependency: None");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				return "None";
 			} else if (
 				cint(this.df.read_only || this.df.is_virtual || this.df.fieldtype === "Read Only")
 			) {
+<<<<<<< HEAD
 				// eslint-disable-next-line
 				if (explain) console.log("By Read Only: Read"); // eslint-disable-line no-console
+=======
+				if (explain) console.log("By Read Only: Read");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				status = "Read";
 			} else if (
 				(this.grid && this.grid.display_status == "Read") ||
 				(this.layout && this.layout.grid && this.layout.grid.display_status == "Read")
 			) {
 				// parent grid is read
-				if (explain) console.log("By Parent Grid Read-only: Read"); // eslint-disable-line no-console
+				if (explain) console.log("By Parent Grid Read-only: Read");
 				status = "Read";
 			}
 
@@ -85,7 +103,11 @@ frappe.ui.form.Control = class BaseControl {
 			if (
 				status === "Read" &&
 				is_null(value) &&
+<<<<<<< HEAD
 				!in_list(["HTML", "Image", "Button"], this.df.fieldtype)
+=======
+				!["HTML", "Image", "Button"].includes(this.df.fieldtype)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			)
 				status = "Read";
 
@@ -107,13 +129,21 @@ frappe.ui.form.Control = class BaseControl {
 			var grid = this.grid || this.layout.grid;
 			if (grid.display_status == "Read") {
 				status = "Read";
+<<<<<<< HEAD
 				if (explain) console.log("By Parent Grid Read-only: Read"); // eslint-disable-line no-console
+=======
+				if (explain) console.log("By Parent Grid Read-only: Read");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			}
 		}
 
 		let value = frappe.model.get_value(this.doctype, this.docname, this.df.fieldname);
 
+<<<<<<< HEAD
 		if (in_list(["Date", "Datetime"], this.df.fieldtype) && value) {
+=======
+		if (["Date", "Datetime"].includes(this.df.fieldtype) && value) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			value = frappe.datetime.str_to_user(value);
 		}
 
@@ -125,10 +155,17 @@ frappe.ui.form.Control = class BaseControl {
 			status === "Read" &&
 			!this.only_input &&
 			is_null(value) &&
+<<<<<<< HEAD
 			!in_list(["HTML", "Image", "Button", "Geolocation"], this.df.fieldtype)
 		) {
 			// eslint-disable-next-line
 			if (explain) console.log("By Hide Read-only, null fields: None"); // eslint-disable-line no-console
+=======
+			cint(frappe.boot.sysdefaults.hide_empty_read_only_fields) &&
+			!["HTML", "Image", "Button", "Geolocation"].includes(this.df.fieldtype)
+		) {
+			if (explain) console.log("By Hide Read-only, null fields: None");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			status = "None";
 		}
 

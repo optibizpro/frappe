@@ -215,6 +215,7 @@ context("View", () => {
 	});
 
 	it("Route to Form", () => {
+<<<<<<< HEAD
 		cy.call("frappe.tests.ui_test_helpers.create_note").then(() => {
 			cy.visit("/app/note/Routing Test");
 			cy.window()
@@ -228,5 +229,19 @@ context("View", () => {
 	it("Route to Settings Workspace", () => {
 		cy.visit("/app/settings");
 		cy.get(".title-text").should("contain", "Settings");
+=======
+		const test_user = cy.config("testUser");
+		cy.visit(`/app/user/${test_user}`);
+		cy.window()
+			.its("cur_frm")
+			.then((frm) => {
+				expect(frm.doc.name).to.equal(test_user);
+			});
+	});
+
+	it("Route to Website Workspace", () => {
+		cy.visit("/app/website");
+		cy.get(".title-text").should("contain", "Website");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	});
 });

@@ -1,18 +1,31 @@
 # Copyright (c) 2015, Maxwell Morais and contributors
 # License: MIT. See LICENSE
 
-import cgitb
-import datetime
 import functools
 import inspect
+<<<<<<< HEAD
 import json
 import linecache
 import os
 import sys
 import traceback
+=======
+import re
+from collections import Counter
+from contextlib import suppress
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 import frappe
-from frappe.utils import cstr, encode
+from frappe.monitor import add_data_to_monitor
+
+EXCLUDE_EXCEPTIONS = (
+	frappe.AuthenticationError,
+	frappe.CSRFTokenError,  # CSRF covers OAuth too
+	frappe.SecurityException,
+	frappe.InReadOnlyMode,
+)
+
+LDAP_BASE_EXCEPTION = "LDAPException"
 
 EXCLUDE_EXCEPTIONS = (
 	frappe.AuthenticationError,
@@ -38,8 +51,65 @@ def _is_ldap_exception(e):
 	return False
 
 
-def make_error_snapshot(exception):
-	if frappe.conf.disable_error_snapshot:
+def _is_ldap_exception(e):
+	"""Check if exception is from LDAP library.
+
+	This is a hack but ensures that LDAP is not imported unless it's required. This is tested in
+	unittests in case the exception changes in future.
+	"""
+
+	for t in type(e).__mro__:
+		if t.__name__ == LDAP_BASE_EXCEPTION:
+			return True
+
+	return False
+
+
+def log_error(title=None, message=None, reference_doctype=None, reference_name=None, *, defer_insert=False):
+	"""Log error to Error Log"""
+	from frappe.monitor import get_trace_id
+	from frappe.utils.sentry import capture_exception
+
+	# Parameter ALERT:
+	# the title and message may be swapped
+	# the better API for this is log_error(title, message), and used in many cases this way
+	# this hack tries to be smart about whats a title (single line ;-)) and fixes it
+
+	traceback = None
+	if message:
+		if "\n" in title:  # traceback sent as title
+			traceback, title = title, message
+		else:
+			traceback = message
+
+	title = title or "Error"
+	traceback = frappe.as_unicode(traceback or frappe.get_traceback(with_context=True))
+
+	if not frappe.db:
+		print(f"Failed to log error in db: {title}")
+		return
+
+	trace_id = get_trace_id()
+	error_log = frappe.get_doc(
+		doctype="Error Log",
+		error=traceback,
+		method=title,
+		reference_doctype=reference_doctype,
+		reference_name=reference_name,
+		trace_id=trace_id,
+	)
+
+	# Capture exception data if telemetry is enabled
+	capture_exception(message=f"{title}\n{traceback}")
+
+	if frappe.flags.read_only or defer_insert:
+		error_log.deferred_insert()
+	else:
+		return error_log.insert(ignore_permissions=True)
+
+
+def log_error_snapshot(exception: Exception):
+	if isinstance(exception, EXCLUDE_EXCEPTIONS) or _is_ldap_exception(exception):
 		return
 
 	if isinstance(exception, EXCLUDE_EXCEPTIONS) or _is_ldap_exception(exception):
@@ -48,26 +118,14 @@ def make_error_snapshot(exception):
 	logger = frappe.logger(with_more_info=True)
 
 	try:
-		error_id = "{timestamp:s}-{ip:s}-{hash:s}".format(
-			timestamp=cstr(datetime.datetime.now()),
-			ip=frappe.local.request_ip or "127.0.0.1",
-			hash=frappe.generate_hash(length=3),
-		)
-		snapshot_folder = get_error_snapshot_path()
-		frappe.create_folder(snapshot_folder)
-
-		snapshot_file_path = os.path.join(snapshot_folder, f"{error_id}.json")
-		snapshot = get_snapshot(exception)
-
-		with open(encode(snapshot_file_path), "wb") as error_file:
-			error_file.write(encode(frappe.as_json(snapshot)))
-
-		logger.error(f"New Exception collected with id: {error_id}")
-
+		log_error(title=str(exception), defer_insert=True)
+		logger.error("New Exception collected in error log")
+		add_data_to_monitor(exception=exception.__class__.__name__)
 	except Exception as e:
 		logger.error(f"Could not take error snapshot: {e}", exc_info=True)
 
 
+<<<<<<< HEAD
 def get_snapshot(exception, context=10):
 	import pydoc
 
@@ -224,6 +282,8 @@ def get_error_snapshot_path():
 	return frappe.get_site_path("error-snapshots")
 
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 def get_default_args(func):
 	"""Get default arguments of a function from its signature."""
 	signature = inspect.signature(func)
@@ -267,3 +327,34 @@ def raise_error_on_no_output(error_message, error_type=None, keep_quiet=None):
 		return wrapper_raise_error_on_no_output
 
 	return decorator_raise_error_on_no_output
+
+
+def guess_exception_source(exception: str) -> str | None:
+	"""Attempts to guess source of error based on traceback.
+
+	E.g.
+
+	- For unhandled exception last python file from apps folder is responsible.
+	- For frappe.throws the exception source is possibly present after skipping frappe.throw frames
+	- For server script the file name contains SERVER_SCRIPT_FILE_PREFIX
+
+	"""
+	from frappe.utils.safe_exec import SERVER_SCRIPT_FILE_PREFIX
+
+	with suppress(Exception):
+		installed_apps = frappe.get_installed_apps()
+		app_priority = {app: installed_apps.index(app) for app in installed_apps}
+
+		APP_NAME_REGEX = re.compile(r".*File.*apps/(?P<app_name>\w+)/\1/")
+
+		apps = Counter()
+		for line in reversed(exception.splitlines()):
+			if SERVER_SCRIPT_FILE_PREFIX in line:
+				return "Server Script"
+
+			if matches := APP_NAME_REGEX.match(line):
+				app_name = matches.group("app_name")
+				apps[app_name] += app_priority.get(app_name, 0)
+
+		if (probably_source := apps.most_common(1)) and probably_source[0][0] != "frappe":
+			return f"{probably_source[0][0]} (app)"

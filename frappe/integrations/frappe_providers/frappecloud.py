@@ -11,7 +11,11 @@ def get_remote_script(remote_site):
 	request = requests.get(request_url)
 
 	if request.status_code / 100 != 2:
+<<<<<<< HEAD
 		print(f"Request exitted with Status Code: {request.status_code}\nPayload: {html2text(request.text)}")
+=======
+		print(f"Request exited with Status Code: {request.status_code}\nPayload: {html2text(request.text)}")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		click.secho(
 			"Some errors occurred while recovering the migration script. Please contact us @ Frappe Cloud if this issue persists",
 			fg="yellow",

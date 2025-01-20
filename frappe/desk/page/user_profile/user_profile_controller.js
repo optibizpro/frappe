@@ -77,7 +77,11 @@ class UserProfile {
 	render_heatmap() {
 		this.heatmap = new frappe.Chart(".performance-heatmap", {
 			type: "heatmap",
+<<<<<<< HEAD
 			countLabel: "Energy Points",
+=======
+			countLabel: __("Energy Points"),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			data: {},
 			discreteDomains: 1,
 			radius: 3,
@@ -111,7 +115,11 @@ class UserProfile {
 			value_based_on: "points",
 			chart_type: "Sum",
 			document_type: "Energy Point Log",
+<<<<<<< HEAD
 			name: "Energy Points",
+=======
+			name: __("Energy Points"),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			width: "half",
 			based_on: "creation",
 		};
@@ -145,7 +153,6 @@ class UserProfile {
 			});
 	}
 
-	// eslint-disable-next-line no-unused-vars
 	render_percentage_chart(field, title) {
 		frappe
 			.xcall(

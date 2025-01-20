@@ -7,10 +7,11 @@ frappe.ui.form.ControlData = class ControlData extends frappe.ui.form.ControlInp
 	make_input() {
 		if (this.$input) return;
 
-		let { html_element, input_type } = this.constructor;
+		let { html_element, input_type, input_mode } = this.constructor;
 
 		this.$input = $("<" + html_element + ">")
 			.attr("type", input_type)
+			.attr("inputmode", input_mode)
 			.attr("autocomplete", "off")
 			.addClass("input-with-feedback form-control")
 			.prependTo(this.input_area);
@@ -215,8 +216,12 @@ frappe.ui.form.ControlData = class ControlData extends frappe.ui.form.ControlInp
 	}
 	set_input_attributes() {
 		if (
+<<<<<<< HEAD
 			in_list(
 				["Data", "Link", "Dynamic Link", "Password", "Select", "Read Only"],
+=======
+			["Data", "Link", "Dynamic Link", "Password", "Select", "Read Only"].includes(
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				this.df.fieldtype
 			)
 		) {

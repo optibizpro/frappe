@@ -12,15 +12,12 @@ from frappe.utils import get_datetime, now
 
 
 def calculate_hash(path: str) -> str:
-	"""Calculate md5 hash of the file in binary mode
+	"""Calculate and return md5 hash of the file in binary mode.
 
 	Args:
 	        path (str): Path to the file to be hashed
-
-	Returns:
-	        str: The calculated hash
 	"""
-	hash_md5 = hashlib.md5()
+	hash_md5 = hashlib.md5(usedforsecurity=False)
 	with open(path, "rb") as f:
 		for chunk in iter(lambda: f.read(4096), b""):
 			hash_md5.update(chunk)
@@ -34,6 +31,7 @@ ignore_values = {
 	"Print Style": ["disabled"],
 	"Module Onboarding": ["is_complete"],
 	"Onboarding Step": ["is_complete", "is_skipped"],
+	"Workspace": ["is_hidden"],
 }
 
 ignore_doctypes = [""]
@@ -41,6 +39,7 @@ ignore_doctypes = [""]
 
 def import_files(module, dt=None, dn=None, force=False, pre_process=None, reset_permissions=False):
 	if isinstance(module, list):
+<<<<<<< HEAD
 		out = []
 		for m in module:
 			out.append(
@@ -52,8 +51,19 @@ def import_files(module, dt=None, dn=None, force=False, pre_process=None, reset_
 					pre_process=pre_process,
 					reset_permissions=reset_permissions,
 				)
+=======
+		return [
+			import_file(
+				m[0],
+				m[1],
+				m[2],
+				force=force,
+				pre_process=pre_process,
+				reset_permissions=reset_permissions,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			)
-		return out
+			for m in module
+		]
 	else:
 		return import_file(
 			module, dt, dn, force=force, pre_process=pre_process, reset_permissions=reset_permissions
@@ -63,8 +73,12 @@ def import_files(module, dt=None, dn=None, force=False, pre_process=None, reset_
 def import_file(module, dt, dn, force=False, pre_process=None, reset_permissions=False):
 	"""Sync a file from txt if modifed, return false if not updated"""
 	path = get_file_path(module, dt, dn)
+<<<<<<< HEAD
 	ret = import_file_by_path(path, force, pre_process=pre_process, reset_permissions=reset_permissions)
 	return ret
+=======
+	return import_file_by_path(path, force, pre_process=pre_process, reset_permissions=reset_permissions)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 def get_file_path(module, dt, dn):
@@ -82,8 +96,8 @@ def import_file_by_path(
 	pre_process=None,
 	ignore_version: bool | None = None,
 	reset_permissions: bool = False,
-):
-	"""Import file from the given path
+) -> bool:
+	"""Import file from the given path.
 
 	Some conditions decide if a file should be imported or not.
 	Evaluation takes place in the order they are mentioned below.
@@ -107,8 +121,7 @@ def import_file_by_path(
 	        ignore_version (bool, optional): ignore current version. Defaults to None.
 	        reset_permissions (bool, optional): reset permissions for the file. Defaults to False.
 
-	Returns:
-	        [bool]: True if import takes place. False if it wasn't imported.
+	Return True if import takes place, False if it wasn't imported.
 	"""
 	try:
 		docs = read_doc_from_file(path)
@@ -182,7 +195,7 @@ def read_doc_from_file(path):
 				print(f"bad json: {path}")
 				raise
 	else:
-		raise OSError("%s missing" % path)
+		raise OSError("{} missing".format(path))
 
 	return doc
 

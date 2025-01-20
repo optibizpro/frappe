@@ -4,6 +4,12 @@
 """build query for doclistview and return results"""
 
 import json
+<<<<<<< HEAD
+=======
+from functools import lru_cache
+
+from sql_metadata import Parser
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 import frappe
 import frappe.permissions
@@ -13,7 +19,11 @@ from frappe.model import child_table_fields, default_fields, get_permitted_field
 from frappe.model.base_document import get_controller
 from frappe.model.db_query import DatabaseQuery
 from frappe.model.utils import is_virtual_doctype
+<<<<<<< HEAD
 from frappe.utils import add_user_info, cint, cstr, format_duration
+=======
+from frappe.utils import add_user_info, cint, format_duration
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from frappe.utils.data import sbool
 
 
@@ -21,10 +31,10 @@ from frappe.utils.data import sbool
 @frappe.read_only()
 def get():
 	args = get_form_params()
-	# If virtual doctype get data from controller het_list method
+	# If virtual doctype, get data from controller get_list method
 	if is_virtual_doctype(args.doctype):
 		controller = get_controller(args.doctype)
-		data = compress(controller.get_list(args))
+		data = compress(frappe.call(controller.get_list, args=args, **args))
 	else:
 		data = compress(execute(**args), args=args)
 	return data
@@ -37,7 +47,7 @@ def get_list():
 
 	if is_virtual_doctype(args.doctype):
 		controller = get_controller(args.doctype)
-		data = controller.get_list(args)
+		data = frappe.call(controller.get_list, args=args, **args)
 	else:
 		# uncompressed (refactored from frappe.model.db_query.get_list)
 		data = execute(**args)
@@ -47,12 +57,16 @@ def get_list():
 
 @frappe.whitelist()
 @frappe.read_only()
-def get_count():
+def get_count() -> int:
 	args = get_form_params()
 
 	if is_virtual_doctype(args.doctype):
 		controller = get_controller(args.doctype)
+<<<<<<< HEAD
 		count = controller.get_count(args)
+=======
+		count = frappe.call(controller.get_count, args=args, **args)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	else:
 		args.distinct = sbool(args.distinct)
 		distinct = "distinct " if args.distinct else ""
@@ -76,7 +90,7 @@ def execute(doctype, *args, **kwargs):
 
 
 def get_form_params():
-	"""Stringify GET request parameters."""
+	"""parse GET request parameters."""
 	data = frappe._dict(frappe.local.form_dict)
 	clean_params(data)
 	validate_args(data)
@@ -102,7 +116,14 @@ def validate_fields(data):
 	wildcard = update_wildcard_field_param(data)
 
 	for field in list(data.fields or []):
+<<<<<<< HEAD
 		fieldname = extract_fieldname(field)
+=======
+		fieldname = extract_fieldnames(field)[0]
+		if not fieldname:
+			raise_invalid_field(fieldname)
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		if is_standard(fieldname):
 			continue
 
@@ -182,23 +203,28 @@ def is_standard(fieldname):
 	return fieldname in default_fields or fieldname in optional_fields or fieldname in child_table_fields
 
 
-def extract_fieldname(field):
-	for text in (",", "/*", "#"):
-		if text in field:
-			raise_invalid_field(field)
+@lru_cache(maxsize=1024)
+def extract_fieldnames(field):
+	from frappe.database.schema import SPECIAL_CHAR_PATTERN
 
+<<<<<<< HEAD
 	fieldname = field
 	for sep in (" as ", " AS "):
 		if sep in fieldname:
 			fieldname = fieldname.split(sep, 1)[0]
+=======
+	if not SPECIAL_CHAR_PATTERN.findall(field):
+		return [field]
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
-	# certain functions allowed, extract the fieldname from the function
-	if fieldname.startswith("count(") or fieldname.startswith("sum(") or fieldname.startswith("avg("):
-		if not fieldname.strip().endswith(")"):
-			raise_invalid_field(field)
-		fieldname = fieldname.split("(", 1)[1][:-1]
+	columns = Parser(f"select {field} from _dummy").columns
 
-	return fieldname
+	if not columns:
+		f = field.lower()
+		if ("count(" in f or "sum(" in f or "avg(" in f) and "*" in f:
+			return ["*"]
+
+	return columns
 
 
 def get_meta_and_docfield(fieldname, data):
@@ -212,11 +238,16 @@ def update_wildcard_field_param(data):
 	if (isinstance(data.fields, str) and data.fields == "*") or (
 		isinstance(data.fields, list | tuple) and len(data.fields) == 1 and data.fields[0] == "*"
 	):
+<<<<<<< HEAD
 		if frappe.get_system_settings("apply_perm_level_on_api_calls"):
 			parent_type = data.parenttype or data.parent_doctype
 			data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
 		else:
 			data.fields = frappe.db.get_table_columns(data.doctype)
+=======
+		parent_type = data.parenttype or data.parent_doctype
+		data.fields = get_permitted_fields(data.doctype, parenttype=parent_type, ignore_virtual=True)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		return True
 
 	return False
@@ -230,6 +261,11 @@ def clean_params(data):
 def parse_json(data):
 	if (filters := data.get("filters")) and isinstance(filters, str):
 		data["filters"] = json.loads(filters)
+<<<<<<< HEAD
+=======
+	if (applied_filters := data.get("applied_filters")) and isinstance(applied_filters, str):
+		data["applied_filters"] = json.loads(applied_filters)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	if (or_filters := data.get("or_filters")) and isinstance(or_filters, str):
 		data["or_filters"] = json.loads(or_filters)
 	if (fields := data.get("fields")) and isinstance(fields, str):
@@ -240,6 +276,10 @@ def parse_json(data):
 		data["save_user_settings"] = json.loads(data["save_user_settings"])
 	else:
 		data["save_user_settings"] = True
+	if isinstance(data.get("start"), str):
+		data["start"] = cint(data.get("start"))
+	if isinstance(data.get("page_length"), str):
+		data["page_length"] = cint(data.get("page_length"))
 
 
 def get_parenttype_and_fieldname(field, data):
@@ -247,13 +287,13 @@ def get_parenttype_and_fieldname(field, data):
 		parts = field.split(".")
 		parenttype = parts[0]
 		fieldname = parts[1]
-		if parenttype.startswith("`tab"):
-			# `tabChild DocType`.`fieldname`
-			parenttype = parenttype[4:-1]
-			fieldname = fieldname.strip("`")
+		df = frappe.get_meta(data.doctype).get_field(parenttype)
+		if not df and parenttype.startswith("tab"):
+			# tabChild DocType.fieldname
+			parenttype = parenttype[3:]
 		else:
 			# tablefield.fieldname
-			parenttype = frappe.get_meta(data.doctype).get_field(parenttype).options
+			parenttype = df.options
 	else:
 		parenttype = data.doctype
 		fieldname = field.strip("`")
@@ -274,10 +314,7 @@ def compress(data, args=None):
 	values = []
 	keys = list(data[0])
 	for row in data:
-		new_row = []
-		for key in keys:
-			new_row.append(row.get(key))
-		values.append(new_row)
+		values.append([row.get(key) for key in keys])
 
 		# add user info for assignments (avatar)
 		if row.get("_assign", ""):
@@ -361,6 +398,10 @@ def export_query():
 	title = form_params.pop("title", doctype)
 	csv_params = pop_csv_params(form_params)
 	add_totals_row = 1 if form_params.pop("add_totals_row", None) == "1" else None
+<<<<<<< HEAD
+=======
+	translate_values = 1 if form_params.pop("translate_values", None) == "1" else None
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	if selection := form_params.pop("selected_items", None):
 		form_params["filters"] = {"name": ("in", json.loads(selection))}
@@ -388,8 +429,29 @@ def export_query():
 	if add_totals_row:
 		ret = append_totals_row(ret)
 
+<<<<<<< HEAD
 	data = [[_("Sr"), *get_labels(db_query.fields, doctype)]]
 	data.extend([i + 1, *list(row)] for i, row in enumerate(ret))
+=======
+	fields_info = get_field_info(db_query.fields, doctype)
+
+	labels = [info["label"] for info in fields_info]
+	data = [[_("Sr"), *labels]]
+	processed_data = []
+
+	if frappe.local.lang == "en" or not translate_values:
+		data.extend([i + 1, *list(row)] for i, row in enumerate(ret))
+	elif translate_values:
+		translatable_fields = [field["translatable"] for field in fields_info]
+		processed_data = []
+		for i, row in enumerate(ret):
+			processed_row = [i + 1] + [
+				_(value) if translatable_fields[idx] else value for idx, value in enumerate(row)
+			]
+			processed_data.append(processed_row)
+			data.extend(processed_data)
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	data = handle_duration_fieldtype_values(doctype, data, db_query.fields)
 
 	if file_format_type == "CSV":
@@ -429,30 +491,62 @@ def append_totals_row(data):
 	return data
 
 
-def get_labels(fields, doctype):
-	"""get column labels based on column names"""
-	labels = []
+def get_field_info(fields, doctype):
+	"""Get column names, labels, field types, and translatable properties based on column names."""
+
+	field_info = []
 	for key in fields:
+<<<<<<< HEAD
 		try:
 			parenttype, fieldname = parse_field(key)
 		except ValueError:
 			continue
+=======
+		df = None
+		try:
+			parenttype, fieldname = parse_field(key)
+		except ValueError:
+			# handles aggregate functions
+			parenttype = doctype
+			fieldname = key.split("(", 1)[0]
+			fieldname = fieldname[0].upper() + fieldname[1:]
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 		parenttype = parenttype or doctype
 
 		if parenttype == doctype and fieldname == "name":
+			name = fieldname
 			label = _("ID", context="Label of name column in report")
+			fieldtype = "Data"
+			translatable = True
 		else:
 			df = frappe.get_meta(parenttype).get_field(fieldname)
-			label = _(df.label if df else fieldname.title())
+			if df and df.fieldtype in ("Data", "Select", "Small Text", "Text"):
+				name = df.name
+				label = _(df.label)
+				fieldtype = df.fieldtype
+				translatable = getattr(df, "translatable", False)
+			elif df and df.fieldtype == "Link" and frappe.get_meta(df.options).translated_doctype:
+				name = df.name
+				label = _(df.label)
+				fieldtype = df.fieldtype
+				translatable = True
+			else:
+				name = fieldname
+				label = _(df.label) if df else _(fieldname)
+				fieldtype = "Data"
+				translatable = False
+
 			if parenttype != doctype:
 				# If the column is from a child table, append the child doctype.
 				# For example, "Item Code (Sales Invoice Item)".
 				label += f" ({ _(parenttype) })"
 
-		labels.append(label)
+		field_info.append(
+			{"name": name, "label": label, "fieldtype": fieldtype, "translatable": translatable}
+		)
 
-	return labels
+	return field_info
 
 
 def handle_duration_fieldtype_values(doctype, data, fields):
@@ -477,13 +571,22 @@ def handle_duration_fieldtype_values(doctype, data, fields):
 
 def parse_field(field: str) -> tuple[str | None, str]:
 	"""Parse a field into parenttype and fieldname."""
+<<<<<<< HEAD
 	key = field.split(" as ")[0]
+=======
+	key = field.split(" as ", 1)[0]
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	if key.startswith(("count(", "sum(", "avg(")):
 		raise ValueError
 
 	if "." in key:
+<<<<<<< HEAD
 		return key.split(".")[0][4:-1], key.split(".")[1].strip("`")
+=======
+		table, column = key.split(".", 2)[:2]
+		return table[4:-1], column.strip("`")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	return None, key.strip("`")
 
@@ -503,8 +606,10 @@ def delete_items():
 
 
 def delete_bulk(doctype, items):
+	undeleted_items = []
 	for i, d in enumerate(items):
 		try:
+			frappe.flags.in_bulk_delete = True
 			frappe.delete_doc(doctype, d)
 			if len(items) >= 5:
 				frappe.publish_realtime(
@@ -519,7 +624,21 @@ def delete_bulk(doctype, items):
 		except Exception:
 			# rollback if any record failed to delete
 			# if not rollbacked, queries get committed on after_request method in app.py
+			undeleted_items.append(d)
 			frappe.db.rollback()
+	if undeleted_items and len(items) != len(undeleted_items):
+		frappe.clear_messages()
+		delete_bulk(doctype, undeleted_items)
+	elif undeleted_items:
+		frappe.msgprint(
+			_("Failed to delete {0} documents: {1}").format(len(undeleted_items), ", ".join(undeleted_items)),
+			realtime=True,
+			title=_("Bulk Operation Failed"),
+		)
+	else:
+		frappe.msgprint(
+			_("Deleted all documents successfully"), realtime=True, title=_("Bulk Operation Successful")
+		)
 
 
 @frappe.whitelist()
@@ -531,7 +650,7 @@ def get_sidebar_stats(stats, doctype, filters=None):
 	if is_virtual_doctype(doctype):
 		controller = get_controller(doctype)
 		args = {"stats": stats, "filters": filters}
-		data = controller.get_stats(args)
+		data = frappe.call(controller.get_stats, args=args, **args)
 	else:
 		data = get_stats(stats, doctype, filters)
 
@@ -615,7 +734,11 @@ def get_filter_dashboard_data(stats, doctype, filters=None):
 			tagcount = frappe.get_list(
 				doctype,
 				fields=[tag["name"], "count(*)"],
+<<<<<<< HEAD
 				filters=[*filters, "ifnull(`%s`,'')!=''" % tag["name"]],
+=======
+				filters=[*filters, "ifnull(`{}`,'')!=''".format(tag["name"])],
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				group_by=tag["name"],
 				as_list=True,
 			)
@@ -664,11 +787,7 @@ def scrub_user_tags(tagcount):
 
 				rdict[tag] += tagdict[t]
 
-	rlist = []
-	for tag in rdict:
-		rlist.append([tag, rdict[tag]])
-
-	return rlist
+	return [[tag, rdict[tag]] for tag in rdict]
 
 
 # used in building query in queries.py

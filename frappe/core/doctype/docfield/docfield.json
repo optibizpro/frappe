@@ -19,10 +19,12 @@
   "reqd",
   "is_virtual",
   "search_index",
+  "not_nullable",
   "column_break_18",
   "options",
   "sort_options",
   "show_dashboard",
+  "link_filters",
   "defaults_section",
   "default",
   "column_break_6",
@@ -30,6 +32,7 @@
   "fetch_if_empty",
   "visibility_section",
   "hidden",
+  "show_on_timeline",
   "bold",
   "allow_in_quick_entry",
   "translatable",
@@ -73,6 +76,10 @@
   "column_break_22",
   "description",
   "documentation_url",
+<<<<<<< HEAD
+=======
+  "placeholder",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
   "oldfieldname",
   "oldfieldtype"
  ],
@@ -185,6 +192,7 @@
   },
   {
    "default": "0",
+   "depends_on": "eval:!in_list(['Tab Break', 'Table'], doc.fieldtype)",
    "fieldname": "allow_in_quick_entry",
    "fieldtype": "Check",
    "label": "Allow in Quick Entry"
@@ -226,6 +234,7 @@
    "description": "For Links, enter the DocType as range.\nFor Select, enter list of Options, each on a new line.",
    "fieldname": "options",
    "fieldtype": "Small Text",
+   "ignore_xss_filter": 1,
    "in_list_view": 1,
    "label": "Options",
    "oldfieldname": "options",
@@ -234,6 +243,7 @@
   {
    "fieldname": "default",
    "fieldtype": "Small Text",
+   "ignore_xss_filter": 1,
    "label": "Default",
    "max_height": "3rem",
    "oldfieldname": "default",
@@ -313,6 +323,7 @@
    "fieldname": "permlevel",
    "fieldtype": "Int",
    "label": "Perm Level",
+   "non_negative": 1,
    "oldfieldname": "permlevel",
    "oldfieldtype": "Int",
    "print_width": "50px",
@@ -552,8 +563,14 @@
   {
    "depends_on": "eval:!in_list([\"Tab Break\", \"Section Break\", \"Column Break\", \"Button\", \"HTML\"], doc.fieldtype)",
    "fieldname": "documentation_url",
+<<<<<<< HEAD
    "fieldtype": "Small Text",
    "label": "Documentation URL"
+=======
+   "fieldtype": "Data",
+   "label": "Documentation URL",
+   "options": "URL"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
   },
   {
    "default": "0",
@@ -563,6 +580,33 @@
    "label": "Sort Options"
   },
   {
+<<<<<<< HEAD
+=======
+   "fieldname": "link_filters",
+   "fieldtype": "JSON",
+   "label": "Link Filters"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:!in_list([\"Check\", \"Currency\", \"Float\", \"Int\", \"Percent\", \"Rating\", \"Select\", \"Table\", \"Table MultiSelect\"], doc.fieldtype)",
+   "fieldname": "not_nullable",
+   "fieldtype": "Check",
+   "label": "Not Nullable"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval: doc.hidden",
+   "fieldname": "show_on_timeline",
+   "fieldtype": "Check",
+   "label": "Show on Timeline"
+  },
+  {
+   "fieldname": "placeholder",
+   "fieldtype": "Data",
+   "label": "Placeholder"
+  },
+  {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
    "default": "0",
    "depends_on": "eval:['Attach', 'Attach Image'].includes(doc.fieldtype)",
    "fieldname": "make_attachment_public",
@@ -574,14 +618,18 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2024-10-01 07:26:16.380090",
+=======
+ "modified": "2024-10-15 23:33:03.926033",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "modified_by": "Administrator",
  "module": "Core",
  "name": "DocField",
  "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [],
- "sort_field": "modified",
+ "sort_field": "creation",
  "sort_order": "ASC",
  "states": []
 }

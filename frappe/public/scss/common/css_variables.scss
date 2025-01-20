@@ -1,7 +1,9 @@
-$input-height: 28px !default;
+$input-height: 28px;
+$disabled-input-height: 22px;
 
 :root,
 [data-theme="light"] {
+<<<<<<< HEAD
 	--brand-color: #0089ff;
 
 	--pink-900: #5b1e34;
@@ -113,21 +115,25 @@ $input-height: 28px !default;
 	--purple-200: #dad9f7;
 	--purple-100: #eaeafb;
 	--purple-50: #f2f2fd;
+=======
+	--brand-color: var(--primary);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	--padding-xs: 5px;
-	--padding-sm: 10px;
+	--padding-sm: 7px;
 	--padding-md: 15px;
 	--padding-lg: 20px;
 	--padding-xl: 30px;
 	--padding-2xl: 40px;
 
 	--margin-xs: 5px;
-	--margin-sm: 8px;
+	--margin-sm: 10px;
 	--margin-md: 15px;
 	--margin-lg: 20px;
 	--margin-xl: 30px;
 	--margin-2xl: 40px;
 
+<<<<<<< HEAD
 	--font-stack: "Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Oxygen",
 		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 
@@ -143,32 +149,41 @@ $input-height: 28px !default;
 
 	--drop-shadow: 0px 0.5px 0px rgba(0, 0, 0, 0.05), 0px 0px 0px rgba(0, 0, 0, 0),
 		0px 2px 4px rgba(0, 0, 0, 0.05);
+=======
+	--page-max-width: 900px;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	--modal-shadow: var(--shadow-md);
 	--card-shadow: var(--shadow-sm);
 	--btn-shadow: var(--shadow-xs);
 
-	// Type Colors
-	--text-muted: var(--gray-700);
-	--text-light: var(--gray-800);
-	--text-color: var(--gray-900);
-	--heading-color: var(--gray-900);
+	// navbar
+	--navbar-height: 48px;
 
 	// SVG Colors
 	--icon-fill: transparent;
 	--icon-fill-bg: var(--fg-color);
-	--icon-stroke: var(--gray-900);
+	--icon-stroke: var(--gray-800);
 
 	// Background Text Color Pairs
 	--bg-blue: var(--blue-100);
 	--bg-light-blue: var(--blue-50);
 	--bg-dark-blue: var(--blue-300);
+<<<<<<< HEAD
 	--bg-green: var(--dark-green-50);
 	--bg-yellow: var(--yellow-50);
 	--bg-orange: var(--orange-50);
 	--bg-red: var(--red-50);
 	--bg-gray: var(--gray-200);
 	--bg-grey: var(--gray-200);
+=======
+	--bg-green: var(--green-100);
+	--bg-yellow: var(--yellow-100);
+	--bg-orange: var(--orange-100);
+	--bg-red: var(--red-100);
+	--bg-gray: var(--gray-100);
+	--bg-grey: var(--gray-100);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	--bg-light-gray: var(--gray-100);
 	--bg-dark-gray: var(--gray-400);
 	--bg-darkgrey: var(--gray-400);
@@ -176,23 +191,17 @@ $input-height: 28px !default;
 	--bg-pink: var(--pink-50);
 	--bg-cyan: var(--cyan-50);
 
-	//font sizes
-	--text-xs: 11px;
-	--text-sm: 12px;
-	--text-md: 13px;
-	--text-base: 14px;
-	--text-lg: 16px;
-	--text-xl: 18px;
-	--text-2xl: 20px;
-	--text-3xl: 22px;
-
 	--text-on-blue: var(--blue-700);
 	--text-on-light-blue: var(--blue-600);
 	--text-on-dark-blue: var(--blue-800);
-	--text-on-green: var(--dark-green-700);
+	--text-on-green: var(--green-800);
 	--text-on-yellow: var(--yellow-700);
 	--text-on-orange: var(--orange-700);
+<<<<<<< HEAD
 	--text-on-red: var(--red-600);
+=======
+	--text-on-red: var(--red-700);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	--text-on-gray: var(--gray-700);
 	--text-on-grey: var(--gray-700);
 	--text-on-darkgrey: var(--gray-800);
@@ -200,7 +209,11 @@ $input-height: 28px !default;
 	--text-on-light-gray: var(--gray-800);
 	--text-on-purple: var(--purple-700);
 	--text-on-pink: var(--pink-700);
+<<<<<<< HEAD
 	--text-on-cyan: var(--cyan-800);
+=======
+	--text-on-cyan: var(--cyan-700);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	// alert colors
 	--alert-text-danger: var(--red-600);
@@ -210,15 +223,17 @@ $input-height: 28px !default;
 	--alert-bg-danger: var(--red-50);
 	--alert-bg-warning: var(--yellow-50);
 	--alert-bg-info: var(--blue-50);
-	--alert-bg-success: var(--green-50);
+	--alert-bg-success: var(--green-100);
 
 	// Layout Colors
-	--bg-color: var(--gray-50);
+	--bg-color: white;
 	--fg-color: white;
-	--navbar-bg: white;
+	--subtle-accent: var(--gray-50);
+	--subtle-fg: var(--gray-100);
+	--navbar-bg: var(--neutral);
 	--fg-hover-color: var(--gray-100);
 	--card-bg: var(--fg-color);
-	--disabled-text-color: var(--gray-700);
+	--disabled-text-color: var(--gray-600);
 	--disabled-control-bg: var(--gray-50);
 	--control-bg: var(--gray-100);
 	--control-bg-on-gray: var(--gray-200);
@@ -230,17 +245,21 @@ $input-height: 28px !default;
 	--awesomplete-hover-bg: var(--control-bg);
 
 	// Button Colors
+	--btn-primary: var(--gray-900);
 	--btn-default-bg: var(--gray-100);
 	--btn-default-hover-bg: var(--gray-300);
 
+	// Border Colors
+	--border-primary: var(--gray-900);
+
 	// Other Colors
-	--sidebar-select-color: var(--gray-200);
+	--sidebar-select-color: var(--gray-100);
 
 	--scrollbar-thumb-color: var(--gray-400);
 	--scrollbar-track-color: var(--gray-200);
 
 	--shadow-inset: inset 0px -1px 0px var(--gray-300);
-	--border-color: var(--gray-100);
+	--border-color: var(--gray-200);
 	--dark-border-color: var(--gray-300);
 	--table-border-color: var(--gray-200);
 	--highlight-color: var(--gray-50);
@@ -248,12 +267,18 @@ $input-height: 28px !default;
 
 	--btn-group-border-color: var(--gray-300);
 
+<<<<<<< HEAD
+=======
+	--placeholder-color: var(--gray-50);
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	--highlight-shadow: 1px 1px 10px var(--blue-50), 0px 0px 4px var(--blue-600);
 
 	// code block
 	--code-block-bg: var(--gray-900);
 	--code-block-text: var(--gray-400);
 
+<<<<<<< HEAD
 	// Border Sizes
 	--border-radius-sm: 4px;
 	--border-radius: 6px;
@@ -263,6 +288,10 @@ $input-height: 28px !default;
 
 	--primary-color: #2490ef;
 	--btn-height: 30px;
+=======
+	--primary-color: var(--gray-900);
+	--btn-height: 28px;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	// input
 	--input-height: #{$input-height};
@@ -271,8 +300,22 @@ $input-height: 28px !default;
 	// Checkbox
 	--checkbox-right-margin: var(--margin-xs);
 	--checkbox-size: 14px;
+	--checkbox-color: var(--neutral-black);
+
 	--checkbox-focus-shadow: 0 0 0 2px var(--gray-300);
+<<<<<<< HEAD
 	--checkbox-gradient: linear-gradient(180deg, #4ac3f8 -124.51%, var(--primary) 100%);
+=======
+	--checkbox-gradient: linear-gradient(180deg, var(--primary) -124.51%, var(--primary) 100%);
+	--checkbox-disabled-gradient: linear-gradient(
+		180deg,
+		var(--disabled-control-bg) -124.51%,
+		var(--disabled-control-bg) 100%
+	);
+
+	// switch
+	--switch-bg: var(--gray-300);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	// "diff" colors
 	--diff-added: var(--green-100);
@@ -280,4 +323,8 @@ $input-height: 28px !default;
 
 	--right-arrow-svg: url("data: image/svg+xml;utf8, <svg width='6' height='8' viewBox='0 0 6 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M1.25 7.5L4.75 4L1.25 0.5' stroke='%231F272E' stroke-linecap='round' stroke-linejoin='round'/></svg>");
 	--left-arrow-svg: url("data: image/svg+xml;utf8, <svg width='6' height='8' viewBox='0 0 6 8' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M7.5 9.5L4 6l3.5-3.5' stroke='%231F272E' stroke-linecap='round' stroke-linejoin='round'></path></svg>");
+
+	@include media-breakpoint-down(md) {
+		--checkbox-size: 18px;
+	}
 }

@@ -2,13 +2,21 @@
 # License: MIT. See LICENSE
 
 import time
+<<<<<<< HEAD
 
+=======
+import unittest
+from uuid import UUID
+
+import uuid_utils
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from tenacity import retry, retry_if_exception_type, stop_after_attempt, wait_full_jitter
 
 import frappe
 from frappe.core.doctype.doctype.test_doctype import new_doctype
 from frappe.model.naming import (
 	InvalidNamingSeriesError,
+	InvalidUUIDValue,
 	NamingSeries,
 	append_number_if_name_exists,
 	determine_consecutive_week_number,
@@ -18,12 +26,17 @@ from frappe.model.naming import (
 	revert_series_if_last,
 )
 from frappe.query_builder.utils import db_type_is
+<<<<<<< HEAD
 from frappe.tests.test_query_builder import run_only_if
 from frappe.tests.utils import FrappeTestCase, patch_hooks
+=======
+from frappe.tests import IntegrationTestCase
+from frappe.tests.test_query_builder import run_only_if
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from frappe.utils import now_datetime, nowdate, nowtime
 
 
-class TestNaming(FrappeTestCase):
+class TestNaming(IntegrationTestCase):
 	def setUp(self):
 		frappe.db.delete("Note")
 
@@ -38,16 +51,13 @@ class TestNaming(FrappeTestCase):
 		if Bottle-1 exists
 		        Bottle -> Bottle-2
 		"""
+		TITLE = "Bottle"
+		DOCTYPE = "Note"
 
-		note = frappe.new_doc("Note")
-		note.title = "Test"
-		note.insert()
+		note = frappe.get_doc({"doctype": DOCTYPE, "title": TITLE}).insert()
 
-		title2 = append_number_if_name_exists("Note", "Test")
-		self.assertEqual(title2, "Test-1")
-
-		title2 = append_number_if_name_exists("Note", "Test", "title", "_")
-		self.assertEqual(title2, "Test_1")
+		self.assertEqual(append_number_if_name_exists(DOCTYPE, note.name), f"{note.name}-1")
+		self.assertEqual(append_number_if_name_exists(DOCTYPE, TITLE, "title", "_"), f"{TITLE}_1")
 
 	def test_field_autoname_name_sync(self):
 		country = frappe.get_last_doc("Country")
@@ -102,7 +112,8 @@ class TestNaming(FrappeTestCase):
 		doc.some_fieldname = description
 		doc.insert()
 
-		series = getseries("", 2)
+		series = getseries(f"TODO-{now_datetime().strftime('%m')}-{description}-", 2)
+
 		series = int(series) - 1
 
 		self.assertEqual(doc.name, f"TODO-{now_datetime().strftime('%m')}-{description}-{series:02}")
@@ -116,7 +127,7 @@ class TestNaming(FrappeTestCase):
 			doc.field = field
 			doc.insert()
 
-			series = getseries("", 2)
+			series = getseries(f"TODO-{field}-", 2)
 			series = int(series) - 1
 
 			self.assertEqual(doc.name, f"TODO-{field}-{series:02}")
@@ -137,14 +148,12 @@ class TestNaming(FrappeTestCase):
 		todo.description = description
 		todo.insert()
 
-		series = getseries("", 2)
-
+		week = determine_consecutive_week_number(now_datetime())
+		series = getseries(f"TODO-{week}-", 2)
 		series = str(int(series) - 1)
 
 		if len(series) < 2:
 			series = "0" + series
-
-		week = determine_consecutive_week_number(now_datetime())
 
 		self.assertEqual(todo.name, f"TODO-{week}-{series}")
 
@@ -282,8 +291,8 @@ class TestNaming(FrappeTestCase):
 		# set by passing set_name as ToDo
 		self.assertRaises(frappe.NameError, make_invalid_todo)
 
-		# set new name - Note
-		note = frappe.get_doc({"doctype": "Note", "title": "Note"})
+		# name (via title field) cannot be the same as the doctype
+		note = frappe.get_doc({"doctype": "Currency", "currency_name": "Currency"})
 		self.assertRaises(frappe.NameError, note.insert)
 
 		# case 2: set name with "New ---"
@@ -326,8 +335,13 @@ class TestNaming(FrappeTestCase):
 
 	def test_naming_series_validation(self):
 		dns = frappe.get_doc("Document Naming Settings")
+<<<<<<< HEAD
 		exisiting_series = dns.get_transactions_and_prefixes()["prefixes"]
 		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *exisiting_series]
+=======
+		existing_series = dns.get_transactions_and_prefixes()["prefixes"]
+		valid = ["SINV-", "SI-.{field}.", "SI-#.###", "", *existing_series]
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		invalid = ["$INV-", r"WINDOWS\NAMING"]
 
 		for series in valid:
@@ -396,7 +410,11 @@ class TestNaming(FrappeTestCase):
 		series = "TODO-.PM.-.####"
 
 		frappe.clear_cache()
+<<<<<<< HEAD
 		with patch_hooks(
+=======
+		with self.patch_hooks(
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			{
 				"naming_series_variables": {
 					"PM": ["frappe.tests.test_naming.parse_naming_series_variable"],
@@ -407,6 +425,10 @@ class TestNaming(FrappeTestCase):
 			expected_name = "TODO-" + nowdate().split("-")[1] + "-" + "0001"
 			self.assertEqual(name, expected_name)
 
+<<<<<<< HEAD
+=======
+	@unittest.skip("This is not supported anymore, see #28349.")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	@retry(
 		retry=retry_if_exception_type(AssertionError),
 		stop=stop_after_attempt(3),
@@ -421,6 +443,30 @@ class TestNaming(FrappeTestCase):
 			names.append(make_autoname("hash"))
 		self.assertEqual(names, sorted(names))
 
+<<<<<<< HEAD
+=======
+	def test_uuid_naming(self):
+		uuid_doctype = new_doctype(autoname="UUID").insert().name
+		self.assertEqual("uuid", frappe.db.get_column_type(uuid_doctype, "name"))
+
+		# Auto set names
+		document = frappe.new_doc(uuid_doctype).insert()
+		uid = UUID(document.name)
+		self.assertEqual(uid.version, 7)  # Default version
+
+		# Applications can specify UUID themselves, useful for APIs to set name themselves.
+		for uid in (uuid_utils.uuid4(), uuid_utils.uuid7()):
+			doc = frappe.new_doc(uuid_doctype, name=uid).insert()
+			self.assertEqual(doc.name, str(uid))
+
+		# Can specify valid UUID strings too
+		for uid in (uuid_utils.uuid4(), uuid_utils.uuid7()):
+			doc = frappe.new_doc(uuid_doctype, name=str(uid)).insert()
+			self.assertEqual(doc.name, str(uid))
+
+		self.assertRaises(InvalidUUIDValue, frappe.new_doc(uuid_doctype, name="XYZ").insert)
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 def parse_naming_series_variable(doc, variable):
 	if variable == "PM":

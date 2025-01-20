@@ -4,16 +4,48 @@
 import frappe
 from frappe import _
 from frappe.boot import get_allowed_report_names
-from frappe.config import get_modules_from_all_apps_for_user
 from frappe.model.document import Document
 from frappe.model.naming import append_number_if_name_exists
 from frappe.modules.export_file import export_to_files
 from frappe.query_builder import Criterion
 from frappe.query_builder.utils import DocType
 from frappe.utils import cint, flt
+<<<<<<< HEAD
+=======
+from frappe.utils.modules import get_modules_from_all_apps_for_user
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 class NumberCard(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		aggregate_function_based_on: DF.Literal[None]
+		color: DF.Color | None
+		document_type: DF.Link | None
+		dynamic_filters_json: DF.Code | None
+		filters_config: DF.Code | None
+		filters_json: DF.Code | None
+		function: DF.Literal["Count", "Sum", "Average", "Minimum", "Maximum"]
+		is_public: DF.Check
+		is_standard: DF.Check
+		label: DF.Data
+		method: DF.Data | None
+		module: DF.Link | None
+		parent_document_type: DF.Link | None
+		report_field: DF.Literal[None]
+		report_function: DF.Literal["Sum", "Average", "Minimum", "Maximum"]
+		report_name: DF.Link | None
+		show_percentage_stats: DF.Check
+		stats_time_interval: DF.Literal["Daily", "Weekly", "Monthly", "Yearly"]
+		type: DF.Literal["Document Type", "Report", "Custom"]
+	# end: auto-generated types
+
 	def autoname(self):
 		if not self.name:
 			self.name = self.label
@@ -163,8 +195,7 @@ def calculate_previous_result(doc, filters):
 	else:
 		previous_date = add_to_date(current_date, years=-1)
 
-	number = get_result(doc, filters, previous_date)
-	return number
+	return get_result(doc, filters, previous_date)
 
 
 @frappe.whitelist()

@@ -49,9 +49,15 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 		this.page.sidebar = $('<div class="print-format-builder-sidebar"></div>').appendTo(
 			this.page.sidebar
 		);
+<<<<<<< HEAD
 		this.page.main = $(
 			'<div class="col-md-12 border print-format-builder-main frappe-card"></div>'
 		).appendTo(this.page.main);
+=======
+		this.page.main = $('<div class="col-md-12 print-format-builder-main"></div>').appendTo(
+			this.page.main
+		);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 		// future-bindings for buttons on sections / fields
 		// bind only once
@@ -225,7 +231,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				'<div class="print-heading">\
 				<h2><div>' +
 				__(this.print_format.doc_type) +
+<<<<<<< HEAD
 				'</div><br><small class="sub-heading">{{ doc.name }}</small>\
+=======
+				'</div><br><small class="sub-heading">{{ _(doc.name) }}</small>\
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				</h2></div>';
 		}
 
@@ -280,7 +290,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				set_section(f.label);
 			} else if (f.fieldtype === "Column Break") {
 				set_column();
+<<<<<<< HEAD
 			} else if (!in_list(frappe.model.layout_fields, f.fieldtype)) {
+=======
+			} else if (!frappe.model.layout_fields.includes(f.fieldtype)) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				if (!column) set_column();
 
 				if (f.fieldtype === "Table") {
@@ -317,7 +331,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 		f.visible_columns = [];
 		$.each(frappe.get_meta(f.options).fields, function (i, _f) {
 			if (
+<<<<<<< HEAD
 				!in_list(["Section Break", "Column Break", "Tab Break"], _f.fieldtype) &&
+=======
+				!["Section Break", "Column Break", "Tab Break"].includes(_f.fieldtype) &&
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				!_f.print_hide &&
 				f.label
 			) {
@@ -372,10 +390,18 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 				if (!$item.hasClass("print-format-builder-field")) {
 					var fieldname = $item.attr("data-fieldname");
 
+<<<<<<< HEAD
 					if (fieldname === "_custom_html") {
 						var field = me.get_custom_html_field();
 					} else {
 						var field = frappe.meta.get_docfield(me.print_format.doc_type, fieldname);
+=======
+					let field;
+					if (fieldname === "_custom_html") {
+						field = me.get_custom_html_field();
+					} else {
+						field = frappe.meta.get_docfield(me.print_format.doc_type, fieldname);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					}
 
 					var html = frappe.render_template("print_format_builder_field", {
@@ -482,6 +508,14 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 							{ label: __("Left", null, "alignment"), value: "left" },
 							{ label: __("Right", null, "alignment"), value: "right" },
 						],
+<<<<<<< HEAD
+=======
+					},
+					{
+						label: __("Hide Label"),
+						fieldname: "nolabel",
+						fieldtype: "Check",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					},
 					{
 						label: __("Remove Field"),
@@ -496,10 +530,18 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			});
 
 			d.set_value("label", field.attr("data-label"));
+<<<<<<< HEAD
+=======
+			d.set_value("nolabel", field.attr("data-nolabel"));
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 			d.set_primary_action(__("Update"), function () {
 				field.attr("data-align", d.get_value("align"));
 				field.attr("data-label", d.get_value("label"));
+<<<<<<< HEAD
+=======
+				field.attr("data-nolabel", d.get_value("nolabel"));
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				field.find(".field-label").html(d.get_value("label"));
 				d.hide();
 			});
@@ -561,7 +603,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			resize();
 		} else if (new_no_of_columns > no_of_columns) {
 			// add empty column and resize old columns
+<<<<<<< HEAD
 			for (var i = no_of_columns; i < new_no_of_columns; i++) {
+=======
+			for (let i = no_of_columns; i < new_no_of_columns; i++) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				var col = $(
 					'<div class="section-column">\
 					<div class="print-format-builder-column"></div></div>'
@@ -607,6 +653,7 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			var parent = $(this).parents(".print-format-builder-field:first"),
 				doctype = parent.attr("data-doctype"),
 				label = parent.attr("data-label"),
+				nolabel = parent.attr("data-nolabel"),
 				columns = parent.attr("data-columns").split(","),
 				column_names = $.map(columns, function (v) {
 					return v.split("|")[0];
@@ -635,7 +682,11 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			// add field which are in column_names first to preserve order
 			var fields = [];
 			$.each(column_names, function (i, v) {
+<<<<<<< HEAD
 				if (in_list(Object.keys(docfields_by_name), v)) {
+=======
+				if (Object.keys(docfields_by_name).includes(v)) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					fields.push(docfields_by_name[v]);
 				}
 			});
@@ -643,8 +694,13 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 			$.each(doc_fields, function (j, f) {
 				if (
 					f &&
+<<<<<<< HEAD
 					!in_list(column_names, f.fieldname) &&
 					!in_list(["Section Break", "Column Break", "Tab Break"], f.fieldtype) &&
+=======
+					!column_names.includes(f.fieldname) &&
+					!["Section Break", "Column Break", "Tab Break"].includes(f.fieldtype) &&
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					f.label
 				) {
 					fields.push(f);
@@ -791,6 +847,10 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 								fieldtype = $this.attr("data-fieldtype"),
 								align = $this.attr("data-align"),
 								label = $this.attr("data-label"),
+<<<<<<< HEAD
+=======
+								nolabel = $this.attr("data-nolabel"),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 								df = {
 									fieldname: $this.attr("data-fieldname"),
 									print_hide: 0,
@@ -804,6 +864,13 @@ frappe.PrintFormatBuilder = class PrintFormatBuilder {
 								df.label = label;
 							}
 
+<<<<<<< HEAD
+=======
+							if (cint(nolabel)) {
+								df.nolabel = 1;
+							}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 							if (fieldtype === "Table") {
 								// append the user selected columns to visible_columns
 								var columns = $this.attr("data-columns").split(",");

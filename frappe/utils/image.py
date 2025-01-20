@@ -10,7 +10,11 @@ import frappe
 
 def resize_images(path, maxdim=700):
 	size = (maxdim, maxdim)
+<<<<<<< HEAD
 	for basepath, _folders, files in os.walk(path):
+=======
+	for basepath, folders, files in os.walk(path):  # noqa: B007
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		for fname in files:
 			extn = fname.rsplit(".", 1)[1]
 			if extn in ("jpg", "jpeg", "png", "gif"):
@@ -22,14 +26,13 @@ def resize_images(path, maxdim=700):
 					print(f"resized {os.path.join(basepath, fname)}")
 
 
-def strip_exif_data(content, content_type):
-	"""Strips EXIF from image files which support it.
+def strip_exif_data(content, content_type) -> bytes:
+	"""Strip EXIF from image files which support it.
 
 	Works by creating a new Image object which ignores exif by
 	default and then extracts the binary data back into content.
 
-	Returns:
-	        Bytes: Stripped image content
+	Return Stripped image content.
 	"""
 
 	original_image = Image.open(io.BytesIO(content))
@@ -47,13 +50,23 @@ def strip_exif_data(content, content_type):
 	return content
 
 
+<<<<<<< HEAD
 def optimize_image(content, content_type, max_width=1920, max_height=1080, optimize=True, quality=85):
+=======
+def optimize_image(content, content_type, max_width=1024, max_height=768, optimize=True, quality=85):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	if content_type == "image/svg+xml":
 		return content
 
 	try:
 		image = Image.open(io.BytesIO(content))
 		exif = image.getexif()
+<<<<<<< HEAD
+=======
+		width, height = image.size
+		max_height = max(min(max_height, height * 0.8), 200)
+		max_width = max(min(max_width, width * 0.8), 200)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		image_format = content_type.split("/")[1]
 		size = max_width, max_height
 		image.thumbnail(size, Image.Resampling.LANCZOS)

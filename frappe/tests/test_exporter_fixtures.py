@@ -5,10 +5,17 @@ import os
 import frappe
 import frappe.defaults
 from frappe.core.doctype.data_import.data_import import export_csv
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDataImportFixtures(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestDataImportFixtures(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def setUp(self):
 		pass
 

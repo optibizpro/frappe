@@ -7,6 +7,23 @@ frappe.listview_settings["Workflow"] = {
 			return [__("Not active"), "gray", "is_active,=,No"];
 		}
 	},
+<<<<<<< HEAD
+=======
+	button: {
+		show(doc) {
+			return doc.name;
+		},
+		get_label() {
+			return frappe.utils.icon("workflow", "sm");
+		},
+		get_description(doc) {
+			return __("Build {0}", [`${doc.name}`]);
+		},
+		action(doc) {
+			frappe.set_route("workflow-builder", doc.name);
+		},
+	},
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 };
 
 frappe.help.youtube_id["Workflow"] = "yObJUg9FxFs";

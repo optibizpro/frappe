@@ -38,7 +38,7 @@ def create_lock(name):
 
 
 def lock_exists(name):
-	"""Returns True if lock of the given name exists"""
+	"""Return True if lock of the given name exists."""
 	return os.path.exists(get_lock_path(name))
 
 
@@ -65,9 +65,13 @@ def delete_lock(name):
 
 
 def get_lock_path(name):
+<<<<<<< HEAD
 	name = name.lower()
 	lock_path = get_site_path(LOCKS_DIR, name + ".lock")
 	return lock_path
+=======
+	return get_site_path(LOCKS_DIR, f"{name.lower()}.lock")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 def release_document_locks():

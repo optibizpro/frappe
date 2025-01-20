@@ -37,7 +37,11 @@ frappe.tools.downloadify = function (data, roles, title) {
 
 frappe.markdown = function (txt) {
 	if (!frappe.md2html) {
+<<<<<<< HEAD
 		frappe.md2html = new showdown.Converter();
+=======
+		frappe.md2html = new showdown.Converter({ tables: true });
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	while (txt.substr(0, 1) === "\n") {

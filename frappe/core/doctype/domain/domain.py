@@ -4,9 +4,21 @@
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 from frappe.model.document import Document
+from frappe.utils import cint
 
 
 class Domain(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		domain: DF.Data
+	# end: auto-generated types
+
 	"""Domain documents are created automatically when DocTypes
 	with "Restricted" domains are imported during
 	installation or migration"""
@@ -18,7 +30,7 @@ class Domain(Document):
 		self.setup_properties()
 		self.set_values()
 
-		if not int(frappe.defaults.get_defaults().setup_complete or 0):
+		if not cint(frappe.defaults.get_defaults().setup_complete):
 			# if setup not complete, setup desktop etc.
 			self.setup_sidebar_items()
 			self.set_default_portal_role()
@@ -67,7 +79,7 @@ class Domain(Document):
 			for role_name in self.data.restricted_roles:
 				user.append("roles", {"role": role_name})
 				if not frappe.db.get_value("Role", role_name):
-					frappe.get_doc(dict(doctype="Role", role_name=role_name)).insert()
+					frappe.get_doc(doctype="Role", role_name=role_name).insert()
 					continue
 
 				role = frappe.get_doc("Role", role_name)

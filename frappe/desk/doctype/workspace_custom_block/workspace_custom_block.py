@@ -6,4 +6,22 @@ from frappe.model.document import Document
 
 
 class WorkspaceCustomBlock(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		custom_block_name: DF.Link | None
+		label: DF.Data | None
+		parent: DF.Data
+		parentfield: DF.Data
+		parenttype: DF.Data
+	# end: auto-generated types
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	pass

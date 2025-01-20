@@ -55,6 +55,7 @@ def execute():
 			user_permissions_to_delete.append(user_permission.name)
 			user_permission.name = None
 			user_permission.skip_for_doctype = None
+<<<<<<< HEAD
 			for doctype in applicable_for_doctypes:
 				if doctype:
 					# Maintain sequence (name, user, allow, for_value, applicable_for, apply_to_all_doctypes, creation, modified)
@@ -70,6 +71,22 @@ def execute():
 							user_permission.modified,
 						)
 					)
+=======
+			new_user_permissions_list.extend(
+				(
+					frappe.generate_hash(length=10),
+					user_permission.user,
+					user_permission.allow,
+					user_permission.for_value,
+					doctype,
+					0,
+					user_permission.creation,
+					user_permission.modified,
+				)
+				for doctype in applicable_for_doctypes
+				if doctype
+			)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		else:
 			# No skip_for_doctype found! Just update apply_to_all_doctypes.
 			frappe.db.set_value("User Permission", user_permission.name, "apply_to_all_doctypes", 1)

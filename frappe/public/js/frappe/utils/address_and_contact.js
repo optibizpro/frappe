@@ -12,9 +12,13 @@ $.extend(frappe.contacts, {
 			$(frm.fields_dict["address_html"].wrapper)
 				.html(frappe.render_template("address_list", frm.doc.__onload))
 				.find(".btn-address")
+<<<<<<< HEAD
 				.on("click", function () {
 					frappe.new_doc("Address");
 				});
+=======
+				.on("click", () => new_record("Address", frm));
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		}
 
 		// render contact
@@ -22,9 +26,13 @@ $.extend(frappe.contacts, {
 			$(frm.fields_dict["contact_html"].wrapper)
 				.html(frappe.render_template("contact_list", frm.doc.__onload))
 				.find(".btn-contact")
+<<<<<<< HEAD
 				.on("click", function () {
 					frappe.new_doc("Contact");
 				});
+=======
+				.on("click", () => new_record("Contact", frm));
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		}
 	},
 	get_last_doc: function (frm) {
@@ -62,3 +70,27 @@ $.extend(frappe.contacts, {
 			.then((address_display) => frm.set_value(_display_field, address_display));
 	},
 });
+<<<<<<< HEAD
+=======
+
+function new_record(doctype, frm) {
+	frappe.dynamic_link = {
+		doctype: frm.doc.doctype,
+		doc: frm.doc,
+		fieldname: "name",
+	};
+
+	if (frappe.boot.enable_address_autocompletion === 1 && doctype === "Address") {
+		new frappe.ui.AddressAutocompleteDialog({
+			title: __("New Address"),
+			link_doctype: frm.doc.doctype,
+			link_name: frm.doc.name,
+			after_insert: function (doc) {
+				frm.reload_doc();
+			},
+		}).show();
+	} else {
+		frappe.new_doc(doctype);
+	}
+}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87

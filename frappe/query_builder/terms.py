@@ -1,10 +1,18 @@
+<<<<<<< HEAD
 from datetime import time, timedelta
+=======
+from datetime import datetime, time, timedelta
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from typing import Any
 
 from pypika.queries import QueryBuilder
 from pypika.terms import Criterion, Function, ValueWrapper
 from pypika.utils import format_alias_sql
 
+<<<<<<< HEAD
+=======
+import frappe
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from frappe.utils.data import format_time, format_timedelta
 
 
@@ -15,24 +23,20 @@ class NamedParameterWrapper:
 		self.parameters = {}
 
 	def get_sql(self, param_value: Any, **kwargs) -> str:
-		"""returns SQL for a parameter, while adding the real value in a dict
+		"""Return SQL for a parameter, while adding the real value in a dict.
 
 		Args:
-		                param_value (Any): Value of the parameter
+		        param_value (Any): Value of the parameter
 
-		Returns:
-		                str: parameter used in the SQL query
+		Return:
+		        str: parameter used in the SQL query
 		"""
 		param_key = f"%(param{len(self.parameters) + 1})s"
 		self.parameters[param_key[2:-2]] = param_value
 		return param_key
 
 	def get_parameters(self) -> dict[str, Any]:
-		"""get dict with parameters and values
-
-		Returns:
-		                Dict[str, Any]: parameter dict
-		"""
+		"""Get dict with parameters and values."""
 		return self.parameters
 
 
@@ -60,6 +64,11 @@ class ParameterizedValueWrapper(ValueWrapper):
 				self.value = format_timedelta(self.value)
 			elif isinstance(self.value, time):
 				self.value = format_time(self.value)
+<<<<<<< HEAD
+=======
+			elif isinstance(self.value, datetime):
+				self.value = frappe.db.format_datetime(self.value)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 			sql = self.get_value_sql(
 				quote_char=quote_char,

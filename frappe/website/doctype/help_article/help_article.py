@@ -10,6 +10,26 @@ from frappe.website.website_generator import WebsiteGenerator
 
 
 class HelpArticle(WebsiteGenerator):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		author: DF.Data | None
+		category: DF.Link
+		content: DF.TextEditor
+		helpful: DF.Int
+		level: DF.Literal["Beginner", "Intermediate", "Expert"]
+		likes: DF.Int
+		not_helpful: DF.Int
+		published: DF.Check
+		route: DF.Data | None
+		title: DF.Data
+	# end: auto-generated types
+
 	def validate(self):
 		self.set_route()
 
@@ -22,14 +42,13 @@ class HelpArticle(WebsiteGenerator):
 
 	def on_update(self):
 		self.update_category()
-		clear_cache()
+
+	def clear_cache(self):
+		clear_knowledge_base_cache()
+		return super().clear_cache()
 
 	def update_category(self):
-		cnt = frappe.db.sql(
-			"""select count(*) from `tabHelp Article`
-			where category=%s and ifnull(published,0)=1""",
-			self.category,
-		)[0][0]
+		cnt = frappe.db.count("Help Article", filters={"category": self.category, "published": 1})
 		cat = frappe.get_doc("Help Category", self.category)
 		cat.help_articles = cnt
 		cat.save()
@@ -88,33 +107,29 @@ def get_sidebar_items():
 			from
 				`tabHelp Category`
 			where
-				ifnull(published,0)=1 and help_articles > 0
+				published = 1 and help_articles > 0
 			order by
 				help_articles desc""",
 			as_dict=True,
 		)
 
-	return frappe.cache().get_value("knowledge_base:category_sidebar", _get)
+	return frappe.cache.get_value("knowledge_base:category_sidebar", _get)
 
 
-def clear_cache():
-	clear_website_cache()
-
-	from frappe.website.utils import clear_cache
-
-	clear_cache()
-
-
-def clear_website_cache(path=None):
-	frappe.cache().delete_value("knowledge_base:category_sidebar")
-	frappe.cache().delete_value("knowledge_base:faq")
+def clear_knowledge_base_cache():
+	frappe.cache.delete_value("knowledge_base:category_sidebar")
+	frappe.cache.delete_value("knowledge_base:faq")
 
 
 @frappe.whitelist(allow_guest=True)
 @rate_limit(key="article", limit=5, seconds=60 * 60)
 def add_feedback(article: str, helpful: str):
+<<<<<<< HEAD
 	if not isinstance("article", str):
 		frappe.throw(_("Invalid Article Name"))
+=======
+	field = "not_helpful" if helpful == "No" else "helpful"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	field = "not_helpful" if helpful == "No" else "helpful"
 	value = cint(frappe.db.get_value("Help Article", article, field))

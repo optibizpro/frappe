@@ -54,6 +54,7 @@ Your query:
 	system_language = frappe.db.get_single_value("System Settings", "language")
 	# add to to-do ?
 	frappe.get_doc(
+<<<<<<< HEAD
 		dict(
 			doctype="Communication",
 			sender=sender,
@@ -62,4 +63,12 @@ Your query:
 			content=message,
 			status="Open",
 		)
+=======
+		doctype="Communication",
+		sender=sender,
+		subject=_("New Message from Website Contact Page", system_language),
+		sent_or_received="Received",
+		content=message,
+		status="Open",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	).insert(ignore_permissions=True)

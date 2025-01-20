@@ -388,7 +388,7 @@ def get_email_html(template, args, subject, header=None, with_container=False):
 
 
 def inline_style_in_html(html):
-	"""Convert email.css and html to inline-styled html"""
+	"""Convert email.css and html to inline-styled html."""
 	from premailer import Premailer
 
 	from frappe.utils.jinja_globals import bundled_asset
@@ -399,7 +399,9 @@ def inline_style_in_html(html):
 	css_files = [path.lstrip("/") for path in css_files]
 	css_files = [css_file for css_file in css_files if os.path.exists(os.path.abspath(css_file))]
 
-	p = Premailer(html=html, external_styles=css_files, strip_important=False)
+	p = Premailer(
+		html=html, external_styles=css_files, strip_important=False, allow_loading_external_files=True
+	)
 
 	return p.transform()
 
@@ -452,7 +454,7 @@ def add_attachment(fname, fcontent, content_type=None, parent=None, content_id=N
 
 
 def get_message_id():
-	"""Returns Message ID created from doctype and name"""
+	"""Return Message ID created from doctype and name."""
 	return email.utils.make_msgid(domain=frappe.local.site)
 
 
@@ -501,9 +503,10 @@ def replace_filename_with_cid(message):
 
 		# found match
 		img_path = groups[0]
-		filename = img_path.rsplit("/")[-1]
+		img_path_escaped = frappe.utils.html_utils.unescape_html(img_path)
+		filename = img_path_escaped.rsplit("/")[-1]
 
-		filecontent = get_filecontent_from_path(img_path)
+		filecontent = get_filecontent_from_path(img_path_escaped)
 		if not filecontent:
 			message = re.sub(f"""embed=['"]{re.escape(img_path)}['"]""", "", message)
 			continue

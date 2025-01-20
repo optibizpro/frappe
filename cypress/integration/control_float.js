@@ -7,6 +7,7 @@ context("Control Float", () => {
 	function get_dialog_with_float() {
 		return cy.dialog({
 			title: "Float Check",
+			animate: false,
 			fields: [
 				{
 					fieldname: "float_number",
@@ -19,6 +20,7 @@ context("Control Float", () => {
 
 	it("check value changes", () => {
 		get_dialog_with_float().as("dialog");
+		cy.wait(300);
 
 		let data = get_data();
 		data.forEach((x) => {
@@ -32,10 +34,20 @@ context("Control Float", () => {
 				cy.wait(200);
 				cy.fill_field("float_number", d.input, "Float").blur();
 				cy.get_field("float_number", "Float").should("have.value", d.blur_expected);
+<<<<<<< HEAD
 
+=======
+				cy.wait(100);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				cy.get_field("float_number", "Float").focus();
+				cy.wait(100);
 				cy.get_field("float_number", "Float").blur();
+				cy.wait(100);
 				cy.get_field("float_number", "Float").focus();
+<<<<<<< HEAD
+=======
+				cy.wait(100);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				cy.get_field("float_number", "Float").should("have.value", d.focus_expected);
 			});
 		});
@@ -49,6 +61,7 @@ context("Control Float", () => {
 					{
 						input: "364.87,334",
 						blur_expected: "36.487,334",
+<<<<<<< HEAD
 						focus_expected: "36487.334",
 					},
 					{
@@ -60,6 +73,19 @@ context("Control Float", () => {
 						input: "100",
 						blur_expected: "100,000",
 						focus_expected: "100",
+=======
+						focus_expected: "36.487,334",
+					},
+					{
+						input: "36487,335",
+						blur_expected: "36.487,335",
+						focus_expected: "36.487,335",
+					},
+					{
+						input: "2*(2+47)+1,5+1",
+						blur_expected: "100,500",
+						focus_expected: "100,500",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					},
 				],
 			},
@@ -67,6 +93,7 @@ context("Control Float", () => {
 				number_format: "#,###.##",
 				values: [
 					{
+<<<<<<< HEAD
 						input: "364,87.334",
 						blur_expected: "36,487.334",
 						focus_expected: "36487.334",
@@ -80,6 +107,38 @@ context("Control Float", () => {
 						input: "100",
 						blur_expected: "100.000",
 						focus_expected: "100",
+=======
+						input: "464,87.334",
+						blur_expected: "46,487.334",
+						focus_expected: "46,487.334",
+					},
+					{
+						input: "46487.335",
+						blur_expected: "46,487.335",
+						focus_expected: "46,487.335",
+					},
+					{
+						input: "3*(2+47)+1.5+1",
+						blur_expected: "149.500",
+						focus_expected: "149.500",
+					},
+				],
+			},
+			{
+				// '.' is the parseFloat's decimal separator
+				number_format: "#.###,##",
+				values: [
+					{
+						input: "12.345",
+						blur_expected: "12.345,000",
+						focus_expected: "12.345,000",
+					},
+					{
+						// parseFloat would reduce 12,340 to 12,34 if this string was ever to be parsed
+						input: "12.340",
+						blur_expected: "12.340,000",
+						focus_expected: "12.340,000",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					},
 				],
 			},

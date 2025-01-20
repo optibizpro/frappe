@@ -12,6 +12,50 @@ from frappe.website.utils import clear_cache
 
 
 class Comment(Document):
+<<<<<<< HEAD
+=======
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		comment_by: DF.Data | None
+		comment_email: DF.Data | None
+		comment_type: DF.Literal[
+			"Comment",
+			"Like",
+			"Info",
+			"Label",
+			"Workflow",
+			"Created",
+			"Submitted",
+			"Cancelled",
+			"Updated",
+			"Deleted",
+			"Assigned",
+			"Assignment Completed",
+			"Attachment",
+			"Attachment Removed",
+			"Shared",
+			"Unshared",
+			"Bot",
+			"Relinked",
+			"Edit",
+		]
+		content: DF.HTMLEditor | None
+		ip_address: DF.Data | None
+		published: DF.Check
+		reference_doctype: DF.Link | None
+		reference_name: DF.DynamicLink | None
+		reference_owner: DF.Data | None
+		seen: DF.Check
+		subject: DF.Text | None
+	# end: auto-generated types
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	no_feed_on_delete = True
 
 	def after_insert(self):
@@ -153,6 +197,7 @@ def update_comments_in_parent(reference_doctype, reference_name, _comments):
 		)
 
 	except Exception as e:
+<<<<<<< HEAD
 		if frappe.db.is_column_missing(e) and getattr(frappe.local, "request", None):
 			# missing column and in request, add column and update after commit
 			frappe.local._comments = [
@@ -160,10 +205,14 @@ def update_comments_in_parent(reference_doctype, reference_name, _comments):
 				(reference_doctype, reference_name, _comments),
 			]
 
+=======
+		if frappe.db.is_missing_column(e) and getattr(frappe.local, "request", None):
+			pass
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		elif frappe.db.is_data_too_long(e):
 			raise frappe.DataTooLongException
-
 		else:
+<<<<<<< HEAD
 			raise ImplicitCommitError
 	else:
 		if frappe.flags.in_patch:
@@ -182,3 +231,13 @@ def update_comments_in_parent_after_request():
 			update_comments_in_parent(reference_doctype, reference_name, _comments)
 
 		frappe.db.commit()
+=======
+			raise
+	else:
+		if frappe.flags.in_patch:
+			return
+
+		# Clear route cache
+		if route := frappe.get_cached_value(reference_doctype, reference_name, "route"):
+			clear_cache(route)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87

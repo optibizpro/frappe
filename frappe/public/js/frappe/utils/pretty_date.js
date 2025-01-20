@@ -11,7 +11,13 @@ function prettyDate(date, mini) {
 		);
 	}
 
+<<<<<<< HEAD
 	let diff = (new Date(frappe.datetime.now_datetime()).getTime() - date.getTime()) / 1000;
+=======
+	let diff =
+		(new Date(frappe.datetime.now_datetime().replace(/-/g, "/")).getTime() - date.getTime()) /
+		1000;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	let day_diff = Math.floor(diff / 86400);
 
 	if (isNaN(day_diff) || day_diff < 0) return "";

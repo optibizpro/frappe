@@ -6,22 +6,8 @@
 		</a>
 	</div>
 </template>
-<script>
-export default {
-	name: "BuildSuccess",
-	data() {
-		return {
-			is_shown: false,
-			live_reload: false,
-		};
-	},
-	methods: {
-		show(data) {
-			if (data.live_reload) {
-				this.live_reload = true;
-				this.reload();
-			}
 
+<<<<<<< HEAD
 			this.is_shown = true;
 			if (this.timeout) {
 				clearTimeout(this.timeout);
@@ -38,8 +24,42 @@ export default {
 		},
 	},
 };
+=======
+<script setup>
+import { ref } from "vue";
+
+// variables
+let is_shown = ref(false);
+let live_reload = ref(false);
+let timeout = ref(null);
+
+// Methods
+function show(data) {
+	if (data.live_reload) {
+		live_reload.value = true;
+		reload();
+	}
+
+	is_shown.value = true;
+	if (timeout.value) {
+		clearTimeout(timeout.value);
+	}
+	timeout.value = setTimeout(() => {
+		hide();
+	}, 10000);
+}
+function hide() {
+	is_shown.value = false;
+}
+function reload() {
+	window.location.reload();
+}
+
+defineExpose({ show, hide });
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 </script>
-<style>
+
+<style scoped>
 .build-success-message {
 	position: fixed;
 	z-index: 9999;

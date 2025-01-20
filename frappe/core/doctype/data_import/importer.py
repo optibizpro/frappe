@@ -1,7 +1,6 @@
 # Copyright (c) 2020, Frappe Technologies Pvt. Ltd. and Contributors
 # License: MIT. See LICENSE
 
-import io
 import json
 import os
 import re
@@ -28,9 +27,12 @@ DURATION_PATTERN = re.compile(r"^(?:(\d+d)?((^|\s)\d+h)?((^|\s)\d+m)?((^|\s)\d+s
 
 
 class Importer:
-	def __init__(self, doctype, data_import=None, file_path=None, import_type=None, console=False):
+	def __init__(
+		self, doctype, data_import=None, file_path=None, import_type=None, console=False, use_sniffer=False
+	):
 		self.doctype = doctype
 		self.console = console
+		self.use_sniffer = use_sniffer
 
 		self.data_import = data_import
 		if not self.data_import:
@@ -46,6 +48,8 @@ class Importer:
 			file_path or data_import.google_sheets_url or data_import.import_file,
 			self.template_options,
 			self.import_type,
+			console=self.console,
+			use_sniffer=self.use_sniffer,
 		)
 
 	def get_data_for_import_preview(self):
@@ -63,7 +67,7 @@ class Importer:
 
 	def before_import(self):
 		# set user lang for translations
-		frappe.cache().hdel("lang", frappe.session.user)
+		frappe.cache.hdel("lang", frappe.session.user)
 		frappe.set_user_lang(frappe.session.user)
 
 		# set flags
@@ -180,7 +184,7 @@ class Importer:
 
 					log_index += 1
 
-					if not self.data_import.status == "Partial Success":
+					if self.data_import.status != "Partial Success":
 						self.data_import.db_set("status", "Partial Success")
 
 					# commit after every successful import
@@ -403,12 +407,16 @@ class Importer:
 
 
 class ImportFile:
-	def __init__(self, doctype, file, template_options=None, import_type=None):
+	def __init__(
+		self, doctype, file, template_options=None, import_type=None, *, console=False, use_sniffer=False
+	):
 		self.doctype = doctype
 		self.template_options = template_options or frappe._dict(column_to_field_map=frappe._dict())
 		self.column_to_field_map = self.template_options.column_to_field_map
 		self.import_type = import_type
 		self.warnings = []
+		self.console = console
+		self.use_sniffer = use_sniffer
 
 		self.file_doc = self.file_path = self.google_sheets_url = None
 		if isinstance(file, str):
@@ -522,8 +530,8 @@ class ImportFile:
 
 	def parse_next_row_for_import(self, data):
 		"""
-		Parses rows that make up a doc. A doc maybe built from a single row or multiple rows.
-		Returns the doc, rows, and data without the rows.
+		Parse rows that make up a doc. A doc maybe built from a single row or multiple rows.
+		Return the doc, rows, and data without the rows.
 		"""
 		doctypes = self.header.doctypes
 
@@ -536,7 +544,10 @@ class ImportFile:
 			# subsequent rows that have blank values in parent columns
 			# are considered as child rows
 			parent_column_indexes = self.header.get_column_indexes(self.doctype)
+<<<<<<< HEAD
 			first_row.get_values(parent_column_indexes)
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 			data_without_first_row = data[1:]
 			for row in data_without_first_row:
@@ -589,6 +600,13 @@ class ImportFile:
 
 		file_content = None
 
+<<<<<<< HEAD
+=======
+		if self.console:
+			file_content = frappe.read_file(file_path, True)
+			return file_content, extn
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		file_name = frappe.db.get_value("File", {"file_url": file_path})
 		if file_name:
 			file = frappe.get_doc("File", file_name)
@@ -602,7 +620,7 @@ class ImportFile:
 			frappe.throw(_("Import template should be of type .csv, .xlsx or .xls"), title=error_title)
 
 		if extension == "csv":
-			data = read_csv_content(content)
+			data = read_csv_content(content, use_sniffer=self.use_sniffer)
 		elif extension == "xlsx":
 			data = read_xlsx_file_from_attached_file(fcontent=content)
 		elif extension == "xls":
@@ -646,8 +664,7 @@ class Row:
 			return None
 
 		columns = self.header.get_columns(col_indexes)
-		doc = self._parse_doc(doctype, columns, values, parent_doc, table_df)
-		return doc
+		return self._parse_doc(doctype, columns, values, parent_doc, table_df)
 
 	def _parse_doc(self, doctype, columns, values, parent_doc=None, table_df=None):
 		doc = frappe._dict()
@@ -1010,7 +1027,13 @@ class Column:
 				)
 		elif self.df.fieldtype in ("Date", "Time", "Datetime"):
 			# guess date/time format
+			# TODO: add possibility for user, to define the date format explicitly in the Data Import UI
+			# for example, if date column in file is in  %d-%m-%y  format -> 23-04-24.
+			# The date guesser might fail, as, this can be also parsed as %y-%m-%d, as both 23 and 24 are valid for year & for day
+			# This is an issue that cannot be handled automatically, no matter how we try, as it completely depends on the user's input.
+			# Defining an explicit value which surely recognizes
 			self.date_format = self.guess_date_format_for_column()
+
 			if not self.date_format:
 				if self.df.fieldtype == "Time":
 					self.date_format = "%H:%M:%S"
@@ -1208,7 +1231,7 @@ def get_df_for_column_header(doctype, header):
 	def build_fields_dict_for_doctype():
 		return build_fields_dict_for_column_matching(doctype)
 
-	df_by_labels_and_fieldname = frappe.cache().hget(
+	df_by_labels_and_fieldname = frappe.cache.hget(
 		"data_import_column_header_map", doctype, generator=build_fields_dict_for_doctype
 	)
 	return df_by_labels_and_fieldname.get(header)

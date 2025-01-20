@@ -50,8 +50,15 @@
 						v-model="column.fields"
 						group="fields"
 						:animation="150"
+						item-key="id"
 					>
+<<<<<<< HEAD
 						<Field v-for="df in get_fields(column)" :key="df.fieldname" :df="df" />
+=======
+						<template #item="{ element }">
+							<Field :df="element" />
+						</template>
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					</draggable>
 				</div>
 			</div>
@@ -62,11 +69,12 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import draggable from "vuedraggable";
 import Field from "./Field.vue";
-import { storeMixin } from "./store";
+import { computed } from "vue";
 
+<<<<<<< HEAD
 export default {
 	name: "PrintFormatSection",
 	mixins: [storeMixin],
@@ -86,14 +94,15 @@ export default {
 		},
 		remove_column() {
 			if (this.section.columns.length <= 1) return;
+=======
+// props
+const props = defineProps(["section"]);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
-			let columns = this.section.columns.slice();
-			let last_column_fields = columns.slice(-1)[0].fields.slice();
-			let index = columns.length - 1;
-			columns = columns.slice(0, index);
-			let last_column = columns[index - 1];
-			last_column.fields = [...last_column.fields, ...last_column_fields];
+// emits
+let emit = defineEmits(["add_section_above"]);
 
+<<<<<<< HEAD
 			this.$set(this.section, "columns", columns);
 		},
 		add_page_break() {
@@ -151,6 +160,85 @@ export default {
 		},
 	},
 };
+=======
+// methods
+function add_column() {
+	if (props.section.columns.length < 4) {
+		props.section.columns.push({
+			label: "",
+			fields: [],
+		});
+	}
+}
+function remove_column() {
+	if (props.section.columns.length <= 1) return;
+
+	let columns = props.section.columns.slice();
+	let last_column_fields = columns.slice(-1)[0].fields.slice();
+	let index = columns.length - 1;
+	columns = columns.slice(0, index);
+	let last_column = columns[index - 1];
+	last_column.fields = [...last_column.fields, ...last_column_fields];
+
+	props.section["columns"] = columns;
+}
+function add_page_break() {
+	props.section["page_break"] = true;
+}
+function remove_page_break() {
+	props.section["page_break"] = false;
+}
+
+// computed
+let section_options = computed(() => {
+	return [
+		{
+			label: __("Add section above"),
+			action: () => emit("add_section_above"),
+		},
+		{
+			label: __("Add column"),
+			action: add_column,
+			condition: () => props.section.columns.length < 4,
+		},
+		{
+			label: __("Remove column"),
+			action: remove_column,
+			condition: () => props.section.columns.length > 1,
+		},
+		{
+			label: __("Add page break"),
+			action: add_page_break,
+			condition: () => !props.section.page_break,
+		},
+		{
+			label: __("Remove page break"),
+			action: remove_page_break,
+			condition: () => props.section.page_break,
+		},
+		{
+			label: __("Remove section"),
+			action: () => {
+				props.section["remove"] = true;
+			},
+		},
+		{
+			label: __("Field Orientation (Left-Right)"),
+			condition: () => !props.section.field_orientation,
+			action: () => {
+				props.section["field_orientation"] = "left-right";
+			},
+		},
+		{
+			label: __("Field Orientation (Top-Down)"),
+			condition: () => props.section.field_orientation == "left-right",
+			action: () => {
+				props.section["field_orientation"] = "";
+			},
+		},
+	].filter((option) => (option.condition ? option.condition() : true));
+});
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 </script>
 
 <style scoped>

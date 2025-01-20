@@ -121,7 +121,11 @@ frappe.listview_settings["User Permission"] = {
 						callback: function (r) {
 							if (r.message === 1) {
 								frappe.show_alert({
+<<<<<<< HEAD
 									message: __("User Permissions created sucessfully"),
+=======
+									message: __("User Permissions created successfully"),
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 									indicator: "blue",
 								});
 							} else {

@@ -16,8 +16,11 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 	var freeze_message = working_label ? __(working_label) : "";
 
 	var save = function () {
+<<<<<<< HEAD
 		remove_empty_rows();
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		$(frm.wrapper).addClass("validated-form");
 		if ((action !== "Save" || frm.is_dirty()) && check_mandatory()) {
 			_call({
@@ -40,6 +43,7 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 		}
 	};
 
+<<<<<<< HEAD
 	var remove_empty_rows = function () {
 		/*
 			This function removes empty rows. Note that in this function, a row is considered
@@ -85,6 +89,8 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 		});
 	};
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	var cancel = function () {
 		var args = {
 			doctype: frm.doc.doctype,
@@ -135,7 +141,7 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 						!frappe.model.has_value(doc.doctype, doc.name, df.fieldname)
 					) {
 						has_errors = true;
-						error_fields[error_fields.length] = __(df.label);
+						error_fields[error_fields.length] = __(df.label, null, df.parent);
 						// scroll to field
 						if (!frm.scroll_set) {
 							scroll_to(doc.parentfield || df.fieldname);
@@ -156,6 +162,7 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 
 			if (error_fields.length) {
 				let meta = frappe.get_meta(doc.doctype);
+				let message;
 				if (meta.istable) {
 					const table_field = frappe.meta.docfield_map[doc.parenttype][doc.parentfield];
 
@@ -163,12 +170,20 @@ frappe.ui.form.save = function (frm, action, callback, btn) {
 						table_field.label || frappe.unscrub(table_field.fieldname)
 					).bold();
 
+<<<<<<< HEAD
 					var message = __("Mandatory fields required in table {0}, Row {1}", [
+=======
+					message = __("Mandatory fields required in table {0}, Row {1}", [
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 						table_label,
 						doc.idx,
 					]);
 				} else {
+<<<<<<< HEAD
 					var message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
+=======
+					message = __("Mandatory fields required in {0}", [__(doc.doctype)]);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				}
 				message = message + "<br><br><ul><li>" + error_fields.join("</li><li>") + "</ul>";
 				frappe.msgprint({

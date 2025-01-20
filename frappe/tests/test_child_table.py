@@ -2,10 +2,17 @@ from collections.abc import Callable
 
 import frappe
 from frappe.model import child_table_fields
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestChildTable(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestChildTable(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def tearDown(self) -> None:
 		try:
 			frappe.delete_doc("DocType", self.doctype_name, force=1)

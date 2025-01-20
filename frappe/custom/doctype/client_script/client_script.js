@@ -17,7 +17,11 @@ frappe.ui.form.on("Client Script", {
 				frappe.model.with_doctype(frm.doc.dt, () => {
 					const child_tables = frappe.meta
 						.get_docfields(frm.doc.dt, null, {
+<<<<<<< HEAD
 							fieldtype: "Table",
+=======
+							fieldtype: ["in", ["Table", "Table MultiSelect"]],
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 						})
 						.map((df) => df.options);
 

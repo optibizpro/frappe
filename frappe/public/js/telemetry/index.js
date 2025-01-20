@@ -7,7 +7,10 @@ class TelemetryManager {
 		this.project_id = frappe.boot.posthog_project_id;
 		this.telemetry_host = frappe.boot.posthog_host;
 		this.site_age = frappe.boot.telemetry_site_age;
+<<<<<<< HEAD
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		if (cint(frappe.boot.enable_telemetry) && this.project_id && this.telemetry_host) {
 			this.enabled = true;
 		}
@@ -15,13 +18,21 @@ class TelemetryManager {
 
 	initialize() {
 		if (!this.enabled) return;
+<<<<<<< HEAD
+=======
+		let disable_decide = !this.should_record_session();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		try {
 			posthog.init(this.project_id, {
 				api_host: this.telemetry_host,
 				autocapture: false,
 				capture_pageview: false,
 				capture_pageleave: false,
+<<<<<<< HEAD
 				advanced_disable_decide: true,
+=======
+				advanced_disable_decide: disable_decide,
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			});
 			posthog.identify(frappe.boot.sitename);
 			this.send_heartbeat();
@@ -39,7 +50,19 @@ class TelemetryManager {
 
 	disable() {
 		this.enabled = false;
+<<<<<<< HEAD
 		posthog.opt_out_capturing();
+=======
+	}
+
+	can_enable() {
+		if (cint(navigator.doNotTrack)) {
+			return false;
+		}
+		let posthog_available = Boolean(this.telemetry_host && this.project_id);
+		let sentry_available = Boolean(frappe.boot.sentry_dsn);
+		return posthog_available || sentry_available;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	send_heartbeat() {
@@ -54,7 +77,11 @@ class TelemetryManager {
 	}
 
 	register_pageview_handler() {
+<<<<<<< HEAD
 		if (this.site_age && this.site_age > 5) {
+=======
+		if (this.site_age && this.site_age > 6) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			return;
 		}
 
@@ -62,6 +89,19 @@ class TelemetryManager {
 			posthog.capture("$pageview");
 		});
 	}
+<<<<<<< HEAD
+=======
+
+	should_record_session() {
+		let start = frappe.boot.sysdefaults.session_recording_start;
+		if (!start) return;
+
+		let start_datetime = frappe.datetime.str_to_obj(start);
+		let now = frappe.datetime.now_datetime();
+		// if user allowed recording only record for first 2 hours, never again.
+		return frappe.datetime.get_minute_diff(now, start_datetime) < 120;
+	}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 }
 
 frappe.telemetry = new TelemetryManager();

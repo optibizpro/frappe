@@ -142,7 +142,11 @@ frappe.report_utils = {
 	},
 
 	get_filter_values(filters) {
+<<<<<<< HEAD
 		let filter_values = filters
+=======
+		return filters
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			.map((f) => {
 				var v = f.default;
 				return {
@@ -153,7 +157,6 @@ frappe.report_utils = {
 				Object.assign(acc, f);
 				return acc;
 			}, {});
-		return filter_values;
 	},
 
 	get_result_of_fn(fn, values) {
@@ -205,6 +208,17 @@ frappe.report_utils = {
 				depends_on: "eval:doc.file_format=='CSV'",
 			},
 			{
+<<<<<<< HEAD
+=======
+				fieldtype: "Data",
+				label: "CSV Decimal Separator",
+				fieldname: "csv_decimal_sep",
+				default: ".",
+				length: 1,
+				depends_on: "eval:doc.file_format=='CSV' && doc.csv_quoting != 2",
+			},
+			{
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				fieldtype: "Small Text",
 				label: "CSV Preview",
 				fieldname: "csv_preview",
@@ -235,7 +249,11 @@ frappe.report_utils = {
 			const is_query_report = frappe.get_route()[0] === "query-report";
 			const report = is_query_report ? frappe.query_report : cur_list;
 			const columns = report.columns.filter((col) => col.hidden !== 1);
+<<<<<<< HEAD
 			PREVIEW_DATA = [
+=======
+			let PREVIEW_DATA = [
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				columns.map((col) => __(is_query_report ? col.label : col.name)),
 				...report.data
 					.slice(0, 3)
@@ -249,7 +267,12 @@ frappe.report_utils = {
 				frappe.report_utils.get_csv_preview(
 					PREVIEW_DATA,
 					dialog.get_value("csv_quoting"),
+<<<<<<< HEAD
 					dialog.get_value("csv_delimiter")
+=======
+					dialog.get_value("csv_delimiter"),
+					dialog.get_value("csv_decimal_sep")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				)
 			);
 		}
@@ -262,10 +285,24 @@ frappe.report_utils = {
 			}
 			update_csv_preview(dialog);
 		};
+<<<<<<< HEAD
 		return dialog;
 	},
 
 	get_csv_preview(data, quoting, delimiter) {
+=======
+		dialog.fields_dict["csv_decimal_sep"].df.onchange = () => {
+			if (!dialog.get_value("csv_decimal_sep")) {
+				dialog.set_value("csv_decimal_sep", ".");
+			}
+			update_csv_preview(dialog);
+		};
+
+		return dialog;
+	},
+
+	get_csv_preview(data, quoting, delimiter, decimal_sep) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		// data: array of arrays
 		// quoting: 0 - minimal, 1 - all, 2 - non-numeric, 3 - none
 		// delimiter: any single character
@@ -281,10 +318,24 @@ frappe.report_utils = {
 			frappe.throw(__("Delimiter must be a single character"));
 		}
 
+<<<<<<< HEAD
+=======
+		if (decimal_sep.length > 1) {
+			frappe.throw(__("Decimal Separator must be a single character"));
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		if (0 > quoting || quoting > 3) {
 			frappe.throw(__("Quoting must be between 0 and 3"));
 		}
 
+<<<<<<< HEAD
+=======
+		if (decimal_sep !== "." && quoting === QUOTING.NonNumeric) {
+			frappe.throw(__("Decimal Separator must be '.' when Quoting is set to Non-numeric"));
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		return data
 			.map((row) => {
 				return row
@@ -297,6 +348,13 @@ frappe.report_utils = {
 							col = col.replace(/"/g, '""');
 						}
 
+<<<<<<< HEAD
+=======
+						if (typeof col == "number" && decimal_sep !== ".") {
+							col = col.toString().replace(".", decimal_sep);
+						}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 						switch (quoting) {
 							case QUOTING.Minimal:
 								return typeof col === "string" && col.includes(delimiter)

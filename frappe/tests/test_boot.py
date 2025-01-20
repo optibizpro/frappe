@@ -1,10 +1,16 @@
 import frappe
+<<<<<<< HEAD
 from frappe.boot import get_unseen_notes, get_user_pages_or_reports
 from frappe.desk.doctype.note.note import mark_as_seen
 from frappe.tests.utils import FrappeTestCase
+=======
+from frappe.boot import get_user_pages_or_reports
+from frappe.desk.doctype.note.note import get_unseen_notes, mark_as_seen
+from frappe.tests import IntegrationTestCase
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
-class TestBootData(FrappeTestCase):
+class TestBootData(IntegrationTestCase):
 	def test_get_unseen_notes(self):
 		frappe.db.delete("Note")
 		frappe.db.delete("Note Seen By")
@@ -27,6 +33,16 @@ class TestBootData(FrappeTestCase):
 		unseen_notes = [d.title for d in get_unseen_notes()]
 		self.assertListEqual(unseen_notes, [])
 
+<<<<<<< HEAD
+=======
+
+class TestPermissionQueries(IntegrationTestCase):
+	@classmethod
+	def setUpClass(cls) -> None:
+		cls.enterClassContext(cls.enable_safe_exec())
+		return super().setUpClass()
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def test_get_user_pages_or_reports_with_permission_query(self):
 		# Create a ToDo custom report with admin user
 		frappe.set_user("Administrator")
@@ -42,6 +58,7 @@ class TestBootData(FrappeTestCase):
 
 		# Add permission query such that each user can only see their own custom reports
 		frappe.get_doc(
+<<<<<<< HEAD
 			dict(
 				doctype="Server Script",
 				name="test_report_permission_query",
@@ -50,6 +67,14 @@ class TestBootData(FrappeTestCase):
 				script="""conditions = f"(`tabReport`.is_standard = 'Yes' or `tabReport`.owner = '{frappe.session.user}')"
 				""",
 			)
+=======
+			doctype="Server Script",
+			name="test_report_permission_query",
+			script_type="Permission Query",
+			reference_doctype="Report",
+			script="""conditions = f"(`tabReport`.is_standard = 'Yes' or `tabReport`.owner = '{frappe.session.user}')"
+				""",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		).insert()
 
 		# Create a ToDo custom report with test user
@@ -65,7 +90,11 @@ class TestBootData(FrappeTestCase):
 		).insert(ignore_permissions=True)
 
 		get_user_pages_or_reports("Report")
+<<<<<<< HEAD
 		allowed_reports = frappe.cache().get_value("has_role:Report", user=frappe.session.user)
+=======
+		allowed_reports = frappe.cache.get_value("has_role:Report", user=frappe.session.user)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 		# Test user must not see admin user's report
 		self.assertNotIn("Test Admin Report", allowed_reports)

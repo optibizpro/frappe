@@ -1,8 +1,13 @@
+#!/bin/env python3
+
 import importlib
 import json
 import os
+import sys
 import traceback
 import warnings
+from dataclasses import dataclass
+from textwrap import dedent
 
 import click
 
@@ -12,29 +17,85 @@ import frappe.utils
 click.disable_unicode_literals_warning = True
 
 
+def FrappeClickWrapper(cls, handler):
+	class Cls(cls):
+		# only implemented on groups
+		def get_command(self, ctx, cmd_name):
+			rv = super().get_command(ctx, cmd_name)
+			if rv is not None:
+				return rv
+
+			all_commands = self.list_commands(ctx)
+			from difflib import get_close_matches
+
+			possibilities = get_close_matches(cmd_name, all_commands)
+			raise click.NoSuchOption(
+				cmd_name, possibilities=possibilities, message=f"No such command: {cmd_name}."
+			)
+
+		def make_context(self, info_name, args, parent=None, **extra):
+			try:
+				return super().make_context(info_name, args, parent=parent, **extra)
+			except (click.ClickException, click.exceptions.Exit, click.exceptions.Abort) as e:
+				raise e
+			except Exception as exc:
+				# call the handler
+				handler(self, info_name, exc)
+				sys.exit(1)
+
+		def invoke(self, ctx):
+			try:
+				return super().invoke(ctx)
+			except (click.ClickException, click.exceptions.Exit, click.exceptions.Abort) as e:
+				raise e
+			except Exception as exc:
+				# call the handler
+				handler(self, ctx.info_name, exc)
+				sys.exit(1)
+
+	return Cls
+
+
+# for type hints
+@dataclass
+class CliCtxObj:
+	sites: list[str]
+	force: bool
+	profile: bool
+	verbose: bool
+
+
+def handle_exception(cmd, info_name, exc):
+	click.echo(traceback.format_exc())
+
+	click.echo(exc)
+
+
 def main():
 	commands = get_app_groups()
 	commands.update({"get-frappe-commands": get_frappe_commands, "get-frappe-help": get_frappe_help})
-	click.Group(commands=commands)(prog_name="bench")
+	FrappeClickWrapper(click.Group, handle_exception)(commands=commands)(prog_name="bench")
 
 
-def get_app_groups():
+def get_app_groups() -> dict[str, click.Group | click.Command]:
 	"""Get all app groups, put them in main group "frappe" since bench is
 	designed to only handle that"""
-	commands = dict()
+	commands = {}
 	for app in get_apps():
-		app_commands = get_app_commands(app)
-		if app_commands:
-			commands.update(app_commands)
+		if app_commands := get_app_commands(app):
+			commands |= app_commands
+	return dict(
+		frappe=click.group(
+			name="frappe", commands=commands, cls=FrappeClickWrapper(click.Group, handle_exception)
+		)(app_group)
+	)
 
-	ret = dict(frappe=click.group(name="frappe", commands=commands)(app_group))
-	return ret
 
-
-def get_app_group(app):
-	app_commands = get_app_commands(app)
-	if app_commands:
-		return click.group(name=app, commands=app_commands)(app_group)
+def get_app_group(app: str) -> click.Group:
+	if app_commands := get_app_commands(app):
+		return click.group(
+			name=app, commands=app_commands, cls=FrappeClickWrapper(click.Group, handle_exception)
+		)(app_group)
 
 
 @click.option("--site")
@@ -43,39 +104,46 @@ def get_app_group(app):
 @click.option("--force", is_flag=True, default=False, help="Force")
 @click.pass_context
 def app_group(ctx, site=False, force=False, verbose=False, profile=False):
-	ctx.obj = {"sites": get_sites(site), "force": force, "verbose": verbose, "profile": profile}
+	ctx.obj = CliCtxObj(sites=get_sites(site), force=force, verbose=verbose, profile=profile)
 	if ctx.info_name == "frappe":
 		ctx.info_name = ""
 
 
-def get_sites(site_arg):
+def get_sites(site_arg: str) -> list[str]:
 	if site_arg == "all":
 		return frappe.utils.get_sites()
 	elif site_arg:
 		return [site_arg]
-	elif os.environ.get("FRAPPE_SITE"):
-		return [os.environ.get("FRAPPE_SITE")]
-	elif os.path.exists("currentsite.txt"):
-		with open("currentsite.txt") as f:
-			site = f.read().strip()
-			if site:
-				return [site]
+	elif env_site := os.environ.get("FRAPPE_SITE"):
+		return [env_site]
+	elif default_site := frappe.get_conf().default_site:
+		return [default_site]
+	# This is not supported, just added here for warning.
+	elif (site := frappe.read_file("currentsite.txt")) and site.strip():
+		click.secho(
+			dedent(
+				f"""
+			WARNING: currentsite.txt is not supported anymore for setting default site. Use following command to set it as default site.
+			$ bench use {site}"""
+			),
+			fg="red",
+		)
+
 	return []
 
 
-def get_app_commands(app):
-	if os.path.exists(os.path.join("..", "apps", app, app, "commands.py")) or os.path.exists(
-		os.path.join("..", "apps", app, app, "commands", "__init__.py")
-	):
-		try:
-			app_command_module = importlib.import_module(app + ".commands")
-		except Exception:
-			traceback.print_exc()
-			return []
-	else:
-		return []
-
+def get_app_commands(app: str) -> dict:
 	ret = {}
+	try:
+		app_command_module = importlib.import_module(f"{app}.commands")
+	except ModuleNotFoundError as e:
+		if e.name == f"{app}.commands":
+			return ret
+		traceback.print_exc()
+		return ret
+	except Exception:
+		traceback.print_exc()
+		return ret
 	for command in getattr(app_command_module, "commands", []):
 		ret[command.name] = command
 	return ret

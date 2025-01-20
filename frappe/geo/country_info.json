@@ -2550,15 +2550,17 @@
  },
  "Sudan": {
   "code": "sd",
+  "currency": "SDG",
   "currency_fraction": "Piastre",
   "currency_fraction_units": 100,
-  "currency_symbol": "\u00a3",
+  "currency_name": "Sudanese Pound",
+  "currency_symbol": "\u062c.\u0633.",
   "number_format": "#,###.##",
   "timezones": [
-   "Africa/Khartoum"
+    "Africa/Khartoum"
   ],
   "isd": "+249"
- },
+},
  "Suriname": {
   "code": "sr",
   "currency": "SRD",
@@ -2597,6 +2599,8 @@
   "currency_name": "Swedish Krona",
   "currency_symbol": "kr",
   "number_format": "#.###,##",
+  "date_format": "yyyy-mm-dd",
+  "time_format": "HH:mm",
   "timezones": [
    "Europe/Stockholm"
   ],
@@ -2729,6 +2733,7 @@
   ],
   "isd": "+216"
  },
+<<<<<<< HEAD
  "Turkey": {
   "code": "tr",
   "currency": "TRY",
@@ -2741,6 +2746,8 @@
   ],
   "isd": "+90"
  },
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "Turkmenistan": {
   "code": "tm",
   "currency": "TMM",
@@ -2772,6 +2779,18 @@
    "Pacific/Funafuti"
   ],
   "isd": "+688"
+ },
+  "T\u00fcrkiye": {
+  "code": "tr",
+  "currency": "TRY",
+  "currency_fraction": "Kuru\u015f",
+  "currency_fraction_units": 100,
+  "currency_symbol": "\u20ba",
+  "number_format": "#.###,##",
+  "timezones": [
+   "Europe/Istanbul"
+  ],
+  "isd": "+90"
  },
  "Uganda": {
   "code": "ug",

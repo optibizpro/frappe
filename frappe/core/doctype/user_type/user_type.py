@@ -3,13 +3,37 @@
 
 import frappe
 from frappe import _
-from frappe.config import get_modules_from_app
+from frappe.core.doctype.custom_docperm.custom_docperm import update_custom_docperm
 from frappe.model.document import Document
 from frappe.permissions import add_permission, add_user_permission
 from frappe.utils import get_link_to_form
+from frappe.utils.modules import get_modules_from_app
 
 
 class UserType(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.user_document_type.user_document_type import UserDocumentType
+		from frappe.core.doctype.user_select_document_type.user_select_document_type import (
+			UserSelectDocumentType,
+		)
+		from frappe.core.doctype.user_type_module.user_type_module import UserTypeModule
+		from frappe.types import DF
+
+		apply_user_permission_on: DF.Link | None
+		custom_select_doctypes: DF.Table[UserSelectDocumentType]
+		is_standard: DF.Check
+		role: DF.Link | None
+		select_doctypes: DF.Table[UserSelectDocumentType]
+		user_doctypes: DF.Table[UserDocumentType]
+		user_id_field: DF.Literal[None]
+		user_type_modules: DF.Table[UserTypeModule]
+	# end: auto-generated types
+
 	def validate(self):
 		self.set_modules()
 		self.add_select_perm_doctypes()
@@ -18,7 +42,11 @@ class UserType(Document):
 		super().clear_cache()
 
 		if not self.is_standard:
+<<<<<<< HEAD
 			frappe.cache().delete_value("non_standard_user_types")
+=======
+			frappe.cache.delete_value("non_standard_user_types")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	def on_update(self):
 		if self.is_standard:
@@ -119,7 +147,11 @@ class UserType(Document):
 			docperm = add_role_permissions(row.document_type, self.role)
 			values = {perm: row.get(perm, default=0) for perm in perms}
 
+<<<<<<< HEAD
 			frappe.db.set_value("Custom DocPerm", docperm, values)
+=======
+			update_custom_docperm(docperm, values)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	def add_select_perm_doctypes(self):
 		if frappe.flags.ignore_select_perm:
@@ -153,13 +185,11 @@ class UserType(Document):
 		for doctype in ["select_doctypes", "custom_select_doctypes"]:
 			for row in self.get(doctype):
 				docperm = add_role_permissions(row.document_type, self.role)
-				frappe.db.set_value(
-					"Custom DocPerm", docperm, {"select": 1, "read": 0, "create": 0, "write": 0}
-				)
+				update_custom_docperm(docperm, {"select": 1, "read": 0, "create": 0, "write": 0})
 
 	def add_role_permissions_for_file(self):
 		docperm = add_role_permissions("File", self.role)
-		frappe.db.set_value("Custom DocPerm", docperm, {"read": 1, "create": 1, "write": 1})
+		update_custom_docperm(docperm, {"read": 1, "create": 1, "write": 1})
 
 	def remove_permission_for_deleted_doctypes(self):
 		doctypes = [d.document_type for d in self.user_doctypes]
@@ -168,9 +198,7 @@ class UserType(Document):
 		doctypes.append("File")
 
 		for doctype in ["select_doctypes", "custom_select_doctypes"]:
-			for dt in self.get(doctype):
-				doctypes.append(dt.document_type)
-
+			doctypes.extend(dt.document_type for dt in self.get(doctype))
 		for perm in frappe.get_all(
 			"Custom DocPerm", filters={"role": self.role, "parent": ["not in", doctypes]}
 		):
@@ -287,7 +315,11 @@ def apply_permissions_for_non_standard_user_type(doc, method=None):
 	if not frappe.db.table_exists("User Type") or frappe.flags.in_migrate:
 		return
 
+<<<<<<< HEAD
 	user_types = frappe.cache().get_value(
+=======
+	user_types = frappe.cache.get_value(
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		"non_standard_user_types",
 		get_non_standard_user_types,
 	)
@@ -319,4 +351,6 @@ def apply_permissions_for_non_standard_user_type(doc, method=None):
 				user_doc.update_children()
 				add_user_permission(doc.doctype, doc.name, doc.get(data[1]))
 			else:
-				frappe.db.set_value("User Permission", perm_data[0], "user", doc.get(data[1]))
+				user_perm = frappe.get_doc("User Permission", perm_data[0])
+				user_perm.user = doc.get(data[1])
+				user_perm.save(ignore_permissions=True)

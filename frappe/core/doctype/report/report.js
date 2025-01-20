@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+// Copyright (c) 2022, Frappe Technologies and contributors
+// For license information, please see license.txt
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 frappe.ui.form.on("Report", {
 	refresh: function (frm) {
 		if (frm.doc.is_standard === "Yes" && !frappe.boot.developer_mode) {
@@ -8,6 +14,7 @@ frappe.ui.form.on("Report", {
 		}
 
 		let doc = frm.doc;
+<<<<<<< HEAD
 		frm.add_custom_button(
 			__("Show Report"),
 			function () {
@@ -51,6 +58,45 @@ frappe.ui.form.on("Report", {
 			);
 		}
 
+=======
+		if (!doc.__islocal) {
+			frm.add_custom_button(
+				__("Show Report"),
+				function () {
+					switch (doc.report_type) {
+						case "Report Builder":
+							frappe.set_route("List", doc.ref_doctype, "Report", doc.name);
+							break;
+						case "Query Report":
+							frappe.set_route("query-report", doc.name);
+							break;
+						case "Script Report":
+							frappe.set_route("query-report", doc.name);
+							break;
+						case "Custom Report":
+							frappe.set_route("query-report", doc.name);
+							break;
+					}
+				},
+				"fa fa-table"
+			);
+		}
+
+		if (doc.is_standard === "Yes" && frm.perm[0].write) {
+			frm.add_custom_button(
+				doc.disabled ? __("Enable Report") : __("Disable Report"),
+				function () {
+					frm.call("toggle_disable", {
+						disable: doc.disabled ? 0 : 1,
+					}).then(() => {
+						frm.reload_doc();
+					});
+				},
+				doc.disabled ? "fa fa-check" : "fa fa-off"
+			);
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		frm.set_query("ref_doctype", () => {
 			return {
 				filters: {

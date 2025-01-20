@@ -13,15 +13,25 @@ sass.render(
 	},
 	function (err, result) {
 		if (err) {
+<<<<<<< HEAD
 			console.error(err.formatted); // eslint-disable-line
+=======
+			console.error(err.formatted);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			return;
 		}
 
 		fs.writeFile(output_path, result.css, function (err) {
 			if (!err) {
+<<<<<<< HEAD
 				console.log(output_path); // eslint-disable-line
 			} else {
 				console.error(err); // eslint-disable-line
+=======
+				console.log(output_path);
+			} else {
+				console.error(err);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			}
 		});
 	}

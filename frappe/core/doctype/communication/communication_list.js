@@ -13,11 +13,15 @@ frappe.listview_settings["Communication"] = {
 		"communication_date",
 	],
 
-	filters: [["status", "=", "Open"]],
-
 	onload: function (list_view) {
 		let method = "frappe.email.inbox.create_email_flag_queue";
 
+<<<<<<< HEAD
+	onload: function (list_view) {
+		let method = "frappe.email.inbox.create_email_flag_queue";
+
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		list_view.page.add_menu_item(__("Mark as Read"), function () {
 			list_view.call_for_selected_items(method, { action: "Read" });
 		});

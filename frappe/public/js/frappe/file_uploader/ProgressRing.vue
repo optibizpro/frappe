@@ -39,6 +39,7 @@
 		</text>
 	</svg>
 </template>
+<<<<<<< HEAD
 <script>
 export default {
 	name: "ProgressRing",
@@ -64,7 +65,31 @@ export default {
 		},
 	},
 };
+=======
+
+<script setup>
+import { computed, ref } from "vue";
+
+// props
+const props = defineProps({
+	primary: String,
+	secondary: String,
+	radius: Number,
+	progress: Number,
+	stroke: Number,
+});
+
+// variables
+let normalizedRadius = ref(props.radius - props.stroke * 2);
+let circumference = ref(normalizedRadius.value * 2 * Math.PI);
+
+// computed
+let strokeDashoffset = computed(() => {
+	return circumference.value - (props.progress / 100) * circumference.value;
+});
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 </script>
+
 <style scoped>
 circle {
 	transition: stroke-dashoffset 0.35s;

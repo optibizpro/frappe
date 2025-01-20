@@ -3,6 +3,8 @@
 
 import os
 
+import click
+
 import frappe
 from frappe.core.doctype.data_import.data_import import export_json, import_doc
 from frappe.utils.deprecations import deprecation_warning
@@ -37,7 +39,11 @@ def import_fixtures(app):
 
 		file_path = frappe.get_app_path(app, "fixtures", fname)
 		try:
+<<<<<<< HEAD
 			import_doc(file_path)
+=======
+			import_doc(file_path, sort=True)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		except (ImportError, frappe.DoesNotExistError) as e:
 			# fixture syncing for missing doctypes
 			print(f"Skipping fixture syncing from the file {fname}. Reason: {e}")
@@ -53,6 +59,7 @@ def import_custom_scripts(app):
 		if not fname.endswith(".js"):
 			continue
 
+<<<<<<< HEAD
 		doctype = fname.rsplit(".", 1)[0]
 		if not frappe.db.exists("DocType", doctype):
 			print(
@@ -76,6 +83,12 @@ def import_custom_scripts(app):
 				client_script = frappe.new_doc("Client Script")
 				client_script.update({"__newname": doctype, "dt": doctype, "script": script})
 				client_script.insert()
+=======
+		click.secho(
+			f"Importing Client Script `{fname}` from `{scripts_folder}` is not supported. Convert the client script to fixture.",
+			fg="red",
+		)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 def export_fixtures(app=None):
@@ -85,20 +98,33 @@ def export_fixtures(app=None):
 	else:
 		apps = frappe.get_installed_apps()
 	for app in apps:
-		for fixture in frappe.get_hooks("fixtures", app_name=app):
+		fixture_auto_order = bool(next(iter(frappe.get_hooks("fixture_auto_order", app_name=app)), False))
+		fixtures = frappe.get_hooks("fixtures", app_name=app)
+		prefix = None
+		for index, fixture in enumerate(fixtures, start=1):
 			filters = None
 			or_filters = None
 			if isinstance(fixture, dict):
 				filters = fixture.get("filters")
 				or_filters = fixture.get("or_filters")
+				prefix = fixture.get("prefix")
 				fixture = fixture.get("doctype") or fixture.get("dt")
 			print(f"Exporting {fixture} app {app} filters {(filters if filters else or_filters)}")
 			if not os.path.exists(frappe.get_app_path(app, "fixtures")):
 				os.mkdir(frappe.get_app_path(app, "fixtures"))
 
+			filename = frappe.scrub(fixture)
+			if prefix:
+				filename = f"{prefix}_{filename}"
+			if fixture_auto_order:
+				number_of_digits = len(str(len(fixtures)))
+				# add zero padding so files can be sorted lexicographically with filename.
+				file_number = str(index).zfill(number_of_digits)
+				filename = f"{file_number}_{filename}"
+
 			export_json(
 				fixture,
-				frappe.get_app_path(app, "fixtures", frappe.scrub(fixture) + ".json"),
+				frappe.get_app_path(app, "fixtures", filename + ".json"),
 				filters=filters,
 				or_filters=or_filters,
 				order_by="idx asc, creation asc",

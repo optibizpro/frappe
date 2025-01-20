@@ -152,6 +152,14 @@ frappe.ui.keys.AltShortcutGroup = class AltShortcutGroup {
 	}
 
 	underline_text(shortcut) {
+<<<<<<< HEAD
+=======
+		if (frappe.boot.lang === "eo") {
+			// The language code "eo" is used to trigger the In-Context Translation feature.
+			// In this case we don't want shortcuts to rip apart the ID of the translatable text.
+			return;
+		}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		shortcut.$text_el.attr("data-label", encodeURIComponent(shortcut.text));
 		let underline_el_found = false;
 		let text_html = shortcut.text
@@ -164,6 +172,10 @@ frappe.ui.keys.AltShortcutGroup = class AltShortcutGroup {
 				return letter;
 			})
 			.join("");
+<<<<<<< HEAD
+=======
+		text_html = `<span>${text_html}</span>`;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		let original_text_html = shortcut.$text_el.html();
 		text_html = original_text_html.replace(shortcut.text.trim(), text_html.trim());
 		shortcut.$text_el.html(text_html);

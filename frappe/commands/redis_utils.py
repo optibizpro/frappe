@@ -3,7 +3,10 @@ import os
 import click
 
 import frappe
+<<<<<<< HEAD
 from frappe.utils.redis_queue import RedisQueue
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 @click.command("create-rq-users")
@@ -21,6 +24,10 @@ def create_rq_users(set_admin_password=False, use_rq_auth=False):
 	and app config is used by app while connecting to redis server.
 	"""
 	from frappe.installer import update_site_config
+<<<<<<< HEAD
+=======
+	from frappe.utils.redis_queue import RedisQueue
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	acl_file_path = os.path.abspath("../config/redis_queue.acl")
 

@@ -93,7 +93,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2023-05-30 14:33:31.994738",
+=======
+ "modified": "2024-03-23 16:02:15.380899",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Custom HTML Block",
@@ -106,7 +110,11 @@
    "print": 1,
    "read": 1,
    "report": 1,
+<<<<<<< HEAD
    "role": "All",
+=======
+   "role": "Desk User",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
    "share": 1
   },
   {
@@ -118,7 +126,11 @@
    "print": 1,
    "read": 1,
    "report": 1,
+<<<<<<< HEAD
    "role": "All",
+=======
+   "role": "Desk User",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
    "share": 1,
    "write": 1
   },
@@ -147,7 +159,11 @@
    "write": 1
   }
  ],
+<<<<<<< HEAD
  "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

@@ -41,7 +41,11 @@ context("Data Control", () => {
 	it("check custom formatters", () => {
 		cy.visit(`/app/doctype/User`);
 		cy.get(
+<<<<<<< HEAD
 			'[data-fieldname="fields"] .grid-row[data-idx="2"] [data-fieldname="fieldtype"] .static-area'
+=======
+			'[data-fieldname="fields"] .grid-row[data-idx="3"] [data-fieldname="fieldtype"] .static-area'
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		).should("have.text", "Section Break");
 	});
 

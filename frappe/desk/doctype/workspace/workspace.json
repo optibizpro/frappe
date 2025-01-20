@@ -14,8 +14,14 @@
   "for_user",
   "parent_page",
   "module",
+  "app",
+  "type",
+  "link_type",
+  "link_to",
+  "external_link",
   "column_break_3",
   "icon",
+  "indicator_color",
   "restrict_to_domain",
   "hide_custom",
   "public",
@@ -47,6 +53,7 @@
   {
    "collapsible": 1,
    "collapsible_depends_on": "charts",
+   "depends_on": "eval:doc.type===\"Workspace\"",
    "fieldname": "tab_break_2",
    "fieldtype": "Tab Break",
    "label": "Dashboards"
@@ -86,6 +93,7 @@
   {
    "collapsible": 1,
    "collapsible_depends_on": "shortcuts",
+   "depends_on": "eval:doc.type===\"Workspace\"",
    "fieldname": "tab_break_15",
    "fieldtype": "Tab Break",
    "label": "Shortcuts"
@@ -93,6 +101,7 @@
   {
    "collapsible": 1,
    "collapsible_depends_on": "links",
+   "depends_on": "eval:doc.type===\"Workspace\"",
    "fieldname": "tab_break_18",
    "fieldtype": "Tab Break",
    "label": "Link Cards"
@@ -100,8 +109,7 @@
   {
    "fieldname": "for_user",
    "fieldtype": "Data",
-   "label": "For User",
-   "read_only": 1
+   "label": "For User"
   },
   {
    "default": "0",
@@ -141,9 +149,15 @@
   },
   {
    "fieldname": "parent_page",
+<<<<<<< HEAD
    "fieldtype": "Data",
    "label": "Parent Page",
    "read_only": 1
+=======
+   "fieldtype": "Link",
+   "label": "Parent Page",
+   "options": "Workspace"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
   },
   {
    "default": "[]",
@@ -170,6 +184,7 @@
    "label": "Roles"
   },
   {
+   "depends_on": "eval:doc.type===\"Workspace\"",
    "fieldname": "quick_lists_tab",
    "fieldtype": "Tab Break",
    "label": "Quick Lists"
@@ -187,6 +202,10 @@
    "label": "Is Hidden"
   },
   {
+<<<<<<< HEAD
+=======
+   "depends_on": "eval:doc.type===\"Workspace\"",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
    "fieldname": "number_cards_tab",
    "fieldtype": "Tab Break",
    "label": "Number Cards"
@@ -198,6 +217,10 @@
    "options": "Workspace Number Card"
   },
   {
+<<<<<<< HEAD
+=======
+   "depends_on": "eval:doc.type===\"Workspace\"",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
    "fieldname": "custom_blocks_tab",
    "fieldtype": "Tab Break",
    "label": "Custom Blocks"
@@ -207,11 +230,62 @@
    "fieldtype": "Table",
    "label": "Custom Blocks",
    "options": "Workspace Custom Block"
+<<<<<<< HEAD
+=======
+  },
+  {
+   "depends_on": "doc.icon",
+   "fieldname": "indicator_color",
+   "fieldtype": "Select",
+   "label": "Indicator Color",
+   "options": "green\ncyan\nblue\norange\nyellow\ngray\ngrey\nred\npink\ndarkgrey\npurple\nlight-blue"
+  },
+  {
+   "fieldname": "app",
+   "fieldtype": "Data",
+   "label": "App"
+  },
+  {
+   "default": "Workspace",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Workspace\nLink\nURL",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.type==\"Link\"",
+   "fieldname": "link_type",
+   "fieldtype": "Select",
+   "label": "Link Type",
+   "mandatory_depends_on": "eval:doc.type==\"Link\"",
+   "options": "DocType\nPage\nReport"
+  },
+  {
+   "depends_on": "eval:doc.type==\"Link\"",
+   "fieldname": "link_to",
+   "fieldtype": "Dynamic Link",
+   "label": "Link To",
+   "mandatory_depends_on": "eval:doc.type==\"Link\"",
+   "options": "link_type"
+  },
+  {
+   "depends_on": "eval:doc.type==\"URL\"",
+   "fieldname": "external_link",
+   "fieldtype": "Data",
+   "label": "External Link",
+   "mandatory_depends_on": "eval:doc.type==\"URL\"",
+   "options": "URL"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
   }
  ],
  "in_create": 1,
  "links": [],
+<<<<<<< HEAD
  "modified": "2023-06-08 14:52:38.110224",
+=======
+ "modified": "2024-09-26 15:47:24.710881",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "modified_by": "Administrator",
  "module": "Desk",
  "name": "Workspace",
@@ -229,9 +303,24 @@
    "role": "Workspace Manager",
    "share": 1,
    "write": 1
+<<<<<<< HEAD
+=======
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Desk User",
+   "share": 1,
+   "write": 1
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
   }
  ],
- "sort_field": "modified",
+ "sort_field": "creation",
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1

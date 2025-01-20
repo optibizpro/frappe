@@ -19,6 +19,10 @@ module.exports = {
 				"revert",
 				"style",
 				"test",
+<<<<<<< HEAD
+=======
+				"deprecate", // deprecation decision
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			],
 		],
 	},

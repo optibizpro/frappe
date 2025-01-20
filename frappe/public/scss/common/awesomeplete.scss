@@ -1,5 +1,7 @@
 // REDESIGN-TODO: Review
 .awesomplete {
+	position: relative;
+
 	[hidden] {
 		display: none;
 	}
@@ -12,15 +14,23 @@
 		display: block;
 	}
 
+<<<<<<< HEAD
 	& > ul:empty {
 		display: none;
 	}
 
 	& > ul {
+=======
+	& > [role="listbox"] {
+		&:empty {
+			display: none;
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		position: absolute;
 		width: 100%;
 		list-style: none;
-		background-color: var(--fg-color);
+		background-color: var(--bg-color);
 		max-height: unquote("min(60vh, 300px)");
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -33,9 +43,14 @@
 		z-index: 4;
 		min-width: 250px;
 
+<<<<<<< HEAD
 		& > li {
+=======
+		& > li,
+		& > [role="option"] {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			cursor: pointer;
-			font-size: var(--text-md);
+			@include get_textstyle("sm", "regular");
 			padding: var(--padding-sm);
 			color: var(--text-color);
 			border-radius: var(--border-radius);
@@ -49,8 +64,11 @@
 				overflow-y: clip;
 				text-overflow: ellipsis;
 			}
-		}
+			strong {
+				@include get_textstyle("sm", "bold");
+			}
 
+<<<<<<< HEAD
 		& > li .link-option {
 			font-weight: normal;
 		}
@@ -59,6 +77,18 @@
 		& > li[aria-selected="true"] {
 			background-color: var(--awesomplete-hover-bg);
 			color: var(--text-color);
+=======
+			.link-option {
+				font-weight: normal;
+				color: var(--text-color);
+			}
+
+			&:hover,
+			&[aria-selected="true"] {
+				background-color: var(--awesomplete-hover-bg);
+				color: var(--text-color);
+			}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		}
 
 		a:hover {

@@ -70,9 +70,13 @@ frappe.ui.form.ControlMultiSelect = class ControlMultiSelect extends (
 
 	get_values() {
 		const value = this.get_value() || "";
+<<<<<<< HEAD
 		const values = value.split(/\s*,\s*/).filter((d) => d);
 
 		return values;
+=======
+		return value.split(/\s*,\s*/).filter((d) => d);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	get_data() {

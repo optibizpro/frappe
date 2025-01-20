@@ -11,6 +11,7 @@ The following 3rd-party software packages may be used by or distributed with <ht
 - Leaflet.Locate - (c) 2016 Dominik Moritz
 - Leaflet.draw - (c) 2012-2017, Jacob Toye, Jon West, Smartrak
 - Leaflet.EasyButton - MIT License, (C) 2014 Daniel Montague
+- Identicons - MIT License, (C) 2015, <https://github.com/evuez/identicons>
 
 ### Icon Fonts
 
@@ -21,10 +22,6 @@ The following 3rd-party software packages may be used by or distributed with <ht
   - Font License: SIL OFL 1.1 (<http://scripts.sil.org/OFL>)
   - Code License: MIT (<http://choosealicense.com/licenses/mit/>)
 - Inter - SIL Open Font License, 1.1 (c) 2020 Rasmus Andersson (<https://github.com/rsms/inter>)
-
-### IP Address Database
-
-- GeoIP: (c) 2014 MaxMind, <http://dev.maxmind.com/geoip/geoip2/downloadable/>
 
 ---
 

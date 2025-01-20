@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Frappe Technologies and contributors
 # License: MIT. See LICENSE
 
+import contextlib
 import json
 from datetime import datetime, timedelta
 from random import randint
@@ -16,12 +17,41 @@ from frappe.utils.background_jobs import enqueue, is_job_enqueued
 
 
 class ScheduledJobType(Document):
-	def autoname(self):
-		self.name = ".".join(self.method.split(".")[-2:])
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.types import DF
+
+		create_log: DF.Check
+		cron_format: DF.Data
+		frequency: DF.Literal[
+			"All",
+			"Hourly",
+			"Hourly Long",
+			"Daily",
+			"Daily Long",
+			"Weekly",
+			"Weekly Long",
+			"Monthly",
+			"Monthly Long",
+			"Cron",
+			"Yearly",
+			"Annual",
+		]
+		last_execution: DF.Datetime | None
+		method: DF.Data
+		next_execution: DF.Datetime | None
+		scheduler_event: DF.Link | None
+		server_script: DF.Link | None
+		stopped: DF.Check
+	# end: auto-generated types
 
 	def validate(self):
-		if self.frequency != "All":
-			# force logging for all events other than continuous ones (ALL)
+		if self.frequency not in ("All", "Cron"):
+			# force logging for all events other than All/Cron
 			self.create_log = 1
 
 		if self.frequency == "Cron":
@@ -38,12 +68,17 @@ class ScheduledJobType(Document):
 	def enqueue(self, force=False) -> bool:
 		# enqueue event if last execution is done
 		if self.is_event_due() or force:
-			if frappe.flags.enqueued_jobs:
-				frappe.flags.enqueued_jobs.append(self.method)
-
-			if frappe.flags.execute_job:
-				self.execute()
+			if not self.is_job_in_queue():
+				enqueue(
+					"frappe.core.doctype.scheduled_job_type.scheduled_job_type.run_scheduled_job",
+					queue=self.get_queue_name(),
+					job_type=self.method,  # Not actually used, kept for logging
+					job_id=self.rq_job_id,
+					scheduled_job_type=self.name,
+				)
+				return True
 			else:
+<<<<<<< HEAD
 				if not self.is_job_in_queue():
 					enqueue(
 						"frappe.core.doctype.scheduled_job_type.scheduled_job_type.run_scheduled_job",
@@ -56,6 +91,12 @@ class ScheduledJobType(Document):
 					frappe.logger("scheduler").error(
 						f"Skipped queueing {self.method} because it was found in queue for {frappe.local.site}"
 					)
+=======
+				frappe.logger("scheduler").error(
+					f"Skipped queueing {self.method} because it was found in queue for {frappe.local.site}"
+				)
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		return False
 
 	def is_event_due(self, current_time=None):
@@ -69,7 +110,11 @@ class ScheduledJobType(Document):
 	@property
 	def rq_job_id(self):
 		"""Unique ID created to deduplicate jobs with single RQ call."""
+<<<<<<< HEAD
 		return f"scheduled_job::{self.method}"
+=======
+		return f"scheduled_job::{self.name}"
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	@property
 	def next_execution(self):
@@ -87,7 +132,7 @@ class ScheduledJobType(Document):
 			"Daily Long": "0 0 * * *",
 			"Hourly": "0 * * * *",
 			"Hourly Long": "0 * * * *",
-			"All": "0/" + str((frappe.get_conf().scheduler_interval or 240) // 60) + " * * * *",
+			"All": f"*/{(frappe.get_conf().scheduler_interval or 240) // 60} * * * *",
 		}
 
 		if not self.cron_format:
@@ -106,6 +151,10 @@ class ScheduledJobType(Document):
 		return next_execution + timedelta(seconds=jitter)
 
 	def execute(self):
+		if frappe.job:
+			frappe.job.frequency = self.frequency
+			frappe.job.cron_format = self.cron_format
+
 		self.scheduler_log = None
 		try:
 			self.log_status("Start")
@@ -134,11 +183,13 @@ class ScheduledJobType(Document):
 			return
 		if not self.scheduler_log:
 			self.scheduler_log = frappe.get_doc(
-				dict(doctype="Scheduled Job Log", scheduled_job_type=self.name)
+				doctype="Scheduled Job Log", scheduled_job_type=self.name
 			).insert(ignore_permissions=True)
 		self.scheduler_log.db_set("status", status)
+		if frappe.debug_log:
+			self.scheduler_log.db_set("debug_log", "\n".join(frappe.debug_log))
 		if status == "Failed":
-			self.scheduler_log.db_set("details", frappe.get_traceback())
+			self.scheduler_log.db_set("details", frappe.get_traceback(with_context=True))
 		if status == "Start":
 			self.db_set("last_execution", now_datetime(), update_modified=False)
 		frappe.db.commit()
@@ -158,10 +209,10 @@ def execute_event(doc: str):
 	return doc
 
 
-def run_scheduled_job(job_type: str):
+def run_scheduled_job(scheduled_job_type: str, job_type: str | None = None):
 	"""This is a wrapper function that runs a hooks.scheduler_events method"""
 	try:
-		frappe.get_doc("Scheduled Job Type", dict(method=job_type)).execute()
+		frappe.get_doc("Scheduled Job Type", scheduled_job_type).execute()
 	except Exception:
 		print(frappe.get_traceback())
 
@@ -169,8 +220,8 @@ def run_scheduled_job(job_type: str):
 def sync_jobs(hooks: dict | None = None):
 	frappe.reload_doc("core", "doctype", "scheduled_job_type")
 	scheduler_events = hooks or frappe.get_hooks("scheduler_events")
-	all_events = insert_events(scheduler_events)
-	clear_events(all_events)
+	insert_events(scheduler_events)
+	clear_events(scheduler_events)
 
 
 def insert_events(scheduler_events: dict) -> list:
@@ -225,16 +276,32 @@ def insert_single_event(frequency: str, event: str, cron_format: str | None = No
 		try:
 			frappe.db.savepoint(savepoint)
 			doc.insert()
-		except frappe.DuplicateEntryError:
+		except frappe.UniqueValidationError:
 			frappe.db.rollback(save_point=savepoint)
 			doc.delete()
 			doc.insert()
 
 
-def clear_events(all_events: list):
-	for event in frappe.get_all("Scheduled Job Type", fields=["name", "method", "server_script"]):
-		is_server_script = event.server_script
-		is_defined_in_hooks = event.method in all_events
+def clear_events(scheduler_events: dict):
+	def event_exists(event) -> bool:
+		if event.server_script:
+			return True
 
-		if not (is_defined_in_hooks or is_server_script):
+		if event.scheduler_event:
+			return True
+
+		freq = frappe.scrub(event.frequency)
+		if freq == "cron":
+			return event.method in scheduler_events.get(freq, {}).get(event.cron_format, [])
+		else:
+			return event.method in scheduler_events.get(freq, [])
+
+	for event in frappe.get_all("Scheduled Job Type", fields=["*"]):
+		if not event_exists(event):
 			frappe.delete_doc("Scheduled Job Type", event.name)
+
+
+def on_doctype_update():
+	frappe.db.add_unique(
+		"Scheduled Job Type", ["frequency", "cron_format", "method"], constraint_name="unique_scheduled_job"
+	)

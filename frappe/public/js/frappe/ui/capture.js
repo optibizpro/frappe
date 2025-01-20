@@ -22,9 +22,13 @@ frappe._.get_data_uri = (element) => {
 	const context = $canvas[0].getContext("2d");
 	context.drawImage(element, 0, 0, width, height);
 
+<<<<<<< HEAD
 	const data_uri = $canvas[0].toDataURL("image/png");
 
 	return data_uri;
+=======
+	return $canvas[0].toDataURL("image/png");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 };
 
 function get_file_input() {
@@ -32,6 +36,10 @@ function get_file_input() {
 	input.setAttribute("type", "file");
 	input.setAttribute("accept", "image/*");
 	input.setAttribute("multiple", "");
+
+	// Make sure that the input exists in the DOM
+	input.classList.add("visually-hidden");
+	document.body.appendChild(input);
 
 	return input;
 }
@@ -127,6 +135,10 @@ frappe.ui.Capture = class {
 				let f = await read(file);
 				me.images.push(f);
 			}
+
+			// Remove the input from the DOM
+			me.input.remove();
+			me.input = null;
 
 			me.render_preview();
 			me.dialog.show();

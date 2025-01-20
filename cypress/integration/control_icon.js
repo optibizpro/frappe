@@ -42,14 +42,22 @@ context("Control Icon", () => {
 
 	it("search for icon and clear search input", () => {
 		let search_text = "ed";
+<<<<<<< HEAD
 		cy.get(".icon-picker").findByRole("searchbox").click().type(search_text);
+=======
+		cy.get(".icon-picker").get(".search-icons > input").click().type(search_text);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		cy.get(".icon-section .icon-wrapper:not(.hidden)").then((i) => {
 			cy.get(`.icon-section .icon-wrapper[id*='${search_text}']`).then((icons) => {
 				expect(i.length).to.equal(icons.length);
 			});
 		});
 
+<<<<<<< HEAD
 		cy.get(".icon-picker").findByRole("searchbox").clear().blur();
+=======
+		cy.get(".icon-picker").get(".search-icons > input").clear().blur();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		cy.get(".icon-section .icon-wrapper").should("not.have.class", "hidden");
 	});
 });

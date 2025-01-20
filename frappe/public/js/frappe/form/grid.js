@@ -71,6 +71,7 @@ export default class Grid {
 						<div class="grid-heading-row"></div>
 						<div class="grid-body">
 							<div class="rows"></div>
+<<<<<<< HEAD
 							<div class="grid-empty text-center">
 								<img
 									src="/assets/frappe/images/ui-states/grid-empty-state.svg"
@@ -80,11 +81,21 @@ export default class Grid {
 								${__("No Data")}
 							</div>
 						</div>
+=======
+							<div class="grid-empty text-center text-extra-muted">
+								${__("No rows")}
+							</div>
+						</div>
+					</div>
+					<div class="grid-scroll-bar">
+						<div class="grid-scroll-bar-rows"></div>
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 					</div>
 				</div>
 				<div class="small form-clickable-section grid-footer">
 					<div class="flex justify-between">
 						<div class="grid-buttons">
+<<<<<<< HEAD
 							<button class="btn btn-xs btn-danger grid-remove-rows hidden"
 								data-action="delete_rows">
 								${__("Delete")}
@@ -100,14 +111,38 @@ export default class Grid {
 							<button class="btn btn-xs btn-secondary grid-add-row">
 								${__("Add Row")}
 							</button>
+=======
+							<button type="button" class="btn btn-xs btn-danger grid-remove-rows hidden"
+								data-action="delete_rows">
+								${__("Delete")}
+							</button>
+							<button type="button" class="btn btn-xs btn-danger grid-remove-all-rows hidden"
+								data-action="delete_all_rows">
+								${__("Delete All")}
+							</button>
+							<!-- hack to allow firefox include this in tabs -->
+							<button type="button" class="btn btn-xs btn-secondary grid-add-row">
+								${__("Add Row")}
+							</button>
+							<button type="button" class="grid-add-multiple-rows btn btn-xs btn-secondary hidden">
+								${__("Add Multiple")}</a>
+							</button>
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 						</div>
 						<div class="grid-pagination">
 						</div>
 						<div class="grid-bulk-actions text-right">
+<<<<<<< HEAD
 							<button class="grid-download btn btn-xs btn-secondary hidden">
 								${__("Download")}
 							</button>
 							<button class="grid-upload btn btn-xs btn-secondary hidden">
+=======
+							<button type="button" class="grid-download btn btn-xs btn-secondary hidden">
+								${__("Download")}
+							</button>
+							<button type="button" class="grid-upload btn btn-xs btn-secondary hidden">
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 								${__("Upload")}
 							</button>
 						</div>
@@ -125,6 +160,56 @@ export default class Grid {
 
 		this.form_grid = this.wrapper.find(".form-grid");
 
+		if (this.form_grid) {
+			this.form_grid.on("wheel", (e) => {
+				const isTrackpad = Math.abs(e.originalEvent.wheelDeltaY) < 50;
+				const delta = e.originalEvent.deltaX;
+				const scroll_bar = this.wrapper.find(".grid-scroll-bar");
+
+				if (isTrackpad) {
+					scroll_bar.scrollLeft(scroll_bar.scrollLeft() + delta);
+				} else {
+					scroll_bar.scrollLeft(scroll_bar.scrollLeft() + delta * 4);
+				}
+
+				// prevent default behaviour when it is scrolled horizontally
+				if (e.originalEvent.deltaX != 0) {
+					e.preventDefault();
+				}
+			});
+			let touchStartX = 0;
+			let touchMoveX = 0;
+			let isTouchScrolling = false;
+
+			// Handle touch start
+			this.form_grid.on("touchstart", (e) => {
+				const touch = e.originalEvent.touches[0];
+				touchStartX = touch.pageX;
+				isTouchScrolling = true;
+			});
+
+			// Handle touch move
+			this.form_grid.on("touchmove", (e) => {
+				if (!isTouchScrolling) return;
+
+				const touch = e.originalEvent.touches[0];
+				touchMoveX = touch.pageX;
+
+				const scrollBar = this.wrapper.find(".grid-scroll-bar");
+				const deltaX = touchStartX - touchMoveX;
+
+				scrollBar.scrollLeft(scrollBar.scrollLeft() + deltaX);
+
+				touchStartX = touchMoveX;
+
+				e.preventDefault();
+			});
+
+			// Handle touch end
+			this.form_grid.on("touchend", () => {
+				isTouchScrolling = false;
+			});
+		}
 		this.setup_add_row();
 
 		this.setup_grid_pagination();
@@ -158,7 +243,11 @@ export default class Grid {
 		if (
 			!this.df.label ||
 			!this.df?.documentation_url ||
+<<<<<<< HEAD
 			in_list(unsupported_fieldtypes, this.df.fieldtype)
+=======
+			unsupported_fieldtypes.includes(this.df.fieldtype)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		)
 			return;
 
@@ -310,6 +399,11 @@ export default class Grid {
 		this.remove_all_rows_button.toggleClass("hidden", !show_delete_all_btn);
 	}
 
+	debounced_refresh_remove_rows_button = frappe.utils.debounce(
+		this.refresh_remove_rows_button,
+		100
+	);
+
 	get_selected() {
 		return (this.grid_rows || [])
 			.map((row) => {
@@ -362,6 +456,12 @@ export default class Grid {
 			grid: this,
 			show_search: true,
 		});
+		this.header_search.row.addClass("filter-row");
+		if (this.header_search.show_search || this.header_search.show_search_row()) {
+			$(this.parent).find(".grid-heading-row").addClass("with-filter");
+		} else {
+			$(this.parent).find(".grid-heading-row").removeClass("with-filter");
+		}
 
 		this.filter_applied && this.update_search_columns();
 	}
@@ -466,12 +566,13 @@ export default class Grid {
 			if (d.name === undefined) {
 				d.name = "row " + d.idx;
 			}
+			let grid_row;
 			if (this.grid_rows[ri] && !append_row) {
-				var grid_row = this.grid_rows[ri];
+				grid_row = this.grid_rows[ri];
 				grid_row.doc = d;
 				grid_row.refresh();
 			} else {
-				var grid_row = new GridRow({
+				grid_row = new GridRow({
 					parent: $rows,
 					parent_df: this.df,
 					docfields: this.docfields,
@@ -673,7 +774,11 @@ export default class Grid {
 	get_modal_data() {
 		return this.df.get_data
 			? this.df.get_data().filter((data) => {
+<<<<<<< HEAD
 					if (!this.deleted_docs || !in_list(this.deleted_docs, data.name)) {
+=======
+					if (!this.deleted_docs || !this.deleted_docs.includes(data.name)) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 						return data;
 					}
 			  })
@@ -940,7 +1045,11 @@ export default class Grid {
 				!df.hidden &&
 				(this.editable_fields || df.in_list_view) &&
 				((this.frm && this.frm.get_perm(df.permlevel, "read")) || !this.frm) &&
+<<<<<<< HEAD
 				!in_list(frappe.model.layout_fields, df.fieldtype)
+=======
+				!frappe.model.layout_fields.includes(df.fieldtype)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			) {
 				if (df.columns) {
 					df.colsize = df.columns;
@@ -962,7 +1071,10 @@ export default class Grid {
 				}
 
 				total_colsize += df.colsize;
+<<<<<<< HEAD
 				if (total_colsize > 11) return false;
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				this.visible_columns.push([df, df.colsize]);
 			}
 		}
@@ -1197,7 +1309,12 @@ export default class Grid {
 		const $wrapper = position === "top" ? this.grid_custom_buttons : this.grid_buttons;
 		let $btn = this.custom_buttons[label];
 		if (!$btn) {
+<<<<<<< HEAD
 			$btn = $(`<button class="btn btn-secondary btn-xs btn-custom">${__(label)}</button>`)
+=======
+			$btn = $(`<button type="button" class="btn btn-secondary btn-xs btn-custom">`)
+				.html(__(label))
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 				.prependTo($wrapper)
 				.on("click", click);
 			this.custom_buttons[label] = $btn;

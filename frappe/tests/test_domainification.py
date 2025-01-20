@@ -8,10 +8,17 @@ from frappe.desk.doctype.desktop_icon.desktop_icon import (
 	clear_desktop_icons_cache,
 	get_desktop_icons,
 )
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDomainification(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestDomainification(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def setUp(self):
 		# create test domain
 		self.new_domain("_Test Domain 1")

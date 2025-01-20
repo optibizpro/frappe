@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 """ Basic telemetry for improving apps.
+=======
+"""Basic telemetry for improving apps.
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 WARNING: Everything in this file should be treated "internal" and is subjected to change or get
 removed without any warning.
 """
+<<<<<<< HEAD
+=======
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 from contextlib import suppress
 
 import frappe
@@ -16,6 +24,7 @@ POSTHOG_HOST_FIELD = "posthog_host"
 
 
 def add_bootinfo(bootinfo):
+<<<<<<< HEAD
 	if not frappe.get_system_settings("enable_telemetry"):
 		return
 
@@ -23,13 +32,27 @@ def add_bootinfo(bootinfo):
 	bootinfo.posthog_project_id = frappe.conf.get(POSTHOG_PROJECT_FIELD)
 	bootinfo.enable_telemetry = True
 	bootinfo.telemetry_site_age = site_age()
+=======
+	bootinfo.telemetry_site_age = site_age()
+
+	if not frappe.get_system_settings("enable_telemetry"):
+		return
+
+	bootinfo.enable_telemetry = True
+	bootinfo.posthog_host = frappe.conf.get(POSTHOG_HOST_FIELD)
+	bootinfo.posthog_project_id = frappe.conf.get(POSTHOG_PROJECT_FIELD)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 
 @site_cache(ttl=60 * 60 * 12)
 def site_age():
 	try:
 		est_creation = frappe.db.get_value("User", "Administrator", "creation")
+<<<<<<< HEAD
 		return (getdate() - getdate(est_creation)).days
+=======
+		return (getdate() - getdate(est_creation)).days + 1
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	except Exception:
 		pass
 

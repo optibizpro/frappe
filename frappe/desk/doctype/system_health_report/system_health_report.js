@@ -25,10 +25,17 @@ frappe.ui.form.on("System Health Report", {
 			frm.set_value("socketio_ping_check", "Pass");
 			frm.set_value(
 				"socketio_transport_mode",
+<<<<<<< HEAD
 				frappe.socketio.socket.io?.engine?.transport?.name
 			);
 		});
 		frappe.socketio.socket.emit("ping");
+=======
+				frappe.realtime.socket.io?.engine?.transport?.name
+			);
+		});
+		frappe.realtime.emit("ping");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		frm.disable_save();
 		frm.trigger("setup_highlight");
 	},

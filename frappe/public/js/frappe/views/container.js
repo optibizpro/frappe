@@ -41,11 +41,15 @@ frappe.views.Container = class Container {
 	}
 	change_to(label) {
 		cur_page = this;
+<<<<<<< HEAD
+=======
+		let page;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		if (label.tagName) {
 			// if sent the div, get the table
-			var page = label;
+			page = label;
 		} else {
-			var page = frappe.pages[label];
+			page = frappe.pages[label];
 		}
 		if (!page) {
 			console.log(__("Page not found") + ": " + label);

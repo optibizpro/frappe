@@ -1,8 +1,15 @@
 from frappe.model.docstatus import DocStatus
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestDocStatus(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestDocStatus(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def test_draft(self):
 		self.assertEqual(DocStatus(0), DocStatus.draft())
 

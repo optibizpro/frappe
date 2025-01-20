@@ -6,7 +6,7 @@ from json import loads
 
 import frappe
 from frappe import _
-from frappe.desk.desktop import save_new_widget
+from frappe.desk.desktop import get_workspace_sidebar_items, save_new_widget
 from frappe.desk.utils import validate_route_conflict
 from frappe.model.document import Document
 from frappe.model.rename_doc import rename_doc
@@ -15,6 +15,60 @@ from frappe.utils import strip_html
 
 
 class Workspace(Document):
+	# begin: auto-generated types
+	# This code is auto-generated. Do not modify anything in this block.
+
+	from typing import TYPE_CHECKING
+
+	if TYPE_CHECKING:
+		from frappe.core.doctype.has_role.has_role import HasRole
+		from frappe.desk.doctype.workspace_chart.workspace_chart import WorkspaceChart
+		from frappe.desk.doctype.workspace_custom_block.workspace_custom_block import WorkspaceCustomBlock
+		from frappe.desk.doctype.workspace_link.workspace_link import WorkspaceLink
+		from frappe.desk.doctype.workspace_number_card.workspace_number_card import WorkspaceNumberCard
+		from frappe.desk.doctype.workspace_quick_list.workspace_quick_list import WorkspaceQuickList
+		from frappe.desk.doctype.workspace_shortcut.workspace_shortcut import WorkspaceShortcut
+		from frappe.types import DF
+
+		app: DF.Data | None
+		charts: DF.Table[WorkspaceChart]
+		content: DF.LongText | None
+		custom_blocks: DF.Table[WorkspaceCustomBlock]
+		external_link: DF.Data | None
+		for_user: DF.Data | None
+		hide_custom: DF.Check
+		indicator_color: DF.Literal[
+			"green",
+			"cyan",
+			"blue",
+			"orange",
+			"yellow",
+			"gray",
+			"grey",
+			"red",
+			"pink",
+			"darkgrey",
+			"purple",
+			"light-blue",
+		]
+		is_hidden: DF.Check
+		label: DF.Data
+		link_to: DF.DynamicLink | None
+		link_type: DF.Literal["DocType", "Page", "Report"]
+		links: DF.Table[WorkspaceLink]
+		module: DF.Link | None
+		number_cards: DF.Table[WorkspaceNumberCard]
+		parent_page: DF.Link | None
+		public: DF.Check
+		quick_lists: DF.Table[WorkspaceQuickList]
+		restrict_to_domain: DF.Link | None
+		roles: DF.Table[HasRole]
+		sequence_id: DF.Float
+		shortcuts: DF.Table[WorkspaceShortcut]
+		title: DF.Data
+		type: DF.Literal["Workspace", "Link", "URL"]
+	# end: auto-generated types
+
 	def validate(self):
 		self.title = strip_html(self.title)
 
@@ -31,12 +85,30 @@ class Workspace(Document):
 		except Exception:
 			frappe.throw(_("Content data shoud be a list"))
 
+<<<<<<< HEAD
 	def clear_cache(self):
 		super().clear_cache()
 		if self.for_user:
 			frappe.cache().hdel("bootinfo", self.for_user)
 		else:
 			frappe.cache().delete_key("bootinfo")
+=======
+		for d in self.get("links"):
+			if d.link_type == "Report" and d.is_query_report != 1:
+				d.report_ref_doctype = frappe.get_value("Report", d.link_to, "ref_doctype")
+
+		if not self.app and self.module:
+			from frappe.modules.utils import get_module_app
+
+			self.app = get_module_app(self.module)
+
+	def clear_cache(self):
+		super().clear_cache()
+		if self.for_user:
+			frappe.cache.hdel("bootinfo", self.for_user)
+		else:
+			frappe.cache.delete_key("bootinfo")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	def on_update(self):
 		if disable_saving_as_public():
@@ -55,6 +127,13 @@ class Workspace(Document):
 		if doc.title != doc.label and doc.label == doc.name:
 			self.name = doc.name = doc.label = doc.title
 
+<<<<<<< HEAD
+=======
+	def on_trash(self):
+		if self.public and not is_workspace_manager():
+			frappe.throw(_("You need to be Workspace Manager to delete a public workspace."))
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def after_delete(self):
 		if disable_saving_as_public():
 			return
@@ -105,7 +184,7 @@ class Workspace(Document):
 
 				current_card = link
 				card_links = []
-			else:
+			elif not link.get("only_for") or link.get("only_for") == frappe.get_system_settings("country"):
 				card_links.append(link)
 
 		current_card["links"] = card_links
@@ -135,6 +214,7 @@ class Workspace(Document):
 					"label": card.get("label"),
 					"type": "Card Break",
 					"icon": card.get("icon"),
+					"description": card.get("description"),
 					"hidden": card.get("hidden") or False,
 					"link_count": card.get("link_count"),
 					"idx": 1 if not self.links else self.links[-1].idx + 1,
@@ -198,22 +278,38 @@ def new_page(new_page):
 		not page.get("public") and page.get("for_user") != frappe.session.user and not is_workspace_manager()
 	):
 		frappe.throw(_("Cannot create private workspace of other users"), frappe.PermissionError)
+<<<<<<< HEAD
+=======
+
+	elif not frappe.has_permission(doctype="Workspace", ptype="create"):
+		frappe.flags.error_message = _("User {0} does not have the permission to create a Workspace.").format(
+			frappe.bold(frappe.session.user)
+		)
+		raise frappe.PermissionError
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 	doc = frappe.new_doc("Workspace")
 	doc.title = page.get("title")
-	doc.icon = page.get("icon")
+	doc.icon = page.get("icon") or "grid"
+	doc.indicator_color = page.get("indicator_color")
 	doc.content = page.get("content")
 	doc.parent_page = page.get("parent_page")
 	doc.label = page.get("label")
 	doc.for_user = page.get("for_user")
 	doc.public = page.get("public")
+	doc.app = page.get("app")
+	doc.type = page.get("type")
+	doc.link_to = page.get("link_to")
+	doc.link_type = page.get("link_type")
+	doc.external_link = page.get("external_link")
 	doc.sequence_id = last_sequence_id(doc) + 1
 	doc.save(ignore_permissions=True)
 
-	return doc
+	return get_workspace_sidebar_items()
 
 
 @frappe.whitelist()
+<<<<<<< HEAD
 def save_page(title, public, new_widgets, blocks):
 	public = frappe.parse_json(public)
 
@@ -237,9 +333,26 @@ def save_page(title, public, new_widgets, blocks):
 
 @frappe.whitelist()
 def update_page(name, title, icon, parent, public):
+=======
+def save_page(name, public, new_widgets, blocks):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
+	public = frappe.parse_json(public)
+	doc = frappe.get_doc("Workspace", name)
+	doc.content = blocks
+
+<<<<<<< HEAD
+=======
+	save_new_widget(doc, name, blocks, new_widgets)
+
+	return {"name": name, "public": public, "label": doc.label}
+
+
+@frappe.whitelist()
+def update_page(name, title, icon, indicator_color, parent, public):
 	public = frappe.parse_json(public)
 	doc = frappe.get_doc("Workspace", name)
 
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	if not doc.get("public") and doc.get("for_user") != frappe.session.user and not is_workspace_manager():
 		frappe.throw(
 			_("Need Workspace Manager role to edit private workspace of other users"),
@@ -250,6 +363,7 @@ def update_page(name, title, icon, parent, public):
 		child_docs = frappe.get_all("Workspace", filters={"parent_page": doc.title, "public": doc.public})
 		doc.title = title
 		doc.icon = icon
+		doc.indicator_color = indicator_color
 		doc.parent_page = parent
 		if doc.public != public:
 			doc.sequence_id = frappe.db.count("Workspace", {"public": public}, cache=True)
@@ -280,6 +394,7 @@ def update_page(name, title, icon, parent, public):
 	return {"name": title, "public": public, "label": new_name}
 
 
+<<<<<<< HEAD
 def hide_unhide_page(page_name: str, is_hidden: bool):
 	page = frappe.get_doc("Workspace", page_name)
 
@@ -398,6 +513,8 @@ def sort_page(workspace_pages, pages):
 	return True
 
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 def last_sequence_id(doc):
 	doc_exists = frappe.db.exists({"doctype": "Workspace", "public": doc.public, "for_user": doc.for_user})
 

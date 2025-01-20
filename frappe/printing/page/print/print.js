@@ -58,7 +58,7 @@ frappe.ui.form.PrintView = class {
 	}
 
 	set_title() {
-		this.page.set_title(this.frm.docname);
+		this.page.set_title(__(this.frm.docname));
 	}
 
 	setup_toolbar() {
@@ -75,7 +75,11 @@ frappe.ui.form.PrintView = class {
 		});
 
 		this.page.add_action_icon(
+<<<<<<< HEAD
 			"file",
+=======
+			"es-line-filetype",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			() => {
 				this.go_to_form_view();
 			},
@@ -87,6 +91,7 @@ frappe.ui.form.PrintView = class {
 	setup_sidebar() {
 		this.sidebar = this.page.sidebar.addClass("print-preview-sidebar");
 
+<<<<<<< HEAD
 		this.print_sel = this.add_sidebar_item({
 			fieldtype: "Select",
 			fieldname: "print_format",
@@ -105,12 +110,31 @@ frappe.ui.form.PrintView = class {
 				...this.get_language_options(),
 			],
 			default: __("Select Language"),
+=======
+		this.print_format_selector = this.add_sidebar_item({
+			fieldtype: "Link",
+			fieldname: "print_format",
+			options: "Print Format",
+			label: __("Print Format"),
+			get_query: () => {
+				return { filters: { doc_type: this.frm.doctype } };
+			},
+			change: () => this.refresh_print_format(),
+		}).$input;
+
+		this.language_selector = this.add_sidebar_item({
+			fieldtype: "Link",
+			fieldname: "language",
+			label: __("Language"),
+			options: "Language",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			change: () => {
 				this.set_user_lang();
 				this.preview();
 			},
 		}).$input;
 
+<<<<<<< HEAD
 		this.letterhead_selector_df = this.add_sidebar_item({
 			fieldtype: "Autocomplete",
 			fieldname: "letterhead",
@@ -123,6 +147,30 @@ frappe.ui.form.PrintView = class {
 				: __("Select Letterhead"),
 		});
 		this.letterhead_selector = this.letterhead_selector_df.$input;
+=======
+		let description = "";
+		if (!cint(this.print_settings.repeat_header_footer)) {
+			description =
+				"<div class='form-message yellow p-3 mt-3'>" +
+				__("Footer might not be visible as {0} option is disabled</div>", [
+					`<a href="/app/print-settings/Print Settings">${__(
+						"Repeat Header and Footer"
+					)}</a>`,
+				]);
+		}
+		const print_view = this;
+		this.letterhead_selector = this.add_sidebar_item({
+			fieldtype: "Link",
+			fieldname: "letterhead",
+			options: "Letter Head",
+			label: __("Letter Head"),
+			description: description,
+			change: function () {
+				this.set_description(this.get_value() ? description : "");
+				print_view.preview();
+			},
+		}).$input;
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		this.sidebar_dynamic_section = $(`<div class="dynamic-settings"></div>`).appendTo(
 			this.sidebar
 		);
@@ -146,6 +194,7 @@ frappe.ui.form.PrintView = class {
 		return field;
 	}
 
+<<<<<<< HEAD
 	get_default_option_for_select(value) {
 		return {
 			label: value,
@@ -154,6 +203,8 @@ frappe.ui.form.PrintView = class {
 		};
 	}
 
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	setup_menu() {
 		this.page.clear_menu();
 
@@ -184,17 +235,31 @@ frappe.ui.form.PrintView = class {
 		this.set_breadcrumbs();
 		this.setup_customize_dialog();
 
+<<<<<<< HEAD
 		// print format builder beta
 		this.page.add_inner_message(`
 			<a style="line-height: 2.4" href="/app/print-format-builder-beta?doctype=${this.frm.doctype}">
 				${__("Try the new Print Format Builder")}
+=======
+		// print designer link
+		if (Object.keys(frappe.boot.versions).includes("print_designer")) {
+			this.page.add_inner_message(`
+			<a style="line-height: 2.4" href="/app/print-designer?doctype=${this.frm.doctype}">
+				${__("Try the new Print Designer")}
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			</a>
-		`);
-
+			`);
+		} else {
+			this.page.add_inner_message(`
+			<a style="line-height: 2.4" href="https://frappecloud.com/marketplace/apps/print_designer?utm_source=framework-desk&utm_medium=print-view&utm_campaign=try-link">
+				${__("Try the new Print Designer")}
+			</a>
+			`);
+		}
 		let tasks = [
-			this.refresh_print_options,
+			this.set_default_print_format,
 			this.set_default_print_language,
-			this.set_letterhead_options,
+			this.set_default_letterhead,
 			this.preview,
 		].map((fn) => fn.bind(this));
 
@@ -283,7 +348,11 @@ frappe.ui.form.PrintView = class {
 					beta: data.beta,
 				};
 				frappe.set_route("print-format-builder");
+<<<<<<< HEAD
 				this.print_sel.val(data.print_format_name);
+=======
+				this.print_format_selector.val(data.print_format_name);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			},
 			__("New Custom Print Format"),
 			__("Start")
@@ -308,11 +377,14 @@ frappe.ui.form.PrintView = class {
 	setup_customize_dialog() {
 		let print_format = this.get_print_format();
 		$(document).on("new-print-format", (e) => {
+<<<<<<< HEAD
 			this.refresh_print_options();
 			if (e.print_format) {
 				this.print_sel.val(e.print_format);
 			}
 			// start a new print format
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			frappe.prompt(
 				[
 					{
@@ -349,6 +421,7 @@ frappe.ui.form.PrintView = class {
 		});
 	}
 
+<<<<<<< HEAD
 	set_letterhead_options() {
 		let letterhead_options = [__("No Letterhead")];
 		let default_letterhead;
@@ -370,21 +443,32 @@ frappe.ui.form.PrintView = class {
 				let selected_letterhead = doc_letterhead || default_letterhead;
 				if (selected_letterhead) this.letterhead_selector.val(selected_letterhead);
 			});
+=======
+	set_default_letterhead() {
+		if (this.frm.doc.letter_head) {
+			this.letterhead_selector.val(this.frm.doc.letter_head);
+			return;
+		}
+
+		return frappe.db
+			.get_value("Letter Head", { disabled: 0, is_default: 1 }, "name")
+			.then(({ message }) => this.letterhead_selector.val(message.name));
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	set_user_lang() {
-		this.lang_code = this.language_sel.val();
-	}
-
-	get_language_options() {
-		return frappe.get_languages();
+		this.lang_code = this.language_selector.val();
 	}
 
 	set_default_print_language() {
 		let print_format = this.get_print_format();
 		this.lang_code =
 			this.frm.doc.language || print_format.default_print_language || frappe.boot.lang;
+<<<<<<< HEAD
 		this.language_sel.val(this.lang_code);
+=======
+		this.language_selector.val(this.lang_code);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	toggle_raw_printing() {
@@ -405,13 +489,18 @@ frappe.ui.form.PrintView = class {
 		this.print_wrapper.find(".preview-beta-wrapper").hide();
 		this.print_wrapper.find(".print-preview-wrapper").show();
 
+<<<<<<< HEAD
 		const $print_format = this.print_wrapper.find("iframe");
 		this.$print_format_body = $print_format.contents();
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		this.get_print_html((out) => {
 			if (!out.html) {
 				out.html = this.get_no_preview_html();
 			}
 
+			const $print_format = this.print_wrapper.find("iframe");
+			this.$print_format_body = $print_format.contents();
 			this.setup_print_format_dom(out, $print_format);
 
 			const print_height = $print_format.get(0).offsetHeight;
@@ -620,7 +709,24 @@ frappe.ui.form.PrintView = class {
 			},
 		});
 	}
-
+	async is_wkhtmltopdf_valid() {
+		const is_valid = await frappe.xcall("frappe.utils.pdf.is_wkhtmltopdf_valid");
+		// function returns true or false
+		if (is_valid) return;
+		frappe.msgprint({
+			title: __("Invalid wkhtmltopdf version"),
+			message:
+				__("PDF generation may not work as expected.") +
+				"<hr/>" +
+				__("Please contact your system manager to install correct version.") +
+				"<br/>" +
+				__("Correct version :") +
+				" <b><a href ='https://wkhtmltopdf.org/downloads.html'>" +
+				__("wkhtmltopdf 0.12.x (with patched qt).") +
+				"</a></b>",
+			indicator: "red",
+		});
+	}
 	render_pdf() {
 		let print_format = this.get_print_format();
 		if (print_format.print_format_builder_beta) {
@@ -636,6 +742,10 @@ frappe.ui.form.PrintView = class {
 				return;
 			}
 		} else {
+<<<<<<< HEAD
+=======
+			this.is_wkhtmltopdf_valid();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			this.render_page("/api/method/frappe.utils.print_format.download_pdf?");
 		}
 	}
@@ -696,7 +806,7 @@ frappe.ui.form.PrintView = class {
 	}
 
 	get_letterhead() {
-		return this.letterhead_selector.val();
+		return this.letterhead_selector.val() || __("No Letterhead");
 	}
 
 	get_no_preview_html() {
@@ -737,13 +847,18 @@ frappe.ui.form.PrintView = class {
 	get_print_format_printer_map() {
 		// returns the whole object "print_format_printer_map" stored in the localStorage.
 		try {
+<<<<<<< HEAD
 			let print_format_printer_map = JSON.parse(localStorage.print_format_printer_map);
 			return print_format_printer_map;
+=======
+			return JSON.parse(localStorage.print_format_printer_map);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		} catch (e) {
 			return {};
 		}
 	}
 
+<<<<<<< HEAD
 	refresh_print_options() {
 		this.print_formats = frappe.meta.get_print_formats(this.frm.doctype);
 		const print_format_select_val = this.print_sel.val();
@@ -761,6 +876,23 @@ frappe.ui.form.PrintView = class {
 
 	selected_format() {
 		return this.print_sel.val() || this.frm.meta.default_print_format || "Standard";
+=======
+	set_default_print_format() {
+		if (
+			frappe.meta
+				.get_print_formats(this.frm.doctype)
+				.includes(this.print_format_selector.val()) ||
+			!this.frm.meta.default_print_format
+		)
+			return;
+
+		this.print_format_selector.empty();
+		this.print_format_selector.val(this.frm.meta.default_print_format);
+	}
+
+	selected_format() {
+		return this.print_format_selector.val() || "Standard";
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	}
 
 	is_raw_printing(format) {
@@ -815,7 +947,7 @@ frappe.ui.form.PrintView = class {
 								fieldtype: "Select",
 								fieldname: "print_format",
 								default: 0,
-								options: this.print_formats,
+								options: frappe.meta.get_print_formats(this.frm.doctype),
 								read_only: 0,
 								in_list_view: 1,
 								label: __("Print Format"),

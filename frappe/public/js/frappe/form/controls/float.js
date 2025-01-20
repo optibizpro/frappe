@@ -1,4 +1,5 @@
 frappe.ui.form.ControlFloat = class ControlFloat extends frappe.ui.form.ControlInt {
+<<<<<<< HEAD
 	make_input() {
 		super.make_input();
 		const change_handler = (e) => {
@@ -12,6 +13,8 @@ frappe.ui.form.ControlFloat = class ControlFloat extends frappe.ui.form.ControlI
 		// convert to number format on focusout since focus converts it to flt.
 		this.$input.on("focusout", change_handler);
 	}
+=======
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	parse(value) {
 		value = this.eval_expression(value);
 		return isNaN(parseFloat(value)) ? null : flt(value, this.get_precision());

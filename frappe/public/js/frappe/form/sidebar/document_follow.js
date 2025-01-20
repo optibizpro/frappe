@@ -87,11 +87,15 @@ frappe.ui.form.DocumentFollow = class DocumentFollow {
 	}
 
 	hide_follow_section() {
-		this.parent.hide();
+		this.parent.addClass("hidden");
 	}
 
 	set_followers() {
+<<<<<<< HEAD
 		this.followed_by.removeClass("hidden");
+=======
+		this.parent.removeClass("hidden");
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		this.followed_by_label.removeClass("hidden");
 		this.followed_by.empty();
 		this.get_followed_user().then((user) => {

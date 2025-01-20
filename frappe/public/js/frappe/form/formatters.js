@@ -49,6 +49,13 @@ frappe.form.formatters = {
 		return __(frappe.form.formatters["Data"](value, df));
 	},
 	Float: function (value, docfield, options, doc) {
+<<<<<<< HEAD
+=======
+		if (value === null) {
+			return "";
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		// don't allow 0 precision for Floats, hence or'ing with null
 		var precision =
 			docfield.precision ||
@@ -73,9 +80,26 @@ frappe.form.formatters = {
 		}
 	},
 	Int: function (value, docfield, options) {
+<<<<<<< HEAD
 		return frappe.form.formatters._right(value == null ? "" : cint(value), options);
 	},
 	Percent: function (value, docfield, options) {
+=======
+		if (value === null) {
+			return "";
+		}
+
+		if (cstr(docfield.options).trim() === "File Size") {
+			return frappe.form.formatters.FileSize(value);
+		}
+		return frappe.form.formatters._right(value == null ? "" : cint(value), options);
+	},
+	Percent: function (value, docfield, options) {
+		if (value === null) {
+			return "";
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		const precision =
 			docfield.precision ||
 			cint(frappe.boot.sysdefaults && frappe.boot.sysdefaults.float_precision) ||
@@ -102,6 +126,13 @@ frappe.form.formatters = {
 		</div>`;
 	},
 	Currency: function (value, docfield, options, doc) {
+<<<<<<< HEAD
+=======
+		if (value === null) {
+			return "";
+		}
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		var currency = frappe.meta.get_field_currency(docfield, doc);
 
 		let precision;
@@ -344,10 +375,16 @@ frappe.form.formatters = {
 		return $("<div></div>").text(value).html();
 	},
 	FileSize: function (value) {
+<<<<<<< HEAD
 		if (value > 1048576) {
 			value = flt(flt(value) / 1048576, 1) + "M";
+=======
+		value = cint(value);
+		if (value > 1048576) {
+			return (value / 1048576).toFixed(2) + "M";
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 		} else if (value > 1024) {
-			value = flt(flt(value) / 1024, 1) + "K";
+			return (value / 1024).toFixed(2) + "K";
 		}
 		return value;
 	},
@@ -357,7 +394,9 @@ frappe.form.formatters = {
 		const link_field = meta.fields.find((df) => df.fieldtype === "Link");
 		const formatted_values = rows.map((row) => {
 			const value = row[link_field.fieldname];
-			return frappe.format(value, link_field, options, row);
+			return `<span class="text-nowrap">
+				${frappe.format(value, link_field, options, row)}
+			</span>`;
 		});
 		return formatted_values.join(", ");
 	},

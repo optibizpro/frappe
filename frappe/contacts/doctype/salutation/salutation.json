@@ -18,7 +18,11 @@
   }
  ],
  "links": [],
+<<<<<<< HEAD
  "modified": "2022-08-05 18:33:28.196387",
+=======
+ "modified": "2024-03-23 16:03:37.726490",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "modified_by": "Administrator",
  "module": "Contacts",
  "name": "Salutation",
@@ -53,7 +57,11 @@
    "write": 1
   }
  ],
+<<<<<<< HEAD
  "sort_field": "modified",
+=======
+ "sort_field": "creation",
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,

@@ -140,6 +140,13 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 		// run them serially
 		return frappe.run_serially(tasks);
 	}
+	has_handler(event_name) {
+		// return true if there exist an event handler (new style only)
+		return (
+			frappe.ui.form.handlers[this.frm.doctype] &&
+			frappe.ui.form.handlers[this.frm.doctype][event_name]
+		);
+	}
 	has_handlers(event_name, doctype) {
 		let handlers = this.get_handlers(event_name, doctype);
 		return handlers && (handlers.old_style.length || handlers.new_style.length);
@@ -156,10 +163,17 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 				handlers.new_style.push(fn);
 			});
 		}
+<<<<<<< HEAD
 		if (this.frm.cscript[event_name]) {
 			handlers.old_style.push(event_name);
 		}
 		if (this.frm.cscript["custom_" + event_name]) {
+=======
+		if (this.frm.cscript && this.frm.cscript[event_name]) {
+			handlers.old_style.push(event_name);
+		}
+		if (this.frm.cscript && this.frm.cscript["custom_" + event_name]) {
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			handlers.old_style.push("custom_" + event_name);
 		}
 		return handlers;
@@ -176,12 +190,16 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 		}
 
 		if (client_script) {
-			eval(client_script);
+			new Function(client_script)();
 		}
 
 		if (!this.frm.doctype_layout && doctype.__custom_js) {
 			try {
+<<<<<<< HEAD
 				eval(doctype.__custom_js);
+=======
+				new Function(doctype.__custom_js)();
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			} catch (e) {
 				frappe.msgprint({
 					title: __("Error in Client Script"),
@@ -239,6 +257,7 @@ frappe.ui.form.ScriptManager = class ScriptManager {
 
 		this.trigger("setup");
 	}
+
 	log_error(caller, e) {
 		frappe.show_alert({ message: __("Error in Client Script."), indicator: "error" });
 		console.group && console.group();

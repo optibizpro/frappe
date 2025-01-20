@@ -4,10 +4,17 @@ from random import choice
 import frappe
 from frappe.model import core_doctypes_list, get_permitted_fields, is_default_field
 from frappe.model.utils import get_fetch_values
+<<<<<<< HEAD
 from frappe.tests.utils import FrappeTestCase
 
 
 class TestModelUtils(FrappeTestCase):
+=======
+from frappe.tests import IntegrationTestCase
+
+
+class TestModelUtils(IntegrationTestCase):
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	def test_get_fetch_values(self):
 		doctype = "ToDo"
 
@@ -34,10 +41,17 @@ class TestModelUtils(FrappeTestCase):
 		todo_all_columns = frappe.get_meta("ToDo").get_valid_columns()
 		self.assertListEqual(todo_all_fields, todo_all_columns)
 
+<<<<<<< HEAD
 		# Guest should have access to no fields in ToDo
 		with set_user("Guest"):
 			guest_permitted_fields = get_permitted_fields("ToDo")
 			self.assertEqual(guest_permitted_fields, [])
+=======
+		# Guest should have access to no non-std fields in ToDo
+		with set_user("Guest"):
+			guest_permitted_fields = get_permitted_fields("ToDo")
+			self.assertNotIn("description", guest_permitted_fields)
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 
 		# everyone should have access to all fields of core doctypes
 		with set_user("Guest"):
@@ -53,6 +67,7 @@ class TestModelUtils(FrappeTestCase):
 				"Installed Application", parenttype="Installed Applications"
 			)
 			child_all_fields = frappe.get_meta("Installed Application").get_valid_columns()
+<<<<<<< HEAD
 			self.assertEqual(without_parent_fields, [])
 			self.assertLess(len(without_parent_fields), len(with_parent_fields))
 			self.assertSequenceEqual(set(with_parent_fields), set(child_all_fields))
@@ -62,6 +77,16 @@ class TestModelUtils(FrappeTestCase):
 			self.assertEqual(get_permitted_fields("Installed Application"), [])
 			self.assertEqual(
 				get_permitted_fields("Installed Application", parenttype="Installed Applications"), []
+=======
+			self.assertLess(len(without_parent_fields), len(with_parent_fields))
+			self.assertSequenceEqual(set(with_parent_fields), set(child_all_fields))
+
+		# guest has access to no non-std fields
+		with set_user("Guest"):
+			self.assertNotIn("app_name", get_permitted_fields("Installed Application"))
+			self.assertNotIn(
+				"app_name", get_permitted_fields("Installed Application", parenttype="Installed Applications")
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 			)
 
 	def test_is_default_field(self):

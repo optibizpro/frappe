@@ -82,6 +82,13 @@ $.extend(frappe.datetime, {
 		return moment(d1).diff(d2, "hours");
 	},
 
+<<<<<<< HEAD
+=======
+	get_minute_diff: function (d1, d2) {
+		return moment(d1).diff(d2, "minutes");
+	},
+
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	get_day_diff: function (d1, d2) {
 		return moment(d1).diff(d2, "days");
 	},
@@ -163,7 +170,13 @@ $.extend(frappe.datetime, {
 	},
 
 	get_datetime_as_string: function (d) {
+<<<<<<< HEAD
 		return moment(d).format("YYYY-MM-DD HH:mm:ss");
+=======
+		let time_format = frappe?.boot?.sysdefaults?.time_format || frappe.defaultTimeFormat;
+		let datetime_format = frappe.defaultDateFormat + " " + time_format;
+		return moment(d).format(datetime_format);
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 	},
 
 	user_to_str: function (val, only_time = false) {
@@ -268,6 +281,7 @@ $.extend(frappe.datetime, {
 	get_first_day_of_the_week_index() {
 		const first_day_of_the_week = frappe.sys_defaults.first_day_of_the_week || "Sunday";
 		return moment.weekdays().indexOf(first_day_of_the_week);
+<<<<<<< HEAD
 	},
 });
 
@@ -300,4 +314,7 @@ Object.defineProperties(window, {
 		},
 		configurable: true,
 	},
+=======
+	},
+>>>>>>> e4a2b8db38691ac78018fd51fe0e037afbd14d87
 });
