@@ -19,7 +19,7 @@ import frappe.translate
 import frappe.utils
 from frappe import _
 from frappe.apps import get_apps, get_default_path, is_desk_apps
-from frappe.cache_manager import clear_user_cache
+from frappe.cache_manager import clear_user_cache, reset_metadata_version
 from frappe.query_builder import Order
 from frappe.utils import cint, cstr, get_assets_json
 from frappe.utils.change_log import has_app_update_notifications
@@ -126,7 +126,8 @@ def clear_expired_sessions():
 
 def get():
 	"""get session boot info"""
-	from frappe.boot import get_bootinfo, get_unseen_notes
+	from frappe.boot import get_bootinfo
+	from frappe.desk.doctype.note.note import get_unseen_notes
 	from frappe.utils.change_log import get_change_log
 
 	bootinfo = None
@@ -156,7 +157,7 @@ def get():
 
 	bootinfo["metadata_version"] = frappe.client_cache.get_value("metadata_version")
 	if not bootinfo["metadata_version"]:
-		bootinfo["metadata_version"] = frappe.reset_metadata_version()
+		bootinfo["metadata_version"] = reset_metadata_version()
 
 	bootinfo.notes = get_unseen_notes()
 	bootinfo.assets_json = get_assets_json()
@@ -175,9 +176,9 @@ def get():
 		"default_path": get_default_path() or "",
 	}
 
-	bootinfo["desk_theme"] = frappe.db.get_value("User", frappe.session.user, "desk_theme") or "Light"
+	bootinfo["desk_theme"] = frappe.get_cached_value("User", frappe.session.user, "desk_theme") or "Light"
 	bootinfo["user"]["impersonated_by"] = frappe.session.data.get("impersonated_by")
-	bootinfo["navbar_settings"] = frappe.get_cached_doc("Navbar Settings")
+	bootinfo["navbar_settings"] = frappe.client_cache.get_doc("Navbar Settings")
 	bootinfo.has_app_updates = has_app_update_notifications()
 
 	return bootinfo
@@ -308,8 +309,7 @@ class Session:
 			self.start_as_guest()
 
 		if self.sid != "Guest":
-			frappe.local.user_lang = frappe.translate.get_user_lang(self.data.user)
-			frappe.local.lang = frappe.local.user_lang
+			frappe.local.lang = frappe.translate.get_user_lang(self.data.user)
 
 	def get_session_record(self):
 		"""get session record, or return the standard Guest Record"""
@@ -386,9 +386,7 @@ class Session:
 		if frappe.session.user == "Guest":
 			return
 
-		now = frappe.utils.now()
-
-		Sessions = frappe.qb.DocType("Sessions")
+		now = frappe.utils.now_datetime()
 
 		# update session in db
 		last_updated = self.data.data.last_updated
@@ -396,9 +394,13 @@ class Session:
 
 		# database persistence is secondary, don't update it too often
 		updated_in_db = False
-		if (force or (time_diff is None) or (time_diff > 600)) and not frappe.flags.read_only:
+		if (
+			force or (time_diff is None) or (time_diff > 600) or self._update_in_cache
+		) and not frappe.flags.read_only:
 			self.data.data.last_updated = now
 			self.data.data.lang = str(frappe.lang)
+
+			Sessions = frappe.qb.DocType("Sessions")
 			# update sessions table
 			(
 				frappe.qb.update(Sessions)
@@ -456,26 +458,3 @@ def get_expiry_period():
 		exp_sec = exp_sec + ":00"
 
 	return exp_sec
-
-
-def get_geo_from_ip(ip_addr):
-	try:
-		from geolite2 import geolite2
-
-		with geolite2 as f:
-			reader = f.reader()
-			data = reader.get(ip_addr)
-
-			return frappe._dict(data)
-	except ImportError:
-		return
-	except ValueError:
-		return
-	except TypeError:
-		return
-
-
-def get_geo_ip_country(ip_addr):
-	match = get_geo_from_ip(ip_addr)
-	if match:
-		return match.country
