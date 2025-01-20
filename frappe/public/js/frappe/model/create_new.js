@@ -63,6 +63,7 @@ $.extend(frappe.model, {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
 				if (
@@ -83,6 +84,9 @@ $.extend(frappe.model, {
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+				if (df && !df.no_copy) {
+>>>>>>> upstream/version-14
 					doc[fieldname] = value;
 				}
 			});

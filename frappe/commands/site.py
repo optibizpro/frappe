@@ -111,13 +111,17 @@ def new_site(
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> upstream/version-14
 	if site in frappe.get_all_apps():
 		click.secho(
 			f"Your bench has an app called {site}, please choose another name for the site.", fg="red"
 		)
 		sys.exit(1)
 
+<<<<<<< HEAD
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 	if no_mariadb_socket:
 		click.secho(
@@ -130,6 +134,8 @@ def new_site(
 
 =======
 >>>>>>> b4ee936175174b0954ceee845039d7e9c9e808df
+=======
+>>>>>>> upstream/version-14
 	if source_sql:
 		source_sql = extract_sql_from_archive(source_sql)
 

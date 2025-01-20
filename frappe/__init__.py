@@ -116,6 +116,7 @@ from .utils.jinja import (
 )
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __version__ = "14.90.0"
 =======
 <<<<<<< HEAD
@@ -126,6 +127,9 @@ __version__ = "15.51.2"
 __version__ = "15.52.0"
 >>>>>>> 3eda272bd61b1e73b74d30b1704d885a39c75d0c
 >>>>>>> 53615bb31040628756ac2b31ed112197ce976581
+=======
+__version__ = "14.91.0"
+>>>>>>> upstream/version-14
 __title__ = "Frappe Framework"
 
 # This if block is never executed when running the code. It is only used for
