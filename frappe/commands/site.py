@@ -1154,8 +1154,13 @@ def publish_realtime(context, event, message, room, user, doctype, docname, afte
 @click.command("browse")
 @click.argument("site", required=False)
 @click.option("--user", required=False, help="Login as user")
+@click.option("--duration", required=False, help="Session duration (in hh:mm:ss format)")
 @pass_context
+<<<<<<< HEAD
 def browse(context, site, user=None):
+=======
+def browse(context: CliCtxObj, site, user=None, duration=None):
+>>>>>>> a121b90d7f (feat: allow created a session for a fixed duration via `bench browse`)
 	"""Opens the site on web browser"""
 	from frappe.auth import CookieManager, LoginManager
 
@@ -1170,6 +1175,8 @@ def browse(context, site, user=None):
 
 	frappe.init(site=site)
 	frappe.connect()
+
+	frappe.flags.session_duration = duration
 
 	sid = ""
 	if user:
