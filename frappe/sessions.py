@@ -444,6 +444,13 @@ class Session:
 
 		return updated_in_db
 
+<<<<<<< HEAD
+=======
+	def set_impersonated(self, original_user):
+		self.data.data.impersonated_by = original_user
+		# Forcefully flush session
+		self.update(force=True)
+>>>>>>> 332e22f00b (refactor: fix typo in `impersonated`)
 
 def get_expiry_period_for_query(device=None):
 	if frappe.db.db_type == "postgres":
