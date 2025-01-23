@@ -17,6 +17,19 @@ class Version(Document):
 		else:
 			return self.set_diff(old, new)
 
+<<<<<<< HEAD
+=======
+	@staticmethod
+	def set_impersonator(data):
+		if not frappe.session:
+			return
+		if impersonator := frappe.session.data.get("impersonated_by"):
+			data["impersonated_by"] = impersonator
+
+		if audit_user := frappe.session.data.get("audit_user"):
+			data["audit_user"] = audit_user
+
+>>>>>>> 15065a93e3 (refactor: don't use impersonate directly, use similar logic)
 	def set_diff(self, old: Document, new: Document) -> bool:
 		"""Set the data property with the diff of the docs if present"""
 		diff = get_diff(old, new)
