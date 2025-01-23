@@ -205,8 +205,23 @@ def generate_csrf_token():
 class Session:
 	__slots__ = ("user", "user_type", "full_name", "data", "time_diff", "sid", "_update_in_cache")
 
+<<<<<<< HEAD
 	def __init__(self, user, resume=False, full_name=None, user_type=None):
 		self.sid = cstr(frappe.form_dict.get("sid") or unquote(frappe.request.cookies.get("sid", "Guest")))
+=======
+	def __init__(
+		self,
+		user: str,
+		resume: bool = False,
+		full_name: str | None = None,
+		user_type: str | None = None,
+		duration: str | None = None,
+		audit_user: str | None = None,
+	):
+		self.sid = cstr(
+			frappe.form_dict.pop("sid", None) or unquote(frappe.request.cookies.get("sid", "Guest"))
+		)
+>>>>>>> 15065a93e3 (refactor: don't use impersonate directly, use similar logic)
 		self.user = user
 		self.user_type = user_type
 		self.full_name = full_name
@@ -223,7 +238,7 @@ class Session:
 		else:
 			if self.user:
 				self.validate_user()
-				self.start()
+				self.start(duration, audit_user)
 
 	def validate_user(self):
 		if not frappe.get_cached_value("User", self.user, "enabled"):
@@ -232,7 +247,7 @@ class Session:
 				frappe.ValidationError,
 			)
 
-	def start(self):
+	def start(self, duration: str | None = None, audit_user: str | None = None):
 		"""start a new session"""
 		# generate sid
 		if self.user == "Guest":
@@ -244,17 +259,17 @@ class Session:
 		self.sid = self.data.sid = sid
 		self.data.data.user = self.user
 		self.data.data.session_ip = frappe.local.request_ip
-		if frappe.flags.session_duration:
+		if duration:
 			self.data.data.fixed_duration = True
 
-		if frappe.flags.audit_user:
-			self.data.data.impersonated_by = frappe.flags.audit_user
+		if audit_user:
+			self.data.data.audit_user = audit_user
 
 		if self.user != "Guest":
 			self.data.data.update(
 				{
 					"last_updated": frappe.utils.now(),
-					"session_expiry": frappe.flags.session_duration or get_expiry_period(),
+					"session_expiry": duration or get_expiry_period(),
 					"full_name": self.full_name,
 					"user_type": self.user_type,
 				}
@@ -385,6 +400,7 @@ class Session:
 			return
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		now = frappe.utils.now()
 
 		Sessions = frappe.qb.DocType("Sessions")
@@ -392,6 +408,8 @@ class Session:
 		if self.data.data.fixed_duration:
 			return
 
+=======
+>>>>>>> 15065a93e3 (refactor: don't use impersonate directly, use similar logic)
 		now = frappe.utils.now_datetime()
 >>>>>>> a121b90d7f (feat: allow created a session for a fixed duration via `bench browse`)
 
@@ -401,8 +419,16 @@ class Session:
 
 		# database persistence is secondary, don't update it too often
 		updated_in_db = False
+<<<<<<< HEAD
 		if (force or (time_diff is None) or (time_diff > 600)) and not frappe.flags.read_only:
 			self.data.data.last_updated = now
+=======
+		if (
+			force or (time_diff is None) or (time_diff > 600) or self._update_in_cache
+		) and not frappe.flags.read_only:
+			if not self.data.data.fixed_duration:
+				self.data.data.last_updated = now
+>>>>>>> 15065a93e3 (refactor: don't use impersonate directly, use similar logic)
 			self.data.data.lang = str(frappe.lang)
 			# update sessions table
 			(
