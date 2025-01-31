@@ -1,0 +1,23 @@
+name: Sync Fork
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at midnight
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Sync with Upstream
+        run: |
+          git remote add upstream https://github.com/frappe/frappe.git
+          git fetch upstream
+          git checkout version-14
+          git pull upstream version-14
+          git push origin version-14
+          git checkout version-15
+          git pull upstream version-15
+          git push origin version-15
+          git checkout develop
+          git pull upstream develop
+          git push origin develop
