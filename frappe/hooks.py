@@ -458,12 +458,15 @@ standard_navbar_items = [
 		"is_standard": 1,
 	},
 	{
+<<<<<<< HEAD
 		"item_label": "Workspace Settings",
 		"item_type": "Action",
 		"action": "frappe.quick_edit('Workspace Settings')",
 		"is_standard": 1,
 	},
 	{
+=======
+>>>>>>> 4f2ee8b5ad36886fa03adc2ac88297f83f499785
 		"item_label": "Session Defaults",
 		"item_type": "Action",
 		"action": "frappe.ui.toolbar.setup_session_defaults()",
