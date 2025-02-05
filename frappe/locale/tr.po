@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
 "POT-Creation-Date: 2025-01-13 17:03+0000\n"
-"PO-Revision-Date: 2025-01-29 03:34\n"
+"PO-Revision-Date: 2025-02-05 06:13\n"
 "Last-Translator: developers@frappe.io\n"
 "Language-Team: Turkish\n"
 "MIME-Version: 1.0\n"
@@ -2787,7 +2787,7 @@ msgstr "Ek dosya boyutu sınırına ulaşıldı"
 #. Label of a HTML field in DocType 'Notification Log'
 #: frappe/desk/doctype/notification_log/notification_log.json
 msgid "Attachment Link"
-msgstr ""
+msgstr "Ek Bağlantısı"
 
 #. Option for the 'Comment Type' (Select) field in DocType 'Comment'
 #. Option for the 'Comment Type' (Select) field in DocType 'Communication'
@@ -8878,7 +8878,7 @@ msgstr "Raporu Etkinleştir"
 #. Label of a Check field in DocType 'System Settings'
 #: frappe/core/doctype/system_settings/system_settings.json
 msgid "Enable Scheduled Jobs"
-msgstr ""
+msgstr "Zamanlanmış İşleri Etkinleştir"
 
 #: frappe/core/doctype/rq_job/rq_job_list.js:23
 msgid "Enable Scheduler"
@@ -15424,7 +15424,7 @@ msgstr ""
 #. Label of a Data field in DocType 'Web Form'
 #: frappe/website/doctype/web_form/web_form.json
 msgid "Meta title"
-msgstr ""
+msgstr "Meta başlık"
 
 #: frappe/website/doctype/web_page/web_page.js:110
 msgid "Meta title for SEO"
@@ -23356,7 +23356,7 @@ msgstr "İşlemler için Seri Ayarlama"
 
 #: frappe/desk/page/setup_wizard/setup_wizard.js:224
 msgid "Setup failed"
-msgstr ""
+msgstr "Kurulum başarısız oldu"
 
 #. Label of a Check field in DocType 'Custom DocPerm'
 #. Label of a Check field in DocType 'DocPerm'
@@ -24777,7 +24777,7 @@ msgstr ""
 
 #: frappe/core/doctype/user/user.py:664
 msgid "Suggested Username: {0}"
-msgstr ""
+msgstr "Önerilen Kullanıcı Adı: {0}"
 
 #. Option for the 'Chart Type' (Select) field in DocType 'Dashboard Chart'
 #. Option for the 'Group By Type' (Select) field in DocType 'Dashboard Chart'
@@ -25524,7 +25524,7 @@ msgstr "{0} için aşağıdaki değerler mevcut değil: {1}"
 
 #: frappe/core/doctype/user_type/user_type.py:88
 msgid "The limit has not set for the user type {0} in the site config file."
-msgstr ""
+msgstr "Site yapılandırma dosyasında {0} kullanıcı türü için sınır ayarlanmamıştır."
 
 #: frappe/templates/emails/login_with_email_link.html:21
 msgid "The link will expire in {0} minutes"
@@ -26734,7 +26734,7 @@ msgstr "Bağlantı Alanlarını Çevir"
 
 #: frappe/public/js/frappe/views/reports/report_view.js:1609
 msgid "Translate values"
-msgstr ""
+msgstr "Değerleri çevir"
 
 #: frappe/public/js/frappe/views/translation_manager.js:11
 msgid "Translate {0}"
@@ -31168,7 +31168,7 @@ msgstr ""
 
 #: frappe/public/js/frappe/form/sidebar/form_sidebar_users.js:72
 msgid "{0} are currently {1}"
-msgstr ""
+msgstr "{0} şu anda {1}"
 
 #: frappe/printing/doctype/print_format/print_format.py:89
 msgid "{0} are required"
@@ -31180,7 +31180,7 @@ msgstr "{0} size yeni bir görev atadı {1} {2}"
 
 #: frappe/desk/doctype/todo/todo.py:47
 msgid "{0} assigned {1}: {2}"
-msgstr ""
+msgstr "{0} atandı {1}: {2}"
 
 #: frappe/public/js/frappe/form/footer/form_timeline.js:416
 msgctxt "Form timeline"
@@ -31202,7 +31202,7 @@ msgstr "{0} bu belgeyi iptal etti {1}"
 
 #: frappe/model/document.py:405
 msgid "{0} cannot be amended because it is not cancelled. Please cancel the document before creating an amendment."
-msgstr ""
+msgstr "{0} iptal edilmediği için düzeltilemez. Lütfen bir düzeltme yapmadan önce belgeyi iptal edin."
 
 #: frappe/public/js/form_builder/store.js:190
 msgid "{0} cannot be hidden and mandatory without any default value"
@@ -31430,11 +31430,11 @@ msgstr "{0} geçerli bir E-Posta Adresi değil."
 
 #: frappe/utils/__init__.py:156
 msgid "{0} is not a valid Name"
-msgstr ""
+msgstr "{0} geçerli bir İsim değil"
 
 #: frappe/utils/__init__.py:136
 msgid "{0} is not a valid Phone Number"
-msgstr ""
+msgstr "{0} geçerli bir Telefon Numarası değil"
 
 #: frappe/model/workflow.py:189
 msgid "{0} is not a valid Workflow State. Please update your Workflow and try again."
@@ -31558,7 +31558,7 @@ msgstr "{0} önce ayarlanmalıdır"
 
 #: frappe/model/base_document.py:654
 msgid "{0} must be unique"
-msgstr ""
+msgstr "{0} benzersiz olmalıdır"
 
 #: frappe/model/document.py:1372
 msgid "{0} must be {1} {2}"
@@ -31571,7 +31571,7 @@ msgstr ""
 
 #: frappe/workflow/doctype/workflow/workflow.py:91
 msgid "{0} not a valid State"
-msgstr ""
+msgstr "{0} geçerli bir Durum değildir"
 
 #: frappe/model/rename_doc.py:391
 msgid "{0} not allowed to be renamed"
