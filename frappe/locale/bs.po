@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
 "POT-Creation-Date: 2025-01-13 17:03+0000\n"
-"PO-Revision-Date: 2025-02-04 05:51\n"
+"PO-Revision-Date: 2025-02-05 06:13\n"
 "Last-Translator: developers@frappe.io\n"
 "Language-Team: Bosnian\n"
 "MIME-Version: 1.0\n"
@@ -14644,7 +14644,7 @@ msgstr "Učitavanje..."
 #. Label of a Data field in DocType 'User'
 #: frappe/core/doctype/user/user.json
 msgid "Location"
-msgstr ""
+msgstr "Lokacija"
 
 #. Label of a Code field in DocType 'Package Import'
 #: frappe/core/doctype/package_import/package_import.json
@@ -20269,7 +20269,7 @@ msgstr "Rekurzivno Donošenje Iz"
 #: frappe/core/doctype/doctype_state/doctype_state.json
 #: frappe/desk/doctype/kanban_board_column/kanban_board_column.json
 msgid "Red"
-msgstr ""
+msgstr "Crvena"
 
 #. Label of a Select field in DocType 'Website Route Redirect'
 #: frappe/website/doctype/website_route_redirect/website_route_redirect.json
@@ -28426,7 +28426,7 @@ msgstr "Webhook URL"
 #: frappe/public/js/frappe/ui/toolbar/about.js:8
 #: frappe/website/workspace/website/website.json
 msgid "Website"
-msgstr ""
+msgstr "Web Stranica"
 
 #. Name of a report
 #: frappe/website/report/website_analytics/website_analytics.json
@@ -29006,7 +29006,7 @@ msgstr "Yandex.Mail"
 #: frappe/desk/doctype/dashboard_chart/dashboard_chart.json
 #: frappe/website/doctype/company_history/company_history.json
 msgid "Year"
-msgstr ""
+msgstr "Godina"
 
 #. Option for the 'Frequency' (Select) field in DocType 'Auto Repeat'
 #. Option for the 'Frequency' (Select) field in DocType 'Scheduled Job Type'
