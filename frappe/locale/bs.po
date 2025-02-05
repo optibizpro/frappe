@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: frappe\n"
 "Report-Msgid-Bugs-To: developers@frappe.io\n"
 "POT-Creation-Date: 2025-01-19 09:33+0000\n"
-"PO-Revision-Date: 2025-02-04 05:52\n"
+"PO-Revision-Date: 2025-02-05 06:13\n"
 "Last-Translator: developers@frappe.io\n"
 "Language-Team: Bosnian\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: frappe/templates/emails/download_data.html:9
 msgid " to your browser"
-msgstr " u vaš preglednik"
+msgstr " u vaš pretraživač"
 
 #. Option for the 'Condition' (Select) field in DocType 'Document Naming Rule
 #. Condition'
@@ -4496,7 +4496,7 @@ msgstr "Promjeni lozinku"
 
 #: frappe/public/js/print_format_builder/print_format_builder.bundle.js:27
 msgid "Change Print Format"
-msgstr "Promjeni Formata Ispisivanja"
+msgstr "Promjeni Format Ispisivanja"
 
 #: frappe/desk/page/user_profile/user_profile_controller.js:51
 #: frappe/desk/page/user_profile/user_profile_controller.js:59
