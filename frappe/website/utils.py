@@ -187,6 +187,7 @@ def get_boot_data():
 		},
 		"assets_json": get_assets_json(),
 		"sitename": frappe.local.site,
+		"fc_communication_secret": frappe.conf.get("fc_communication_secret"),
 	}
 
 

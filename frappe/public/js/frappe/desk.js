@@ -389,9 +389,14 @@ frappe.Application = class Application {
 		frappe.app.redirect_to_login();
 	}
 	redirect_to_login() {
-		window.location.href = `/login?redirect-to=${encodeURIComponent(
-			window.location.pathname + window.location.search
-		)}`;
+		if (frappe.boot.fc_communication_secret) {
+			const frappeCloudBaseEndpoint = "https://frappecloud.com";
+			window.location.href = `${frappeCloudBaseEndpoint}/dashboard/site-login`;
+		} else {
+			window.location.href = `/login?redirect-to=${encodeURIComponent(
+				window.location.pathname + window.location.search
+			)}`;
+		}
 	}
 	set_favicon() {
 		var link = $('link[type="image/x-icon"]').remove().attr("href");

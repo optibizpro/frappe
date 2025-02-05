@@ -5,7 +5,12 @@ frappe.logout = function () {
 			if (r.exc) {
 				return;
 			}
-			window.location.href = "/login";
+
+			if (frappe.boot.fc_communication_secret) {
+				const frappeCloudBaseEndpoint = "https://frappecloud.com";
+				// navigate to login page of Frappe Cloud if the site is hosted on Frappe Cloud
+				window.location.href = `${frappeCloudBaseEndpoint}/dashboard/site-login`;
+			} else window.location.href = "/login";
 		},
 	});
 };
