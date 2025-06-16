@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>
 		<br>
-		<a href="https://frappeframework.com">
+		<a href="https://optibizpro.com">
 			<img src=".github/frappe-framework-logo.svg" height="50">
 		</a>
 	</h1>
@@ -16,9 +16,9 @@
 <div align="center">
 	<a target="_blank" href="#LICENSE" title="License: MIT"><img src="https://img.shields.io/badge/License-MIT-success.svg"></a>
 	<a target="_blank" href="https://www.python.org/downloads/" title="Python version"><img src="https://img.shields.io/badge/python-%3E=_3.10-success.svg"></a>
-	<a href="https://frappeframework.com/docs"><img src="https://img.shields.io/badge/docs-%F0%9F%93%96-success.svg"/></a>
-	<a href="https://github.com/frappe/frappe/actions/workflows/server-tests.yml"><img src="https://github.com/frappe/frappe/actions/workflows/server-tests.yml/badge.svg"></a>
-	<a href="https://github.com/frappe/frappe/actions/workflows/ui-tests.yml"><img src="https://github.com/frappe/frappe/actions/workflows/ui-tests.yml/badge.svg?branch=develop"></a>
+	<a href="https://optibizpro.com/docs"><img src="https://img.shields.io/badge/docs-%F0%9F%93%96-success.svg"/></a>
+	<a href="https://github.com/optibizpro/frappe/actions/workflows/server-tests.yml"><img src="https://github.com/optibizpro/frappe/actions/workflows/server-tests.yml/badge.svg"></a>
+	<a href="https://github.com/optibizpro/frappe/actions/workflows/ui-tests.yml"><img src="https://github.com/optibizpro/frappe/actions/workflows/ui-tests.yml/badge.svg?branch=develop"></a>
 	<a href="https://codecov.io/gh/frappe/frappe"><img src="https://codecov.io/gh/frappe/frappe/branch/develop/graph/badge.svg?token=XoTa679hIj"/></a>
 </div>
 
@@ -42,24 +42,24 @@ Full-stack web application framework that uses Python and MariaDB on the server 
 
 ### Production
 * [Managed Hosting on Frappe Cloud](https://frappecloud.com/)
-* [Easy install script using Docker images](https://github.com/frappe/bench/tree/develop#easy-install-script)
-* [Manual install using Docker images](https://github.com/frappe/frappe_docker)
+* [Easy install script using Docker images](https://github.com/optibizpro/bench/tree/develop#easy-install-script)
+* [Manual install using Docker images](https://github.com/optibizpro/frappe_docker)
 
 ### Development
-* [Easy install script using Docker images](https://github.com/frappe/bench/tree/develop#easy-install-script)
-* [Development installation on bare metal](https://frappeframework.com/docs/user/en/installation)
+* [Easy install script using Docker images](https://github.com/optibizpro/bench/tree/develop#easy-install-script)
+* [Development installation on bare metal](https://optibizpro.com/docs/user/en/installation)
 
 
 ## Contributing
 
 1. [Code of Conduct](CODE_OF_CONDUCT.md)
-1. [Contribution Guidelines](https://github.com/frappe/erpnext/wiki/Contribution-Guidelines)
+1. [Contribution Guidelines](https://github.com/optibizpro/erpnext/wiki/Contribution-Guidelines)
 1. [Security Policy](SECURITY.md)
 1. [Translations](https://translate.erpnext.com)
 
 ## Resources
 
-1. [frappeframework.com](https://frappeframework.com) - Official documentation of the Frappe Framework.
+1. [optibizpro.com](https://optibizpro.com) - Official documentation of the Frappe Framework.
 1. [frappe.school](https://frappe.school) - Pick from the various courses by the maintainers or from the community.
 
 ## License
