@@ -13,9 +13,9 @@
 	<img src=".github/hero-image.png" alt="Hero Image" />
 </div>
 <div align="center">
-    <a href="https://frappe.io/framework">Website</a>
+    <a href="https://optibizpro.com/framework">Website</a>
     -
-    <a href="https://docs.frappe.io/framework">Documentation</a>
+    <a href="https://docs.optibizpro.com/framework">Documentation</a>
 </div>
 
 ## Frappe Framework
@@ -52,15 +52,15 @@ By creating a web framework that allowed for easy definition of metadata, it mad
 
 ### Managed Hosting
 
-You can try [Frappe Cloud](https://frappecloud.com), a simple, user-friendly and sophisticated [open-source](https://github.com/frappe/press) platform to host Frappe applications with peace of mind.
+You can try [Frappe Cloud](https://optibizpro.com), a simple, user-friendly and sophisticated [open-source](https://github.com/optibizpro/press) platform to host Frappe applications with peace of mind.
 
 It takes care of installation, setup, upgrades, monitoring, maintenance and support of your Frappe deployments. It is a fully featured developer platform with an ability to manage and control multiple Frappe deployments.
 
 <div>
-    <a href="https://frappecloud.com/" target="_blank">
+    <a href="https://optibizpro.com/" target="_blank">
         <picture>
-            <source media="(prefers-color-scheme: dark)" srcset="https://frappe.io/files/try-on-fc-white.png">
-            <img src="https://frappe.io/files/try-on-fc-black.png" alt="Try on Frappe Cloud" height="28" />
+            <source media="(prefers-color-scheme: dark)" srcset="https://optibizpro.com/files/try-on-fc-white.png">
+            <img src="https://optibizpro.com/files/try-on-fc-black.png" alt="Try on Frappe Cloud" height="28" />
         </picture>
     </a>
 </div>
@@ -73,7 +73,7 @@ Prerequisites: docker, docker-compose, git. Refer [Docker Documentation](https:/
 Run following commands:
 
 ```
-git clone https://github.com/frappe/frappe_docker
+git clone https://github.com/optibizpro/frappe_docker
 cd frappe_docker
 docker compose -f pwd.yml up -d
 ```
@@ -82,12 +82,12 @@ After a couple of minutes, site should be accessible on your localhost port: 808
 - Username: Administrator
 - Password: admin
 
-See [Frappe Docker](https://github.com/frappe/frappe_docker?tab=readme-ov-file#to-run-on-arm64-architecture-follow-this-instructions) for ARM based docker setup.
+See [Frappe Docker](https://github.com/optibizpro/frappe_docker?tab=readme-ov-file#to-run-on-arm64-architecture-follow-this-instructions) for ARM based docker setup.
 
 ## Development Setup
 ### Manual Install
 
-The Easy Way: our install script for bench will install all dependencies (e.g. MariaDB). See https://github.com/frappe/bench for more details.
+The Easy Way: our install script for bench will install all dependencies (e.g. MariaDB). See https://github.com/optibizpro/bench for more details.
 
 New passwords will be created for the Frappe "Administrator" user, the MariaDB root user, and the frappe user (the script displays the passwords and saves them to ~/frappe_passwords.txt).
 
@@ -95,7 +95,7 @@ New passwords will be created for the Frappe "Administrator" user, the MariaDB r
 
 To setup the repository locally follow the steps mentioned below:
 
-1. Setup bench by following the [Installation Steps](https://docs.frappe.io/framework/user/en/installation) and start the server
+1. Setup bench by following the [Installation Steps](https://docs.optibizpro.com/framework/user/en/installation) and start the server
    ```
    bench start
    ```
@@ -109,29 +109,29 @@ To setup the repository locally follow the steps mentioned below:
    bench --site frappe.dev add-to-hosts
    ```
 
-3. Open the URL `http://frappe.dev:8000/app` in your browser, you should see the app running
+3. Open the URL `http://optibizpro.dev:8000/app` in your browser, you should see the app running
 
 ## Learning and community
 
 1. [Frappe School](https://frappe.school) - Learn Frappe Framework and ERPNext from the various courses by the maintainers or from the community.
-2. [Official documentation](https://docs.frappe.io/framework) - Extensive documentation for Frappe Framework.
-3. [Discussion Forum](https://discuss.frappe.io/) - Engage with community of Frappe Framework users and service providers.
+2. [Official documentation](https://docs.optibizpro.com/framework) - Extensive documentation for Frappe Framework.
+3. [Discussion Forum](https://discuss.optibizpro.com/) - Engage with community of Frappe Framework users and service providers.
 4. [buildwithhussain.com](https://buildwithhussain.com) - Watch Frappe Framework being used in the wild to build world-class web apps.
 
 ## Contributing
 
-1. [Issue Guidelines](https://github.com/frappe/erpnext/wiki/Issue-Guidelines)
-1. [Report Security Vulnerabilities](https://frappe.io/security)
-1. [Pull Request Requirements](https://github.com/frappe/erpnext/wiki/Contribution-Guidelines)
+1. [Issue Guidelines](https://github.com/optibizpro/erpnext/wiki/Issue-Guidelines)
+1. [Report Security Vulnerabilities](https://optibizpro.com/security)
+1. [Pull Request Requirements](https://github.com/optibizpro/erpnext/wiki/Contribution-Guidelines)
 2. [Translations](https://crowdin.com/project/frappe)
 
 <br>
 <br>
 <div align="center">
-	<a href="https://frappe.io" target="_blank">
+	<a href="https://optibizpro.com" target="_blank">
 		<picture>
-			<source media="(prefers-color-scheme: dark)" srcset="https://frappe.io/files/Frappe-white.png">
-			<img src="https://frappe.io/files/Frappe-black.png" alt="Frappe Technologies" height="28"/>
+			<source media="(prefers-color-scheme: dark)" srcset="https://optibizpro.com/files/Frappe-white.png">
+			<img src="https://optibizpro.com/files/Frappe-black.png" alt="Frappe Technologies" height="28"/>
 		</picture>
 	</a>
 </div>
