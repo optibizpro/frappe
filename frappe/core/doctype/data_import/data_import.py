@@ -77,10 +77,11 @@ class DataImport(Document):
 			return
 		validate_google_sheets_url(self.google_sheets_url)
 
-	def set_payload_count(self):
+	def set_payload_count(self, importer: Importer | None = None):
 		if self.import_file:
-			i = self.get_importer()
-			payloads = i.import_file.get_payloads_for_import()
+			if importer is None:
+				importer = self.get_importer()
+			payloads = importer.import_file.get_payloads_for_import()
 			self.payload_count = len(payloads)
 
 	@frappe.whitelist()
@@ -101,7 +102,7 @@ class DataImport(Document):
 	def start_import(self):
 		from frappe.utils.scheduler import is_scheduler_inactive
 
-		run_now = frappe.flags.in_test or frappe.conf.developer_mode
+		run_now = frappe.in_test or frappe.conf.developer_mode
 		if is_scheduler_inactive() and not run_now:
 			frappe.throw(_("Scheduler is inactive. Cannot import data."), title=_("Scheduler Inactive"))
 
@@ -262,12 +263,15 @@ def import_file(doctype, file_path, import_type, submit_after_import=False, cons
 	"""
 
 	data_import = frappe.new_doc("Data Import")
+	data_import.reference_doctype = doctype
+	data_import.import_file = file_path
 	data_import.submit_after_import = submit_after_import
 	data_import.import_type = (
 		"Insert New Records" if import_type.lower() == "insert" else "Update Existing Records"
 	)
 
 	i = Importer(doctype=doctype, file_path=file_path, data_import=data_import, console=console)
+	data_import.set_payload_count(i)
 	i.import_data()
 
 
