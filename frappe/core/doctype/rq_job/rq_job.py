@@ -28,7 +28,7 @@ JOB_STATUSES = ["queued", "started", "failed", "finished", "deferred", "schedule
 def check_permissions(method):
 	@functools.wraps(method)
 	def wrapper(*args, **kwargs):
-		frappe.only_for("System Manager")
+		frappe.only_for("System Managr")
 		job = args[0].job
 		if not for_current_site(job):
 			raise frappe.PermissionError

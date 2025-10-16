@@ -1174,7 +1174,6 @@ class Database:
 		self.sql("commit")
 		self.begin()  # explicitly start a new transaction
 
-		self.value_cache.clear()
 		self.after_commit.run()
 
 	def rollback(self, *, save_point=None):
@@ -1187,19 +1186,9 @@ class Database:
 
 			self.before_rollback.run()
 
-<<<<<<< HEAD
 			self.sql("rollback")
 			self.begin()
-=======
-			if chain:
-				self.sql("rollback and chain")
-				self.value_cache.clear()
-			else:
-				self.sql("rollback")
-				self.begin()
->>>>>>> 598ba6d63d (fix: Clear DB value cache after commit/rollback (#34335))
 
-			self.value_cache.clear()
 			self.after_rollback.run()
 
 	def savepoint(self, save_point):
